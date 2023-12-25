@@ -1,14 +1,15 @@
-import { IconMail, IconMaximize, IconPlayerPause, IconPlayerPlay, IconX, TablerIconsProps } from '@tabler/icons-react';
+import { IconBrandGithub, IconLoader2, IconMail, IconMaximize, IconPlayerPause, IconPlayerPlay, IconX, TablerIconsProps } from '@tabler/icons-react';
 
-const Icons = {
+export const Icons = {
   Play: IconPlayerPlay,
   Pause: IconPlayerPause,
   FullScreen: IconMaximize,
   Email: IconMail,
   X: IconX,
+  Spinner: IconLoader2,
+  Github: IconBrandGithub,
 };
 
 type IIconKeys = keyof typeof Icons;
 
-export default Icons;
 export type { IIconKeys, TablerIconsProps };

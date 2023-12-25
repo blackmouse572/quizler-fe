@@ -1,6 +1,9 @@
+import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { Toaster } from '@/components/ui/toaster';
+import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+import './global.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +21,13 @@ type Props = {
 export default function LocaleLayout({ children, params: { locale } }: Props) {
   return (
     <html lang={locale}>
-      <body className={inter.className}>{children}</body>
+      <body className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.className,
+        )}>{children}
+        <Toaster/>
+        <TailwindIndicator/>
+        </body>
     </html>
   );
 }

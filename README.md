@@ -70,3 +70,4 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 - [Shadcn UI](https://ui.shadcn.com/)
 - [Taxonamy](https://github.com/shadcn-ui/taxonomy/tree/main/app)
+- [I18Next](https://next-intl-docs.vercel.app/docs/)
