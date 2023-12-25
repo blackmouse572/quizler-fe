@@ -68,9 +68,5 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ## Acknowledgements
 
-- [NextJS](https://nextjs.org/)
-- [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [React Hook Form](https://react-hook-form.com/)
 - [Shadcn UI](https://ui.shadcn.com/)
+- [Taxonamy](https://github.com/shadcn-ui/taxonomy/tree/main/app)
