@@ -31,6 +31,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   async function onSubmit(data: FormData) {
     setIsLoading(true)
+    console.log(data)
     await new Promise((r) => setTimeout(r, 1000))
     const signInResult = {
       ok: true,
@@ -46,6 +47,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       })
     }
 
+    console.log(data)
+
     return toast({
       title: "Check your email",
       description: "We sent you a login link. Be sure to check your spam too.",
@@ -55,9 +58,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          Make sure you have a GitHub account with a verified email address.
-        </div>
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">

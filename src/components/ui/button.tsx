@@ -93,12 +93,13 @@ const buttonVariants = cva(
         variant: 'default',
         className: 'bg-warning-500 text-warning-50 hover:bg-warning-500/90',
       },
+
       //Ghost
       {
         color: 'primary',
         variant: 'ghost',
         className:
-          'border-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground bg-transparent  border',
+          'border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent  border',
       },
       {
         color: 'accent',
@@ -183,7 +184,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
