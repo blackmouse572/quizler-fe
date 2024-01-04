@@ -1,9 +1,8 @@
 import Link from "next/link"
 
 import { UserAuthForm } from "@/app/[locale]/(auth)/signup/component/sign-up-form"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
-import { cn } from "@/lib/utils"
 
 export const metadata = {
   title: "Create an account",
@@ -12,17 +11,10 @@ export const metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="container grid h-screen w-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
-        href="/login"
-        className={cn(
-          "absolute right-4 top-4 md:right-8 md:top-8"
-        )}
-      >
-        <Button variant={'ghost'}>
-          Login
-        </Button>
-      </Link>
+    <div className="">
+      <Link className={buttonVariants({ color: "primary", isIconOnly: false, variant: 'default', className: 'absolute font-heading font-medium top-10 left-10' })} href={"/"}>
+        <Icons.SignatureArrow /> Go back </Link>
+
       <div className="hidden h-full bg-muted lg:block" />
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">

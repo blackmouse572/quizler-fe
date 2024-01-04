@@ -1,14 +1,25 @@
-'use client'
+"use client"
 
+import Link from "next/link"
+import { useSelectedLayoutSegment } from "next/navigation"
+import React from "react"
+
+import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { ListItem } from "@/components/ui/list-item"
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
-import { useSelectedLayoutSegment } from "next/navigation"
-import React from "react"
+
 export type MainNavItem = {
     title: string
     href: string
@@ -27,13 +38,16 @@ function Navbar({ className, children, items = [] }: Props) {
     const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
 
     return (
-        <NavigationMenu className={cn('z-[100] w-full py-4 justify-between container mx-auto', className)}>
+        <NavigationMenu
+            className={cn(
+                "z-[100] w-full py-4 justify-between container mx-auto",
+                className
+            )}
+        >
             <NavigationMenuLink asChild>
-                <Link href="/" className="p-1.5 rounded-sm flex items-center" >
+                <Link href="/" className="p-1.5 rounded-sm flex items-center">
                     <Icons.Icon className="h-6 w-6 mr-2" />
-                    <span className="font-bold">
-                        Quizler
-                    </span>
+                    <span className="font-bold">Quizler</span>
                 </Link>
             </NavigationMenuLink>
             <NavigationMenuList>
@@ -49,9 +63,7 @@ function Navbar({ className, children, items = [] }: Props) {
                                     >
                                         <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:linear-gradient(to_bottom_left,white_20%,transparent_30%)] duration-500 ease-in-out"></div>
 
-                                        <div className="mb-2 mt-4 text-lg font-bold">
-                                            Quizler
-                                        </div>
+                                        <div className="mb-2 mt-4 text-lg font-bold">Quizler</div>
                                         <p className="text-sm leading-tight text-muted-foreground">
                                             Learning with supafast methods
                                         </p>
@@ -66,7 +78,9 @@ function Navbar({ className, children, items = [] }: Props) {
                             </ListItem>
                             <ListItem href="/docs/primitives/typography" title="A.I">
                                 <span>What is A.I? How to use A.I in Quizler?</span>
-                                <Badge size="sm" color="danger" className="rounded-sm mx-2">Beta</Badge>
+                                <Badge size="sm" color="danger" className="rounded-sm mx-2">
+                                    Beta
+                                </Badge>
                             </ListItem>
                         </ul>
                     </NavigationMenuContent>
@@ -76,13 +90,7 @@ function Navbar({ className, children, items = [] }: Props) {
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                             {items.map((item) => (
-                                <ListItem
-                                    key={item.title}
-                                    title={item.title}
-                                    href={item.href}
-                                >
-                                    {item.description}
-                                </ListItem>
+                                <AnimatedListItem key={item.title} title={item.title} href={item.href} />
                             ))}
                         </ul>
                     </NavigationMenuContent>
@@ -98,12 +106,20 @@ function Navbar({ className, children, items = [] }: Props) {
             <NavigationMenuList className="space-x-2">
                 <NavigationMenuItem asChild>
                     <Link href="signup">
-                        <Button variant="default" color={'primary'}>Sign up</Button>
+                        <Button variant="default" color={"primary"}>
+                            Sign up
+                        </Button>
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem asChild>
                     <Link href="login">
-                        <Button variant="default" className="shadow-none hover:bg-slate-300" color={'accent'}>Sign in</Button>
+                        <Button
+                            variant="default"
+                            className="shadow-none hover:bg-slate-300"
+                            color={"accent"}
+                        >
+                            Sign in
+                        </Button>
                     </Link>
                 </NavigationMenuItem>
             </NavigationMenuList>
