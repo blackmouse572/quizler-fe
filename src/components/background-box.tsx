@@ -12,6 +12,7 @@ export const BoxesCore = ({ className, row = 50, col = 50, ...rest }: BoxProps) 
     let colors = [
         "--slate-200",
         "--slate-300",
+        "--slate-100",
     ];
 
     const getRandomColor = () => {
