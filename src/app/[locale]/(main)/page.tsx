@@ -1,10 +1,30 @@
 import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 
-import { Boxes } from "@/components/background-box"
+import { isAuthenticated } from "@/lib/auth"
 import LogoutButton from "@/components/logout-btn"
 import { Button } from "@/components/ui/button"
-import { isAuthenticated } from "@/lib/auth"
+import { CardInfo, ICardInfoProps } from "@/components/ui/card"
+import { Boxes } from "@/components/background-box"
+
+const cardInfos: ICardInfoProps[] = [
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+  },
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+  },
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+  },
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+  },
+]
 
 export default function Home() {
   const t = useTranslations("Index")
@@ -24,7 +44,27 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="space-y-4 text-center">
+      {/* Recent and stats */}
+      <div className="bg-slate-600 p-10">
+        <div className="p-2">
+          <div className="underline mb-2">Recent</div>
+          <div className="flex justify-around space-x-4">
+            {cardInfos.map((card) => (
+              <CardInfo title={card.title} subTitle={card.subTitle} />
+            ))}
+          </div>
+        </div>
+        <div className="p-2">
+          <div className="underline mb-2">Stats</div>
+          <div className="flex justify-around space-x-4">
+            {cardInfos.map((card) => (
+              <CardInfo title={card.title} subTitle={card.subTitle} />
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* footer */}
+      <div className="text-center space-y-4 h-[100px]">
         <div className="space-x-2">
           <Link href="signup">
             <Button variant="default" color={"primary"}>
