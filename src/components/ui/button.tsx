@@ -15,7 +15,6 @@ const buttonVariants = cva(
         success: 'text-success-50 bg-success-500',
         warning: 'text-warning-50 bg-warning-500',
       },
-
       variant: {
         default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
         outline: 'border border-input bg-transparent shadow-sm',
@@ -24,7 +23,7 @@ const buttonVariants = cva(
         flat: '',
       },
       size: {
-        default: 'h-9 px-4 py-2',
+        md: 'h-9 px-4 py-2 [&_svg]:h-5 [&_svg]:w-5 [&_svg]:mr-1',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-10 rounded-md px-8',
         icon: 'h-9 w-9',
@@ -36,7 +35,7 @@ const buttonVariants = cva(
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default',
+      size: 'md',
       color: 'primary',
       isIconOnly: false,
     },

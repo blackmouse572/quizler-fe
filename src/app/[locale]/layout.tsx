@@ -8,14 +8,13 @@ import './global.css';
 
 const montserrat = Montserrat({
   weight: ['400', '600', '700', '800', '900', '500', '300', '200'],
-  variable: '--font-sans',
-  display: 'swap',
+  variable: '--font-heading',
   subsets: ['latin-ext', 'vietnamese']
 });
-const ibmSans = Plus_Jakarta_Sans({
+
+const plusJakarta = Plus_Jakarta_Sans({
   weight: ['400', '600', '700', '500', '300',],
-  variable: '--font-heading',
-  display: 'optional',
+  variable: '--font-sans',
   subsets: ['latin-ext', 'vietnamese']
 });
 
@@ -67,9 +66,9 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={cn(
-        ["min-h-screen bg-background antialiased",
-          montserrat.className,
-          ibmSans.className,
+        ["bg-background min-h-screen font-sans antialiased",
+          montserrat.variable,
+          plusJakarta.variable,
         ]
       )}>
         {children}

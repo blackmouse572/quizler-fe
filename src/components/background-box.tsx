@@ -25,7 +25,7 @@ export const BoxesCore = ({ className, row = 50, col = 50, ...rest }: BoxProps) 
                 transform: `translate(-40%, -59%) skewX(-34deg) skewY(0deg) scale(0.675) rotate(0deg) translateZ(0px)`,
             }}
             className={cn(
-                "absolute left-1/4 p-4 -top-1/4 flex -translate-x-1/2 -translate-y-1/2 w-full h-full z-0 ",
+                "absolute -top-1/4 left-1/4 z-0 flex h-full w-full -translate-x-1/2 -translate-y-1/2 p-4 ",
                 className
             )}
             {...rest}
@@ -33,7 +33,7 @@ export const BoxesCore = ({ className, row = 50, col = 50, ...rest }: BoxProps) 
             {rows.map((_, i) => (
                 <motion.div
                     key={`row` + i}
-                    className="order-l border-slate-200 relative"
+                    className="order-l relative border-slate-200"
                 >
                     {cols.map((_, j) => (
                         <motion.div
@@ -45,7 +45,7 @@ export const BoxesCore = ({ className, row = 50, col = 50, ...rest }: BoxProps) 
                                 transition: { duration: 5000 },
                             }}
                             key={`col` + j}
-                            className="w-20 h-32  border-r border-t border-slate-200 relative"
+                            className="relative h-32  w-20 border-r border-t border-slate-200"
                             style={{
                                 borderRadius: '14px 14px'
                             }}
@@ -57,7 +57,7 @@ export const BoxesCore = ({ className, row = 50, col = 50, ...rest }: BoxProps) 
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
                                     stroke="currentColor"
-                                    className="absolute h-6 w-10 -top-[14px] -left-[22px] text-slate-500 stroke-[1px] pointer-events-none rounded-md"
+                                    className="pointer-events-none absolute left-[-22px] top-[-14px] h-6 w-10 rounded-md stroke-[1px] text-slate-500"
                                 >
                                     <path
                                         strokeLinecap="round"

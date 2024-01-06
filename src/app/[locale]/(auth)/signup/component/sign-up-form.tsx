@@ -1,19 +1,21 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useSearchParams } from "next/navigation"
 import * as React from "react"
+import { useSearchParams } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import SignUpSchema, { SignUpSchemaType } from "@/app/[locale]/(auth)/signup/vaidations/sign-up-validate"
+import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { cn } from "@/lib/utils"
+import SignUpSchema, {
+  SignUpSchemaType,
+} from "@/app/[locale]/(auth)/signup/vaidations/sign-up-validate"
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 type FormData = SignUpSchemaType
 
@@ -31,7 +33,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   async function onSubmit(data: FormData) {
     setIsLoading(true)
-    console.log(data)
     await new Promise((r) => setTimeout(r, 1000))
     const signInResult = {
       ok: true,
@@ -43,11 +44,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         title: "Something went wrong.",
         description: "Your sign in request failed. Please try again.",
         variant: "flat",
-        color: 'danger'
+        color: "danger",
       })
     }
-
-    console.log(data)
 
     return toast({
       title: "Check your email",
@@ -92,7 +91,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="bg-background text-muted-foreground px-2">
             Or continue with
           </span>
         </div>
