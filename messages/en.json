@@ -19,6 +19,18 @@
       "submit": "Sign in"
     }
   },
+  "UserDropdown": {
+    "my_account": "My account",
+    "profile": "Profile",
+    "billing": "Billing",
+    "settings": "Settings",
+    "classrooms": "Classrooms",
+    "invite": "Invite a friend",
+    "new_classroom": "New classroom",
+    "faq": "FAQ",
+    "support": "Support",
+    "signout": "Sign out"
+  },
   "Validations": {
     "errors": {
       "invalid_type": "Expected {{expected}}, received {{received}}",

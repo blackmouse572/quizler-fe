@@ -1,4 +1,16 @@
-import { IconArrowUpLeft, IconBrandGithub, IconCards, IconLoader2, IconMail, IconMaximize, IconPlayerPause, IconPlayerPlay, IconX, TablerIconsProps } from '@tabler/icons-react';
+import {
+  IconArrowUpLeft,
+  IconBrandGithub,
+  IconCards,
+  IconLoader2,
+  IconLogout2,
+  IconMail,
+  IconMaximize,
+  IconPlayerPause,
+  IconPlayerPlay,
+  IconX,
+  TablerIconsProps,
+} from "@tabler/icons-react"
 
 export const Icons = {
   Play: IconPlayerPlay,
@@ -10,9 +22,10 @@ export const Icons = {
   Spinner: IconLoader2,
   Icon: IconCards,
   Github: IconBrandGithub,
-  SignatureArrow: IconArrowUpLeft
-};
+  SignatureArrow: IconArrowUpLeft,
+  Logout: IconLogout2,
+}
 
-type IIconKeys = keyof typeof Icons;
+type IIconKeys = keyof typeof Icons
 
-export type { IIconKeys, TablerIconsProps };
+export type { IIconKeys, TablerIconsProps }
