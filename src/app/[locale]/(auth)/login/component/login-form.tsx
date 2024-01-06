@@ -1,27 +1,52 @@
 'use client'
+import { LoginAction } from '@/app/[locale]/(auth)/login/actions/login-action'
 import LoginSchema, { LoginSchemaType } from '@/app/[locale]/(auth)/login/validations/login-validate'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Form, FormControl, FormField, FormLabel, FormMessage } from '@/components/ui/form'
+import { Icons } from '@/components/ui/icons'
 import { Input } from '@/components/ui/input'
+import { useToast } from '@/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type Props = {}
 
 function LoginForm({ }: Props) {
     const t = useTranslations('SignIn')
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const { toast } = useToast()
+    const router = useRouter()
     const form = useForm<LoginSchemaType>({
         resolver: zodResolver(LoginSchema)
     })
 
-    function onSubmit(values: LoginSchemaType) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+    async function onSubmit(values: LoginSchemaType) {
+        setIsLoading(true)
+        const result = await LoginAction(values)
+
+        if (!result.ok) {
+            setIsLoading(false)
+            return toast({
+                title: 'Something went wrong.',
+                description: <pre className='max-w-sm'>{JSON.stringify(result)}</pre>,
+                variant: 'flat',
+                color: 'danger'
+            })
+        }
+
+        toast({
+            title: 'Success',
+            description: 'You have been logged in.',
+            variant: 'flat',
+            color: 'success'
+        })
+        return router.push('/')
     }
 
     return (
@@ -43,7 +68,7 @@ function LoginForm({ }: Props) {
                             return <div className="space-y-1">
                                 <FormLabel required htmlFor="">{t('form.email.label')}</FormLabel>
                                 <FormControl>
-                                    <Input className="rounded-sm" id="email" placeholder={t('form.email.placeholder')} {...field} />
+                                    <Input disabled={isLoading} className="rounded-sm" id="email" placeholder={t('form.email.placeholder')} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </div>
@@ -53,7 +78,7 @@ function LoginForm({ }: Props) {
                             return <div className="space-y-1">
                                 <FormLabel required htmlFor="">{t('form.password.label')}</FormLabel>
                                 <FormControl>
-                                    <Input className="rounded-sm" id="password" type="password" placeholder={t('form.password.placeholder')} {...field} />
+                                    <Input disabled={isLoading} className="rounded-sm" id="password" type="password" placeholder={t('form.password.placeholder')} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </div>
@@ -62,14 +87,15 @@ function LoginForm({ }: Props) {
                         <FormField control={form.control} name="password" render={({ field }) => {
                             return <div className="flex items-center gap-2 justify-start">
                                 <FormControl className=''>
-                                    <Checkbox size={'sm'} id="remember" {...field} />
+                                    <Checkbox disabled={isLoading} size={'sm'} id="remember" {...field} />
                                 </FormControl>
                                 <FormLabel className='text-sm' htmlFor="remember">{t('form.remember')}</FormLabel>
                                 <FormMessage />
                             </div>
                         }} />
 
-                        <Button className="w-full" color="primary" variant="default" type="submit">
+                        <Button disabled={isLoading} className="w-full" color="primary" variant="default" type="submit">
+                            {isLoading && (<Icons.Loader className='animate-spin' />)}
                             {t('form.submit')}
                         </Button>
                     </form>

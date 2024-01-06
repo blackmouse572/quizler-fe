@@ -6,6 +6,7 @@ export const Icons = {
   FullScreen: IconMaximize,
   Email: IconMail,
   X: IconX,
+  Loader: IconLoader2,
   Spinner: IconLoader2,
   Icon: IconCards,
   Github: IconBrandGithub,

@@ -31,7 +31,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   async function onSubmit(data: FormData) {
     setIsLoading(true)
-    console.log(data)
     await new Promise((r) => setTimeout(r, 1000))
     const signInResult = {
       ok: true,
@@ -46,8 +45,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         color: 'danger'
       })
     }
-
-    console.log(data)
 
     return toast({
       title: "Check your email",

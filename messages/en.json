@@ -1,6 +1,7 @@
 {
   "Index": {
-    "title": "Hello world!"
+    "title": "Quizler",
+    "back": "Go back"
   },
   "SignIn": {
     "title": "Welcome back!",

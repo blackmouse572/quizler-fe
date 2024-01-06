@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { UserAuthForm } from "@/app/[locale]/(auth)/signup/component/sign-up-form"
-import { buttonVariants } from "@/components/ui/button"
+import GoBackButton from "@/components/go-back-btn"
 import { Icons } from "@/components/ui/icons"
 
 export const metadata = {
@@ -9,11 +9,10 @@ export const metadata = {
   description: "Create an account to get started.",
 }
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
   return (
     <div className="">
-      <Link className={buttonVariants({ color: "primary", isIconOnly: false, variant: 'default', className: 'absolute font-heading font-medium top-10 left-10' })} href={"/"}>
-        <Icons.SignatureArrow /> Go back </Link>
+      <GoBackButton />
 
       <div className="hidden h-full bg-muted lg:block" />
       <div className="lg:p-8">
