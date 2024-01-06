@@ -1,15 +1,16 @@
 import {
   IconAffiliate,
+  IconArrowDownRight,
   IconArrowRoundaboutLeft,
   IconArrowUpLeft,
   IconBrandGithub,
   IconCards,
   IconChalkboard,
-  IconHome,
   IconLoader2,
   IconLogout2,
   IconMail,
   IconMaximize,
+  IconMenu,
   IconPlayerPause,
   IconPlayerPlay,
   IconSmartHome,
@@ -19,6 +20,7 @@ import {
 
 export const Icons = {
   Play: IconPlayerPlay,
+  Menu: IconMenu,
   Pause: IconPlayerPause,
   FullScreen: IconMaximize,
   Email: IconMail,
@@ -33,6 +35,7 @@ export const Icons = {
   Github: IconBrandGithub,
   SignatureArrow: IconArrowUpLeft,
   Logout: IconLogout2,
+  ArrowDownRight: IconArrowDownRight,
 }
 
 type IIconKeys = keyof typeof Icons

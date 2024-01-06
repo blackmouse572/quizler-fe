@@ -6,7 +6,8 @@ import React, { useMemo } from "react"
 
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { IIconKeys, Icons } from "@/components/ui/icons"
 import { ListItem } from "@/components/ui/list-item"
 import {
@@ -79,6 +80,62 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
       )
   }, [isAuthed, menuItems])
 
+  const renderDrawerMenu = useMemo(() => {
+    return (
+      <Drawer>
+        <DrawerTrigger
+          className={buttonVariants({
+            isIconOnly: true,
+            variant: "flat",
+            className:
+              "bg-transparent px-0 py-0 hover:text-primary/70 [&_svg]:text-primary ",
+            size: "md",
+          })}
+        >
+          <Icons.Menu />
+        </DrawerTrigger>
+        <DrawerContent>
+          <ul className="grid grid-cols-2 gap-4 px-4 py-8 [&_svg]:h-6 [&_svg]:w-6 [&_svg]:text-emerald-500">
+            <li className="rounded-md bg-neutral-100 px-4 py-3">
+              <NavigationMenuLink asChild>
+                <Link href="/" className="flex flex-col gap-2">
+                  <Icons.Play />
+                  <span className="font-bold">{tNav("getting_started")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+            <li className="rounded-md bg-neutral-100 px-4 py-3">
+              <NavigationMenuLink asChild>
+                <Link href="/contact" className="flex flex-col gap-2">
+                  <Icons.Contact />
+                  <span className="font-bold">{tNav("doc")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+
+            <li className="rounded-md bg-neutral-100 px-4 py-3">
+              <NavigationMenuLink asChild>
+                <Link href="/about" className="flex flex-col gap-2">
+                  <Icons.About />
+                  <span className="font-bold">{tNav("about")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+
+            <li className="rounded-md bg-neutral-100 px-4 py-3">
+              <NavigationMenuLink asChild>
+                <Link href="/about" className="flex flex-col gap-2">
+                  <Icons.School />
+                  <span className="font-bold">{tNav("classrooms")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+          </ul>
+        </DrawerContent>
+      </Drawer>
+    )
+  }, [tNav])
+
   return (
     <NavigationMenu
       className={cn(
@@ -86,13 +143,19 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
         className
       )}
     >
-      <NavigationMenuLink asChild>
-        <Link href="/" className="flex items-center rounded-sm p-1.5">
-          <Icons.Icon className="mr-2 h-6 w-6" />
-          <span className="font-bold">{tIndex("title")}</span>
-        </Link>
-      </NavigationMenuLink>
-      <NavigationMenuList>
+      <NavigationMenuList className="flex items-center space-x-2">
+        <NavigationMenuItem className="flex md:hidden">
+          {renderDrawerMenu}
+        </NavigationMenuItem>
+
+        <NavigationMenuLink asChild>
+          <Link href="/" className="flex items-center rounded-sm p-1.5">
+            <Icons.Icon className="mr-2 h-6 w-6" />
+            <span className="font-bold">{tIndex("title")}</span>
+          </Link>
+        </NavigationMenuLink>
+      </NavigationMenuList>
+      <NavigationMenuList className="hidden md:flex">
         <NavigationMenuItem>
           <NavigationMenuTrigger>
             {tNav("getting_started")}
