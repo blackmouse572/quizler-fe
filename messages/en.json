@@ -5,7 +5,7 @@
   },
   "SignIn": {
     "title": "Welcome back!",
-    "descritpion": "What if you <forgot> your password?</forgot> Or you <need> an account? </need>",
+    "descritpion": "What if you forgot<forgot> your password?</forgot> Or you need<need> an account? </need>",
     "form": {
       "email": {
         "label": "Email",
