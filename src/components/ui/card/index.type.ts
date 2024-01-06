@@ -1,3 +1,5 @@
+import React from "react"
+
 export interface ICardProps<P> extends React.HTMLAttributes<P> {
   ref?: React.ForwardedRef<P>
 }

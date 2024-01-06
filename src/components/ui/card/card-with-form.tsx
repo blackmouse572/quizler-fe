@@ -18,10 +18,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { TCardContainerProps } from "./index.type"
+import { cn } from "@/lib/utils"
 
-export function CardWithForm() {
+interface ICardWithFormProps extends TCardContainerProps {}
+
+export function CardWithForm(props: ICardWithFormProps) {
+  const {className, ...others} = props
   return (
-    <Card className="w-[350px]">
+    <Card {...others} className={cn("w-[350px]", className)}>
       <CardHeader>
         <CardTitle>Create project</CardTitle>
         <CardDescription>Deploy your new project in one-click.</CardDescription>
