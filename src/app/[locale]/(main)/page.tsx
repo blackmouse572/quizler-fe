@@ -48,17 +48,17 @@ export default function Home() {
       <div className="bg-slate-600 p-10">
         <div className="p-2">
           <div className="underline mb-2">Recent</div>
-          <div className="flex justify-around space-x-4">
-            {cardInfos.map((card) => (
-              <CardInfo title={card.title} subTitle={card.subTitle} />
+          <div className="flex justify-between space-x-4">
+            {cardInfos.map((card, i) => (
+              <CardInfo key={i} title={card.title} subTitle={card.subTitle} />
             ))}
           </div>
         </div>
         <div className="p-2">
           <div className="underline mb-2">Stats</div>
-          <div className="flex justify-around space-x-4">
-            {cardInfos.map((card) => (
-              <CardInfo title={card.title} subTitle={card.subTitle} />
+          <div className="flex justify-between space-x-4">
+            {cardInfos.map((card, i) => (
+              <CardInfo key={i} title={card.title} subTitle={card.subTitle} />
             ))}
           </div>
         </div>

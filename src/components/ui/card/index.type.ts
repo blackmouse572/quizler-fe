@@ -1,19 +1,11 @@
-export interface ICardProps<P, R> {
-  props?: P
-  ref?: R
+export interface ICardProps<P> extends React.HTMLAttributes<P> {
+  ref?: React.ForwardedRef<P>
 }
 
-export type TTitleProps = ICardProps<
-  React.HTMLAttributes<HTMLHeadingElement>,
-  React.ForwardedRef<HTMLParagraphElement>
->
+export type TCardContainerProps = ICardProps<HTMLDivElement>
 
-export type THeaderProps = ICardProps<
-  React.HTMLAttributes<HTMLDivElement>,
-  React.ForwardedRef<HTMLParagraphElement>
->
+export type TTitleProps = ICardProps<HTMLHeadingElement>
 
-export type TSubtitleProps = ICardProps<
-  React.HTMLAttributes<HTMLParagraphElement>,
-  React.ForwardedRef<HTMLParagraphElement>
->
+export type THeaderProps = ICardProps<HTMLDivElement>
+
+export type TSubtitleProps = ICardProps<HTMLParagraphElement>

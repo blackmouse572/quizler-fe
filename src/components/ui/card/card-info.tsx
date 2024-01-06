@@ -6,9 +6,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card/card"
-import { THeaderProps, TSubtitleProps, TTitleProps } from "./index.type"
 
-export interface ICardInfoProps {
+import {
+  TCardContainerProps,
+  THeaderProps,
+  TSubtitleProps,
+  TTitleProps,
+} from "./index.type"
+
+export interface ICardInfoProps extends TCardContainerProps {
   title: string
   subTitle?: string
   titleProps?: TTitleProps
@@ -17,14 +23,13 @@ export interface ICardInfoProps {
 }
 
 export function CardInfo(props: ICardInfoProps) {
-  const { title, subTitle, titleProps } = props
+  const { title, subTitle, titleProps, headerProps, subTitleProps, ...others } =
+    props
   return (
-    <Card className="min-w-[100px]">
-      <CardHeader>
-        <CardTitle ref={titleProps?.ref} {...titleProps?.props}>
-          {title}
-        </CardTitle>
-        <CardDescription>{subTitle}</CardDescription>
+    <Card className="min-w-[100px] rounded-3xl" {...others}>
+      <CardHeader {...headerProps}>
+        <CardTitle {...titleProps}>{title}</CardTitle>
+        <CardDescription {...subTitleProps}>{subTitle}</CardDescription>
       </CardHeader>
     </Card>
   )
