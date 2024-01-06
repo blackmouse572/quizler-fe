@@ -66,7 +66,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={cn(
-        ["min-h-screen bg-background antialiased font-sans",
+        ["bg-background min-h-screen font-sans antialiased",
           montserrat.variable,
           plusJakarta.variable,
         ]

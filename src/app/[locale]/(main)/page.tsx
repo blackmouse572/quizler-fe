@@ -12,19 +12,19 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <div className="relative h-[70vh] w-full overflow-hidden flex flex-col items-center justify-center">
-        <div className="absolute inset-0 w-full h-full bg-background z-10 [mask-image:linear-gradient(to_top_right,white_40%,transparent_50%)] pointer-events-none" />
+      <div className="relative flex h-[70vh] w-full flex-col items-center justify-center overflow-hidden">
+        <div className="bg-background pointer-events-none absolute inset-0 z-10 h-full w-full [mask-image:linear-gradient(to_top_right,white_40%,transparent_50%)]" />
         <Boxes row={60} className='-top-[30%]' />
-        <p className="font-black font-heading text-4xl sm:text-7xl relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-slate-400 to-slate-800">
+        <p className="font-heading relative z-20 bg-gradient-to-b from-slate-400 to-slate-800 bg-clip-text text-4xl font-black text-transparent sm:text-7xl">
           {t('title')}
         </p>
-        <p className="font-black text-sm sm:text-base relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-slate-300 to-slate-700 tracking-wider">
+        <p className="relative z-20 bg-gradient-to-b from-slate-300 to-slate-700 bg-clip-text text-sm font-black tracking-wider text-transparent sm:text-base">
           Bring joy and fun to your classroom
         </p>
       </div>
 
 
-      <div className='text-center space-y-4'>
+      <div className='space-y-4 text-center'>
         <div className='space-x-2'>
           <Link href="signup">
             <Button variant="default" color={'primary'}>Sign up</Button>

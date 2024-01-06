@@ -9,7 +9,7 @@ type Props = {
 function MainLayout({ children }: Props) {
     return (
         <main className='relative min-h-screen'>
-            <Navbar className="fixed top-0 left-1/2 -translate-x-1/2" items={MAIN_NAVBAR_ITEMS} />
+            <Navbar className="fixed left-1/2 top-0 -translate-x-1/2" items={MAIN_NAVBAR_ITEMS} />
             {children}
         </main>
     )

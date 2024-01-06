@@ -40,13 +40,13 @@ function Navbar({ className, children, items = [] }: Props) {
     return (
         <NavigationMenu
             className={cn(
-                "z-[100] w-full py-4 justify-between container mx-auto",
+                "container z-[100] mx-auto w-full justify-between py-4",
                 className
             )}
         >
             <NavigationMenuLink asChild>
-                <Link href="/" className="p-1.5 rounded-sm flex items-center">
-                    <Icons.Icon className="h-6 w-6 mr-2" />
+                <Link href="/" className="flex items-center rounded-sm p-1.5">
+                    <Icons.Icon className="mr-2 h-6 w-6" />
                     <span className="font-bold">Quizler</span>
                 </Link>
             </NavigationMenuLink>
@@ -54,17 +54,17 @@ function Navbar({ className, children, items = [] }: Props) {
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] rounded-lg">
+                        <ul className="grid gap-3 rounded-lg p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                             <li className="row-span-3">
                                 <NavigationMenuLink asChild>
                                     <Link
-                                        className="flex h-full w-full select-none flex-col justify-end rounded-md from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] transition-all duration-500 ease-in relative"
+                                        className="from-muted/50 to-muted dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex h-full w-full select-none flex-col justify-end rounded-md bg-white p-6 no-underline outline-none transition-all duration-500 ease-in focus:shadow-md dark:bg-black"
                                         href="/"
                                     >
-                                        <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:linear-gradient(to_bottom_left,white_20%,transparent_30%)] duration-500 ease-in-out"></div>
+                                        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white duration-500 ease-in-out [mask-image:linear-gradient(to_bottom_left,white_20%,transparent_30%)] dark:bg-black"></div>
 
                                         <div className="mb-2 mt-4 text-lg font-bold">Quizler</div>
-                                        <p className="text-sm leading-tight text-muted-foreground">
+                                        <p className="text-muted-foreground text-sm leading-tight">
                                             Learning with supafast methods
                                         </p>
                                     </Link>
@@ -78,7 +78,7 @@ function Navbar({ className, children, items = [] }: Props) {
                             </ListItem>
                             <ListItem href="/docs/primitives/typography" title="A.I">
                                 <span>What is A.I? How to use A.I in Quizler?</span>
-                                <Badge size="sm" color="danger" className="rounded-sm mx-2">
+                                <Badge size="sm" color="danger" className="mx-2 rounded-sm">
                                     Beta
                                 </Badge>
                             </ListItem>

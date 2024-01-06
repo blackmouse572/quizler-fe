@@ -10,7 +10,7 @@ export type SiteConfig = {
 }
 
 export type INextPage = {
-  params?: Record<string, string>
+  params?: any
   locale?: string
 }
 export type INextLayout = INextPage & {

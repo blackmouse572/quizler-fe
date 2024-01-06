@@ -85,7 +85,7 @@ function LoginForm({ }: Props) {
                         }} />
 
                         <FormField control={form.control} name="password" render={({ field }) => {
-                            return <div className="flex items-center gap-2 justify-start">
+                            return <div className="flex items-center justify-start gap-2">
                                 <FormControl className=''>
                                     <Checkbox disabled={isLoading} size={'sm'} id="remember" {...field} />
                                 </FormControl>

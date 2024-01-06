@@ -19,7 +19,7 @@ export const AnimatedListItem = React.forwardRef<
                 <Link
                     ref={ref}
                     className={cn(
-                        "flex select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground items-center gap-3",
+                        "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex select-none items-center gap-3 rounded-md p-3 leading-none no-underline outline-none transition-colors",
                         "group",
                         className
                     )}
@@ -27,11 +27,11 @@ export const AnimatedListItem = React.forwardRef<
                     {...props}
                 >
                     <div className="h-4 overflow-hidden">
-                        <div className="flex items-center gap-4 translate-y-0 group-hover:-translate-y-8 transition-transform ease-out duration-500">
-                            <Icon className="inline-block w-4 h-4" />
+                        <div className="flex translate-y-0 items-center gap-4 transition-transform duration-500 ease-out group-hover:-translate-y-8">
+                            <Icon className="inline-block h-4 w-4" />
                         </div>
-                        <div className="flex items-center gap-4 translate-y-8 group-hover:-translate-y-4 transition-transform ease-out duration-300 text-emerald-500">
-                            <Icon className="inline-block w-4 h-4" />
+                        <div className="flex translate-y-8 items-center gap-4 text-emerald-500 transition-transform duration-300 ease-out group-hover:-translate-y-4">
+                            <Icon className="inline-block h-4 w-4" />
                         </div>
                     </div>
                     <div className="text-sm font-[500] leading-none">{title}</div>

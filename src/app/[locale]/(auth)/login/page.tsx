@@ -10,7 +10,7 @@ async function LoginPage({ }: Props) {
   const t = await getTranslations('SignIn')
   const m = await getMessages()
 
-  return <div className="w-full h-full">
+  return <div className="h-full w-full">
     <GoBackButton />
     <NextIntlClientProvider messages={_.pick(m, 'SignIn')}>
       <LoginForm />

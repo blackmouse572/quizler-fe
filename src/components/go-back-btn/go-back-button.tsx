@@ -12,7 +12,7 @@ export default function GoBackButtonClient({ className, ...props }: Props) {
     const router = useRouter();
     const goBack = () => router.back()
     return (
-        <Button {...props} className={cn(className, 'absolute font-heading font-medium top-10 left-10')} onClick={goBack}>
+        <Button {...props} className={cn(className, 'font-heading absolute left-10 top-10 font-medium')} onClick={goBack}>
             <Icons.SignatureArrow />
             {t('back')}
         </Button>
