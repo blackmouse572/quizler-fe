@@ -36,10 +36,10 @@ export default function Home() {
           </Link>
         </div>
         {
-          isAuth && (<>
+          isAuth && (<div className='space-x-2'>
             <Button variant="flat" color={'primary'}>If you see this. You are authenticated!</Button>
             <LogoutButton />
-          </>)
+          </div>)
         }
       </div>
     </div>
