@@ -26,6 +26,29 @@ const cardInfos: ICardInfoProps[] = [
   },
 ]
 
+const cardInfosExpand: ICardInfoProps[] = [
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+    expand: true,
+  },
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+    expand: true,
+  },
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+    expand: true,
+  },
+  {
+    title: "Create project",
+    subTitle: "Deploy your new project in one-click.",
+    expand: true,
+  },
+]
+
 export default function Home() {
   const t = useTranslations("Index")
   const locale = useLocale()
@@ -35,7 +58,7 @@ export default function Home() {
     <div className="min-h-screen">
       <div className="relative flex h-[70vh] w-full flex-col items-center justify-center overflow-hidden">
         <div className="pointer-events-none absolute inset-0 z-10 h-full w-full bg-background [mask-image:linear-gradient(to_top_right,white_40%,transparent_50%)]" />
-        <Boxes row={60} className="to-[-30%]" />
+        <Boxes row={60} className="-top-[30%]" />
         <p className="relative z-20 bg-gradient-to-b from-slate-400 to-slate-800 bg-clip-text font-heading text-4xl font-black text-transparent sm:text-7xl">
           {t("title")}
         </p>
@@ -47,24 +70,32 @@ export default function Home() {
       {/* Recent and stats */}
       <div className="bg-slate-600 p-10">
         <div className="p-2">
-          <div className="underline mb-2">Recent</div>
+          <div className="mb-2 underline">Recent</div>
           <div className="flex justify-between space-x-4">
             {cardInfos.map((card, i) => (
-              <CardInfo key={i} title={card.title} subTitle={card.subTitle} />
+              <CardInfo
+                className="max-h-[74px] max-w-[285px]"
+                key={i}
+                {...card}
+              />
             ))}
           </div>
         </div>
         <div className="p-2">
-          <div className="underline mb-2">Stats</div>
+          <div className="mb-2 underline">Stats</div>
           <div className="flex justify-between space-x-4">
-            {cardInfos.map((card, i) => (
-              <CardInfo key={i} title={card.title} subTitle={card.subTitle} />
+            {cardInfosExpand.map((card, i) => (
+              <CardInfo
+                className="max-h-[74px] max-w-[285px]"
+                key={i}
+                {...card}
+              />
             ))}
           </div>
         </div>
       </div>
       {/* footer */}
-      <div className="text-center space-y-4 h-[100px]">
+      <div className="h-[100px] space-y-4 text-center">
         <div className="space-x-2">
           <Link href="signup">
             <Button variant="default" color={"primary"}>
