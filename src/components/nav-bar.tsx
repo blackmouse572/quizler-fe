@@ -96,35 +96,35 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
         </DrawerTrigger>
         <DrawerContent>
           <ul className="grid grid-cols-2 gap-4 px-4 py-8 [&_svg]:h-6 [&_svg]:w-6 [&_svg]:text-emerald-500">
-            <li className="rounded-md bg-neutral-100 px-4 py-3">
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
               <NavigationMenuLink asChild>
                 <Link href="/" className="flex flex-col gap-2">
-                  <Icons.Play />
+                  <Icons.Search />
                   <span className="font-bold">{tNav("getting_started")}</span>
                 </Link>
               </NavigationMenuLink>
             </li>
-            <li className="rounded-md bg-neutral-100 px-4 py-3">
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
               <NavigationMenuLink asChild>
-                <Link href="/contact" className="flex flex-col gap-2">
-                  <Icons.Contact />
+                <Link href="/docs" className="flex flex-col gap-2">
+                  <Icons.Document />
                   <span className="font-bold">{tNav("doc")}</span>
                 </Link>
               </NavigationMenuLink>
             </li>
 
-            <li className="rounded-md bg-neutral-100 px-4 py-3">
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
               <NavigationMenuLink asChild>
                 <Link href="/about" className="flex flex-col gap-2">
-                  <Icons.About />
+                  <Icons.CircleOff />
                   <span className="font-bold">{tNav("about")}</span>
                 </Link>
               </NavigationMenuLink>
             </li>
 
-            <li className="rounded-md bg-neutral-100 px-4 py-3">
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
               <NavigationMenuLink asChild>
-                <Link href="/about" className="flex flex-col gap-2">
+                <Link href="/classrooms" className="flex flex-col gap-2">
                   <Icons.School />
                   <span className="font-bold">{tNav("classrooms")}</span>
                 </Link>
