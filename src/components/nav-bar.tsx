@@ -7,7 +7,7 @@ import React, { useMemo } from "react"
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/ui/icons"
+import { IIconKeys, Icons } from "@/components/ui/icons"
 import { ListItem } from "@/components/ui/list-item"
 import {
   NavigationMenu,
@@ -21,9 +21,11 @@ import {
 import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
 import { MenuItem } from "@/types/dropdown-menu"
+import { useTranslations } from "next-intl"
 
 export type MainNavItem = {
   title: string
+  icon?: IIconKeys
   href: string
   description?: string
   disabled?: boolean
@@ -39,6 +41,8 @@ type Props = {
 function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
   const segment = useSelectedLayoutSegment()
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
+  const tNav = useTranslations("Navbar")
+  const tIndex = useTranslations("Index")
   const renderRightContent = useMemo(() => {
     if (!isAuthed)
       return (
@@ -85,12 +89,14 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
       <NavigationMenuLink asChild>
         <Link href="/" className="flex items-center rounded-sm p-1.5">
           <Icons.Icon className="mr-2 h-6 w-6" />
-          <span className="font-bold">Quizler</span>
+          <span className="font-bold">{tIndex("title")}</span>
         </Link>
       </NavigationMenuLink>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            {tNav("getting_started")}
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 rounded-lg p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -101,21 +107,32 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
                   >
                     <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white duration-500 ease-in-out [mask-image:linear-gradient(to_bottom_left,white_20%,transparent_30%)] dark:bg-black"></div>
 
-                    <div className="mb-2 mt-4 text-lg font-bold">Quizler</div>
+                    <div className="mb-2 mt-4 text-lg font-bold">
+                      {tIndex("title")}
+                    </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Learning with supafast methods
+                      {tIndex("description")}
                     </p>
                   </Link>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Introduction">
-                What is Quizler?
+              <ListItem
+                href="/docs"
+                title={tNav("getting_started_sec.introduction.title")}
+              >
+                {tNav("getting_started_sec.introduction.description")}
               </ListItem>
-              <ListItem href="/docs/installation" title="Classroom">
-                What is classroom? How to create a classroom?
+              <ListItem
+                href="/docs/installation"
+                title={tNav("getting_started_sec.classroom.title")}
+              >
+                {tNav("getting_started_sec.classroom.description")}
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="A.I">
-                <span>What is A.I? How to use A.I in Quizler?</span>
+              <ListItem
+                href="/docs/primitives/typography"
+                title={tNav("getting_started_sec.ai.title")}
+              >
+                <span>{tNav("getting_started_sec.ai.description")}</span>
                 <Badge size="sm" color="danger" className="mx-2 rounded-sm">
                   Beta
                 </Badge>
@@ -124,15 +141,11 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>How it works</NavigationMenuTrigger>
+          <NavigationMenuTrigger>{tNav("how_it_work")}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {items.map((item) => (
-                <AnimatedListItem
-                  key={item.title}
-                  title={item.title}
-                  href={item.href}
-                />
+                <AnimatedListItem {...item} />
               ))}
             </ul>
           </NavigationMenuContent>
@@ -140,7 +153,7 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
         <NavigationMenuItem>
           <Link href="/docs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
+              {tNav("doc")}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
