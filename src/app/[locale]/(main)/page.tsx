@@ -6,6 +6,7 @@ import LogoutButton from "@/components/logout-btn"
 import { Button } from "@/components/ui/button"
 import { CardInfo, ICardInfoProps } from "@/components/ui/card"
 import { Boxes } from "@/components/background-box"
+import { LoginCard } from "./component/login-card"
 
 const cardInfos: ICardInfoProps[] = [
   {
@@ -65,6 +66,7 @@ export default function Home() {
         <p className="relative z-20 bg-gradient-to-b from-slate-300 to-slate-700 bg-clip-text text-sm font-black tracking-wider  text-transparent sm:text-base ">
           Bring joy and fun to your classroom
         </p>
+        <LoginCard />
       </div>
 
       {/* Recent and stats */}
@@ -74,7 +76,7 @@ export default function Home() {
           <div className="flex justify-between space-x-4">
             {cardInfos.map((card, i) => (
               <CardInfo
-                className="max-h-[74px] max-w-[285px]"
+                className="max-w-[285px] max-h-[74px]"
                 key={i}
                 {...card}
               />
@@ -86,7 +88,7 @@ export default function Home() {
           <div className="flex justify-between space-x-4">
             {cardInfosExpand.map((card, i) => (
               <CardInfo
-                className="max-h-[74px] max-w-[285px]"
+                className="max-w-[285px] max-h-[74px]"
                 key={i}
                 {...card}
               />
