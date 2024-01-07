@@ -21,6 +21,8 @@ import {
   TablerIconsProps,
 } from "@tabler/icons-react"
 
+import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons"
+
 export const Icons = {
   Play: IconPlayerPlay,
   Menu: IconMenu,
@@ -42,6 +44,8 @@ export const Icons = {
   ArrowDownRight: IconArrowDownRight,
   CircleOff: IconCircleOff,
   Search: IconSearch,
+  ArrowUp: ChevronUpIcon,
+  ArrowDown: ChevronDownIcon,
 }
 
 type IIconKeys = keyof typeof Icons
