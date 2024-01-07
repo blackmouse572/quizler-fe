@@ -1,10 +1,10 @@
-import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
+import Link from "next/link"
 
-import { isAuthenticated } from "@/lib/auth"
-import { Button } from "@/components/ui/button"
 import { Boxes } from "@/components/background-box"
 import LogoutButton from "@/components/logout-btn"
+import { Button } from "@/components/ui/button"
+import { isAuthenticated } from "@/lib/auth"
 
 export default function Home() {
   const t = useTranslations("Index")
@@ -14,9 +14,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <div className="relative flex h-[70vh] w-full flex-col items-center justify-center overflow-hidden">
-        <div className="bg-background pointer-events-none absolute inset-0 z-10 h-full w-full [mask-image:linear-gradient(to_top_right,white_40%,transparent_50%)]" />
-        <Boxes row={60} className="-top-[30%]" />
-        <p className="font-heading relative z-20 bg-gradient-to-b from-slate-400 to-slate-800 bg-clip-text text-4xl font-black text-transparent sm:text-7xl">
+        <div className="pointer-events-none absolute inset-0 z-10 h-full w-full bg-background [mask-image:linear-gradient(to_top_right,white_40%,transparent_50%)]" />
+        <Boxes row={60} className="to-[-30%]" />
+        <p className="relative z-20 bg-gradient-to-b from-slate-400 to-slate-800 bg-clip-text font-heading text-4xl font-black text-transparent sm:text-7xl">
           {t("title")}
         </p>
         <p className="relative z-20 bg-gradient-to-b from-slate-300 to-slate-700 bg-clip-text text-sm font-black tracking-wider  text-transparent sm:text-base ">
