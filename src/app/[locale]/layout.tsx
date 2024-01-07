@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Montserrat, Plus_Jakarta_Sans } from 'next/font/google';
 import './global.css';
+import { NextAuthProvider } from '../provider/authProvider';
 
 const montserrat = Montserrat({
   weight: ['400', '600', '700', '800', '900', '500', '300', '200'],
@@ -71,7 +72,9 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           plusJakarta.variable,
         ]
       )}>
-        {children}
+         <NextAuthProvider>
+          {children}
+        </NextAuthProvider>
         <Toaster />
         <TailwindIndicator />
       </body>

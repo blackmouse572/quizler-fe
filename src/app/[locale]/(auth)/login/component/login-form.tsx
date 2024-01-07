@@ -30,6 +30,8 @@ import { LoginAction } from "@/app/[locale]/(auth)/login/actions/login-action"
 import LoginSchema, {
   LoginSchemaType,
 } from "@/app/[locale]/(auth)/login/validations/login-validate"
+import { signIn, signOut, useSession } from "next-auth/react"
+import Image from "next/image"
 
 type Props = {}
 
@@ -63,6 +65,22 @@ function LoginForm({}: Props) {
       color: "success",
     })
     return router.push("/")
+  }
+
+  const { data, status } = useSession()
+
+  if (status === "loading") return <h1> loading... please wait</h1>
+
+  if (data && data.user && status === "authenticated") {
+    const src = data.user.image;
+
+    return (
+      <div>
+        <h1> Hi {data.user.name}</h1>
+        <Image width={300} height={300} loader={() => src!} src={src!} alt={data.user.name + " photo"} />
+        <Button onClick={() => signOut()}>Sign out</Button>
+      </div>
+    )
   }
 
   return (
@@ -178,6 +196,19 @@ function LoginForm({}: Props) {
             </Button>
           </form>
         </Form>
+
+        <CardDescription className="m-5 flex justify-center text-sm text-neutral-500">
+          ----- {t("or_signin")} -----
+        </CardDescription>
+
+        <Button
+          className="w-full"
+          color="primary"
+          variant="default"
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+        >
+          {t("signin_with_google")}
+        </Button>
       </CardContent>
     </Card>
   )

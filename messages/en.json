@@ -17,7 +17,9 @@
       },
       "remember": "Remember me",
       "submit": "Sign in"
-    }
+    },
+    "or_signin": "OR",
+    "signin_with_google": "Login with Google"
   },
   "UserDropdown": {
     "my_account": "My account",
