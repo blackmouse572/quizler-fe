@@ -77,7 +77,7 @@ function LoginForm({}: Props) {
     return (
       <div>
         <h1> Hi {data.user.name}</h1>
-        <Image width={300} height={300} loader={() => src!} src={src!} alt={data.user.name + " photo"} />
+        <Image width={300} height={300} loader={() => src!} src={src!} alt={data.user.name + " photo"} unoptimized={true} />
         <Button onClick={() => signOut()}>Sign out</Button>
       </div>
     )
