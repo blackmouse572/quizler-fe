@@ -1,13 +1,14 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { ButtonDropdown } from "@/components/ui/button"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card/card"
+
+import { Icons } from "@/components/ui/icons"
 
 import {
   TCardContainerProps,
@@ -19,7 +20,8 @@ import {
 export interface ICardInfoProps extends TCardContainerProps {
   title: string
   subTitle?: string
-  expand?: boolean
+  arrowIcon?: boolean
+  isIconUp?: boolean
   titleProps?: TTitleProps
   headerProps?: THeaderProps
   subTitleProps?: TSubtitleProps
@@ -32,10 +34,12 @@ export function CardInfo(props: ICardInfoProps) {
     titleProps,
     headerProps,
     subTitleProps,
-    expand = false,
+    arrowIcon = false,
+    isIconUp = true,
     ...others
   } = props
 
+  const IconDefaultStyle: string = "relative top-2 mt-0 h-[32px] w-[48px]"
 
   return (
     <Card
@@ -44,15 +48,26 @@ export function CardInfo(props: ICardInfoProps) {
     >
       <CardHeader
         {...headerProps}
-        className={cn("flex flex-row space-x-2 justify-between p-5", headerProps?.className) }
+        className={cn(
+          "flex flex-row justify-between space-x-2 p-5",
+          headerProps?.className
+        )}
       >
-        <div className="overflow-hidden text-ellipsis">
+        <div className="space-y-2 overflow-hidden text-ellipsis">
           <CardTitle {...titleProps}>{title}</CardTitle>
           <CardDescription className="truncate" {...subTitleProps}>
             {subTitle}
           </CardDescription>
         </div>
-        {expand && <ButtonDropdown style={{margin: 0}} className="rounded-full w-[3.5em] h-[3em] mt-0 relative bottom-1" />}
+        {arrowIcon && (
+          <div className="h-[50px] w-[50px] rounded-full bg-[#E5E5E5]">
+            {isIconUp ? (
+              <Icons.ArrowUp className={IconDefaultStyle} />
+            ) : (
+              <Icons.ArrowDown className={IconDefaultStyle} />
+            )}
+          </div>
+        )}
       </CardHeader>
     </Card>
   )

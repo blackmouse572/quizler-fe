@@ -31,22 +31,23 @@ const cardInfosExpand: ICardInfoProps[] = [
   {
     title: "Create project",
     subTitle: "Deploy your new project in one-click.",
-    expand: true,
+    arrowIcon: true,
   },
   {
     title: "Create project",
     subTitle: "Deploy your new project in one-click.",
-    expand: true,
+    arrowIcon: true,
+    isIconUp: false,
   },
   {
     title: "Create project",
     subTitle: "Deploy your new project in one-click.",
-    expand: true,
+    arrowIcon: true,
   },
   {
     title: "Create project",
     subTitle: "Deploy your new project in one-click.",
-    expand: true,
+    arrowIcon: true,
   },
 ]
 
@@ -70,13 +71,13 @@ export default function Home() {
       </div>
 
       {/* Recent and stats */}
-      <div className="bg-slate-600 p-10">
+      <div className="bg-[#E5E5E5] p-10">
         <div className="p-2">
           <div className="mb-2 underline">Recent</div>
           <div className="flex justify-between space-x-4">
             {cardInfos.map((card, i) => (
               <CardInfo
-                className="max-w-[285px] max-h-[74px]"
+                className="h-[14vh] max-h-[20vh] w-[21.9vw] max-w-[40vw]"
                 key={i}
                 {...card}
               />
@@ -88,7 +89,7 @@ export default function Home() {
           <div className="flex justify-between space-x-4">
             {cardInfosExpand.map((card, i) => (
               <CardInfo
-                className="max-w-[285px] max-h-[74px]"
+                className="h-[14vh] max-h-[20vh] w-[21.9vw] max-w-[40vw]"
                 key={i}
                 {...card}
               />
