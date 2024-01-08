@@ -46,6 +46,14 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const form = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      confirm: "",
+      gender: undefined
+    }
   })
 
   const t = useTranslations("SignUp")

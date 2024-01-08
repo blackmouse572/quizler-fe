@@ -89,7 +89,11 @@
   },
   "VerifySignUp": {
     "title": "Create new account to discover",
-    "description": "We have sent the code to your email.<br></br>Do you received it? <resent>Resent</resent>"
+    "description": "We have sent the code to your email.<br></br>Do you received it? <resent>Resent</resent>",
+    "form": {
+      "title": "Enter OTP Code",
+      "submit": "Confirm"
+    }
   },
   "UserDropdown": {
     "my_account": "My account",

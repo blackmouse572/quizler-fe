@@ -5,13 +5,13 @@ import { getMessages, getTranslations } from "next-intl/server"
 import { VerifyRegister } from "../component/verify-sign-up"
 
 export default async function VerifyRegisterPage() {
-  const t = await getTranslations("SignUp")
+  const t = await getTranslations("VerifySignUp")
   const m = await getMessages()
 
   return (
     <div className="h-full w-full">
       <GoBackButton />
-      <NextIntlClientProvider messages={_.pick(m, "SignUp")}>
+      <NextIntlClientProvider messages={_.pick(m, "VerifySignUp")}>
         <VerifyRegister />
       </NextIntlClientProvider>
     </div>
