@@ -45,6 +45,52 @@
       "submit": "Sign in"
     }
   },
+  "SignUp": {
+    "title": "Create new account to discover",
+    "description": "Already have account? <login>Login</login> now",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "How would you like to call?"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Just to send you cool stuffs"
+      },
+      "username": {
+        "label": "Username",
+        "placeholder": "Just to send you cool stuffs"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "********"
+      },
+      "confirm": {
+        "label": "Re-password",
+        "placeholder": "********"
+      },
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Select gender",
+        "type": {
+          "Male": {
+            "value": "Male"
+          },
+          "Female": {
+            "value": "Female"
+          },
+          "Other": {
+            "value": "Other"
+          }
+        }
+      },
+      "submit": "Sign Up"
+    }
+  },
+  "VerifySignUp": {
+    "title": "Create new account to discover",
+    "description": "We have sent the code to your email.<br></br>Do you received it? <resent>Resent</resent>"
+  },
   "UserDropdown": {
     "my_account": "My account",
     "profile": "Profile",

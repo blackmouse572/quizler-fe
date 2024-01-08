@@ -1,11 +1,21 @@
-import { z } from 'zod';
+import { z } from "zod"
 
-const SignUpSchema = z.object({
-  username: z.string().min(3).max(20),
-  email: z.string().email(),
-});
+const genders = ["Male", "Female", "Other"] as const
 
-type SignUpSchemaType = z.infer<typeof SignUpSchema>;
+const SignUpSchema = z
+  .object({
+    name: z.string().min(1).max(20),
+    email: z.string().email(),
+    username: z.string().min(3).max(20),
+    password: z.string().min(8),
+    confirm: z.string().min(8),
+    gender: z.enum(genders),
+  })
+  .refine((data) => data.password === data.confirm, {
+    message: "Passwords don't match"
+  })
 
-export default SignUpSchema;
-export type { SignUpSchemaType };
+type SignUpSchemaType = z.infer<typeof SignUpSchema>
+
+export default SignUpSchema
+export type { SignUpSchemaType }
