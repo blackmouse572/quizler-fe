@@ -95,6 +95,42 @@
       "submit": "Confirm"
     }
   },
+  "ForgotPassword": {
+    "title": "Forgot password? Do not worry",
+    "description": "Enter your credentials and we will take it back",
+    "form": {
+      "title": "Enter OTP Code",
+      "email": {
+        "label": "Email",
+        "description": "We will sent the verification code to your email",
+        "placeholder": "Enter your email"
+      },
+      "submit": "Reset Password"
+    }
+  },
+  "VerifyForgotPassword": {
+    "title": "Forgot password? Do not worry",
+    "description": "We have sent the code to your email.<br></br>Do you received it? <resent>Resent</resent>",
+    "form": {
+      "title": "Enter OTP Code",
+      "submit": "Confirm"
+    }
+  },
+  "ChangePassword": {
+    "title": "Forgot password? Do not worry",
+    "description": "Enter new password",
+    "form": {
+      "password": {
+        "label": "Password",
+        "placeholder": "********"
+      },
+      "confirm": {
+        "label": "Re-password",
+        "placeholder": "********"
+      },
+      "submit": "Confirm"
+    }
+  },
   "UserDropdown": {
     "my_account": "My account",
     "profile": "Profile",
