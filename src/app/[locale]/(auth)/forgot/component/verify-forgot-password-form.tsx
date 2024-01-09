@@ -21,6 +21,8 @@ import { useForm } from "react-hook-form"
 import { Icons } from "@/components/ui/icons"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
+import { VerifyForgotPasswordSchemaType } from "../validations/verify-forgot-password-validate"
+import { VerifyForgotPasswordAction } from "../actions/verify-forgot-password-action"
 
 export default function VerifyForgotPasswordForm() {
   const t = useTranslations("VerifyForgotPassword")
@@ -34,12 +36,17 @@ export default function VerifyForgotPasswordForm() {
     setOtp(value)
   }
 
-  async function onSubmit(values: number) {
+  async function onSubmit(values: VerifyForgotPasswordSchemaType) {
     setIsLoading(true)
 
-    console.log(values)
+    values = {
+      otpCode: otp
+    }
+
     // TODO: change here
-    const result = await VerifyForgotPasswordForm(values)
+    console.log(values)
+    
+    const result = await VerifyForgotPasswordAction(values)
 
     if (!result?.ok) {
       setIsLoading(false)

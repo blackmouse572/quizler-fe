@@ -2,7 +2,8 @@ import { z } from "zod"
 
 const VerifyForgotPasswordSchema = z
   .object({
-    email: z.string().email()
+    // TODO: change here
+    // otpCode: z.number()
   })
   
 type VerifyForgotPasswordSchemaType = z.infer<typeof VerifyForgotPasswordSchema>

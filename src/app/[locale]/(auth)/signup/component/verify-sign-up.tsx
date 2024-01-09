@@ -24,6 +24,7 @@ import { Icons } from "@/components/ui/icons"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 import { VerifySignUpAction } from "../actions/verify-signup-action"
+import { VerifySignUpSchemaType } from "../vaidations/verify-sign-up-validate"
 
 export function VerifyRegister() {
   const t = useTranslations("VerifySignUp")
@@ -37,11 +38,16 @@ export function VerifyRegister() {
     setOtp(value)
   }
 
-  async function onSubmit(values: number) {
+  async function onSubmit(values: VerifySignUpSchemaType) {
     setIsLoading(true)
 
-    console.log(values)
+    values = {
+      otpCode: otp
+    }
+
     // TODO: change here
+    console.log(values)
+    
     const result = await VerifySignUpAction(values)
 
     if (!result?.ok) {

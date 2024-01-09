@@ -2,7 +2,8 @@ import { z } from "zod"
 
 const VerifySignUpSchema = z
   .object({
-    otpCode: z.number().positive()
+    // TODO: change here
+    // otpCode: z.number()
   })
   
 type VerifySignUpSchemaType = z.infer<typeof VerifySignUpSchema>
