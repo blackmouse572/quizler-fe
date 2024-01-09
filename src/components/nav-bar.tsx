@@ -34,9 +34,20 @@ type Props = {
   className?: string
   isAuthed?: boolean
   menuItems?: MenuItem[][]
+  profile?: {
+    name: string
+    email: string
+    avatar?: string
+  }
 }
 
-function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
+function Navbar({
+  className,
+  isAuthed,
+  items = [],
+  menuItems = [],
+  profile,
+}: Props) {
   const segment = useSelectedLayoutSegment()
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
   const renderRightContent = useMemo(() => {
@@ -63,17 +74,8 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
           </NavigationMenuItem>
         </>
       )
-    else
-      return (
-        <UserDropdown
-          user={{
-            name: "Huy Nguyen",
-            email: "",
-          }}
-          menuItems={menuItems}
-        />
-      )
-  }, [isAuthed, menuItems])
+    else return <UserDropdown user={profile} menuItems={menuItems} />
+  }, [isAuthed, menuItems, profile])
 
   return (
     <NavigationMenu

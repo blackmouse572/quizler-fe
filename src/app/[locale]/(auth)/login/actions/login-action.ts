@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache"
 
-import { setToken } from "@/lib/auth"
 import { LoginSchemaType } from "@/app/[locale]/(auth)/login/validations/login-validate"
+import { setAccessToken, setRefreshToken } from "@/lib/auth"
 
 export const LoginAction = async (values: LoginSchemaType) => {
   const URL = "https://api.escuelajs.co/api/v1/auth/login"
@@ -19,7 +19,8 @@ export const LoginAction = async (values: LoginSchemaType) => {
   return fetch(URL, options)
     .then((response) => response.json())
     .then((response) => {
-      setToken(response.token)
+      setAccessToken(response.access_token)
+      setRefreshToken(response.refresh_token)
       revalidatePath("/")
       return {
         ok: true,
