@@ -1,116 +1,279 @@
 "use client"
 
 import * as React from "react"
-import { useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { toast } from "@/components/ui/use-toast"
+import { toast, useToast } from "@/components/ui/use-toast"
 import SignUpSchema, {
   SignUpSchemaType,
 } from "@/app/[locale]/(auth)/signup/vaidations/sign-up-validate"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import Link from "next/link"
+import { useTranslations } from "next-intl"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { SignUpAction } from "../actions/signup-action"
+import { useRouter } from "next/navigation"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-type FormData = SignUpSchemaType
-
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
+  const form = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
-  })
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false)
-  const searchParams = useSearchParams()
-
-  async function onSubmit(data: FormData) {
-    setIsLoading(true)
-    await new Promise((r) => setTimeout(r, 1000))
-    const signInResult = {
-      ok: true,
+    defaultValues: {
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      confirm: "",
+      gender: undefined
     }
-    setIsLoading(false)
+  })
 
-    if (!signInResult?.ok) {
+  const t = useTranslations("SignUp")
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const genders = ["Male", "Female", "Other"] as const
+  const router = useRouter()
+  const { toast } = useToast()
+
+  async function onSubmit(values: SignUpSchemaType) {
+    setIsLoading(true)
+    const result = await SignUpAction(values)
+    
+    if (!result?.ok) {
+      setIsLoading(false)
       return toast({
         title: "Something went wrong.",
-        description: "Your sign in request failed. Please try again.",
+        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
         variant: "flat",
         color: "danger",
       })
     }
 
-    return toast({
-      title: "Check your email",
-      description: "We sent you a login link. Be sure to check your spam too.",
+    toast({
+      title: "Success",
+      description: "You have been signed up. Check your email",
+      variant: "flat",
+      color: "success",
     })
+
+    return router.push("/signup/verify")
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading || isGitHubLoading}
-              {...register("email")}
+    <Card className="min-w-96">
+      <CardHeader>
+        <CardTitle className="font-heading text-lg">{t("title")}</CardTitle>
+        <CardDescription className="text-sm text-neutral-500">
+          {t.rich("description", {
+            login: (children) => (
+              <Link
+                className="font-medium underline opacity-75 hover:opacity-100"
+                href="/login"
+              >
+                <b>{children}</b>
+              </Link>
+            ),
+          })}
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <Form {...form}>
+          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => {
+                return (
+                  <div className="space-y-1">
+                    <FormLabel required htmlFor="">
+                      {t("form.name.label")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        className="rounded-sm"
+                        id="name"
+                        placeholder={t("form.name.placeholder")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                )
+              }}
             />
-            {errors?.email && (
-              <p className="px-1 text-xs text-red-600">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-          <button className={cn(buttonVariants())} disabled={isLoading}>
-            {isLoading && (
-              <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Sign In with Email
-          </button>
-        </div>
-      </form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background text-muted-foreground px-2">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <button
-        type="button"
-        className={cn(buttonVariants({ variant: "outline" }))}
-        onClick={() => {
-          setIsGitHubLoading(true)
-        }}
-        disabled={isLoading || isGitHubLoading}
-      >
-        {isGitHubLoading ? (
-          <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.Github className="mr-2 h-4 w-4" />
-        )}{" "}
-        Github
-      </button>
-    </div>
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => {
+                return (
+                  <div className="space-y-1">
+                    <FormLabel required htmlFor="">
+                      {t("form.email.label")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        className="rounded-sm"
+                        id="email"
+                        placeholder={t("form.email.placeholder")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                )
+              }}
+            />
+
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => {
+                return (
+                  <div className="space-y-1">
+                    <FormLabel required htmlFor="">
+                      {t("form.username.label")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        className="rounded-sm"
+                        id="username"
+                        placeholder={t("form.username.placeholder")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                )
+              }}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => {
+                return (
+                  <div className="space-y-1">
+                    <FormLabel required htmlFor="">
+                      {t("form.password.label")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        className="rounded-sm"
+                        id="password"
+                        type="password"
+                        placeholder={t("form.password.placeholder")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                )
+              }}
+            />
+
+            <FormField
+              control={form.control}
+              name="confirm"
+              render={({ field }) => {
+                return (
+                  <div className="space-y-1">
+                    <FormLabel required htmlFor="">
+                      {t("form.confirm.label")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        className="rounded-sm"
+                        id="confirm"
+                        type="password"
+                        placeholder={t("form.confirm.placeholder")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                )
+              }}
+            />
+
+            <FormField
+              control={form.control}
+              name="gender"
+              render={({ field }) => {
+                return (
+                  <div className="space-y-1">
+                    <FormLabel required>{t("form.gender.label")}</FormLabel>
+                    <FormControl>
+                      <Select onValueChange={field.onChange}>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={t("form.gender.placeholder")}
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>{t("form.gender.label")}</SelectLabel>
+                            {genders.map((key, i) => (
+                              <SelectItem key={i} value={key}>
+                                {t(`form.gender.type.${key}.value`)}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                )
+              }}
+            />
+
+            <Button
+              disabled={isLoading}
+              className="w-full"
+              color="primary"
+              variant="default"
+              type="submit"
+            >
+              {isLoading && <Icons.Loader className="animate-spin" />}
+              {t("form.submit")}
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   )
 }
