@@ -1,7 +1,7 @@
 "use client"
 
-import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
+import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
@@ -35,16 +35,27 @@ AvatarImage.displayName = AvatarPrimitive.Image.displayName
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Fallback
-    ref={ref}
-    className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800",
-      className
-    )}
-    {...props}
-  />
-))
+>(({ className, ...props }, ref) => {
+  const gradients = [
+    "from-slate-500 via-violet-500 to-cyan-600",
+    "from-rose-500 via-red-500 to-amber-500",
+    "from-sky-500 via-teal-500 to-emerald-500",
+  ]
+
+  const randomGradient = gradients[Math.floor(Math.random() * gradients.length)]
+
+  return (
+    <AvatarPrimitive.Fallback
+      ref={ref}
+      className={cn(
+        "flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br dark:bg-neutral-800",
+        randomGradient,
+        className
+      )}
+      {...props}
+    />
+  )
+})
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
 export { Avatar, AvatarFallback, AvatarImage }
