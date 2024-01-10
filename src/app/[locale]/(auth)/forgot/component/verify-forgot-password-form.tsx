@@ -96,7 +96,7 @@ export default function VerifyForgotPasswordForm() {
               name="name"
               render={({ field }) => {
                 return (
-                  <div className="ml-2 mt-2">
+                  <div className="mt-2 flex justify-center">
                     <FormControl>
                       <Otp
                         length={4}

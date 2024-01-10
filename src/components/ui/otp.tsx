@@ -56,7 +56,7 @@ const Otp = ({ length, otp, onOtpChange }: OtpInputProps): JSX.Element => {
               ref={index === activeOtpIndex ? inputRef : null}
               onChange={handleOnchange}
               onKeyDown={(e) => handleOnKeyDown(e, index)}
-              className="text-center placeholder:text-slate-300 dark:placeholder:text-slate-500"
+              className="w-10 text-center placeholder:text-slate-300 dark:placeholder:text-slate-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               type="number"
               placeholder={(index + 1).toString()}
               value={tempOtp[index]}
