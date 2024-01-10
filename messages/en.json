@@ -1,7 +1,33 @@
 {
   "Index": {
     "title": "Quizler",
-    "back": "Go back"
+    "back": "Go back",
+    "description": "Learning with supafast methods"
+  },
+  "Navbar": {
+    "home": "Home",
+    "classrooms": "Classrooms",
+    "contact": "Contact",
+    "about": "About",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "getting_started": "Getting started",
+    "how_it_work": "How it works?",
+    "doc": "Documentation",
+    "getting_started_sec": {
+      "introduction": {
+        "title": "Introduction",
+        "description": "What is Quizler and how it works?"
+      },
+      "classroom": {
+        "title": "Classroom",
+        "description": "Get more fun with your classroom"
+      },
+      "ai": {
+        "title": "AI",
+        "description": "Know more with information from AI"
+      }
+    }
   },
   "SignIn": {
     "title": "Welcome back!",
@@ -17,6 +43,92 @@
       },
       "remember": "Remember me",
       "submit": "Sign in"
+    }
+  },
+  "SignUp": {
+    "title": "Create new account to discover",
+    "description": "Already have account? <login>Login</login> now",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "How would you like to call?"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Just to send you cool stuffs"
+      },
+      "username": {
+        "label": "Username",
+        "placeholder": "Just to send you cool stuffs"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "********"
+      },
+      "confirm": {
+        "label": "Re-password",
+        "placeholder": "********"
+      },
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Select gender",
+        "type": {
+          "Male": {
+            "value": "Male"
+          },
+          "Female": {
+            "value": "Female"
+          },
+          "Other": {
+            "value": "Other"
+          }
+        }
+      },
+      "submit": "Sign Up"
+    }
+  },
+  "VerifySignUp": {
+    "title": "Create new account to discover",
+    "description": "We have sent the code to your email.<br></br>Do you received it? <resent>Resent</resent>",
+    "form": {
+      "title": "Enter OTP Code",
+      "submit": "Confirm"
+    }
+  },
+  "ForgotPassword": {
+    "title": "Forgot password? Do not worry",
+    "description": "Enter your credentials and we will take it back",
+    "form": {
+      "title": "Enter OTP Code",
+      "email": {
+        "label": "Email",
+        "description": "We will sent the verification code to your email",
+        "placeholder": "Enter your email"
+      },
+      "submit": "Reset Password"
+    }
+  },
+  "VerifyForgotPassword": {
+    "title": "Forgot password? Do not worry",
+    "description": "We have sent the code to your email.<br></br>Do you received it? <resent>Resent</resent>",
+    "form": {
+      "title": "Enter OTP Code",
+      "submit": "Confirm"
+    }
+  },
+  "ChangePassword": {
+    "title": "Forgot password? Do not worry",
+    "description": "Enter new password",
+    "form": {
+      "password": {
+        "label": "Password",
+        "placeholder": "********"
+      },
+      "confirm": {
+        "label": "Re-password",
+        "placeholder": "********"
+      },
+      "submit": "Confirm"
     }
   },
   "UserDropdown": {

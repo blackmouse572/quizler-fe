@@ -3,10 +3,10 @@
 import { revalidatePath } from "next/cache"
 
 import { setToken } from "@/lib/auth"
-import { LoginSchemaType } from "@/app/[locale]/(auth)/login/validations/login-validate"
+import { VerifyForgotPasswordSchemaType } from "../validations/verify-forgot-password-validate"
 
-export const LoginAction = async (values: LoginSchemaType) => {
-  const URL = "https://api.escuelajs.co/api/v1/auth/login"
+export const VerifyForgotPasswordAction = async (values: VerifyForgotPasswordSchemaType) => {
+  const URL = "https://api.escuelajs.co/api/v1/auth/forgot-password"
 
   const options = {
     method: "POST",

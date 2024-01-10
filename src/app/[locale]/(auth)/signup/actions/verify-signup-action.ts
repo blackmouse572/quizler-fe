@@ -3,9 +3,9 @@
 import { revalidatePath } from "next/cache"
 
 import { setToken } from "@/lib/auth"
-import { LoginSchemaType } from "@/app/[locale]/(auth)/login/validations/login-validate"
+import { VerifySignUpSchemaType } from "../vaidations/verify-sign-up-validate"
 
-export const LoginAction = async (values: LoginSchemaType) => {
+export const VerifySignUpAction = async (values: VerifySignUpSchemaType) => {
   const URL = "https://api.escuelajs.co/api/v1/auth/login"
 
   const options = {
