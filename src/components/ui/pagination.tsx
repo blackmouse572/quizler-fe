@@ -45,7 +45,7 @@ type PaginationLinkProps = {
 const PaginationLink = ({
   className,
   isActive,
-  size = "sm",
+  size = "icon",
   ...props
 }: PaginationLinkProps) => (
   <PaginationItem>
@@ -54,8 +54,6 @@ const PaginationLink = ({
       className={cn(
         buttonVariants({
           variant: isActive ? "outline" : "ghost",
-          isIconOnly: true,
-          color: isActive ? "primary" : "accent",
           size,
         }),
         className
@@ -113,10 +111,6 @@ const PaginationEllipsis = ({
 
 export {
   Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+  PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious
 }
+

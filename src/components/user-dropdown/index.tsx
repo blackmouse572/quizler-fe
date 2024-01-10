@@ -18,7 +18,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Icons } from "@/components/ui/icons"
-import { getShortName } from "@/lib/string-helper"
 import { MenuItem } from "@/types/dropdown-menu"
 import { useRouter } from "next/navigation"
 
@@ -92,8 +91,8 @@ function UserDropdown({ user, menuItems }: Props) {
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src={user?.avatar} alt={user?.name} />
-          <AvatarFallback className="bg-gradient-to-bl ">
-            <span className="text-white">{getShortName(user.name)}</span>
+          <AvatarFallback className="bg-gradient-to-bl from-slate-500 via-violet-500 to-cyan-600">
+            <span className="text-white">{user.name}</span>
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
