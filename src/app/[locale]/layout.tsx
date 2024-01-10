@@ -1,22 +1,24 @@
-import { TailwindIndicator } from '@/components/tailwind-indicator';
-import { Toaster } from '@/components/ui/toaster';
-import { siteConfig } from '@/lib/config/siteconfig';
-import { cn } from '@/lib/utils';
-import type { Metadata } from 'next';
-import { Montserrat, Plus_Jakarta_Sans } from 'next/font/google';
-import './global.css';
+import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { Toaster } from "@/components/ui/toaster"
+import { siteConfig } from "@/lib/config/siteconfig"
+import { cn } from "@/lib/utils"
+import { GeistMono } from "geist/font/mono"
+import type { Metadata } from "next"
+import { Montserrat, Plus_Jakarta_Sans } from "next/font/google"
+
+import "./global.css"
 
 const montserrat = Montserrat({
-  weight: ['400', '600', '700', '800', '900', '500', '300', '200'],
-  variable: '--font-heading',
-  subsets: ['latin-ext', 'vietnamese']
-});
+  weight: ["400", "600", "700", "800", "900", "500", "300", "200"],
+  variable: "--font-heading",
+  subsets: ["latin-ext", "vietnamese"],
+})
 
 const plusJakarta = Plus_Jakarta_Sans({
-  weight: ['400', '600', '700', '500', '300',],
-  variable: '--font-sans',
-  subsets: ['latin-ext', 'vietnamese']
-});
+  weight: ["400", "600", "700", "500", "300"],
+  variable: "--font-sans",
+  subsets: ["latin-ext", "vietnamese"],
+})
 
 export const metadata: Metadata = {
   title: {
@@ -24,9 +26,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: [
-    "Next.js",
-  ],
+  keywords: ["Next.js"],
   authors: [
     {
       name: "blackmouse572",
@@ -57,24 +57,26 @@ export const metadata: Metadata = {
 }
 
 type Props = {
-  children: React.ReactNode;
+  children: React.ReactNode
   params: {
-    locale: string;
-  };
-};
+    locale: string
+  }
+}
 export default function LocaleLayout({ children, params: { locale } }: Props) {
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={cn(
-        ["bg-background min-h-screen font-sans antialiased",
+      <body
+        className={cn([
+          "min-h-screen bg-background font-sans antialiased",
           montserrat.variable,
           plusJakarta.variable,
-        ]
-      )}>
+          GeistMono.variable,
+        ])}
+      >
         {children}
         <Toaster />
         <TailwindIndicator />
       </body>
     </html>
-  );
+  )
 }

@@ -1,7 +1,33 @@
 {
   "Index": {
     "title": "Quizler",
-    "back": "Go back"
+    "back": "Go back",
+    "description": "Learning with supafast methods"
+  },
+  "Navbar": {
+    "home": "Home",
+    "classrooms": "Classrooms",
+    "contact": "Contact",
+    "about": "About",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "getting_started": "Getting started",
+    "how_it_work": "How it works?",
+    "doc": "Documentation",
+    "getting_started_sec": {
+      "introduction": {
+        "title": "Introduction",
+        "description": "What is Quizler and how it works?"
+      },
+      "classroom": {
+        "title": "Classroom",
+        "description": "Get more fun with your classroom"
+      },
+      "ai": {
+        "title": "AI",
+        "description": "Know more with information from AI"
+      }
+    }
   },
   "SignIn": {
     "title": "Welcome back!",

@@ -3,10 +3,8 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
-import Navbar from "@/components/nav-bar"
-import { getTokens, isAuthenticated } from "@/lib/auth"
-import { MAIN_NAVBAR_ITEMS } from "@/lib/config/navbar-config"
-import { getUserProfile } from "@/services/account.service"
+import Navbar, { MainNavItem } from "@/components/nav-bar"
+import { isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
 
 type Props = {
@@ -14,61 +12,83 @@ type Props = {
 }
 
 async function MainLayout({ children }: Props) {
+  const tUserDropdown = await getTranslations("UserDropdown")
+  const tNav = await getTranslations("Navbar")
   const isAuth = isAuthenticated()
-  const { accessToken } = getTokens()
-  const [m, t, profile] = await Promise.all([
-    getMessages(),
-    getTranslations("UserDropdown"),
-    accessToken && getUserProfile(accessToken),
-  ])
+  const m = await getMessages()
   const menuItems: MenuItem[][] = [
     [
       {
-        label: t("profile"),
+        label: tUserDropdown("profile"),
         href: "/profile",
         shortcut: "⌘+P",
       },
       {
-        label: t("billing"),
+        label: tUserDropdown("billing"),
         href: "/billing",
         shortcut: "⌘+B",
       },
       {
-        label: t("settings"),
+        label: tUserDropdown("settings"),
         href: "/settings",
         shortcut: "⌘+,",
       },
     ],
     [
       {
-        label: t("classrooms"),
+        label: tUserDropdown("classrooms"),
         href: "/classrooms",
       },
       {
-        label: t("invite"),
+        label: tUserDropdown("invite"),
         href: "/invite",
       },
     ],
     [
       {
-        label: t("faq"),
+        label: tUserDropdown("faq"),
         href: "/help",
       },
       {
-        label: t("support"),
+        label: tUserDropdown("support"),
         href: "/support",
       },
     ],
   ]
+
+  const mainNavbarItems: MainNavItem[] = [
+    {
+      title: tNav("home"),
+      href: "/",
+      icon: "Home",
+    },
+    {
+      title: tNav("about"),
+      icon: "About",
+      href: "/about",
+    },
+    {
+      title: tNav("contact"),
+      href: "/contact",
+      icon: "Contact",
+    },
+    {
+      title: tNav("classrooms"),
+      href: "/classrooms",
+      icon: "School",
+    },
+  ]
+
   return (
     <main className="relative min-h-screen">
-      <NextIntlClientProvider messages={pick(m, "UserDropdown")}>
+      <NextIntlClientProvider
+        messages={pick(m, "UserDropdown", "Navbar", "Index")}
+      >
         <Navbar
           className="fixed left-1/2 top-0 -translate-x-1/2"
-          items={MAIN_NAVBAR_ITEMS}
+          items={mainNavbarItems}
           menuItems={menuItems}
           isAuthed={isAuth}
-          profile={profile}
         />
       </NextIntlClientProvider>
       {children}

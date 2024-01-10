@@ -6,8 +6,9 @@ import React, { useMemo } from "react"
 
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/ui/icons"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
+import { IIconKeys, Icons } from "@/components/ui/icons"
 import { ListItem } from "@/components/ui/list-item"
 import {
   NavigationMenu,
@@ -21,9 +22,11 @@ import {
 import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
 import { MenuItem } from "@/types/dropdown-menu"
+import { useTranslations } from "next-intl"
 
 export type MainNavItem = {
   title: string
+  icon?: IIconKeys
   href: string
   description?: string
   disabled?: boolean
@@ -34,22 +37,13 @@ type Props = {
   className?: string
   isAuthed?: boolean
   menuItems?: MenuItem[][]
-  profile?: {
-    name: string
-    email: string
-    avatar?: string
-  }
 }
 
-function Navbar({
-  className,
-  isAuthed,
-  items = [],
-  menuItems = [],
-  profile,
-}: Props) {
+function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
   const segment = useSelectedLayoutSegment()
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
+  const tNav = useTranslations("Navbar")
+  const tIndex = useTranslations("Index")
   const renderRightContent = useMemo(() => {
     if (!isAuthed)
       return (
@@ -74,8 +68,73 @@ function Navbar({
           </NavigationMenuItem>
         </>
       )
-    else return <UserDropdown user={profile} menuItems={menuItems} />
-  }, [isAuthed, menuItems, profile])
+    else
+      return (
+        <UserDropdown
+          user={{
+            name: "Huy Nguyen",
+            email: "",
+          }}
+          menuItems={menuItems}
+        />
+      )
+  }, [isAuthed, menuItems])
+
+  const renderDrawerMenu = useMemo(() => {
+    return (
+      <Drawer>
+        <DrawerTrigger
+          className={buttonVariants({
+            isIconOnly: true,
+            variant: "flat",
+            className:
+              "bg-transparent px-0 py-0 hover:text-primary/70 [&_svg]:text-primary ",
+            size: "md",
+          })}
+        >
+          <Icons.Menu />
+        </DrawerTrigger>
+        <DrawerContent>
+          <ul className="grid grid-cols-2 gap-4 px-4 py-8 [&_svg]:h-6 [&_svg]:w-6 [&_svg]:text-emerald-500">
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
+              <NavigationMenuLink asChild>
+                <Link href="/" className="flex flex-col gap-2">
+                  <Icons.Search />
+                  <span className="font-bold">{tNav("getting_started")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
+              <NavigationMenuLink asChild>
+                <Link href="/docs" className="flex flex-col gap-2">
+                  <Icons.Document />
+                  <span className="font-bold">{tNav("doc")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
+              <NavigationMenuLink asChild>
+                <Link href="/about" className="flex flex-col gap-2">
+                  <Icons.CircleOff />
+                  <span className="font-bold">{tNav("about")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+
+            <li className="scale-100 rounded-md bg-neutral-100 px-4 py-3 transition-all ease-linear hover:bg-neutral-200/60 hover:shadow-sm focus:scale-95">
+              <NavigationMenuLink asChild>
+                <Link href="/classrooms" className="flex flex-col gap-2">
+                  <Icons.School />
+                  <span className="font-bold">{tNav("classrooms")}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+          </ul>
+        </DrawerContent>
+      </Drawer>
+    )
+  }, [tNav])
 
   return (
     <NavigationMenu
@@ -84,15 +143,23 @@ function Navbar({
         className
       )}
     >
-      <NavigationMenuLink asChild>
-        <Link href="/" className="flex items-center rounded-sm p-1.5">
-          <Icons.Icon className="mr-2 h-6 w-6" />
-          <span className="font-bold">Quizler</span>
-        </Link>
-      </NavigationMenuLink>
-      <NavigationMenuList>
+      <NavigationMenuList className="flex items-center space-x-2">
+        <NavigationMenuItem className="flex md:hidden">
+          {renderDrawerMenu}
+        </NavigationMenuItem>
+
+        <NavigationMenuLink asChild>
+          <Link href="/" className="flex items-center rounded-sm p-1.5">
+            <Icons.Icon className="mr-2 h-6 w-6" />
+            <span className="font-bold">{tIndex("title")}</span>
+          </Link>
+        </NavigationMenuLink>
+      </NavigationMenuList>
+      <NavigationMenuList className="hidden md:flex">
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            {tNav("getting_started")}
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 rounded-lg p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -103,21 +170,32 @@ function Navbar({
                   >
                     <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white duration-500 ease-in-out [mask-image:linear-gradient(to_bottom_left,white_20%,transparent_30%)] dark:bg-black"></div>
 
-                    <div className="mb-2 mt-4 text-lg font-bold">Quizler</div>
+                    <div className="mb-2 mt-4 text-lg font-bold">
+                      {tIndex("title")}
+                    </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Learning with supafast methods
+                      {tIndex("description")}
                     </p>
                   </Link>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Introduction">
-                What is Quizler?
+              <ListItem
+                href="/docs"
+                title={tNav("getting_started_sec.introduction.title")}
+              >
+                {tNav("getting_started_sec.introduction.description")}
               </ListItem>
-              <ListItem href="/docs/installation" title="Classroom">
-                What is classroom? How to create a classroom?
+              <ListItem
+                href="/docs/installation"
+                title={tNav("getting_started_sec.classroom.title")}
+              >
+                {tNav("getting_started_sec.classroom.description")}
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="A.I">
-                <span>What is A.I? How to use A.I in Quizler?</span>
+              <ListItem
+                href="/docs/primitives/typography"
+                title={tNav("getting_started_sec.ai.title")}
+              >
+                <span>{tNav("getting_started_sec.ai.description")}</span>
                 <Badge size="sm" color="danger" className="mx-2 rounded-sm">
                   Beta
                 </Badge>
@@ -126,15 +204,11 @@ function Navbar({
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>How it works</NavigationMenuTrigger>
+          <NavigationMenuTrigger>{tNav("how_it_work")}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {items.map((item) => (
-                <AnimatedListItem
-                  key={item.title}
-                  title={item.title}
-                  href={item.href}
-                />
+                <AnimatedListItem {...item} />
               ))}
             </ul>
           </NavigationMenuContent>
@@ -142,7 +216,7 @@ function Navbar({
         <NavigationMenuItem>
           <Link href="/docs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
+              {tNav("doc")}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
