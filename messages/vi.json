@@ -45,6 +45,92 @@
       "submit": "Đăng nhập"
     }
   },
+  "SignUp": {
+    "title": "Tạo tài khoản mới để khám phá",
+    "description": "Đã có tài khoản? Đăng nhập ngay <login>tại đây</login>",
+    "form": {
+      "name": {
+        "label": "Họ và tên",
+        "placeholder": "Bạn muốn gọi là gì?"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Chỉ để gửi những thông tin thú vị đến bạn"
+      },
+      "username": {
+        "label": "Tên đăng nhập",
+        "placeholder": "Chỉ để gửi những thông tin thú vị đến bạn"
+      },
+      "password": {
+        "label": "Mật khẩu",
+        "placeholder": "********"
+      },
+      "confirm": {
+        "label": "Xác nhận mật khẩu",
+        "placeholder": "********"
+      },
+      "gender": {
+        "label": "Giới tính",
+        "placeholder": "Chọn giới tính",
+        "type": {
+          "Male": {
+            "value": "Nam"
+          },
+          "Female": {
+            "value": "Nữ"
+          },
+          "Other": {
+            "value": "Khác"
+          }
+        }
+      },
+      "submit": "Đăng ký"
+    }
+  },
+  "VerifySignUp": {
+    "title": "Tạo tài khoản mới để khám phá",
+    "description": "Chúng tôi đã gửi mã xác nhận đến email của bạn.<br></br>Bạn đã nhận được nó chưa? <resent>Gửi lại</resent>",
+    "form": {
+      "title": "Nhập mã OTP",
+      "submit": "Xác nhận"
+    }
+  },
+  "ForgotPassword": {
+    "title": "Quên mật khẩu? Đừng lo",
+    "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",
+    "form": {
+      "title": "Nhập mã OTP",
+      "email": {
+        "label": "Email",
+        "description": "Chúng tôi sẽ gửi mã xác nhận đến email của bạn",
+        "placeholder": "Nhập email của bạn"
+      },
+      "submit": "Khôi phục mật khẩu"
+    }
+  },
+  "VerifyForgotPassword": {
+    "title": "Quên mật khẩu? Đừng lo",
+    "description": "Chúng tôi đã gửi mã xác nhận đến email của bạn.<br></br>Bạn đã nhận được nó chưa? <resent>Gửi lại</resent>",
+    "form": {
+      "title": "Nhập mã OTP",
+      "submit": "Xác nhận"
+    }
+  },
+  "ChangePassword": {
+    "title": "Quên mật khẩu? Đừng lo",
+    "description": "Nhập mật khẩu mới",
+    "form": {
+      "password": {
+        "label": "Mật khẩu",
+        "placeholder": "********"
+      },
+      "confirm": {
+        "label": "Xác nhận mật khẩu",
+        "placeholder": "********"
+      },
+      "submit": "Xác nhận"
+    }
+  },
   "UserDropdown": {
     "my_account": "Tài khoản của tôi",
     "profile": "Hồ sơ",
