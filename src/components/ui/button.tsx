@@ -9,13 +9,11 @@ const buttonVariants = cva(
   {
     variants: {
       color: {
-        primary:
-          "bg-primary text-primary-foreground [&_svg]:text-primary-foreground",
-        accent:
-          "bg-accent text-accent-foreground [&_svg]:text-accent-foreground",
-        danger: "bg-danger-500 text-danger-50 [&_svg]:text-danger-50",
-        success: "bg-success-500 text-success-50 [&_svg]:text-success-50",
-        warning: "bg-warning-500 text-warning-50 [&_svg]:text-warning-50",
+        primary: "bg-primary text-primary-foreground",
+        accent: "bg-accent text-accent-foreground",
+        danger: "bg-danger-500 text-danger-50",
+        success: "bg-success-500 text-success-50",
+        warning: "bg-warning-500 text-warning-50",
       },
       variant: {
         default:
@@ -26,9 +24,10 @@ const buttonVariants = cva(
         flat: "",
       },
       size: {
-        md: "h-9 px-4 py-2 [&_svg]:h-5 [&_svg]:w-5 ",
+        md: "h-9 px-4 py-2 [&_svg]:mr-1 [&_svg]:h-5 [&_svg]:w-5",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
       },
       isIconOnly: {
         true: "aspect-square p-0",
