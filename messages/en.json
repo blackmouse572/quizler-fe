@@ -254,5 +254,12 @@
       "map": "map",
       "set": "set"
     }
+  },
+  "NotFoundPage": {
+    "title": "You seem lost?",
+    "message": "The page you seeks seem like terminated or not existed 😎😎",
+    "input": {
+      "placeholder": "New Quiz"
+    }
   }
 }
