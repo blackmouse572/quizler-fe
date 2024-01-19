@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl"
 
-import { Input } from "@/components/ui/input"
+import { SearchBar } from "@/components/ui/searchbar"
 export default function NotFound() {
   const t = useTranslations("NotFoundPage")
   return (
@@ -11,7 +11,7 @@ export default function NotFound() {
           {t('message')}
         </p>
         {/* <Link href="/">Return Home</Link> */}
-        <Input placeholder={t('input.placeholder')} />
+        <SearchBar placeholder={t('input.placeholder')} />
       </div>
     </div>
   )
