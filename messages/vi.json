@@ -143,11 +143,19 @@
     "support": "Hỗ trợ",
     "signout": "Đăng xuất"
   },
-  "NotFoundPage": {
+  "NotFound": {
     "title": "Bạn có vẻ đang đi lạc?",
     "message": "Trang bạn tìm kiếm có vẻ như đã bị chấm dứt hoặc không tồn tại 🥺🥺",
     "input": {
       "placeholder": "Tạo Quiz mới"
     }
+  },
+  "Error": {
+    "title": "Oops, có vẻ như đã có lỗi",
+    "message": "Đây không phải là cảnh báo hay là 1 bày kiểm tra !\nBạn gặp phải một lỗi khiến bạn nhìn thấy thông báo này, vui lòng thông báo ngay cho cơ quan chức năng ",
+    "input": {
+      "placeholder": "Tạo Quiz mới"
+    },
+    "errorBtn": "Thông báo lỗi"
   }
 }

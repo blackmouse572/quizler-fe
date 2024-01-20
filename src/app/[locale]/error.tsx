@@ -9,7 +9,8 @@ const ErroPageComp = lazy(() => import("./ErrorComponent"))
 const ErrorPage = (props: Omit<TErrorPageProps, "type">) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ErroPageComp {...props} type={"NotFound"} />
+      {/* Use YourComponent and pass props */}
+      <ErroPageComp {...props} type={"Error"} />
     </Suspense>
   )
 }
