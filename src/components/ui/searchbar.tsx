@@ -3,17 +3,18 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Input, InputProps } from "./input"
 
-export interface SearchBarProps extends InputProps {}
+export interface SearchBarProps extends InputProps {
+  container?: React.ComponentProps<"div">
+}
 
 const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
-  ({ className, type, ...props }, ref) => {
-    // const form = useForm()
+  ({ container, className, type, ...props }, ref) => {
     return (
-      <div className="relative">
+      <div className={cn("relative w-[100%]", container?.className)}>
         <svg
           width="20"
           height="20"
-          className="absolute bottom-0 left-3 top-0 my-auto h-6 w-6 text-gray-500"
+          className="absolute inset-y-0 left-3 my-auto h-6 w-6 text-gray-500"
           viewBox="0 0 20 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
