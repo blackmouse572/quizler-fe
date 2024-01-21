@@ -4,13 +4,11 @@ import { useTranslations } from "next-intl"
 
 import { SearchBar } from "@/components/ui/searchbar"
 import BackgoundSquare from "@/components/ui/background-square"
-import { Suspense } from "react"
-import { Button } from "@/components/ui/button"
 
 export type TErrorPageProps = {
   type: "Error" | "NotFound"
-  error?: any
-  reset?: any
+  error?: Error & { digest?: string }
+  reset?: () => void
 }
 
 export function Error({ type, error, reset }: TErrorPageProps) {
@@ -25,9 +23,13 @@ export function Error({ type, error, reset }: TErrorPageProps) {
             {t("message")}
           </p>
           {!isProduction && type === "Error" ? (
-            <Button variant="ghost" color={"primary"} className="bg-white border-neutral-300 w-[100%] h-[92px] font-medium font-mono">
-              {t("errorBtn")}
-            </Button>
+            <>
+              <div className="h-[150px] w-max-w overflow-hidden rounded-md border border-input border-neutral-300">
+                <div className="flex max-h-[100%] items-center justify-center overflow-auto bg-white font-mono font-medium">
+                  <pre className="mx-[100px] my-[20px] mt-[100px] text-start max-w-[60%]">{error?.message}</pre>
+                </div>
+              </div>
+            </>
           ) : (
             <SearchBar
               container={{ className: "w-[399px]" }}

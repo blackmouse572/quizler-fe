@@ -1,15 +1,13 @@
 "use client"
 
 import { Suspense, lazy } from "react"
-import { TErrorPageProps } from "./ErrorComponent"
+import { TErrorPageProps } from "@/components/error-component"
 
-// Move error content to a separate chunk and load it only when needed
-const ErroPageComp = lazy(() => import("./ErrorComponent"))
+const ErroPageComp = lazy(() => import("@/components/error-component"))
 
 const ErrorPage = (props: Omit<TErrorPageProps, "type">) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      {/* Use YourComponent and pass props */}
       <ErroPageComp {...props} type={"Error"} />
     </Suspense>
   )
