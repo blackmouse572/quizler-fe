@@ -10,9 +10,9 @@ import {
 import { getAPIServerURL } from "@/lib/utils"
 import { Token } from "@/types/User"
 
-const publicPages = ["/"]
-
 const authPages = ["/login", "/signup"]
+
+const requireAuthPages = ["/profile"]
 
 const locales = ["en", "vi"]
 
@@ -59,8 +59,8 @@ function isRefreshTokenValid(refreshToken: Token): boolean {
 }
 
 export default async function middleware(req: NextRequest) {
-  const publicPathnameRegex = RegExp(
-    `^(/(${locales.join("|")}))?(${publicPages
+  const requireAuthRegex = RegExp(
+    `^(/(${locales.join("|")}))?(${requireAuthPages
       .flatMap((p) => (p === "/" ? ["", "/"] : p))
       .join("|")})/?$`,
     "i"
@@ -72,7 +72,7 @@ export default async function middleware(req: NextRequest) {
       .join("|")})/?$`,
     "i"
   )
-  const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname)
+  const isRequiredAuthPage = requireAuthRegex.test(req.nextUrl.pathname)
   const isAuthPage = authPathnameRegex.test(req.nextUrl.pathname)
   const isAuth = isAuthenticated(req)
 
@@ -80,7 +80,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.url))
   }
 
-  if (isAuthPage) {
+  if (isRequiredAuthPage) {
     if (!isAuth) {
       return NextResponse.redirect(new URL("/login", req.url))
     }

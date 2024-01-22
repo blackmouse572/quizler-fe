@@ -8,6 +8,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 
 import { LoginAction } from "@/app/[locale]/(auth)/login/actions/login-action"
+import { LoginGoogleAction } from "@/app/[locale]/(auth)/login/actions/login-google"
 import LoginSchema, {
   LoginSchemaType,
 } from "@/app/[locale]/(auth)/login/validations/login-validate"
@@ -70,8 +71,10 @@ function LoginForm({}: Props) {
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: (res) => {
-      console.log("onSuccess", res)
-      setIsLoading(false)
+      LoginGoogleAction(res.access_token).then(() => {
+        setIsLoading(false)
+        router.push("/")
+      })
     },
     onError: (error) => {
       setIsLoading(false)
