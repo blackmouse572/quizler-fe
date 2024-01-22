@@ -4,6 +4,8 @@ import { siteConfig } from "@/lib/config/siteconfig"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { Montserrat, Plus_Jakarta_Sans } from "next/font/google"
+
+import GoogleProvider from "@/app/[locale]/components/GoogleProvider"
 import "./global.css"
 
 const montserrat = Montserrat({
@@ -70,7 +72,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           plusJakarta.variable,
         ])}
       >
-        {children}
+        <GoogleProvider>{children}</GoogleProvider>
         <Toaster />
         <TailwindIndicator />
       </body>

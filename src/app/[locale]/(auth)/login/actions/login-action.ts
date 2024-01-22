@@ -2,12 +2,15 @@
 
 import { revalidatePath } from "next/cache"
 
-import { setToken } from "@/lib/auth"
 import { LoginSchemaType } from "@/app/[locale]/(auth)/login/validations/login-validate"
+import { setRefreshToken, setToken } from "@/lib/auth"
+import { getAPIServerURL } from "@/lib/utils"
+import { User } from "@/types/User"
+import { getTranslations } from "next-intl/server"
 
 export const LoginAction = async (values: LoginSchemaType) => {
-  const URL = "https://api.escuelajs.co/api/v1/auth/login"
-
+  const URL = getAPIServerURL("/auth/login")
+  const t = await getTranslations()
   const options = {
     method: "POST",
     headers: {
@@ -16,15 +19,22 @@ export const LoginAction = async (values: LoginSchemaType) => {
     body: JSON.stringify(values),
   }
 
-  return fetch(URL, options)
-    .then((response) => response.json())
-    .then((response) => {
-      setToken(response.token)
+  const data = await fetch(URL, options)
+    .then(async (response) => {
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.message)
+      }
+      return response.json()
+    })
+    .then((response: User) => {
+      setToken(response.accessToken)
+      setRefreshToken(response.refreshToken)
       revalidatePath("/")
       return {
         ok: true,
-        message: response.message,
-        token: response.token,
+        message: t("SignIn.success.index"),
+        token: response.accessToken.token,
       }
     })
     .catch((error) => {
@@ -33,4 +43,6 @@ export const LoginAction = async (values: LoginSchemaType) => {
         message: error.message,
       }
     })
+
+  return data
 }

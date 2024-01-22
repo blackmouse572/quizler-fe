@@ -1,4 +1,4 @@
-const withNextIntl = require('next-intl/plugin')();
+const withNextIntl = require("next-intl/plugin")()
 
 module.exports = async (phase, { defaultConfig }) => {
   /**
@@ -6,6 +6,6 @@ module.exports = async (phase, { defaultConfig }) => {
    */
   const nextConfig = {
     /* config options here */
-  };
-  return withNextIntl(nextConfig);
-};
+  }
+  return withNextIntl(nextConfig)
+}

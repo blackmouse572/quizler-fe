@@ -42,7 +42,15 @@
         "placeholder": "Enter your password"
       },
       "remember": "Remember me",
-      "submit": "Sign in"
+      "submit": "Sign in",
+      "google": "Sign in with Google"
+    },
+    "success": {
+      "index": "Sign in successfully!"
+    },
+    "error": {
+      "google": "Error when sign in with Google",
+      "invalid_popup": "Flow failed"
     }
   },
   "SignUp": {

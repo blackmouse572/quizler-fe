@@ -21,6 +21,7 @@ import { Icons } from "@/components/ui/icons"
 import { getShortName } from "@/lib/string-helper"
 import { MenuItem } from "@/types/dropdown-menu"
 import { useRouter } from "next/navigation"
+import React from "react"
 
 type Props = {
   user: any
@@ -56,8 +57,8 @@ function UserDropdown({ user, menuItems }: Props) {
         return renderMenuItem(menuItem[0])
       }
       return (
-        <>
-          <DropdownMenuGroup key={"wrapper" + index}>
+        <React.Fragment key={"wrapper" + index}>
+          <DropdownMenuGroup>
             {menuItem.map(
               ({ icon, children, href: action, label, shortcut }, i) => {
                 return children ? (
@@ -83,7 +84,7 @@ function UserDropdown({ user, menuItems }: Props) {
             )}
           </DropdownMenuGroup>
           {index < menuItems.length - 1 && <DropdownMenuSeparator />}
-        </>
+        </React.Fragment>
       )
     })
   }

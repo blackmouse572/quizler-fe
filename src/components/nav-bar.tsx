@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
+import { User } from "@/types/User"
 import { MenuItem } from "@/types/dropdown-menu"
 import { useTranslations } from "next-intl"
 
@@ -36,10 +37,17 @@ type Props = {
   items?: MainNavItem[]
   className?: string
   isAuthed?: boolean
+  user?: User
   menuItems?: MenuItem[][]
 }
 
-function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
+function Navbar({
+  className,
+  isAuthed,
+  user,
+  items = [],
+  menuItems = [],
+}: Props) {
   const segment = useSelectedLayoutSegment()
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
   const tNav = useTranslations("Navbar")
@@ -152,6 +160,9 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
           <Link href="/" className="flex items-center rounded-sm p-1.5">
             <Icons.Icon className="mr-2 h-6 w-6" />
             <span className="font-bold">{tIndex("title")}</span>
+            <h5 className="text-accent-500 ml-2 text-xs font-bold">
+              {user?.fullName}
+            </h5>
           </Link>
         </NavigationMenuLink>
       </NavigationMenuList>
@@ -208,7 +219,7 @@ function Navbar({ className, isAuthed, items = [], menuItems = [] }: Props) {
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {items.map((item) => (
-                <AnimatedListItem {...item} />
+                <AnimatedListItem key={item.title} {...item} />
               ))}
             </ul>
           </NavigationMenuContent>
