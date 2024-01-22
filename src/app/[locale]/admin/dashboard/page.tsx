@@ -1,4 +1,4 @@
-import { getTokens } from "@/lib/auth"
+import { getToken } from "@/lib/auth"
 import { getUserProfile } from "@/services/account.service"
 import { notFound } from "next/navigation"
 export const metadata = {
@@ -6,11 +6,11 @@ export const metadata = {
   description: "Dashboard page, control your site",
 }
 async function AdminDashboardPage() {
-  const token = getTokens()
-  if (!token.accessToken) {
+  const { token } = getToken()
+  if (token) {
     return notFound()
   }
-  const user = await getUserProfile(token.accessToken)
+  const user = await getUserProfile(token)
   return (
     <div className="">
       <article>
