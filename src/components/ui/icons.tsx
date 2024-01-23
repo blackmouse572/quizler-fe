@@ -5,9 +5,11 @@ import {
   IconArrowUpLeft,
   IconBook,
   IconBrandGithub,
+  IconBrandGoogle,
   IconCards,
   IconChalkboard,
   IconCircleOff,
+  IconDashboard,
   IconLoader2,
   IconLogout2,
   IconMail,
@@ -17,6 +19,9 @@ import {
   IconPlayerPlay,
   IconSearch,
   IconSmartHome,
+  IconTableFilled,
+  IconUserFilled,
+  IconUsers,
   IconX,
   TablerIconsProps,
 } from "@tabler/icons-react"
@@ -37,11 +42,16 @@ export const Icons = {
   School: IconChalkboard,
   Contact: IconAffiliate,
   Github: IconBrandGithub,
+  Google: IconBrandGoogle,
   SignatureArrow: IconArrowUpLeft,
   Logout: IconLogout2,
   ArrowDownRight: IconArrowDownRight,
   CircleOff: IconCircleOff,
   Search: IconSearch,
+  DashBoard: IconDashboard,
+  MultiUsers: IconUsers,
+  TableFilled: IconTableFilled,
+  UserFilled: IconUserFilled,
 }
 
 type IIconKeys = keyof typeof Icons

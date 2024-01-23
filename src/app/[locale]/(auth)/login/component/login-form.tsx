@@ -1,12 +1,18 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 
+import { LoginAction } from "@/app/[locale]/(auth)/login/actions/login-action"
+import { LoginGoogleAction } from "@/app/[locale]/(auth)/login/actions/login-google"
+import LoginSchema, {
+  LoginSchemaType,
+} from "@/app/[locale]/(auth)/login/validations/login-validate"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -26,10 +32,7 @@ import {
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import { LoginAction } from "@/app/[locale]/(auth)/login/actions/login-action"
-import LoginSchema, {
-  LoginSchemaType,
-} from "@/app/[locale]/(auth)/login/validations/login-validate"
+import { useGoogleLogin } from "@react-oauth/google"
 
 type Props = {}
 
@@ -50,7 +53,7 @@ function LoginForm({}: Props) {
       setIsLoading(false)
       return toast({
         title: "Something went wrong.",
-        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
+        description: result.message,
         variant: "flat",
         color: "danger",
       })
@@ -64,9 +67,39 @@ function LoginForm({}: Props) {
     })
     return router.push("/")
   }
+  const [errMsg, setErrMsg] = useState<string | undefined>("")
+
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: (res) => {
+      LoginGoogleAction(res.access_token).then((res) => {
+        if (!res.ok) {
+          setIsLoading(false)
+          return setErrMsg(t("error.not_found"))
+        }
+        setIsLoading(false)
+        router.push("/")
+      })
+    },
+    onError: (error) => {
+      setIsLoading(false)
+      setErrMsg(error.error_description)
+    },
+    onNonOAuthError: (error) => {
+      setIsLoading(false)
+      setErrMsg(t("error.invalid_popup"))
+    },
+  })
 
   return (
-    <Card className="min-w-96">
+    <Card className="w-full xl:w-[30vw]">
+      <div className="px-4 py-3">
+        {errMsg && (
+          <Alert className="mx-auto bg-danger-500/20 text-danger-500">
+            <AlertTitle>{t("error.google")}</AlertTitle>
+            <AlertDescription>{errMsg}</AlertDescription>
+          </Alert>
+        )}
+      </div>
       <CardHeader>
         <CardTitle className="font-heading text-lg">{t("title")}</CardTitle>
         <CardDescription className="text-sm text-neutral-500">
@@ -96,7 +129,7 @@ function LoginForm({}: Props) {
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name="email"
+              name="emailOrUsername"
               render={({ field }) => {
                 return (
                   <div className="space-y-1">
@@ -178,6 +211,23 @@ function LoginForm({}: Props) {
             </Button>
           </form>
         </Form>
+        <hr className="my-4" />
+
+        <Button
+          disabled={isLoading}
+          className="w-full"
+          color="primary"
+          variant="default"
+          type="submit"
+          onClick={() => {
+            setIsLoading(true)
+            loginWithGoogle()
+          }}
+        >
+          {isLoading && <Icons.Loader className="animate-spin" />}
+          <Icons.Google />
+          {t("form.google")}
+        </Button>
       </CardContent>
     </Card>
   )

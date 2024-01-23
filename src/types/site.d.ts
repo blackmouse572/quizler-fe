@@ -13,6 +13,8 @@ export type INextPage = {
   params?: any
   locale?: string
 }
-export type INextLayout = INextPage & {
+type INextLayout = INextPage & {
   children?: React.ReactNode
 }
+
+export default INextLayout
