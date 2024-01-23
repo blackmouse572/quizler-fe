@@ -18,6 +18,12 @@ export const LoginGoogleAction = async (token: string) => {
 
   const data = await fetch(URL, options)
     .then(async (response) => {
+      console.log("[API response]")
+      console.table({
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      })
       if (!response.ok) {
         const error = await response.json()
         throw new Error(error.message)

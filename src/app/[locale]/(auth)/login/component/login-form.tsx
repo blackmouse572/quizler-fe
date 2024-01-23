@@ -71,7 +71,11 @@ function LoginForm({}: Props) {
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: (res) => {
-      LoginGoogleAction(res.access_token).then(() => {
+      LoginGoogleAction(res.access_token).then((res) => {
+        if (!res.ok) {
+          setIsLoading(false)
+          return setErrMsg(t("error.not_found"))
+        }
         setIsLoading(false)
         router.push("/")
       })
@@ -87,8 +91,8 @@ function LoginForm({}: Props) {
   })
 
   return (
-    <Card className="min-w-96">
-      <div className="px-4 py-1.5">
+    <Card className="w-full xl:w-[30vw]">
+      <div className="px-4 py-3">
         {errMsg && (
           <Alert className="mx-auto bg-danger-500/20 text-danger-500">
             <AlertTitle>{t("error.google")}</AlertTitle>

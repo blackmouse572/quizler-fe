@@ -42,7 +42,16 @@
         "placeholder": "Nhập mật khẩu của bạn"
       },
       "remember": "Nhớ mật khẩu",
-      "submit": "Đăng nhập"
+      "submit": "Đăng nhập",
+      "google": "Đăng nhập bằng Google"
+    },
+    "success": {
+      "index": "Đăng nhập thành công!"
+    },
+    "error": {
+      "google": "Đăng nhập bằng Google thất bại:",
+      "invalid_popup": "Cửa sổ đăng nhập đã bị chặn. Vui lòng kiểm tra lại cài đặt trình duyệt của bạn.",
+      "not_found": "Tài khoản không tồn tại"
     }
   },
   "SignUp": {

@@ -49,8 +49,9 @@
       "index": "Sign in successfully!"
     },
     "error": {
-      "google": "Error when sign in with Google",
-      "invalid_popup": "Flow failed"
+      "google": "Error when sign in with Google:",
+      "invalid_popup": "Flow failed",
+      "not_found": "User not found"
     }
   },
   "SignUp": {
