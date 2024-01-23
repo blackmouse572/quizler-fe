@@ -162,7 +162,7 @@ const config = {
         },
         { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
       )
-    },
+    }
   ],
 } satisfies Config
 function addVariablesForColors({ addBase, theme }: any) {

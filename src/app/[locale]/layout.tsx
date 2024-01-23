@@ -7,6 +7,8 @@ import { Montserrat, Plus_Jakarta_Sans } from "next/font/google"
 
 import GoogleProvider from "@/app/[locale]/components/GoogleProvider"
 import "./global.css"
+import { NextIntlClientProvider, useMessages } from "next-intl"
+import { pick } from "lodash"
 
 const montserrat = Montserrat({
   weight: ["400", "600", "700", "800", "900", "500", "300", "200"],
@@ -63,6 +65,7 @@ type Props = {
   }
 }
 export default function LocaleLayout({ children, params: { locale } }: Props) {
+  const messages = useMessages();
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
@@ -72,7 +75,14 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           plusJakarta.variable,
         ])}
       >
-        <GoogleProvider>{children}</GoogleProvider>
+        <GoogleProvider>
+          <NextIntlClientProvider
+            locale={locale}
+            messages={pick(messages, "NotFound", "Error")}
+            >
+              {children}
+          </NextIntlClientProvider>
+        </GoogleProvider>
         <Toaster />
         <TailwindIndicator />
       </body>

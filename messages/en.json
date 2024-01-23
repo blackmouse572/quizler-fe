@@ -262,5 +262,20 @@
       "map": "map",
       "set": "set"
     }
+  },
+  "NotFound": {
+    "title": "You seem lost?",
+    "message": "The page you seeks seem like terminated or not existed 🥺🥺",
+    "input": {
+      "placeholder": "New Quiz"
+    }
+  },
+  "Error": {
+    "title": "Oops, seem like an errors",
+    "message": "This is not a warning. This is not a test !\nYou have concur an error that make you see this message, please inform the authority immidietly",
+    "input": {
+      "placeholder": "New Quiz"
+    },
+    "errorBtn": "Errors messages"
   }
 }
