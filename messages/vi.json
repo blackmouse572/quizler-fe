@@ -43,6 +43,13 @@
       },
       "remember": "Nhớ mật khẩu",
       "submit": "Đăng nhập"
+    },
+    "success": {
+      "index": "Đăng nhập thành công!"
+    },
+    "error": {
+      "google": "Lỗi khi đăng nhập bằng Google",
+      "invalid_popup": "Quá trình thất bại"
     }
   },
   "SignUp": {
