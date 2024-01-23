@@ -1,7 +1,6 @@
 import Sidebar from "@/app/[locale]/admin/components/sidebar"
-import { INextLayout } from "@/types/site"
 
-function AdminLayout({ children }: INextLayout) {
+function AdminLayout({ children }: React.PropsWithChildren) {
   return (
     <div className="flex min-h-screen flex-row bg-neutral-900/95 text-white">
       <div className="relative">
