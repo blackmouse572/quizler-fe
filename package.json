@@ -10,7 +10,6 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "@designbycode/tailwindcss-mask-image": "^2.0.3",
     "@hookform/resolvers": "^3.3.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",

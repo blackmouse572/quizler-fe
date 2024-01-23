@@ -2,15 +2,15 @@ import { cn } from "@/lib/utils"
 import { VariantProps, cva } from "class-variance-authority"
 import React from "react"
 
-const backgoundSquareVariants = cva(
+// TODO: apply mask image style
+const backgroundSquareVariants = cva(
   "flex h-screen items-center justify-center bg-grid-xl-slate-300/20",
   {
     variants: {
       variant: {
-        default:
-          "",
+        default: "",
         topDown:
-          "mask-image-b mask-image-end-60",
+          "",
       },
     },
     defaultVariants: {
@@ -19,9 +19,9 @@ const backgoundSquareVariants = cva(
   }
 )
 
-type TBackgroundSquareProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof backgoundSquareVariants>
+type TBackgroundSquareProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof backgroundSquareVariants>
 
-const BackgoundSquare = ({
+const BackgroundSquare = ({
   children,
   className,
   variant,
@@ -30,7 +30,7 @@ const BackgoundSquare = ({
   return (
     <div
       className={cn(
-        backgoundSquareVariants({variant}),
+        backgroundSquareVariants({variant}),
         className
       )}
       {...props}
@@ -41,4 +41,4 @@ const BackgoundSquare = ({
   )
 }
 
-export default BackgoundSquare
+export default BackgroundSquare

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { SearchBar } from "@/components/ui/searchbar"
-import BackgoundSquare from "@/components/ui/background-square"
+import BackgroundSquare from "@/components/background-square"
 
 export type TErrorPageProps = {
   type: "Error" | "NotFound"
@@ -11,11 +11,11 @@ export type TErrorPageProps = {
   reset?: () => void
 }
 
-export function Error({ type, error, reset }: TErrorPageProps) {
+export function ErrorFn({ type, error, reset }: TErrorPageProps) {
   const t = useTranslations(type)
   const isProduction = process.env.NODE_ENV === "production"
   return (
-    <BackgoundSquare variant={"topDown"} className="bg-grid-xl-slate-500/20">
+    <BackgroundSquare variant={"topDown"} className="bg-grid-xl-slate-500/20">
       <div className="flex h-screen w-screen flex-row items-center justify-center text-center">
         <div className="flex flex-col items-center space-y-11">
           <h2 className="text-4xl font-extrabold">{t("title")}</h2>
@@ -39,8 +39,8 @@ export function Error({ type, error, reset }: TErrorPageProps) {
           )}
         </div>
       </div>
-    </BackgoundSquare>
+    </BackgroundSquare>
   )
 }
 
-export default Error
+export default ErrorFn

@@ -151,8 +151,7 @@ const config = {
         },
         { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
       )
-    },
-    require("@designbycode/tailwindcss-mask-image"),
+    }
   ],
 } satisfies Config
 function addVariablesForColors({ addBase, theme }: any) {
