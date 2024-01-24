@@ -85,7 +85,9 @@ export function signJWT(secret: string, data: Record<string, any>) {
 }
 
 export function validateJWT(token: string, secret: string) {
-  return jwt.verify(token, secret, {
-    issuer: ISSUER,
-  })
+  return jwt.verify(token, secret)
+}
+
+export function decodeJWT(token: string, secret: string) {
+  return jwt.decode(token)
 }

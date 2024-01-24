@@ -60,7 +60,7 @@ const ITEMS: SidebarItem[] = [
 function Sidebar({}: Props) {
   const [isExpanded, setIsExpanded] = useState(true)
   const segments = useSelectedLayoutSegments()
-  console.log(segments)
+
   const renderItems = useMemo(() => {
     return ITEMS.map((item, index) => {
       const Icon = Icons[item.icon]

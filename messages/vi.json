@@ -115,6 +115,16 @@
         "placeholder": "Nhập email của bạn"
       },
       "submit": "Khôi phục mật khẩu"
+    },
+    "card": {
+      "title": "Hãy kiểm tra hòm thư của bạn 📫",
+      "desciption": "Bạn sẽ nhận được email thay đổi mật khẩu",
+      "missing": "Không nhận được? Thử kiểm tra Thư rác hoặc",
+      "try-again": "Thử email khác"
+    },
+    "errors": {
+      "index": "Lỗi",
+      "account-fail": "Tài khoản không tồn tại"
     }
   },
   "VerifyForgotPassword": {
@@ -138,6 +148,14 @@
         "placeholder": "********"
       },
       "submit": "Xác nhận"
+    },
+    "success": {
+      "title": "Thay đổi mật khẩu thành công",
+      "description": "Mật khẩu đã được thay đổi, hãy thử đăng nhập ngay"
+    },
+    "errors": {
+      "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
+      "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay"
     }
   },
   "UserDropdown": {
