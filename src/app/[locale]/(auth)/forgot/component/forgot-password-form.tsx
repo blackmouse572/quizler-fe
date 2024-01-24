@@ -52,14 +52,17 @@ export default function ForgotPasswordForm() {
         color: "danger",
       })
     }
-
+    const { data } = result
+    const searchParams = new URLSearchParams()
+    searchParams.set("t", data || "")
     toast({
       title: "Success",
       description: "We have sent the verification code to your email",
       variant: "flat",
       color: "success",
     })
-    return router.push("/forgot/verify")
+
+    return router.push("/forgot/verify?" + searchParams.toString())
   }
 
   return (
