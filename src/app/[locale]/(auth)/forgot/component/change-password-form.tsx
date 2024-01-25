@@ -20,7 +20,6 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -29,7 +28,15 @@ import ChangePasswordSchema, {
   ChangePasswordSchemaType,
 } from "../validations/change-password-validate"
 
-export default function ChangePasswordForm() {
+type ChangePasswordPageProps = {
+  email: string
+  token: string
+}
+
+export default function ChangePasswordForm({
+  email,
+  token,
+}: ChangePasswordPageProps) {
   const t = useTranslations("ChangePassword")
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
@@ -46,19 +53,19 @@ export default function ChangePasswordForm() {
       setIsLoading(false)
       return toast({
         title: "Something went wrong.",
-        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
+        description: t(result.message),
         variant: "flat",
         color: "danger",
       })
     }
 
     toast({
-      title: "Success",
-      description: "We have sent the verification code to your email",
+      title: t("success.title"),
+      description: t("success.description"),
       variant: "flat",
       color: "success",
     })
-    return router.push("/")
+    return router.push("/login")
   }
 
   return (
@@ -66,23 +73,8 @@ export default function ChangePasswordForm() {
       <CardHeader>
         <CardTitle className="font-heading text-lg">{t("title")}</CardTitle>
         <CardDescription className="text-sm text-neutral-500">
-          {t.rich("description", {
-            forgot: (children) => (
-              <Link
-                className="font-medium underline opacity-75 hover:opacity-100"
-                href="/forgot"
-              >
-                {children}
-              </Link>
-            ),
-            need: (children) => (
-              <Link
-                className="font-medium underline opacity-75 hover:opacity-100"
-                href="/signup"
-              >
-                {children}
-              </Link>
-            ),
+          {t("description", {
+            email,
           })}
         </CardDescription>
       </CardHeader>
@@ -90,6 +82,7 @@ export default function ChangePasswordForm() {
       <CardContent>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+            <input hidden {...form.register("token")} value={token} />
             <FormField
               control={form.control}
               name="password"

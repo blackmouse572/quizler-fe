@@ -1,4 +1,5 @@
 //Use server only !
+import jwt from "jsonwebtoken"
 import { Token } from "@/types/User"
 import { cookies } from "next/headers"
 import { NextRequest } from "next/server"
@@ -72,4 +73,21 @@ export function isAuthenticated(req?: NextRequest) {
   } else {
     return !!cookies().get(TOKEN_KEY.accessToken)
   }
+}
+const ISSUER = "Quizlearner"
+export function signJWT(secret: string, data: Record<string, any>) {
+  const token = jwt.sign(data, secret, {
+    expiresIn: "1d",
+    issuer: ISSUER,
+  })
+
+  return token
+}
+
+export function validateJWT(token: string, secret: string) {
+  return jwt.verify(token, secret)
+}
+
+export function decodeJWT(token: string, secret: string) {
+  return jwt.decode(token)
 }

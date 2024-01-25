@@ -1,37 +1,42 @@
 "use server"
-
-import { ForgotPasswordSchemaType } from "../validations/forgot-password-validate"
+import { validateJWT } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { JwtPayload } from "jsonwebtoken"
 
-export const ForgotPasswordAction = async (
-  values: ForgotPasswordSchemaType
-) => {
+export const ResentEmailAction = async (token: string) => {
   const URL = getAPIServerURL("/auth/forgot-password")
-  const { email } = values
-
+  const jwt = validateJWT(
+    token,
+    process.env.FORGOT_PASSWORD_SECRET!
+  ) as JwtPayload
+  if (!jwt)
+    return {
+      ok: false,
+      message: "not valid token",
+      data: undefined,
+    }
   const options: RequestInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email }),
-    cache: "no-cache",
+    body: JSON.stringify({ email: jwt.email }),
   }
 
-  const res = await fetch(URL, options)
+  return fetch(URL, options)
     .then(async (response) => {
       if (!response.ok) {
         const err = await response.json()
         throw Error(err.message)
       }
-      console.log(response.headers)
       return response.json()
     })
     .then((response) => {
-      console.log(response, URL)
+      console.log({ response, URL })
       return {
         ok: true,
         message: response.message,
+        data: token,
       }
     })
     .catch((error) => {
@@ -42,6 +47,4 @@ export const ForgotPasswordAction = async (
         data: null,
       }
     })
-
-  return res
 }

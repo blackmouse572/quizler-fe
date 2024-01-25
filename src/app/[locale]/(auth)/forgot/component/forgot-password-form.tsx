@@ -46,20 +46,17 @@ export default function ForgotPasswordForm() {
     if (!result.ok) {
       setIsLoading(false)
       return toast({
-        title: "Something went wrong.",
-        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
+        title: t("errors.index"),
+        description: t(result.message),
         variant: "flat",
         color: "danger",
       })
     }
+    const searchParams = new URLSearchParams()
+    searchParams.set("state", "sent")
+    searchParams.set("email", values.email)
 
-    toast({
-      title: "Success",
-      description: "We have sent the verification code to your email",
-      variant: "flat",
-      color: "success",
-    })
-    return router.push("/forgot/verify")
+    return router.push("/forgot?" + searchParams.toString())
   }
 
   return (

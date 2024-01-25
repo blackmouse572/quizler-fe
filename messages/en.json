@@ -115,6 +115,16 @@
         "placeholder": "Enter your email"
       },
       "submit": "Reset Password"
+    },
+    "card": {
+      "title": "Check your mailbox 📫",
+      "desciption": "You'll get a password reset email if the address you provided has been verified.",
+      "missing": "Didn't receive an email? Check your spam folder or",
+      "try-again": "Try another email"
+    },
+    "errors": {
+      "index": "Errors",
+      "account-fail": "Account not found"
     }
   },
   "VerifyForgotPassword": {
@@ -127,7 +137,7 @@
   },
   "ChangePassword": {
     "title": "Forgot password? Do not worry",
-    "description": "Enter new password",
+    "description": "Enter new password for {email}",
     "form": {
       "password": {
         "label": "Password",
@@ -138,6 +148,14 @@
         "placeholder": "********"
       },
       "submit": "Confirm"
+    },
+    "success": {
+      "title": "Changed password",
+      "description": "Your password has been changed, please login"
+    },
+    "errors": {
+      "token-expire": "The url has been expire, please create another request",
+      "account-fail": "The account has been terminated, please contact the Support"
     }
   },
   "UserDropdown": {
