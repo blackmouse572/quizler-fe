@@ -27,7 +27,7 @@ const Otp = ({
         />
       )
     },
-    []
+    [inputClassName]
   )
   return (
     <OtpInput
