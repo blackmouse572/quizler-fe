@@ -24,7 +24,6 @@ export const ForgotPasswordAction = async (
         const err = await response.json()
         throw Error(err.message)
       }
-      console.log(response.headers)
       return response.json()
     })
     .then((response) => {
@@ -35,7 +34,6 @@ export const ForgotPasswordAction = async (
       }
     })
     .catch((error) => {
-      console.error(error)
       return {
         ok: false,
         message: error.message,

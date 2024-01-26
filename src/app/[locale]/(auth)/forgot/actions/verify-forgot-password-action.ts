@@ -1,12 +1,16 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
-
-import { setToken } from "@/lib/auth"
 import { VerifyForgotPasswordSchemaType } from "../validations/verify-forgot-password-validate"
-
-export const VerifyForgotPasswordAction = async (values: VerifyForgotPasswordSchemaType) => {
-  const URL = "https://api.escuelajs.co/api/v1/auth/forgot-password"
+import { getAPIServerURL } from "@/lib/utils"
+type Result = {
+  ok: boolean
+  message: string
+  token: string | undefined
+}
+export const VerifyForgotPasswordAction = async (
+  values: VerifyForgotPasswordSchemaType
+): Promise<Result> => {
+  const URL = getAPIServerURL("auth/validate-reset-token")
 
   const options = {
     method: "POST",
@@ -16,21 +20,28 @@ export const VerifyForgotPasswordAction = async (values: VerifyForgotPasswordSch
     body: JSON.stringify(values),
   }
 
-  return fetch(URL, options)
-    .then((response) => response.json())
+  const res: Promise<Result> = fetch(URL, options)
     .then((response) => {
-      setToken(response.token)
-      revalidatePath("/")
+      if (!response.ok) {
+        throw response
+      }
+      return response.json()
+    })
+    .then((response) => {
       return {
         ok: true,
         message: response.message,
-        token: response.token,
+        token: response.data.token,
       }
     })
     .catch((error) => {
+      console.error("[Error at verrify forgot password]", error)
       return {
         ok: false,
         message: error.message,
+        token: undefined,
       }
     })
+
+  return res
 }

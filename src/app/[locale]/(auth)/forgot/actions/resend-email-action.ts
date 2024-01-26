@@ -3,24 +3,15 @@ import { validateJWT } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { JwtPayload } from "jsonwebtoken"
 
-export const ResentEmailAction = async (token: string) => {
+export const ResentEmailAction = async (email: string) => {
   const URL = getAPIServerURL("/auth/forgot-password")
-  const jwt = validateJWT(
-    token,
-    process.env.FORGOT_PASSWORD_SECRET!
-  ) as JwtPayload
-  if (!jwt)
-    return {
-      ok: false,
-      message: "not valid token",
-      data: undefined,
-    }
   const options: RequestInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email: jwt.email }),
+    body: JSON.stringify({ email }),
+    cache: "no-cache",
   }
 
   return fetch(URL, options)
@@ -36,7 +27,6 @@ export const ResentEmailAction = async (token: string) => {
       return {
         ok: true,
         message: response.message,
-        data: token,
       }
     })
     .catch((error) => {
@@ -44,7 +34,6 @@ export const ResentEmailAction = async (token: string) => {
       return {
         ok: false,
         message: error.message,
-        data: null,
       }
     })
 }

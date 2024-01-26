@@ -38,6 +38,7 @@ export default function ChangePasswordForm({
   token,
 }: ChangePasswordPageProps) {
   const t = useTranslations("ChangePassword")
+  const e = useTranslations("Errors")
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
@@ -52,8 +53,8 @@ export default function ChangePasswordForm({
     if (!result.ok) {
       setIsLoading(false)
       return toast({
-        title: "Something went wrong.",
-        description: t(result.message),
+        title: e("index"),
+        description: e(result.message),
         variant: "flat",
         color: "danger",
       })
