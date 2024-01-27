@@ -22,11 +22,14 @@ export const ChangePasswordAction = async (
   }
 
   return fetch(URL, options)
-    .then((response) => response.json())
-    .then((response) => {
+    .then(async (response) => {
       if (!response.ok) {
-        throw new Error(response.message)
+        const err = await response.json()
+        throw Error(err.message)
       }
+      return response.json()
+    })
+    .then((response) => {
       return {
         ok: true,
         message: response.message,

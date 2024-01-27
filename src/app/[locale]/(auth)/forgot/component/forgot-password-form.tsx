@@ -56,7 +56,7 @@ export default function ForgotPasswordForm() {
     searchParams.set("state", "sent")
     searchParams.set("email", values.email)
 
-    return router.push("/forgot?" + searchParams.toString())
+    return router.push("/forgot/reset-password?" + searchParams.toString())
   }
 
   return (

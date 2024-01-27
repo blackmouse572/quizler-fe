@@ -33,21 +33,21 @@ export function VerifyRegister() {
   const router = useRouter()
   const { toast } = useToast()
 
-  const [otp, setOtp] = useState<number>(0)
-  const handleOtpChange = (value: number) => {
-    setOtp(value)
+  const [otp, setOtp] = useState<string>("")
+  const handleOtpChange = (otp: string) => {
+    setOtp(otp)
   }
 
   async function onSubmit(values: VerifySignUpSchemaType) {
     setIsLoading(true)
 
     values = {
-      otpCode: otp
+      otpCode: otp,
     }
 
     // TODO: change here
     console.log(values)
-    
+
     const result = await VerifySignUpAction(values)
 
     if (!result?.ok) {
@@ -90,9 +90,7 @@ export function VerifyRegister() {
       </CardHeader>
 
       <CardContent>
-        <CardTitle className="flex justify-center">
-          {t("form.title")}
-        </CardTitle>
+        <CardTitle className="flex justify-center">{t("form.title")}</CardTitle>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -102,12 +100,7 @@ export function VerifyRegister() {
                 return (
                   <div className="mt-2 flex justify-center">
                     <FormControl>
-                      <Otp
-                        length={4}
-                        otp={otp}
-                        onOtpChange={handleOtpChange}
-                        {...field}
-                      />
+                      <Otp {...field} value={otp} onChange={handleOtpChange} />
                     </FormControl>
                     <FormMessage />
                   </div>

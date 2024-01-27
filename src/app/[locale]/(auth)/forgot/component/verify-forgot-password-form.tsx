@@ -17,65 +17,61 @@ import { useForm } from "react-hook-form"
 import { Icons } from "@/components/ui/icons"
 import { notFound, useRouter, useSearchParams } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
-import { VerifyForgotPasswordSchemaType } from "../validations/verify-forgot-password-validate"
+import VerifyForgotPasswordSchema, {
+  VerifyForgotPasswordSchemaType,
+} from "../validations/verify-forgot-password-validate"
 import { VerifyForgotPasswordAction } from "../actions/verify-forgot-password-action"
-import { ForgotPasswordAction } from "../actions/forgot-password-action"
 import { ResentEmailAction } from "../actions/resend-email-action"
+import { zodResolver } from "@hookform/resolvers/zod"
 
-export default function VerifyForgotPasswordForm() {
+export default function VerifyForgotPasswordForm({ email }: { email: string }) {
   const t = useTranslations("VerifyForgotPassword")
-  const form = useForm()
+  const e = useTranslations("Errors")
+  const form = useForm<VerifyForgotPasswordSchemaType>({
+    resolver: zodResolver(VerifyForgotPasswordSchema),
+  })
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
-  const s = useSearchParams()
   const { toast } = useToast()
 
-  const [otp, setOtp] = useState<number>(0)
-  const handleOtpChange = (value: number) => {
+  const [otp, setOtp] = useState<string>("")
+  const handleOtpChange = (value: string) => {
+    form.setValue("pin", value)
     setOtp(value)
   }
 
   async function onSubmit(values: VerifyForgotPasswordSchemaType) {
     setIsLoading(true)
 
-    values = {
-      otpCode: otp,
-    }
-
-    const result = await VerifyForgotPasswordAction(values)
+    const result = await VerifyForgotPasswordAction({
+      email: values.email,
+      pin: otp,
+    })
 
     if (!result?.ok) {
       setIsLoading(false)
       return toast({
-        title: "Something went wrong.",
-        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
+        title: e("index"),
+        description: e(result.message as any),
         variant: "flat",
         color: "danger",
       })
     }
-
-    toast({
-      title: "Success",
-      description: "You have been signed up. Check your email",
-      variant: "flat",
-      color: "success",
-    })
-
-    return router.push("/")
+    const searchParams = new URLSearchParams()
+    searchParams.set("t", result.token!)
+    return router.push("/forgot/verify?" + searchParams.toString())
   }
 
   async function onResentEmail() {
     setIsLoading(true)
-    const token = s.get("t")
-    if (token == null) return notFound()
-    const result = await ResentEmailAction(token).finally(() =>
+    const result = await ResentEmailAction(email).finally(() =>
       setIsLoading(false)
     )
 
     if (!result.ok) {
       return toast({
         title: "Something went wrong.",
-        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
+        description: e(result.message),
         variant: "flat",
         color: "danger",
       })
@@ -112,18 +108,18 @@ export default function VerifyForgotPasswordForm() {
         <CardTitle className="flex justify-center">{t("form.title")}</CardTitle>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+            <input hidden {...form.register("email")} value={email} />
             <FormField
               control={form.control}
-              name="name"
-              render={({ field }) => {
+              name="pin"
+              render={({}) => {
                 return (
-                  <div className="mt-2 flex justify-center">
+                  <div className="my-2 px-4">
                     <FormControl>
                       <Otp
-                        length={6}
-                        otp={otp}
-                        onOtpChange={handleOtpChange}
-                        {...field}
+                        className="justify-between"
+                        value={otp}
+                        onChange={handleOtpChange}
                       />
                     </FormControl>
                     <FormMessage />

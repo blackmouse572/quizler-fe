@@ -65,7 +65,7 @@ type Props = {
   }
 }
 export default function LocaleLayout({ children, params: { locale } }: Props) {
-  const messages = useMessages();
+  const messages = useMessages()
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
@@ -79,8 +79,8 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           <NextIntlClientProvider
             locale={locale}
             messages={pick(messages, "NotFound", "Error")}
-            >
-              {children}
+          >
+            {children}
           </NextIntlClientProvider>
         </GoogleProvider>
         <Toaster />

@@ -104,6 +104,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.49.2
     version: 7.49.2(react@18.2.0)
+  react-otp-input:
+    specifier: ^3.1.1
+    version: 3.1.1(react-dom@18.2.0)(react@18.2.0)
   tailwind-merge:
     specifier: ^2.2.0
     version: 2.2.0
@@ -3861,6 +3864,16 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-otp-input@3.1.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-bjPavgJ0/Zmf/AYi4onj8FbH93IjeD+e8pWwxIJreDEWsU1ILR5fs8jEJmMGWSBe/yyvPP6X/W6Mk9UkOCkTPw==}
+    peerDependencies:
+      react: '>=16.8.6 || ^17.0.0 || ^18.0.0'
+      react-dom: '>=16.8.6 || ^17.0.0 || ^18.0.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-remove-scroll-bar@2.3.4(@types/react@18.2.45)(react@18.2.0):
     resolution: {integrity: sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A==}

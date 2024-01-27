@@ -170,6 +170,12 @@
     "support": "Support",
     "signout": "Sign out"
   },
+  "Errors": {
+    "index": "Errors",
+    "token-expire": "The url has been expire, please create another request",
+    "invalid-pin": "Pin is not correct, please try again",
+    "account-fail": "The account has been terminated, please contact the Support"
+  },
   "Validations": {
     "errors": {
       "invalid_type": "Expected {{expected}}, received {{received}}",
