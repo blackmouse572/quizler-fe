@@ -1,6 +1,5 @@
 "use client"
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -20,15 +19,23 @@ import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Icons } from "@/components/ui/icons"
@@ -145,71 +152,57 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
           )
         },
       },
-      {
-        id: "actions",
-        header(props) {
-          return <></>
-        },
-        enableHiding: false,
-        cell: ({ row }) => {
-          const bank = row.original
-
-          return (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="light" color="primary" isIconOnly>
-                  <span className="sr-only">Open menu</span>
-                  <DotsHorizontalIcon className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="min-w-[250px]" align="end">
-                <DropdownMenuLabel>{t("action")} </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() =>
-                    navigator.clipboard.writeText(bank.id.toString())
-                  }
-                >
-                  <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.copy_id")}
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() =>
-                    navigator.clipboard.writeText(bank.authorName ?? "")
-                  }
-                >
-                  <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.copy_author_id")}
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.take_action")}
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.delete")}
-                </DropdownMenuItem>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>
-                    <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />
-                    {i18n("actions.go_to.index")}
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuSubContent>
-                    <DropdownMenuItem>
-                      {i18n("actions.go_to.quiz")}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      {i18n("actions.go_to.author")}
-                    </DropdownMenuItem>
-                  </DropdownMenuSubContent>
-                </DropdownMenuSub>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )
-        },
-      },
     ],
+    [i18n]
+  )
+
+  const renderContextMenuAction = React.useCallback(
+    (children: React.ReactNode, bank: QuizBank) => {
+      return (
+        <ContextMenu>
+          <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
+          <ContextMenuContent className="min-w-[250px]">
+            <ContextMenuLabel>{t("action")} </ContextMenuLabel>
+            <ContextMenuSeparator />
+            <ContextMenuItem
+              onClick={() => navigator.clipboard.writeText(bank.id.toString())}
+            >
+              <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
+              {i18n("actions.copy_id")}
+            </ContextMenuItem>
+            <ContextMenuItem
+              onClick={() =>
+                navigator.clipboard.writeText(bank.authorName ?? "")
+              }
+            >
+              <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
+              {i18n("actions.copy_author_id")}
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>
+              <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
+              {i18n("actions.take_action")}
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
+              {i18n("actions.delete")}
+            </ContextMenuItem>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />
+                {i18n("actions.go_to.index")}
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                <ContextMenuItem>{i18n("actions.go_to.quiz")}</ContextMenuItem>
+                <ContextMenuItem>
+                  {i18n("actions.go_to.author")}
+                </ContextMenuItem>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+          </ContextMenuContent>
+        </ContextMenu>
+      )
+    },
     [i18n, t]
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -336,22 +329,26 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  onClick={() => row.toggleSelected()}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table.getRowModel().rows.map((row) =>
+                renderContextMenuAction(
+                  <TableRow
+                    key={row.id}
+                    onClick={() => row.toggleSelected()}
+                    data-state={row.getIsSelected() && "selected"}
+                    className="h-14"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>,
+                  row.original as QuizBank
+                )
+              )
             ) : (
               <TableRow>
                 <TableCell
