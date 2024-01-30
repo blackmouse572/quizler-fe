@@ -76,6 +76,23 @@
       "visibility": "Visibility",
       "created_at": "Created at"
     },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
     "actions": {
       "copy_id": "Copy ID",
       "copy_author_id": "Copy author ID",

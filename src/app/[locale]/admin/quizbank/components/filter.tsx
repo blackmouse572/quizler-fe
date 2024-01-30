@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,28 +22,78 @@ import { z } from "zod"
 type FilterDropdownProps = {
   table: Table<QuizBank>
 }
+const visibilityOptions = [
+  { key: "all", label: "All" },
+  { key: "public", label: "Public" },
+  { key: "private", label: "Private" },
+]
 function FilterDropdown({ table }: FilterDropdownProps) {
   const t = useTranslations("Table")
+  const i18n = useTranslations("UserAdmin")
   const router = useRouter()
   const pathName = usePathname()
 
   const schema = useMemo(() => {
     return z.object({
       search: z.string().optional(),
+      visibility: z.string().optional().default(""),
       sortBy: z.string().optional(),
       sortDirection: z.enum(["asc", "desc"]).default("asc"),
     })
   }, [])
 
-  const { register, handleSubmit, reset, formState } = useForm<
+  const { register, handleSubmit, reset, setValue, getValues, watch } = useForm<
     z.infer<typeof schema>
   >({
     defaultValues: {
       search: "",
       sortBy: "",
+      visibility: "all",
     },
     resolver: zodResolver(schema),
   })
+
+  const onSelected = React.useCallback(
+    (key: string, checked: boolean) => {
+      const value = getValues("visibility")
+      console.log({ value, key, checked })
+      if (value === "all" && !checked) {
+        setValue("visibility", key === "public" ? "private" : "public")
+        return
+      }
+      if (value === key) {
+        setValue("visibility", "")
+        return
+      }
+
+      if (value === "" || value === undefined) {
+        setValue("visibility", key)
+        return
+      }
+
+      if (
+        ((value === "public" && key === "private") ||
+          (value === "private" && key === "public")) &&
+        checked
+      ) {
+        setValue("visibility", "all")
+        return
+      }
+
+      if (value === "public" && key === "public" && !checked) {
+        setValue("visibility", "private")
+        return
+      }
+
+      if (value === "private" && key === "private" && !checked) {
+        setValue("visibility", "public")
+        return
+      }
+
+      setValue("visibility", "all")
+    },
+    [getValues, setValue]
+  )
 
   const onClear = React.useCallback(() => {
     reset()
@@ -55,6 +106,7 @@ function FilterDropdown({ table }: FilterDropdownProps) {
       const params = new URLSearchParams()
       values.search && params.set("search", values.search)
       values.sortBy && params.set("sortBy", values.sortBy)
+      values.visibility && params.set("visibility", values.visibility)
       params.set("sortDirection", values.sortDirection)
       router.push(pathName + "?" + params.toString())
     },
@@ -77,6 +129,35 @@ function FilterDropdown({ table }: FilterDropdownProps) {
               <Icons.X className="h-4 w-4" />
             </PopoverClose>
           </div>
+          <div className="px-3">
+            <Label>{i18n("filters.visibility.label")}</Label>
+            <div className="mt-2 space-y-1">
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  value={"public"}
+                  checked={
+                    watch("visibility") === "public" ||
+                    watch("visibility") === "all"
+                  }
+                  onCheckedChange={(e) => onSelected("public", e as boolean)}
+                />
+                <Label>{i18n("filters.visibility.type.Public.value")}</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  value={"private"}
+                  checked={
+                    watch("visibility") === "private" ||
+                    watch("visibility") === "all"
+                  }
+                  onCheckedChange={(e) => onSelected("private", e as boolean)}
+                />
+                <Label>{i18n("filters.visibility.type.Private.value")}</Label>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
           <div className="px-3">
             <Label>{t("search")}</Label>
             <div className="relative max-w-2xl items-center ">
