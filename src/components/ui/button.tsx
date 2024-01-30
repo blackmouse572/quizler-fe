@@ -18,13 +18,14 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        outline: "border border-input bg-transparent shadow-sm",
+        outline:
+          "border border-input bg-transparent shadow-sm ring-primary focus:ring-0",
         ghost: "",
         light: "",
         flat: "",
       },
       size: {
-        md: "h-9 px-4 py-2 [&_svg]:mr-1 [&_svg]:h-5 [&_svg]:w-5",
+        md: "h-9 px-4 py-2 [&_svg]:h-5 [&_svg]:w-5",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
@@ -46,13 +47,13 @@ const buttonVariants = cva(
         color: "primary",
         variant: "outline",
         className:
-          "border-primary text-primary hover:bg-transparent hover:text-primary",
+          "border-primary text-primary hover:bg-primary/20 hover:text-primary",
       },
       {
         color: "accent",
         variant: "outline",
         className:
-          "border-accent text-accent-foreground hover:bg-transparent hover:text-primary-foreground",
+          "border-primary/20 text-accent-foreground hover:bg-accent hover:text-primary",
       },
       {
         color: "danger",

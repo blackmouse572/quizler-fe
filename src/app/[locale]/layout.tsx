@@ -9,6 +9,7 @@ import GoogleProvider from "@/app/[locale]/components/GoogleProvider"
 import "./global.css"
 import { NextIntlClientProvider, useMessages } from "next-intl"
 import { pick } from "lodash"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 const montserrat = Montserrat({
   weight: ["400", "600", "700", "800", "900", "500", "300", "200"],
@@ -76,12 +77,14 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
         ])}
       >
         <GoogleProvider>
-          <NextIntlClientProvider
-            locale={locale}
-            messages={pick(messages, "NotFound", "Error")}
-          >
-            {children}
-          </NextIntlClientProvider>
+          <TooltipProvider>
+            <NextIntlClientProvider
+              locale={locale}
+              messages={pick(messages, "NotFound", "Error")}
+            >
+              {children}
+            </NextIntlClientProvider>
+          </TooltipProvider>
         </GoogleProvider>
         <Toaster />
         <TailwindIndicator />
