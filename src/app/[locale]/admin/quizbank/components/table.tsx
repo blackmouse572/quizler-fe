@@ -1,7 +1,6 @@
 "use client"
 
-import * as React from "react"
-import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
+import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,7 +13,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import * as React from "react"
 
+import Pagination from "@/components/pagination"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -26,7 +28,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+import { Icons } from "@/components/ui/icons"
 import {
   Table,
   TableBody,
@@ -36,21 +38,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import QuizBank from "@/types/QuizBank"
-import { useTranslations } from "next-intl"
-import { Icons } from "@/components/ui/icons"
 import PagedResponse from "@/types/paged-response"
-import Pagination from "@/components/pagination"
-import SearchBox from "@/components/searchbox"
-import { Badge } from "@/components/ui/badge"
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
-import { usePathname, useRouter } from "next/navigation"
-import { PopoverClose } from "@radix-ui/react-popover"
+import { useTranslations } from "next-intl"
 import FilterDropdown from "./filter"
 
 type QuizBankTableProps = {
@@ -67,7 +56,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         id: "select",
         header: ({ table }) => (
           <Checkbox
-            className="rounded-[0.5rem]"
+            className="rounded-[0.25rem] opacity-100"
             checked={
               table.getIsAllPageRowsSelected() ||
               (table.getIsSomePageRowsSelected() && "indeterminate")
@@ -81,7 +70,6 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         cell: ({ row }) => (
           <Checkbox
             checked={row.getIsSelected()}
-            className="rounded-[0.5rem]"
             onCheckedChange={(value) => row.toggleSelected(!!value)}
             aria-label="Select row"
           />
@@ -93,14 +81,16 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         accessorKey: "bankName",
         header: i18n("headers.name"),
         cell: ({ row }) => (
-          <div className="capitalize">{row.getValue("bankName")}</div>
+          <div className="min-w-52 capitalize">{row.getValue("bankName")}</div>
         ),
       },
       {
         accessorKey: "authorName",
         header: i18n("headers.author"),
         cell: ({ row }) => (
-          <div className="capitalize">{row.getValue("authorName")}</div>
+          <div className="min-w-52 capitalize">
+            {row.getValue("authorName")}
+          </div>
         ),
       },
       {
@@ -117,9 +107,8 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         accessorKey: "created",
         header: ({ column }) => {
           return (
-            <Button
-              className="gap-2 hover:bg-primary/20 hover:text-primary [&_svg]:h-4 [&_svg]:w-4"
-              variant="light"
+            <div
+              className="flex h-full cursor-pointer items-center justify-start gap-2 px-3  [&_svg]:h-4 [&_svg]:w-4"
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
@@ -130,7 +119,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
               ) : (
                 <Icons.ArrowDown className="" />
               )}
-            </Button>
+            </div>
           )
         },
         cell: ({ row }) => (
@@ -146,7 +135,11 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
           const visibility = row.getValue("visibility") as string
           const isPublic = visibility.toLowerCase() === "public"
 
-          return <Checkbox checked={isPublic} className="mx-auto" />
+          return (
+            <div className="flex w-full justify-center">
+              <Checkbox role="cell" checked={isPublic} className="mx-auto" />
+            </div>
+          )
         },
       },
       {
@@ -269,14 +262,14 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
           <FilterDropdown table={table} />
         </div>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+      <div className="rounded-md border border-primary">
+        <Table className=" rounded-md">
+          <TableHeader className="rounded-lg">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-sm !font-bold">
                       {header.isPlaceholder
                         ? null
                         : flexRender(

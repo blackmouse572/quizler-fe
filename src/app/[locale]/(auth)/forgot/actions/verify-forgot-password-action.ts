@@ -35,7 +35,7 @@ export const VerifyForgotPasswordAction = async (
       }
     })
     .catch((error) => {
-      console.error("[Error at verrify forgot password]", error)
+      console.error("[Error at verify forgot password]", error)
       return {
         ok: false,
         message: error.message,

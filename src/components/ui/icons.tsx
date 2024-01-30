@@ -10,6 +10,7 @@ import {
   IconBrandGoogle,
   IconCards,
   IconChalkboard,
+  IconCheck,
   IconCircleOff,
   IconDashboard,
   IconEye,
@@ -19,6 +20,7 @@ import {
   IconMail,
   IconMaximize,
   IconMenu,
+  IconMinus,
   IconPlayerPause,
   IconPlayerPlay,
   IconSearch,
@@ -60,6 +62,8 @@ export const Icons = {
   MultiUsers: IconUsers,
   TableFilled: IconTableFilled,
   UserFilled: IconUserFilled,
+  Checked: IconCheck,
+  Minus: IconMinus,
 }
 
 type IIconKeys = keyof typeof Icons
