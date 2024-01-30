@@ -75,6 +75,17 @@
       "quizzes": "Quizzes",
       "visibility": "Visibility",
       "created_at": "Created at"
+    },
+    "actions": {
+      "copy_id": "Copy ID",
+      "copy_author_id": "Copy author ID",
+      "take_action": "Take action",
+      "delete": "Delete",
+      "go_to": {
+        "index": "Go to",
+        "author": "Go to author",
+        "quiz": "Go to quiz"
+      }
     }
   },
   "Navbar": {

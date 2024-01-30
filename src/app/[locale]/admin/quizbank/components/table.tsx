@@ -17,7 +17,7 @@ import * as React from "react"
 
 import Pagination from "@/components/pagination"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
@@ -26,6 +26,9 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Icons } from "@/components/ui/icons"
@@ -154,30 +157,60 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
           return (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" isIconOnly>
+                <Button variant="light" color="primary" isIconOnly>
                   <span className="sr-only">Open menu</span>
                   <DotsHorizontalIcon className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuContent className="min-w-[250px]" align="end">
+                <DropdownMenuLabel>{t("action")} </DropdownMenuLabel>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={() =>
                     navigator.clipboard.writeText(bank.id.toString())
                   }
                 >
-                  Copy ID
+                  <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.copy_id")}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() =>
+                    navigator.clipboard.writeText(bank.authorName ?? "")
+                  }
+                >
+                  <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.copy_author_id")}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>View customer</DropdownMenuItem>
-                <DropdownMenuItem>View payment details</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.take_action")}
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.delete")}
+                </DropdownMenuItem>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />
+                    {i18n("actions.go_to.index")}
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem>
+                      {i18n("actions.go_to.quiz")}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      {i18n("actions.go_to.author")}
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuSub>
               </DropdownMenuContent>
             </DropdownMenu>
           )
         },
       },
     ],
-    [i18n]
+    [i18n, t]
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -213,7 +246,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
 
   const renderVisibibleColumnDropdown = React.useCallback(() => {
     return (
-      <DropdownMenu>
+      <DropdownMenu modal>
         <DropdownMenuTrigger asChild>
           <div className="relative">
             <Badge
@@ -232,7 +265,12 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
             </Button>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="min-w-52">
+          <DropdownMenuLabel className="flex items-center">
+            <Icons.Eye className="mr-2 inline-block h-4 w-4 text-emerald-500" />
+            {t("column_visibility")}
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
           {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
@@ -243,15 +281,29 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
                   className="capitalize"
                   checked={column.getIsVisible()}
                   onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  onSelect={(e) => e.preventDefault()} // prevent closing when selecting
                 >
                   {column.id}
                 </DropdownMenuCheckboxItem>
               )
             })}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.preventDefault()
+              table.resetColumnVisibility()
+            }}
+            className={buttonVariants({
+              className: "w-full",
+            })}
+            disabled={Object.keys(columnVisibility).length === 0}
+          >
+            {t("reset")}
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     )
-  }, [table, visibleColumnsCount])
+  }, [columnVisibility, t, table, visibleColumnsCount])
 
   return (
     <div className="w-full">
@@ -287,6 +339,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
+                  onClick={() => row.toggleSelected()}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
@@ -305,7 +358,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {t("no_results")}
                 </TableCell>
               </TableRow>
             )}

@@ -9,11 +9,16 @@ const buttonVariants = cva(
   {
     variants: {
       color: {
-        primary: "bg-primary text-primary-foreground",
-        accent: "bg-accent text-accent-foreground",
-        danger: "bg-danger-500 text-danger-50",
-        success: "bg-success-500 text-success-50",
-        warning: "bg-warning-500 text-warning-50",
+        primary:
+          "bg-primary text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+        accent:
+          "bg-accent text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+        danger:
+          "bg-danger-500 text-danger-50 focus:bg-danger-500 focus:text-danger-50",
+        success:
+          "bg-success-500 text-success-50 focus:bg-success-500 focus:text-success-50",
+        warning:
+          "bg-warning-500 text-warning-50 focus:bg-warning-500 focus:text-warning-50",
       },
       variant: {
         default:

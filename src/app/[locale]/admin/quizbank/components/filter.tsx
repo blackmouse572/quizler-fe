@@ -68,16 +68,16 @@ function FilterDropdown({ table }: FilterDropdownProps) {
           <Icons.Filter />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="end" className="space-y-4" asChild>
+      <PopoverContent align="end" className="space-y-4 px-0" asChild>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex items-center border-b border-neutral-200 py-1 font-sans">
+          <div className="flex items-center border-b border-neutral-200 px-3 pb-3 font-sans">
             <Icons.Filter className="mr-2 inline-block h-4 w-4 text-emerald-500" />
             <p className="text-sm font-semibold">{t("filter")}</p>
             <PopoverClose className="ml-auto">
               <Icons.X className="h-4 w-4" />
             </PopoverClose>
           </div>
-          <div className="">
+          <div className="px-3">
             <Label>{t("search")}</Label>
             <div className="relative max-w-2xl items-center ">
               <Icons.Search className="absolute  left-2 top-1/2 h-4  w-4 -translate-y-1/2 " />
@@ -89,7 +89,7 @@ function FilterDropdown({ table }: FilterDropdownProps) {
             </div>
           </div>
           <Separator />
-          <div className="flex justify-between">
+          <div className="flex justify-between px-3">
             <Button variant="outline" color="accent" onClick={onClear}>
               {t("clear")}
             </Button>
