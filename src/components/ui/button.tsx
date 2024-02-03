@@ -52,37 +52,37 @@ const buttonVariants = cva(
         color: "primary",
         variant: "outline",
         className:
-          "border-primary text-primary hover:bg-primary/20 hover:text-primary",
+          "border-primary bg-transparent text-primary hover:bg-primary/20 hover:text-primary focus:bg-primary/30 focus:text-primary-foreground",
       },
       {
         color: "accent",
         variant: "outline",
         className:
-          "border-primary/20 text-accent-foreground hover:bg-accent hover:text-primary",
+          "border-primary/20 text-accent-foreground hover:bg-accent hover:text-primary focus:bg-accent/30 focus:text-accent-foreground",
       },
       {
         color: "danger",
         variant: "outline",
         className:
-          "border-danger-500 text-danger-500 hover:bg-transparent hover:text-danger-500",
+          "border-danger-500 text-danger-500 hover:bg-transparent hover:text-danger-500 focus:bg-danger-500/20 focus:text-danger-500",
       },
       {
         color: "success",
         variant: "outline",
         className:
-          "border-success-500 text-success-500 hover:bg-transparent hover:text-success-500",
+          "border-success-500 text-success-500 hover:bg-transparent hover:text-success-500 focus:bg-success-500/20 focus:text-success-500",
       },
       {
         color: "warning",
         variant: "outline",
         className:
-          "hover:text-waning-500 border-warning-500 text-warning-500 hover:bg-transparent",
+          "hover:text-waning-500 border-warning-500 text-warning-500 hover:bg-transparent focus:bg-warning-500/20 focus:text-warning-500",
       },
       //Default
       {
         color: "primary",
         variant: "default",
-        className: "bg-primary text-primary-foreground hover:bg-primary/90",
+        className: "bg-primary text-primary-foreground hover:bg-primary/90 ",
       },
       {
         color: "accent",
