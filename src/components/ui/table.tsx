@@ -22,7 +22,11 @@ const TableHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
-    className={cn("cursor-default [&_tr]:border-b ", className)}
+    className={cn(
+      "cursor-default [&_tr]:border-b ",
+      "text-neutral-300 dark:text-neutral-400 [&_tr]:hover:bg-transparent",
+      className
+    )}
     {...props}
   />
 ))
@@ -80,7 +84,7 @@ const TableHead = React.forwardRef<
     ref={ref}
     className={cn(
       "border-neutral-400 text-xs",
-      "h-10 border-r px-2 text-left align-middle font-medium last:border-r-0 dark:text-neutral-400 [&:has([role=checkbox])]:pl-5 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "h-10 px-2 text-left align-middle font-medium last:border-r-0 dark:text-neutral-400 [&:has([role=checkbox])]:pl-5 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
       "first:rounded-tl-md last:rounded-tr-md",
       className
     )}
@@ -97,7 +101,6 @@ const TableCell = React.forwardRef<
     ref={ref}
     className={cn(
       "border-neutral-400 px-3 py-1.5 align-middle [&:has([role=checkbox])]:pl-5 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-      "border-l first:border-l-0",
       className
     )}
     {...props}

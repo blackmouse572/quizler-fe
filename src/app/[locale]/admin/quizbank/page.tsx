@@ -1,11 +1,11 @@
-import { getAPIServerURL, getAbsoluteURL } from "@/lib/utils"
-import { QuizBankTable } from "./components/table"
-import PagedResponse from "@/types/paged-response"
+import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
+import PagedRequest from "@/types/paged-request"
+import PagedResponse from "@/types/paged-response"
+import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
-import _ from "lodash"
-import PagedRequest from "@/types/paged-request"
+import { QuizBankTable } from "./components/table"
 
 type AdminQuizBankProps = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -47,7 +47,7 @@ async function AdminUserPage({ searchParams }: AdminQuizBankProps) {
   const messages = await getMessages()
 
   return (
-    <div>
+    <div className="">
       <NextIntlClientProvider
         messages={_.pick(messages, "Table", "UserAdmin", "Validations")}
       >
