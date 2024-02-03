@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { PopoverClose } from "@radix-ui/react-popover"
 import { Table } from "@tanstack/react-table"
 import { useTranslations } from "next-intl"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import React, { useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -31,6 +31,7 @@ function FilterDropdown({ table }: FilterDropdownProps) {
   const t = useTranslations("Table")
   const i18n = useTranslations("UserAdmin")
   const router = useRouter()
+  const searchParams = useSearchParams()
   const pathName = usePathname()
 
   const schema = useMemo(() => {
@@ -50,6 +51,17 @@ function FilterDropdown({ table }: FilterDropdownProps) {
       sortBy: "",
       visibility: "all",
     },
+    values: {
+      search: searchParams.get("search") || "",
+      sortBy: searchParams.get("sortBy") || "",
+      visibility: searchParams.get("visibility") || "all",
+      sortDirection:
+        searchParams.get("sortDirection") === "desc" ? "desc" : "asc",
+    },
+    resetOptions: {
+      keepDefaultValues: true,
+    },
+
     resolver: zodResolver(schema),
   })
 
@@ -102,7 +114,6 @@ function FilterDropdown({ table }: FilterDropdownProps) {
 
   const onSubmit = React.useCallback(
     (values: z.infer<typeof schema>) => {
-      console.log("values", values)
       const params = new URLSearchParams()
       values.search && params.set("search", values.search)
       values.sortBy && params.set("sortBy", values.sortBy)

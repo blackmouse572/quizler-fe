@@ -3,6 +3,7 @@
 import {
   ColumnDef,
   ColumnFiltersState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -14,6 +15,7 @@ import {
 } from "@tanstack/react-table"
 import * as React from "react"
 
+import DeleteDialog from "@/app/[locale]/admin/quizbank/components/delete-dialog"
 import Pagination from "@/components/pagination"
 import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -49,17 +51,20 @@ import {
 } from "@/components/ui/table"
 import QuizBank from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
-import { useTranslations } from "next-intl"
+import { useFormatter, useTranslations } from "next-intl"
 import FilterDropdown from "./filter"
 
 type QuizBankTableProps = {
   data: PagedResponse<QuizBank>
+  locale?: string
 }
 
-export function QuizBankTable({ data }: QuizBankTableProps) {
+export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
   const { skip, take, total: totalPages } = data.metadata
   const t = useTranslations("Table")
   const i18n = useTranslations("UserAdmin")
+  const format = useFormatter()
+
   const columns: ColumnDef<QuizBank>[] = React.useMemo(
     () => [
       {
@@ -118,22 +123,27 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         header: ({ column }) => {
           return (
             <div
-              className="flex h-full cursor-pointer items-center justify-start gap-2 px-3  [&_svg]:h-4 [&_svg]:w-4"
+              className="flex h-full cursor-pointer items-center justify-start gap-2 [&_svg]:h-4 [&_svg]:w-4"
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
             >
               {i18n("headers.created_at")}
               {column.getIsSorted() === "asc" ? (
-                <Icons.ArrowUp className="" />
+                <Icons.CaretUpFilled className="ml-auto" />
               ) : (
-                <Icons.ArrowDown className="" />
+                <Icons.CaretDownFilled className="ml-auto" />
               )}
             </div>
           )
         },
         cell: ({ row }) => (
-          <div className="lowercase">{row.getValue("created")}</div>
+          <div className="lowercase">
+            {format.dateTime(new Date(row.getValue("created")), {
+              dateStyle: "short",
+              timeStyle: "short",
+            })}
+          </div>
         ),
       },
       {
@@ -147,13 +157,17 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
 
           return (
             <div className="flex w-full justify-center">
-              <Checkbox role="cell" checked={isPublic} className="mx-auto" />
+              <Checkbox
+                role="cell"
+                checked={isPublic}
+                className="mx-auto data-[state=checked]:bg-success-500"
+              />
             </div>
           )
         },
       },
     ],
-    [i18n]
+    [format, i18n]
   )
 
   const renderContextMenuAction = React.useCallback(
@@ -211,7 +225,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
   )
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
 
   const table = useReactTable({
     data: data.data,
@@ -231,6 +245,18 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
       rowSelection,
     },
   })
+
+  const renderDeleteButton = React.useCallback(() => {
+    if (Object.keys(rowSelection).length) {
+      const model = table.getSelectedRowModel()
+
+      return (
+        <DeleteDialog
+          ids={model.rows.map((row) => row.original.id.toString())}
+        />
+      )
+    }
+  }, [rowSelection, table])
 
   const visibleColumnsCount = React.useMemo(() => {
     // -2 for select and actions column
@@ -301,7 +327,10 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
-        <Button>create</Button>
+        <div className="flex items-center gap-2">
+          <Button>create</Button>
+          {renderDeleteButton()}
+        </div>
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}
           <FilterDropdown table={table} />
@@ -373,6 +402,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
       <Pagination
         currentPage={skip / take + 1}
         perPage={take}
+        hasNext={skip + take < totalPages}
         totalPages={totalPages}
       />
     </div>

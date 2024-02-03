@@ -9,6 +9,8 @@ import {
   IconBrandGithub,
   IconBrandGoogle,
   IconCards,
+  IconCaretDownFilled,
+  IconCaretUpFilled,
   IconChalkboard,
   IconCheck,
   IconCircleOff,
@@ -72,6 +74,8 @@ export const Icons = {
   UserFilled: IconUserFilled,
   Checked: IconCheck,
   Minus: IconMinus,
+  CaretUpFilled: IconCaretUpFilled,
+  CaretDownFilled: IconCaretDownFilled,
 }
 
 type IIconKeys = keyof typeof Icons

@@ -29,6 +29,8 @@
     "save_and_new": "Save and new",
     "cancel": "Cancel",
     "delete": "Delete",
+    "delete_title": "Delete items",
+    "delete_message": "Are you sure you want to delete <span></span> items?",
     "edit": "Edit",
     "create": "Create",
     "show": "Show",

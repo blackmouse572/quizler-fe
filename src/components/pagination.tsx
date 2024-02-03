@@ -1,25 +1,25 @@
 "use client"
 import { cn } from "@/lib/utils"
+import { useMemo } from "react"
 import {
+  Pagination as Page,
   PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-  Pagination as Page,
 } from "./ui/pagination"
-import { useMemo } from "react"
 
 type PaginationProps = {
   totalPages: number
   perPage: number
   currentPage: number
+  hasNext: boolean
 } & React.ComponentProps<"div">
 function Pagination({
   currentPage,
   perPage,
   totalPages: total,
+  hasNext,
   className,
 }: PaginationProps) {
   const renderItem = useMemo(() => {
@@ -65,7 +65,7 @@ function Pagination({
   }, [currentPage, perPage, total])
 
   const renderNext = useMemo(() => {
-    if (currentPage >= total) return null
+    if (!hasNext) return null
     const index = currentPage
     return (
       <PaginationNext
