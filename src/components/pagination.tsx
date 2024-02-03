@@ -74,7 +74,7 @@ function Pagination({
         }}
       />
     )
-  }, [currentPage, perPage, total])
+  }, [currentPage, hasNext, perPage])
 
   const renderPrevious = useMemo(() => {
     if (currentPage <= 1) return null

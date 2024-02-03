@@ -3,6 +3,7 @@
 import {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
   RowSelectionState,
   SortingState,
   VisibilityState,
@@ -17,6 +18,7 @@ import * as React from "react"
 
 import DeleteDialog from "@/app/[locale]/admin/quizbank/components/delete-dialog"
 import Pagination from "@/components/pagination"
+import SizeSelector from "@/components/size-selector"
 import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -49,6 +51,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import usePaginationValue from "@/hooks/usePaginationValue"
 import QuizBank from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
@@ -60,7 +63,9 @@ type QuizBankTableProps = {
 }
 
 export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
-  const { skip, take, total: totalPages } = data.metadata
+  const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
+    data.metadata
+  )
   const t = useTranslations("Table")
   const i18n = useTranslations("UserAdmin")
   const format = useFormatter()
@@ -84,7 +89,7 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
         ),
         cell: ({ row }) => (
           <Checkbox
-            checked={row.getIsSelected()}
+            checked={row.getIsSelected() || false}
             onCheckedChange={(value) => row.toggleSelected(!!value)}
             aria-label="Select row"
           />
@@ -219,10 +224,16 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
     },
     [i18n, t]
   )
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: Math.floor(skip / take),
+    pageSize: take,
+  })
+
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
@@ -230,6 +241,7 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
   const table = useReactTable({
     data: data.data,
     columns,
+    pageCount: totalPages,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -237,12 +249,19 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: (updater) => {
+      if (typeof updater === "function") {
+        setRowSelection(updater(rowSelection))
+      }
+    },
+    getRowId: (row) => row.id.toString(),
+    manualPagination: true,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination,
     },
   })
 
@@ -341,18 +360,16 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
           <TableHeader className="rounded-lg">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} className="text-sm !font-bold">
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id} className="text-sm !font-bold">
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -379,7 +396,7 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
                 )
               )
             ) : (
-              <TableRow>
+              <TableRow key={"empty"}>
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center"
@@ -391,20 +408,30 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center">
-        <div className="flex-1 text-sm text-muted-foreground">
+      <div className="my-3 flex items-center justify-between">
+        <div className="text-sm text-muted-foreground">
           {t("selected_rows", {
             count: table.getFilteredSelectedRowModel().rows.length,
             total: table.getFilteredRowModel().rows.length,
           })}
         </div>
+        <Pagination
+          currentPage={currentPage}
+          className="w-fit flex-1"
+          perPage={take}
+          hasNext={hasMore}
+          totalPages={totalPages}
+        />
+        <SizeSelector
+          onValueChange={(value) =>
+            setPagination((prev) => ({
+              ...prev,
+              pageSize: parseInt(value, 10),
+            }))
+          }
+          defaultValue={take.toString()}
+        />
       </div>
-      <Pagination
-        currentPage={skip / take + 1}
-        perPage={take}
-        hasNext={skip + take < totalPages}
-        totalPages={totalPages}
-      />
     </div>
   )
 }

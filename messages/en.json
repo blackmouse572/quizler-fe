@@ -68,7 +68,9 @@
     "validation": "Validation",
     "warning": "Warning",
     "success": "Success",
-    "apply": "Apply"
+    "apply": "Apply",
+    "take-placeholder": "Take action",
+    "take-value": "Display {count} rows"
   },
   "UserAdmin": {
     "headers": {
