@@ -9,9 +9,13 @@ import { cn } from "@/lib/utils"
 import { VariantProps, cva } from "class-variance-authority"
 
 export const checkboxVariants = cva(
-  "group: peer h-4 w-4 shrink-0 rounded-[0.35rem] border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+  "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
   {
     variants: {
+      variant: {
+        rounded: "rounded-full",
+        square: "rounded-[0.375rem]",
+      },
       size: {
         md: "h-4 w-4 [&_svg]:h-4 [&_svg]:w-4",
         sm: "h-3.5 w-3.5 [&_svg]:h-3.5 [&_svg]:w-3.5",
@@ -31,10 +35,10 @@ export interface CheckboxProps
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
->(({ className, size, ...props }, ref) => (
+>(({ className, size, variant, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
-    className={cn(checkboxVariants({ size, className }))}
+    className={cn(checkboxVariants({ size, variant, className }))}
     {...props}
   >
     <CheckboxPrimitive.Indicator

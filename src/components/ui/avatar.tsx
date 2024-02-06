@@ -36,11 +36,7 @@ const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
 >(({ className, ...props }, ref) => {
-  const gradients = [
-    "from-slate-500 via-violet-500 to-cyan-600",
-    "from-rose-500 via-red-500 to-amber-500",
-    "from-sky-500 via-teal-500 to-emerald-500",
-  ]
+  const gradients = ["from-rose-500 via-red-500 to-amber-500"]
 
   const randomGradient = gradients[Math.floor(Math.random() * gradients.length)]
 

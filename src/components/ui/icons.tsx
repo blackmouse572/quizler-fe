@@ -40,7 +40,7 @@ import {
 } from "@tabler/icons-react"
 
 export const Icons = {
-  Calendar: IconCalendar,
+  Checked: IconCheck,
   Play: IconPlayerPlay,
   Copy: IconCopy,
   HandStop: IconHandStop,

@@ -12,7 +12,7 @@ async function ForgotPasswordPage({ searchParams }: ForgotPasswordProps) {
   const m = await getMessages()
 
   return (
-    <div className="h-full w-full">
+    <div className="">
       <GoBackButton />
       <NextIntlClientProvider messages={_.pick(m, "ForgotPassword", "Erros")}>
         <ForgotPasswordForm />

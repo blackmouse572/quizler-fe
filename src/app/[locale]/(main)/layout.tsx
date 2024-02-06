@@ -80,7 +80,7 @@ async function MainLayout({ children }: Props) {
   ]
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative">
       <NextIntlClientProvider
         messages={pick(m, "UserDropdown", "Navbar", "Index")}
       >
