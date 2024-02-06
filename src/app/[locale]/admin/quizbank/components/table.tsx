@@ -67,7 +67,7 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
     data.metadata
   )
   const t = useTranslations("Table")
-  const i18n = useTranslations("UserAdmin")
+  const i18n = useTranslations("QuizBankAdmin")
   const format = useFormatter()
 
   const columns: ColumnDef<QuizBank>[] = React.useMemo(
@@ -277,28 +277,12 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
     }
   }, [rowSelection, table])
 
-  const visibleColumnsCount = React.useMemo(() => {
-    // -2 for select and actions column
-    return table.getVisibleFlatColumns().length - 2
-  }, [table])
-
   const renderVisibibleColumnDropdown = React.useCallback(() => {
     return (
       <DropdownMenu modal>
         <DropdownMenuTrigger asChild>
           <div className="relative">
-            <Badge
-              size={"sm"}
-              className="absolute left-0 top-0 origin-center -translate-x-1/2 -translate-y-1/2"
-            >
-              {visibleColumnsCount}
-            </Badge>
-            <Button
-              variant="outline"
-              color="accent"
-              className="ml-auto"
-              isIconOnly
-            >
+            <Button color="accent" className="ml-auto" size="sm" isIconOnly>
               <Icons.Eye />
             </Button>
           </div>
@@ -341,22 +325,19 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
         </DropdownMenuContent>
       </DropdownMenu>
     )
-  }, [columnVisibility, t, table, visibleColumnsCount])
+  }, [columnVisibility, t, table])
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
-        <div className="flex items-center gap-2">
-          <Button>create</Button>
-          {renderDeleteButton()}
-        </div>
+        <div className="flex items-center gap-2">{renderDeleteButton()}</div>
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}
           <FilterDropdown table={table} />
         </div>
       </div>
-      <div className="rounded-md border border-primary">
-        <Table className=" rounded-md">
+      <div className="rounded-md border border-primary bg-background">
+        <Table className="rounded-md">
           <TableHeader className="rounded-lg">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

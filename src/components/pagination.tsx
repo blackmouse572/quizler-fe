@@ -23,6 +23,7 @@ function Pagination({
   className,
 }: PaginationProps) {
   const renderItem = useMemo(() => {
+    console.log({ currentPage, perPage, total })
     if (currentPage <= 3) {
       return [...Array(total)].map((_, i) => (
         <PaginationLink

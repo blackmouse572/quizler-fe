@@ -149,7 +149,7 @@
     "success": "Thành công",
     "apply": "Áp dụng"
   },
-  "UserAdmin": {
+  "QuizBankAdmin": {
     "headers": {
       "name": "Tên",
       "author": "Tác giả",

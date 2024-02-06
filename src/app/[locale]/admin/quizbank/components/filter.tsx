@@ -22,17 +22,13 @@ import { z } from "zod"
 type FilterDropdownProps = {
   table: Table<QuizBank>
 }
-const visibilityOptions = [
-  { key: "all", label: "All" },
-  { key: "public", label: "Public" },
-  { key: "private", label: "Private" },
-]
-function FilterDropdown({ table }: FilterDropdownProps) {
+function FilterDropdown(props: FilterDropdownProps) {
   const t = useTranslations("Table")
-  const i18n = useTranslations("UserAdmin")
+  const i18n = useTranslations("QuizBankAdmin")
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathName = usePathname()
+  const [open, setOpen] = React.useState(false)
 
   const schema = useMemo(() => {
     return z.object({
@@ -60,15 +56,15 @@ function FilterDropdown({ table }: FilterDropdownProps) {
     },
     resetOptions: {
       keepDefaultValues: true,
+      keepValues: true,
     },
-
+    mode: "onSubmit",
     resolver: zodResolver(schema),
   })
 
   const onSelected = React.useCallback(
     (key: string, checked: boolean) => {
       const value = getValues("visibility")
-      console.log({ value, key, checked })
       if (value === "all" && !checked) {
         setValue("visibility", key === "public" ? "private" : "public")
         return
@@ -108,15 +104,22 @@ function FilterDropdown({ table }: FilterDropdownProps) {
   )
 
   const onClear = React.useCallback(() => {
-    reset()
+    reset({
+      search: "",
+      sortBy: "",
+      visibility: "all",
+      sortDirection: "asc",
+    })
     router.push(pathName)
   }, [pathName, reset, router])
 
   const onSubmit = React.useCallback(
     (values: z.infer<typeof schema>) => {
+      setOpen(false)
+
       const params = new URLSearchParams()
-      values.search && params.set("search", values.search)
-      values.sortBy && params.set("sortBy", values.sortBy)
+      values.search && params.set("search", values.search.trim())
+      values.sortBy && params.set("sortBy", values.sortBy.trim())
       values.visibility && params.set("visibility", values.visibility)
       params.set("sortDirection", values.sortDirection)
       router.push(pathName + "?" + params.toString())
@@ -125,9 +128,15 @@ function FilterDropdown({ table }: FilterDropdownProps) {
   )
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
-        <Button variant="outline" color="accent" className="ml-auto" isIconOnly>
+        <Button
+          color="accent"
+          size="sm"
+          className="ml-auto"
+          isIconOnly
+          onClick={() => setOpen(true)}
+        >
           <Icons.Filter />
         </Button>
       </PopoverTrigger>

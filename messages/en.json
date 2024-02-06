@@ -72,7 +72,11 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
-  "UserAdmin": {
+  "QuizBankAdmin": {
+    "metadata":{
+      "title": "Quiz Bank",
+      "description": "Manage all quizzes in the system" 
+    },
     "headers": {
       "name": "Name",
       "author": "Author",

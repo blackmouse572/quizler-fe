@@ -21,7 +21,7 @@ function DeleteDialog({ ids, ...props }: Props) {
   return (
     <Dialog {...props}>
       <DialogTrigger asChild>
-        <Button variant="outline" color="danger">
+        <Button color="danger" size={"sm"}>
           <Icons.Delete />
           {tableI18n("delete")}
         </Button>
