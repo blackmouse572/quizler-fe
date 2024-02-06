@@ -4,6 +4,115 @@
     "back": "Go back",
     "description": "Learning with supafast methods"
   },
+  "Table": {
+    "no_data": "No data",
+    "no_results": "No results",
+    "loading": "Loading...",
+    "selected_rows": "Selected {count}/{total} row(s)",
+    "action": "Action",
+    "search": "Search",
+    "search_placeholder": "Search...",
+    "export": "Export",
+    "export_csv": "Export CSV",
+    "export_excel": "Export Excel",
+    "export_pdf": "Export PDF",
+    "export_print": "Print",
+    "selected": "Selected",
+    "all": "All",
+    "clear": "Clear",
+    "reset": "Reset",
+    "reload": "Reload",
+    "column_visibility": "Column visibility",
+    "column_selection": "Column selection",
+    "save": "Save",
+    "save_and_close": "Save and close",
+    "save_and_new": "Save and new",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "delete_title": "Delete items",
+    "delete_message": "Are you sure you want to delete <span></span> items?",
+    "edit": "Edit",
+    "create": "Create",
+    "show": "Show",
+    "show_more": "Show more",
+    "show_less": "Show less",
+    "next": "Next",
+    "prev": "Prev",
+    "first": "First",
+    "last": "Last",
+    "page": "Page",
+    "goto_page": "Go to page",
+    "rows_per_page": "Rows per page",
+    "filter": "Filter",
+    "filters": "Filters",
+    "filter_by": "Filter by",
+    "filter_placeholder": "Filter by...",
+    "limit": "Limit",
+    "sort_by": "Sort by",
+    "sort_asc": "Sort ascending",
+    "sort_desc": "Sort descending",
+    "add_filter": "Add filter",
+    "remove_filter": "Remove filter",
+    "clear_filter": "Clear filter",
+    "clear_all": "Clear all",
+    "show_column": "Show column",
+    "hide_column": "Hide column",
+    "refresh": "Refresh",
+    "refresh_data": "Refresh data",
+    "refreshed": "Refreshed",
+    "column": "Column",
+    "error": "Error",
+    "edit_row": "Edit row",
+    "clone_row": "Clone row",
+    "delete_row": "Delete row",
+    "validation": "Validation",
+    "warning": "Warning",
+    "success": "Success",
+    "apply": "Apply",
+    "take-placeholder": "Take action",
+    "take-value": "Display {count} rows"
+  },
+  "QuizBankAdmin": {
+    "metadata":{
+      "title": "Quiz Bank",
+      "description": "Manage all quizzes in the system" 
+    },
+    "headers": {
+      "name": "Name",
+      "author": "Author",
+      "quizzes": "Quizzes",
+      "visibility": "Visibility",
+      "created_at": "Created at"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Copy ID",
+      "copy_author_id": "Copy author ID",
+      "take_action": "Take action",
+      "delete": "Delete",
+      "go_to": {
+        "index": "Go to",
+        "author": "Go to author",
+        "quiz": "Go to quiz"
+      }
+    }
+  },
   "Navbar": {
     "home": "Home",
     "classrooms": "Classrooms",

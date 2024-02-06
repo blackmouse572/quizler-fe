@@ -104,6 +104,93 @@
       "submit": "Xác nhận"
     }
   },
+  "Table": {
+    "no_data": "Không có dữ liệu",
+    "no_search": "Không tìm thấy kết quả",
+    "loading": "Đang tải...",
+    "selected_rows": "Đã chọn {count} hàng",
+    "action": "Hành động",
+    "search": "Tìm kiếm",
+    "search_placeholder": "Tìm kiếm...",
+    "export": "Xuất",
+    "export_excel": "Xuất ra Excel",
+    "export_csv": "Xuất ra CSV",
+    "export_pdf": "Xuất ra PDF",
+    "all": "Tất cả",
+    "clear": "Xóa lựa chọn",
+    "reset": "Huỷ bỏ",
+    "reload": "Tải lại",
+    "column_visibility": "Hiển thị cột",
+    "column_selection": "Chọn cột",
+    "save": "Lưu",
+    "save_and_close": "Lưu và đóng",
+    "save_and_new": "Lưu và tiếp theo",
+    "cancel": "Huỷ bỏ",
+    "delete": "Xoá",
+    "delete_title": "Xoá bản ghi",
+    "delete_message": "Bạn có chắc chắn muốn xoá <span></span> bản ghi không?",
+    "edit": "Chỉnh sửa",
+    "create": "Tạo mới",
+    "show": "Xem",
+    "show_more": "Xem thêm",
+    "show_less": "Thu gọn",
+    "next": "Tiếp theo",
+    "prev": "Trước",
+    "first": "Đầu",
+    "last": "Cuối",
+    "goto_page": "Đến trang",
+    "filter": "Lọc",
+    "filters": "Bộ lọc",
+    "limit": "Số lượng",
+    "sort_by": "Sắp xếp theo",
+    "sort_asc": "Sắp xếp tăng dần",
+    "sort_desc": "Sắp xếp giảm dần",
+    "warning": "Cảnh báo",
+    "success": "Thành công",
+    "apply": "Áp dụng",
+    "take-value": "Hiển thị {count} dòng"
+  },
+  "QuizBankAdmin": {
+    "metadata": {
+      "title": "Quản lý Quiz",
+      "description": "Quản lý tất cả các Quiz của bạn"
+    },
+    "headers": {
+      "name": "Tên",
+      "author": "Tác giả",
+      "quizzes": "Sô lượng Quiz",
+      "visibility": "Công khai",
+      "created_at": "Ngày tạo"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
+        "type": {
+          "Public": {
+            "value": "Công khai"
+          },
+          "Private": {
+            "value": "Riêng tư"
+          },
+          "All": {
+            "value": "Tất cả"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Sao chép ID",
+      "copy_author_id": "Sao chép ID tác giả",
+      "take_action": "Thực hiện hành động",
+      "delete": "Xoá",
+      "go_to": {
+        "index": "Xem chi tiết",
+        "author": "Xem tác giả",
+        "quiz": "Xem Quiz"
+      }
+    }
+  },
   "ForgotPassword": {
     "title": "Quên mật khẩu? Đừng lo",
     "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",

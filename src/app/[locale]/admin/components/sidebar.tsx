@@ -55,6 +55,11 @@ const ITEMS: SidebarItem[] = [
     icon: "UserFilled",
     href: "users",
   },
+  {
+    label: "Quiz Bank",
+    icon: "Icon",
+    href: "quizbank",
+  },
 ]
 
 function Sidebar({}: Props) {

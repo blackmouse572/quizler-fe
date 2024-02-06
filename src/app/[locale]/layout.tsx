@@ -9,6 +9,7 @@ import GoogleProvider from "@/app/[locale]/components/GoogleProvider"
 import "./global.css"
 import { NextIntlClientProvider, useMessages } from "next-intl"
 import { pick } from "lodash"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 const montserrat = Montserrat({
   weight: ["400", "600", "700", "800", "900", "500", "300", "200"],
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
       url: "https://ngocnt.dev",
     },
   ],
-  manifest: "./manifest.json",
+  manifest: `${siteConfig.url}/manifest.json`,
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
@@ -48,12 +49,13 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
+    images: [{ url: siteConfig.ogImage }],
     creator: "@shadcn",
   },
 }
@@ -76,12 +78,14 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
         ])}
       >
         <GoogleProvider>
-          <NextIntlClientProvider
-            locale={locale}
-            messages={pick(messages, "NotFound", "Error")}
-          >
-            {children}
-          </NextIntlClientProvider>
+          <TooltipProvider>
+            <NextIntlClientProvider
+              locale={locale}
+              messages={pick(messages, "NotFound", "Error")}
+            >
+              {children}
+            </NextIntlClientProvider>
+          </TooltipProvider>
         </GoogleProvider>
         <Toaster />
         <TailwindIndicator />

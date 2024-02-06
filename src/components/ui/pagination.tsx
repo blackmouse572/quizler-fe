@@ -7,6 +7,7 @@ import * as React from "react"
 
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -23,7 +24,7 @@ const PaginationContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-1", className)}
+    className={cn("flex flex-row items-center gap-4", className)}
     {...props}
   />
 ))
@@ -33,30 +34,33 @@ const PaginationItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
 >(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn("", className)} {...props} />
+  <li ref={ref} className={cn("w-full", className)} {...props} />
 ))
 PaginationItem.displayName = "PaginationItem"
 
 type PaginationLinkProps = {
   isActive?: boolean
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"a">
+  React.ComponentProps<typeof Link>
 
 const PaginationLink = ({
   className,
   isActive,
   size = "sm",
+  href = "#",
   ...props
 }: PaginationLinkProps) => (
   <PaginationItem>
-    <a
+    <Link
       aria-current={isActive ? "page" : undefined}
+      href={href}
       className={cn(
         buttonVariants({
-          variant: isActive ? "outline" : "ghost",
+          variant: isActive ? "default" : "ghost",
           isIconOnly: true,
           color: isActive ? "primary" : "accent",
           size,
+          className: "p-2 ",
         }),
         className
       )}
@@ -77,7 +81,6 @@ const PaginationPrevious = ({
     {...props}
   >
     <ChevronLeftIcon className="h-4 w-4" />
-    <span>Previous</span>
   </PaginationLink>
 )
 PaginationPrevious.displayName = "PaginationPrevious"
@@ -92,7 +95,6 @@ const PaginationNext = ({
     className={cn("gap-1 pr-2.5", className)}
     {...props}
   >
-    <span>Next</span>
     <ChevronRightIcon className="h-4 w-4" />
   </PaginationLink>
 )

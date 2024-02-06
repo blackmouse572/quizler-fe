@@ -19,6 +19,7 @@ export function getAbsoluteURL(uri: string) {
   if (!isEndWithSlash && !isStartWithSlash) {
     return `${URL}/${uri}`
   }
+  return URL + uri
 }
 
 export function getAPIServerURL(uri: string) {
