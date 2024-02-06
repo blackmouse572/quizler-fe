@@ -22,6 +22,7 @@ function SizeSelector({ ...props }: Props) {
   const pathName = usePathname()
 
   function handleChange(value: string) {
+    console.log(value)
     const params = new URLSearchParams(searchParams.toString())
     params.set("take", value)
     router.push(pathName + "?" + params.toString())
@@ -31,7 +32,7 @@ function SizeSelector({ ...props }: Props) {
 
   return (
     <Select {...props} onValueChange={handleChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-fit max-w-[180px]">
         <SelectValue placeholder={tableI18n("take-placeholder")} />
       </SelectTrigger>
       <SelectContent>

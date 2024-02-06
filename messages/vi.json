@@ -147,9 +147,14 @@
     "sort_desc": "Sắp xếp giảm dần",
     "warning": "Cảnh báo",
     "success": "Thành công",
-    "apply": "Áp dụng"
+    "apply": "Áp dụng",
+    "take-value": "Hiển thị {count} dòng"
   },
   "QuizBankAdmin": {
+    "metadata": {
+      "title": "Quản lý Quiz",
+      "description": "Quản lý tất cả các Quiz của bạn"
+    },
     "headers": {
       "name": "Tên",
       "author": "Tác giả",
