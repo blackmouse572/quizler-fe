@@ -85,7 +85,7 @@ async function MainLayout({ children }: Props) {
         messages={pick(m, "UserDropdown", "Navbar", "Index")}
       >
         <Navbar
-          className="fixed left-1/2 top-0 -translate-x-1/2"
+          className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
           items={mainNavbarItems}
           menuItems={menuItems}
           isAuthed={isAuth}

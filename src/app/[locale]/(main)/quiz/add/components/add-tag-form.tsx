@@ -84,7 +84,15 @@ function AddTagForm({ initialValues, onTagChange }: AddTagFormProps) {
               layout
               key={tag}
               initial={{ scale: 0, x: 100 }}
-              animate={{ scale: 1, x: 0 }}
+              animate={{
+                scale: 1,
+                x: 0,
+                transition: {
+                  type: "spring",
+                  damping: 15,
+                  bounce: 0.5,
+                },
+              }}
               exit={{ scale: 0 }}
             >
               <Badge

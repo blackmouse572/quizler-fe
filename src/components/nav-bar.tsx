@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useSelectedLayoutSegment } from "next/navigation"
-import React, { useMemo } from "react"
+import React, { useEffect, useMemo } from "react"
 
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { Badge } from "@/components/ui/badge"
@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils"
 import { User } from "@/types/User"
 import { MenuItem } from "@/types/dropdown-menu"
 import { useTranslations } from "next-intl"
+import { useMotionValueEvent, useScroll } from "framer-motion"
 
 export type MainNavItem = {
   title: string
@@ -49,9 +50,20 @@ function Navbar({
   menuItems = [],
 }: Props) {
   const segment = useSelectedLayoutSegment()
-  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
+  // const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
   const tNav = useTranslations("Navbar")
   const tIndex = useTranslations("Index")
+  const { scrollY } = useScroll()
+  const [hidden, setHidden] = React.useState(false)
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const prev = scrollY.getPrevious()
+    if (prev === undefined) return
+    if (latest > prev && latest > 100) {
+      setHidden(true)
+    } else {
+      setHidden(false)
+    }
+  })
   const renderRightContent = useMemo(() => {
     if (!isAuthed)
       return (
@@ -59,7 +71,7 @@ function Navbar({
           <NavigationMenuItem asChild>
             <Link href="signup">
               <Button variant="default" color={"primary"}>
-                Sign up
+                {tNav("signup")}
               </Button>
             </Link>
           </NavigationMenuItem>
@@ -70,7 +82,7 @@ function Navbar({
                 className="shadow-none hover:bg-slate-300"
                 color={"accent"}
               >
-                Sign in
+                {tNav("signin")}
               </Button>
             </Link>
           </NavigationMenuItem>
@@ -86,7 +98,7 @@ function Navbar({
           menuItems={menuItems}
         />
       )
-  }, [isAuthed, menuItems])
+  }, [isAuthed, menuItems, tNav])
 
   const renderDrawerMenu = useMemo(() => {
     return (
@@ -147,7 +159,10 @@ function Navbar({
   return (
     <NavigationMenu
       className={cn(
-        "container z-[100] mx-auto w-full justify-between py-4",
+        "duration-600 container z-[100] mx-auto w-full justify-between py-2 transition-all ease-in-out",
+        segment === null && "bg-transparent",
+        segment !== null && "bg-background/30 backdrop-blur-sm",
+        hidden ? "-translate-y-16 opacity-10" : "translate-y-0 opacity-100",
         className
       )}
     >

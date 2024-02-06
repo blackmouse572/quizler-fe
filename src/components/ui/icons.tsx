@@ -29,6 +29,7 @@ import {
   IconNavigation,
   IconPlayerPause,
   IconPlayerPlay,
+  IconPlus,
   IconSearch,
   IconSmartHome,
   IconTableFilled,
@@ -40,6 +41,7 @@ import {
 } from "@tabler/icons-react"
 
 export const Icons = {
+  Plus: IconPlus,
   Checked: IconCheck,
   Play: IconPlayerPlay,
   Copy: IconCopy,
