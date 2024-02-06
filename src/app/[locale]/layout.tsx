@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       url: "https://ngocnt.dev",
     },
   ],
-  manifest: "./manifest.json",
+  manifest: `${siteConfig.url}/manifest.json`,
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
@@ -49,12 +49,13 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
+    images: [{ url: siteConfig.ogImage }],
     creator: "@shadcn",
   },
 }
