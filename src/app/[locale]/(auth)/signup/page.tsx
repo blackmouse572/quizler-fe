@@ -10,13 +10,12 @@ export const metadata = {
 }
 
 export default async function RegisterPage() {
-  const t = await getTranslations("SignUp")
   const m = await getMessages()
 
   return (
     <div className="h-full w-full">
       <GoBackButton />
-      <NextIntlClientProvider messages={_.pick(m, "SignUp")}>
+      <NextIntlClientProvider messages={_.pick(m, "SignUp", "Errors")}>
         <UserAuthForm />
       </NextIntlClientProvider>
     </div>

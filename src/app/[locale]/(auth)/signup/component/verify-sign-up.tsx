@@ -21,15 +21,26 @@ import {
 } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
 import { Icons } from "@/components/ui/icons"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 import { VerifySignUpAction } from "../actions/verify-signup-action"
-import { VerifySignUpSchemaType } from "../vaidations/verify-sign-up-validate"
+import VerifySignUpSchema, {
+  VerifySignUpSchemaType,
+} from "../vaidations/verify-sign-up-validate"
+import { zodResolver } from "@hookform/resolvers/zod"
 
-export function VerifyRegister() {
+interface VerifyRegisterProps {
+  initialValues: VerifySignUpSchemaType
+}
+export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
   const t = useTranslations("VerifySignUp")
-  const form = useForm()
+  const errorsI18n = useTranslations("Errors")
+  const form = useForm<VerifySignUpSchemaType>({
+    defaultValues: initialValues,
+    resolver: zodResolver(VerifySignUpSchema),
+  })
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const searchParams = useSearchParams()
   const router = useRouter()
   const { toast } = useToast()
 
@@ -38,34 +49,20 @@ export function VerifyRegister() {
     setOtp(otp)
   }
 
-  async function onSubmit(values: VerifySignUpSchemaType) {
+  async function onSubmit(data: VerifySignUpSchemaType) {
     setIsLoading(true)
 
-    values = {
-      otpCode: otp,
-    }
-
-    // TODO: change here
-    console.log(values)
-
-    const result = await VerifySignUpAction(values)
+    const result = await VerifySignUpAction(data)
 
     if (!result?.ok) {
       setIsLoading(false)
       return toast({
         title: "Something went wrong.",
-        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
+        description: errorsI18n(result.message),
         variant: "flat",
         color: "danger",
       })
     }
-
-    toast({
-      title: "Success",
-      description: "You have been signed up. Check your email",
-      variant: "flat",
-      color: "success",
-    })
 
     return router.push("/")
   }
@@ -93,9 +90,10 @@ export function VerifyRegister() {
         <CardTitle className="flex justify-center">{t("form.title")}</CardTitle>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+            <input type="text" hidden value={searchParams.get("email") || ""} />
             <FormField
               control={form.control}
-              name="name"
+              name="token"
               render={({ field }) => {
                 return (
                   <div className="mt-2 flex justify-center">
