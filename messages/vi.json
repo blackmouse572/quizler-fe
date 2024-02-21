@@ -93,6 +93,10 @@
           }
         }
       },
+      "dob": {
+        "label": "Ngày sinh",
+        "placeholder": "Chọn ngày sinh"
+      },
       "submit": "Đăng ký"
     }
   },
@@ -271,5 +275,14 @@
       "placeholder": "Tạo Quiz mới"
     },
     "errorBtn": "Thông báo lỗi"
+  },
+  "Errors": {
+    "index": "Lỗi",
+    "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
+    "invalid-pin": "Mã PIN không hợp lệ, vui lòng thử lại",
+    "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
+    "email-existed": "Email đã tồn tại, vui lòng thử lại",
+    "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
+    "verification-failed": "Xác thực thất bại, vui lòng thử lại"
   }
 }
