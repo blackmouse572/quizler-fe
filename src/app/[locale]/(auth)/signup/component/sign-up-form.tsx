@@ -21,7 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Link from "next/link"
-import { useTranslations } from "next-intl"
+import { useFormatter, useTranslations } from "next-intl"
 import {
   Form,
   FormControl,
@@ -29,61 +29,53 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { SignUpAction } from "../actions/signup-action"
 import { useRouter } from "next/navigation"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Calendar } from "@/components/ui/calendar"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+  const format = useFormatter()
+
   const form = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
-      name: "",
-      email: "",
+      fullName: "",
       username: "",
       password: "",
       confirm: "",
-      gender: undefined
-    }
+      dob: new Date(),
+      email: "",
+    },
   })
 
   const t = useTranslations("SignUp")
+  const errorI188n = useTranslations("Errors")
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const genders = ["Male", "Female", "Other"] as const
   const router = useRouter()
   const { toast } = useToast()
 
   async function onSubmit(values: SignUpSchemaType) {
     setIsLoading(true)
     const result = await SignUpAction(values)
-    
+
     if (!result?.ok) {
       setIsLoading(false)
       return toast({
         title: "Something went wrong.",
-        description: <pre className="max-w-sm">{JSON.stringify(result)}</pre>,
+        description: errorI188n(result.message),
         variant: "flat",
         color: "danger",
       })
     }
-
-    toast({
-      title: "Success",
-      description: "You have been signed up. Check your email",
-      variant: "flat",
-      color: "success",
-    })
-
-    return router.push("/signup/verify")
+    const params = new URLSearchParams({ email: values.email })
+    return router.push(`/signup/verify?${params}`)
   }
 
   return (
@@ -109,7 +101,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name="name"
+              name="fullName"
               render={({ field }) => {
                 return (
                   <div className="space-y-1">
@@ -231,29 +223,59 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
             <FormField
               control={form.control}
-              name="gender"
+              name="dob"
               render={({ field }) => {
                 return (
                   <div className="space-y-1">
-                    <FormLabel required>{t("form.gender.label")}</FormLabel>
+                    <FormLabel required>{t("form.dob.label")}</FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange}>
-                        <SelectTrigger>
-                          <SelectValue
-                            placeholder={t("form.gender.placeholder")}
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-full pl-3 text-left font-normal"
+                              )}
+                            >
+                              {field.value ? (
+                                format.dateTime(new Date(field.value), {
+                                  day: "numeric",
+                                  month: "short",
+                                  year: "numeric",
+                                })
+                              ) : (
+                                <span>{t("form.dob.placeholder")}</span>
+                              )}
+                              <Icons.Calendar className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            defaultMonth={new Date()}
+                            formatters={{
+                              formatYearCaption: (date) =>
+                                format.dateTime(date, {
+                                  year: "numeric",
+                                }),
+
+                              formatMonthCaption: (date) =>
+                                format.dateTime(date, {
+                                  month: "long",
+                                  year: "numeric",
+                                }),
+                            }}
+                            selected={new Date(field.value)}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            initialFocus
                           />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectLabel>{t("form.gender.label")}</SelectLabel>
-                            {genders.map((key, i) => (
-                              <SelectItem key={i} value={key}>
-                                {t(`form.gender.type.${key}.value`)}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
+                        </PopoverContent>
+                      </Popover>
                     </FormControl>
                     <FormMessage />
                   </div>

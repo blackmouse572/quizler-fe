@@ -8,6 +8,7 @@ import {
   IconBook,
   IconBrandGithub,
   IconBrandGoogle,
+  IconCalendar,
   IconCards,
   IconCaretDownFilled,
   IconCaretUpFilled,
@@ -39,6 +40,7 @@ import {
 } from "@tabler/icons-react"
 
 export const Icons = {
+  Calendar: IconCalendar,
   Play: IconPlayerPlay,
   Copy: IconCopy,
   HandStop: IconHandStop,

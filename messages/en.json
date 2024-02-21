@@ -73,9 +73,9 @@
     "take-value": "Display {count} rows"
   },
   "QuizBankAdmin": {
-    "metadata":{
+    "metadata": {
       "title": "Quiz Bank",
-      "description": "Manage all quizzes in the system" 
+      "description": "Manage all quizzes in the system"
     },
     "headers": {
       "name": "Name",
@@ -187,20 +187,9 @@
         "label": "Re-password",
         "placeholder": "********"
       },
-      "gender": {
-        "label": "Gender",
-        "placeholder": "Select gender",
-        "type": {
-          "Male": {
-            "value": "Male"
-          },
-          "Female": {
-            "value": "Female"
-          },
-          "Other": {
-            "value": "Other"
-          }
-        }
+      "dob": {
+        "label": "Date of birth",
+        "placeholder": "Select your birthday"
       },
       "submit": "Sign Up"
     }
@@ -283,7 +272,10 @@
     "index": "Errors",
     "token-expire": "The url has been expire, please create another request",
     "invalid-pin": "Pin is not correct, please try again",
-    "account-fail": "The account has been terminated, please contact the Support"
+    "account-fail": "The account has been terminated, please contact the Support",
+    "email-existed": "The email has been existed, please try another email",
+    "username-existed": "The username has been existed, please try another username",
+    "verification-failed": "The verification code is not correct, please try again"
   },
   "Validations": {
     "errors": {

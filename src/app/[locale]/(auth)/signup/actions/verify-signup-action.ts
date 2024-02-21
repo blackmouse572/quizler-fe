@@ -4,9 +4,10 @@ import { revalidatePath } from "next/cache"
 
 import { setToken } from "@/lib/auth"
 import { VerifySignUpSchemaType } from "../vaidations/verify-sign-up-validate"
+import { getAPIServerURL } from "@/lib/utils"
 
 export const VerifySignUpAction = async (values: VerifySignUpSchemaType) => {
-  const URL = "https://api.escuelajs.co/api/v1/auth/login"
+  const URL = getAPIServerURL("/auth/verify")
 
   const options = {
     method: "POST",

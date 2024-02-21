@@ -8,14 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useTranslations } from "next-intl"
-import Link from "next/link"
 import Otp from "@/components/ui/otp"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormMessage } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
 import { Icons } from "@/components/ui/icons"
-import { notFound, useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 import VerifyForgotPasswordSchema, {
   VerifyForgotPasswordSchemaType,
