@@ -6,10 +6,10 @@ import type { Metadata } from "next"
 import { Montserrat, Plus_Jakarta_Sans } from "next/font/google"
 
 import GoogleProvider from "@/app/[locale]/components/GoogleProvider"
-import "./global.css"
-import { NextIntlClientProvider, useMessages } from "next-intl"
-import { pick } from "lodash"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { pick } from "lodash"
+import { NextIntlClientProvider, useMessages } from "next-intl"
+import "./global.css"
 
 const montserrat = Montserrat({
   weight: ["400", "600", "700", "800", "900", "500", "300", "200"],
@@ -81,7 +81,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           <TooltipProvider>
             <NextIntlClientProvider
               locale={locale}
-              messages={pick(messages, "NotFound", "Error")}
+              messages={pick(messages, "NotFound", "Error", "Errors")}
             >
               {children}
             </NextIntlClientProvider>
