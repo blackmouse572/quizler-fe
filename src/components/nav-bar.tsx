@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useSelectedLayoutSegment } from "next/navigation"
-import React, { useEffect, useMemo } from "react"
+import React, { useMemo } from "react"
 
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { Badge } from "@/components/ui/badge"
@@ -23,8 +23,8 @@ import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
 import { User } from "@/types/User"
 import { MenuItem } from "@/types/dropdown-menu"
-import { useTranslations } from "next-intl"
 import { useMotionValueEvent, useScroll } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 export type MainNavItem = {
   title: string
@@ -152,7 +152,7 @@ function Navbar({
       className={cn(
         "duration-600 container z-[100] mx-auto w-full justify-between py-2 transition-all ease-in-out",
         segment === null && "bg-transparent",
-        segment !== null && "bg-background/30 backdrop-blur-sm",
+        segment !== null && "backdrop-blur-sm",
         hidden ? "-translate-y-16 opacity-10" : "translate-y-0 opacity-100",
         className
       )}
