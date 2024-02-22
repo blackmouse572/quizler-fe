@@ -14,7 +14,10 @@ import {
   IconCaretUpFilled,
   IconChalkboard,
   IconCheck,
-  IconChevronDown, IconChevronLeft, IconChevronRight, IconChevronUp,
+  IconChevronDown,
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronUp,
   IconCircleOff,
   IconCopy,
   IconDashboard,
@@ -30,6 +33,7 @@ import {
   IconNavigation,
   IconPlayerPause,
   IconPlayerPlay,
+  IconPlus,
   IconSearch,
   IconSmartHome,
   IconTableFilled,
@@ -37,11 +41,12 @@ import {
   IconUserFilled,
   IconUsers,
   IconX,
-  TablerIconsProps
+  TablerIconsProps,
 } from "@tabler/icons-react"
 
 export const Icons = {
-  Calendar: IconCalendar,
+  Plus: IconPlus,
+  Checked: IconCheck,
   Play: IconPlayerPlay,
   Copy: IconCopy,
   HandStop: IconHandStop,
@@ -75,7 +80,6 @@ export const Icons = {
   MultiUsers: IconUsers,
   TableFilled: IconTableFilled,
   UserFilled: IconUserFilled,
-  Checked: IconCheck,
   Minus: IconMinus,
   CaretUpFilled: IconCaretUpFilled,
   CaretDownFilled: IconCaretDownFilled,
@@ -84,10 +88,10 @@ export const Icons = {
   ChevronUp: IconChevronUp,
   ChevronDown: IconChevronDown,
   ChevronLeft: IconChevronLeft,
-  ChevronRight: IconChevronRight, 
+  ChevronRight: IconChevronRight,
+  Calendar: IconCalendar,
 }
 
 type IIconKeys = keyof typeof Icons
 
 export type { IIconKeys, TablerIconsProps }
-

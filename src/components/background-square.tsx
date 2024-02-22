@@ -4,13 +4,12 @@ import React from "react"
 
 // TODO: apply mask image style
 const backgroundSquareVariants = cva(
-  "flex h-screen items-center justify-center bg-grid-xl-slate-300/20",
+  "flex min-h-screen items-center justify-center bg-neutral-200 bg-grid-xl-slate-300/20",
   {
     variants: {
       variant: {
-        default: "",
-        topDown:
-          "",
+        default: "bg-center",
+        topDown: "bg-top",
       },
     },
     defaultVariants: {
@@ -19,7 +18,8 @@ const backgroundSquareVariants = cva(
   }
 )
 
-type TBackgroundSquareProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof backgroundSquareVariants>
+type TBackgroundSquareProps = React.HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof backgroundSquareVariants>
 
 const BackgroundSquare = ({
   children,
@@ -29,14 +29,21 @@ const BackgroundSquare = ({
 }: TBackgroundSquareProps) => {
   return (
     <div
-      className={cn(
-        backgroundSquareVariants({variant}),
-        className
-      )}
+      className={cn(backgroundSquareVariants({ variant }), className)}
       {...props}
     >
-      <div className="z-10">{children}</div>
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-neutral-200 p-28 backdrop-blur-lg [mask-image:radial-gradient(ellipse_at_center,transparent_0%,var(--neutral-200)_70%)] dark:bg-white" />
+      <div className="z-10 h-full w-full">{children}</div>
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0 flex items-center justify-center bg-neutral-200 p-28 backdrop-blur-lg  dark:bg-white",
+          {
+            "[mask-image:radial-gradient(ellipse_at_center,transparent_0%,var(--neutral-200)_70%)]":
+              variant === "default",
+            "[mask-image:radial-gradient(ellipse_at_top,transparent_0%,var(--neutral-200)_70%)]":
+              variant === "topDown",
+          }
+        )}
+      />
     </div>
   )
 }

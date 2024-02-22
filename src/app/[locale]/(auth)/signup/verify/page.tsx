@@ -17,7 +17,7 @@ export default async function VerifyRegisterPage({
   if (!email) return notFound()
 
   return (
-    <div className="h-full w-full">
+    <div className="">
       <GoBackButton />
       <NextIntlClientProvider messages={_.pick(m, "VerifySignUp", "Errors")}>
         <VerifyRegister
