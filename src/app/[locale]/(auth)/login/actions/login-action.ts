@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache"
 
 import { LoginSchemaType } from "@/app/[locale]/(auth)/login/validations/login-validate"
-import { setRefreshToken, setToken } from "@/lib/auth"
+import { setRefreshToken, setToken, setUser } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { User } from "@/types/User"
 import { getTranslations } from "next-intl/server"
@@ -30,6 +30,8 @@ export const LoginAction = async (values: LoginSchemaType) => {
     .then((response: User) => {
       setToken(response.accessToken)
       setRefreshToken(response.refreshToken)
+      console.log(response)
+      setUser(response)
       revalidatePath("/")
       return {
         ok: true,

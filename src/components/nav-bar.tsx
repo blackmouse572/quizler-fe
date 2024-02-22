@@ -65,7 +65,7 @@ function Navbar({
     }
   })
   const renderRightContent = useMemo(() => {
-    if (!isAuthed)
+    if (!isAuthed || !user)
       return (
         <>
           <NavigationMenuItem asChild>
@@ -88,17 +88,8 @@ function Navbar({
           </NavigationMenuItem>
         </>
       )
-    else
-      return (
-        <UserDropdown
-          user={{
-            name: "Huy Nguyen",
-            email: "",
-          }}
-          menuItems={menuItems}
-        />
-      )
-  }, [isAuthed, menuItems, tNav])
+    else return <UserDropdown user={user} menuItems={menuItems} />
+  }, [isAuthed, menuItems, tNav, user])
 
   const renderDrawerMenu = useMemo(() => {
     return (

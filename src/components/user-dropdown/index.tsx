@@ -22,9 +22,10 @@ import { getShortName } from "@/lib/string-helper"
 import { MenuItem } from "@/types/dropdown-menu"
 import { useRouter } from "next/navigation"
 import React from "react"
+import { User } from "@/types"
 
 type Props = {
-  user: any
+  user: User
   menuItems: MenuItem[][]
 }
 
@@ -92,9 +93,9 @@ function UserDropdown({ user, menuItems }: Props) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src={user?.avatar} alt={user?.name} />
+          <AvatarImage src={user?.avatar} alt={user?.fullName} />
           <AvatarFallback className="bg-gradient-to-bl ">
-            <span className="text-white">{getShortName(user.name)}</span>
+            <span className="text-white">{getShortName(user.fullName)}</span>
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
