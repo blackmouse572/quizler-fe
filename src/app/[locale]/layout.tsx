@@ -81,7 +81,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           <TooltipProvider>
             <NextIntlClientProvider
               locale={locale}
-              messages={pick(messages, "NotFound", "Error")}
+              messages={pick(messages, "NotFound", "Error", "Errors")}
             >
               {children}
             </NextIntlClientProvider>

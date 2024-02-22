@@ -7,7 +7,7 @@ function AddQuizbank() {
   const message = useMessages()
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "AddQuiz")}
+      messages={_.pick(message, "Validations", "AddQuiz", "Errors")}
     >
       <AddQuizbankForm />
     </NextIntlClientProvider>

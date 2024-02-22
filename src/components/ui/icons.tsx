@@ -76,7 +76,6 @@ export const Icons = {
   MultiUsers: IconUsers,
   TableFilled: IconTableFilled,
   UserFilled: IconUserFilled,
-  Checked: IconCheck,
   Minus: IconMinus,
   CaretUpFilled: IconCaretUpFilled,
   CaretDownFilled: IconCaretDownFilled,

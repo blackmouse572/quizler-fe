@@ -21,6 +21,8 @@ import { Icons } from "@/components/ui/icons"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
+import { addQuizBankAction } from "../actions/add-quiz-bank-action"
+import { useToast } from "@/components/ui/use-toast"
 
 const addQuizbankSchema = z.object({
   bankName: z
@@ -33,7 +35,7 @@ const addQuizbankSchema = z.object({
     .max(255, {
       message: "errors.too_big.string.inclusive",
     }),
-  desciption: z
+  description: z
     .string({
       required_error: "errors.invalid_type_received_undefined",
     })
@@ -43,9 +45,9 @@ const addQuizbankSchema = z.object({
     .max(255, {
       message: "errors.too_big.string.inclusive",
     }),
-  visibility: z.boolean().default(false),
+  visibility: z.enum(["public", "private"]).default("public"),
   tags: z.array(z.string()).default([]),
-  quiz: z.array(
+  quizes: z.array(
     z.object({
       question: z
         .string({
@@ -71,7 +73,7 @@ const addQuizbankSchema = z.object({
   ),
 })
 
-type AddQuizbank = z.infer<typeof addQuizbankSchema>
+export type AddQuizbank = z.infer<typeof addQuizbankSchema>
 
 type AddQuizbankFormProps = {
   initialValues?: AddQuizbank
@@ -79,15 +81,38 @@ type AddQuizbankFormProps = {
 function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
   const i18n = useTranslations("AddQuiz")
+  const errorI18n = useTranslations("Errors")
+  const { toast } = useToast()
   const form = useForm<AddQuizbank>({
     resolver: zodResolver(addQuizbankSchema),
     values: initialValues,
   })
   const { append, fields, remove } = useFieldArray({
     control: form.control,
-    name: "quiz",
+    name: "quizes",
   })
-  const onSubmit = useCallback(() => {}, [])
+
+  const onSubmit = useCallback(
+    async (value: AddQuizbank) => {
+      const res = await addQuizBankAction(value)
+
+      if (!res.ok) {
+        toast({
+          title: errorI18n("index"),
+          color: "danger",
+          description: errorI18n(res.message),
+        })
+      } else {
+        // TODO: change this
+        toast({
+          title: "Success",
+          color: "success",
+          description: "Quiz added successfully",
+        })
+      }
+    },
+    [errorI18n, toast]
+  )
   const onTagChange = useCallback(
     (tags: string[]) => form.setValue("tags", tags),
     [form]
@@ -116,12 +141,12 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
             <Textarea
               placeholder={i18n("form.term.placeholder")}
               rows={5}
-              {...form.register(`quiz.${index}.question`)}
+              {...form.register(`quizes.${index}.question`)}
             />
-            {form.getFieldState(`quiz.${index}.question`).error && (
+            {form.getFieldState(`quizes.${index}.question`).error && (
               <FormMessage>
                 {errori18n(
-                  form.getFieldState(`quiz.${index}.question`).error
+                  form.getFieldState(`quizes.${index}.question`).error
                     ?.message as any,
                   {
                     maximum: 255,
@@ -137,12 +162,12 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
               rows={5}
               key={item.question + index}
               placeholder={i18n("form.definition.placeholder")}
-              {...form.register(`quiz.${index}.answer`)}
+              {...form.register(`quizes.${index}.answer`)}
             />
-            {form.getFieldState(`quiz.${index}.answer`).error && (
+            {form.getFieldState(`quizes.${index}.answer`).error && (
               <FormMessage>
                 {errori18n(
-                  form.getFieldState(`quiz.${index}.answer`).error
+                  form.getFieldState(`quizes.${index}.answer`).error
                     ?.message as any,
                   {
                     maximum: 255,
@@ -155,7 +180,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
         </CardContent>
       </Card>
     ))
-  }, [errori18n, fields, form, i18n])
+  }, [errori18n, fields, form, i18n, removeQuiz])
 
   const renderAddButton = useMemo(() => {
     return (
@@ -171,6 +196,16 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
   return (
     <Form {...form}>
       <div className="mx-auto w-full max-w-xl space-y-8">
+        {form.formState.errors && (
+          <FormMessage color="danger">
+            {JSON.stringify(form.formState.errors, null, 2)}
+          </FormMessage>
+        )}
+        {form.formState.isSubmitting && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-neutral-900/50">
+            <Icons.Loader className="text-primary-500 h-10 w-10 animate-spin" />
+          </div>
+        )}
         <form
           id="addForm"
           onSubmit={form.handleSubmit(onSubmit)}
@@ -207,7 +242,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
           />
           <FormField
             control={form.control}
-            name="desciption"
+            name="description"
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel required>{i18n("form.description.label")}</FormLabel>
@@ -235,8 +270,13 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                   <FormControl>
                     <Checkbox
                       variant={"square"}
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
+                      checked={field.value === "public"}
+                      onCheckedChange={(checked) => {
+                        form.setValue(
+                          "visibility",
+                          checked ? "public" : "private"
+                        )
+                      }}
                     />
                   </FormControl>
                   <FormLabel>{i18n("form.public.label")}</FormLabel>

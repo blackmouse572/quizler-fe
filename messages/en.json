@@ -299,13 +299,14 @@
     }
   },
   "Errors": {
-    "index": "Errors",
+    "index": "Error",
     "token-expire": "The url has been expire, please create another request",
     "invalid-pin": "Pin is not correct, please try again",
     "account-fail": "The account has been terminated, please contact the Support",
     "email-existed": "The email has been existed, please try another email",
     "username-existed": "The username has been existed, please try another username",
-    "verification-failed": "The verification code is not correct, please try again"
+    "verification-failed": "The verification code is not correct, please try again",
+    "Unauthorized": "Account not authorized, please login"
   },
   "Validations": {
     "errors": {
