@@ -79,6 +79,7 @@ export const Icons = {
   Minus: IconMinus,
   CaretUpFilled: IconCaretUpFilled,
   CaretDownFilled: IconCaretDownFilled,
+  Calendar: IconCalendar,
 }
 
 type IIconKeys = keyof typeof Icons

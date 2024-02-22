@@ -26,7 +26,6 @@ export const addQuizBankAction = (data: AddQuizbank) => {
       return json
     })
     .then((res) => {
-      console.log(res)
       return {
         ok: true,
         message: "success",
