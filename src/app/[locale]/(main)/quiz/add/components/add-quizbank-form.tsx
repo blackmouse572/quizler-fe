@@ -49,28 +49,30 @@ const addQuizbankSchema = z.object({
   visibility: z.enum(["public", "private"]).default("public"),
   tags: z.array(z.string()).default([]),
   quizes: z.array(
-    z.object({
-      question: z
-        .string({
-          required_error: "errors.invalid_type_received_undefined",
-        })
-        .min(3, {
-          message: "errors.too_small.string.inclusive",
-        })
-        .max(255, {
-          message: "errors.too_big.string.inclusive",
-        }),
-      answer: z
-        .string({
-          required_error: "errors.invalid_type_received_undefined",
-        })
-        .min(3, {
-          message: "errors.too_small.string.inclusive",
-        })
-        .max(255, {
-          message: "errors.too_big.string.inclusive",
-        }),
-    })
+    z
+      .object({
+        question: z
+          .string({
+            required_error: "errors.invalid_type_received_undefined",
+          })
+          .min(3, {
+            message: "errors.too_small.string.inclusive",
+          })
+          .max(255, {
+            message: "errors.too_big.string.inclusive",
+          }),
+        answer: z
+          .string({
+            required_error: "errors.invalid_type_received_undefined",
+          })
+          .min(3, {
+            message: "errors.too_small.string.inclusive",
+          })
+          .max(255, {
+            message: "errors.too_big.string.inclusive",
+          }),
+      })
+      .default({ question: "", answer: "" })
   ),
 })
 
