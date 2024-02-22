@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Boxes } from "@/components/background-box"
 import LogoutButton from "@/components/logout-btn"
 import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
 import { isAuthenticated } from "@/lib/auth"
 
 export default function Home() {
@@ -45,6 +46,13 @@ export default function Home() {
             <LogoutButton />
           </div>
         )}
+      </div>
+      <div className="mx-auto w-fit">
+        <Calendar
+          fromYear={1990}
+          toYear={2024}
+          captionLayout="dropdown-buttons"
+        />
       </div>
     </div>
   )

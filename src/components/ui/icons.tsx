@@ -14,6 +14,10 @@ import {
   IconCaretUpFilled,
   IconChalkboard,
   IconCheck,
+  IconChevronDown,
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronUp,
   IconCircleOff,
   IconCopy,
   IconDashboard,
@@ -79,6 +83,12 @@ export const Icons = {
   Minus: IconMinus,
   CaretUpFilled: IconCaretUpFilled,
   CaretDownFilled: IconCaretDownFilled,
+
+  //Chevrons
+  ChevronUp: IconChevronUp,
+  ChevronDown: IconChevronDown,
+  ChevronLeft: IconChevronLeft,
+  ChevronRight: IconChevronRight,
   Calendar: IconCalendar,
 }
 

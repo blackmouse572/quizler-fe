@@ -1,18 +1,14 @@
 "use client"
 
-import * as React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
+import * as React from "react"
 import { useForm } from "react-hook-form"
 
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/ui/icons"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { toast, useToast } from "@/components/ui/use-toast"
 import SignUpSchema, {
   SignUpSchemaType,
 } from "@/app/[locale]/(auth)/signup/vaidations/sign-up-validate"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
 import {
   Card,
   CardContent,
@@ -20,8 +16,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import Link from "next/link"
-import { useFormatter, useTranslations } from "next-intl"
 import {
   Form,
   FormControl,
@@ -29,14 +23,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { SignUpAction } from "../actions/signup-action"
-import { useRouter } from "next/navigation"
+import { Icons } from "@/components/ui/icons"
+import { Input } from "@/components/ui/input"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { Calendar } from "@/components/ui/calendar"
+import { useToast } from "@/components/ui/use-toast"
+import { cn } from "@/lib/utils"
+import { subYears } from "date-fns"
+import { useFormatter, useTranslations } from "next-intl"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { SignUpAction } from "../actions/signup-action"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -254,25 +254,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         <PopoverContent className="w-auto p-0" align="start">
                           <Calendar
                             mode="single"
-                            defaultMonth={new Date()}
-                            formatters={{
-                              formatYearCaption: (date) =>
-                                format.dateTime(date, {
-                                  year: "numeric",
-                                }),
-
-                              formatMonthCaption: (date) =>
-                                format.dateTime(date, {
-                                  month: "long",
-                                  year: "numeric",
-                                }),
-                            }}
+                            captionLayout="dropdown-buttons"
+                            fromYear={subYears(new Date(), 100).getFullYear()}
+                            toYear={new Date().getFullYear()}
                             selected={new Date(field.value)}
                             onSelect={field.onChange}
-                            disabled={(date) =>
-                              date > new Date() || date < new Date("1900-01-01")
-                            }
-                            initialFocus
                           />
                         </PopoverContent>
                       </Popover>
