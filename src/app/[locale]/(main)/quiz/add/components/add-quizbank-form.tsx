@@ -259,7 +259,10 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                 </FormControl>
                 {fieldState.error && (
                   <p className="text-xs text-danger-500">
-                    {errori18n(fieldState.error?.message as any)}
+                    {errori18n(fieldState.error?.message as any, {
+                      maximum: 255,
+                      minimum: 3,
+                    })}
                   </p>
                 )}
               </FormItem>
