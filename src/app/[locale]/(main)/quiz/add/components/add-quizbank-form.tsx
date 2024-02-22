@@ -23,6 +23,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { addQuizBankAction } from "../actions/add-quiz-bank-action"
 import { useToast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
 
 const addQuizbankSchema = z.object({
   bankName: z
@@ -82,6 +83,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
   const i18n = useTranslations("AddQuiz")
   const errorI18n = useTranslations("Errors")
+  const router = useRouter()
   const { toast } = useToast()
   const form = useForm<AddQuizbank>({
     resolver: zodResolver(addQuizbankSchema),
@@ -103,15 +105,10 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
           description: errorI18n(res.message),
         })
       } else {
-        // TODO: change this
-        toast({
-          title: "Success",
-          color: "success",
-          description: "Quiz added successfully",
-        })
+        router.push(`/quiz/${res.data.id}`)
       }
     },
-    [errorI18n, toast]
+    [errorI18n, router, toast]
   )
   const onTagChange = useCallback(
     (tags: string[]) => form.setValue("tags", tags),
@@ -196,11 +193,6 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
   return (
     <Form {...form}>
       <div className="mx-auto w-full max-w-xl space-y-8">
-        {form.formState.errors && (
-          <FormMessage color="danger">
-            {JSON.stringify(form.formState.errors, null, 2)}
-          </FormMessage>
-        )}
         {form.formState.isSubmitting && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-neutral-900/50">
             <Icons.Loader className="text-primary-500 h-10 w-10 animate-spin" />
@@ -213,8 +205,18 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
         >
           <div className="my-4 flex items-center justify-between border-b border-primary">
             <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
-            <Button type="submit" variant={"flat"} isIconOnly color={"accent"}>
-              <Icons.Checked />
+            <Button
+              type="submit"
+              variant={"flat"}
+              isIconOnly
+              color={"accent"}
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? (
+                <Icons.Loader className="animate-spin" />
+              ) : (
+                <Icons.Checked />
+              )}
             </Button>
           </div>
           <FormField

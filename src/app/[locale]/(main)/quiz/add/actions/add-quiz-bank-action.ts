@@ -21,21 +21,22 @@ export const addQuizBankAction = (data: AddQuizbank) => {
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        console.log(json)
         throw new Error(json)
       }
       return json
     })
     .then((res) => {
+      console.log(res)
       return {
         ok: true,
-        message: res.message,
-        data: res.data,
+        message: "success",
+        data: res,
       }
     })
     .catch((error) => {
       return {
         ok: false,
+        data: null,
         message: error.message,
       }
     })
