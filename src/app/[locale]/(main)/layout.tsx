@@ -37,18 +37,41 @@ async function MainLayout({ children }: Props) {
     ],
     [
       {
-        label: tUserDropdown("classrooms"),
-        href: "/classrooms",
+        label: tUserDropdown("classrooms.index"),
+        children: [
+          {
+            label: tUserDropdown("classrooms.new"),
+            href: "/classrooms/create",
+            icon: "Plus",
+          },
+          {
+            label: tUserDropdown("classrooms.my_classrooms"),
+            href: "/classrooms",
+            icon: "School",
+          },
+        ],
       },
       {
-        label: tUserDropdown("invite"),
-        href: "/invite",
+        label: tUserDropdown("quizbank.index"),
+        children: [
+          {
+            label: tUserDropdown("quizbank.new"),
+            href: "/quiz/add",
+            icon: "Plus",
+          },
+          {
+            label: tUserDropdown("quizbank.my_quizbanks"),
+            href: "/quiz",
+            icon: "Icon",
+          },
+        ],
       },
     ],
     [
       {
         label: tUserDropdown("support"),
         href: "/support",
+        icon: "Support",
       },
     ],
   ]
