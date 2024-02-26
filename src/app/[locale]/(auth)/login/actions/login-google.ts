@@ -1,5 +1,5 @@
 "use server"
-import { setRefreshToken, setToken } from "@/lib/auth"
+import { setRefreshToken, setToken, setUser } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { User } from "@/types/User"
 import { getTranslations } from "next-intl/server"
@@ -18,12 +18,6 @@ export const LoginGoogleAction = async (token: string) => {
 
   const data = await fetch(URL, options)
     .then(async (response) => {
-      console.log("[API response]")
-      console.table({
-        status: response.status,
-        statusText: response.statusText,
-        ok: response.ok,
-      })
       if (!response.ok) {
         const error = await response.json()
         throw new Error(error.message)
@@ -33,6 +27,7 @@ export const LoginGoogleAction = async (token: string) => {
     .then((response: User) => {
       setToken(response.accessToken)
       setRefreshToken(response.refreshToken)
+      setUser(response)
       revalidatePath("/")
       return {
         ok: true,

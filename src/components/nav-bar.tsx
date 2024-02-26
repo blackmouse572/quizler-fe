@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useSelectedLayoutSegment } from "next/navigation"
-import React, { useEffect, useMemo } from "react"
+import React, { useMemo } from "react"
 
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { Badge } from "@/components/ui/badge"
@@ -23,8 +23,8 @@ import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
 import { User } from "@/types/User"
 import { MenuItem } from "@/types/dropdown-menu"
-import { useTranslations } from "next-intl"
 import { useMotionValueEvent, useScroll } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 export type MainNavItem = {
   title: string
@@ -65,7 +65,7 @@ function Navbar({
     }
   })
   const renderRightContent = useMemo(() => {
-    if (!isAuthed)
+    if (!isAuthed || !user)
       return (
         <>
           <NavigationMenuItem asChild>
@@ -88,17 +88,8 @@ function Navbar({
           </NavigationMenuItem>
         </>
       )
-    else
-      return (
-        <UserDropdown
-          user={{
-            name: "Huy Nguyen",
-            email: "",
-          }}
-          menuItems={menuItems}
-        />
-      )
-  }, [isAuthed, menuItems, tNav])
+    else return <UserDropdown user={user} menuItems={menuItems} />
+  }, [isAuthed, menuItems, tNav, user])
 
   const renderDrawerMenu = useMemo(() => {
     return (
@@ -107,12 +98,9 @@ function Navbar({
           className={buttonVariants({
             isIconOnly: true,
             variant: "flat",
-            className:
-              "bg-transparent px-0 py-0 hover:text-primary/70 [&_svg]:text-primary ",
-            size: "md",
           })}
         >
-          <Icons.Menu />
+          <Icons.Menu className="h-5 w-5 min-w-5" />
         </DrawerTrigger>
         <DrawerContent>
           <ul className="grid grid-cols-2 gap-4 px-4 py-8 [&_svg]:h-6 [&_svg]:w-6 [&_svg]:text-emerald-500">
@@ -161,7 +149,7 @@ function Navbar({
       className={cn(
         "duration-600 container z-[100] mx-auto w-full justify-between py-2 transition-all ease-in-out",
         segment === null && "bg-transparent",
-        segment !== null && "bg-background/30 backdrop-blur-sm",
+        segment !== null && "backdrop-blur-sm",
         hidden ? "-translate-y-16 opacity-10" : "translate-y-0 opacity-100",
         className
       )}
@@ -175,9 +163,6 @@ function Navbar({
           <Link href="/" className="flex items-center rounded-sm p-1.5">
             <Icons.Icon className="mr-2 h-6 w-6" />
             <span className="font-bold">{tIndex("title")}</span>
-            <h5 className="text-accent-500 ml-2 text-xs font-bold">
-              {user?.fullName}
-            </h5>
           </Link>
         </NavigationMenuLink>
       </NavigationMenuList>

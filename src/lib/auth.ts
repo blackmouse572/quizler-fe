@@ -1,6 +1,6 @@
 //Use server only !
 import jwt from "jsonwebtoken"
-import { Token } from "@/types/User"
+import { Token, User } from "@/types/User"
 import { cookies } from "next/headers"
 import { NextRequest } from "next/server"
 
@@ -9,6 +9,21 @@ const TOKEN_KEY = {
   refreshToken: "refreshToken",
   accessTokenExp: "accessTokenExp",
   refreshTokenExp: "refreshTokenExp",
+  user: "user",
+}
+export function setUser(user: User) {
+  cookies().set(TOKEN_KEY.user, JSON.stringify(user), {
+    path: "/",
+    maxAge: 7 * 24 * 60 * 60, // 30 days
+  })
+}
+
+export function getUser(): User {
+  return JSON.parse(cookies().get(TOKEN_KEY.user)?.value || "{}")
+}
+
+export function removeUser() {
+  cookies().delete(TOKEN_KEY.user)
 }
 
 export function setToken(token: Token) {
@@ -34,7 +49,7 @@ export function getToken(): Token {
   }
 }
 
-export function removeToken() {
+export function removeAccesstoken() {
   cookies().delete(TOKEN_KEY.accessToken)
   cookies().delete(TOKEN_KEY.accessTokenExp)
 }

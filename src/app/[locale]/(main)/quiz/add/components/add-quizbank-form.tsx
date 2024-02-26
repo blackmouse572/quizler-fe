@@ -1,5 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -9,21 +11,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import { z } from "zod"
-import AddTagForm from "./add-tag-form"
-import { Icons } from "@/components/ui/icons"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Card, CardContent } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
 import { addQuizBankAction } from "../actions/add-quiz-bank-action"
-import { useToast } from "@/components/ui/use-toast"
-import { useRouter } from "next/navigation"
+import AddTagForm from "./add-tag-form"
 
 const addQuizbankSchema = z.object({
   bankName: z
@@ -58,7 +58,7 @@ const addQuizbankSchema = z.object({
           .min(3, {
             message: "errors.too_small.string.inclusive",
           })
-          .max(255, {
+          .max(500, {
             message: "errors.too_big.string.inclusive",
           }),
         answer: z
@@ -68,7 +68,7 @@ const addQuizbankSchema = z.object({
           .min(3, {
             message: "errors.too_small.string.inclusive",
           })
-          .max(255, {
+          .max(500, {
             message: "errors.too_big.string.inclusive",
           }),
       })
@@ -140,6 +140,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
             <Textarea
               placeholder={i18n("form.term.placeholder")}
               rows={5}
+              maxLength={500}
               {...form.register(`quizes.${index}.question`)}
             />
             {form.getFieldState(`quizes.${index}.question`).error && (
@@ -148,7 +149,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                   form.getFieldState(`quizes.${index}.question`).error
                     ?.message as any,
                   {
-                    maximum: 255,
+                    maximum: 500,
                     minimum: 3,
                   }
                 )}
@@ -160,6 +161,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
             <Textarea
               rows={5}
               key={item.question + index}
+              maxLength={500}
               placeholder={i18n("form.definition.placeholder")}
               {...form.register(`quizes.${index}.answer`)}
             />
@@ -169,7 +171,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                   form.getFieldState(`quizes.${index}.answer`).error
                     ?.message as any,
                   {
-                    maximum: 255,
+                    maximum: 500,
                     minimum: 3,
                   }
                 )}

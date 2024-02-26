@@ -4,7 +4,7 @@ import { getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
 import Navbar, { MainNavItem } from "@/components/nav-bar"
-import { isAuthenticated } from "@/lib/auth"
+import { getUser, isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
 
 type Props = {
@@ -15,6 +15,7 @@ async function MainLayout({ children }: Props) {
   const tUserDropdown = await getTranslations("UserDropdown")
   const tNav = await getTranslations("Navbar")
   const isAuth = isAuthenticated()
+  const user = getUser()
   const m = await getMessages()
   const menuItems: MenuItem[][] = [
     [
@@ -36,22 +37,41 @@ async function MainLayout({ children }: Props) {
     ],
     [
       {
-        label: tUserDropdown("classrooms"),
-        href: "/classrooms",
+        label: tUserDropdown("classrooms.index"),
+        children: [
+          {
+            label: tUserDropdown("classrooms.new"),
+            href: "/classrooms/create",
+            icon: "Plus",
+          },
+          {
+            label: tUserDropdown("classrooms.my_classrooms"),
+            href: "/classrooms",
+            icon: "School",
+          },
+        ],
       },
       {
-        label: tUserDropdown("invite"),
-        href: "/invite",
+        label: tUserDropdown("quizbank.index"),
+        children: [
+          {
+            label: tUserDropdown("quizbank.new"),
+            href: "/quiz/add",
+            icon: "Plus",
+          },
+          {
+            label: tUserDropdown("quizbank.my_quizbanks"),
+            href: "/quiz",
+            icon: "Icon",
+          },
+        ],
       },
     ],
     [
       {
-        label: tUserDropdown("faq"),
-        href: "/help",
-      },
-      {
         label: tUserDropdown("support"),
         href: "/support",
+        icon: "Support",
       },
     ],
   ]
@@ -89,6 +109,7 @@ async function MainLayout({ children }: Props) {
           items={mainNavbarItems}
           menuItems={menuItems}
           isAuthed={isAuth}
+          user={user}
         />
       </NextIntlClientProvider>
       {children}

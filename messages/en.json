@@ -261,9 +261,17 @@
     "profile": "Profile",
     "billing": "Billing",
     "settings": "Settings",
-    "classrooms": "Classrooms",
+    "classrooms": {
+      "index": "Classrooms",
+      "new": "New classroom",
+      "my_classrooms": "My classrooms"
+    },
+    "quizbank": {
+      "index": "Quiz bank",
+      "new": "New quiz bank",
+      "my_quizbanks": "My quiz banks"
+    },
     "invite": "Invite a friend",
-    "new_classroom": "New classroom",
     "faq": "FAQ",
     "support": "Support",
     "signout": "Sign out"
