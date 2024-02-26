@@ -98,12 +98,9 @@ function Navbar({
           className={buttonVariants({
             isIconOnly: true,
             variant: "flat",
-            className:
-              "bg-transparent px-0 py-0 hover:text-primary/70 [&_svg]:text-primary ",
-            size: "md",
           })}
         >
-          <Icons.Menu />
+          <Icons.Menu className="h-5 w-5 min-w-5" />
         </DrawerTrigger>
         <DrawerContent>
           <ul className="grid grid-cols-2 gap-4 px-4 py-8 [&_svg]:h-6 [&_svg]:w-6 [&_svg]:text-emerald-500">
