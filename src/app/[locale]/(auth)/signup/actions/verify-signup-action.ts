@@ -2,30 +2,34 @@
 
 import { revalidatePath } from "next/cache"
 
-import { setToken } from "@/lib/auth"
-import { VerifySignUpSchemaType } from "../vaidations/verify-sign-up-validate"
 import { getAPIServerURL } from "@/lib/utils"
+import { VerifySignUpSchemaType } from "../vaidations/verify-sign-up-validate"
 
 export const VerifySignUpAction = async (values: VerifySignUpSchemaType) => {
-  const URL = getAPIServerURL("/auth/verify")
+  const URL = getAPIServerURL("/auth/verify-email")
 
-  const options = {
+  const options: RequestInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(values),
+    cache: "no-cache",
   }
 
   return fetch(URL, options)
-    .then((response) => response.json())
+    .then(async (response) => {
+      const json = await response.json()
+      if (!response.ok) {
+        return Promise.reject(json)
+      }
+      return json
+    })
     .then((response) => {
-      setToken(response.token)
       revalidatePath("/")
       return {
         ok: true,
         message: response.message,
-        token: response.token,
       }
     })
     .catch((error) => {

@@ -106,7 +106,9 @@
     "form": {
       "title": "Nhập mã OTP",
       "submit": "Xác nhận"
-    }
+    },
+    "signup-success": "Tài khoản đã được xác thực",
+    "login": "Đăng nhập"
   },
   "Table": {
     "no_data": "Không có dữ liệu",

@@ -200,7 +200,9 @@
     "form": {
       "title": "Enter OTP Code",
       "submit": "Confirm"
-    }
+    },
+    "signup-success": "Your account has been verify 🩷",
+    "login": "Login now"
   },
   "ForgotPassword": {
     "title": "Forgot password? Do not worry",
