@@ -166,9 +166,6 @@ function Navbar({
           <Link href="/" className="flex items-center rounded-sm p-1.5">
             <Icons.Icon className="mr-2 h-6 w-6" />
             <span className="font-bold">{tIndex("title")}</span>
-            <h5 className="text-accent-500 ml-2 text-xs font-bold">
-              {user?.fullName}
-            </h5>
           </Link>
         </NavigationMenuLink>
       </NavigationMenuList>
