@@ -308,6 +308,24 @@
       }
     }
   },
+  "ViewQuizBank": {
+    "ViewFlashcard": {
+      "play_button": "Start learning",
+      "shuffle_button": "Toggle random",
+      "full_screen_button": "Full screen mode"
+    },
+    "ViewQuizzes": {
+      "term": "Terms in this bank",
+      "view_AI_answer": "View A.I answer",
+      "recommend_quiz_bank": "Students also view these"
+    },
+    "belong_to": "This quiz is belong to",
+    "author": {
+      "class_title": "Class",
+      "copy_button": "Copy",
+      "report_button": "Report"
+    }
+  },
   "Errors": {
     "index": "Error",
     "token-expire": "The url has been expire, please create another request",

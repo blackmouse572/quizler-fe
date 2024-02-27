@@ -1,6 +1,10 @@
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import { Metadata } from "next"
+import ViewQuizBank from "./components/view-quizbank"
+import { NextIntlClientProvider, useMessages } from "next-intl"
+import _ from "lodash"
+import { getMessages } from "next-intl/server"
 
 type QuizBankDetailPageProps = { params: { id: string } }
 
@@ -27,11 +31,27 @@ async function getQuizBankDetailPage(id: string) {
     },
   }
 }
-async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
+
+async function QuizBankDetailPageTemporary({
+  params,
+}: QuizBankDetailPageProps) {
   const { id } = params
 
   const { props } = await getQuizBankDetailPage(id)
-  return <div>{JSON.stringify(props.data)}</div>
+
+  return <QuizBankDetailPage data={props.data} />
+}
+
+function QuizBankDetailPage({ data }: any) {
+  const message = useMessages()
+
+  return (
+    <NextIntlClientProvider
+      messages={_.pick(message, "ViewQuizBank")}
+    >
+      <ViewQuizBank data={data} />
+    </NextIntlClientProvider>
+  )
 }
 
 export default QuizBankDetailPage
