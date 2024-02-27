@@ -4,7 +4,6 @@ import { Metadata } from "next"
 import ViewQuizBank from "./components/view-quizbank"
 import { NextIntlClientProvider, useMessages } from "next-intl"
 import _ from "lodash"
-import { getMessages } from "next-intl/server"
 
 type QuizBankDetailPageProps = { params: { id: string } }
 

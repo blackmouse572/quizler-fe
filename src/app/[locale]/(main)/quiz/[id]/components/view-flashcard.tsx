@@ -1,8 +1,6 @@
 "use client"
 
-import { useToast } from "@/components/ui/use-toast"
 import { useTranslations } from "next-intl"
-import { useRouter } from "next/navigation"
 import {
   Carousel,
   CarouselApi,
@@ -21,6 +19,12 @@ import {
 } from "@radix-ui/react-icons"
 import React from "react"
 import QuizBank from "@/types/QuizBank"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 type Props = {
   data: QuizBank
@@ -59,11 +63,11 @@ export default function ViewFlashcard({ data }: Props) {
         </div>
       </div>
 
-      <div className="flex gap-1 self-start mt-1.5 ml-72 text-xs font-medium leading-4 text-center whitespace-nowrap text-zinc-500 max-md:ml-2.5">
-        <div className="justify-center px-2 py-0.5 bg-white rounded-lg border border-solid shadow-sm aspect-[3.05] border-[color:var(--color-border,#E4E4E7)]">
+      <div className="ml-72 mt-1.5 flex gap-1 self-start whitespace-nowrap text-center text-xs font-medium leading-4 text-zinc-500 max-md:ml-2.5">
+        <div className="aspect-[3.05] justify-center rounded-lg border border-solid border-[color:var(--color-border,#E4E4E7)] bg-white px-2 py-0.5 shadow-sm">
           Biology
         </div>
-        <div className="justify-center px-2 py-0.5 bg-white rounded-lg border border-solid shadow-sm aspect-[3.05] border-[color:var(--color-border,#E4E4E7)]">
+        <div className="aspect-[3.05] justify-center rounded-lg border border-solid border-[color:var(--color-border,#E4E4E7)] bg-white px-2 py-0.5 shadow-sm">
           Biology
         </div>
       </div>
@@ -88,16 +92,31 @@ export default function ViewFlashcard({ data }: Props) {
 
         <div className="flex w-[840px] max-w-full justify-between gap-5 pr-5 max-md:flex-wrap">
           <div className="flex justify-between gap-3">
-            <Button title={i18n("ViewFlashcard.play_button")} variant="light">
-              <PlayIcon />
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="light" color={null}>
+                    <PlayIcon />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{i18n("ViewFlashcard.play_button")}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
-            <Button
-              title={i18n("ViewFlashcard.shuffle_button")}
-              variant="light"
-            >
-              <ShuffleIcon />
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="light" color={null}>
+                    <ShuffleIcon />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{i18n("ViewFlashcard.shuffle_button")}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
 
           <div className="flex justify-between gap-5 whitespace-nowrap text-xs font-semibold leading-4 text-black">
@@ -106,12 +125,18 @@ export default function ViewFlashcard({ data }: Props) {
             </div>
           </div>
 
-          <Button
-            title={i18n("ViewFlashcard.full_screen_button")}
-            variant="light"
-          >
-            <EnterFullScreenIcon />
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="light" color={null}>
+                  <EnterFullScreenIcon />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{i18n("ViewFlashcard.full_screen_button")}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </Carousel>
     </>
