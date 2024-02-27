@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -7,27 +8,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { useTranslations } from "next-intl"
-import Link from "next/link"
-import Otp from "@/components/ui/otp"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { useForm } from "react-hook-form"
+import { Form, FormControl, FormField, FormMessage } from "@/components/ui/form"
 import { Icons } from "@/components/ui/icons"
-import { useRouter, useSearchParams } from "next/navigation"
+import Otp from "@/components/ui/otp"
 import { useToast } from "@/components/ui/use-toast"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslations } from "next-intl"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 import { VerifySignUpAction } from "../actions/verify-signup-action"
 import VerifySignUpSchema, {
   VerifySignUpSchemaType,
 } from "../vaidations/verify-sign-up-validate"
-import { zodResolver } from "@hookform/resolvers/zod"
 
 interface VerifyRegisterProps {
   initialValues: VerifySignUpSchemaType
@@ -57,14 +50,24 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
     if (!result?.ok) {
       setIsLoading(false)
       return toast({
-        title: "Something went wrong.",
+        title: errorsI18n("index"),
         description: errorsI18n(result.message),
         variant: "flat",
         color: "danger",
       })
+    } else {
+      setIsLoading(false)
+      toast({
+        color: "success",
+        duration: 3000,
+        title: t("signup-success"),
+        action: (
+          <Button variant={"flat"} onClick={() => router.push("/login")}>
+            {t("login")}
+          </Button>
+        ),
+      })
     }
-
-    return router.push("/")
   }
 
   return (
@@ -74,12 +77,12 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
         <CardDescription className="text-sm text-neutral-500">
           {t.rich("description", {
             resent: (children) => (
-              <Link
+              <button
                 className="font-medium underline opacity-75 hover:opacity-100"
-                href="/"
+                onClick={() => alert("Ok")} //TODO: implement
               >
                 <b>{children}</b>
-              </Link>
+              </button>
             ),
             br: () => <br />,
           })}
@@ -96,11 +99,19 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
               name="token"
               render={({ field }) => {
                 return (
-                  <div className="mt-2 flex justify-center">
+                  <div className="mt-2 space-y-4">
                     <FormControl>
-                      <Otp {...field} value={otp} onChange={handleOtpChange} />
+                      <Otp
+                        {...field}
+                        className="flex justify-around"
+                        value={otp}
+                        onChange={(value) => {
+                          handleOtpChange(value)
+                          field.onChange(value)
+                        }}
+                      />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-center" />
                   </div>
                 )
               }}

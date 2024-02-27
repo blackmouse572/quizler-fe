@@ -23,6 +23,7 @@ const Otp = ({
             className,
             inputClassName
           )}
+          maxLength={1}
           {...props}
         />
       )

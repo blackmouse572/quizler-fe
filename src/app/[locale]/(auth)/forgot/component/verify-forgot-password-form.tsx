@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -7,21 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { useTranslations } from "next-intl"
-import Otp from "@/components/ui/otp"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormMessage } from "@/components/ui/form"
-import { useForm } from "react-hook-form"
 import { Icons } from "@/components/ui/icons"
-import { useRouter } from "next/navigation"
+import Otp from "@/components/ui/otp"
 import { useToast } from "@/components/ui/use-toast"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { ResentEmailAction } from "../actions/resend-email-action"
+import { VerifyForgotPasswordAction } from "../actions/verify-forgot-password-action"
 import VerifyForgotPasswordSchema, {
   VerifyForgotPasswordSchemaType,
 } from "../validations/verify-forgot-password-validate"
-import { VerifyForgotPasswordAction } from "../actions/verify-forgot-password-action"
-import { ResentEmailAction } from "../actions/resend-email-action"
-import { zodResolver } from "@hookform/resolvers/zod"
 
 export default function VerifyForgotPasswordForm({ email }: { email: string }) {
   const t = useTranslations("VerifyForgotPassword")
@@ -121,7 +121,7 @@ export default function VerifyForgotPasswordForm({ email }: { email: string }) {
                         onChange={handleOtpChange}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="w-full" />
                   </div>
                 )
               }}
