@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import QuizBank from "@/types/QuizBank"
 import { useTranslations } from "next-intl"
-import Image from "next/image"
 import {
   Tooltip,
   TooltipContent,

@@ -24,6 +24,8 @@ async function getQuizBankDetailPage(id: string) {
   const url = getAPIServerURL(`/quizbank/${id}`)
   const res = await fetch(url)
   const data = (await res.json()) as QuizBank
+  console.log(data)
+  
   return {
     props: {
       data,
@@ -43,6 +45,7 @@ async function QuizBankDetailPageTemporary({
 
 function QuizBankDetailPage({ data }: any) {
   const message = useMessages()
+  // console.log(data)
 
   return (
     <NextIntlClientProvider
