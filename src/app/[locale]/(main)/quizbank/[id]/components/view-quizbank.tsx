@@ -7,15 +7,18 @@ import ViewQuizzes from "./view-quizzes"
 import RecommendQuizBank from "./recommend-quizbank"
 
 type Props = {
-  data: QuizBank
+  quizBankData: QuizBank
+  quizData: {}
 }
 
-function ViewQuizBank({ data }: Props) {
+function ViewQuizBank({ quizBankData, quizData }: Props) {
+  // console.log("aaa: " + JSON.stringify(quizBankData))
+  // console.log("bbb: " + JSON.stringify(quizData))
   return (
     <div className="flex flex-col items-center rounded-3xl border border-solid">
-      <ViewFlashcard data={data} />
-      <ViewQuizzes data={data} />
-      <RecommendQuizBank data={data} />
+      <ViewFlashcard quizBankData={quizBankData} quizData={quizData} />
+      <ViewQuizzes quizData={quizData} />
+      <RecommendQuizBank quizBankData={quizBankData} />
     </div>
   )
 }

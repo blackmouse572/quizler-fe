@@ -2,8 +2,9 @@ import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import { Metadata } from "next"
 import ViewQuizBank from "./components/view-quizbank"
-import { NextIntlClientProvider, useMessages } from "next-intl"
+import { NextIntlClientProvider } from "next-intl"
 import _ from "lodash"
+import { getMessages } from "next-intl/server"
 
 type QuizBankDetailPageProps = { params: { id: string } }
 
@@ -12,46 +13,35 @@ export async function generateMetadata({
 }: QuizBankDetailPageProps): Promise<Metadata> {
   const { id } = params
 
-  const { props } = await getQuizBankDetailPage(id)
+  const { quizBankData } = await getQuizBankDetailPage(id)
 
   return {
-    title: props.data.bankName,
-    description: props.data.description,
+    title: quizBankData.bankName,
+    description: quizBankData.description,
   }
 }
 
 async function getQuizBankDetailPage(id: string) {
-  const url = getAPIServerURL(`/quizbank/${id}`)
-  const res = await fetch(url)
-  const data = (await res.json()) as QuizBank
-  console.log(data)
-  
-  return {
-    props: {
-      data,
-    },
-  }
+  const quizBankUrl = getAPIServerURL(`/quizbank/${id}`)
+  const quizUrl = getAPIServerURL(`/quiz/${id}`)
+  const quizBankRes = await fetch(quizBankUrl)
+  const quizRes = await fetch(quizUrl)
+
+  const quizBankData = (await quizBankRes.json()) as QuizBank
+  const quizData = await quizRes.json()
+
+  return { quizBankData, quizData }
 }
 
-async function QuizBankDetailPageTemporary({
-  params,
-}: QuizBankDetailPageProps) {
+async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
+  const message = await getMessages()
   const { id } = params
 
-  const { props } = await getQuizBankDetailPage(id)
-
-  return <QuizBankDetailPage data={props.data} />
-}
-
-function QuizBankDetailPage({ data }: any) {
-  const message = useMessages()
-  // console.log(data)
+  const { quizBankData, quizData } = await getQuizBankDetailPage(id)
 
   return (
-    <NextIntlClientProvider
-      messages={_.pick(message, "ViewQuizBank")}
-    >
-      <ViewQuizBank data={data} />
+    <NextIntlClientProvider messages={_.pick(message, "ViewQuizBank")}>
+      <ViewQuizBank quizBankData={quizBankData} quizData={quizData} />
     </NextIntlClientProvider>
   )
 }

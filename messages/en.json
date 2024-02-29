@@ -311,6 +311,7 @@
   "ViewQuizBank": {
     "ViewFlashcard": {
       "play_button": "Start learning",
+      "pause_button": "Pause flashcard",
       "shuffle_button": "Toggle random",
       "full_screen_button": "Full screen mode"
     },
@@ -319,7 +320,7 @@
       "view_AI_answer": "View A.I answer",
       "recommend_quiz_bank": "Students also view these"
     },
-    "belong_to": "This quiz is belong to",
+    "belong_to": "This quizbank is belong to",
     "author": {
       "class_title": "Class",
       "copy_button": "Copy",

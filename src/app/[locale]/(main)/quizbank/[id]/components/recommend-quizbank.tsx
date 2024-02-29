@@ -10,10 +10,10 @@ import { CopyIcon, InfoCircledIcon } from "@radix-ui/react-icons"
 import QuizBank from "@/types/QuizBank"
 
 type Props = {
-  data: QuizBank
+  quizBankData: QuizBank
 }
 
-export default function RecommendQuizBank({ data }: Props) {
+export default function RecommendQuizBank({ quizBankData }: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
   return (

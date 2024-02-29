@@ -263,6 +263,25 @@
     "support": "Hỗ trợ",
     "signout": "Đăng xuất"
   },
+  "ViewQuizBank": {
+    "ViewFlashcard": {
+      "play_button": "Bắt đầu học",
+      "pause_button": "Tạm dừng thẻ ghi nhớ",
+      "shuffle_button": "Trộn thẻ",
+      "full_screen_button": "Chế độ toàn màn hình"
+    },
+    "ViewQuizzes": {
+      "term": "Thuật ngữ trong học phần này",
+      "view_AI_answer": "Xem câu trả lời của A.I",
+      "recommend_quiz_bank": "Học sinh cũng đã xem các học phần"
+    },
+    "belong_to": "Học phần này thuộc về",
+    "author": {
+      "class_title": "Lớp",
+      "copy_button": "Sao chép",
+      "report_button": "Báo cáo"
+    }
+  },
   "NotFound": {
     "title": "Bạn có vẻ đang đi lạc?",
     "message": "Trang bạn tìm kiếm có vẻ như đã bị chấm dứt hoặc không tồn tại 🥺🥺",
