@@ -33,6 +33,7 @@ const buttonVariants = cva(
         md: "h-9 px-4 py-2 [&_svg]:h-5 [&_svg]:w-5",
         sm: "h-8 rounded-md px-3 text-xs [&_svg]:h-4 [&_svg]:w-4",
         lg: "h-10 rounded-md px-8 [&_svg]:h-6 [&_svg]:w-6",
+        icon: "",
       },
       isIconOnly: {
         true: "aspect-square p-0",
