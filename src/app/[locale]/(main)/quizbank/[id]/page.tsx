@@ -24,8 +24,11 @@ export async function generateMetadata({
 async function getQuizBankDetailPage(id: string) {
   const quizBankUrl = getAPIServerURL(`/quizbank/${id}`)
   const quizUrl = getAPIServerURL(`/quiz/${id}`)
-  const quizBankRes = await fetch(quizBankUrl)
-  const quizRes = await fetch(quizUrl)
+
+  const [quizBankRes, quizRes] = await Promise.all([
+    fetch(quizBankUrl),
+    fetch(quizUrl)
+  ]);
 
   const quizBankData = (await quizBankRes.json()) as QuizBank
   const quizData = await quizRes.json()

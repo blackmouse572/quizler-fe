@@ -138,6 +138,9 @@
       }
     }
   },
+  "Footer": {
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
+  },
   "SignIn": {
     "title": "Welcome back!",
     "descritpion": "What if you forgot<forgot> your password?</forgot> Or you need<need> an account? </need>",
@@ -313,7 +316,9 @@
       "play_button": "Start learning",
       "pause_button": "Pause flashcard",
       "shuffle_button": "Toggle random",
-      "full_screen_button": "Full screen mode"
+      "full_screen_button": "Full screen mode",
+      "slide": "Slides",
+      "of": "of"
     },
     "ViewQuizzes": {
       "term": "Terms in this bank",
@@ -323,6 +328,7 @@
     "belong_to": "This quizbank is belong to",
     "author": {
       "class_title": "Class",
+      "of": "of",
       "copy_button": "Copy",
       "report_button": "Report"
     }

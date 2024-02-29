@@ -23,7 +23,6 @@ import QuizBank from "@/types/QuizBank"
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import Autoplay from "embla-carousel-autoplay"
@@ -37,7 +36,7 @@ export default function ViewFlashcard({ quizBankData, quizData }: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
   const [api, setApi] = useState<CarouselApi>()
-  const plugin = useRef(Autoplay({ stopOnInteraction: true, }))
+  const plugin = useRef(Autoplay({ stopOnInteraction: true }))
 
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
@@ -142,55 +141,49 @@ export default function ViewFlashcard({ quizBankData, quizData }: Props) {
 
       <div className="flex w-[840px] max-w-full justify-between gap-5 pr-5 max-md:flex-wrap">
         <div className="flex justify-between gap-3">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={handleButtonClick}
-                  variant="light"
-                  color={null}
-                >
-                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{isPlaying ? i18n("ViewFlashcard.pause_button") : i18n("ViewFlashcard.play_button")}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={handleButtonClick} variant="light" color={null}>
+                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                {isPlaying
+                  ? i18n("ViewFlashcard.pause_button")
+                  : i18n("ViewFlashcard.play_button")}
+              </p>
+            </TooltipContent>
+          </Tooltip>
 
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="light" color={null}>
-                  <ShuffleIcon />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{i18n("ViewFlashcard.shuffle_button")}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="light" color={null}>
+                <ShuffleIcon />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{i18n("ViewFlashcard.shuffle_button")}</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
 
         <div className="flex justify-between gap-5 whitespace-nowrap text-xs font-semibold leading-4 text-black">
           <div className="my-auto">
-            Slide {current} of {count}
+            {i18n('ViewFlashcard.slide')} {current} {i18n('ViewFlashcard.of')} {count}
           </div>
         </div>
 
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="light" color={null}>
-                <EnterFullScreenIcon />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{i18n("ViewFlashcard.full_screen_button")}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="light" color={null}>
+              <EnterFullScreenIcon />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{i18n("ViewFlashcard.full_screen_button")}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </>
   )

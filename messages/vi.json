@@ -29,6 +29,9 @@
       }
     }
   },
+  "Footer": {
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
+  },
   "SignIn": {
     "title": "Chào mừng trở lại!",
     "descritpion": "Bạn quên<forgot> mật khẩu?</forgot> Hoặc bạn cần<need> một tài khoản?</need>",
@@ -268,7 +271,9 @@
       "play_button": "Bắt đầu học",
       "pause_button": "Tạm dừng thẻ ghi nhớ",
       "shuffle_button": "Trộn thẻ",
-      "full_screen_button": "Chế độ toàn màn hình"
+      "full_screen_button": "Chế độ toàn màn hình",
+      "slide": "Trang",
+      "of": "của"
     },
     "ViewQuizzes": {
       "term": "Thuật ngữ trong học phần này",
@@ -277,7 +282,8 @@
     },
     "belong_to": "Học phần này thuộc về",
     "author": {
-      "class_title": "Lớp",
+      "class_title": "Lớp học",
+      "of": "của",
       "copy_button": "Sao chép",
       "report_button": "Báo cáo"
     }
