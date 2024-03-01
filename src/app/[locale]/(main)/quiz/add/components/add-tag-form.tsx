@@ -12,7 +12,7 @@ type AddTagFormProps = {
 }
 function AddTagForm({ initialValues, onTagChange }: AddTagFormProps) {
   const [tags, setTags] = useState(initialValues || [])
-  const i18n = useTranslations("AddQuiz.form")
+  const i18n = useTranslations("EditQuiz.form")
   const error18n = useTranslations("Validations.errors")
   const { register, setError, formState, handleSubmit, setValue, ...form } =
     useForm({

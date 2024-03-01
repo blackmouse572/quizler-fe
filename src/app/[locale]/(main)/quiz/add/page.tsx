@@ -1,7 +1,10 @@
 import _ from "lodash"
 import { NextIntlClientProvider, useMessages, useTranslations } from "next-intl"
 import { z } from "zod"
-import AddQuizbankForm, { AddQuizbank } from "./components/add-quizbank-form"
+import AddQuizbankForm, {
+  AddQuizbank
+} from "./components/add-quizbank-form"
+import { EQuizBankAction } from "@/types"
 
 function AddQuizbank() {
   const message = useMessages()
@@ -15,13 +18,16 @@ function AddQuizbank() {
       },
     ],
     tags: [],
-    visibility: "public",
+    visibility: "Public",
   }
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "AddQuiz", "Errors")}
+      messages={_.pick(message, "Validations", "EditQuiz", "Errors")}
     >
-      <AddQuizbankForm initialValues={initialValues} />
+      <AddQuizbankForm
+        initialValues={initialValues}
+        action={EQuizBankAction.Add}
+      />
     </NextIntlClientProvider>
   )
 }

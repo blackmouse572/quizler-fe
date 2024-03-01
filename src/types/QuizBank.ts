@@ -10,3 +10,10 @@ interface QuizBank {
 }
 
 export default QuizBank
+
+
+export enum EQuizBankAction {
+  None = 0,
+  Add = 1,
+  Edit = 2,
+}

@@ -278,9 +278,10 @@
     "support": "Support",
     "signout": "Sign out"
   },
-  "AddQuiz": {
+  "EditQuiz": {
     "form": {
-      "title": "Add new quiz bank",
+      "addTitle": "Add new quiz bank",
+      "editTitle": "Edit quiz bank",
       "name": {
         "label": "Name",
         "placeholder": "Enter the name of the quiz"
@@ -297,6 +298,9 @@
       "public": {
         "label": "Public",
         "description": "Anyone can see and use this quiz"
+      },
+      "quiz": {
+        "new": "Add a new quiz"
       },
       "term": {
         "label": "Term",
