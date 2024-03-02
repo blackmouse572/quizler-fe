@@ -69,14 +69,14 @@ function Navbar({
       return (
         <>
           <NavigationMenuItem asChild>
-            <Link href="signup">
+            <Link href="/signup">
               <Button variant="default" color={"primary"}>
                 {tNav("signup")}
               </Button>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem asChild>
-            <Link href="login">
+            <Link href="/login">
               <Button
                 variant="default"
                 className="shadow-none hover:bg-slate-300"
