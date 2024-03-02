@@ -256,9 +256,18 @@
     "profile": "Hồ sơ",
     "billing": "Thanh toán",
     "settings": "Cài đặt",
-    "classrooms": "Lớp học",
-    "invite": "Mời bạn bè",
     "new_classroom": "Tạo lớp học mới",
+    "classrooms": {
+      "index": "Lớp học",
+      "new": "Tạo lớp học mới",
+      "my_classrooms": "Lớp học của tôi"
+    },
+    "quizbank": {
+      "index": "Quizbank",
+      "new": "Tạo quizbank mới",
+      "my_quizbanks": "Quizbank của tôi"
+    },
+    "invite": "Mời bạn bè",
     "faq": "Câu hỏi thường gặp",
     "support": "Hỗ trợ",
     "signout": "Đăng xuất"
