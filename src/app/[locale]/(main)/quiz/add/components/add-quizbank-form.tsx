@@ -84,9 +84,11 @@ const addQuizbankSchema = z.object({
       })
       .default({ question: "", answer: "" })
   ),
-  explaination: z.string({
-    required_error: "errors.invalid_type_received_undefined",
-  }).optional()
+  explaination: z
+    .string({
+      required_error: "errors.invalid_type_received_undefined",
+    })
+    .optional(),
 })
 
 export type AddQuizbank = z.infer<typeof addQuizbankSchema>
@@ -98,15 +100,17 @@ type AddQuizbankFormProps = {
   /**
    * needed when action is edit
    */
-  quizBankId?: string,
+  quizBankId?: string
 }
 function AddQuizbankForm({
   initialValues,
   action = EQuizBankAction.Add,
-  quizBankId
+  quizBankId,
 }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
-  const i18n = useTranslations("EditQuiz")
+  const i18n = useTranslations(
+    +action === +EQuizBankAction.Add ? "AddQuiz" : "EditQuiz"
+  )
   const errorI18n = useTranslations("Errors")
   const router = useRouter()
   const { toast } = useToast()
@@ -140,7 +144,7 @@ function AddQuizbankForm({
       if (+action === +EQuizBankAction.Add) {
         res = await addQuizBankAction(value)
       } else {
-        res = await editQuizBankAction(value, quizBankId?.toString() ?? '')
+        res = await editQuizBankAction(value, quizBankId?.toString() ?? "")
       }
       onSubmitCallback(res)
     },
@@ -160,12 +164,6 @@ function AddQuizbankForm({
       remove(index)
     },
     [remove]
-  )
-
-  const formTitle = useMemo(
-    () =>
-      i18n(action === EQuizBankAction.Add ? "form.addTitle" : "form.editTitle"),
-    [action, i18n]
   )
 
   const renderItems = useMemo(() => {
@@ -254,9 +252,7 @@ function AddQuizbankForm({
           className="space-y-8"
         >
           <div className="my-4 flex items-center justify-between border-b border-primary">
-            <h3 className="text-lg font-bold">
-              {formTitle}
-            </h3>
+            <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
             <Tooltip delayDuration={200}>
               <TooltipTrigger asChild>
                 <Button
@@ -274,7 +270,7 @@ function AddQuizbankForm({
                 </Button>
               </TooltipTrigger>
               <TooltipContent className="z-10">
-                {formTitle}
+                {i18n("form.title")}
               </TooltipContent>
             </Tooltip>
           </div>
