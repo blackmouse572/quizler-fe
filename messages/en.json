@@ -278,10 +278,42 @@
     "support": "Support",
     "signout": "Sign out"
   },
+  "AddQuiz": {
+    "form": {
+      "title": "Add new quiz bank",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the name of the quiz"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the description of the quiz"
+      },
+      "submit": "Add",
+      "tags": {
+        "label": "Tags",
+        "placeholder": "Enter the tags of the quiz"
+      },
+      "public": {
+        "label": "Public",
+        "description": "Anyone can see and use this quiz"
+      },
+      "quiz": {
+        "new": "Add a new quiz"
+      },
+      "term": {
+        "label": "Term",
+        "placeholder": "Enter the term of the quiz"
+      },
+      "definition": {
+        "label": "Definition",
+        "placeholder": "Enter the definition of the quiz"
+      }
+    }
+  },
   "EditQuiz": {
     "form": {
-      "addTitle": "Add new quiz bank",
-      "editTitle": "Edit quiz bank",
+      "title": "Edit quiz bank",
       "name": {
         "label": "Name",
         "placeholder": "Enter the name of the quiz"

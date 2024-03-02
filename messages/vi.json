@@ -269,13 +269,45 @@
     "quizbank": {
       "index": "Ngân hàng câu hỏi",
       "new": "Câu hỏi mới",
-      "my_quizbanks": "Ngân hnagf câu hỏi của tôi"
+      "my_quizbanks": "Ngân hàng câu hỏi của tôi"
+    }
+  },
+  "AddQuiz": {
+    "form": {
+      "title": "Tạo ngân hàng câu hỏi mới",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên ngân hàng câu hỏi"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả ngân hàng câu hỏi"
+      },
+      "submit": "Thêm",
+      "tags": {
+        "label": "Tags",
+        "placeholder": "Nhập tags ngân hàng câu hỏi"
+      },
+      "public": {
+        "label": "Công khai",
+        "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
+      },
+      "quiz": {
+        "new": "Thêm câu hỏi mới"
+      },
+      "term": {
+        "label": "Thuật ngữ",
+        "placeholder": "Nhập thuật ngữ"
+      },
+      "definition": {
+        "label": "Định nghĩa",
+        "placeholder": "Nhập định nghĩa"
+      }
     }
   },
   "EditQuiz": {
     "form": {
-      "addTitle": "Tạo ngân hàng câu hỏi mới",
-      "editTitle": "Chỉnh sửa ngân hàng câu hỏi",
+      "itle": "Chỉnh sửa ngân hàng câu hỏi",
       "name": {
         "label": "Tên",
         "placeholder": "Nhập tên ngân hàng câu hỏi"
