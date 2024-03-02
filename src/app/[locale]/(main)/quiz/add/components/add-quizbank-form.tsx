@@ -84,6 +84,9 @@ const addQuizbankSchema = z.object({
       })
       .default({ question: "", answer: "" })
   ),
+  explaination: z.string({
+    required_error: "errors.invalid_type_received_undefined",
+  }).optional()
 })
 
 export type AddQuizbank = z.infer<typeof addQuizbankSchema>
@@ -134,7 +137,7 @@ function AddQuizbankForm({
   const onSubmit = useCallback(
     async (value: AddQuizbank) => {
       let res
-      if (action === EQuizBankAction.Add) {
+      if (+action === +EQuizBankAction.Add) {
         res = await addQuizBankAction(value)
       } else {
         res = await editQuizBankAction(value, quizBankId?.toString() ?? '')

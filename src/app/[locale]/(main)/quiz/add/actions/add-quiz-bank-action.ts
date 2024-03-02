@@ -54,9 +54,14 @@ export const addQuizBankAction = (data: AddQuizbank): Promise<TAPIResult> => {
 export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promise<TAPIResult> => { 
   const url = getAPIServerURL(`/quizbank/${quizBankId}`)
   const { token } = getToken()
-  const body = JSON.stringify(data)
+
+  const editData: Partial<AddQuizbank> = {...data}
+  delete editData.tags
+
+  console.log(editData)
+  const body = JSON.stringify(editData)
   const options: RequestInit = {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -67,6 +72,7 @@ export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promi
   return fetch(url, { ...options, body })
     .then(async (res) => {
       const json = await res.json()
+      console.log("json:", json)
       if (!res.ok) {
         throw new Error(json)
       }
@@ -80,6 +86,8 @@ export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promi
       }
     })
     .catch((error) => {
+      debugger;
+      console.log("Error:", error.toString())
       return {
         ok: false,
         message: error.message as string,

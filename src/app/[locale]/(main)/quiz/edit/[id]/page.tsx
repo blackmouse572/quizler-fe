@@ -4,7 +4,10 @@ import AddQuizbankForm, {
   AddQuizbank,
 } from "../../add/components/add-quizbank-form"
 import { use } from "react"
-import { getQuizBankDetailPage } from "@/services/quiz.service"
+import {
+  getQuizBankDetailPage,
+  getQuizByQuizBankId,
+} from "@/services/quiz.service"
 import { EQuizBankAction } from "@/types"
 
 type QuizBankDetailPageProps = {
@@ -14,41 +17,18 @@ type QuizBankDetailPageProps = {
 function EditQuizbank({ params }: QuizBankDetailPageProps) {
   const { id } = params
   const message = useMessages()
-  // const [initialValues, setInitialValues] = useState<AddQuizbank>({
-  //   bankName: "",
-  //   description: "",
-  //   quizes: [
-  //     {
-  //       question: "",
-  //       answer: "",
-  //     },
-  //   ],
-  //   tags: [],
-  //   visibility: "public",
-  // })
 
   const { props } = use(getQuizBankDetailPage(id))
   const data = props.data
+  const { data: quizes } = use(getQuizByQuizBankId(id))
+
   const initialValues: AddQuizbank = {
     bankName: data.bankName,
     description: data.description,
-    quizes: data.quizes,
+    quizes: quizes ?? [],
     tags: [],
     visibility: data.visibility,
   }
-
-  // useEffect(() => {
-  //   const data = props.data
-  //   const newInitialValue: AddQuizbank = {
-  //     bankName: data.bankName,
-  //     description: data.description,
-  //     quizes: data.quizes,
-  //     tags: [],
-  //     visibility: data.visibility,
-  //   }
-
-  //   setInitialValues(newInitialValue)
-  // }, [props])
 
   return (
     <NextIntlClientProvider

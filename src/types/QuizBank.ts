@@ -9,6 +9,16 @@ interface QuizBank {
   updated: string | null
 }
 
+export interface Quiz {
+  id: number,
+  quizBankId: number,
+  question: string,
+  answer: string,
+  explaination?: string,
+  created: string,
+  updated?: string
+}
+
 export default QuizBank
 
 
