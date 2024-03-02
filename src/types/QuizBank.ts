@@ -9,6 +9,11 @@ interface QuizBank {
   updated: string | null
 }
 
+export type TAPIQuizResponse = {
+  metadata: any,
+  data: Quiz[]
+}
+
 export interface Quiz {
   id: number,
   quizBankId: number,

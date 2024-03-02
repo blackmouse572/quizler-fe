@@ -20,12 +20,12 @@ function EditQuizbank({ params }: QuizBankDetailPageProps) {
 
   const { props } = use(getQuizBankDetailPage(id))
   const data = props.data
-  const { data: quizes } = use(getQuizByQuizBankId(id))
+  const { data: quizesData } = use(getQuizByQuizBankId(id))
 
   const initialValues: AddQuizbank = {
     bankName: data.bankName,
     description: data.description,
-    quizes: quizes ?? [],
+    quizes: quizesData?.data ?? [],
     tags: [],
     visibility: data.visibility,
   }

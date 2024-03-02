@@ -1,5 +1,5 @@
 import { getAPIServerURL } from "@/lib/utils"
-import QuizBank, { Quiz } from "@/types/QuizBank"
+import QuizBank, { TAPIQuizResponse } from "@/types/QuizBank"
 
 export async function getQuizBankDetailPage(id: string) {
   const url = getAPIServerURL(`/quizbank/${id}`)
@@ -21,7 +21,7 @@ export async function getQuizByQuizBankId(id: string) {
       if (!res.ok) {
         throw new Error(json)
       }
-      return json as Quiz[]
+      return json as TAPIQuizResponse
     })
     .then((res) => {
       return {

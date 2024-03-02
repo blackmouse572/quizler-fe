@@ -55,11 +55,8 @@ export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promi
   const url = getAPIServerURL(`/quizbank/${quizBankId}`)
   const { token } = getToken()
 
-  const editData: Partial<AddQuizbank> = {...data}
-  delete editData.tags
-
-  console.log(editData)
-  const body = JSON.stringify(editData)
+  console.log(data)
+  const body = JSON.stringify(data)
   const options: RequestInit = {
     method: "PUT",
     headers: {
