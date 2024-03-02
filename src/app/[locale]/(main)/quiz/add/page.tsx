@@ -22,7 +22,7 @@ function AddQuizbank() {
   }
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "EditQuiz", "Errors")}
+      messages={_.pick(message, "Validations", "AddQuiz", "QuizForm", "Errors")}
     >
       <AddQuizbankForm
         initialValues={initialValues}

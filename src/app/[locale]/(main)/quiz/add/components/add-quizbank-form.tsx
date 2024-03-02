@@ -108,9 +108,8 @@ function AddQuizbankForm({
   quizBankId,
 }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
-  const i18n = useTranslations(
-    +action === +EQuizBankAction.Add ? "AddQuiz" : "EditQuiz"
-  )
+  const i18Term = +action === +EQuizBankAction.Add ? "AddQuiz" : "EditQuiz"
+  const i18n = useTranslations(i18Term)
   const errorI18n = useTranslations("Errors")
   const router = useRouter()
   const { toast } = useToast()
@@ -356,6 +355,7 @@ function AddQuizbankForm({
         <AddTagForm
           initialValues={initialValues?.tags}
           onTagChange={onTagChange}
+          action={action}
         />
         <div className="space-y-4">
           {renderItems}

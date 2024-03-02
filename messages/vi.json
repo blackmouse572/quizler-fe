@@ -272,9 +272,9 @@
       "my_quizbanks": "Ngân hàng câu hỏi của tôi"
     }
   },
-  "AddQuiz": {
+  "EditQuiz": {
     "form": {
-      "title": "Tạo ngân hàng câu hỏi mới",
+      "title": "Chỉnh sửa ngân hàng câu hỏi",
       "name": {
         "label": "Tên",
         "placeholder": "Nhập tên ngân hàng câu hỏi"
@@ -305,9 +305,9 @@
       }
     }
   },
-  "EditQuiz": {
+  "AddQuiz": {
     "form": {
-      "itle": "Chỉnh sửa ngân hàng câu hỏi",
+      "title": "Tạo ngân hàng câu hỏi mới",
       "name": {
         "label": "Tên",
         "placeholder": "Nhập tên ngân hàng câu hỏi"
