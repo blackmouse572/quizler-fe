@@ -15,7 +15,13 @@ import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
+import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -55,20 +61,20 @@ const addQuizbankSchema = z.object({
           .string({
             required_error: "errors.invalid_type_received_undefined",
           })
-          .min(3, {
+          .min(1, {
             message: "errors.too_small.string.inclusive",
           })
-          .max(500, {
+          .max(1000, {
             message: "errors.too_big.string.inclusive",
           }),
         answer: z
           .string({
             required_error: "errors.invalid_type_received_undefined",
           })
-          .min(3, {
+          .min(1, {
             message: "errors.too_small.string.inclusive",
           })
-          .max(500, {
+          .max(1000, {
             message: "errors.too_big.string.inclusive",
           }),
       })
@@ -131,16 +137,22 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
     return fields.map((item, index) => (
       <Card key={item.question + item.id} className="relative">
         <Icons.X
-          className="absolute right-4 top-4 h-4 w-4 cursor-pointer text-neutral-500"
+          className={cn(
+            "absolute right-4 top-4 h-4 w-4 cursor-pointer text-neutral-500",
+            {
+              hidden: index === 0,
+            }
+          )}
           onClick={() => removeQuiz(index)}
         />
         <CardContent className="flex justify-evenly gap-2 pt-6">
           <FormItem className="w-full">
-            <Label>{i18n("form.term.label")}</Label>
+            <Label required>{i18n("form.term.label")}</Label>
             <Textarea
+              required
               placeholder={i18n("form.term.placeholder")}
               rows={5}
-              maxLength={500}
+              maxLength={1000}
               {...form.register(`quizes.${index}.question`)}
             />
             {form.getFieldState(`quizes.${index}.question`).error && (
@@ -149,19 +161,19 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                   form.getFieldState(`quizes.${index}.question`).error
                     ?.message as any,
                   {
-                    maximum: 500,
-                    minimum: 3,
+                    maximum: 1000,
+                    minimum: 1,
                   }
                 )}
               </FormMessage>
             )}
           </FormItem>
           <FormItem className="w-full">
-            <Label>{i18n("form.definition.label")}</Label>
+            <Label required>{i18n("form.definition.label")}</Label>
             <Textarea
               rows={5}
               key={item.question + index}
-              maxLength={500}
+              maxLength={1000}
               placeholder={i18n("form.definition.placeholder")}
               {...form.register(`quizes.${index}.answer`)}
             />
@@ -171,8 +183,8 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                   form.getFieldState(`quizes.${index}.answer`).error
                     ?.message as any,
                   {
-                    maximum: 500,
-                    minimum: 3,
+                    maximum: 1000,
+                    minimum: 1,
                   }
                 )}
               </FormMessage>
@@ -181,7 +193,8 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
         </CardContent>
       </Card>
     ))
-  }, [errori18n, fields, form, i18n, removeQuiz])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errori18n, fields, form, i18n, removeQuiz, form.formState])
 
   const renderAddButton = useMemo(() => {
     return (
@@ -209,19 +222,26 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
         >
           <div className="my-4 flex items-center justify-between border-b border-primary">
             <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
-            <Button
-              type="submit"
-              variant={"flat"}
-              isIconOnly
-              color={"accent"}
-              disabled={form.formState.isSubmitting}
-            >
-              {form.formState.isSubmitting ? (
-                <Icons.Loader className="animate-spin" />
-              ) : (
-                <Icons.Checked />
-              )}
-            </Button>
+            <Tooltip>
+              <TooltipContent>
+                <p>{i18n("form.submit")}</p>
+              </TooltipContent>
+              <TooltipTrigger asChild>
+                <Button
+                  type="submit"
+                  variant={"flat"}
+                  isIconOnly
+                  color={"accent"}
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? (
+                    <Icons.Loader className="animate-spin" />
+                  ) : (
+                    <Icons.Checked />
+                  )}
+                </Button>
+              </TooltipTrigger>
+            </Tooltip>
           </div>
           <FormField
             control={form.control}
