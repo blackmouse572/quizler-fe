@@ -55,7 +55,6 @@ export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promi
   const url = getAPIServerURL(`/quizbank/${quizBankId}`)
   const { token } = getToken()
 
-  console.log(data)
   const body = JSON.stringify(data)
   const options: RequestInit = {
     method: "PUT",
@@ -69,7 +68,6 @@ export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promi
   return fetch(url, { ...options, body })
     .then(async (res) => {
       const json = await res.json()
-      console.log("json:", json)
       if (!res.ok) {
         throw new Error(json)
       }
@@ -84,7 +82,6 @@ export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promi
     })
     .catch((error) => {
       debugger;
-      console.log("Error:", error.toString())
       return {
         ok: false,
         message: error.message as string,

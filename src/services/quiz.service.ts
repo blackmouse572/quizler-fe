@@ -17,7 +17,6 @@ export async function getQuizByQuizBankId(id: string) {
   return fetch(url)
     .then(async (res) => {
       const json = await res.json()
-      console.log("json:", json)
       if (!res.ok) {
         throw new Error(json)
       }
@@ -32,7 +31,6 @@ export async function getQuizByQuizBankId(id: string) {
     })
     .catch((error) => {
       debugger
-      console.log("Error:", error.toString())
       return {
         ok: false,
         message: error.message as string,
