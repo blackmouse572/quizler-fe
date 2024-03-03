@@ -156,6 +156,48 @@
     "apply": "Áp dụng",
     "take-value": "Hiển thị {count} dòng"
   },
+  "AddQuiz": {
+    "form": {
+      "title": "Thêm Quiz mới",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên Quiz"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả"
+      },
+      "visibility": {
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
+        "type": {
+          "Public": {
+            "value": "Công khai"
+          },
+          "Private": {
+            "value": "Riêng tư"
+          }
+        }
+      },
+      "submit": "Tạo Quiz",
+      "tags": {
+        "label": "Tags",
+        "placeholder": "Nhập tags"
+      },
+      "public": {
+        "label": "Công khai",
+        "placeholder": "Ai cũng có thể thấy"
+      },
+      "definition": {
+        "label": "Định nghĩa",
+        "placeholder": "Nhập định nghĩa"
+      },
+      "term": {
+        "label": "Thuật ngữ",
+        "placeholder": "Nhập thuật ngữ"
+      }
+    }
+  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quản lý Quiz",
