@@ -156,48 +156,6 @@
     "apply": "Áp dụng",
     "take-value": "Hiển thị {count} dòng"
   },
-  "AddQuiz": {
-    "form": {
-      "title": "Thêm Quiz mới",
-      "name": {
-        "label": "Tên",
-        "placeholder": "Nhập tên Quiz"
-      },
-      "description": {
-        "label": "Mô tả",
-        "placeholder": "Nhập mô tả"
-      },
-      "visibility": {
-        "label": "Hiển thị",
-        "placeholder": "Chọn hiển thị",
-        "type": {
-          "Public": {
-            "value": "Công khai"
-          },
-          "Private": {
-            "value": "Riêng tư"
-          }
-        }
-      },
-      "submit": "Tạo Quiz",
-      "tags": {
-        "label": "Tags",
-        "placeholder": "Nhập tags"
-      },
-      "public": {
-        "label": "Công khai",
-        "placeholder": "Ai cũng có thể thấy"
-      },
-      "definition": {
-        "label": "Định nghĩa",
-        "placeholder": "Nhập định nghĩa"
-      },
-      "term": {
-        "label": "Thuật ngữ",
-        "placeholder": "Nhập thuật ngữ"
-      }
-    }
-  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quản lý Quiz",
@@ -313,6 +271,72 @@
     "faq": "Câu hỏi thường gặp",
     "support": "Hỗ trợ",
     "signout": "Đăng xuất"
+  },
+  "EditQuiz": {
+    "form": {
+      "title": "Chỉnh sửa ngân hàng câu hỏi",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên ngân hàng câu hỏi"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả ngân hàng câu hỏi"
+      },
+      "submit": "Thêm",
+      "tags": {
+        "label": "Tags",
+        "placeholder": "Nhập tags ngân hàng câu hỏi"
+      },
+      "public": {
+        "label": "Công khai",
+        "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
+      },
+      "quiz": {
+        "new": "Thêm câu hỏi mới"
+      },
+      "term": {
+        "label": "Thuật ngữ",
+        "placeholder": "Nhập thuật ngữ"
+      },
+      "definition": {
+        "label": "Định nghĩa",
+        "placeholder": "Nhập định nghĩa"
+      }
+    }
+  },
+  "AddQuiz": {
+    "form": {
+      "title": "Tạo ngân hàng câu hỏi mới",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên ngân hàng câu hỏi"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả ngân hàng câu hỏi"
+      },
+      "submit": "Thêm",
+      "tags": {
+        "label": "Tags",
+        "placeholder": "Nhập tags ngân hàng câu hỏi"
+      },
+      "public": {
+        "label": "Công khai",
+        "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
+      },
+      "quiz": {
+        "new": "Thêm câu hỏi mới"
+      },
+      "term": {
+        "label": "Thuật ngữ",
+        "placeholder": "Nhập thuật ngữ"
+      },
+      "definition": {
+        "label": "Định nghĩa",
+        "placeholder": "Nhập định nghĩa"
+      }
+    }
   },
   "NotFound": {
     "title": "Bạn có vẻ đang đi lạc?",

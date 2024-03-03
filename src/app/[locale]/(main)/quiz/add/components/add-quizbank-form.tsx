@@ -15,11 +15,7 @@ import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -28,8 +24,18 @@ import { useRouter } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import { z } from "zod"
-import { addQuizBankAction } from "../actions/add-quiz-bank-action"
+import {
+  TAPIResult,
+  addQuizBankAction,
+  editQuizBankAction,
+} from "../actions/add-quiz-bank-action"
 import AddTagForm from "./add-tag-form"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { EQuizBankAction } from "@/types"
 
 const addQuizbankSchema = z.object({
   bankName: z
@@ -52,7 +58,7 @@ const addQuizbankSchema = z.object({
     .max(255, {
       message: "errors.too_big.string.inclusive",
     }),
-  visibility: z.enum(["public", "private"]).default("public"),
+  visibility: z.enum(["Public", "Private"]).default("Public"),
   tags: z.array(z.string()).default([]),
   quizes: z.array(
     z
@@ -80,16 +86,32 @@ const addQuizbankSchema = z.object({
       })
       .default({ question: "", answer: "" })
   ),
+  explaination: z
+    .string({
+      required_error: "errors.invalid_type_received_undefined",
+    })
+    .optional(),
 })
 
 export type AddQuizbank = z.infer<typeof addQuizbankSchema>
 
 type AddQuizbankFormProps = {
   initialValues?: AddQuizbank
+  // action if the form
+  action?: EQuizBankAction
+  /**
+   * needed when action is edit
+   */
+  quizBankId?: string
 }
-function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
+function AddQuizbankForm({
+  initialValues,
+  action = EQuizBankAction.Add,
+  quizBankId,
+}: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
-  const i18n = useTranslations("AddQuiz")
+  const i18Term = +action === +EQuizBankAction.Add ? "AddQuiz" : "EditQuiz"
+  const i18n = useTranslations(i18Term)
   const errorI18n = useTranslations("Errors")
   const router = useRouter()
   const { toast } = useToast()
@@ -102,10 +124,8 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
     name: "quizes",
   })
 
-  const onSubmit = useCallback(
-    async (value: AddQuizbank) => {
-      const res = await addQuizBankAction(value)
-
+  const onSubmitCallback = useCallback(
+    (res: TAPIResult) => {
       if (!res.ok) {
         toast({
           title: errorI18n("index"),
@@ -118,6 +138,20 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
     },
     [errorI18n, router, toast]
   )
+
+  const onSubmit = useCallback(
+    async (value: AddQuizbank) => {
+      let res
+      if (+action === +EQuizBankAction.Add) {
+        res = await addQuizBankAction(value)
+      } else {
+        res = await editQuizBankAction(value, quizBankId?.toString() ?? "")
+      }
+      onSubmitCallback(res)
+    },
+    [action, onSubmitCallback, quizBankId]
+  )
+
   const onTagChange = useCallback(
     (tags: string[]) => form.setValue("tags", tags),
     [form]
@@ -198,18 +232,23 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
 
   const renderAddButton = useMemo(() => {
     return (
-      <Card
-        className="flex h-32 cursor-pointer items-center justify-center border-dashed bg-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-300/50"
-        onClick={addEmptyQuiz}
-      >
-        <Icons.Plus className="h-10 w-10" />
-      </Card>
+      <Tooltip delayDuration={200}>
+        <TooltipTrigger asChild>
+          <Card
+            className="flex h-32 cursor-pointer items-center justify-center border-dashed bg-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-300/50"
+            onClick={addEmptyQuiz}
+          >
+            <Icons.Plus className="h-10 w-10" />
+          </Card>
+        </TooltipTrigger>
+        <TooltipContent>{i18n("form.quiz.new")}</TooltipContent>
+      </Tooltip>
     )
-  }, [addEmptyQuiz])
+  }, [addEmptyQuiz, i18n])
 
   return (
     <Form {...form}>
-      <div className="mx-auto w-full max-w-xl space-y-8">
+      <div className="mx-auto w-full max-w-xl space-y-8 pb-6">
         {form.formState.isSubmitting && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-neutral-900/50">
             <Icons.Loader className="text-primary-500 h-10 w-10 animate-spin" />
@@ -222,10 +261,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
         >
           <div className="my-4 flex items-center justify-between border-b border-primary">
             <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
-            <Tooltip>
-              <TooltipContent>
-                <p>{i18n("form.submit")}</p>
-              </TooltipContent>
+            <Tooltip delayDuration={200}>
               <TooltipTrigger asChild>
                 <Button
                   type="submit"
@@ -241,6 +277,9 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                   )}
                 </Button>
               </TooltipTrigger>
+              <TooltipContent className="z-10">
+                {i18n("form.title")}
+              </TooltipContent>
             </Tooltip>
           </div>
           <FormField
@@ -299,11 +338,11 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
                   <FormControl>
                     <Checkbox
                       variant={"square"}
-                      checked={field.value === "public"}
+                      checked={field.value === "Public"}
                       onCheckedChange={(checked) => {
                         form.setValue(
                           "visibility",
-                          checked ? "public" : "private"
+                          checked ? "Public" : "Private"
                         )
                       }}
                     />
@@ -325,6 +364,7 @@ function AddQuizbankForm({ initialValues }: AddQuizbankFormProps) {
         <AddTagForm
           initialValues={initialValues?.tags}
           onTagChange={onTagChange}
+          action={action}
         />
         <div className="space-y-4">
           {renderItems}
