@@ -29,10 +29,10 @@ import Autoplay from "embla-carousel-autoplay"
 
 type Props = {
   quizBankData: QuizBank
-  quizData: any
+  flashcardData: any
 }
 
-export default function ViewFlashcard({ quizBankData, quizData }: Props) {
+export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
   const [api, setApi] = useState<CarouselApi>()
@@ -107,8 +107,8 @@ export default function ViewFlashcard({ quizBankData, quizData }: Props) {
         onMouseLeave={plugin.current.play}
       >
         <CarouselContent>
-          {Object.keys(quizData).map((quizKey) => {
-            const quiz = quizData[quizKey]
+          {Object.keys(flashcardData).map((quizKey) => {
+            const quiz = flashcardData[quizKey]
 
             {
               /* Replace '\n' with <div></div> */
