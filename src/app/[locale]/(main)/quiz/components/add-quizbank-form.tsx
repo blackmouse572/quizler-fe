@@ -34,6 +34,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { EQuizBankAction } from "@/types"
+import CopyButton from "@/components/copy-button"
 
 const addQuizbankSchema = z.object({
   bankName: z
@@ -358,6 +359,7 @@ function AddQuizbankForm({
           action={action}
         />
         <div className="space-y-4">
+          <CopyButton content="Copy quiz bank"/>
           {renderItems}
           {renderAddButton}
         </div>

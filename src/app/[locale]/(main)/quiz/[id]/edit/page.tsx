@@ -2,7 +2,7 @@ import _ from "lodash"
 import { NextIntlClientProvider, useMessages, useTranslations } from "next-intl"
 import AddQuizbankForm, {
   AddQuizbank,
-} from "../../add/components/add-quizbank-form"
+} from "../../components/add-quizbank-form"
 import { use } from "react"
 import {
   getQuizBankDetailPage,
