@@ -27,6 +27,7 @@ async function getQuizBankDetailPage(id: string) {
   const quizBankUrl = getAPIServerURL(`/quizbank/${id}`)
   const flashcardUrl = getAPIServerURL(`/quiz/${id}`)
   const quizUrl = getAPIServerURL(`/quiz/${id}?take=1`)
+  const relativeQuizUrl = getAPIServerURL(`/quizbank/related/${id}`)
 
   const token = getToken().token
 
@@ -38,10 +39,11 @@ async function getQuizBankDetailPage(id: string) {
     },
   }
 
-  const [quizBankRes, flashcardRes, quizRes] = await Promise.all([
+  const [quizBankRes, flashcardRes, quizRes, relativeQuizRes] = await Promise.all([
     fetch(quizBankUrl, options),
     fetch(flashcardUrl, options),
     fetch(quizUrl, options),
+    fetch(relativeQuizUrl, options)
   ])
 
   const quizBankData = (await quizBankRes.json()) as QuizBank
@@ -53,15 +55,16 @@ async function getQuizBankDetailPage(id: string) {
     statusCode: quizRes.status,
     data: await quizRes.json(),
   }
+  const relativeQuizBankData = await relativeQuizRes.json()
 
-  return { quizBankData, flashcardData, quizData }
+  return { quizBankData, flashcardData, quizData, relativeQuizBankData }
 }
 
 async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
   const message = await getMessages()
   const { id } = params
 
-  const { quizBankData, flashcardData, quizData } =
+  const { quizBankData, flashcardData, quizData, relativeQuizBankData } =
     await getQuizBankDetailPage(id)
 
   // if quizbank is private or user is not author => return notFound
@@ -77,6 +80,7 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
         quizBankData={quizBankData}
         flashcardData={flashcardData.data}
         quizData={quizData.data}
+        relativeQuizBankData={relativeQuizBankData}
       />
     </NextIntlClientProvider>
   )

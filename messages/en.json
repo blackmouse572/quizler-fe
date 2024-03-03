@@ -323,7 +323,7 @@
     "ViewQuizzes": {
       "term": "Terms in this bank",
       "view_AI_answer": "View A.I answer",
-      "recommend_quiz_bank": "Students also view these"
+      "relative_quiz_bank": "Students also view these"
     },
     "belong_to": "This quizbank is belong to",
     "author": {

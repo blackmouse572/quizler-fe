@@ -14,13 +14,12 @@ type Props = {
 
 export default function ViewQuizzes({ quizData }: Props) {
   const i18n = useTranslations("ViewQuizBank")
-  const numberOfQuizzes = Object.keys(quizData).length
 
   return (
     <>
       <div className="z-10 mt-16 flex w-[849px] max-w-full items-start justify-between gap-5 px-5 max-md:mt-10 max-md:flex-wrap">
         <div className="flex-auto self-start text-xl font-bold leading-8 text-black">
-          {i18n('ViewQuizzes.term')} ({numberOfQuizzes})
+          {i18n('ViewQuizzes.term')} ({quizData.metadata.totals})
         </div>
         <div className="mt-5 flex flex-col self-end whitespace-nowrap pb-2 font-medium text-white">
           <div className="mr-3 justify-center self-end rounded-lg bg-red-600 px-1.5 text-center text-xs leading-4 shadow-sm max-md:mr-2.5">
@@ -30,8 +29,8 @@ export default function ViewQuizzes({ quizData }: Props) {
       </div>
 
       {/* Render quizzes */}
-      {Object.keys(quizData).map((quizKey) => {
-        const quiz = quizData[quizKey]
+      {Object.keys(quizData.data).map((quizKey) => {
+        const quiz = quizData.data[quizKey]
 
         {
           /* Replace '\n' with <div></div> */

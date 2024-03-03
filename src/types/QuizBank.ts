@@ -6,6 +6,9 @@ interface QuizBank {
   quizes: []
   description: string
   visibility: "Public" | "Private"
+  rating: []
+  averageRating: number
+  tags: []
   created: string
   updated: string | null
 }

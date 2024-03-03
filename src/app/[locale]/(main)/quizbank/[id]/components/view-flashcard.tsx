@@ -82,17 +82,23 @@ export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
         </div>
         <div className="my-auto flex justify-end gap-2.5 px-5 text-base leading-6 text-neutral-900">
           <StarIcon width="3rem" height="1.5rem" />
-          <div className="grow">4.5 • 5</div>
+          <div className="grow">{quizBankData.averageRating} • 5</div>
         </div>
       </div>
 
       <div className="ml-72 mt-1.5 flex gap-1 self-start whitespace-nowrap text-center text-xs font-medium leading-4 text-zinc-500 max-md:ml-2.5">
-        <div className="aspect-[3.05] justify-center rounded-lg border border-solid border-[color:var(--color-border,#E4E4E7)] bg-white px-2 py-0.5 shadow-sm">
-          Biology
-        </div>
-        <div className="aspect-[3.05] justify-center rounded-lg border border-solid border-[color:var(--color-border,#E4E4E7)] bg-white px-2 py-0.5 shadow-sm">
-          Biology
-        </div>
+        {Object.keys(quizBankData.tags).map((_, index) => {
+          const tag = quizBankData.tags[index]
+
+          return (
+            <div
+              key={index}
+              className="aspect-[3.05] justify-center rounded-lg border border-solid border-[color:var(--color-border,#E4E4E7)] bg-white px-2 py-0.5 shadow-sm"
+            >
+              {tag}
+            </div>
+          )
+        })}
       </div>
 
       {/* Flashcard */}
@@ -107,8 +113,8 @@ export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
         onMouseLeave={plugin.current.play}
       >
         <CarouselContent>
-          {Object.keys(flashcardData).map((quizKey) => {
-            const quiz = flashcardData[quizKey]
+          {Object.keys(flashcardData.data).map((quizKey) => {
+            const quiz = flashcardData.data[quizKey]
 
             {
               /* Replace '\n' with <div></div> */
@@ -170,7 +176,8 @@ export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
 
         <div className="flex justify-between gap-5 whitespace-nowrap text-xs font-semibold leading-4 text-black">
           <div className="my-auto">
-            {i18n('ViewFlashcard.slide')} {current} {i18n('ViewFlashcard.of')} {count}
+            {i18n("ViewFlashcard.slide")} {current} {i18n("ViewFlashcard.of")}{" "}
+            {count}
           </div>
         </div>
 

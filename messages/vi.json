@@ -278,7 +278,7 @@
     "ViewQuizzes": {
       "term": "Thuật ngữ trong học phần này",
       "view_AI_answer": "Xem câu trả lời của A.I",
-      "recommend_quiz_bank": "Học sinh cũng đã xem các học phần"
+      "relative_quiz_bank": "Học sinh cũng đã xem các học phần"
     },
     "belong_to": "Học phần này thuộc về",
     "author": {
