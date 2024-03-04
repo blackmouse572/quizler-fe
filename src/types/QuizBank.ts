@@ -1,13 +1,16 @@
+import { User } from "@/types"
+
 interface QuizBank {
   id: number
   bankName: string
   authorName: string
-  author: {}
+  author: User
   quizes: []
   description: string
   visibility: "Public" | "Private"
   rating: []
   averageRating: number
+  quizCount?: number
   tags: []
   created: string
   updated: string | null

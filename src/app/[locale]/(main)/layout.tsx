@@ -57,12 +57,12 @@ async function MainLayout({ children }: Props) {
         children: [
           {
             label: tUserDropdown("quizbank.new"),
-            href: "/quiz/add",
+            href: "/quizbank/add",
             icon: "Plus",
           },
           {
             label: tUserDropdown("quizbank.my_quizbanks"),
-            href: "/quiz",
+            href: "/quizbank",
             icon: "Icon",
           },
         ],

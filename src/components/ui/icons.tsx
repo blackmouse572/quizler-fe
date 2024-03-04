@@ -21,6 +21,7 @@ import {
   IconCircleOff,
   IconCopy,
   IconDashboard,
+  IconDotsVertical,
   IconEye,
   IconFilter,
   IconHandStop,
@@ -85,6 +86,7 @@ export const Icons = {
   CaretUpFilled: IconCaretUpFilled,
   CaretDownFilled: IconCaretDownFilled,
   Support: IconLifebuoy,
+  DotVertical: IconDotsVertical,
 
   //Chevrons
   ChevronUp: IconChevronUp,
