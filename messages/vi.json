@@ -259,21 +259,21 @@
     "profile": "Hồ sơ",
     "billing": "Thanh toán",
     "settings": "Cài đặt",
-    "invite": "Mời bạn bè",
     "new_classroom": "Tạo lớp học mới",
-    "faq": "Câu hỏi thường gặp",
-    "support": "Hỗ trợ",
-    "signout": "Đăng xuất",
     "classrooms": {
       "index": "Lớp học",
-      "new": "Lớp học mới",
+      "new": "Tạo lớp học mới",
       "my_classrooms": "Lớp học của tôi"
     },
     "quizbank": {
-      "index": "Ngân hàng câu hỏi",
-      "new": "Câu hỏi mới",
-      "my_quizbanks": "Ngân hàng câu hỏi của tôi"
-    }
+      "index": "Quizbank",
+      "new": "Tạo quizbank mới",
+      "my_quizbanks": "Quizbank của tôi"
+    },
+    "invite": "Mời bạn bè",
+    "faq": "Câu hỏi thường gặp",
+    "support": "Hỗ trợ",
+    "signout": "Đăng xuất"
   },
   "EditQuiz": {
     "form": {
