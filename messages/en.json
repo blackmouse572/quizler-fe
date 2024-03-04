@@ -72,6 +72,16 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
+  "MyQuizbanks": {
+    "metadata": {
+      "title": "My Quiz Banks",
+      "description": "Manage all quiz banks in the system"
+    },
+    "headers": {
+      "index": "My Quiz Banks"
+    },
+    "terms": "Terms"
+  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quiz Bank",

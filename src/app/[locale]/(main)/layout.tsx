@@ -3,10 +3,10 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
+import Footer from "@/components/footer"
 import Navbar, { MainNavItem } from "@/components/nav-bar"
 import { getUser, isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
-import Footer from "@/components/footer"
 
 type Props = {
   children?: React.ReactNode
@@ -57,12 +57,12 @@ async function MainLayout({ children }: Props) {
         children: [
           {
             label: tUserDropdown("quizbank.new"),
-            href: "/quiz/add",
+            href: "/quizbank/add",
             icon: "Plus",
           },
           {
             label: tUserDropdown("quizbank.my_quizbanks"),
-            href: "/quiz",
+            href: "/quizbank",
             icon: "Icon",
           },
         ],
