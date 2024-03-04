@@ -36,8 +36,6 @@ export default function ViewQuizzes({ id, token, quizData }: Props) {
       const nextPageData = await nextPageRes.json()
 
       setData((prevData: any) => [...prevData, ...nextPageData.data])
-
-      console.log("kkk: " + data)
       setCurrentPage(nextPage)
     } catch (error) {
       console.error("Error loading more quizzes:", error)

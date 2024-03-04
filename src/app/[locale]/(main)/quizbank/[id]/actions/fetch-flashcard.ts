@@ -1,9 +1,7 @@
-import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
-export const fetchFlashcard = async (id: string) => {
+export const fetchFlashcard = async (id: string, token: string, skip: number) => {
   const URL = getAPIServerURL(`/quiz/${id}`)
-  const token = getToken().token
 
   const options = {
     method: "GET",

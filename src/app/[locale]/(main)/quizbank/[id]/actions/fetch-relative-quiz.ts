@@ -2,7 +2,7 @@ import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
 export const fetchRelativeQuiz = async (id: string) => {
-  const URL = getAPIServerURL(`/quiz/${id}?take=1`)
+  const URL = getAPIServerURL(`/quizbank/related/${id}`)
   const token = getToken().token
 
   const options = {
