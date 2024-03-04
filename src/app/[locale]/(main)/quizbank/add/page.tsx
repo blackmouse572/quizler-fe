@@ -1,9 +1,8 @@
 import _ from "lodash"
 import { NextIntlClientProvider, useMessages, useTranslations } from "next-intl"
-import { z } from "zod"
 import AddQuizbankForm, {
   AddQuizbank
-} from "../components/add-quizbank-form"
+} from "./components/add-quizbank-form"
 import { EQuizBankAction } from "@/types"
 
 function AddQuizbank() {

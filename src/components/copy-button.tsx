@@ -1,3 +1,4 @@
+"use client"
 import { useTranslations } from "next-intl"
 import { Button, ButtonProps } from "./ui/button"
 import { Icons } from "./ui/icons"
@@ -29,7 +30,7 @@ export default function CopyButton({ className, onClick, content, ...props }: Pr
           <Icons.Copy style={{ marginRight: "unset" }} />
         </Button>
       </TooltipTrigger>
-      <TooltipContent side={"top"} sideOffset={18}>{content}</TooltipContent>
+      <TooltipContent side={"top"}>{content}</TooltipContent>
     </Tooltip>
   )
 }

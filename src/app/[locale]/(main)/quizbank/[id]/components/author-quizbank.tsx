@@ -8,6 +8,7 @@ import { CopyIcon, InfoCircledIcon } from "@radix-ui/react-icons"
 import { useTranslations } from "next-intl"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getShortName } from "@/lib/string-helper"
+import CopyButton from "@/components/copy-button"
 
 type Props = {
   authorData: any
@@ -55,16 +56,7 @@ export default function AuthorQuizBank({ authorData, classname }: Props) {
           </div>
         </div>
         <div className="flex justify-between gap-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="light" color={null}>
-                <CopyIcon />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{i18n("author.copy_button")}</p>
-            </TooltipContent>
-          </Tooltip>
+          <CopyButton content={i18n("author.copy_button")}/>
 
           <Tooltip>
             <TooltipTrigger asChild>
