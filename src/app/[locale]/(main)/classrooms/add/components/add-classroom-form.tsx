@@ -94,15 +94,15 @@ export default function AddClassroomForm({
 
   const onSubmit = useCallback(
     async (value: AddClassroom) => {
-      let res
+      let res = {} as TAPIResult
       if (+action === +EFormAction.Add) {
         res = await addNewClassroom(value)
       } else {
         // res = await editQuizBankAction(value, quizBankId?.toString() ?? "")
       }
-      //   onSubmitCallback(res)
+      onSubmitCallback(res)
     },
-    [action]
+    [action, onSubmitCallback]
   )
 
   return (

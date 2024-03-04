@@ -509,7 +509,7 @@
   },
   "AddClassroom": {
     "metadata": {
-      "title": "Classrooms",
+      "title": "Create new classroom",
       "description": "Manage all classrooms in the system"
     },
     "form": {
@@ -529,9 +529,8 @@
           "currency": "USD",
           "features": {
             "feature1": "Unlimited quizzes",
-            "feature2": "Unlimited students",
-            "feature3": "Unlimited classrooms",
-            "feature4": "Unlimited flashcards"
+            "feature2": "10 students",
+            "feature3": "10 games"
           }
         },
         "premium": {
@@ -541,8 +540,7 @@
           "features": {
             "feature1": "Unlimited quizzes",
             "feature2": "Unlimited students",
-            "feature3": "Unlimited classrooms",
-            "feature4": "Unlimited flashcards"
+            "feature3": "Unlimited games"
           }
         },
         "submit": "Create"

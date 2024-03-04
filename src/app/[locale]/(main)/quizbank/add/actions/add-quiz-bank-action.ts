@@ -1,18 +1,20 @@
 "use server"
 
+import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { AddQuizbank } from "../components/add-quizbank-form"
-import { getToken } from "@/lib/auth"
 
-export type TAPIResult = {
-  ok: boolean;
-  message: string;
-  data: any;
-} | {
-  ok: boolean;
-  message: any;
-  data: null;
-}
+export type TAPIResult =
+  | {
+      ok: boolean
+      message: string
+      data: any
+    }
+  | {
+      ok: boolean
+      message: any
+      data: null
+    }
 
 export const addQuizBankAction = (data: AddQuizbank): Promise<TAPIResult> => {
   const url = getAPIServerURL("/quizbank")
@@ -27,7 +29,7 @@ export const addQuizBankAction = (data: AddQuizbank): Promise<TAPIResult> => {
     body,
   }
 
-  return fetch(url, { ...options, body })
+  return fetch(url, options)
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
@@ -51,7 +53,10 @@ export const addQuizBankAction = (data: AddQuizbank): Promise<TAPIResult> => {
     })
 }
 
-export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promise<TAPIResult> => { 
+export const editQuizBankAction = (
+  data: AddQuizbank,
+  quizBankId: string
+): Promise<TAPIResult> => {
   const url = getAPIServerURL(`/quizbank/${quizBankId}`)
   const { token } = getToken()
 
@@ -81,7 +86,7 @@ export const editQuizBankAction = (data: AddQuizbank, quizBankId: string): Promi
       }
     })
     .catch((error) => {
-      debugger;
+      debugger
       return {
         ok: false,
         message: error.message as string,

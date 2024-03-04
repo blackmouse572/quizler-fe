@@ -54,7 +54,7 @@ function PlanSelectionForm({ onPlanSelection }: Props) {
       },
     ]
   }, [t])
-  const [selectedPlan, setSelectedPlan] = useState<Plan>(plans[0])
+  const [selectedPlan, setSelectedPlan] = useState<Plan>()
 
   const onPlanChange = useCallback(
     (id: string) => {
@@ -73,9 +73,9 @@ function PlanSelectionForm({ onPlanSelection }: Props) {
             onClick={() => onPlanChange(plan.id)}
             className={cn("flex-1 cursor-pointer transition-all", {
               "ring-2 ring-emerald-500 ring-offset-2":
-                selectedPlan.id === plan.id,
+                selectedPlan?.id === plan.id,
             })}
-            aria-selected={selectedPlan.id === plan.id}
+            aria-selected={selectedPlan?.id === plan.id}
           >
             <CardHeader>
               <CardTitle>{plan.name}</CardTitle>
