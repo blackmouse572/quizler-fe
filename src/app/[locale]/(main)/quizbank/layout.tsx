@@ -5,7 +5,10 @@ type QuizbankLayoutProps = {
 }
 function QuizbankLayout({ children }: QuizbankLayoutProps) {
   return (
-    <BackgroundSquare variant={"topDown"} className="container mx-auto pt-20">
+    <BackgroundSquare
+      variant={"topDown"}
+      className="container mx-auto items-start pt-20"
+    >
       {children}
     </BackgroundSquare>
   )
