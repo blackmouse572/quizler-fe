@@ -1,6 +1,5 @@
 import QuizbankCard from "@/components/quizbank-card"
 import SearchBox from "@/components/searchbox"
-import { IIconKeys } from "@/components/ui/icons"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
@@ -9,6 +8,22 @@ import PagedResponse from "@/types/paged-response"
 import { getMessages, getTranslations } from "next-intl/server"
 
 type Props = {}
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string }
+}) {
+  const t = await getTranslations({
+    locale,
+    namespace: "MyQuizbanks.metadata",
+  })
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  }
+}
 
 async function getQuizBank(options: Partial<PagedRequest>) {
   //Convert object to query string
@@ -61,7 +76,13 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
         {data.data.map((item) => {
           return (
-            <QuizbankCard item={item} key={item.id}>
+            <QuizbankCard
+              item={item}
+              key={item.id}
+              translations={{
+                terms: t("terms"),
+              }}
+            >
               {item.bankName}
             </QuizbankCard>
           )
