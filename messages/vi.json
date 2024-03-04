@@ -159,6 +159,16 @@
     "apply": "Áp dụng",
     "take-value": "Hiển thị {count} dòng"
   },
+  "MyQuizbanks": {
+    "metadata": {
+      "title": "Quản lý ngân hàng câu hỏi",
+      "description": "Quản lý tất cả các ngân hàng câu hỏi của bạn"
+    },
+    "headers": {
+      "index": "Quizbank của tôi"
+    },
+    "terms": "Thuật ngữ"
+  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quản lý Quiz",
