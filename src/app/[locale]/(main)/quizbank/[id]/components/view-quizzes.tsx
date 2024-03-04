@@ -155,7 +155,7 @@ export default function ViewQuizzes({ id, token, quizData }: Props) {
               {hiddenAIAnswer[quizKey] && (
                 <ViewAIExplain
                   key={quizKey}
-                  classname={
+                  hiddenOrNot={
                     hiddenAIAnswer[quizKey]?.hidden ? "block" : "hidden"
                   }
                   explain={hiddenAIAnswer[quizKey]?.answerAIRes || ""}

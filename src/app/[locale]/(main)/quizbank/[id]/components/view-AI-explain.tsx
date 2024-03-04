@@ -1,14 +1,18 @@
+import { cn } from "@/lib/utils"
 import { PiSparkle } from "react-icons/pi"
 
 type Props = {
   explain: string
-  classname: string
+  hiddenOrNot: string
 }
 
-export default function ViewAIExplain({ explain, classname }: Props) {
+export default function ViewAIExplain({ explain, hiddenOrNot }: Props) {
   return (
     <div
-      className={`${classname} mt-5 whitespace-nowrap border-t-2 border-gray-300 leading-[150%] max-md:mb-10`}
+      className={cn(
+        hiddenOrNot,
+        'mt-5 whitespace-nowrap border-t-2 border-gray-300 leading-[150%] max-md:mb-10'
+      )}
     >
       <div className="mt-4 flex justify-center">
         <PiSparkle />
