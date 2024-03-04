@@ -17,7 +17,7 @@ type Props = {
 function ViewQuizBank({ id, token, quizBankData, flashcardData, quizData, relativeQuizBankData, classname }: Props) {
   return (
     <div className="flex flex-col items-center rounded-3xl border border-solid">
-      <ViewFlashcard quizBankData={quizBankData} flashcardData={flashcardData} />
+      <ViewFlashcard id={id} token={token} quizBankData={quizBankData} flashcardData={flashcardData} />
       <ViewQuizzes id={id} token={token} quizData={quizData} />
       <ViewRelativeQuizBank relativeQuizBankData={relativeQuizBankData} />
       <AuthorQuizBank authorData={quizBankData.author} classname={classname} />

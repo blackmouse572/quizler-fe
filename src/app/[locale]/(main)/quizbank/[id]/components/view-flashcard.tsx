@@ -26,13 +26,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import Autoplay from "embla-carousel-autoplay"
+import usePaginationValue from "@/hooks/usePaginationValue"
+import { fetchFlashcard } from "../actions/fetch-flashcard"
 
 type Props = {
+  id: string
+  token: string
   quizBankData: QuizBank
   flashcardData: any
 }
 
-export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
+export default function ViewFlashcard({ id, token, quizBankData, flashcardData }: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
   const [api, setApi] = useState<CarouselApi>()
@@ -43,12 +47,32 @@ export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
   const [selectedItem, setSelectedItem] = useState(true)
   const [isPlaying, setIsPlaying] = useState(true)
 
+  const { skip, take, totals, hasMore } = usePaginationValue(
+    flashcardData.metadata
+  )
+  const [data, setData] = useState(flashcardData.data)
+  const [currentPage, setCurrentPage] = useState(skip)
+
+  const handleSeemore = async () => {
+    const nextPage = currentPage + 1
+
+    try {
+      const nextPageRes = await fetchFlashcard(id, token, nextPage)
+      const nextPageData = await nextPageRes.json()
+
+      setData((prevData: any) => [...prevData, ...nextPageData.data])
+      setCurrentPage(nextPage)
+    } catch (error) {
+      console.error("Error loading more quizzes:", error)
+    }
+  }
+
   useEffect(() => {
     if (!api) {
       return
     }
 
-    setCount(api.scrollSnapList().length)
+    setCount(totals)
     setCurrent(api.selectedScrollSnap() + 1)
 
     api.on("select", () => {
@@ -58,7 +82,7 @@ export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
     api.on("pointerDown", () => {
       setSelectedItem(!selectedItem)
     })
-  }, [api, selectedItem])
+  }, [api, selectedItem, totals])
 
   const handleButtonClick = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying)
@@ -113,8 +137,8 @@ export default function ViewFlashcard({ quizBankData, flashcardData }: Props) {
         onMouseLeave={plugin.current.play}
       >
         <CarouselContent>
-          {Object.keys(flashcardData.data).map((quizKey) => {
-            const quiz = flashcardData.data[quizKey]
+          {Object.keys(data).map((quizKey) => {
+            const quiz = data[quizKey]
 
             {
               /* Replace '\n' with <div></div> */

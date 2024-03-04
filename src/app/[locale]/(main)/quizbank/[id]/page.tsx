@@ -32,7 +32,7 @@ async function getQuizBankDetailPage(id: string) {
   const [quizBankRes, flashcardRes, quizRes, relativeQuizRes] =
     await Promise.all([
       fetchQuizBank(id),
-      fetchFlashcard(id),
+      fetchFlashcard(id, token, 0),
       fetchQuiz(id, token, 0),
       fetchRelativeQuiz(id),
     ])
