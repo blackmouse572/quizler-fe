@@ -11,7 +11,10 @@ import {
 import { PiSparkle } from "react-icons/pi"
 import usePaginationValue from "@/hooks/usePaginationValue"
 import { fetchQuiz } from "../actions/fetch-quiz"
+import ViewAIExplain from "./view-AI-explain"
 import { useState } from "react"
+import { fetchAIquestion } from "../actions/fetch-AI-question"
+import { useRouter } from "next/navigation"
 
 type Props = {
   id: string
@@ -19,12 +22,20 @@ type Props = {
   quizData: any
 }
 
+interface HiddenAIAnswerState {
+  [key: string]: {
+    hidden: boolean
+    answerAIRes: string
+  }
+}
+
 export default function ViewQuizzes({ id, token, quizData }: Props) {
   const i18n = useTranslations("ViewQuizBank")
   const { skip, take, totalPages, hasMore } = usePaginationValue(
     quizData.metadata
   )
-
+  const router = useRouter()
+  
   const [data, setData] = useState(quizData.data)
   const [currentPage, setCurrentPage] = useState(skip)
 
@@ -41,6 +52,39 @@ export default function ViewQuizzes({ id, token, quizData }: Props) {
       setCurrentPage(nextPage)
     } catch (error) {
       console.error("Error loading more quizzes:", error)
+    }
+  }
+  const [hiddenAIAnswer, setHiddenAIAnswer] = useState<HiddenAIAnswerState>({})
+
+  const handleButtonAIClick = async (
+    quizKey: string,
+    token: string,
+    question: string,
+    answer: string,
+    explaination?: string
+  ) => {
+    setHiddenAIAnswer((prevState) => ({
+      ...prevState,
+      [quizKey]: {
+        ...prevState[quizKey],
+        hidden: !prevState[quizKey]?.hidden,
+      },
+    }))
+
+    try {
+      const res = await fetchAIquestion(token, question, answer, explaination)
+      const answerAIRes = res.candidates[0].content.parts[0].text
+
+      setHiddenAIAnswer((prevState) => ({
+        ...prevState,
+        [quizKey]: {
+          ...prevState[quizKey],
+          answerAIRes: answerAIRes,
+        },
+      }))
+    } catch (error) {
+      console.error("Error fetching AI question:", error)
+      return router.push("/login")
     }
   }
 
@@ -86,7 +130,19 @@ export default function ViewQuizzes({ id, token, quizData }: Props) {
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button variant="light" color={null}>
+                        <Button
+                          onClick={async () =>
+                            await handleButtonAIClick(
+                              quizKey,
+                              token,
+                              quiz.question,
+                              quiz.answer,
+                              ""
+                            )
+                          }
+                          variant="light"
+                          color={null}
+                        >
                           <PiSparkle />
                         </Button>
                       </TooltipTrigger>
@@ -97,6 +153,16 @@ export default function ViewQuizzes({ id, token, quizData }: Props) {
                   </TooltipProvider>
                 </div>
               </div>
+
+              {hiddenAIAnswer[quizKey] && (
+                <ViewAIExplain
+                  key={quizKey}
+                  classname={
+                    hiddenAIAnswer[quizKey]?.hidden ? "block" : "hidden"
+                  }
+                  explain={hiddenAIAnswer[quizKey]?.answerAIRes || ""}
+                />
+              )}
             </div>
           </div>
         )
