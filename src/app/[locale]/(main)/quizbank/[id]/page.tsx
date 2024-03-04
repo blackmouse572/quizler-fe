@@ -1,12 +1,15 @@
-import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import { Metadata } from "next"
 import ViewQuizBank from "./components/view-quizbank"
 import { NextIntlClientProvider } from "next-intl"
 import _ from "lodash"
 import { getMessages } from "next-intl/server"
-import { getToken } from "@/lib/auth"
 import { notFound } from "next/navigation"
+import { fetchQuizBank } from "./actions/fetch-quiz-bank"
+import { fetchFlashcard } from "./actions/fetch-flashcard"
+import { fetchQuiz } from "./actions/fetch-quiz"
+import { fetchRelativeQuiz } from "./actions/fetch-relative-quiz"
+import { getToken } from "@/lib/auth"
 
 type QuizBankDetailPageProps = { params: { id: string } }
 
@@ -24,27 +27,15 @@ export async function generateMetadata({
 }
 
 async function getQuizBankDetailPage(id: string) {
-  const quizBankUrl = getAPIServerURL(`/quizbank/${id}`)
-  const flashcardUrl = getAPIServerURL(`/quiz/${id}`)
-  const quizUrl = getAPIServerURL(`/quiz/${id}?take=1`)
-  const relativeQuizUrl = getAPIServerURL(`/quizbank/related/${id}`)
-
   const token = getToken().token
 
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  }
-
-  const [quizBankRes, flashcardRes, quizRes, relativeQuizRes] = await Promise.all([
-    fetch(quizBankUrl, options),
-    fetch(flashcardUrl, options),
-    fetch(quizUrl, options),
-    fetch(relativeQuizUrl, options)
-  ])
+  const [quizBankRes, flashcardRes, quizRes, relativeQuizRes] =
+    await Promise.all([
+      fetchQuizBank(id),
+      fetchFlashcard(id),
+      fetchQuiz(id, token, 0),
+      fetchRelativeQuiz(id),
+    ])
 
   const quizBankData = (await quizBankRes.json()) as QuizBank
   const flashcardData = {
@@ -67,6 +58,10 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
   const { quizBankData, flashcardData, quizData, relativeQuizBankData } =
     await getQuizBankDetailPage(id)
 
+  const token = getToken().token
+
+  // loading in here, check again when create quiz did it load yet?
+
   // if quizbank is private or user is not author => return notFound
   {
     flashcardData.statusCode !== 200 &&
@@ -77,6 +72,8 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
   return (
     <NextIntlClientProvider messages={_.pick(message, "ViewQuizBank")}>
       <ViewQuizBank
+        id={id}
+        token={token}
         quizBankData={quizBankData}
         flashcardData={flashcardData.data}
         quizData={quizData.data}
