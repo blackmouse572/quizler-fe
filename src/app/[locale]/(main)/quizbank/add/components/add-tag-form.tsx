@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge"
-import { FormField, FormItem } from "@/components/ui/form"
+import { FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { EQuizBankAction } from "@/types"
+import { EFormAction } from "@/types"
 import { AnimatePresence, motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
@@ -11,12 +11,18 @@ import { useForm } from "react-hook-form"
 type AddTagFormProps = {
   initialValues?: string[]
   onTagChange?: (tag: string[]) => void
-  action?: EQuizBankAction
+  action?: EFormAction
 }
 
-function AddTagForm({ initialValues, onTagChange, action=EQuizBankAction.Add }: AddTagFormProps) {
+function AddTagForm({
+  initialValues,
+  onTagChange,
+  action = EFormAction.Add,
+}: AddTagFormProps) {
   const [tags, setTags] = useState(initialValues || [])
-  const i18n = useTranslations(+action === EQuizBankAction.Add ? "AddQuiz.form" : "EditQuiz.form")
+  const i18n = useTranslations(
+    +action === EFormAction.Add ? "AddQuiz.form" : "EditQuiz.form"
+  )
   const error18n = useTranslations("Validations.errors")
   const { register, setError, formState, handleSubmit, setValue, ...form } =
     useForm({

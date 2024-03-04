@@ -14,24 +14,23 @@ interface QuizBank {
 }
 
 export type TAPIQuizResponse = {
-  metadata: any,
+  metadata: any
   data: Quiz[]
 }
 
 export interface Quiz {
-  id: number,
-  quizBankId: number,
-  question: string,
-  answer: string,
-  explaination?: string,
-  created: string,
+  id: number
+  quizBankId: number
+  question: string
+  answer: string
+  explaination?: string
+  created: string
   updated?: string
 }
 
 export default QuizBank
 
-
-export enum EQuizBankAction {
+export enum EFormAction {
   None = 0,
   Add = 1,
   Edit = 2,

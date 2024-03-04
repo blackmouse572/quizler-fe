@@ -16,8 +16,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
+import { EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -30,12 +36,6 @@ import {
   editQuizBankAction,
 } from "../actions/add-quiz-bank-action"
 import AddTagForm from "./add-tag-form"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { EQuizBankAction } from "@/types"
 
 const addQuizbankSchema = z.object({
   bankName: z
@@ -98,7 +98,7 @@ export type AddQuizbank = z.infer<typeof addQuizbankSchema>
 type AddQuizbankFormProps = {
   initialValues?: AddQuizbank
   // action if the form
-  action?: EQuizBankAction
+  action?: EFormAction
   /**
    * needed when action is edit
    */
@@ -106,11 +106,11 @@ type AddQuizbankFormProps = {
 }
 function AddQuizbankForm({
   initialValues,
-  action = EQuizBankAction.Add,
+  action = EFormAction.Add,
   quizBankId,
 }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
-  const i18Term = +action === +EQuizBankAction.Add ? "AddQuiz" : "EditQuiz"
+  const i18Term = +action === +EFormAction.Add ? "AddQuiz" : "EditQuiz"
   const i18n = useTranslations(i18Term)
   const errorI18n = useTranslations("Errors")
   const router = useRouter()
@@ -142,7 +142,7 @@ function AddQuizbankForm({
   const onSubmit = useCallback(
     async (value: AddQuizbank) => {
       let res
-      if (+action === +EQuizBankAction.Add) {
+      if (+action === +EFormAction.Add) {
         res = await addQuizBankAction(value)
       } else {
         res = await editQuizBankAction(value, quizBankId?.toString() ?? "")

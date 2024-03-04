@@ -3,10 +3,10 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
+import Footer from "@/components/footer"
 import Navbar, { MainNavItem } from "@/components/nav-bar"
 import { getUser, isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
-import Footer from "@/components/footer"
 
 type Props = {
   children?: React.ReactNode
@@ -42,7 +42,7 @@ async function MainLayout({ children }: Props) {
         children: [
           {
             label: tUserDropdown("classrooms.new"),
-            href: "/classrooms/create",
+            href: "/classrooms/add",
             icon: "Plus",
           },
           {
@@ -113,11 +113,13 @@ async function MainLayout({ children }: Props) {
           user={user}
         />
       </NextIntlClientProvider>
-      {children}
+      <div className="relative z-0">{children}</div>
       {/* TODO: fix z-position of footer */}
-      <NextIntlClientProvider messages={pick(m, "Footer", "Index")}>
-        <Footer className="fixed z-[100]" />
-      </NextIntlClientProvider>
+      <footer className="z-10">
+        <NextIntlClientProvider messages={pick(m, "Footer", "Index")}>
+          <Footer className="z-10" />
+        </NextIntlClientProvider>
+      </footer>
     </main>
   )
 }
