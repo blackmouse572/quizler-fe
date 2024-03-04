@@ -6,6 +6,7 @@ import React from "react"
 import Navbar, { MainNavItem } from "@/components/nav-bar"
 import { getUser, isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
+import Footer from "@/components/footer"
 
 type Props = {
   children?: React.ReactNode
@@ -113,6 +114,10 @@ async function MainLayout({ children }: Props) {
         />
       </NextIntlClientProvider>
       {children}
+      {/* TODO: fix z-position of footer */}
+      <NextIntlClientProvider messages={pick(m, "Footer", "Index")}>
+        <Footer className="fixed z-[100]" />
+      </NextIntlClientProvider>
     </main>
   )
 }

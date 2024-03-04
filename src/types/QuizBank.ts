@@ -1,10 +1,14 @@
 interface QuizBank {
   id: number
   bankName: string
-  authorName: string | null
+  authorName: string
+  author: {}
   quizes: []
   description: string
   visibility: "Public" | "Private"
+  rating: []
+  averageRating: number
+  tags: []
   created: string
   updated: string | null
 }

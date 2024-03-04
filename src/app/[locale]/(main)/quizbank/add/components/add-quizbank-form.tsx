@@ -133,7 +133,7 @@ function AddQuizbankForm({
           description: errorI18n(res.message),
         })
       } else {
-        router.push(`/quiz/${res.data.id}`)
+        router.push(`/quizbank/${res.data.id}`)
       }
     },
     [errorI18n, router, toast]
