@@ -38,6 +38,7 @@
     "caniuse-lite": "^1.0.30001571",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "cmdk": "^0.2.1",
     "date-fns": "^3.3.1",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
