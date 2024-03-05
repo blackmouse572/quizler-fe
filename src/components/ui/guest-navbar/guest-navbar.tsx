@@ -19,10 +19,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
-import { User } from "@/types/User"
-import { MenuItem } from "@/types/dropdown-menu"
 import { useMotionValueEvent, useScroll } from "framer-motion"
 import { useTranslations } from "next-intl"
 
@@ -37,17 +34,11 @@ export type MainNavItem = {
 type Props = {
   items?: MainNavItem[]
   className?: string
-  isAuthed?: boolean
-  user?: User
-  menuItems?: MenuItem[][]
 }
 
-function Navbar({
+export default function GuestNavbar({
   className,
-  isAuthed,
-  user,
   items = [],
-  menuItems = [],
 }: Props) {
   const segment = useSelectedLayoutSegment()
   // const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
@@ -65,31 +56,29 @@ function Navbar({
     }
   })
   const renderRightContent = useMemo(() => {
-    if (!isAuthed || !user)
-      return (
-        <>
-          <NavigationMenuItem asChild>
-            <Link href="/signup">
-              <Button variant="default" color={"primary"}>
-                {tNav("signup")}
-              </Button>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem asChild>
-            <Link href="/login">
-              <Button
-                variant="default"
-                className="shadow-none hover:bg-slate-300"
-                color={"accent"}
-              >
-                {tNav("signin")}
-              </Button>
-            </Link>
-          </NavigationMenuItem>
-        </>
-      )
-    else return <UserDropdown user={user} menuItems={menuItems} />
-  }, [isAuthed, menuItems, tNav, user])
+    return (
+      <>
+        <NavigationMenuItem asChild>
+          <Link href="/signup">
+            <Button variant="default" color={"primary"}>
+              {tNav("signup")}
+            </Button>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem asChild>
+          <Link href="/login">
+            <Button
+              variant="default"
+              className="shadow-none hover:bg-slate-300"
+              color={"accent"}
+            >
+              {tNav("signin")}
+            </Button>
+          </Link>
+        </NavigationMenuItem>
+      </>
+    )
+  }, [tNav])
 
   const renderDrawerMenu = useMemo(() => {
     return (
@@ -238,5 +227,3 @@ function Navbar({
     </NavigationMenu>
   )
 }
-
-export default Navbar

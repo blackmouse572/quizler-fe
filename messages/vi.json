@@ -14,6 +14,12 @@
     "getting_started": "Bắt đầu",
     "how_it_work": "Cách thức hoạt động?",
     "doc": "Tài liệu",
+    "search": "Tôi nên học...",
+    "my_quizlearn": "Quizlearn của tôi",
+    "my_classrooms":"Lớp học của tôi",
+    "subjects": "Môn",
+    "notification": "Thông báo",
+    "no_search_result_found": "Không có kết quả.",
     "getting_started_sec": {
       "introduction": {
         "title": "Giới thiệu",
@@ -27,7 +33,13 @@
         "title": "AI",
         "description": "Biết thêm thông tin với trí tuệ nhân tạo"
       }
-    }
+    },
+    "subject_item": {
+      "Math": "Toán",
+      "Literatue": "Ngữ văn",
+      "Science": "Khoa học",
+      "Other": "Khác"
+    } 
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"

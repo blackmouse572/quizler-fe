@@ -4,12 +4,23 @@ import { getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
 import Footer from "@/components/footer"
-import Navbar, { MainNavItem } from "@/components/nav-bar"
+import { MainNavItem } from "@/components/ui/guest-navbar/guest-navbar"
 import { getUser, isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
+import { fetchMyClassrooms } from "./classrooms/[id]/actions/fetch-my-classroom"
+import GuestNavbar from "@/components/ui/guest-navbar/guest-navbar"
+import LoggedInNavbar from "@/components/ui/logged-in-navbar/logged-in-navbar"
 
 type Props = {
   children?: React.ReactNode
+}
+
+async function getNavbarLoggedIn() {
+  const [myClassroomRes] = await Promise.all([fetchMyClassrooms()])
+
+  const myClassroomData = await myClassroomRes.json()
+
+  return { myClassroomData }
 }
 
 async function MainLayout({ children }: Props) {
@@ -100,18 +111,34 @@ async function MainLayout({ children }: Props) {
     },
   ]
 
+  let myClassroomData = null
+  if (isAuth && user) {
+    const { myClassroomData: data } = await getNavbarLoggedIn()
+    myClassroomData = data
+  }
+
+  const navbarComponent = isAuth && user ? (
+    <LoggedInNavbar
+      className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
+      items={mainNavbarItems}
+      menuItems={menuItems}
+      isAuthed={isAuth}
+      user={user}
+      myClassroomData={myClassroomData}
+    />
+  ) : (
+    <GuestNavbar
+      className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
+      items={mainNavbarItems}
+    />
+  );
+
   return (
     <main className="relative">
       <NextIntlClientProvider
         messages={pick(m, "UserDropdown", "Navbar", "Index")}
       >
-        <Navbar
-          className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
-          items={mainNavbarItems}
-          menuItems={menuItems}
-          isAuthed={isAuth}
-          user={user}
-        />
+        {navbarComponent}
       </NextIntlClientProvider>
       <div className="relative z-0">{children}</div>
       {/* TODO: fix z-position of footer */}
