@@ -11,7 +11,6 @@ type Props = ButtonProps & {
 }
 
 export default function CopyButton({ className, onClick, content, ...props }: Props) {
-  const t = useTranslations("Index")
 
   // TODO: Implement action
   const hanldeClick: MouseEventHandler<HTMLButtonElement> = (e) => {

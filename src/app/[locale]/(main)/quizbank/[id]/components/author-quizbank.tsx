@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getShortName } from "@/lib/string-helper"
 import CopyButton from "@/components/copy-button"
+import CopyQuizBankDialog from "./copy-quizbank-dialog"
 
 type Props = {
   authorData: any
@@ -56,7 +57,7 @@ export default function AuthorQuizBank({ authorData, classname }: Props) {
           </div>
         </div>
         <div className="flex justify-between gap-2">
-          <CopyButton content={i18n("author.copy_button")}/>
+          <CopyQuizBankDialog buttonContent={i18n("author.copy_button")} />
 
           <Tooltip>
             <TooltipTrigger asChild>
