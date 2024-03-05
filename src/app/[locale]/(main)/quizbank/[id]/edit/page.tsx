@@ -1,14 +1,14 @@
-import _ from "lodash"
-import { NextIntlClientProvider, useMessages, useTranslations } from "next-intl"
-import AddQuizbankForm, {
-  AddQuizbank,
-} from "../../add/components/add-quizbank-form"
-import { use } from "react"
 import {
   getQuizBankDetailPage,
   getQuizByQuizBankId,
 } from "@/services/quiz.service"
-import { EQuizBankAction } from "@/types"
+import { EFormAction } from "@/types"
+import _ from "lodash"
+import { NextIntlClientProvider, useMessages } from "next-intl"
+import { use } from "react"
+import AddQuizbankForm, {
+  AddQuizbank,
+} from "../../add/components/add-quizbank-form"
 
 type QuizBankDetailPageProps = {
   params: { id: string }
@@ -36,7 +36,7 @@ function EditQuizbank({ params }: QuizBankDetailPageProps) {
     >
       <AddQuizbankForm
         initialValues={initialValues}
-        action={EQuizBankAction.Edit}
+        action={EFormAction.Edit}
         quizBankId={data?.id?.toString()}
       />
     </NextIntlClientProvider>

@@ -516,5 +516,45 @@
       "placeholder": "New Quiz"
     },
     "errorBtn": "Errors messages"
+  },
+  "AddClassroom": {
+    "metadata": {
+      "title": "Create new classroom",
+      "description": "Manage all classrooms in the system"
+    },
+    "form": {
+      "title": "Create new classroom",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the name of the classroom"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the description of the classroom"
+      },
+      "plan-form": {
+        "starter": {
+          "title": "Starter",
+          "description": "Free",
+          "currency": "USD",
+          "features": {
+            "feature1": "Unlimited quizzes",
+            "feature2": "10 students",
+            "feature3": "10 games"
+          }
+        },
+        "premium": {
+          "title": "Premium",
+          "description": "Get more fun",
+          "currency": "USD",
+          "features": {
+            "feature1": "Unlimited quizzes",
+            "feature2": "Unlimited students",
+            "feature3": "Unlimited games"
+          }
+        },
+        "submit": "Create"
+      }
+    }
   }
 }

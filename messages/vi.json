@@ -318,6 +318,118 @@
       }
     }
   },
+  "Validations": {
+    "errors": {
+      "invalid_type": "Dự kiến {expected}, nhận được {received}",
+      "invalid_type_received_undefined": "Yêu cầu",
+      "invalid_literal": "Giá trị chữ không hợp lệ, dự kiến {expected}",
+      "unrecognized_keys": "Khóa không được nhận diện trong đối tượng: {- keys}",
+      "invalid_union": "Đầu vào không hợp lệ",
+      "invalid_union_discriminator": "Giá trị phân biệt không hợp lệ. Dự kiến {- options}",
+      "invalid_enum_value": "Giá trị enum không hợp lệ. Dự kiến {- options}, nhận được '{received}'",
+      "invalid_arguments": "Tham số hàm không hợp lệ",
+      "invalid_return_type": "Kiểu trả về của hàm không hợp lệ",
+      "invalid_date": "Ngày không hợp lệ",
+      "custom": "Đầu vào không hợp lệ",
+      "invalid_intersection_types": "Kết quả giao không thể được hợp nhất",
+      "not_multiple_of": "Số phải là bội số của {multipleOf}",
+      "not_finite": "Số phải là hữu hạn",
+      "invalid_string": {
+        "email": "{validation} không hợp lệ",
+        "url": "{validation} không hợp lệ",
+        "uuid": "{validation} không hợp lệ",
+        "cuid": "{validation} không hợp lệ",
+        "regex": "Không hợp lệ",
+        "datetime": "{validation} không hợp lệ",
+        "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
+        "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
+      },
+      "too_small": {
+        "array": {
+          "exact": "Mảng phải chứa đúng {minimum} phần tử",
+          "inclusive": "Mảng phải chứa ít nhất {minimum} phần tử",
+          "not_inclusive": "Mảng phải chứa nhiều hơn {minimum} phần tử"
+        },
+        "string": {
+          "exact": "Chuỗi phải chứa đúng {minimum} ký tự",
+          "inclusive": "Chuỗi phải chứa ít nhất {minimum} ký tự",
+          "not_inclusive": "Chuỗi phải chứa hơn {minimum} ký tự"
+        },
+        "number": {
+          "exact": "Số phải đúng bằng {minimum}",
+          "inclusive": "Số phải lớn hơn hoặc bằng {minimum}",
+          "not_inclusive": "Số phải lớn hơn {minimum}"
+        },
+        "set": {
+          "exact": "Đầu vào không hợp lệ",
+          "inclusive": "Đầu vào không hợp lệ",
+          "not_inclusive": "Đầu vào không hợp lệ"
+        },
+        "date": {
+          "exact": "Ngày phải đúng bằng {- minimum, datetime}",
+          "inclusive": "Ngày phải lớn hơn hoặc bằng {- minimum, datetime}",
+          "not_inclusive": "Ngày phải lớn hơn {- minimum, datetime}"
+        }
+      },
+      "too_big": {
+        "array": {
+          "exact": "Mảng phải chứa đúng {maximum} phần tử",
+          "inclusive": "Mảng phải chứa nhiều nhất {maximum} phần tử",
+          "not_inclusive": "Mảng phải chứa ít hơn {maximum} phần tử"
+        },
+        "string": {
+          "exact": "Chuỗi phải chứa đúng {maximum} ký tự",
+          "inclusive": "Chuỗi phải chứa nhiều nhất {maximum} ký tự",
+          "not_inclusive": "Chuỗi phải chứa dưới {maximum} ký tự"
+        },
+        "number": {
+          "exact": "Số phải đúng bằng {maximum}",
+          "inclusive": "Số phải nhỏ hơn hoặc bằng {maximum}",
+          "not_inclusive": "Số phải nhỏ hơn {maximum}"
+        },
+        "set": {
+          "exact": "Đầu vào không hợp lệ",
+          "inclusive": "Đầu vào không hợp lệ",
+          "not_inclusive": "Đầu vào không hợp lệ"
+        },
+        "date": {
+          "exact": "Ngày phải đúng bằng {- maximum, datetime}",
+          "inclusive": "Ngày phải nhỏ hơn hoặc bằng {- maximum, datetime}",
+          "not_inclusive": "Ngày phải nhỏ hơn {- maximum, datetime}"
+        }
+      }
+    },
+    "validations": {
+      "email": "email",
+      "url": "url",
+      "uuid": "uuid",
+      "cuid": "cuid",
+      "regex": "regex",
+      "datetime": "datetime"
+    },
+    "types": {
+      "function": "hàm",
+      "number": "số",
+      "string": "chuỗi",
+      "nan": "nan",
+      "integer": "số nguyên",
+      "float": "số thực",
+      "boolean": "boolean",
+      "date": "ngày",
+      "bigint": "số nguyên lớn",
+      "undefined": "không xác định",
+      "symbol": "ký hiệu",
+      "null": "null",
+      "array": "mảng",
+      "object": "đối tượng",
+      "unknown": "không xác định",
+      "promise": "promise",
+      "void": "void",
+      "never": "never",
+      "map": "map",
+      "set": "set"
+    }
+  },
   "AddQuiz": {
     "form": {
       "title": "Tạo ngân hàng câu hỏi mới",
@@ -397,5 +509,45 @@
     "email-existed": "Email đã tồn tại, vui lòng thử lại",
     "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
     "verification-failed": "Xác thực thất bại, vui lòng thử lại"
+  },
+  "AddClassroom": {
+    "metadata": {
+      "title": "Tạo lớp học mới",
+      "description": "Quản lý tất cả các lớp học trong hệ thống"
+    },
+    "form": {
+      "title": "Tạo lớp học mới",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên của lớp học"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả của lớp học"
+      },
+      "plan-form": {
+        "starter": {
+          "title": "Gói cơ bản",
+          "description": "Miễn phí",
+          "currency": "USD",
+          "features": {
+            "feature1": "Bài kiểm tra không giới hạn",
+            "feature2": "10 học sinh",
+            "feature3": "10 trò chơi"
+          }
+        },
+        "premium": {
+          "title": "Gói cao cấp",
+          "description": "Có nhiều niềm vui hơn",
+          "currency": "USD",
+          "features": {
+            "feature1": "Bài kiểm tra không giới hạn",
+            "feature2": "Học sinh không giới hạn",
+            "feature3": "Trò chơi không giới hạn"
+          }
+        },
+        "submit": "Tạo"
+      }
+    }
   }
 }

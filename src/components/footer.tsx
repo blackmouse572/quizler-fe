@@ -11,7 +11,7 @@ export default function Footer({ className }: Props) {
 
   return (
     <>
-      <div className="mt-80 flex w-full flex-col items-start justify-center self-stretch bg-white px-11 py-7 text-base max-md:mt-10 max-md:max-w-full max-md:px-5">
+      <div className="flex w-full flex-col items-start justify-center self-stretch bg-white px-11 py-7 text-base max-md:mt-10 max-md:max-w-full max-md:px-5">
         <div className="flex w-[923px] max-w-full justify-between gap-5 max-md:flex-wrap">
           <div className="flex flex-col">
             <div className="text-blsack flex gap-1.5 whitespace-nowrap text-center tracking-widest">

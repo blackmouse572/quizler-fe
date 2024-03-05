@@ -33,7 +33,7 @@ export interface Quiz {
 
 export default QuizBank
 
-export enum EQuizBankAction {
+export enum EFormAction {
   None = 0,
   Add = 1,
   Edit = 2,
