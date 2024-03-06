@@ -101,7 +101,7 @@ function UserDropdown({ user, menuItems }: Props) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src={user?.avatar} alt={user?.fullName} />
+          <AvatarImage src={user?.avatar || ""} alt={user?.fullName} />
           <AvatarFallback className="bg-gradient-to-bl ">
             <span className="text-white">{getShortName(user.fullName)}</span>
           </AvatarFallback>

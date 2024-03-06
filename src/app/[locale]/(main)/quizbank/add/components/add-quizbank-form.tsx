@@ -15,7 +15,15 @@ import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
+import { cn } from "@/lib/utils"
+import { EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -28,12 +36,6 @@ import {
   editQuizBankAction,
 } from "../actions/add-quiz-bank-action"
 import AddTagForm from "./add-tag-form"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { EQuizBankAction } from "@/types"
 
 const addQuizbankSchema = z.object({
   bankName: z
@@ -65,20 +67,20 @@ const addQuizbankSchema = z.object({
           .string({
             required_error: "errors.invalid_type_received_undefined",
           })
-          .min(3, {
+          .min(1, {
             message: "errors.too_small.string.inclusive",
           })
-          .max(500, {
+          .max(1000, {
             message: "errors.too_big.string.inclusive",
           }),
         answer: z
           .string({
             required_error: "errors.invalid_type_received_undefined",
           })
-          .min(3, {
+          .min(1, {
             message: "errors.too_small.string.inclusive",
           })
-          .max(500, {
+          .max(1000, {
             message: "errors.too_big.string.inclusive",
           }),
       })
@@ -96,7 +98,7 @@ export type AddQuizbank = z.infer<typeof addQuizbankSchema>
 type AddQuizbankFormProps = {
   initialValues?: AddQuizbank
   // action if the form
-  action?: EQuizBankAction
+  action?: EFormAction
   /**
    * needed when action is edit
    */
@@ -104,11 +106,11 @@ type AddQuizbankFormProps = {
 }
 function AddQuizbankForm({
   initialValues,
-  action = EQuizBankAction.Add,
+  action = EFormAction.Add,
   quizBankId,
 }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
-  const i18Term = +action === +EQuizBankAction.Add ? "AddQuiz" : "EditQuiz"
+  const i18Term = +action === +EFormAction.Add ? "AddQuiz" : "EditQuiz"
   const i18n = useTranslations(i18Term)
   const errorI18n = useTranslations("Errors")
   const router = useRouter()
@@ -140,7 +142,7 @@ function AddQuizbankForm({
   const onSubmit = useCallback(
     async (value: AddQuizbank) => {
       let res
-      if (+action === +EQuizBankAction.Add) {
+      if (+action === +EFormAction.Add) {
         res = await addQuizBankAction(value)
       } else {
         res = await editQuizBankAction(value, quizBankId?.toString() ?? "")
@@ -169,16 +171,22 @@ function AddQuizbankForm({
     return fields.map((item, index) => (
       <Card key={item.question + item.id} className="relative">
         <Icons.X
-          className="absolute right-4 top-4 h-4 w-4 cursor-pointer text-neutral-500"
+          className={cn(
+            "absolute right-4 top-4 h-4 w-4 cursor-pointer text-neutral-500",
+            {
+              hidden: index === 0,
+            }
+          )}
           onClick={() => removeQuiz(index)}
         />
         <CardContent className="flex justify-evenly gap-2 pt-6">
           <FormItem className="w-full">
-            <Label>{i18n("form.term.label")}</Label>
+            <Label required>{i18n("form.term.label")}</Label>
             <Textarea
+              required
               placeholder={i18n("form.term.placeholder")}
               rows={5}
-              maxLength={500}
+              maxLength={1000}
               {...form.register(`quizes.${index}.question`)}
             />
             {form.getFieldState(`quizes.${index}.question`).error && (
@@ -187,19 +195,19 @@ function AddQuizbankForm({
                   form.getFieldState(`quizes.${index}.question`).error
                     ?.message as any,
                   {
-                    maximum: 500,
-                    minimum: 3,
+                    maximum: 1000,
+                    minimum: 1,
                   }
                 )}
               </FormMessage>
             )}
           </FormItem>
           <FormItem className="w-full">
-            <Label>{i18n("form.definition.label")}</Label>
+            <Label required>{i18n("form.definition.label")}</Label>
             <Textarea
               rows={5}
               key={item.question + index}
-              maxLength={500}
+              maxLength={1000}
               placeholder={i18n("form.definition.placeholder")}
               {...form.register(`quizes.${index}.answer`)}
             />
@@ -209,8 +217,8 @@ function AddQuizbankForm({
                   form.getFieldState(`quizes.${index}.answer`).error
                     ?.message as any,
                   {
-                    maximum: 500,
-                    minimum: 3,
+                    maximum: 1000,
+                    minimum: 1,
                   }
                 )}
               </FormMessage>
@@ -219,7 +227,8 @@ function AddQuizbankForm({
         </CardContent>
       </Card>
     ))
-  }, [errori18n, fields, form, i18n, removeQuiz])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errori18n, fields, form, i18n, removeQuiz, form.formState])
 
   const renderAddButton = useMemo(() => {
     return (

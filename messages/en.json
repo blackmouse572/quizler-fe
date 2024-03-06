@@ -72,6 +72,16 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
+  "MyQuizbanks": {
+    "metadata": {
+      "title": "My Quiz Banks",
+      "description": "Manage all quiz banks in the system"
+    },
+    "headers": {
+      "index": "My Quiz Banks"
+    },
+    "terms": "Terms"
+  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quiz Bank",
@@ -123,6 +133,12 @@
     "getting_started": "Getting started",
     "how_it_work": "How it works?",
     "doc": "Documentation",
+    "search": "I should learn...",
+    "my_quizlearn": "My Quizlearn",
+    "my_classrooms":"My classrooms",
+    "subjects": "Subject",
+    "notification": "Notifications",
+    "no_search_result_found": "No result found.",
     "getting_started_sec": {
       "introduction": {
         "title": "Introduction",
@@ -136,7 +152,13 @@
         "title": "AI",
         "description": "Know more with information from AI"
       }
-    }
+    },
+    "subject_item": {
+      "Math": "Math",
+      "Literatue": "Literatue",
+      "Science": "Science",
+      "Other": "Other"
+    } 
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
@@ -506,5 +528,45 @@
       "placeholder": "New Quiz"
     },
     "errorBtn": "Errors messages"
+  },
+  "AddClassroom": {
+    "metadata": {
+      "title": "Create new classroom",
+      "description": "Manage all classrooms in the system"
+    },
+    "form": {
+      "title": "Create new classroom",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the name of the classroom"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the description of the classroom"
+      },
+      "plan-form": {
+        "starter": {
+          "title": "Starter",
+          "description": "Free",
+          "currency": "USD",
+          "features": {
+            "feature1": "Unlimited quizzes",
+            "feature2": "10 students",
+            "feature3": "10 games"
+          }
+        },
+        "premium": {
+          "title": "Premium",
+          "description": "Get more fun",
+          "currency": "USD",
+          "features": {
+            "feature1": "Unlimited quizzes",
+            "feature2": "Unlimited students",
+            "feature3": "Unlimited games"
+          }
+        },
+        "submit": "Create"
+      }
+    }
   }
 }

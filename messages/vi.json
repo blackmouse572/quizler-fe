@@ -14,6 +14,12 @@
     "getting_started": "Bắt đầu",
     "how_it_work": "Cách thức hoạt động?",
     "doc": "Tài liệu",
+    "search": "Tôi nên học...",
+    "my_quizlearn": "Quizlearn của tôi",
+    "my_classrooms":"Lớp học của tôi",
+    "subjects": "Môn",
+    "notification": "Thông báo",
+    "no_search_result_found": "Không có kết quả.",
     "getting_started_sec": {
       "introduction": {
         "title": "Giới thiệu",
@@ -27,7 +33,13 @@
         "title": "AI",
         "description": "Biết thêm thông tin với trí tuệ nhân tạo"
       }
-    }
+    },
+    "subject_item": {
+      "Math": "Toán",
+      "Literatue": "Ngữ văn",
+      "Science": "Khoa học",
+      "Other": "Khác"
+    } 
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
@@ -159,6 +171,16 @@
     "apply": "Áp dụng",
     "take-value": "Hiển thị {count} dòng"
   },
+  "MyQuizbanks": {
+    "metadata": {
+      "title": "Quản lý ngân hàng câu hỏi",
+      "description": "Quản lý tất cả các ngân hàng câu hỏi của bạn"
+    },
+    "headers": {
+      "index": "Quizbank của tôi"
+    },
+    "terms": "Thuật ngữ"
+  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quản lý Quiz",
@@ -259,21 +281,21 @@
     "profile": "Hồ sơ",
     "billing": "Thanh toán",
     "settings": "Cài đặt",
-    "invite": "Mời bạn bè",
     "new_classroom": "Tạo lớp học mới",
-    "faq": "Câu hỏi thường gặp",
-    "support": "Hỗ trợ",
-    "signout": "Đăng xuất",
     "classrooms": {
       "index": "Lớp học",
-      "new": "Lớp học mới",
+      "new": "Tạo lớp học mới",
       "my_classrooms": "Lớp học của tôi"
     },
     "quizbank": {
-      "index": "Ngân hàng câu hỏi",
-      "new": "Câu hỏi mới",
-      "my_quizbanks": "Ngân hàng câu hỏi của tôi"
-    }
+      "index": "Quizbank",
+      "new": "Tạo quizbank mới",
+      "my_quizbanks": "Quizbank của tôi"
+    },
+    "invite": "Mời bạn bè",
+    "faq": "Câu hỏi thường gặp",
+    "support": "Hỗ trợ",
+    "signout": "Đăng xuất"
   },
   "EditQuiz": {
     "form": {
@@ -306,6 +328,118 @@
         "label": "Định nghĩa",
         "placeholder": "Nhập định nghĩa"
       }
+    }
+  },
+  "Validations": {
+    "errors": {
+      "invalid_type": "Dự kiến {expected}, nhận được {received}",
+      "invalid_type_received_undefined": "Yêu cầu",
+      "invalid_literal": "Giá trị chữ không hợp lệ, dự kiến {expected}",
+      "unrecognized_keys": "Khóa không được nhận diện trong đối tượng: {- keys}",
+      "invalid_union": "Đầu vào không hợp lệ",
+      "invalid_union_discriminator": "Giá trị phân biệt không hợp lệ. Dự kiến {- options}",
+      "invalid_enum_value": "Giá trị enum không hợp lệ. Dự kiến {- options}, nhận được '{received}'",
+      "invalid_arguments": "Tham số hàm không hợp lệ",
+      "invalid_return_type": "Kiểu trả về của hàm không hợp lệ",
+      "invalid_date": "Ngày không hợp lệ",
+      "custom": "Đầu vào không hợp lệ",
+      "invalid_intersection_types": "Kết quả giao không thể được hợp nhất",
+      "not_multiple_of": "Số phải là bội số của {multipleOf}",
+      "not_finite": "Số phải là hữu hạn",
+      "invalid_string": {
+        "email": "{validation} không hợp lệ",
+        "url": "{validation} không hợp lệ",
+        "uuid": "{validation} không hợp lệ",
+        "cuid": "{validation} không hợp lệ",
+        "regex": "Không hợp lệ",
+        "datetime": "{validation} không hợp lệ",
+        "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
+        "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
+      },
+      "too_small": {
+        "array": {
+          "exact": "Mảng phải chứa đúng {minimum} phần tử",
+          "inclusive": "Mảng phải chứa ít nhất {minimum} phần tử",
+          "not_inclusive": "Mảng phải chứa nhiều hơn {minimum} phần tử"
+        },
+        "string": {
+          "exact": "Chuỗi phải chứa đúng {minimum} ký tự",
+          "inclusive": "Chuỗi phải chứa ít nhất {minimum} ký tự",
+          "not_inclusive": "Chuỗi phải chứa hơn {minimum} ký tự"
+        },
+        "number": {
+          "exact": "Số phải đúng bằng {minimum}",
+          "inclusive": "Số phải lớn hơn hoặc bằng {minimum}",
+          "not_inclusive": "Số phải lớn hơn {minimum}"
+        },
+        "set": {
+          "exact": "Đầu vào không hợp lệ",
+          "inclusive": "Đầu vào không hợp lệ",
+          "not_inclusive": "Đầu vào không hợp lệ"
+        },
+        "date": {
+          "exact": "Ngày phải đúng bằng {- minimum, datetime}",
+          "inclusive": "Ngày phải lớn hơn hoặc bằng {- minimum, datetime}",
+          "not_inclusive": "Ngày phải lớn hơn {- minimum, datetime}"
+        }
+      },
+      "too_big": {
+        "array": {
+          "exact": "Mảng phải chứa đúng {maximum} phần tử",
+          "inclusive": "Mảng phải chứa nhiều nhất {maximum} phần tử",
+          "not_inclusive": "Mảng phải chứa ít hơn {maximum} phần tử"
+        },
+        "string": {
+          "exact": "Chuỗi phải chứa đúng {maximum} ký tự",
+          "inclusive": "Chuỗi phải chứa nhiều nhất {maximum} ký tự",
+          "not_inclusive": "Chuỗi phải chứa dưới {maximum} ký tự"
+        },
+        "number": {
+          "exact": "Số phải đúng bằng {maximum}",
+          "inclusive": "Số phải nhỏ hơn hoặc bằng {maximum}",
+          "not_inclusive": "Số phải nhỏ hơn {maximum}"
+        },
+        "set": {
+          "exact": "Đầu vào không hợp lệ",
+          "inclusive": "Đầu vào không hợp lệ",
+          "not_inclusive": "Đầu vào không hợp lệ"
+        },
+        "date": {
+          "exact": "Ngày phải đúng bằng {- maximum, datetime}",
+          "inclusive": "Ngày phải nhỏ hơn hoặc bằng {- maximum, datetime}",
+          "not_inclusive": "Ngày phải nhỏ hơn {- maximum, datetime}"
+        }
+      }
+    },
+    "validations": {
+      "email": "email",
+      "url": "url",
+      "uuid": "uuid",
+      "cuid": "cuid",
+      "regex": "regex",
+      "datetime": "datetime"
+    },
+    "types": {
+      "function": "hàm",
+      "number": "số",
+      "string": "chuỗi",
+      "nan": "nan",
+      "integer": "số nguyên",
+      "float": "số thực",
+      "boolean": "boolean",
+      "date": "ngày",
+      "bigint": "số nguyên lớn",
+      "undefined": "không xác định",
+      "symbol": "ký hiệu",
+      "null": "null",
+      "array": "mảng",
+      "object": "đối tượng",
+      "unknown": "không xác định",
+      "promise": "promise",
+      "void": "void",
+      "never": "never",
+      "map": "map",
+      "set": "set"
     }
   },
   "AddQuiz": {
@@ -387,5 +521,45 @@
     "email-existed": "Email đã tồn tại, vui lòng thử lại",
     "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
     "verification-failed": "Xác thực thất bại, vui lòng thử lại"
+  },
+  "AddClassroom": {
+    "metadata": {
+      "title": "Tạo lớp học mới",
+      "description": "Quản lý tất cả các lớp học trong hệ thống"
+    },
+    "form": {
+      "title": "Tạo lớp học mới",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên của lớp học"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả của lớp học"
+      },
+      "plan-form": {
+        "starter": {
+          "title": "Gói cơ bản",
+          "description": "Miễn phí",
+          "currency": "USD",
+          "features": {
+            "feature1": "Bài kiểm tra không giới hạn",
+            "feature2": "10 học sinh",
+            "feature3": "10 trò chơi"
+          }
+        },
+        "premium": {
+          "title": "Gói cao cấp",
+          "description": "Có nhiều niềm vui hơn",
+          "currency": "USD",
+          "features": {
+            "feature1": "Bài kiểm tra không giới hạn",
+            "feature2": "Học sinh không giới hạn",
+            "feature3": "Trò chơi không giới hạn"
+          }
+        },
+        "submit": "Tạo"
+      }
+    }
   }
 }

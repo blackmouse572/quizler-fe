@@ -1,9 +1,8 @@
 import BackgroundSquare from "@/components/background-square"
 
-type QuizbankLayoutProps = {
-  children?: React.ReactNode
-}
-function QuizbankLayout({ children }: QuizbankLayoutProps) {
+type Props = { children?: React.ReactNode }
+
+function ClassroomLayout({ children }: Props) {
   return (
     <BackgroundSquare
       variant={"topDown"}
@@ -14,4 +13,4 @@ function QuizbankLayout({ children }: QuizbankLayoutProps) {
   )
 }
 
-export default QuizbankLayout
+export default ClassroomLayout

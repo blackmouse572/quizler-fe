@@ -1,4 +1,4 @@
-import { MainNavItem } from "@/components/nav-bar"
+import { MainNavItem } from "@/components/ui/guest-navbar/guest-navbar"
 
 const MAIN_NAVBAR_ITEMS: MainNavItem[] = [
   {
