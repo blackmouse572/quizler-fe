@@ -1,5 +1,4 @@
 "use client"
-import { useTranslations } from "next-intl"
 import { Button, ButtonProps } from "./ui/button"
 import { Icons } from "./ui/icons"
 import { cn } from "@/lib/utils"

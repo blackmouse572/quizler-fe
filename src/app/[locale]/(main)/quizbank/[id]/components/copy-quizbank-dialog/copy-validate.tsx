@@ -19,5 +19,15 @@ const getCopyQuizShema = (copyToOptions: [string, ...string[]], classRoomOptions
     }))
 type CopyQuizBankSchemaType = z.infer<typeof CopyQuizBankSchema>
 
+export const copyToChoice = [
+  {
+    id: "classroom",
+    text: "Classroom",
+  },
+  {
+    id: "personal",
+    text: "Personal",
+  },
+]
 export default getCopyQuizShema
 export type { CopyQuizBankSchemaType }

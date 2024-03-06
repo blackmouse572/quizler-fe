@@ -4,11 +4,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
-import { CopyIcon, InfoCircledIcon } from "@radix-ui/react-icons"
+import { InfoCircledIcon } from "@radix-ui/react-icons"
 import { useTranslations } from "next-intl"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getShortName } from "@/lib/string-helper"
-import CopyButton from "@/components/copy-button"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 
 type Props = {

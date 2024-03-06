@@ -16,7 +16,7 @@
     "doc": "Tài liệu",
     "search": "Tôi nên học...",
     "my_quizlearn": "Quizlearn của tôi",
-    "my_classrooms":"Lớp học của tôi",
+    "my_classrooms": "Lớp học của tôi",
     "subjects": "Môn",
     "notification": "Thông báo",
     "no_search_result_found": "Không có kết quả.",
@@ -39,7 +39,7 @@
       "Literatue": "Ngữ văn",
       "Science": "Khoa học",
       "Other": "Khác"
-    } 
+    }
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
@@ -327,6 +327,36 @@
       "definition": {
         "label": "Định nghĩa",
         "placeholder": "Nhập định nghĩa"
+      }
+    }
+  },
+  "CopyQuizBank": {
+    "title": "Sao chép ngân hàng câu hỏi này", 
+    "description": "Bạn có muốn sao chép ngân hàng câu hỏi này với",
+    "quizzes": "câu hỏi",
+    "form": {
+      "name": {
+        "label": "Name",
+        "text": "Tên",
+        "placeholder": "Nhập tên của ngân hàng câu hỏi"
+      },
+      "copyTo": {
+        "label": "copyTo",
+        "text": "Sao chép tới",
+        "placeholder": "Chọn nơi để sao chép"
+      },
+      "classroom": {
+        "label": "classroom",
+        "text": "Lớp",
+        "placeholder": "Chọn lớp để sao chép tới"
+      },
+      "public": {
+        "label": "public",
+        "text": "Công khai"
+      },
+      "button" : {
+        "cancel": "Hủy",
+        "submit": "Sao chép"
       }
     }
   },

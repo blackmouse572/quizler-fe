@@ -19,19 +19,21 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
+  SelectLabel,
+  SelectGroup,
 } from "@/components/ui/select"
 import { Dialog } from "@radix-ui/react-dialog"
 import { Select } from "@radix-ui/react-select"
 import { useCallback } from "react"
-import getCopyQuizShema, { CopyQuizBankSchemaType } from "./copy-validate"
+import getCopyQuizShema, { CopyQuizBankSchemaType, copyToChoice } from "./copy-validate"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslations } from "next-intl"
 
 type Props = {
   buttonContent: string
@@ -53,23 +55,28 @@ const classRoomChoices = [
 ]
 
 export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
+  const i18n = useTranslations("CopyQuizBank")
+
   const renderClassChoice = useCallback(
-    (items: { id: string; text: string }[]) => (
+    (items: { id: string; text: string }[], label: string) => (
       <Select required>
         <SelectTrigger>
-          <SelectValue placeholder="Classroom" />
+          <SelectValue placeholder={items[0].text} />
         </SelectTrigger>
         <SelectContent>
-          {items.map((item) => (
-            <SelectItem value={item.id}>{item.text}</SelectItem>
-          ))}
+          <SelectGroup>
+            <SelectLabel>{label}</SelectLabel>
+            {items.map((item) => (
+              <SelectItem value={item.id}>{item.text}</SelectItem>
+            ))}
+          </SelectGroup>
         </SelectContent>
       </Select>
     ),
     []
   )
 
-  const copyTochoices = classRoomChoices.map((choice) => choice.id) as [
+  const copyTochoices = copyToChoice.map((choice) => choice.id) as [
     string,
     ...string[],
   ]
@@ -114,7 +121,7 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
             return (
               <div className="space-y-1">
                 <FormLabel required htmlFor="">
-                  {"Name"}
+                  {i18n("form.name.label")}
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -122,7 +129,7 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
                     required
                     className="rounded-sm"
                     id="name"
-                    placeholder={"name"}
+                    placeholder={i18n("form.name.placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -139,9 +146,11 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
             return (
               <div className="space-y-1">
                 <FormLabel required htmlFor="">
-                  {"Copy To"}
+                  {i18n("form.copyTo.text")}
                 </FormLabel>
-                <FormControl>{renderClassChoice(classRoomChoices)}</FormControl>
+                <FormControl>
+                  {renderClassChoice(copyToChoice, i18n("form.copyTo.text"))}
+                </FormControl>
                 <FormMessage />
               </div>
             )
@@ -155,9 +164,14 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
             return (
               <div className="space-y-1">
                 <FormLabel required htmlFor="">
-                  {"Class Room"}
+                  {i18n("form.classroom.text")}
                 </FormLabel>
-                <FormControl>{renderClassChoice(classRoomChoices)}</FormControl>
+                <FormControl>
+                  {renderClassChoice(
+                    classRoomChoices,
+                    i18n("form.classroom.text")
+                  )}
+                </FormControl>
                 <FormMessage />
               </div>
             )
@@ -165,7 +179,7 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
         />
       </>
     ),
-    [form, renderClassChoice]
+    [form.control, i18n, renderClassChoice]
   )
 
   return (
@@ -174,33 +188,33 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
         <CopyButton content={buttonContent} />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-        <DialogHeader>
-          <div className="space-y-2">
-            <DialogTitle>Copy this quizbank</DialogTitle>
-            <DialogDescription>
-              {"Do you want to copy this bank with"}
-              <span className="font-bold">230 quizzes</span>?
-            </DialogDescription>
-          </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <DialogHeader>
+              <div className="space-y-2">
+                <DialogTitle>{i18n("title")}</DialogTitle>
+                <DialogDescription>
+                  {i18n("description")}
+                  <span className="font-bold"> 230 {i18n("quizzes")}</span>?
+                </DialogDescription>
+              </div>
 
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            {copyForm()}
-          </div>
-        </DialogHeader>
-        <DialogFooter className="mt-4 flex justify-between sm:justify-between">
-          <DialogClose asChild>
-            <Button type="reset" variant="outline" color="accent">
-              Cancel
-            </Button>
-          </DialogClose>
-          <Button type="submit" variant="default">
-            Copy
-          </Button>
-        </DialogFooter>
-        </form>
-      </Form>
+              <div className="grid w-full max-w-sm items-center gap-1.5">
+                {copyForm()}
+              </div>
+            </DialogHeader>
+            <DialogFooter className="mt-4 flex justify-between sm:justify-between">
+              <DialogClose asChild>
+                <Button type="reset" variant="outline" color="accent">
+                  {i18n("form.button.cancel")}
+                </Button>
+              </DialogClose>
+              <Button type="submit" variant="default">
+                {i18n("form.button.submit")}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   )
