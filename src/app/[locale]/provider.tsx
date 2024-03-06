@@ -26,6 +26,10 @@ export function Providers(props: {
         },
       })
   )
+  React.useEffect(() => {
+    if (!props.user) return
+    setUser(props.user)
+  }, [props, setUser])
 
   const doLogout = React.useCallback(() => {
     logout()

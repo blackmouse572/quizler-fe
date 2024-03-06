@@ -20,7 +20,7 @@ function getAllClassroom() {
     },
   }
 
-  return fetch(getAPIServerURL("/api/classrooms"), options).then((data) =>
+  return fetch(getAPIServerURL("/classrooms"), options).then((data) =>
     data.json()
   )
 }

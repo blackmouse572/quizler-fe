@@ -2,6 +2,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { Toaster } from "@/components/ui/toaster"
 import { siteConfig } from "@/lib/config/siteconfig"
 import { cn } from "@/lib/utils"
+import { GeistMono } from "geist/font/mono"
 import type { Metadata } from "next"
 import { Montserrat, Plus_Jakarta_Sans } from "next/font/google"
 
@@ -78,6 +79,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           "min-h-screen bg-background font-sans antialiased",
           montserrat.variable,
           plusJakarta.variable,
+          GeistMono.variable,
         ])}
       >
         <GoogleProvider>
