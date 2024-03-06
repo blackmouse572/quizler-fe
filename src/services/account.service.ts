@@ -23,7 +23,7 @@ export function fetchClassroomByUserId(token: string, userId: string) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
-    }
+    },
   }
 
   return fetch(URL, options).then((response) => {
@@ -32,7 +32,6 @@ export function fetchClassroomByUserId(token: string, userId: string) {
     }
     return response.json()
   })
-
 }
 
 export function fetchClassroomCurrentUser(token: string) {
@@ -43,14 +42,18 @@ export function fetchClassroomCurrentUser(token: string) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
-    }
+    },
   }
 
-  return fetch(URL, options).then((response) => {
+  return fetch(URL, options).then(async (response) => {
+    // console.log("response: ", response)
+    // console.log("response json: ", response.json())
+    debugger;
     if (!response.ok) {
-      throw new Error(response.statusText)
+      const error = await response.json()
+      throw new Error(error.message)
     }
-    return response.json()
+    const result = await response.json()
+    return result;
   })
-
 }
