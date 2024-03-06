@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import { Montserrat, Plus_Jakarta_Sans } from "next/font/google"
 
 import GoogleProvider from "@/app/[locale]/components/GoogleProvider"
+import { Providers } from "@/app/[locale]/provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { pick } from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
@@ -79,12 +80,14 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
       >
         <GoogleProvider>
           <TooltipProvider>
-            <NextIntlClientProvider
-              locale={locale}
-              messages={pick(messages, "NotFound", "Error", "Errors")}
-            >
-              {children}
-            </NextIntlClientProvider>
+            <Providers>
+              <NextIntlClientProvider
+                locale={locale}
+                messages={pick(messages, "NotFound", "Error", "Errors")}
+              >
+                {children}
+              </NextIntlClientProvider>
+            </Providers>
           </TooltipProvider>
         </GoogleProvider>
         <Toaster />
