@@ -98,12 +98,12 @@ function GenerateJoinDialog({ classroomId }: Props) {
         color="accent"
         isIconOnly
         className="-mr-2"
-        onClick={() => copy("https://www.google.com")}
+        onClick={() => copy(getAbsoluteURL(`/classroom?${data?.data?.code}`))}
       >
         {isURLCopied ? <Icons.Checked /> : <Icons.Copy />}
       </Button>
     )
-  }, [copy, isURLCopied])
+  }, [copy, data?.data?.code, isURLCopied])
 
   const buttonCode = useMemo(() => {
     return (
