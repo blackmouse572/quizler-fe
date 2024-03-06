@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useSelectedLayoutSegment } from "next/navigation"
 import React, { useMemo } from "react"
 
+import NotificationDropdown from "@/components/notification-dropdown"
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
 import { buttonVariants } from "@/components/ui/button"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
@@ -14,19 +15,18 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
 import { User } from "@/types/User"
 import { MenuItem } from "@/types/dropdown-menu"
+import { MyClassrooms } from "@/types/my-classrooms"
 import { useMotionValueEvent, useScroll } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { MyClassrooms } from "@/types/my-classrooms"
+import GlobalSearch from "./global-search"
 import { LoggedInAnimatedListItemMyClassroom } from "./logged-in-animated-list-item-my-classroom"
 import { LoggedInAnimatedListItemSubject } from "./logged-in-animated-list-item-subject"
-import NotificationDropdown from "@/components/notification-dropdown"
-import GlobalSearch from "./global-search"
 
 export type MainNavItem = {
   title: string
@@ -35,8 +35,6 @@ export type MainNavItem = {
   description?: string
   disabled?: boolean
 }
-
-
 
 type Props = {
   items?: MainNavItem[]

@@ -568,5 +568,19 @@
         "submit": "Create"
       }
     }
+  },
+  "Invite_classroom": {
+    "title": "Invite a friend",
+    "description": "Invite your friend to join your classroom",
+    "link": "Invitation link",
+    "code": "Invitation code",
+    "toast_link": {
+      "title": "Copied link to clipboard",
+      "description": "You can now paste the link to your friend"
+    },
+    "toast_code": {
+      "title": "Copied code to clipboard",
+      "description": "You can now paste the code to your friend"
+    }
   }
 }

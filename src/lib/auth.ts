@@ -1,6 +1,6 @@
 //Use server only !
-import jwt from "jsonwebtoken"
 import { Token, User } from "@/types/User"
+import jwt from "jsonwebtoken"
 import { cookies } from "next/headers"
 import { NextRequest } from "next/server"
 
@@ -83,10 +83,17 @@ export function removeRefreshToken() {
 }
 
 export function isAuthenticated(req?: NextRequest) {
-  if (req) {
-    return !!req.cookies.get(TOKEN_KEY.accessToken)
+  const accessToken = req
+    ? req.cookies.get(TOKEN_KEY.accessToken)
+    : cookies().get(TOKEN_KEY.accessToken)
+  const expiredAt = req
+    ? req.cookies.get(TOKEN_KEY.accessTokenExp)
+    : cookies().get(TOKEN_KEY.accessTokenExp)
+
+  if (!accessToken || !expiredAt) {
+    return false
   } else {
-    return !!cookies().get(TOKEN_KEY.accessToken)
+    return true
   }
 }
 const ISSUER = "Quizlearner"
