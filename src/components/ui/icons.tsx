@@ -26,6 +26,7 @@ import {
   IconFilter,
   IconHandStop,
   IconLifebuoy,
+  IconLink,
   IconLoader2,
   IconLogout2,
   IconMail,
@@ -88,6 +89,7 @@ export const Icons = {
   CaretUpFilled: IconCaretUpFilled,
   CaretDownFilled: IconCaretDownFilled,
   Support: IconLifebuoy,
+  Link: IconLink,
   DotVertical: IconDotsVertical,
 
   //Chevrons

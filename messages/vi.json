@@ -16,7 +16,7 @@
     "doc": "Tài liệu",
     "search": "Tôi nên học...",
     "my_quizlearn": "Quizlearn của tôi",
-    "my_classrooms":"Lớp học của tôi",
+    "my_classrooms": "Lớp học của tôi",
     "subjects": "Môn",
     "notification": "Thông báo",
     "no_search_result_found": "Không có kết quả.",
@@ -39,7 +39,7 @@
       "Literatue": "Ngữ văn",
       "Science": "Khoa học",
       "Other": "Khác"
-    } 
+    }
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
@@ -560,6 +560,20 @@
         },
         "submit": "Tạo"
       }
+    }
+  },
+  "Invite_classroom": {
+    "title": "Mời bạn bè",
+    "description": "Hãy sử dụng mã ở dưới để tham gia vào lớp học",
+    "link": "Link mời bạn bè",
+    "code": "Mã mời bạn bè",
+    "toast_link": {
+      "title": "Đã sao chép link ",
+      "description": "Bạn có thể dán link vào nơi bạn muốn"
+    },
+    "toast_code": {
+      "title": "Đã sao chép mã",
+      "description": "Bạn có thể dán link vào nơi bạn muốn"
     }
   }
 }

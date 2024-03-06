@@ -1,15 +1,14 @@
 "use client"
 
-import * as React from "react"
 import {
   CalendarIcon,
   EnvelopeClosedIcon,
   FaceIcon,
   GearIcon,
-  MagnifyingGlassIcon,
   PersonIcon,
   RocketIcon,
 } from "@radix-ui/react-icons"
+import * as React from "react"
 
 import {
   CommandDialog,
@@ -21,6 +20,8 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
+import { Icons } from "@/components/ui/icons"
+import KBD from "@/components/ui/kbd"
 import { useTranslations } from "next-intl"
 import { Button } from "../button"
 
@@ -49,15 +50,15 @@ export default function GlobalSearch() {
     <>
       <Button
         onClick={handleClick}
-        variant="light"
-        color={null}
+        variant={"ghost"}
+        color={"accent"}
         className="hidden text-sm md:flex"
       >
-        <MagnifyingGlassIcon />
+        <Icons.Search />
         <div className="mr-4">{tNav("search")}</div>
-        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs">⌘</span>J
-        </kbd>
+        <KBD>
+          <span>⌘</span>J
+        </KBD>
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>

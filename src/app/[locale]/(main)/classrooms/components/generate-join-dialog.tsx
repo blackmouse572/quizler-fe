@@ -33,11 +33,17 @@ async function getClassroomInviteCodeFetch(classroomId: string) {
 }
 
 function GenerateJoinDialog({ classroomId }: Props) {
+  const [isOpen, setOpen] = useState(false)
   const { isLoading, data, error, isError, refetch } = useQuery({
     queryKey: ["classroom", classroomId],
     queryFn: () => {
       return getClassroomInviteCodeFetch(classroomId)
     },
+    enabled: isOpen,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchIntervalInBackground: false,
   })
   const t = useTranslations("Invite_classroom")
   const { toast } = useToast()
@@ -144,7 +150,7 @@ function GenerateJoinDialog({ classroomId }: Props) {
     const code = data?.data?.code || ""
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 font-mono">
         <div>
           <Label>{t("link")}</Label>
           <Input
@@ -171,10 +177,10 @@ function GenerateJoinDialog({ classroomId }: Props) {
   ])
 
   return (
-    <Dialog defaultOpen>
+    <Dialog open={isOpen} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" isIconOnly>
-          <Icons.School />
+        <Button variant="flat" color="accent" isIconOnly>
+          <Icons.Link />
         </Button>
       </DialogTrigger>
       <DialogContent>

@@ -2,9 +2,10 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { Classroom } from "@/types"
 
 async function getClassroomDetails(id: string) {
-  const url = getAPIServerURL(`/classrooms/${id}`)
+  const url = getAPIServerURL(`/api/classrooms/${id}`)
   const { token } = getToken()
   const options: RequestInit = {
     method: "GET",
@@ -37,3 +38,5 @@ async function getClassroomDetails(id: string) {
       }
     })
 }
+
+export default getClassroomDetails

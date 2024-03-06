@@ -1,3 +1,5 @@
+import { User } from "@/types"
+
 type ClassroomInvitation = {
   id: string
   classroomId: string
@@ -9,4 +11,11 @@ type ClassroomInvitation = {
   revoked: boolean | null
 }
 
-export type { ClassroomInvitation }
+type Classroom = {
+  classname: string
+  account: User
+  id: string
+  description: string
+}
+
+export type { Classroom, ClassroomInvitation }

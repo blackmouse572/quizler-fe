@@ -25,8 +25,8 @@ const Input = React.forwardRef<InputRef, InputProps>(
           type={type}
           className="w-full p-2 placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
           ref={ref}
-          readOnly
-          disabled
+          readOnly={readOnly}
+          disabled={disabled}
           {...props}
         />
       </div>
