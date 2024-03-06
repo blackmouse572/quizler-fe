@@ -173,7 +173,7 @@ const buttonVariants = cva(
       {
         color: "accent",
         variant: "flat",
-        className: "bg-accent/20 text-accent-foreground",
+        className: "bg-accent text-accent-foreground",
       },
       {
         color: "danger",
