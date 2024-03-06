@@ -29,11 +29,17 @@ import {
 } from "@/components/ui/select"
 import { Dialog } from "@radix-ui/react-dialog"
 import { Select } from "@radix-ui/react-select"
-import { useCallback } from "react"
-import getCopyQuizShema, { CopyQuizBankSchemaType, copyToChoice } from "./copy-validate"
-import { useForm } from "react-hook-form"
+import { useCallback, useState } from "react"
+import getCopyQuizShema, {
+  CopyQuizBankSchemaType,
+  ECopyTo,
+  copyToChoice,
+} from "./copy-validate"
+import { ControllerRenderProps, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
 
 type Props = {
   buttonContent: string
@@ -56,10 +62,22 @@ const classRoomChoices = [
 
 export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
   const i18n = useTranslations("CopyQuizBank")
+  const [copyToValue, setCopyToValue] = useState<ECopyTo>(ECopyTo.classroom)
 
   const renderClassChoice = useCallback(
-    (items: { id: string; text: string }[], label: string) => (
-      <Select required>
+    (
+      field: ControllerRenderProps<
+        {
+          name: string
+          copyTo: string
+          classRoom: string
+        },
+        any
+      >,
+      items: { id: string; text: string }[],
+      label: string
+    ) => (
+      <Select onValueChange={field.onChange} required>
         <SelectTrigger>
           <SelectValue placeholder={items[0].text} />
         </SelectTrigger>
@@ -143,13 +161,20 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
           control={form.control}
           name="copyTo"
           render={({ field }) => {
+            field.onChange = (...event: any[]) => {
+              setCopyToValue(event[0])
+            }
             return (
               <div className="space-y-1">
                 <FormLabel required htmlFor="">
                   {i18n("form.copyTo.text")}
                 </FormLabel>
                 <FormControl>
-                  {renderClassChoice(copyToChoice, i18n("form.copyTo.text"))}
+                  {renderClassChoice(
+                    field,
+                    copyToChoice,
+                    i18n("form.copyTo.text")
+                  )}
                 </FormControl>
                 <FormMessage />
               </div>
@@ -161,25 +186,31 @@ export default function CopyQuizBankDialog({ buttonContent, ...props }: Props) {
           control={form.control}
           name="classRoom"
           render={({ field }) => {
-            return (
+            return copyToValue === ECopyTo.classroom ? (
               <div className="space-y-1">
                 <FormLabel required htmlFor="">
                   {i18n("form.classroom.text")}
                 </FormLabel>
                 <FormControl>
                   {renderClassChoice(
+                    field,
                     classRoomChoices,
                     i18n("form.classroom.text")
                   )}
                 </FormControl>
                 <FormMessage />
               </div>
+            ) : (
+              <div className="ml-1 mt-2 flex items-center space-x-2">
+                <Checkbox id={i18n("form.public.label")} variant={"square"} />
+                <Label htmlFor={i18n("form.public.label")}>{i18n("form.public.text")}</Label>
+              </div>
             )
           }}
         />
       </>
     ),
-    [form.control, i18n, renderClassChoice]
+    [copyToValue, form.control, i18n, renderClassChoice]
   )
 
   return (
