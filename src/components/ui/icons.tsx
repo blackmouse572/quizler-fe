@@ -26,6 +26,7 @@ import {
   IconFilter,
   IconHandStop,
   IconLifebuoy,
+  IconLink,
   IconLoader2,
   IconLogout2,
   IconMail,
@@ -36,6 +37,7 @@ import {
   IconPlayerPause,
   IconPlayerPlay,
   IconPlus,
+  IconRefresh,
   IconSearch,
   IconSmartHome,
   IconTableFilled,
@@ -63,6 +65,7 @@ export const Icons = {
   X: IconX,
   Loader: IconLoader2,
   Spinner: IconLoader2,
+  Refresh: IconRefresh,
   Icon: IconCards,
   Home: IconSmartHome,
   About: IconArrowRoundaboutLeft,
@@ -86,6 +89,7 @@ export const Icons = {
   CaretUpFilled: IconCaretUpFilled,
   CaretDownFilled: IconCaretDownFilled,
   Support: IconLifebuoy,
+  Link: IconLink,
   DotVertical: IconDotsVertical,
 
   //Chevrons
