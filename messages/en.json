@@ -135,7 +135,7 @@
     "doc": "Documentation",
     "search": "I should learn...",
     "my_quizlearn": "My Quizlearn",
-    "my_classrooms":"My classrooms",
+    "my_classrooms": "My classrooms",
     "subjects": "Subject",
     "notification": "Notifications",
     "no_search_result_found": "No result found.",
@@ -158,7 +158,7 @@
       "Literatue": "Literatue",
       "Science": "Science",
       "Other": "Other"
-    } 
+    }
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
@@ -390,6 +390,36 @@
       "of": "of",
       "copy_button": "Copy",
       "report_button": "Report"
+    }
+  },
+  "CopyQuizBank": {
+    "title": "Copy this quizbank", 
+    "description": "Do you want to copy this bank with",
+    "quizzes": "quizzes",
+    "form": {
+      "name": {
+        "label": "Name",
+        "text": "Name",
+        "placeholder": "Enter the name of the quizbank"
+      },
+      "copyTo": {
+        "label": "copyTo",
+        "text": "Copy to",
+        "placeholder": "Chose options to copy to"
+      },
+      "classroom": {
+        "label": "classroom",
+        "text": "Classroom",
+        "placeholder": "Chose classroom to copy to"
+      },
+      "public": {
+        "label": "public",
+        "text": "Public"
+      },
+      "button" : {
+        "cancel": "Cancel",
+        "submit": "Copy"
+      }
     }
   },
   "Errors": {

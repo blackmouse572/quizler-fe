@@ -4,10 +4,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
-import { CopyIcon, InfoCircledIcon } from "@radix-ui/react-icons"
+import { InfoCircledIcon } from "@radix-ui/react-icons"
 import { useTranslations } from "next-intl"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getShortName } from "@/lib/string-helper"
+import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
+import { use } from "react"
+import { getToken } from "@/lib/auth"
+import { fetchClassroomCurrentUser } from "@/services/account.service"
+import { Classroom } from "@/types"
 
 type Props = {
   authorData: any
@@ -16,6 +21,8 @@ type Props = {
 
 export default function AuthorQuizBank({ authorData, classname }: Props) {
   const i18n = useTranslations("ViewQuizBank")
+  const {token} = getToken()
+  const userCurrentClass: Classroom[]  = use(fetchClassroomCurrentUser(token))
 
   return (
     <>
@@ -55,16 +62,7 @@ export default function AuthorQuizBank({ authorData, classname }: Props) {
           </div>
         </div>
         <div className="flex justify-between gap-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="light" color={null}>
-                <CopyIcon />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{i18n("author.copy_button")}</p>
-            </TooltipContent>
-          </Tooltip>
+          <CopyQuizBankDialog buttonContent={i18n("author.copy_button")} classes={userCurrentClass} />
 
           <Tooltip>
             <TooltipTrigger asChild>
