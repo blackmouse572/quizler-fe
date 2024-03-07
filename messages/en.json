@@ -159,8 +159,9 @@
     },
     "nav_search": {
       "search": "I should learn...",
-      "no_search_result_found": "No result found.",
-      "type_something": "Type a command or search..."
+      "no_search_result_found": "We search high and low, but can't find anything.",
+      "type_something": "Type a command or search...",
+      "error_fetching_search": "Something went wrong"
     }  
   },
   "Footer": {

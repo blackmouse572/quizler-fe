@@ -59,49 +59,48 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
     classroomsData = data.classrooms
   }
 
-  console.log("assa: " + JSON.stringify(data))
-  console.log(JSON.stringify(quizBanksData))
-  console.log("loading: " + isLoading)
-
   return (
     <CommandList>
-      {!isError && !isLoading && !data && (
-        <CommandEmpty>{tNav("nav_search.no_search_result_found")}</CommandEmpty>
-      )}
-      {isLoading && <div className="p-4 text-sm">Searching...</div>}
-      {isError && <CommandEmpty>Something went wrong</CommandEmpty>}
+      {isLoading && <div className="p-4 text-sm">{tNav("nav_search.type_something")}</div>}
+      {!isError &&
+        !isLoading &&
+        !quizBanksData?.length &&
+        !classroomsData?.length && (
+          <div className="py-6 text-center text-sm">
+            {tNav("nav_search.no_search_result_found")}
+          </div>
+        )}
+      {isError && <CommandEmpty>{tNav("nav_search.error_fetching_search")}</CommandEmpty>}
 
       <CommandGroup
         className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
         heading="Quizbanks"
       >
-        {quizBanksData?.map((data, index) => (
-          <CommandItem key={index}>
+        {quizBanksData?.slice(0, 4).map((data) => (
+          <CommandItem key={data.id} value={data.id + data.bankName}>
             <Icons.Icon className="mr-2 h-4 w-4" />
-            <div className="truncate">{data.bankName}</div>
+            <Link href={`/quizbank/${data.id}`} className="truncate">
+              {data.bankName}
+            </Link>
           </CommandItem>
         ))}
       </CommandGroup>
 
       <CommandSeparator />
 
-      {/* <CommandGroup
+      <CommandGroup
         className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
         heading="Classrooms"
       >
-        <CommandItem>
-          <DesktopIcon className="mr-2 h-4 w-4" />
-          <div>Classroom 1</div>
-        </CommandItem>
-        <CommandItem>
-          <DesktopIcon className="mr-2 h-4 w-4" />
-          <div>Classroom 2</div>
-        </CommandItem>
-        <CommandItem>
-          <DesktopIcon className="mr-2 h-4 w-4" />
-          <div>Classroom 3</div>
-        </CommandItem>
-      </CommandGroup> */}
+        {classroomsData?.slice(0, 4).map((data) => (
+          <CommandItem key={data.id} value={data.id + data.classname}>
+            <DesktopIcon className="mr-2 h-4 w-4" />
+            <Link href={`/classrooms/${data.id}`} className="truncate">
+              {data.classname}
+            </Link>
+          </CommandItem>
+        ))}
+      </CommandGroup>
     </CommandList>
   )
 }

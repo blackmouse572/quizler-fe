@@ -41,7 +41,8 @@
     "nav_search": {
       "search": "Tôi nên học...",
       "no_search_result_found": "Không có kết quả.",
-      "type_something": "Gõ vài từ để tìm kiếm..."
+      "type_something": "Gõ vài từ để tìm kiếm...",
+      "error_fetching_search": "Đã có lỗi xảy ra, vui lòng thử lại sau"
     }  
   },
   "Footer": {
