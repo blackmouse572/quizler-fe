@@ -156,12 +156,12 @@ export default function LoggedInNavbar({
           <NavigationMenuTrigger>{tNav("my_classrooms")}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {myClassroomData!.slice(0, 3).map((data) => (
-                <div key={data.id}>
+              {myClassroomData!.data.slice(0, 3).map((passingClassroomData) => (
+                <div key={passingClassroomData.id}>
                   <div>
                     <LoggedInAnimatedListItemMyClassroom
-                      key={data.id}
-                      {...data}
+                      key={passingClassroomData.id}
+                      {...passingClassroomData}
                     />
                   </div>
                 </div>

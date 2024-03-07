@@ -133,12 +133,10 @@
     "getting_started": "Getting started",
     "how_it_work": "How it works?",
     "doc": "Documentation",
-    "search": "I should learn...",
     "my_quizlearn": "My Quizlearn",
     "my_classrooms":"My classrooms",
     "subjects": "Subject",
     "notification": "Notifications",
-    "no_search_result_found": "No result found.",
     "getting_started_sec": {
       "introduction": {
         "title": "Introduction",
@@ -158,7 +156,12 @@
       "Literatue": "Literatue",
       "Science": "Science",
       "Other": "Other"
-    } 
+    },
+    "nav_search": {
+      "search": "I should learn...",
+      "no_search_result_found": "No result found.",
+      "type_something": "Type a command or search..."
+    }  
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"

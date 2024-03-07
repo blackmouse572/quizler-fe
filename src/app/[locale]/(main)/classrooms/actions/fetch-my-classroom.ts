@@ -2,7 +2,7 @@ import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
 export const fetchMyClassrooms = async () => {
-  const URL = getAPIServerURL(`/api/classrooms`)
+  const URL = getAPIServerURL(`/classrooms`)
   const token = getToken().token
 
   const options = {

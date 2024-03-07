@@ -1,13 +1,6 @@
 "use client"
 
-import {
-  CalendarIcon,
-  EnvelopeClosedIcon,
-  FaceIcon,
-  GearIcon,
-  PersonIcon,
-  RocketIcon,
-} from "@radix-ui/react-icons"
+import { DesktopIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 
 import {
@@ -21,14 +14,104 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 import { Icons } from "@/components/ui/icons"
-import KBD from "@/components/ui/kbd"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Button } from "../button"
+import { useDebounce } from "use-debounce"
+import { useQuery } from "@tanstack/react-query"
+import { SearchGlobalResults } from "@/types/search-global-results"
+import { fetchSearchGlobal } from "@/app/[locale]/(main)/search/actions/fetch-search-global"
+
+interface SearchResultsProps {
+  searchQuery: string
+}
+
+function SearchResults({ searchQuery }: SearchResultsProps) {
+  const tNav = useTranslations("Navbar")
+  const [debouncedSearchQuery] = useDebounce(searchQuery, 500)
+
+  const enabled = !!debouncedSearchQuery
+
+  const {
+    data,
+    isLoading: isLoadingOrig,
+    isError,
+  } = useQuery<SearchGlobalResults>({
+    queryKey: ["searchQuery", debouncedSearchQuery],
+    queryFn: () => fetchSearchGlobal(debouncedSearchQuery),
+    enabled,
+  })
+
+  const isLoading = enabled && isLoadingOrig
+
+  if (!enabled) return null
+
+  let quizzesData = null
+  let quizBanksData = null
+  let postsData = null
+  let classroomsData = null
+
+  if (data) {
+    quizzesData = data.quizzes
+    quizBanksData = data.quizBanks
+    postsData = data.posts
+    classroomsData = data.classrooms
+  }
+
+  console.log("assa: " + JSON.stringify(data))
+  console.log(JSON.stringify(quizBanksData))
+  console.log("loading: " + isLoading)
+
+  return (
+    <CommandList>
+      {!isError && !isLoading && !data && (
+        <CommandEmpty>{tNav("nav_search.no_search_result_found")}</CommandEmpty>
+      )}
+      {isLoading && <div className="p-4 text-sm">Searching...</div>}
+      {isError && <CommandEmpty>Something went wrong</CommandEmpty>}
+
+      <CommandGroup
+        className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
+        heading="Quizbanks"
+      >
+        {quizBanksData?.map((data, index) => (
+          <CommandItem key={index}>
+            <Icons.Icon className="mr-2 h-4 w-4" />
+            <div className="truncate">{data.bankName}</div>
+          </CommandItem>
+        ))}
+      </CommandGroup>
+
+      <CommandSeparator />
+
+      {/* <CommandGroup
+        className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
+        heading="Classrooms"
+      >
+        <CommandItem>
+          <DesktopIcon className="mr-2 h-4 w-4" />
+          <div>Classroom 1</div>
+        </CommandItem>
+        <CommandItem>
+          <DesktopIcon className="mr-2 h-4 w-4" />
+          <div>Classroom 2</div>
+        </CommandItem>
+        <CommandItem>
+          <DesktopIcon className="mr-2 h-4 w-4" />
+          <div>Classroom 3</div>
+        </CommandItem>
+      </CommandGroup> */}
+    </CommandList>
+  )
+}
 
 export default function GlobalSearch() {
   const tNav = useTranslations("Navbar")
 
   const [open, setOpen] = React.useState(false)
+  const [searchQuery, setSearchQuery] = React.useState("")
+  const router = useRouter()
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -36,11 +119,16 @@ export default function GlobalSearch() {
         e.preventDefault()
         setOpen((open) => !open)
       }
+
+      if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+        setOpen((open) => !open)
+        router.push("/search")
+      }
     }
 
     document.addEventListener("keydown", down)
     return () => document.removeEventListener("keydown", down)
-  }, [])
+  }, [router])
 
   const handleClick = () => {
     setOpen(!open)
@@ -54,50 +142,35 @@ export default function GlobalSearch() {
         color={"accent"}
         className="hidden text-sm md:flex"
       >
-        <Icons.Search />
-        <div className="mr-4">{tNav("search")}</div>
-        <KBD>
-          <span>⌘</span>J
-        </KBD>
+        <MagnifyingGlassIcon />
+        <div className="mr-4">{tNav("nav_search.search")}</div>
+        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+          <span className="text-xs">⌘</span>J
+        </kbd>
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList>
-          <CommandEmpty>{tNav("no_search_result_found")}</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <FaceIcon className="mr-2 h-4 w-4" />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <RocketIcon className="mr-2 h-4 w-4" />
-              <span>Launch</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
-              <PersonIcon className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <EnvelopeClosedIcon className="mr-2 h-4 w-4" />
-              <span>Mail</span>
-              <CommandShortcut>⌘B</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <GearIcon className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
-            </CommandItem>
-          </CommandGroup>
-        </CommandList>
+        <CommandInput
+          value={searchQuery}
+          onValueChange={setSearchQuery}
+          placeholder={tNav("nav_search.type_something")}
+        />
+
+        <SearchResults searchQuery={searchQuery} />
+        <CommandSeparator />
+
+        <Button
+          onClick={() => setOpen(!open)}
+          className="mt-2 self-end whitespace-nowrap font-bold text-zinc-500"
+          variant="light"
+          color={null}
+          asChild
+        >
+          <Link href="/search">
+            See more
+            <CommandShortcut>(⌘Enter)</CommandShortcut>
+          </Link>
+        </Button>
       </CommandDialog>
     </>
   )
