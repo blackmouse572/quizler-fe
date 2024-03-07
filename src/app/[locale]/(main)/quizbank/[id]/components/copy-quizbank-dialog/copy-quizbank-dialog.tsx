@@ -15,6 +15,7 @@ import {
   Form,
   FormControl,
   FormField,
+  FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
@@ -41,26 +42,15 @@ import { useTranslations } from "next-intl"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Classroom } from "@/types"
+import { copyQuizBankToClassroom } from "@/services/quiz.service"
+import { toast } from "@/components/ui/use-toast"
 
 type Props = {
   buttonContent: string
   classes?: Classroom[]
+  quizbankId: string
+  token: string
 } & React.ComponentProps<"div">
-
-// const classRoomChoices = [
-//   {
-//     id: "class-of-Ad-id",
-//     text: "Class of Ad",
-//   },
-//   {
-//     id: "class-of-Jaden-id",
-//     text: "Class of Jaden",
-//   },
-//   {
-//     id: "class-of-Grey-id",
-//     text: "Class of Grey",
-//   },
-// ]
 
 type TClassroomChoices = {
   id: string
@@ -70,14 +60,21 @@ type TClassroomChoices = {
 export default function CopyQuizBankDialog({
   buttonContent,
   classes,
+  quizbankId,
+  token,
   ...props
 }: Props) {
   const i18n = useTranslations("CopyQuizBank")
+  const errorI18n = useTranslations("Errors")
   const [copyToValue, setCopyToValue] = useState<ECopyTo>(ECopyTo.classroom)
   const classRoomChoices: TClassroomChoices = useMemo(
-    () => classes?.map((c) => ({ id: c.id, text: c.classname })) ?? [],
+    // cast id to string to change field value
+    () =>
+      classes?.map((c) => ({ id: c.id.toString(), text: c.classname })) ?? [],
     [classes]
   )
+  const [open, setOpen] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const renderClassChoice = useCallback(
     (
@@ -91,20 +88,35 @@ export default function CopyQuizBankDialog({
       >,
       label: string,
       items?: { id: string; text: string }[]
-    ) => (
-      <Select onValueChange={field.onChange} required>
-        <SelectTrigger>{items && <SelectValue placeholder={items[0].text}/>}</SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>{label}</SelectLabel>
-            {items?.map((item) => (
-              <SelectItem value={item.id}>{item.text}</SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    ),
-    []
+    ) => {
+      return (
+        <Select
+          disabled={isLoading}
+          onValueChange={(value) => {
+            field.onChange(value)
+          }}
+          defaultValue={field.value}
+          required
+        >
+          <SelectTrigger>
+            {items && (
+              <SelectValue placeholder="Select a verified email to display" />
+            )}
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>{label}</SelectLabel>
+              {items?.map((item) => (
+                <SelectItem key={item.id} value={item.id}>
+                  {item.text}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      )
+    },
+    [isLoading]
   )
 
   const copyTochoices = copyToChoice.map((choice) => choice.id) as [
@@ -126,21 +138,25 @@ export default function CopyQuizBankDialog({
     },
   })
 
+  const onSubmitCb = (result: any) => {
+    console.log("result:", result)
+    setOpen(false)
+    setIsLoading(false)
+    if (!result?.ok) {
+      return toast({
+        title: "Something went wrong.",
+        description: errorI18n(result.message as any),
+        variant: "flat",
+        color: "danger",
+      })
+    }
+  }
+
   async function onSubmit(values: CopyQuizBankSchemaType) {
-    // setIsLoading(true)
-    // const result = await SignUpAction(values)
-    // if (!result?.ok) {
-    //   setIsLoading(false)
-    //   return toast({
-    //     title: "Something went wrong.",
-    //     description: errorI188n(result.message),
-    //     variant: "flat",
-    //     color: "danger",
-    //   })
-    // }
-    // const params = new URLSearchParams({ email: values.email })
-    // return router.push(`/signup/verify?${params}`)
-    console.log("values:", values)
+    const { classRoom } = values
+    setIsLoading(true)
+    const result = await copyQuizBankToClassroom(token, quizbankId, classRoom)
+    onSubmitCb(await result)
   }
 
   const copyForm = useCallback(
@@ -157,7 +173,7 @@ export default function CopyQuizBankDialog({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    // disabled={isLoading}
+                    disabled={isLoading}
                     required
                     className="rounded-sm"
                     id="name"
@@ -226,11 +242,18 @@ export default function CopyQuizBankDialog({
         />
       </>
     ),
-    [classRoomChoices, copyToValue, form.control, i18n, renderClassChoice]
+    [
+      classRoomChoices,
+      copyToValue,
+      form.control,
+      i18n,
+      isLoading,
+      renderClassChoice,
+    ]
   )
 
   return (
-    <Dialog {...props}>
+    <Dialog {...props} open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <CopyButton content={buttonContent} />
       </DialogTrigger>
@@ -252,11 +275,16 @@ export default function CopyQuizBankDialog({
             </DialogHeader>
             <DialogFooter className="mt-4 flex justify-between sm:justify-between">
               <DialogClose asChild>
-                <Button type="reset" variant="outline" color="accent">
+                <Button
+                  disabled={isLoading}
+                  type="reset"
+                  variant="outline"
+                  color="accent"
+                >
                   {i18n("form.button.cancel")}
                 </Button>
               </DialogClose>
-              <Button type="submit" variant="default">
+              <Button disabled={isLoading} type="submit" variant="default">
                 {i18n("form.button.submit")}
               </Button>
             </DialogFooter>

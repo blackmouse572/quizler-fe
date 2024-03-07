@@ -20,7 +20,7 @@ function ViewQuizBank({ id, token, quizBankData, flashcardData, quizData, relati
       <ViewFlashcard id={id} token={token} quizBankData={quizBankData} flashcardData={flashcardData} />
       <ViewQuizzes id={id} token={token} quizData={quizData} />
       <ViewRelativeQuizBank relativeQuizBankData={relativeQuizBankData} />
-      <AuthorQuizBank authorData={quizBankData.author} classname={classname} />
+      <AuthorQuizBank quizbankId={id} authorData={quizBankData.author} classname={classname} />
     </div>
   )
 }

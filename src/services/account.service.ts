@@ -46,9 +46,6 @@ export function fetchClassroomCurrentUser(token: string) {
   }
 
   return fetch(URL, options).then(async (response) => {
-    // console.log("response: ", response)
-    // console.log("response json: ", response.json())
-    debugger;
     if (!response.ok) {
       const error = await response.json()
       throw new Error(error.message)

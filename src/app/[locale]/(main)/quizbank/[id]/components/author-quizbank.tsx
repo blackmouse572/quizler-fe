@@ -17,9 +17,10 @@ import { Classroom } from "@/types"
 type Props = {
   authorData: any
   classname?: string
+  quizbankId: string
 }
 
-export default function AuthorQuizBank({ authorData, classname }: Props) {
+export default function AuthorQuizBank({ authorData, classname, quizbankId }: Props) {
   const i18n = useTranslations("ViewQuizBank")
   const {token} = getToken()
   const userCurrentClass: Classroom[]  = use(fetchClassroomCurrentUser(token))
@@ -62,7 +63,7 @@ export default function AuthorQuizBank({ authorData, classname }: Props) {
           </div>
         </div>
         <div className="flex justify-between gap-2">
-          <CopyQuizBankDialog buttonContent={i18n("author.copy_button")} classes={userCurrentClass} />
+          <CopyQuizBankDialog token={token} quizbankId={quizbankId} buttonContent={i18n("author.copy_button")} classes={userCurrentClass} />
 
           <Tooltip>
             <TooltipTrigger asChild>
