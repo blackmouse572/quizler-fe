@@ -1,6 +1,6 @@
 "use client"
 
-import { DesktopIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons"
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 
 import {
@@ -13,7 +13,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
-import { Icons } from "@/components/ui/icons"
+import { IIconKeys, Icons } from "@/components/ui/icons"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -25,6 +25,14 @@ import { fetchSearchGlobal } from "@/app/[locale]/(main)/search/actions/fetch-se
 
 interface SearchResultsProps {
   searchQuery: string
+}
+
+type SearchType = {
+  icon: IIconKeys
+  id: string
+  href: string
+  displayName: string
+  [key: string]: any
 }
 
 function SearchResults({ searchQuery }: SearchResultsProps) {
@@ -48,15 +56,44 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
     [enabled, isLoadingOrig]
   )
 
-  const renderLink = React.useCallback(
-    (id: string, link: string, displayName: string) => {
-      return (
-        <Link href={`/${link}/${id}`} className="truncate">
-          {displayName}
+  const renderLink = React.useCallback((data: SearchType) => {
+    const Icon = Icons[data.icon]
+
+    return (
+      <CommandItem key={data.id} value={data.id + data.displayName}>
+        <Icon className="mr-2 h-4 w-4" />
+        <Link href={data.href} className="truncate">
+          {data.displayName}
         </Link>
+      </CommandItem>
+    )
+  }, [])
+
+  const renderCommandGroup = React.useCallback(
+    (
+      fieldsData: any,
+      heading: string,
+      icon: IIconKeys,
+      linkName: string,
+      displayName: string
+    ) => {
+      return (
+        <CommandGroup
+          className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
+          heading={heading}
+        >
+          {fieldsData?.slice(0, 4).map((data: SearchType) =>
+            renderLink({
+              icon: icon,
+              id: data.id,
+              href: `/${linkName}/${data.id}`,
+              displayName: data[displayName],
+            })
+          )}
+        </CommandGroup>
       )
     },
-    []
+    [renderLink]
   )
 
   if (!enabled) return null
@@ -82,32 +119,23 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
       {isError && (
         <CommandEmpty>{tNav("nav_search.error_fetching_search")}</CommandEmpty>
       )}
-
-      <CommandGroup
-        className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
-        heading="Quizbanks"
-      >
-        {quizBanksData?.slice(0, 4).map((data) => (
-          <CommandItem key={data.id} value={data.id + data.bankName}>
-            <Icons.Icon className="mr-2 h-4 w-4" />
-            {renderLink(data.id, "quizbank", data.bankName)}
-          </CommandItem>
-        ))}
-      </CommandGroup>
+      {renderCommandGroup(
+        quizBanksData,
+        tNav("quizbanks"),
+        "Icon",
+        "quizbank",
+        "bankName"
+      )}
 
       <CommandSeparator />
 
-      <CommandGroup
-        className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
-        heading="Classrooms"
-      >
-        {classroomsData?.slice(0, 4).map((data) => (
-          <CommandItem key={data.id} value={data.id + data.classname}>
-            <DesktopIcon className="mr-2 h-4 w-4" />
-            {renderLink(data.id, "classrooms", data.classname)}
-          </CommandItem>
-        ))}
-      </CommandGroup>
+      {renderCommandGroup(
+        classroomsData,
+        tNav("classrooms"),
+        "School",
+        "classrooms",
+        "classname"
+      )}
     </CommandList>
   )
 }
@@ -173,7 +201,7 @@ export default function GlobalSearch() {
           asChild
         >
           <Link href="/search">
-            See more
+            {tNav("nav_search.see_more_results")}
             <CommandShortcut>(⌘Enter)</CommandShortcut>
           </Link>
         </Button>

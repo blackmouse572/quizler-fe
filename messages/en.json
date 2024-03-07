@@ -126,6 +126,7 @@
   "Navbar": {
     "home": "Home",
     "classrooms": "Classrooms",
+    "quizbanks": "Quizbanks",
     "contact": "Contact",
     "about": "About",
     "signin": "Sign in",
@@ -161,7 +162,8 @@
       "search": "I should learn...",
       "no_search_result_found": "We search high and low, but can't find anything.",
       "type_something": "Type a command or search...",
-      "error_fetching_search": "Something went wrong"
+      "error_fetching_search": "Something went wrong",
+      "see_more_results": "See more"
     }  
   },
   "Footer": {
