@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
+import BatchImportQuizbankForm from "@/app/[locale]/(main)/quizbank/add/components/batch-import-quizbank-form"
 import {
   Tooltip,
   TooltipContent,
@@ -246,6 +247,19 @@ function AddQuizbankForm({
     )
   }, [addEmptyQuiz, i18n])
 
+  const onImport = useCallback(
+    (
+      data: {
+        question: string
+        answer: string
+      }[]
+    ) => {
+      const prev = form.getValues("quizes")
+      form.setValue("quizes", [...prev, ...data])
+    },
+    [form]
+  )
+
   return (
     <Form {...form}>
       <div className="mx-auto w-full max-w-xl space-y-8 pb-6">
@@ -261,26 +275,30 @@ function AddQuizbankForm({
         >
           <div className="my-4 flex items-center justify-between border-b border-primary">
             <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
-            <Tooltip delayDuration={200}>
-              <TooltipTrigger asChild>
-                <Button
-                  type="submit"
-                  variant={"flat"}
-                  isIconOnly
-                  color={"accent"}
-                  disabled={form.formState.isSubmitting}
-                >
-                  {form.formState.isSubmitting ? (
-                    <Icons.Loader className="animate-spin" />
-                  ) : (
-                    <Icons.Checked />
-                  )}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent className="z-10">
-                {i18n("form.title")}
-              </TooltipContent>
-            </Tooltip>
+            <div>
+              <BatchImportQuizbankForm onSuccessfulImport={onImport} />
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type="submit"
+                    variant={"flat"}
+                    isIconOnly
+                    color={"accent"}
+                    disabled={form.formState.isSubmitting}
+                  >
+                    {form.formState.isSubmitting ? (
+                      <Icons.Loader className="animate-spin" />
+                    ) : (
+                      <Icons.Checked />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="z-10">
+                  {i18n("form.title")}
+                </TooltipContent>
+              </Tooltip>
+            </div>
           </div>
           <FormField
             control={form.control}
