@@ -70,7 +70,7 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
   }
 
   return (
-    <NextIntlClientProvider messages={_.pick(message, "ViewQuizBank")}>
+    <NextIntlClientProvider messages={_.pick(message, "ViewQuizBank", "CopyQuizBank")}>
       <ViewQuizBank
         id={id}
         token={token}

@@ -16,6 +16,9 @@ type Classroom = {
   account: User
   id: string
   description: string
+  bankIds: string[],
+  accountIds: string[],
+  created: string
 }
 
 export type { Classroom, ClassroomInvitation }

@@ -134,7 +134,7 @@
     "how_it_work": "How it works?",
     "doc": "Documentation",
     "my_quizlearn": "My Quizlearn",
-    "my_classrooms":"My classrooms",
+    "my_classrooms": "My classrooms",
     "subjects": "Subject",
     "notification": "Notifications",
     "getting_started_sec": {
@@ -394,6 +394,36 @@
       "of": "of",
       "copy_button": "Copy",
       "report_button": "Report"
+    }
+  },
+  "CopyQuizBank": {
+    "title": "Copy this quizbank", 
+    "description": "Do you want to copy this bank with",
+    "quizzes": "quizzes",
+    "form": {
+      "name": {
+        "label": "Name",
+        "text": "Name",
+        "placeholder": "Enter the name of the quizbank"
+      },
+      "copyTo": {
+        "label": "copyTo",
+        "text": "Copy to",
+        "placeholder": "Chose options to copy to"
+      },
+      "classroom": {
+        "label": "classroom",
+        "text": "Classroom",
+        "placeholder": "Chose classroom to copy to"
+      },
+      "public": {
+        "label": "public",
+        "text": "Public"
+      },
+      "button" : {
+        "cancel": "Cancel",
+        "submit": "Copy"
+      }
     }
   },
   "Errors": {
