@@ -124,7 +124,7 @@ async function MainLayout({ children }: Props) {
       menuItems={menuItems}
       isAuthed={isAuth}
       user={user}
-      myClassroomData={myClassroomData.data}
+      myClassroomData={myClassroomData}
     />
   ) : (
     <GuestNavbar

@@ -43,25 +43,34 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
     enabled,
   })
 
-  const isLoading = enabled && isLoadingOrig
+  const isLoading = React.useMemo(
+    () => enabled && isLoadingOrig,
+    [enabled, isLoadingOrig]
+  )
+
+  const renderLink = React.useCallback(
+    (id: string, link: string, displayName: string) => {
+      return (
+        <Link href={`/${link}/${id}`} className="truncate">
+          {displayName}
+        </Link>
+      )
+    },
+    []
+  )
 
   if (!enabled) return null
 
-  let quizzesData = null
-  let quizBanksData = null
-  let postsData = null
-  let classroomsData = null
-
-  if (data) {
-    quizzesData = data.quizzes
-    quizBanksData = data.quizBanks
-    postsData = data.posts
-    classroomsData = data.classrooms
-  }
+  var quizzesData = data?.quizzes || null
+  var quizBanksData = data?.quizBanks || null
+  var postsData = data?.posts || null
+  var classroomsData = data?.classrooms || null
 
   return (
     <CommandList>
-      {isLoading && <div className="p-4 text-sm">{tNav("nav_search.type_something")}</div>}
+      {isLoading && (
+        <div className="p-4 text-sm">{tNav("nav_search.type_something")}</div>
+      )}
       {!isError &&
         !isLoading &&
         !quizBanksData?.length &&
@@ -70,7 +79,9 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
             {tNav("nav_search.no_search_result_found")}
           </div>
         )}
-      {isError && <CommandEmpty>{tNav("nav_search.error_fetching_search")}</CommandEmpty>}
+      {isError && (
+        <CommandEmpty>{tNav("nav_search.error_fetching_search")}</CommandEmpty>
+      )}
 
       <CommandGroup
         className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
@@ -79,9 +90,7 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
         {quizBanksData?.slice(0, 4).map((data) => (
           <CommandItem key={data.id} value={data.id + data.bankName}>
             <Icons.Icon className="mr-2 h-4 w-4" />
-            <Link href={`/quizbank/${data.id}`} className="truncate">
-              {data.bankName}
-            </Link>
+            {renderLink(data.id, "quizbank", data.bankName)}
           </CommandItem>
         ))}
       </CommandGroup>
@@ -95,9 +104,7 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
         {classroomsData?.slice(0, 4).map((data) => (
           <CommandItem key={data.id} value={data.id + data.classname}>
             <DesktopIcon className="mr-2 h-4 w-4" />
-            <Link href={`/classrooms/${data.id}`} className="truncate">
-              {data.classname}
-            </Link>
+            {renderLink(data.id, "classrooms", data.classname)}
           </CommandItem>
         ))}
       </CommandGroup>
