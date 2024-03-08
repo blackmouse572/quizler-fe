@@ -5,7 +5,7 @@ import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
 export async function addNewClassroom(data: AddClassroom) {
-  const url = getAPIServerURL("/api/classrooms")
+  const url = getAPIServerURL("/classrooms")
   const { token } = getToken()
   const body = JSON.stringify(data)
   const options: RequestInit = {

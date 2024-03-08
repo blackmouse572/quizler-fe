@@ -31,7 +31,7 @@ export default function ViewRelativeQuizBank({ relativeQuizBankData }: Props) {
                   <Link href={`/quizbank/${quiz.id}`}>{quiz.bankName}</Link>
                 </div>
                 <div className="mt-1.5 text-sm leading-5 text-zinc-500">
-                  320 cards
+                  {quiz.quizCount}
                 </div>
               </div>
             </div>

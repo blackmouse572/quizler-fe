@@ -7,7 +7,7 @@ import Footer from "@/components/footer"
 import { MainNavItem } from "@/components/ui/guest-navbar/guest-navbar"
 import { getUser, isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
-import { fetchMyClassrooms } from "./classrooms/[id]/actions/fetch-my-classroom"
+import { fetchMyClassrooms } from "./classrooms/actions/fetch-my-classroom"
 import GuestNavbar from "@/components/ui/guest-navbar/guest-navbar"
 import LoggedInNavbar from "@/components/ui/logged-in-navbar/logged-in-navbar"
 
@@ -124,7 +124,7 @@ async function MainLayout({ children }: Props) {
       menuItems={menuItems}
       isAuthed={isAuth}
       user={user}
-      myClassroomData={myClassroomData.data}
+      myClassroomData={myClassroomData}
     />
   ) : (
     <GuestNavbar
