@@ -142,12 +142,19 @@ export default function CopyQuizBankDialog({
     console.log("result:", result)
     setOpen(false)
     setIsLoading(false)
-    if (!result?.ok) {
+    if (!result) {
       return toast({
         title: "Something went wrong.",
         description: errorI18n(result.message as any),
         variant: "flat",
         color: "danger",
+      })
+    } else {
+      return toast({
+        title: "Success",
+        description: "Copy quizbank successfully",
+        variant: "flat",
+        color: "success",
       })
     }
   }

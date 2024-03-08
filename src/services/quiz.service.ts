@@ -49,18 +49,12 @@ export async function copyQuizBankToClassroom(token: string, quizbankId: string,
       Authorization: `Bearer ${token}`,
     },
   }
-  console.log("url", url)
-  console.log("options", options)
-  
   return fetch(url, options)
     .then(async(res) => {
-      console.log("res", res)
-      if (!res.ok) {
+      if (!res?.ok) {
         throw new Error(res.statusText)
       }
-      debugger
-      const result = await res.json()
-      return result
+      return true
     })
 }
 
