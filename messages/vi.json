@@ -363,6 +363,15 @@
       "button": {
         "cancel": "Hủy",
         "submit": "Sao chép"
+      },
+      "message": {
+        "success": {
+          "title": "Thành công",
+          "description": "Thành công sao chép ngân hàng câu hỏi"
+        },
+        "failed": {
+          "title": "Có gì đó không đúng"
+        }
       }
     }
   },
