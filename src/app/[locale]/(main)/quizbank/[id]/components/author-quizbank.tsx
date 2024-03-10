@@ -23,7 +23,7 @@ type Props = {
 export default function AuthorQuizBank({ authorData, classname, quizbankId }: Props) {
   const i18n = useTranslations("ViewQuizBank")
   const {token} = getToken()
-  const userCurrentClass: Classroom[]  = use(fetchClassroomCurrentUser(token))
+  const {data: userCurrentClass} : {data: Classroom[] } = use(fetchClassroomCurrentUser(token))
 
   return (
     <>
