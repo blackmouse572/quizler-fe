@@ -274,38 +274,39 @@ function AddQuizbankForm({
             <Icons.Loader className="text-primary-500 h-10 w-10 animate-spin" />
           </div>
         )}
+        <div className="my-4 flex items-center justify-between border-b border-primary">
+          <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
+          <div>
+            <BatchImportQuizbankForm onSuccessfulImport={onImport} />
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="submit"
+                  variant={"flat"}
+                  form="addForm"
+                  isIconOnly
+                  color={"accent"}
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? (
+                    <Icons.Loader className="animate-spin" />
+                  ) : (
+                    <Icons.Checked />
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="z-10">
+                {i18n("form.title")}
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        </div>
         <form
           id="addForm"
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8"
         >
-          <div className="my-4 flex items-center justify-between border-b border-primary">
-            <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
-            <div>
-              <BatchImportQuizbankForm onSuccessfulImport={onImport} />
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    type="submit"
-                    variant={"flat"}
-                    isIconOnly
-                    color={"accent"}
-                    disabled={form.formState.isSubmitting}
-                  >
-                    {form.formState.isSubmitting ? (
-                      <Icons.Loader className="animate-spin" />
-                    ) : (
-                      <Icons.Checked />
-                    )}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent className="z-10">
-                  {i18n("form.title")}
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </div>
           <FormField
             control={form.control}
             name="bankName"

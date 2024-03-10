@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/tooltip"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
-import { useCallback, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -65,6 +65,7 @@ type Props = {
 
 function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
   const errori18n = useTranslations("Validations")
+  const formRef = useRef<HTMLFormElement>(null)
   const i18n = useTranslations("AddQuiz.import-form")
   const [isOpen, setOpen] = useState(false)
   const form = useForm<BatchImportQuizbank>({
@@ -213,14 +214,14 @@ function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
                   )}
                 />
               </div>
+              <DialogFooter>
+                <Button type="submit" form="import">
+                  {i18n("title")}
+                </Button>
+              </DialogFooter>
             </form>
           </Form>
         </div>
-        <DialogFooter>
-          <Button type="submit" formTarget="import" form="import">
-            Import
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
