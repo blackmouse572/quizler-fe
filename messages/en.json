@@ -310,6 +310,22 @@
     "signout": "Sign out"
   },
   "AddQuiz": {
+    "import-form": {
+      "title": "Import batch quizbank",
+      "descriptions": "Paste your data from doc, text, csv here",
+      "data": {
+        "label": "Data",
+        "placeholder": "term1,definition1;term2,definition2"
+      },
+      "itemSeperator": {
+        "label": "Item seperator",
+        "placeholder": "Enter the item seperator"
+      },
+      "quizSeperator": {
+        "label": "Quiz seperator",
+        "placeholder": "Enter the quiz seperator"
+      }
+    },
     "form": {
       "title": "Add new quiz bank",
       "name": {
@@ -399,7 +415,7 @@
     }
   },
   "CopyQuizBank": {
-    "title": "Copy this quizbank", 
+    "title": "Copy this quizbank",
     "description": "Do you want to copy this bank with",
     "quizzes": "quizzes",
     "form": {
@@ -422,7 +438,7 @@
         "label": "public",
         "text": "Public"
       },
-      "button" : {
+      "button": {
         "cancel": "Cancel",
         "submit": "Copy"
       }

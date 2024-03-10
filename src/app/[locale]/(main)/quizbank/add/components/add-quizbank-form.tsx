@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
+import BatchImportQuizbankForm from "@/app/[locale]/(main)/quizbank/add/components/batch-import-quizbank-form"
 import {
   Tooltip,
   TooltipContent,
@@ -246,6 +247,25 @@ function AddQuizbankForm({
     )
   }, [addEmptyQuiz, i18n])
 
+  const onImport = useCallback(
+    (
+      data: {
+        question: string
+        answer: string
+      }[]
+    ) => {
+      const prev = form.getValues("quizes")
+      //Remove all empty quizes
+      const filtered = prev.filter(
+        (item) => item.question !== "" && item.answer !== ""
+      )
+
+      form.setValue("quizes", [...filtered, ...data])
+      return
+    },
+    [form]
+  )
+
   return (
     <Form {...form}>
       <div className="mx-auto w-full max-w-xl space-y-8 pb-6">
@@ -254,18 +274,17 @@ function AddQuizbankForm({
             <Icons.Loader className="text-primary-500 h-10 w-10 animate-spin" />
           </div>
         )}
-        <form
-          id="addForm"
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8"
-        >
-          <div className="my-4 flex items-center justify-between border-b border-primary">
-            <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
-            <Tooltip delayDuration={200}>
+        <div className="my-4 flex items-center justify-between border-b border-primary">
+          <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
+          <div>
+            <BatchImportQuizbankForm onSuccessfulImport={onImport} />
+
+            <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   type="submit"
                   variant={"flat"}
+                  form="addForm"
                   isIconOnly
                   color={"accent"}
                   disabled={form.formState.isSubmitting}
@@ -282,6 +301,12 @@ function AddQuizbankForm({
               </TooltipContent>
             </Tooltip>
           </div>
+        </div>
+        <form
+          id="addForm"
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8"
+        >
           <FormField
             control={form.control}
             name="bankName"

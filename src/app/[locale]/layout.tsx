@@ -8,6 +8,7 @@ import { Montserrat, Plus_Jakarta_Sans } from "next/font/google"
 import GoogleProvider from "@/app/[locale]/components/GoogleProvider"
 import { Providers } from "@/app/[locale]/provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { getUser } from "@/lib/auth"
 import { pick } from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
 import "./global.css"
@@ -69,6 +70,7 @@ type Props = {
 }
 export default function LocaleLayout({ children, params: { locale } }: Props) {
   const messages = useMessages()
+  const user = getUser()
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
@@ -80,7 +82,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
       >
         <GoogleProvider>
           <TooltipProvider>
-            <Providers>
+            <Providers user={user}>
               <NextIntlClientProvider
                 locale={locale}
                 messages={pick(messages, "NotFound", "Error", "Errors")}

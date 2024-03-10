@@ -18,7 +18,12 @@ export function setUser(user: User) {
   })
 }
 
-export function getUser(): User {
+export function getUser(): User | undefined {
+  const user = cookies().get(TOKEN_KEY.user)?.value
+  if (!user) {
+    return
+  }
+
   return JSON.parse(cookies().get(TOKEN_KEY.user)?.value || "{}")
 }
 

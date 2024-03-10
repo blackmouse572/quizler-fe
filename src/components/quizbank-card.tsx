@@ -19,7 +19,7 @@ import { IIconKeys, Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import Link from "next/link"
-import React, { useMemo, useState } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 
 type Props = {
   item: QuizBank
