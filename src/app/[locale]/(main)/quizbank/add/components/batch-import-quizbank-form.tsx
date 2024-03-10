@@ -114,6 +114,7 @@ function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
               variant="flat"
               isIconOnly
               color="accent"
+              type="button"
               onClick={() => setOpen(true)}
             >
               <Icons.Plus />
