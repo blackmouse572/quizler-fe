@@ -2,6 +2,7 @@ import JoinClassroomDialog from "@/app/[locale]/(main)/classrooms/components/joi
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { Classroom } from "@/types"
+import PagedResponse from "@/types/paged-response"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
@@ -9,7 +10,7 @@ import Link from "next/link"
 
 type Props = {}
 
-async function getAllClassroom(): Promise<Classroom[]> {
+async function getAllClassroom(): Promise<PagedResponse<Classroom>> {
   const token = getToken()
 
   const options: RequestInit = {
@@ -37,7 +38,7 @@ async function ClassroomPage({}: Props) {
         <JoinClassroomDialog />
       </div>
       <div className="grid grid-cols-4 gap-3">
-        {classrooms.map((classroom: Classroom, index: number) => {
+        {classrooms.data.map((classroom: Classroom, index: number) => {
           return (
             <Link
               href={`/classrooms/${classroom.id}`}

@@ -1,6 +1,6 @@
 {
   "Index": {
-    "title": "Quizler",
+    "title": "Quizlearn",
     "back": "Go back",
     "description": "Learning with supafast methods"
   },
@@ -141,7 +141,7 @@
     "getting_started_sec": {
       "introduction": {
         "title": "Introduction",
-        "description": "What is Quizler and how it works?"
+        "description": "What is Quizlearn and how it works?"
       },
       "classroom": {
         "title": "Classroom",

@@ -1,6 +1,6 @@
 {
   "Index": {
-    "title": "Quizler",
+    "title": "Quizlearn",
     "back": "Quay lại",
     "description": "Học tập với các phương pháp siêu tốc"
   },
@@ -22,7 +22,7 @@
     "getting_started_sec": {
       "introduction": {
         "title": "Giới thiệu",
-        "description": "Quizler là gì và nó hoạt động như thế nào?"
+        "description": "Quizlearn là gì và nó hoạt động như thế nào?"
       },
       "classroom": {
         "title": "Lớp học",
