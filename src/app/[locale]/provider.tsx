@@ -71,6 +71,7 @@ export function Providers(props: {
       if (Date.now() > axToken && Date.now() > rxToken) {
         console.debug("[DEBUG] Cannot refresh token, redirect to login page.")
         doLogout()
+        logout()
       } else {
         console.log("[DEBUG] Refresh token...")
         doRefreshToken()

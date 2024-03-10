@@ -7,7 +7,7 @@ import { ActionResponse, ClassroomInvitation } from "@/types"
 async function getClassroomInviteCodeAction(
   classroomId: string
 ): Promise<ActionResponse<ClassroomInvitation>> {
-  const url = getAPIServerURL(`/api/classrooms/generatecode/${classroomId}`)
+  const url = getAPIServerURL(`/classrooms/generatecode/${classroomId}`)
   const { token } = getToken()
   const options: RequestInit = {
     method: "POST",
@@ -21,7 +21,7 @@ async function getClassroomInviteCodeAction(
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        throw new Error(json)
+        throw new Error(json.message)
       }
       return json
     })

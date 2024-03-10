@@ -9,7 +9,7 @@ import Link from "next/link"
 
 type Props = {}
 
-function getAllClassroom() {
+async function getAllClassroom(): Promise<Classroom[]> {
   const token = getToken()
 
   const options: RequestInit = {
@@ -20,14 +20,13 @@ function getAllClassroom() {
     },
   }
 
-  return fetch(getAPIServerURL("/classrooms"), options).then((data) =>
-    data.json()
-  )
+  const data = await fetch(getAPIServerURL("/classrooms/getCurrent"), options)
+  return await data.json()
 }
 
 async function ClassroomPage({}: Props) {
   const msg = await getMessages()
-  const classrooms: Classroom[] = await getAllClassroom()
+  const classrooms = await getAllClassroom()
 
   return (
     <NextIntlClientProvider

@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache"
 export async function joinClassroomAction(
   params: string
 ): Promise<ActionResponse<never>> {
-  const URL = getAPIServerURL(`/api/classrooms/join/${params}`)
+  const URL = getAPIServerURL(`/classrooms/join/${params}`)
   const token = getToken()
   const options: RequestInit = {
     method: "POST",
