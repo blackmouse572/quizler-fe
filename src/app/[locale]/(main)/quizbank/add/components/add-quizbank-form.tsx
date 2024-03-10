@@ -255,7 +255,13 @@ function AddQuizbankForm({
       }[]
     ) => {
       const prev = form.getValues("quizes")
-      form.setValue("quizes", [...prev, ...data])
+      //Remove all empty quizes
+      const filtered = prev.filter(
+        (item) => item.question !== "" && item.answer !== ""
+      )
+
+      form.setValue("quizes", [...filtered, ...data])
+      return
     },
     [form]
   )

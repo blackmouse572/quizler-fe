@@ -4,12 +4,16 @@
 import { refreshTokenAction } from "@/app/[locale]/(auth)/login/actions/refresh-token-action"
 import logoutAction from "@/components/logout-btn/logout-action"
 import { useUser } from "@/hooks/useUser"
+import { User } from "@/types"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental"
 import { useRouter } from "next/navigation"
 import * as React from "react"
 
-export function Providers(props: { children: React.ReactNode }) {
+export function Providers(props: {
+  children: React.ReactNode
+  user: User | undefined
+}) {
   const { setUser, user, isAuth, logout } = useUser()
   const router = useRouter()
   const [queryClient] = React.useState(
@@ -43,7 +47,15 @@ export function Providers(props: { children: React.ReactNode }) {
   }, [logout, router, setUser])
 
   React.useEffect(() => {
+    console.debug("[DEBUG] Set user from props.")
+    if (user) {
+      setUser(user)
+    }
+  }, [user, setUser])
+
+  React.useEffect(() => {
     if (isAuth) {
+      console.log("[DEBUG] Check token...")
       const { accessToken, refreshToken } = user!
       const { expiredAt: axToken } = accessToken
       const { expiredAt: rxToken } = refreshToken
@@ -53,8 +65,10 @@ export function Providers(props: { children: React.ReactNode }) {
       }
 
       if (Date.now() > axToken && Date.now() > rxToken) {
+        console.debug("[DEBUG] Cannot refresh token, redirect to login page.")
         doLogout()
       } else {
+        console.log("[DEBUG] Refresh token...")
         doRefreshToken()
       }
     }
