@@ -1,6 +1,6 @@
 {
   "Index": {
-    "title": "Quizler",
+    "title": "Quizlearn",
     "back": "Go back",
     "description": "Learning with supafast methods"
   },
@@ -141,7 +141,7 @@
     "getting_started_sec": {
       "introduction": {
         "title": "Introduction",
-        "description": "What is Quizler and how it works?"
+        "description": "What is Quizlearn and how it works?"
       },
       "classroom": {
         "title": "Classroom",
@@ -164,7 +164,7 @@
       "type_something": "Type a command or search...",
       "error_fetching_search": "Something went wrong",
       "see_more_results": "See more"
-    }  
+    }
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
@@ -461,7 +461,13 @@
     "email-existed": "The email has been existed, please try another email",
     "username-existed": "The username has been existed, please try another username",
     "verification-failed": "The verification code is not correct, please try again",
-    "Unauthorized": "Account not authorized, please login"
+    "Unauthorized": "Account not authorized, please login",
+    "classroom": {
+      "code-invalid": "The code is not valid, please try again",
+      "code-expire": "The code has been expired, please try again",
+      "code-used": "The code has been used, please try again",
+      "already-joined": "You have already joined this classroom"
+    }
   },
   "Validations": {
     "errors": {
@@ -642,6 +648,22 @@
     "toast_code": {
       "title": "Copied code to clipboard",
       "description": "You can now paste the code to your friend"
+    }
+  },
+  "Join_classroom": {
+    "title": "Join classroom",
+    "description": "Enter the invitation code to join the classroom",
+    "form": {
+      "code": {
+        "label": "Invitation code",
+        "placeholder": "Enter the invitation code"
+      },
+      "submit": "Join",
+      "cancel": "Cancel"
+    },
+    "success": {
+      "title": "Joined classroom",
+      "description": "You have joined the classroom successfully"
     }
   }
 }

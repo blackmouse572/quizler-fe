@@ -1,6 +1,6 @@
 {
   "Index": {
-    "title": "Quizler",
+    "title": "Quizlearn",
     "back": "Quay lại",
     "description": "Học tập với các phương pháp siêu tốc"
   },
@@ -22,7 +22,7 @@
     "getting_started_sec": {
       "introduction": {
         "title": "Giới thiệu",
-        "description": "Quizler là gì và nó hoạt động như thế nào?"
+        "description": "Quizlearn là gì và nó hoạt động như thế nào?"
       },
       "classroom": {
         "title": "Lớp học",
@@ -45,7 +45,7 @@
       "type_something": "Gõ vài từ để tìm kiếm...",
       "error_fetching_search": "Đã có lỗi xảy ra, vui lòng thử lại sau",
       "see_more_results": "Xem thêm"
-    }  
+    }
   },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
@@ -581,7 +581,13 @@
     "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
     "email-existed": "Email đã tồn tại, vui lòng thử lại",
     "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
-    "verification-failed": "Xác thực thất bại, vui lòng thử lại"
+    "verification-failed": "Xác thực thất bại, vui lòng thử lại",
+    "classroom": {
+      "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
+      "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
+      "code-used": "Mã lớp học đã được sử dụng, vui lòng thử lại",
+      "already-joined": "Bạn đã tham gia lớp học này rồi"
+    }
   },
   "AddClassroom": {
     "metadata": {
@@ -635,6 +641,22 @@
     "toast_code": {
       "title": "Đã sao chép mã",
       "description": "Bạn có thể dán link vào nơi bạn muốn"
+    }
+  },
+  "Join_classroom": {
+    "title": "Tham gia lớp học",
+    "description": "Nhập mã để tham gia vào lớp học",
+    "form": {
+      "code": {
+        "label": "Mã mời",
+        "placeholder": "Nhập mã mời của lớp học"
+      },
+      "submit": "Tham gia",
+      "cancel": "Huỷ bỏ"
+    },
+    "success": {
+      "title": "Tham gia lớp học thành công",
+      "description": "Bạn đã tham gia lớp học thành công"
     }
   }
 }

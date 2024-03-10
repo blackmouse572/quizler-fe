@@ -20,7 +20,9 @@ async function ClassroomDetailsPage({ params }: Props) {
   }
 
   return (
-    <NextIntlClientProvider messages={_.pick(messages, "Invite_classroom")}>
+    <NextIntlClientProvider
+      messages={_.pick(messages, "Invite_classroom", "Errors")}
+    >
       <div>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
