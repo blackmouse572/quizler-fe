@@ -1,5 +1,5 @@
 "use client"
-import { joinClassroomAction } from "@/app/[locale]/(main)/classrooms/[id]/actions/join-classroom"
+import { joinClassroomAction } from "@/app/[locale]/(main)/classrooms/actions/join-classroom"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,

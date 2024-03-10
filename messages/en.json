@@ -157,6 +157,13 @@
       "Literatue": "Literatue",
       "Science": "Science",
       "Other": "Other"
+    },
+    "nav_search": {
+      "search": "I should learn...",
+      "no_search_result_found": "We search high and low, but can't find anything.",
+      "type_something": "Type a command or search...",
+      "error_fetching_search": "Something went wrong",
+      "see_more_results": "See more"
     }
   },
   "Footer": {
