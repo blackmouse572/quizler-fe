@@ -442,6 +442,15 @@
         "cancel": "Cancel",
         "submit": "Copy"
       }
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Copy quizbank successfully"
+      },
+      "failed": {
+        "title": "Something went wrong."
+      }
     }
   },
   "Errors": {

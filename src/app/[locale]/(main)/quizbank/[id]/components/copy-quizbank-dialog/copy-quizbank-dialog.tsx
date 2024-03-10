@@ -100,7 +100,7 @@ export default function CopyQuizBankDialog({
         >
           <SelectTrigger>
             {items && (
-              <SelectValue placeholder="Select a verified email to display" />
+              <SelectValue placeholder={items[0].text} />
             )}
           </SelectTrigger>
           <SelectContent>
@@ -139,20 +139,19 @@ export default function CopyQuizBankDialog({
   })
 
   const onSubmitCb = (result: any) => {
-    console.log("result:", result)
     setOpen(false)
     setIsLoading(false)
     if (!result) {
       return toast({
-        title: "Something went wrong.",
+        title: i18n("message.failed.title"),
         description: errorI18n(result.message as any),
         variant: "flat",
         color: "danger",
       })
     } else {
       return toast({
-        title: "Success",
-        description: "Copy quizbank successfully",
+        title: i18n("message.success.title"),
+        description: i18n("message.success.description"),
         variant: "flat",
         color: "success",
       })
@@ -163,7 +162,7 @@ export default function CopyQuizBankDialog({
     const { classRoom } = values
     setIsLoading(true)
     const result = await copyQuizBankToClassroom(token, quizbankId, classRoom)
-    onSubmitCb(await result)
+    onSubmitCb(result)
   }
 
   const copyForm = useCallback(
