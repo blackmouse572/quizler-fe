@@ -14,7 +14,7 @@ export default function ResultUsers({ usersData, isLoading }: Props) {
   const tSearch = useTranslations("SearchPage")
 
   return (
-    <>
+    <section>
       <div className="mt-6 w-full text-base font-semibold leading-6 text-zinc-900 max-md:max-w-full">
         {tSearch("users")}
       </div>
@@ -25,7 +25,10 @@ export default function ResultUsers({ usersData, isLoading }: Props) {
         {usersData &&
           usersData.map((data) => {
             return (
-              <div key={data.id} className="flex max-w-[25%] flex-1 flex-col items-start justify-center rounded-3xl border border-solid border-zinc-200 bg-white py-6 pl-6 pr-16 shadow max-md:px-5">
+              <div
+                key={data.id}
+                className="flex max-w-[25%] flex-1 flex-col items-start justify-center rounded-3xl border border-solid border-zinc-200 bg-white py-6 pl-6 pr-16 shadow max-md:px-5"
+              >
                 <div className="flex gap-2.5">
                   <Avatar>
                     <AvatarFallback>
@@ -41,6 +44,6 @@ export default function ResultUsers({ usersData, isLoading }: Props) {
             )
           })}
       </div>
-    </>
+    </section>
   )
 }

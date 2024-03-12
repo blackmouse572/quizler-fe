@@ -12,7 +12,7 @@ export default function ResultQuizbanks({ quizBanksData, isLoading }: Props) {
   const tSearch = useTranslations("SearchPage")
 
   return (
-    <>
+    <section>
       <div className="mt-6 w-full text-base font-semibold leading-6 text-zinc-900 max-md:max-w-full">
         {tSearch("quizbanks")}
       </div>
@@ -23,7 +23,10 @@ export default function ResultQuizbanks({ quizBanksData, isLoading }: Props) {
         {quizBanksData &&
           quizBanksData.map((data) => {
             return (
-              <div key={data.id} className="flex max-w-[25%] flex-1 flex-1 flex-col justify-center rounded-3xl border border-solid border-zinc-200 bg-white shadow">
+              <div
+                key={data.id}
+                className="flex max-w-[25%] flex-1 flex-1 flex-col justify-center rounded-3xl border border-solid border-zinc-200 bg-white shadow"
+              >
                 <div className="flex flex-col items-start py-6 pl-6 pr-20 max-md:px-5">
                   <div className="whitespace-nowrap text-base font-semibold leading-6 text-zinc-950">
                     <Link href={`/quizbank/${data.id}`}>{data.bankName}</Link>
@@ -36,6 +39,6 @@ export default function ResultQuizbanks({ quizBanksData, isLoading }: Props) {
             )
           })}
       </div>
-    </>
+    </section>
   )
 }

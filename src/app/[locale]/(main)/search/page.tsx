@@ -54,7 +54,7 @@ export default function SearchGlobalPage() {
     <>
       {isError && tSearch("search_error")}
 
-      <div className="flex flex-col px-5">
+      <div className="container">
         <ResultFilterTag search={search!} />
 
         <ResultQuizbanks quizBanksData={quizBanksData} isLoading={isLoading} />

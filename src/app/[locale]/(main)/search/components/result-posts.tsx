@@ -18,7 +18,7 @@ export default function ResultPosts({ postsData, isLoading }: Props) {
         {tSearch("posts")}
       </div>
 
-      <div className="mt-1 w-full justify-between px-0.5 max-md:max-w-full">
+      <div className="container mt-1 w-full justify-between px-0.5 max-md:max-w-full">
         <div className="flex flex-wrap justify-between gap-5 max-md:flex-col max-md:gap-0">
           <ResultLoading isLoading={isLoading} fieldData={postsData} />
 
@@ -34,7 +34,7 @@ export default function ResultPosts({ postsData, isLoading }: Props) {
                       <div className="text-base font-semibold leading-6 text-zinc-950">
                         <Link
                           className="text-wrap"
-                          href={`/classroom`}
+                          href={`/classrooms`}
                         >
                           {data.title.slice(0, maxLength) +
                             (data.title.length > maxLength ? "..." : "")}

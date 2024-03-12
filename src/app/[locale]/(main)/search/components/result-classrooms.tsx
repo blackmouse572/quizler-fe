@@ -12,6 +12,7 @@ type Props = {
 
 export default function ResultClassrooms({ classroomsData, isLoading }: Props) {
   const tSearch = useTranslations("SearchPage")
+  const maxLength = 20
 
   return (
     <>
@@ -20,18 +21,22 @@ export default function ResultClassrooms({ classroomsData, isLoading }: Props) {
       </div>
 
       <div className="mt-1 w-full justify-between max-md:max-w-full">
-        <div className="flex gap-5 flex-wrap justify-between max-md:flex-col max-md:gap-0">
+        <div className="flex flex-wrap justify-between gap-5 max-md:flex-col max-md:gap-0">
           <ResultLoading isLoading={isLoading} fieldData={classroomsData} />
 
           {classroomsData &&
             classroomsData.map((data) => {
               return (
-                <div key={data.id} className="flex w-3/12 flex-col max-md:ml-0 max-md:w-full">
+                <div
+                  key={data.id}
+                  className="flex w-3/12 flex-col max-md:ml-0 max-md:w-full"
+                >
                   <div className="mx-auto flex w-full grow flex-col rounded-3xl border border-solid border-zinc-200 bg-white pb-6 shadow max-md:mt-3">
                     <div className="flex flex-col items-start py-6 pl-6 pr-20 max-md:px-5">
                       <div className="whitespace-nowrap text-base font-semibold leading-6 text-zinc-950">
                         <Link href={`classrooms/${data.id}`}>
-                          {data.classname}
+                          {data.classname.slice(0, maxLength) +
+                            (data.classname.length > maxLength ? "..." : "")}
                         </Link>
                       </div>
                       <div className="mt-1.5 text-sm leading-5 text-zinc-500">
@@ -49,7 +54,8 @@ export default function ResultClassrooms({ classroomsData, isLoading }: Props) {
                         />
                       </Avatar>
                       <div className="my-auto grow text-lg font-bold">
-                        {data.author.fullName}
+                        {data.author.fullName.slice(0, maxLength) +
+                            (data.author.fullName.length > maxLength ? "..." : "")}
                       </div>
                     </div>
                   </div>

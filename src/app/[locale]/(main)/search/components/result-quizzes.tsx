@@ -12,7 +12,7 @@ export default function ResultQuizzes({ quizzesData, isLoading }: Props) {
   const tSearch = useTranslations("SearchPage")
 
   return (
-    <>
+    <section>
       <div className="mt-6 w-full text-base font-semibold leading-6 text-zinc-900 max-md:max-w-full">
         {tSearch("quizzes")}
       </div>
@@ -42,6 +42,6 @@ export default function ResultQuizzes({ quizzesData, isLoading }: Props) {
             })}
         </div>
       </div>
-    </>
+    </section>
   )
 }
