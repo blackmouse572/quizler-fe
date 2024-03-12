@@ -1,15 +1,15 @@
+import { getToken } from "@/lib/auth"
 import QuizBank from "@/types/QuizBank"
-import { Metadata } from "next"
-import ViewQuizBank from "./components/view-quizbank"
-import { NextIntlClientProvider } from "next-intl"
 import _ from "lodash"
+import { Metadata } from "next"
+import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
-import { fetchQuizBank } from "./actions/fetch-quiz-bank"
 import { fetchFlashcard } from "./actions/fetch-flashcard"
 import { fetchQuiz } from "./actions/fetch-quiz"
+import { fetchQuizBank } from "./actions/fetch-quiz-bank"
 import { fetchRelativeQuiz } from "./actions/fetch-relative-quiz"
-import { getToken } from "@/lib/auth"
+import ViewQuizBank from "./components/view-quizbank"
 
 type QuizBankDetailPageProps = { params: { id: string } }
 
@@ -43,8 +43,7 @@ async function getQuizBankDetailPage(id: string) {
     data: await flashcardRes.json(),
   }
   const quizData = {
-    statusCode: quizRes.status,
-    data: await quizRes.json(),
+    data: quizRes,
   }
   const relativeQuizBankData = await relativeQuizRes.json()
 
@@ -59,10 +58,9 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
     await getQuizBankDetailPage(id)
 
   const token = getToken().token
-  {
-    flashcardData.statusCode !== 200 &&
-      quizData.statusCode !== 200 &&
-      notFound()
+
+  if (!quizData.data.data) {
+    return notFound()
   }
 
   return (
@@ -74,7 +72,7 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
         token={token}
         quizBankData={quizBankData}
         flashcardData={flashcardData.data}
-        quizData={quizData.data}
+        quizData={quizData.data.data}
         relativeQuizBankData={relativeQuizBankData}
       />
     </NextIntlClientProvider>

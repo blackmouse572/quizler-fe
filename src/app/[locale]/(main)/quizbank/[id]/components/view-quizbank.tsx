@@ -1,8 +1,8 @@
+import ViewWrapper from "@/app/[locale]/(main)/quizbank/[id]/components/view-wrapper"
 import QuizBank, { Quiz } from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
 import AuthorQuizBank from "./author-quizbank"
 import ViewFlashcard from "./view-flashcard"
-import ViewQuizzes from "./view-quizzes"
 import ViewRelativeQuizBank from "./view-relative-quizbank"
 
 type Props = {
@@ -26,13 +26,8 @@ function ViewQuizBank({
 }: Props) {
   return (
     <div className="container mx-auto mb-8 space-y-8">
-      <ViewFlashcard
-        id={id}
-        token={token}
-        quizBankData={quizBankData}
-        flashcardData={flashcardData}
-      />
-      <ViewQuizzes id={id} token={token} quizData={quizData} />
+      {/* <ViewQuizzes id={id} token={token} data={quizData} /> */}
+      <ViewWrapper id={id} initialData={quizData} quizBankData={quizBankData} />
       <ViewRelativeQuizBank relativeQuizBankData={relativeQuizBankData} />
       <AuthorQuizBank
         quizbankId={id}

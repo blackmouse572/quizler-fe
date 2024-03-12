@@ -1,7 +1,9 @@
 import { getAPIServerURL } from "@/lib/utils"
+import { Quiz } from "@/types"
+import PagedResponse from "@/types/paged-response"
 
 export const fetchQuiz = async (id: string, token: string, skip: number) => {
-  const URL = getAPIServerURL(`/quiz/${id}?skip=${skip}`)
+  const url = getAPIServerURL(`/quiz/${id}?skip=${skip}`)
 
   const options = {
     method: "GET",
@@ -11,13 +13,26 @@ export const fetchQuiz = async (id: string, token: string, skip: number) => {
     },
   }
 
-  const res = await fetch(URL, options).then(async (response) => {
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message)
-    }
-    return response
-  })
-
-  return res
-} 
+  return fetch(url, options)
+    .then(async (res) => {
+      const json = await res.json()
+      if (!res.ok) {
+        throw new Error(json)
+      }
+      return json
+    })
+    .then((res: PagedResponse<Quiz>) => {
+      return {
+        ok: true,
+        message: "success",
+        data: res,
+      }
+    })
+    .catch((error) => {
+      return {
+        ok: false,
+        message: error.message,
+        data: null,
+      }
+    })
+}

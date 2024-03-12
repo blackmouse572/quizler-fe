@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -10,12 +8,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Toggle } from "@/components/ui/toggle"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import usePaginationValue from "@/hooks/usePaginationValue"
 import QuizBank, { Quiz } from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
 import {
@@ -25,54 +24,44 @@ import {
   ShuffleIcon,
   StarIcon,
 } from "@radix-ui/react-icons"
+import { InfiniteData } from "@tanstack/react-query"
 import Autoplay from "embla-carousel-autoplay"
 import { useTranslations } from "next-intl"
-import { useEffect, useRef, useState } from "react"
-import { fetchFlashcard } from "../actions/fetch-flashcard"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 type Props = {
-  id: string
-  token: string
+  data: InfiniteData<PagedResponse<Quiz> | null, unknown>
   quizBankData: QuizBank
-  flashcardData: PagedResponse<Quiz>
+  onSeeMore: () => void
+  isLoading: boolean
+  isError: boolean
+  take: number
+  totals: number
+  hasMore: boolean
 }
 
 export default function ViewFlashcard({
-  id,
-  token,
+  data,
+  hasMore,
+  isError,
+  isLoading,
+  onSeeMore,
+  totals,
+  take,
   quizBankData,
-  flashcardData,
 }: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
   const [api, setApi] = useState<CarouselApi>()
-  const plugin = useRef(Autoplay({ stopOnInteraction: true }))
+  const autoPlay = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true, playOnInit: false })
+  )
 
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
   const [selectedItem, setSelectedItem] = useState(true)
   const [isPlaying, setIsPlaying] = useState(true)
-
-  const { skip, take, totals, hasMore } = usePaginationValue(
-    flashcardData.metadata
-  )
-  const [data, setData] = useState(flashcardData.data)
-  const [currentPage, setCurrentPage] = useState(skip)
-
-  const handleSeemore = async () => {
-    const nextPage = currentPage + 1
-
-    try {
-      const nextPageRes = await fetchFlashcard(id, token, nextPage)
-      const nextPageData = await nextPageRes.json()
-
-      setData((prevData: any) => [...prevData, ...nextPageData.data])
-      setCurrentPage(nextPage)
-    } catch (error) {
-      console.error("Error loading more quizzes:", error)
-    }
-  }
-
+  const totalLoaded = useMemo(() => data.pages.length * take, [data, take])
   useEffect(() => {
     if (!api) {
       return
@@ -90,14 +79,77 @@ export default function ViewFlashcard({
     })
   }, [api, selectedItem, totals])
 
-  const handleButtonClick = () => {
-    setIsPlaying((prevIsPlaying) => !prevIsPlaying)
-    if (isPlaying) {
-      plugin.current.stop()
+  // trigger see more on near end of the list
+  useEffect(() => {
+    if (hasMore && !isLoading && !isError) {
+      if (totalLoaded - current < 5) {
+        onSeeMore()
+      }
+    }
+  }, [current, hasMore, isError, isLoading, onSeeMore, totalLoaded])
+
+  const loadingItem = useMemo(() => {
+    if (isLoading) {
+      return (
+        <CarouselItem key="loading" className="bg-background">
+          <Skeleton className="h-full w-full" />
+        </CarouselItem>
+      )
+    }
+  }, [isLoading])
+
+  const renderItem = useCallback(
+    (item: Quiz) => {
+      const questionWithDiv = item.question
+        .split("\n")
+        .map((line: string, index: number) => <div key={index}>{line}</div>)
+
+      return (
+        <CarouselItem key={item.id}>
+          <div className="p-1">
+            <Card>
+              <CardContent className="flex aspect-video items-center justify-center p-6">
+                <span className="text-4xl">
+                  {selectedItem ? questionWithDiv : item.answer}
+                </span>
+              </CardContent>
+            </Card>
+          </div>
+        </CarouselItem>
+      )
+    },
+    [selectedItem]
+  )
+
+  const handleButtonClick = (newValue: boolean) => {
+    setIsPlaying(newValue)
+    if (autoPlay.current.isPlaying()) {
+      autoPlay.current.stop()
     } else {
-      plugin.current.play()
+      autoPlay.current.play()
     }
   }
+
+  const toggleAutoPlay = useCallback(() => {
+    const autoplay = api?.plugins()?.autoplay as any
+    if (!autoplay) return
+
+    const playOrStop = autoplay.isPlaying() ? autoplay.stop : autoplay.play
+    playOrStop()
+  }, [api])
+
+  useEffect(() => {
+    const autoplay = api?.plugins()?.autoplay as any
+    if (!autoplay) return
+
+    setIsPlaying(autoplay.isPlaying())
+    api
+      // @ts-ignore
+      ?.on("autoplay:play", () => setIsPlaying(true))
+      // @ts-ignore
+      .on("autoplay:stop", () => setIsPlaying(false))
+      .on("reInit", () => setIsPlaying(false))
+  }, [api])
 
   return (
     <>
@@ -137,45 +189,31 @@ export default function ViewFlashcard({
         opts={{
           align: "start",
         }}
-        plugins={[plugin.current]}
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.play}
+        plugins={[autoPlay.current]}
       >
         <CarouselContent>
-          {data.map((quizKey) => {
-            const questionWithDiv = quizKey.question
-              .split("\n")
-              .map((line: string, index: number) => (
-                <div key={index}>{line}</div>
-              ))
-
-            return (
-              <CarouselItem key={quizKey.id}>
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex aspect-video items-center justify-center p-6">
-                      <span className="text-4xl">
-                        {selectedItem ? questionWithDiv : quizKey.answer}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            )
-          })}
+          {data.pages.map((page) => page?.data.map((item) => renderItem(item)))}
+          {loadingItem}
         </CarouselContent>
 
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
 
-      <div className="flex justify-between gap-5 ">
+      <div className="flex items-center justify-between gap-5 ">
         <div className="flex justify-between gap-3">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button onClick={handleButtonClick} variant="light" isIconOnly>
+              <Toggle
+                onClick={toggleAutoPlay}
+                aria-label={
+                  isPlaying
+                    ? i18n("ViewFlashcard.pause_button")
+                    : i18n("ViewFlashcard.play_button")
+                }
+              >
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
-              </Button>
+              </Toggle>
             </TooltipTrigger>
             <TooltipContent>
               <p>
@@ -188,9 +226,9 @@ export default function ViewFlashcard({
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="light" isIconOnly>
+              <Toggle aria-label={i18n("ViewFlashcard.shuffle_button")}>
                 <ShuffleIcon />
-              </Button>
+              </Toggle>
             </TooltipTrigger>
             <TooltipContent>
               <p>{i18n("ViewFlashcard.shuffle_button")}</p>
@@ -198,10 +236,8 @@ export default function ViewFlashcard({
           </Tooltip>
         </div>
 
-        <div className="flex justify-between gap-5 whitespace-nowrap text-xs font-semibold leading-4 text-black">
-          <div className="my-auto">
-            {current}/{count}
-          </div>
+        <div className="flex-1 text-center text-xs font-semibold leading-4 text-black">
+          {current}/{count}
         </div>
 
         <Tooltip>
