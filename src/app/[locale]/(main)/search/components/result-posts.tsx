@@ -34,7 +34,7 @@ export default function ResultPosts({ postsData, isLoading }: Props) {
                       <div className="text-base font-semibold leading-6 text-zinc-950">
                         <Link
                           className="text-wrap"
-                          href={`/classroom/${data.classroom.id}?postID=${data.id}`}
+                          href={`/classroom`}
                         >
                           {data.title.slice(0, maxLength) +
                             (data.title.length > maxLength ? "..." : "")}
