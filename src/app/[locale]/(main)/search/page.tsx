@@ -19,7 +19,7 @@ export default function SearchGlobalPage() {
   const search = searchParams.get("search")
   const take = searchParams.get("take")
   const skip = searchParams.get("skip")
-  const tNav = useTranslations("Navbar")
+  const tSearch = useTranslations("SearchPage")
 
   {
     !search && notFound()
@@ -52,7 +52,7 @@ export default function SearchGlobalPage() {
 
   return (
     <>
-      {isError && tNav("nav_search.error_fetching_search")}
+      {isError && tSearch("search_error")}
 
       <div className="flex flex-col px-5">
         <ResultFilterTag search={search!} />

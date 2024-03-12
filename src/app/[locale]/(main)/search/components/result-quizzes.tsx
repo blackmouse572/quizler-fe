@@ -1,6 +1,7 @@
 import { QuizzesData } from "@/types/quizzesData"
 import Link from "next/link"
 import ResultLoading from "../loading/result-loading"
+import { useTranslations } from "next-intl"
 
 type Props = {
   quizzesData: QuizzesData
@@ -8,18 +9,20 @@ type Props = {
 }
 
 export default function ResultQuizzes({ quizzesData, isLoading }: Props) {
+  const tSearch = useTranslations("SearchPage")
+
   return (
     <>
       <div className="mt-6 w-full text-base font-semibold leading-6 text-zinc-900 max-md:max-w-full">
-        Quizzes
+        {tSearch("quizzes")}
       </div>
 
       <div className="mt-1 w-full justify-between px-0.5 max-md:max-w-full">
-        <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+        <div className="flex flex-wrap justify-between gap-5 max-md:flex-col max-md:gap-0">
           <ResultLoading isLoading={isLoading} fieldData={quizzesData} />
 
           {quizzesData &&
-            quizzesData.slice(0, 12).map((data) => {
+            quizzesData.map((data) => {
               return (
                 <div key={data.id} className="flex w-3/12 flex-col max-md:ml-0 max-md:w-full">
                   <div className="flex w-full grow flex-col justify-center rounded-3xl border border-solid border-zinc-200 bg-white shadow max-md:mt-6">

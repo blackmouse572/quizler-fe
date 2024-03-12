@@ -15,7 +15,7 @@ export default function SearchLayout({
   const messages = useMessages()
 
   return (
-    <NextIntlClientProvider locale={locale} messages={pick(messages, "Navbar")}>
+    <NextIntlClientProvider locale={locale} messages={pick(messages, "SearchPage")}>
       <BackgroundSquare
         variant={"topDown"}
         className="container mx-auto items-start pt-20"

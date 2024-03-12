@@ -3,6 +3,7 @@ import { getShortName } from "@/lib/string-helper"
 import { ClassroomsData } from "@/types/classroomsData"
 import Link from "next/link"
 import ResultLoading from "../loading/result-loading"
+import { useTranslations } from "next-intl"
 
 type Props = {
   classroomsData: ClassroomsData
@@ -10,18 +11,20 @@ type Props = {
 }
 
 export default function ResultClassrooms({ classroomsData, isLoading }: Props) {
+  const tSearch = useTranslations("SearchPage")
+
   return (
     <>
       <div className="mt-6 w-full text-base font-semibold leading-6 text-zinc-900 max-md:max-w-full">
-        Classrooms
+        {tSearch("classrooms")}
       </div>
 
       <div className="mt-1 w-full justify-between max-md:max-w-full">
-        <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+        <div className="flex gap-5 flex-wrap justify-between max-md:flex-col max-md:gap-0">
           <ResultLoading isLoading={isLoading} fieldData={classroomsData} />
 
           {classroomsData &&
-            classroomsData.slice(0, 6).map((data) => {
+            classroomsData.map((data) => {
               return (
                 <div key={data.id} className="flex w-3/12 flex-col max-md:ml-0 max-md:w-full">
                   <div className="mx-auto flex w-full grow flex-col rounded-3xl border border-solid border-zinc-200 bg-white pb-6 shadow max-md:mt-3">
@@ -32,7 +35,7 @@ export default function ResultClassrooms({ classroomsData, isLoading }: Props) {
                         </Link>
                       </div>
                       <div className="mt-1.5 text-sm leading-5 text-zinc-500">
-                        {data.studentNumber} students
+                        {data.studentNumber} {tSearch("students")}
                       </div>
                     </div>
                     <div className="ml-6 flex gap-2.5 self-start whitespace-nowrap leading-8 text-black max-md:ml-2.5">
