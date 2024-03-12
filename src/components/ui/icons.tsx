@@ -1,5 +1,6 @@
 import {
   IconAffiliate,
+  IconAlertCircle,
   IconArrowDown,
   IconArrowDownRight,
   IconArrowRoundaboutLeft,
@@ -80,6 +81,7 @@ export const Icons = {
   CircleOff: IconCircleOff,
   Eye: IconEye,
   Filter: IconFilter,
+  Report: IconAlertCircle,
   Search: IconSearch,
   DashBoard: IconDashboard,
   MultiUsers: IconUsers,

@@ -59,10 +59,6 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
     await getQuizBankDetailPage(id)
 
   const token = getToken().token
-
-  // loading in here, check again when create quiz did it load yet?
-
-  // if quizbank is private or user is not author => return notFound
   {
     flashcardData.statusCode !== 200 &&
       quizData.statusCode !== 200 &&
@@ -70,7 +66,9 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
   }
 
   return (
-    <NextIntlClientProvider messages={_.pick(message, "ViewQuizBank", "CopyQuizBank", "Errors")}>
+    <NextIntlClientProvider
+      messages={_.pick(message, "ViewQuizBank", "CopyQuizBank", "Errors")}
+    >
       <ViewQuizBank
         id={id}
         token={token}

@@ -1,33 +1,39 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Icons } from "@/components/ui/icons"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Button } from "@/components/ui/button"
-import { InfoCircledIcon } from "@radix-ui/react-icons"
-import { useTranslations } from "next-intl"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { getShortName } from "@/lib/string-helper"
-import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
-import { use } from "react"
 import { getToken } from "@/lib/auth"
+import { getShortName } from "@/lib/string-helper"
 import { fetchClassroomCurrentUser } from "@/services/account.service"
-import { Classroom } from "@/types"
+import { Classroom, User } from "@/types"
+import { useTranslations } from "next-intl"
+import { use } from "react"
+import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 
 type Props = {
-  authorData: any
+  authorData: User
   classname?: string
   quizbankId: string
 }
 
-export default function AuthorQuizBank({ authorData, classname, quizbankId }: Props) {
+export default function AuthorQuizBank({
+  authorData,
+  classname,
+  quizbankId,
+}: Props) {
   const i18n = useTranslations("ViewQuizBank")
-  const {token} = getToken()
-  const {data: userCurrentClass} : {data: Classroom[] } = use(fetchClassroomCurrentUser(token))
+  const { token } = getToken()
+  const { data: userCurrentClass }: { data: Classroom[] } = use(
+    fetchClassroomCurrentUser(token)
+  )
 
   return (
-    <>
-      <div className="mt-16 w-[849px] border-b-2 border-gray-300 text-xl font-bold leading-8 text-black max-md:mt-10 max-md:max-w-full" />
+    <div className="space-y-4">
+      <div className=" border-b-2 border-gray-300 text-xl font-bold leading-8 text-black max-md:mt-10 max-md:max-w-full" />
       <div className="mt-16 text-xl font-bold leading-8 text-black max-md:mt-10 max-md:max-w-full">
         {i18n("belong_to")}
       </div>
@@ -37,16 +43,19 @@ export default function AuthorQuizBank({ authorData, classname, quizbankId }: Pr
             {i18n("author.class_title")}:{" "}
             <span className="font-bold">
               {i18n("author.class_title")} Biology {i18n("author.of")}{" "}
-              {authorData.fullName}{" "}
+              {authorData.fullName}
             </span>
           </div>
         </div>
       )}
 
-      <div className="ml-3.5 flex w-[874px] max-w-full justify-between gap-5 pr-6 max-md:flex-wrap max-md:pr-5">
+      <div className="flex max-w-full justify-between gap-5 pr-6 max-md:flex-wrap max-md:pr-5">
         <div className="flex justify-between gap-2 whitespace-nowrap">
           <Avatar>
-            <AvatarImage src={authorData?.avatar} alt={authorData?.fullName} />
+            <AvatarImage
+              src={authorData?.avatar ?? ""}
+              alt={authorData?.fullName}
+            />
             <AvatarFallback className="bg-gradient-to-bl ">
               <span className="text-white">
                 {getShortName(authorData.fullName)}
@@ -63,20 +72,23 @@ export default function AuthorQuizBank({ authorData, classname, quizbankId }: Pr
           </div>
         </div>
         <div className="flex justify-between gap-2">
-          <CopyQuizBankDialog token={token} quizbankId={quizbankId} buttonContent={i18n("author.copy_button")} classes={userCurrentClass} />
+          <CopyQuizBankDialog
+            token={token}
+            quizbankId={quizbankId}
+            buttonContent={i18n("author.copy_button")}
+            classes={userCurrentClass}
+          />
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="light" color={null}>
-                <InfoCircledIcon />
+              <Button color="accent" isIconOnly>
+                <Icons.Report />
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
-              <p>{i18n("author.report_button")}</p>
-            </TooltipContent>
+            <TooltipContent>{i18n("author.report_button")}</TooltipContent>
           </Tooltip>
         </div>
       </div>
-    </>
+    </div>
   )
 }

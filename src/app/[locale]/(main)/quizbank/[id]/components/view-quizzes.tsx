@@ -1,25 +1,28 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { useTranslations } from "next-intl"
+import { Separator } from "@/components/ui/separator"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { PiSparkle } from "react-icons/pi"
 import usePaginationValue from "@/hooks/usePaginationValue"
+import { Quiz } from "@/types/QuizBank"
+import PagedResponse from "@/types/paged-response"
+import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { PiSparkle } from "react-icons/pi"
+import { fetchAIquestion } from "../actions/fetch-AI-question"
 import { fetchQuiz } from "../actions/fetch-quiz"
 import ViewAIExplain from "./view-AI-explain"
-import { useState } from "react"
-import { fetchAIquestion } from "../actions/fetch-AI-question"
-import { useRouter } from "next/navigation"
 
 type Props = {
   id: string
   token: string
-  quizData: any
+  quizData: PagedResponse<Quiz>
 }
 
 interface HiddenAIAnswerState {
@@ -35,7 +38,7 @@ export default function ViewQuizzes({ id, token, quizData }: Props) {
     quizData.metadata
   )
   const router = useRouter()
-  
+
   const [data, setData] = useState(quizData.data)
   const [currentPage, setCurrentPage] = useState(skip)
 
@@ -87,90 +90,92 @@ export default function ViewQuizzes({ id, token, quizData }: Props) {
   }
 
   return (
-    <>
-      <div className="z-10 mt-16 flex w-[849px] max-w-full items-start justify-between gap-5 px-5 max-md:mt-10 max-md:flex-wrap">
-        <div className="flex-auto self-start text-xl font-bold leading-8 text-black">
+    <section>
+      <div className="z-10 mt-16">
+        <h3 className="text-xl font-bold  text-black">
           {i18n("ViewQuizzes.term")} ({quizData.metadata.totals})
-        </div>
-        <div className="mt-5 flex flex-col self-end whitespace-nowrap pb-2 font-medium text-white">
-          <div className="mr-3 justify-center self-end rounded-lg bg-red-600 px-1.5 text-center text-xs leading-4 shadow-sm max-md:mr-2.5">
-            BETA
-          </div>
-        </div>
+        </h3>
       </div>
 
-      {/* Render quizzes */}
-      {Object.keys(data).map((quizKey) => {
-        const quiz = data[quizKey]
+      <div className="space-y-4">
+        {data.map((quiz) => {
+          const questionWithDiv = quiz.question
+            .split("\n")
+            .map((line: string, index: number) => <div key={index}>{line}</div>)
 
-        {
-          /* Replace '\n' with <div></div> */
-        }
-        const questionWithDiv = quiz.question
-          .split("\n")
-          .map((line: string, index: number) => <div key={index}>{line}</div>)
-
-        return (
-          <div key={quizKey}>
-            <div className="mt-4 w-[849px] max-w-full rounded-xl border border-solid border-[color:var(--Colors-Neutral-300,#D4D4D4)] bg-white px-6 py-4 shadow-sm max-md:px-5">
-              <div className="max-md: flex gap-5 max-md:flex-col max-md:gap-0">
-                <div className="flex w-6/12 flex-col max-md:ml-0 max-md:w-full">
-                  <div className="border-r-2 border-gray-300 text-base leading-6 text-black max-md:mt-10">
-                    {questionWithDiv}
+          return (
+            <div key={quiz.id}>
+              <div className="rounded-xl border border-solid border-border bg-white px-6 py-4 shadow-sm max-md:px-5">
+                <div className="max-md: flex gap-5 max-md:flex-col max-md:gap-0">
+                  <div className="flex w-6/12 flex-col max-md:ml-0 max-md:w-full">
+                    <div className="border-r-2 border-gray-300 text-base leading-6 text-black max-md:mt-10">
+                      {questionWithDiv}
+                    </div>
+                  </div>
+                  <div className="ml-5 flex w-6/12 flex-col max-md:ml-0 max-md:w-full">
+                    <div className="text-base leading-6 text-black max-md:mt-10">
+                      {quiz.answer}
+                    </div>
+                  </div>
+                  <div className="">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            onClick={async () =>
+                              await handleButtonAIClick(
+                                quiz.id.toString(),
+                                token,
+                                quiz.question,
+                                quiz.answer,
+                                ""
+                              )
+                            }
+                            variant="light"
+                            color={null}
+                          >
+                            <PiSparkle />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{i18n("ViewQuizzes.view_AI_answer")}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </div>
                 </div>
-                <div className="ml-5 flex w-6/12 flex-col max-md:ml-0 max-md:w-full">
-                  <div className="text-base leading-6 text-black max-md:mt-10">
-                    {quiz.answer}
-                  </div>
-                </div>
-                <div className="ml-5">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          onClick={async () =>
-                            await handleButtonAIClick(
-                              quizKey,
-                              token,
-                              quiz.question,
-                              quiz.answer,
-                              ""
-                            )
-                          }
-                          variant="light"
-                          color={null}
-                        >
-                          <PiSparkle />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{i18n("ViewQuizzes.view_AI_answer")}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
+
+                {hiddenAIAnswer[quiz.id.toString()] && (
+                  <ViewAIExplain
+                    key={quiz.id}
+                    hiddenOrNot={
+                      hiddenAIAnswer[quiz.id.toString()]?.hidden
+                        ? "block"
+                        : "hidden"
+                    }
+                    explain={
+                      hiddenAIAnswer[quiz.id.toString()]?.answerAIRes || ""
+                    }
+                  />
+                )}
               </div>
-
-              {hiddenAIAnswer[quizKey] && (
-                <ViewAIExplain
-                  key={quizKey}
-                  hiddenOrNot={
-                    hiddenAIAnswer[quizKey]?.hidden ? "block" : "hidden"
-                  }
-                  explain={hiddenAIAnswer[quizKey]?.answerAIRes || ""}
-                />
-              )}
             </div>
-          </div>
-        )
-      })}
-
-      {quizData.metadata.hasMore && (
-        <Button className="mt-2" onClick={handleSeemore} variant="light">
-          {i18n("ViewQuizzes.see_more_btn")}
-        </Button>
-      )}
-    </>
+          )
+        })}
+      </div>
+      <div className="flex items-center gap-4">
+        <Separator className="shrink" />
+        {quizData.metadata.hasMore && (
+          <Button
+            className="mx-auto mt-2"
+            onClick={handleSeemore}
+            variant="light"
+          >
+            {i18n("ViewQuizzes.see_more_btn")}
+          </Button>
+        )}
+        <Separator className="shrink" />
+      </div>
+    </section>
   )
 }

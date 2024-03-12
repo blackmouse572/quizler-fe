@@ -1,6 +1,7 @@
 "use client"
 
-import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
   CarouselApi,
@@ -9,8 +10,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import usePaginationValue from "@/hooks/usePaginationValue"
+import QuizBank, { Quiz } from "@/types/QuizBank"
+import PagedResponse from "@/types/paged-response"
 import {
   EnterFullScreenIcon,
   PauseIcon,
@@ -18,25 +25,24 @@ import {
   ShuffleIcon,
   StarIcon,
 } from "@radix-ui/react-icons"
-import { useEffect, useRef, useState } from "react"
-import QuizBank from "@/types/QuizBank"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import Autoplay from "embla-carousel-autoplay"
-import usePaginationValue from "@/hooks/usePaginationValue"
+import { useTranslations } from "next-intl"
+import { useEffect, useRef, useState } from "react"
 import { fetchFlashcard } from "../actions/fetch-flashcard"
 
 type Props = {
   id: string
   token: string
   quizBankData: QuizBank
-  flashcardData: any
+  flashcardData: PagedResponse<Quiz>
 }
 
-export default function ViewFlashcard({ id, token, quizBankData, flashcardData }: Props) {
+export default function ViewFlashcard({
+  id,
+  token,
+  quizBankData,
+  flashcardData,
+}: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
   const [api, setApi] = useState<CarouselApi>()
@@ -95,7 +101,7 @@ export default function ViewFlashcard({ id, token, quizBankData, flashcardData }
 
   return (
     <>
-      <div className="mt-7 flex w-[840px] max-w-full justify-between gap-5 whitespace-nowrap max-md:flex-wrap">
+      <div className="mt-7 flex w-full justify-between gap-5 whitespace-nowrap max-md:flex-wrap">
         <div className="flex flex-col px-5 text-black">
           <div className="text-2xl font-bold leading-9">
             {quizBankData.bankName}
@@ -110,14 +116,13 @@ export default function ViewFlashcard({ id, token, quizBankData, flashcardData }
         </div>
       </div>
 
-      <div className="ml-72 mt-1.5 flex gap-1 self-start whitespace-nowrap text-center text-xs font-medium leading-4 text-zinc-500 max-md:ml-2.5">
+      <div className="flex gap-2 self-start whitespace-nowrap text-center text-xs font-medium leading-4 text-zinc-500 max-md:ml-2.5">
         {Object.keys(quizBankData.tags).map((_, index) => {
           const tag = quizBankData.tags[index]
-
           return (
             <div
               key={index}
-              className="aspect-[3.05] justify-center rounded-lg border border-solid border-[color:var(--color-border,#E4E4E7)] bg-white px-2 py-0.5 shadow-sm"
+              className="aspect-[3.05] justify-center rounded-lg border border-solid border-border bg-white px-2 py-0.5 shadow-sm"
             >
               {tag}
             </div>
@@ -128,7 +133,7 @@ export default function ViewFlashcard({ id, token, quizBankData, flashcardData }
       {/* Flashcard */}
       <Carousel
         setApi={setApi}
-        className="mt-6 w-[840px] max-w-full"
+        className="mt-6"
         opts={{
           align: "start",
         }}
@@ -137,25 +142,20 @@ export default function ViewFlashcard({ id, token, quizBankData, flashcardData }
         onMouseLeave={plugin.current.play}
       >
         <CarouselContent>
-          {Object.keys(data).map((quizKey) => {
-            const quiz = data[quizKey]
-
-            {
-              /* Replace '\n' with <div></div> */
-            }
-            const questionWithDiv = quiz.question
+          {data.map((quizKey) => {
+            const questionWithDiv = quizKey.question
               .split("\n")
               .map((line: string, index: number) => (
                 <div key={index}>{line}</div>
               ))
 
             return (
-              <CarouselItem key={quizKey}>
+              <CarouselItem key={quizKey.id}>
                 <div className="p-1">
                   <Card>
                     <CardContent className="flex aspect-video items-center justify-center p-6">
                       <span className="text-4xl">
-                        {selectedItem ? questionWithDiv : quiz.answer}
+                        {selectedItem ? questionWithDiv : quizKey.answer}
                       </span>
                     </CardContent>
                   </Card>
@@ -169,11 +169,11 @@ export default function ViewFlashcard({ id, token, quizBankData, flashcardData }
         <CarouselNext />
       </Carousel>
 
-      <div className="flex w-[840px] max-w-full justify-between gap-5 pr-5 max-md:flex-wrap">
+      <div className="flex justify-between gap-5 ">
         <div className="flex justify-between gap-3">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button onClick={handleButtonClick} variant="light" color={null}>
+              <Button onClick={handleButtonClick} variant="light" isIconOnly>
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </Button>
             </TooltipTrigger>
@@ -188,7 +188,7 @@ export default function ViewFlashcard({ id, token, quizBankData, flashcardData }
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="light" color={null}>
+              <Button variant="light" isIconOnly>
                 <ShuffleIcon />
               </Button>
             </TooltipTrigger>
@@ -200,14 +200,13 @@ export default function ViewFlashcard({ id, token, quizBankData, flashcardData }
 
         <div className="flex justify-between gap-5 whitespace-nowrap text-xs font-semibold leading-4 text-black">
           <div className="my-auto">
-            {i18n("ViewFlashcard.slide")} {current} {i18n("ViewFlashcard.of")}{" "}
-            {count}
+            {current}/{count}
           </div>
         </div>
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="light" color={null}>
+            <Button variant="light" isIconOnly>
               <EnterFullScreenIcon />
             </Button>
           </TooltipTrigger>
