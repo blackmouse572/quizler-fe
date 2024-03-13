@@ -13,6 +13,7 @@ import { Classroom, User } from "@/types"
 import { useTranslations } from "next-intl"
 import { use, useMemo } from "react"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
+import EditQuizBank from "./edit-button"
 
 type Props = {
   authorData: User
@@ -33,19 +34,15 @@ export default function AuthorQuizBank({
     fetchClassroomCurrentUser(token)
   )
 
-  // TODO: set action for public and edit button
+  // TODO: set action for public button
   const quizBankActions = useMemo(() => {
-    if (!isOwnQuizBank) {
+    if (isOwnQuizBank) {
       return (
         <>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button color="accent" isIconOnly>
-                <Icons.Edit />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{i18n("author.edit_button")}</TooltipContent>
-          </Tooltip>
+          <EditQuizBank
+            quizbankId={quizbankId}
+            content={i18n("author.edit_button")}
+          />
           <Tooltip>
             <TooltipTrigger asChild>
               <Button color="accent" isIconOnly>
@@ -57,23 +54,25 @@ export default function AuthorQuizBank({
         </>
       )
     } else {
-      ;<>
-        <CopyQuizBankDialog
-          token={token}
-          quizbankId={quizbankId}
-          buttonContent={i18n("author.copy_button")}
-          classes={userCurrentClass}
-        />
+      return (
+        <>
+          <CopyQuizBankDialog
+            token={token}
+            quizbankId={quizbankId}
+            buttonContent={i18n("author.copy_button")}
+            classes={userCurrentClass}
+          />
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button color="accent" isIconOnly>
-              <Icons.Report />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>{i18n("author.report_button")}</TooltipContent>
-        </Tooltip>
-      </>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button color="accent" isIconOnly>
+                <Icons.Report />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>{i18n("author.report_button")}</TooltipContent>
+          </Tooltip>
+        </>
+      )
     }
   }, [i18n, isOwnQuizBank, quizbankId, token, userCurrentClass])
 
