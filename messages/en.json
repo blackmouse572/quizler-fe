@@ -166,6 +166,24 @@
       "see_more_results": "See more"
     }
   },
+  "SearchPage": {
+    "search_error": "Something went wrong",
+    "results_for": "Results for",
+    "filter": {
+      "take": "take",
+      "skip": "skip",
+      "take_placeholder": "Take",
+      "skip_placeholder": "Skip"
+    },
+    "quizbanks": "Quizbanks",
+    "classrooms": "Classrooms",
+    "students": "students",
+    "quizzes": "Quizzes",
+    "users": "Users",
+    "posts": "Posts",
+    "loading": "Loading...",
+    "no_results": "No results"
+  },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
   },

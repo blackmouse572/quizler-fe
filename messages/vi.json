@@ -47,6 +47,24 @@
       "see_more_results": "Xem thêm"
     }
   },
+  "SearchPage": {
+    "search_error": "Đã có lỗi xảy ra, vui lòng thử lại sau",
+    "results_for": "Kết quả cho",
+    "filter": {
+      "take": "take",
+      "skip": "skip",
+      "take_placeholder": "Lấy số kết quả",
+      "skip_placeholder": "Trang"
+    },
+    "quizbanks": "Các học phần",
+    "classrooms": "Lớp học",
+    "students": "học sinh",
+    "quizzes": "Câu hỏi nằm trong QuizBank",
+    "users": "Người dùng",
+    "posts": "Các bài đăng trong lớp học",
+    "loading": "Đang tải...",
+    "no_results": "Không có kết quả"
+  },
   "Footer": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
   },

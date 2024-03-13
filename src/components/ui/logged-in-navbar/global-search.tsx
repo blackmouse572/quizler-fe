@@ -47,7 +47,7 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
     isError,
   } = useQuery<SearchGlobalResults>({
     queryKey: ["searchQuery", debouncedSearchQuery],
-    queryFn: () => fetchSearchGlobal(debouncedSearchQuery),
+    queryFn: () => fetchSearchGlobal(debouncedSearchQuery, null, null),
     enabled,
   })
 
@@ -98,9 +98,7 @@ function SearchResults({ searchQuery }: SearchResultsProps) {
 
   if (!enabled) return null
 
-  var quizzesData = data?.quizzes || null
   var quizBanksData = data?.quizBanks || null
-  var postsData = data?.posts || null
   var classroomsData = data?.classrooms || null
 
   return (
@@ -147,6 +145,13 @@ export default function GlobalSearch() {
   const [searchQuery, setSearchQuery] = React.useState("")
   const router = useRouter()
 
+  const createQueryString = (name: string, value: string) => {
+    const params = new URLSearchParams()
+    params.set(name, value)
+
+    return params.toString()
+  }
+
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
@@ -156,13 +161,13 @@ export default function GlobalSearch() {
 
       if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
         setOpen((open) => !open)
-        router.push("/search")
+        router.push("/search" + "?" + createQueryString("search", searchQuery))
       }
     }
 
     document.addEventListener("keydown", down)
     return () => document.removeEventListener("keydown", down)
-  }, [router])
+  }, [router, searchQuery])
 
   const handleClick = () => {
     setOpen(!open)
@@ -200,7 +205,7 @@ export default function GlobalSearch() {
           color={null}
           asChild
         >
-          <Link href="/search">
+          <Link href={{ pathname: "/search", query: { search: searchQuery } }}>
             {tNav("nav_search.see_more_results")}
             <CommandShortcut>(⌘Enter)</CommandShortcut>
           </Link>
