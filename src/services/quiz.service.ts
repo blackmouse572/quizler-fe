@@ -1,7 +1,6 @@
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank, { TAPIQuizResponse } from "@/types/QuizBank"
 
-
 export async function getQuizBankDetailPage(id: string) {
   const url = getAPIServerURL(`/quizbank/${id}`)
   const res = await fetch(url)
@@ -39,8 +38,14 @@ export async function getQuizByQuizBankId(id: string) {
     })
 }
 
-export async function copyQuizBankToClassroom(token: string, quizbankId: string, classroomId: string) {
-  const url = getAPIServerURL(`/api/classrooms/copyquizbank/${quizbankId}/${classroomId}`)
+export async function copyQuizBankToClassroom(
+  token: string,
+  quizbankId: string,
+  classroomId: string
+) {
+  const url = getAPIServerURL(
+    `/api/classrooms/copyquizbank/${quizbankId}/${classroomId}`
+  )
 
   const options = {
     method: "POST",
@@ -49,12 +54,34 @@ export async function copyQuizBankToClassroom(token: string, quizbankId: string,
       Authorization: `Bearer ${token}`,
     },
   }
-  return fetch(url, options)
-    .then(async(res) => {
-      if (!res?.ok) {
-        throw new Error(res.statusText)
-      }
-      return true
-    })
+  return fetch(url, options).then(async (res) => {
+    if (!res?.ok) {
+      throw new Error(res.statusText)
+    }
+    return true
+  })
 }
 
+export async function deleteQuizBank(token: string, quizbankId: string) {
+  const url = getAPIServerURL(`/api/quizbank/${quizbankId}`)
+
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  return fetch(url, options).then(async (res) => {
+    if (!res?.ok) {
+      return {
+        isSuccess: false,
+        message: res.statusText,
+      }
+    }
+    console.log(res.json())
+    return {
+      isSuccess: true,
+    }
+  })
+}

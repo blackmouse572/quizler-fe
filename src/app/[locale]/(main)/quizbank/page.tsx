@@ -5,6 +5,8 @@ import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
+import _ from "lodash"
+import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 
 type Props = {}
@@ -64,31 +66,35 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
     : undefined
   const options = { take, skip, search }
   const data = await getQuizBank(options)
-  const messages = await getMessages()
+  const m = await getMessages()
   const t = await getTranslations("MyQuizbanks")
+  const { token } = getToken()
 
   return (
-    <main>
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-lg font-bold">{t("headers.index")}</h3>
-        <SearchBox className="bg-background" />
-      </div>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-        {data.data.map((item) => {
-          return (
-            <QuizbankCard
-              item={item}
-              key={item.id}
-              translations={{
-                terms: t("terms"),
-              }}
-            >
-              {item.bankName}
-            </QuizbankCard>
-          )
-        })}
-      </div>
-    </main>
+    <NextIntlClientProvider messages={_.pick(m, "Delete_quizbank", "Erros")}>
+      <main>
+        <div className="mb-3 flex items-center justify-between">
+          <h3 className="text-lg font-bold">{t("headers.index")}</h3>
+          <SearchBox className="bg-background" />
+        </div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+          {data.data.map((item) => {
+            return (
+              <QuizbankCard
+                item={item}
+                key={item.id}
+                translations={{
+                  terms: t("terms"),
+                }}
+                token={token}
+              >
+                {item.bankName}
+              </QuizbankCard>
+            )
+          })}
+        </div>
+      </main>
+    </NextIntlClientProvider>
   )
 }
 

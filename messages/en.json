@@ -683,5 +683,14 @@
       "title": "Joined classroom",
       "description": "You have joined the classroom successfully"
     }
+  },
+  "Delete_quizbank": {
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully delete quizbank"
+      },
+      "failed": { "title": "Failed" }
+    }
   }
 }

@@ -7,12 +7,18 @@ import {
   DialogHeader,
 } from "@/components/ui/dialog"
 
+import { deleteQuizBank } from "@/services/quiz.service"
+import { useTranslations } from "next-intl"
+import { toast } from "./ui/use-toast"
+
 type Props = {
   deleteUrl: string
+  itemId: number
   title: string
   description: string
   isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  token: string
 }
 
 function DeleteDialogConfirm({
@@ -21,10 +27,32 @@ function DeleteDialogConfirm({
   description,
   isOpen,
   setOpen,
+  itemId,
+  token
 }: Props) {
+  const i18n = useTranslations("Delete_quizbank")
+  const errorI18n = useTranslations("Errors")
+
   const onDelete = async () => {
-    // TODO: Implement delete
+    const result = await deleteQuizBank(token, itemId.toString())
+    setOpen(false)
+    if (!result.isSuccess) {
+      return toast({
+        title: i18n("message.failed.title"),
+        description: errorI18n(result.message as any),
+        variant: "flat",
+        color: "danger",
+      })
+    } else {
+      return toast({
+        title: i18n("message.success.title"),
+        description: i18n("message.success.description"),
+        variant: "flat",
+        color: "success",
+      })
+    }
   }
+  
   return (
     <Dialog onOpenChange={setOpen} open={isOpen}>
       <DialogContent>

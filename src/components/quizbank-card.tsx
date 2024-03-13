@@ -26,9 +26,10 @@ type Props = {
   translations?: {
     terms: string
   }
+  token: string
 } & React.HTMLAttributes<HTMLDivElement>
 
-function QuizbankCard({ item, translations, className, ...props }: Props) {
+function QuizbankCard({ item, translations, className, token, ...props }: Props) {
   const [isDelete, setIsDelete] = useState(false)
   const options = useMemo<
     {
@@ -122,6 +123,8 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
           title="Delete Quiz Bank"
           isOpen={isDelete}
           setOpen={setIsDelete}
+          itemId={item.id}
+          token={token}
         />
       </CardContent>
     </Card>
