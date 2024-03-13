@@ -1,16 +1,20 @@
 "use client"
-import { Button, ButtonProps } from "./ui/button"
-import { Icons } from "./ui/icons"
 import { cn } from "@/lib/utils"
 import { MouseEventHandler } from "react"
+import { Button, ButtonProps } from "./ui/button"
+import { Icons } from "./ui/icons"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 
 type Props = ButtonProps & {
-    content: string
+  content: string
 }
 
-export default function CopyButton({ className, onClick, content, ...props }: Props) {
-
+export default function CopyButton({
+  className,
+  onClick,
+  content,
+  ...props
+}: Props) {
   // TODO: Implement action
   const hanldeClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     onClick?.(e)
@@ -24,8 +28,9 @@ export default function CopyButton({ className, onClick, content, ...props }: Pr
           onClick={hanldeClick}
           variant={"default"}
           color={"accent"}
+          isIconOnly
         >
-          <Icons.Copy style={{ marginRight: "unset" }} />
+          <Icons.Copy />
         </Button>
       </TooltipTrigger>
       <TooltipContent side={"top"}>{content}</TooltipContent>

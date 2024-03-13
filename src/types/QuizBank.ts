@@ -5,7 +5,7 @@ interface QuizBank {
   bankName: string
   authorName: string
   author: User
-  quizes: []
+  quizes: Quiz[]
   description: string
   visibility: "Public" | "Private"
   rating: []
