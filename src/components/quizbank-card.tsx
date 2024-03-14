@@ -19,7 +19,9 @@ import { IIconKeys, Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import Link from "next/link"
-import React, { useMemo, useState } from "react"
+import { useRouter } from "next/navigation"
+import React, { useCallback, useMemo, useState } from "react"
+
 
 type Props = {
   item: QuizBank
@@ -30,6 +32,8 @@ type Props = {
 
 function QuizbankCard({ item, translations, className, ...props }: Props) {
   const [isDelete, setIsDelete] = useState(false)
+
+  const router = useRouter();
   const options = useMemo<
     {
       icon?: IIconKeys
@@ -93,10 +97,16 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
     )
   }, [options])
 
+  
+  const onQuizBankLick = useCallback((item: QuizBank) => {
+    router.push(`quizbank\\${item.id}`)
+  }, [router])
+
   return (
     <Card
       className={cn("cursor-pointer hover:bg-neutral-50", className)}
       {...props}
+      onClick={e => onQuizBankLick(item)}
     >
       <Link href={`/quizbank/${item.id}`}>
         <CardHeader>

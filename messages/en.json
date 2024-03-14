@@ -429,7 +429,9 @@
       "class_title": "Class",
       "of": "of",
       "copy_button": "Copy",
-      "report_button": "Report"
+      "report_button": "Report",
+      "edit_button": "Edit",
+      "public_button": "Public"
     }
   },
   "CopyQuizBank": {
