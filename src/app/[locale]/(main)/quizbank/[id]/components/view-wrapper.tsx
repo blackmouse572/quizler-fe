@@ -21,7 +21,6 @@ function ViewWrapper({ id, initialData, quizBankData }: Props) {
     useInfiniteQuery({
       queryKey: ["fetchQuiz", id],
       queryFn: async ({ pageParam }) => {
-        console.log("Fetch quiz", id, pageParam)
         const res = await fetchQuiz(
           id,
           user?.accessToken.token ?? "",

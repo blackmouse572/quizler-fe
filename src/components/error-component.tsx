@@ -2,8 +2,8 @@
 
 import { useTranslations } from "next-intl"
 
-import { SearchBar } from "@/components/ui/searchbar"
 import BackgroundSquare from "@/components/background-square"
+import { SearchBar } from "@/components/ui/searchbar"
 
 export type TErrorPageProps = {
   type: "Error" | "NotFound"
@@ -23,13 +23,9 @@ export function ErrorFn({ type, error, reset }: TErrorPageProps) {
             {t("message")}
           </p>
           {!isProduction && type === "Error" ? (
-            <>
-              <div className="h-[150px] w-max-w overflow-hidden rounded-md border border-input border-neutral-300">
-                <div className="flex max-h-[100%] items-center justify-center overflow-auto bg-white font-mono font-medium">
-                  <pre className="mx-[100px] my-[20px] mt-[100px] text-start max-w-[60%]">{error?.message}</pre>
-                </div>
-              </div>
-            </>
+            <pre className="max-h-svh max-w-screen-xl overflow-auto text-wrap rounded-md border border-input border-neutral-200 bg-background px-4 py-2.5 text-start font-mono">
+              {error?.message}
+            </pre>
           ) : (
             <SearchBar
               container={{ className: "w-[399px]" }}
