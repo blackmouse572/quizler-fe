@@ -47,6 +47,7 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
+  IconPencil
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -93,6 +94,7 @@ export const Icons = {
   Support: IconLifebuoy,
   Link: IconLink,
   DotVertical: IconDotsVertical,
+  Edit: IconPencil,
 
   //Chevrons
   ChevronUp: IconChevronUp,

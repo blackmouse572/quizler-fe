@@ -1,4 +1,4 @@
-import { getToken } from "@/lib/auth"
+import { getToken, getUser } from "@/lib/auth"
 import QuizBank from "@/types/QuizBank"
 import _ from "lodash"
 import { Metadata } from "next"
@@ -57,6 +57,8 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
   const { quizBankData, flashcardData, quizData, relativeQuizBankData } =
     await getQuizBankDetailPage(id)
 
+  const isUserOwnQuizBank = quizBankData.author.id === getUser()?.id
+
   const token = getToken().token
 
   if (!quizData.data.data) {
@@ -74,6 +76,7 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
         flashcardData={flashcardData.data}
         quizData={quizData.data.data}
         relativeQuizBankData={relativeQuizBankData}
+        isOwnQuizBank={isUserOwnQuizBank}
       />
     </NextIntlClientProvider>
   )
