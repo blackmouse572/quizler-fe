@@ -19,7 +19,7 @@ import { IIconKeys, Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import Link from "next/link"
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 
 type Props = {
   item: QuizBank
@@ -98,32 +98,34 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
       className={cn("cursor-pointer hover:bg-neutral-50", className)}
       {...props}
     >
-      <CardHeader>
-        <CardTitle>{item.bankName}</CardTitle>
-        <CardDescription>
-          {item.quizCount} {translations?.terms}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex">
-        <div className="flex flex-1 items-center gap-2">
-          <Avatar>
-            <AvatarFallback>{item.bankName.charAt(0)}</AvatarFallback>
-            <AvatarImage
-              src={item.author.avatar || ""}
-              alt={item.author.fullName}
-            />
-          </Avatar>
-          <h3 className="text-sm font-bold">{item.author.fullName}</h3>
-        </div>
-        {renderOptions}
-        <DeleteDialogConfirm
-          deleteUrl=""
-          description=""
-          title="Delete Quiz Bank"
-          isOpen={isDelete}
-          setOpen={setIsDelete}
-        />
-      </CardContent>
+      <Link href={`/quizbank/${item.id}`}>
+        <CardHeader>
+          <CardTitle>{item.bankName}</CardTitle>
+          <CardDescription>
+            {item.quizCount} {translations?.terms}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex">
+          <div className="flex flex-1 items-center gap-2">
+            <Avatar>
+              <AvatarFallback>{item.bankName.charAt(0)}</AvatarFallback>
+              <AvatarImage
+                src={item.author.avatar || ""}
+                alt={item.author.fullName}
+              />
+            </Avatar>
+            <h3 className="text-sm font-bold">{item.author.fullName}</h3>
+          </div>
+          {renderOptions}
+          <DeleteDialogConfirm
+            deleteUrl=""
+            description=""
+            title="Delete Quiz Bank"
+            isOpen={isDelete}
+            setOpen={setIsDelete}
+          />
+        </CardContent>
+      </Link>
     </Card>
   )
 }
