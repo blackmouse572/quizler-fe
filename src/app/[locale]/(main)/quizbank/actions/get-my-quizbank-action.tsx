@@ -29,7 +29,6 @@ export async function getMyQuizbankAction(options: Partial<PagedRequest>) {
   return fetch(url, option)
     .then(async (res) => {
       const data = await res.json()
-      console.log(data)
       if (!res.ok) {
         throw new Error(data.message)
       }
@@ -41,7 +40,6 @@ export async function getMyQuizbankAction(options: Partial<PagedRequest>) {
       data: res,
     }))
     .catch((err) => {
-      console.error(`[ERROR] getMyQuizbankAction: ${url} `, err)
       return {
         ok: false,
         message: err.message,

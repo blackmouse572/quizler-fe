@@ -45,7 +45,6 @@ function QuizBankList({ data: initData, filter }: Props) {
       const params =
         (lastPage?.metadata.skip || 0) + (lastPage?.metadata.take || 10)
       const hasMore = lastPage?.metadata.hasMore
-      console.log(lastPage, params)
       return hasMore ? params : undefined
     },
     initialData: { pages: [initData], pageParams: [0] },
