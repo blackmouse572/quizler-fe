@@ -19,6 +19,7 @@ import { IIconKeys, Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import React, { useCallback, useMemo, useState } from "react"
 
 type Props = {
@@ -29,8 +30,20 @@ type Props = {
   token: string
 } & React.HTMLAttributes<HTMLDivElement>
 
-function QuizbankCard({ item, translations, className, token, ...props }: Props) {
+function QuizbankCard({
+  item,
+  translations,
+  className,
+  token,
+  ...props
+}: Props) {
   const [isDelete, setIsDelete] = useState(false)
+  const router = useRouter()
+
+  const onSuccessDeleteCb = useCallback(() => {
+    // reload page
+    router.refresh()
+  }, [router])
   const options = useMemo<
     {
       icon?: IIconKeys
@@ -125,6 +138,7 @@ function QuizbankCard({ item, translations, className, token, ...props }: Props)
           setOpen={setIsDelete}
           itemId={item.id}
           token={token}
+          onSuccessDeleteCb={onSuccessDeleteCb}
         />
       </CardContent>
     </Card>

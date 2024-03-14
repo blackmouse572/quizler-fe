@@ -71,7 +71,7 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
   const { token } = getToken()
 
   return (
-    <NextIntlClientProvider messages={_.pick(m, "Delete_quizbank", "Erros")}>
+    <NextIntlClientProvider messages={_.pick(m, "Delete_quizbank", "Errors")}>
       <main>
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-lg font-bold">{t("headers.index")}</h3>

@@ -19,6 +19,7 @@ type Props = {
   isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   token: string
+  onSuccessDeleteCb?: () =>void
 }
 
 function DeleteDialogConfirm({
@@ -28,7 +29,8 @@ function DeleteDialogConfirm({
   isOpen,
   setOpen,
   itemId,
-  token
+  token,
+  onSuccessDeleteCb
 }: Props) {
   const i18n = useTranslations("Delete_quizbank")
   const errorI18n = useTranslations("Errors")
@@ -44,6 +46,7 @@ function DeleteDialogConfirm({
         color: "danger",
       })
     } else {
+      onSuccessDeleteCb?.();
       return toast({
         title: i18n("message.success.title"),
         description: i18n("message.success.description"),
