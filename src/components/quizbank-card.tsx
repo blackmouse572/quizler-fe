@@ -1,4 +1,5 @@
 "use client"
+import { deleteQuizBank } from "@/app/[locale]/(main)/quizbank/actions/detete-quiz-bank"
 import DeleteDialogConfirm from "@/components/delete-confirm-dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,8 @@ import QuizBank from "@/types/QuizBank"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useCallback, useMemo, useState } from "react"
+import { toast } from "./ui/use-toast"
+import { useTranslations } from "next-intl"
 
 type Props = {
   item: QuizBank
@@ -39,11 +42,35 @@ function QuizbankCard({
 }: Props) {
   const [isDelete, setIsDelete] = useState(false)
   const router = useRouter()
+  const i18n = useTranslations("Delete_quizbank")
+  const errorI18n = useTranslations("Errors")
 
   const onSuccessDeleteCb = useCallback(() => {
     // reload page
     router.refresh()
   }, [router])
+
+  const onDeleteQuizBank = async (itemId: number) => {
+    const result = await deleteQuizBank(token, itemId.toString())
+    setIsDelete(false)
+    if (!result.isSuccess) {
+      return toast({
+        title: i18n("message.failed.title"),
+        description: errorI18n(result.message as any),
+        variant: "flat",
+        color: "danger",
+      })
+    } else {
+      onSuccessDeleteCb()
+      return toast({
+        title: i18n("message.success.title"),
+        description: i18n("message.success.description"),
+        variant: "flat",
+        color: "success",
+      })
+    }
+  }
+  
   const options = useMemo<
     {
       icon?: IIconKeys
@@ -131,14 +158,11 @@ function QuizbankCard({
         </div>
         {renderOptions}
         <DeleteDialogConfirm
-          deleteUrl=""
           description=""
           title="Delete Quiz Bank"
           isOpen={isDelete}
           setOpen={setIsDelete}
-          itemId={item.id}
-          token={token}
-          onSuccessDeleteCb={onSuccessDeleteCb}
+          onDelete={() => onDeleteQuizBank(item.id)}
         />
       </CardContent>
     </Card>
