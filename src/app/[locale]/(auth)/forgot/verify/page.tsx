@@ -25,7 +25,7 @@ export default async function VerifyForgotPasswordPage({
   ) as Record<string, any>
 
   return (
-    <div className="h-full w-full">
+    <div className="flex h-full w-full justify-center">
       <GoBackButton />
       <NextIntlClientProvider messages={_.pick(m, "ChangePassword", "Errors")}>
         <ChangePasswordForm token={t as string} email={isValidToken.email} />
