@@ -8,7 +8,9 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import Link from "next/link"
 
-type Props = {}
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
 async function getAllClassroom(): Promise<PagedResponse<Classroom>> {
   const token = getToken()
@@ -25,9 +27,14 @@ async function getAllClassroom(): Promise<PagedResponse<Classroom>> {
   return await data.json()
 }
 
-async function ClassroomPage({}: Props) {
+function validateCode(code: string): boolean {
+  return code.length >= 6 && code.length <= 12
+}
+
+async function ClassroomPage({ searchParams }: Props) {
   const msg = await getMessages()
   const classrooms = await getAllClassroom()
+  const initCode = searchParams["code"] as string | undefined
 
   return (
     <NextIntlClientProvider
@@ -35,7 +42,7 @@ async function ClassroomPage({}: Props) {
     >
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">Classrooms</h1>
-        <JoinClassroomDialog />
+        <JoinClassroomDialog defaultOpen={!!initCode} defaultValue={initCode} />
       </div>
       <div className="grid grid-cols-4 gap-3">
         {classrooms.data.map((classroom: Classroom, index: number) => {
