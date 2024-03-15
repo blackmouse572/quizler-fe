@@ -18,7 +18,7 @@ async function ForgotPasswordPage({
   await validate.parseAsync(email).catch((e) => notFound())
 
   return (
-    <div className="h-full w-full">
+    <div className="flex h-full w-full justify-center">
       <GoBackButton />
       <NextIntlClientProvider
         messages={_.pick(m, "VerifyForgotPassword", "Errors")}
