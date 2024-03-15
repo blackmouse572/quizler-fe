@@ -26,8 +26,6 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-type Props = {}
-
 const JoinClassroomSchema = z.object({
   code: z
     .string({
@@ -41,15 +39,23 @@ const JoinClassroomSchema = z.object({
     }),
 })
 
+type Props = {
+  defaultOpen?: boolean
+  defaultValue?: string
+}
+
 type FormData = z.infer<typeof JoinClassroomSchema>
 
-function JoinClassroomDialog({}: Props) {
-  const [isOpen, setOpen] = useState(false)
+function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
+  const [isOpen, setOpen] = useState(defaultOpen)
   const t = useTranslations("Join_classroom")
   const validationsi18n = useTranslations("Validations")
   const errori18n = useTranslations("Errors")
   const form = useForm<FormData>({
     resolver: zodResolver(JoinClassroomSchema),
+    defaultValues: {
+      code: defaultValue,
+    },
   })
 
   const { toast } = useToast()

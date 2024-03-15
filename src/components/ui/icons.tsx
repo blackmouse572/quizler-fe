@@ -34,7 +34,9 @@ import {
   IconMaximize,
   IconMenu,
   IconMinus,
+  IconMoodEmptyFilled,
   IconNavigation,
+  IconPencil,
   IconPlayerPause,
   IconPlayerPlay,
   IconPlus,
@@ -47,7 +49,6 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
-  IconPencil
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -95,6 +96,7 @@ export const Icons = {
   Link: IconLink,
   DotVertical: IconDotsVertical,
   Edit: IconPencil,
+  Empty: IconMoodEmptyFilled,
 
   //Chevrons
   ChevronUp: IconChevronUp,

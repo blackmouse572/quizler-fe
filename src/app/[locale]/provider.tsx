@@ -7,7 +7,7 @@ import { useUser } from "@/hooks/useUser"
 import { User } from "@/types"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import * as React from "react"
 
 export function Providers(props: {
@@ -16,6 +16,7 @@ export function Providers(props: {
 }) {
   const { setUser, user, isAuth, logout } = useUser()
   const router = useRouter()
+  const pathName = usePathname()
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -34,8 +35,9 @@ export function Providers(props: {
   const doLogout = React.useCallback(() => {
     logout()
     logoutAction()
-    router.refresh()
-  }, [logout, router])
+    const from = pathName
+    router.push(`/login?from=${from}`)
+  }, [logout, pathName, router])
 
   const doRefreshToken = React.useCallback(async () => {
     // refresh token
@@ -59,7 +61,9 @@ export function Providers(props: {
 
   React.useEffect(() => {
     if (isAuth) {
-      console.log("[DEBUG] Check token...")
+      if (!user) {
+        return doLogout()
+      }
       const { accessToken, refreshToken } = user!
       const { expiredAt: axToken } = accessToken
       const { expiredAt: rxToken } = refreshToken
@@ -71,7 +75,6 @@ export function Providers(props: {
       if (Date.now() > axToken && Date.now() > rxToken) {
         console.debug("[DEBUG] Cannot refresh token, redirect to login page.")
         doLogout()
-        logout()
       } else {
         console.log("[DEBUG] Refresh token...")
         doRefreshToken()
