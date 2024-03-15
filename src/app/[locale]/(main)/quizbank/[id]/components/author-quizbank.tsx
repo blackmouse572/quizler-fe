@@ -36,44 +36,46 @@ export default function AuthorQuizBank({
 
   // TODO: set action for public button
   const quizBankActions = useMemo(() => {
-    if (isOwnQuizBank) {
-      return (
-        <>
-          <EditQuizBank
-            quizbankId={quizbankId}
-            content={i18n("author.edit_button")}
-          />
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button color="accent" isIconOnly>
-                <Icons.Eye />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{i18n("author.public_button")}</TooltipContent>
-          </Tooltip>
-        </>
-      )
-    } else {
-      return (
-        <>
-          <CopyQuizBankDialog
-            token={token}
-            quizbankId={quizbankId}
-            buttonContent={i18n("author.copy_button")}
-            classes={userCurrentClass}
-          />
+    const defaultButtons = [
+      <CopyQuizBankDialog
+        token={token}
+        quizbankId={quizbankId}
+        buttonContent={i18n("author.copy_button")}
+        classes={userCurrentClass}
+      />,
+    ]
+    const OwnerQuizBankButtons = [
+      <EditQuizBank
+        quizbankId={quizbankId}
+        content={i18n("author.edit_button")}
+      />,
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button color="accent" isIconOnly>
+            <Icons.Eye />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>{i18n("author.public_button")}</TooltipContent>
+      </Tooltip>,
+    ]
+    const visitorQuizBankButtons = [
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button color="accent" isIconOnly>
+            <Icons.Report />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>{i18n("author.report_button")}</TooltipContent>
+      </Tooltip>,
+    ]
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button color="accent" isIconOnly>
-                <Icons.Report />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{i18n("author.report_button")}</TooltipContent>
-          </Tooltip>
-        </>
-      )
+    let shouldUsedButtons: React.JSX.Element[]
+    if (isOwnQuizBank) {
+      shouldUsedButtons = [...OwnerQuizBankButtons]
+    } else {
+      shouldUsedButtons = [...visitorQuizBankButtons]
     }
+    return shouldUsedButtons = [...defaultButtons, ...shouldUsedButtons]
   }, [i18n, isOwnQuizBank, quizbankId, token, userCurrentClass])
 
   return (
@@ -116,7 +118,7 @@ export default function AuthorQuizBank({
             </div>
           </div>
         </div>
-        <div className="flex justify-between gap-2">{quizBankActions}</div>
+        <div className="flex justify-between gap-2">{quizBankActions.map(btn => btn)}</div>
       </div>
     </div>
   )
