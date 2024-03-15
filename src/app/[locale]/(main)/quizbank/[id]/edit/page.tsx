@@ -9,6 +9,8 @@ import { use } from "react"
 import AddQuizbankForm, {
   AddQuizbank,
 } from "../../add/components/add-quizbank-form"
+import { getToken, getUser } from "@/lib/auth"
+import { notFound } from "next/navigation"
 
 type QuizBankDetailPageProps = {
   params: { id: string }
@@ -30,9 +32,18 @@ function EditQuizbank({ params }: QuizBankDetailPageProps) {
     visibility: data.visibility,
   }
 
+  const { token } = getToken()
+  const user = getUser()
+
+  const isAuthor = user?.role === "User" && user?.email === data.author.email
+
+  {
+    ;(!token || !isAuthor) && notFound()
+  }
+
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "EditQuiz", "Errors")}
+      messages={_.pick(message, "Validations", "EditQuiz", "AddQuiz", "Errors")}
     >
       <AddQuizbankForm
         initialValues={initialValues}
