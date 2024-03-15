@@ -140,7 +140,7 @@ export default function LoggedInNavbar({
 
     return (
       <>
-        <GlobalSearch />
+        <GlobalSearch className={"hidden text-sm md:flex"} />
         <NavigationMenuItem>
           <NavigationMenuTrigger>{tNav("my_quizlearn")}</NavigationMenuTrigger>
           <NavigationMenuContent>

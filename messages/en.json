@@ -610,7 +610,7 @@
   },
   "Error": {
     "title": "Oops, seem like an errors",
-    "message": "This is not a warning. This is not a test !\nYou have concur an error that make you see this message, please inform the authority immidietly",
+    "message": "This is not a warning. This is not a test !\nYou have concur an error that make you see this message, please inform the authority immediately",
     "input": {
       "placeholder": "New Quiz"
     },

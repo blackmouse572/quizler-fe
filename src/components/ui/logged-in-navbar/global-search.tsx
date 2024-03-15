@@ -4,16 +4,23 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 
 import {
-  CommandDialog, CommandInput, CommandSeparator,
-  CommandShortcut
+  CommandDialog,
+  CommandInput,
+  CommandSeparator,
+  CommandShortcut,
 } from "@/components/ui/command"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "../button"
 import SearchResults from "./search-results"
+import { cn } from "@/lib/utils"
 
-export default function GlobalSearch() {
+type Props = {
+  className: string
+}
+
+export default function GlobalSearch({ className }: Props) {
   const tNav = useTranslations("Navbar")
 
   const [open, setOpen] = React.useState(false)
@@ -54,7 +61,7 @@ export default function GlobalSearch() {
         onClick={handleClick}
         variant={"ghost"}
         color={"accent"}
-        className="hidden text-sm md:flex"
+        className={cn(className)}
       >
         <MagnifyingGlassIcon />
         <div className="mr-4">{tNav("nav_search.search")}</div>
