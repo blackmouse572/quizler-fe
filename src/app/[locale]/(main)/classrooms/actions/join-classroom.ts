@@ -19,18 +19,15 @@ export async function joinClassroomAction(
 
   return fetch(URL, options)
     .then(async (response) => {
-      console.log(response)
-      const json = await response.json()
       if (!response.ok) {
-        return Promise.reject(json)
+        return Promise.reject(await response.json())
       }
-      return json
+      return response
     })
     .then((response) => {
-      revalidatePath("/classrooms")
       return {
         ok: true,
-        message: response.message,
+        message: "",
       }
     })
     .catch((error) => {
@@ -38,5 +35,8 @@ export async function joinClassroomAction(
         ok: false,
         message: error.message,
       }
+    })
+    .finally(() => {
+      revalidatePath("/classrooms")
     })
 }

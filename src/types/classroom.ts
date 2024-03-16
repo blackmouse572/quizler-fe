@@ -20,6 +20,7 @@ type Classroom = {
   accountIds: string[]
   isStudentAllowInvite?: boolean
   studentNumber?: number
+  accountIds: string[]
   created: string
 }
 

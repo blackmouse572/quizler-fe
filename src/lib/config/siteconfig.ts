@@ -3,7 +3,7 @@ import { env } from "process"
 import { SiteConfig } from "@/types/site"
 
 export const siteConfig: SiteConfig = {
-  name: "Quizler",
+  name: "Quizlearn",
   description:
     "Quiz-based Learning and Practice System using NextJS framework, ASP.NET Core Web API and PostgreSQL database",
   url: env.SITE_URL || "http://localhost:3000",

@@ -13,7 +13,8 @@ const Input = React.forwardRef<InputRef, InputProps>(
     return (
       <div
         className={cn(
-          "flex h-10 items-center rounded-md border border-input bg-background pl-3 text-sm ",
+          "flex h-10 items-center rounded-md border border-input bg-background text-sm ",
+          prefix && "pl-3",
           readOnly || disabled
             ? ""
             : "ring-offset-background focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-2",
