@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Toggle } from "@/components/ui/toggle"
 import {
@@ -17,13 +18,7 @@ import {
 } from "@/components/ui/tooltip"
 import QuizBank, { Quiz } from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
-import {
-  EnterFullScreenIcon,
-  PauseIcon,
-  PlayIcon,
-  ShuffleIcon,
-  StarIcon,
-} from "@radix-ui/react-icons"
+
 import { InfiniteData } from "@tanstack/react-query"
 import Autoplay from "embla-carousel-autoplay"
 import { useTranslations } from "next-intl"
@@ -38,6 +33,7 @@ type Props = {
   take: number
   totals: number
   hasMore: boolean
+  onShuffle?: () => void
 }
 
 export default function ViewFlashcard({
@@ -49,6 +45,7 @@ export default function ViewFlashcard({
   totals,
   take,
   quizBankData,
+  onShuffle,
 }: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
@@ -58,6 +55,7 @@ export default function ViewFlashcard({
   )
 
   const [current, setCurrent] = useState(0)
+  const [isShuffle, setIsShuffle] = useState(false)
   const [count, setCount] = useState(0)
   const [selectedItem, setSelectedItem] = useState(true)
   const [isPlaying, setIsPlaying] = useState(true)
@@ -105,7 +103,7 @@ export default function ViewFlashcard({
         .map((line: string, index: number) => <div key={index}>{line}</div>)
 
       return (
-        <CarouselItem key={item.id}>
+        <CarouselItem key={item.id + "-carousel"}>
           <div className="p-1">
             <Card>
               <CardContent className="flex aspect-video items-center justify-center p-6">
@@ -163,7 +161,7 @@ export default function ViewFlashcard({
           </div>
         </div>
         <div className="my-auto flex justify-end gap-2.5 px-5 text-base leading-6 text-neutral-900">
-          <StarIcon width="3rem" height="1.5rem" />
+          <Icons.Star width="3rem" height="1.5rem" />
           <div className="grow">{quizBankData.averageRating} • 5</div>
         </div>
       </div>
@@ -212,7 +210,7 @@ export default function ViewFlashcard({
                     : i18n("ViewFlashcard.play_button")
                 }
               >
-                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                {isPlaying ? <Icons.Pause /> : <Icons.Play />}
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>
@@ -226,8 +224,14 @@ export default function ViewFlashcard({
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Toggle aria-label={i18n("ViewFlashcard.shuffle_button")}>
-                <ShuffleIcon />
+              <Toggle
+                aria-label={i18n("ViewFlashcard.shuffle_button")}
+                onClick={() => {
+                  setIsShuffle(!isShuffle)
+                  onShuffle?.()
+                }}
+              >
+                {isShuffle ? <Icons.ArrowsRight /> : <Icons.Shuffle />}
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>
@@ -243,7 +247,7 @@ export default function ViewFlashcard({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="light" isIconOnly>
-              <EnterFullScreenIcon />
+              <Icons.FullScreen />
             </Button>
           </TooltipTrigger>
           <TooltipContent>

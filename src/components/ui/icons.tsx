@@ -47,7 +47,11 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
-  IconPencil
+  IconPencil,
+  IconArrowsShuffle2,
+  IconStar,
+  IconArrowRight,
+  IconArrowsRight,
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -102,6 +106,13 @@ export const Icons = {
   ChevronLeft: IconChevronLeft,
   ChevronRight: IconChevronRight,
   Calendar: IconCalendar,
+  ArrowRight: IconArrowRight,
+  ArrowsRight: IconArrowsRight,
+
+  //Control
+  Shuffle: IconArrowsShuffle2,
+  Star: IconStar,
+  Fullscreen: IconMaximize,
 }
 
 type IIconKeys = keyof typeof Icons

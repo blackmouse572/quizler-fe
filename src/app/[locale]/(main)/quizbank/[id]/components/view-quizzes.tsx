@@ -174,8 +174,6 @@ export default function ViewQuizzes({
     return renderTitle
   }
 
-  console.log(hasMore)
-
   return (
     <section>
       {renderTitle}

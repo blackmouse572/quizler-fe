@@ -7,28 +7,23 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-neutral-100 hover:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-neutral-500 data-[state=on]:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-400 dark:focus-visible:ring-neutral-300 dark:data-[state=on]:bg-neutral-800 dark:data-[state=on]:text-neutral-50",
+  "inline-flex aspect-square items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground",
   {
     variants: {
       variant: {
         default: "bg-transparent",
         outline:
-          "border border-neutral-200 bg-transparent shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+          "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
       },
       size: {
-        md: "h-9 px-4 py-2 [&_svg]:h-5 [&_svg]:w-5",
-        sm: "h-8 rounded-md px-3 text-xs [&_svg]:h-4 [&_svg]:w-4",
-        lg: "h-10 rounded-md px-8 [&_svg]:h-6 [&_svg]:w-6",
-      },
-      isIconOnly: {
-        true: "aspect-square p-0",
-        false: "[&_svg]:mr-1",
+        default: "h-10 px-3 [&_svg]:h-6 [&_svg]:w-6",
+        sm: "h-9 px-2.5",
+        lg: "h-11 px-5",
       },
     },
     defaultVariants: {
       variant: "default",
-      size: "md",
-      isIconOnly: true,
+      size: "default",
     },
   }
 )
