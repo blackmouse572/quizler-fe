@@ -36,6 +36,7 @@ function QuizbankCard({
   translations,
   className,
   onDeleteQuizBank,
+  allowActions,
   ...props
 }: QuizbankCardProps) {
   const [isDelete, setIsDelete] = useState(false)
@@ -108,7 +109,7 @@ function QuizbankCard({
         </DropdownMenuContent>
       </DropdownMenu>
     )
-  }, [options])
+  }, [allowActions, options])
 
   const onQuizBankLick = useCallback(
     (item: QuizBank) => {
@@ -147,7 +148,7 @@ function QuizbankCard({
             title="Delete Quiz Bank"
             isOpen={isDelete}
             setOpen={setIsDelete}
-            onDelete={() => onDelete(item.id)}
+            onDelete={() => onDeleteQuizBank?.(item.id, () => {})}
           />
         </CardContent>
       </Link>

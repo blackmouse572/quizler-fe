@@ -2,6 +2,7 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { revalidatePath } from "next/cache"
 import { AddQuizbank } from "../components/add-quizbank-form"
 
 export type TAPIResult =
@@ -79,6 +80,7 @@ export const editQuizBankAction = (
       return json
     })
     .then((res) => {
+      revalidatePath(`/quizbank/${quizBankId}`)
       return {
         ok: true,
         message: "success",
@@ -86,7 +88,6 @@ export const editQuizBankAction = (
       }
     })
     .catch((error) => {
-      debugger
       return {
         ok: false,
         message: error.message as string,

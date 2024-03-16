@@ -1,3 +1,4 @@
+import { fetchQuiz } from "@/app/[locale]/(main)/quizbank/[id]/actions/fetch-quiz"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -7,10 +8,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { useUser } from "@/hooks/useUser"
 import { Quiz } from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
-import { InfiniteData } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 import { useCallback, useMemo, useState } from "react"
 import { PiSparkle } from "react-icons/pi"
@@ -18,12 +18,9 @@ import { fetchAIquestion } from "../actions/fetch-AI-question"
 import ViewAIExplain from "./view-AI-explain"
 
 type Props = {
-  data: InfiniteData<PagedResponse<Quiz> | null, unknown>
-  onSeeMore: () => void
-  isLoading: boolean
-  isError: boolean
-  totals: number
-  hasMore: boolean
+  initialData: PagedResponse<Quiz>
+
+  id: string
 }
 
 interface HiddenAIAnswerState {
@@ -33,23 +30,44 @@ interface HiddenAIAnswerState {
   }
 }
 
-export default function ViewQuizzes({
-  data,
-  isError,
-  isLoading,
-  onSeeMore,
-  totals,
-  hasMore,
-}: Props) {
+export default function ViewQuizzes({ initialData, id }: Props) {
   const i18n = useTranslations("ViewQuizBank")
-  const user = useUser((pre) => pre.user)
-  const token = user?.accessToken.token ?? ""
   const [hiddenAIAnswer, setHiddenAIAnswer] = useState<HiddenAIAnswerState>({})
+
+  const {
+    data,
+    error,
+    isLoading,
+    isFetching,
+    fetchNextPage,
+    isError,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["fetchQuiz", id],
+    queryFn: async ({ pageParam }) => {
+      const res = await fetchQuiz(id, {
+        take: 10,
+        skip: pageParam,
+      })
+      if (!res.ok) {
+        throw new Error(res.message)
+      }
+
+      return res.data
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const params =
+        (lastPage?.metadata.skip || 0) + (lastPage?.metadata.take || 10)
+      const hasMore = lastPage?.metadata.hasMore
+      return hasMore ? params : undefined
+    },
+    initialData: { pages: [initialData], pageParams: [0] },
+  })
 
   const handleButtonAIClick = useCallback(
     async (
       quizKey: string,
-      token: string,
       question: string,
       answer: string,
       explaination?: string
@@ -63,7 +81,7 @@ export default function ViewQuizzes({
       }))
 
       try {
-        const res = await fetchAIquestion(token, question, answer, explaination)
+        const res = await fetchAIquestion(question, answer, explaination)
         const answerAIRes = res.candidates[0].content.parts[0].text
 
         setHiddenAIAnswer((prevState) => ({
@@ -84,11 +102,11 @@ export default function ViewQuizzes({
     () => (
       <div className="z-10 mt-16">
         <h3 className="text-xl font-bold  text-black">
-          {i18n("ViewQuizzes.term")} ({totals})
+          {i18n("ViewQuizzes.term")} ({data.pages[0]?.metadata.totals ?? 0})
         </h3>
       </div>
     ),
-    [i18n, totals]
+    [data.pages, i18n]
   )
 
   const renderItem = useCallback(
@@ -119,7 +137,6 @@ export default function ViewQuizzes({
                         onClick={async () =>
                           await handleButtonAIClick(
                             quiz.id.toString(),
-                            token,
                             quiz.question,
                             quiz.answer,
                             ""
@@ -154,7 +171,7 @@ export default function ViewQuizzes({
         </div>
       )
     },
-    [handleButtonAIClick, hiddenAIAnswer, i18n, token]
+    [handleButtonAIClick, hiddenAIAnswer, i18n]
   )
 
   if (isLoading) {
@@ -171,7 +188,14 @@ export default function ViewQuizzes({
   }
 
   if (isError) {
-    return renderTitle
+    return (
+      <>
+        {renderTitle}
+        <div className="text-xs text-danger">
+          {error instanceof Error ? error.message : error}
+        </div>
+      </>
+    )
   }
 
   return (
@@ -185,8 +209,12 @@ export default function ViewQuizzes({
       </div>
       <div className="flex items-center gap-4">
         <Separator className="shrink" />
-        {hasMore && (
-          <Button className="mx-auto mt-2" onClick={onSeeMore} variant="light">
+        {hasNextPage && (
+          <Button
+            className="mx-auto mt-2"
+            onClick={() => fetchNextPage()}
+            variant="light"
+          >
             {i18n("ViewQuizzes.see_more_btn")}
           </Button>
         )}

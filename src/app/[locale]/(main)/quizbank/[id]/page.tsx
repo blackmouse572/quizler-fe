@@ -1,4 +1,4 @@
-import { getToken, getUser } from "@/lib/auth"
+import { getUser } from "@/lib/auth"
 import QuizBank from "@/types/QuizBank"
 import _ from "lodash"
 import { Metadata } from "next"
@@ -26,11 +26,9 @@ export async function generateMetadata({
 }
 
 async function getQuizBankDetailPage(id: string) {
-  const token = getToken().token
-
   const [quizBankRes, quizRes, relativeQuizRes] = await Promise.all([
     fetchQuizBank(id),
-    fetchQuiz(id, token, {
+    fetchQuiz(id, {
       take: 10,
       skip: 0,
       sortBy: "created",

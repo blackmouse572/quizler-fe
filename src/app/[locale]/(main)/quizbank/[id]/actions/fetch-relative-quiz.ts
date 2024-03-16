@@ -1,3 +1,4 @@
+'use server'
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
