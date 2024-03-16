@@ -12,7 +12,7 @@ type Props = {
   description: string
   isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  onDelete: () =>void
+  onDelete: () => void
 }
 
 function DeleteDialogConfirm({
@@ -20,9 +20,8 @@ function DeleteDialogConfirm({
   description,
   isOpen,
   setOpen,
-  onDelete
+  onDelete,
 }: Props) {
-
   return (
     <Dialog onOpenChange={setOpen} open={isOpen}>
       <DialogContent>
@@ -31,10 +30,22 @@ function DeleteDialogConfirm({
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant={"ghost"} onClick={() => setOpen(false)}>
+          <Button
+            variant={"ghost"}
+            onClick={(e) => {
+              e.stopPropagation()
+              setOpen(false)
+            }}
+          >
             Cancel
           </Button>
-          <Button onClick={onDelete} color="danger">
+          <Button
+            onClick={(e) => {
+              e.stopPropagation()
+              onDelete()
+            }}
+            color="danger"
+          >
             Delete
           </Button>
         </DialogFooter>

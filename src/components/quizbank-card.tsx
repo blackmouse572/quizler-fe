@@ -27,7 +27,7 @@ export type QuizbankCardProps = {
   translations?: {
     terms: string
   }
-  onDeleteQuizBank?: (itemId: number, deleteSucceedCb: ()=>void) => void
+  onDeleteQuizBank?: (itemId: number, deleteSucceedCb: () => void) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
 function QuizbankCard({
@@ -38,10 +38,10 @@ function QuizbankCard({
   ...props
 }: QuizbankCardProps) {
   const [isDelete, setIsDelete] = useState(false)
-  const router = useRouter();
+  const router = useRouter()
 
   const onDeleteSucceed = () => {
-    router.push(`/quizbank`)
+    router.refresh()
   }
 
   const onDelete = async (itemId: number) => {
@@ -91,8 +91,10 @@ function QuizbankCard({
               return (
                 <DropdownMenuItem key={href} asChild>
                   <Link className={className} href={href}>
-                    {Icon && <Icon className="mr-2 inline-block h-4 w-4" />}
-                    {title}
+                    <>
+                      {Icon && <Icon className="mr-2 inline-block h-4 w-4" />}
+                      {title}
+                    </>
                   </Link>
                 </DropdownMenuItem>
               )
@@ -100,7 +102,10 @@ function QuizbankCard({
               <DropdownMenuItem
                 key={title}
                 className={className}
-                onClick={onClick}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onClick?.()
+                }}
               >
                 {Icon && <Icon className="mr-2 inline-block h-4 w-4" />}
                 <span>{title}</span>
@@ -112,17 +117,18 @@ function QuizbankCard({
     )
   }, [options])
 
-  
-  const onQuizBankLick = useCallback((e: any, item: QuizBank) => {
-    e.stopPropagation()
-    router.push(`quizbank\\${item.id}`)
-  }, [router])
+  const onQuizBankLick = useCallback(
+    (item: QuizBank) => {
+      router.push(`quizbank\\${item.id}`)
+    },
+    [router]
+  )
 
   return (
     <Card
       className={cn("cursor-pointer hover:bg-neutral-50", className)}
       {...props}
-      onClick={e => onQuizBankLick(e, item)}
+      onClick={(e) => onQuizBankLick(item)}
     >
       <Link href={`/quizbank/${item.id}`}>
         <CardHeader>
