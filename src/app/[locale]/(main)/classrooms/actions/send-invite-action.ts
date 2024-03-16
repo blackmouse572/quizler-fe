@@ -21,12 +21,11 @@ export async function sendInviteAction(users: User[], classroomId: string) {
 
   return fetch(url, options)
     .then(async (res) => {
-      const json = await res.json()
       if (!res.ok) {
-        console.log("error", json)
+        const json = await res.json()
         throw new Error(json.message)
       }
-      return json
+      return true
     })
     .then((res) => {
       return {

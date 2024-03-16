@@ -27,7 +27,6 @@ export async function joinClassroomAction(
       return json
     })
     .then((response) => {
-      revalidatePath("/classrooms")
       return {
         ok: true,
         message: response.message,
@@ -38,5 +37,8 @@ export async function joinClassroomAction(
         ok: false,
         message: error.message,
       }
+    })
+    .finally(() => {
+      revalidatePath("/classrooms")
     })
 }

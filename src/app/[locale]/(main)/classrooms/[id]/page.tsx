@@ -2,6 +2,7 @@ import getClassroomDetails from "@/app/[locale]/(main)/classrooms/actions/get-cl
 import GenerateJoinDialog from "@/app/[locale]/(main)/classrooms/components/generate-join-dialog"
 import SendInviteDialog from "@/app/[locale]/(main)/classrooms/components/send-invite-dialog"
 import _ from "lodash"
+import { Metadata } from "next"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
@@ -9,6 +10,16 @@ import { notFound } from "next/navigation"
 type Props = {
   params: {
     id: string
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = params
+
+  const { data } = await getClassroomDetails(id)
+  return {
+    title: data?.classname,
+    description: data?.description,
   }
 }
 
