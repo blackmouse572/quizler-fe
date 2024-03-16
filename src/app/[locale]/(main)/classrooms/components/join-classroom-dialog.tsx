@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -57,6 +58,7 @@ function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
       code: defaultValue,
     },
   })
+  const router = useRouter()
 
   const { toast } = useToast()
 
@@ -76,6 +78,7 @@ function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
         color: "success",
         description: t("success.description"),
       })
+      router.push("/classrooms")
     }
   }
 
