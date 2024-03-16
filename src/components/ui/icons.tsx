@@ -9,6 +9,7 @@ import {
   IconBook,
   IconBrandGithub,
   IconBrandGoogle,
+  IconBrandTelegram,
   IconCalendar,
   IconCards,
   IconCaretDownFilled,
@@ -34,7 +35,9 @@ import {
   IconMaximize,
   IconMenu,
   IconMinus,
+  IconMoodEmptyFilled,
   IconNavigation,
+  IconPencil,
   IconPlayerPause,
   IconPlayerPlay,
   IconPlus,
@@ -47,7 +50,6 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
-  IconPencil
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -95,6 +97,8 @@ export const Icons = {
   Link: IconLink,
   DotVertical: IconDotsVertical,
   Edit: IconPencil,
+  Empty: IconMoodEmptyFilled,
+  Send: IconBrandTelegram,
 
   //Chevrons
   ChevronUp: IconChevronUp,

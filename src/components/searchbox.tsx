@@ -33,14 +33,15 @@ function SearchBox({ className, ...props }: InputProps) {
         className={cn(
           "relative w-fit max-w-2xl items-center rounded-md",
           "border border-none border-border",
+          "focus:border-primary-500 focus:ring-0",
           className
         )}
       >
-        <Icons.Search className="absolute left-2 top-1/2 h-4  w-4 -translate-y-1/2 " />
+        <Icons.Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 " />
         <Input
           type="text"
           placeholder="Search"
-          className="focus:border-primary-500 max-w-sm  bg-transparent pl-9 focus:ring-0"
+          className=" max-w-sm bg-transparent pl-9"
           {...register("search")}
           {...props}
         />

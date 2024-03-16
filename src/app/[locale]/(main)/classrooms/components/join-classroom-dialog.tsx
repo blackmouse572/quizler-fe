@@ -22,11 +22,10 @@ import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
-type Props = {}
 
 const JoinClassroomSchema = z.object({
   code: z
@@ -41,16 +40,25 @@ const JoinClassroomSchema = z.object({
     }),
 })
 
+type Props = {
+  defaultOpen?: boolean
+  defaultValue?: string
+}
+
 type FormData = z.infer<typeof JoinClassroomSchema>
 
-function JoinClassroomDialog({}: Props) {
-  const [isOpen, setOpen] = useState(false)
+function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
+  const [isOpen, setOpen] = useState(defaultOpen)
   const t = useTranslations("Join_classroom")
   const validationsi18n = useTranslations("Validations")
   const errori18n = useTranslations("Errors")
   const form = useForm<FormData>({
     resolver: zodResolver(JoinClassroomSchema),
+    defaultValues: {
+      code: defaultValue,
+    },
   })
+  const router = useRouter()
 
   const { toast } = useToast()
 
@@ -70,6 +78,7 @@ function JoinClassroomDialog({}: Props) {
         color: "success",
         description: t("success.description"),
       })
+      router.push("/classrooms")
     }
   }
 

@@ -486,7 +486,10 @@
       "code-invalid": "The code is not valid, please try again",
       "code-expire": "The code has been expired, please try again",
       "code-used": "The code has been used, please try again",
-      "already-joined": "You have already joined this classroom"
+      "already-joined": "You have already joined this classroom",
+      "not_found": "Classroom not found",
+      "user_not_found": "User not found",
+      "user_in_classroom": "User has already in classroom"
     }
   },
   "Validations": {
@@ -657,17 +660,35 @@
     }
   },
   "Invite_classroom": {
-    "title": "Invite a friend",
-    "description": "Invite your friend to join your classroom",
-    "link": "Invitation link",
-    "code": "Invitation code",
-    "toast_link": {
-      "title": "Copied link to clipboard",
-      "description": "You can now paste the link to your friend"
+    "code": {
+      "title": "Invite a friend",
+      "description": "Invite your friend to join your classroom",
+      "link": "Invitation link",
+      "code": "Invitation code",
+      "toast_link": {
+        "title": "Copied link to clipboard",
+        "description": "You can now paste the link to your friend"
+      },
+      "toast_code": {
+        "title": "Copied code to clipboard",
+        "description": "You can now paste the code to your friend"
+      }
     },
-    "toast_code": {
-      "title": "Copied code to clipboard",
-      "description": "You can now paste the code to your friend"
+    "user": {
+      "title": "Send invitation to user",
+      "description": "Enter the email of the user you want to invite",
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter the email of the user"
+        },
+        "submit": "Send",
+        "cancel": "Cancel"
+      },
+      "success": {
+        "title": "Invited user",
+        "description": "You have invited the user successfully"
+      }
     }
   },
   "Join_classroom": {

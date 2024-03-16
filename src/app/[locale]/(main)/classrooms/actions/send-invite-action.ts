@@ -2,35 +2,32 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
-import { Classroom } from "@/types"
-export const TAGS_CLASSROOM_DETAILS = (id: string) => [
-  "Classroom",
-  `ClassroomDetails-${id}`,
-]
-async function getClassroomDetails(id: string) {
-  const url = getAPIServerURL(`/classrooms/${id}`)
+import { User } from "@/types"
+
+export async function sendInviteAction(users: User[], classroomId: string) {
+  const url = getAPIServerURL(
+    `/classrooms/sent-invitation-email/${classroomId}`
+  )
   const { token } = getToken()
+  const body = JSON.stringify({ memberIds: users.map((user) => user.id) })
   const options: RequestInit = {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    next: {
-      revalidate: 60,
-      tags: TAGS_CLASSROOM_DETAILS(id),
-    },
+    body,
   }
 
   return fetch(url, options)
     .then(async (res) => {
-      const json = await res.json()
       if (!res.ok) {
-        throw new Error(json)
+        const json = await res.json()
+        throw new Error(json.message)
       }
-      return json
+      return true
     })
-    .then((res: Classroom) => {
+    .then((res) => {
       return {
         ok: true,
         message: "success",
@@ -45,5 +42,3 @@ async function getClassroomDetails(id: string) {
       }
     })
 }
-
-export default getClassroomDetails

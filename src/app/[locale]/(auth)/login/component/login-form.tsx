@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -41,6 +41,7 @@ function LoginForm({}: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { toast } = useToast()
   const router = useRouter()
+  const search = useSearchParams()
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
   })
@@ -65,6 +66,8 @@ function LoginForm({}: Props) {
       variant: "flat",
       color: "success",
     })
+    const from = search.get("from")
+    if (from) return router.push(from.toString())
     return router.push("/")
   }
   const [errMsg, setErrMsg] = useState<string | undefined>("")
