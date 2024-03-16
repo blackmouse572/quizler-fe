@@ -606,7 +606,10 @@
       "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
       "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
       "code-used": "Mã lớp học đã được sử dụng, vui lòng thử lại",
-      "already-joined": "Bạn đã tham gia lớp học này rồi"
+      "already-joined": "Bạn đã tham gia lớp học này rồi",
+      "not_found": "Không tìm thấy lớp học",
+      "user_not_found": "Không tìm thấy người dùng",
+      "user_in_classroom": "Người dùng đã ở trong lớp học"
     }
   },
   "AddClassroom": {
@@ -661,6 +664,22 @@
     "toast_code": {
       "title": "Đã sao chép mã",
       "description": "Bạn có thể dán link vào nơi bạn muốn"
+    },
+    "user": {
+      "title": "Gửi lời mời tới người dùng",
+      "description": "Nhập email của người dùng bạn muốn mời",
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Nhập email của người dùng"
+        },
+        "submit": "Mời",
+        "cancel": "Huỷ bỏ"
+      },
+      "success": {
+        "title": "Mời thành công",
+        "description": "Mời người dùng thành công"
+      }
     }
   },
   "Join_classroom": {
