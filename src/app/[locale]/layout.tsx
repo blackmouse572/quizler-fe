@@ -87,7 +87,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
             <Providers user={user}>
               <NextIntlClientProvider
                 locale={locale}
-                messages={pick(messages, "NotFound", "Error", "Errors")}
+                messages={pick(messages, "NotFound", "Error", "Errors", "Navbar")}
               >
                 {children}
               </NextIntlClientProvider>
