@@ -50,6 +50,7 @@ function GenerateJoinDialog({ classroomId }: Props) {
   const { toast } = useToast()
   const [isURLCopied, setIsURLCopied] = useState(false)
   const [isCodeCopied, setIsCodeCopied] = useState(false)
+  const invitationLink = `/classrooms?code=`
 
   useEffect(() => {
     let timount: NodeJS.Timeout
@@ -99,12 +100,14 @@ function GenerateJoinDialog({ classroomId }: Props) {
         color="accent"
         isIconOnly
         className="-mr-2"
-        onClick={() => copy(getAbsoluteURL(`/classroom?${data?.data?.code}`))}
+        onClick={() =>
+          copy(getAbsoluteURL(`${invitationLink}${data?.data?.code}`))
+        }
       >
         {isURLCopied ? <Icons.Checked /> : <Icons.Copy />}
       </Button>
     )
-  }, [copy, data?.data?.code, isURLCopied])
+  }, [copy, data?.data?.code, invitationLink, isURLCopied])
 
   const buttonCode = useMemo(() => {
     return (
@@ -156,7 +159,7 @@ function GenerateJoinDialog({ classroomId }: Props) {
           <Label>{t("link")}</Label>
           <Input
             prefix={buttonLink as any}
-            value={getAbsoluteURL(`/classrooms?code=${code}`)}
+            value={getAbsoluteURL(`${invitationLink}${code}`)}
             readOnly
           />
         </div>
@@ -172,6 +175,7 @@ function GenerateJoinDialog({ classroomId }: Props) {
     data?.data?.code,
     error?.message,
     errorI18n,
+    invitationLink,
     isError,
     isLoading,
     refetch,
