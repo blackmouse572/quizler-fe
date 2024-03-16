@@ -574,7 +574,9 @@
       "class_title": "Lớp học",
       "of": "của",
       "copy_button": "Sao chép",
-      "report_button": "Báo cáo"
+      "report_button": "Báo cáo",
+      "edit_button": "Chỉnh sửa",
+      "public_button": "Công khai"
     }
   },
   "NotFound": {

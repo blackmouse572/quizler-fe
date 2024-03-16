@@ -1,13 +1,13 @@
+import QuizBankList from "@/app/[locale]/(main)/quizbank/components/quizbank-list"
 import SearchBox from "@/components/searchbox"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
-import _ from "lodash"
+import { pick } from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
-import QuizBankCardComp from "./components/quiz-card"
 
 type Props = {}
 
@@ -28,7 +28,6 @@ export async function generateMetadata({
 }
 
 async function getQuizBank(options: Partial<PagedRequest>) {
-  //Convert object to query string
   const params = new URLSearchParams()
   const token = getToken()
   for (const [key, value] of Object.entries(options)) {
@@ -40,18 +39,33 @@ async function getQuizBank(options: Partial<PagedRequest>) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.token}`,
     },
     next: {
       revalidate: 1, // Revalidate every 1 second
     },
   }
-  const url = getAPIServerURL("/QuizBank") + "?" + params
-  const res: PagedResponse<QuizBank> = await fetch(url, option)
-    .then((res) => res.json())
+  const url = getAPIServerURL("/QuizBank/GetMyQuizBank?" + params.toString())
+  const res = await fetch(url, option)
+    .then(async (res) => {
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.message)
+      }
+      return data
+    })
+    .then((res: PagedResponse<QuizBank>) => ({
+      ok: true,
+      message: "success",
+      data: res,
+    }))
     .catch((err) => {
-      console.error(`[ERROR] getQuizBank: ${url} `, err)
-      throw new Error(err)
+      console.error(`[ERROR] getMyQuizbankAction: `, err.message)
+      return {
+        ok: false,
+        message: err.message,
+        data: null,
+      }
     })
   return res
 }
@@ -59,42 +73,31 @@ type MyQuizbankProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
-  const take = searchParams.take ? parseInt(searchParams.take as string) : 20
-  const skip = searchParams.skip ? parseInt(searchParams.skip as string) : 0
+  const take = 20
+  const skip = 0
   const search = searchParams.search
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
   const data = await getQuizBank(options)
   const m = await getMessages()
+  const res = await getQuizBank(options)
+  if (!res.ok) throw new Error(res.message)
+
+  const messages = await getMessages()
   const t = await getTranslations("MyQuizbanks")
   const { token } = getToken()
 
   return (
-    <NextIntlClientProvider messages={_.pick(m, "Delete_quizbank", "Errors")}>
-      <main>
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-lg font-bold">{t("headers.index")}</h3>
-          <SearchBox className="bg-background" />
-        </div>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-          {data.data.map((item) => {
-            return (
-              <QuizBankCardComp
-                item={item}
-                key={item.id}
-                translations={{
-                  terms: t("terms"),
-                }}
-                token={token}
-              >
-                {item.bankName}
-              </QuizBankCardComp>
-            )
-          })}
-        </div>
-      </main>
-    </NextIntlClientProvider>
+    <main>
+      <div className="mb-3 flex items-center justify-between">
+        <h3 className="text-lg font-bold">{t("headers.index")}</h3>
+        <SearchBox className="bg-background" />
+      </div>
+      <NextIntlClientProvider messages={pick(messages, "MyQuizbanks", "Errors", "Delete_quizbank")}>
+        <QuizBankList data={res.data!} filter={options} token={token} />
+      </NextIntlClientProvider>
+    </main>
   )
 }
 
