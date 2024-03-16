@@ -10,10 +10,10 @@ import {
 import { User } from "@/types"
 import { MenuItem } from "@/types/dropdown-menu"
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
-import React from "react"
-import { Button } from "../ui/button"
 import { BellIcon } from "@radix-ui/react-icons"
 import { useTranslations } from "next-intl"
+import React from "react"
+import { Button } from "../ui/button"
 
 type Props = {
   user: User
@@ -31,7 +31,12 @@ export default function NotificationDropdown({ user, menuItems }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="light">
+        <Button
+          variant="light"
+          color="accent"
+          isIconOnly
+          className="text-accent-foreground"
+        >
           <BellIcon />
         </Button>
       </DropdownMenuTrigger>
@@ -54,7 +59,7 @@ export default function NotificationDropdown({ user, menuItems }: Props) {
         >
           Activity Bar
         </DropdownMenuCheckboxItem>
-        
+
         <DropdownMenuCheckboxItem
           checked={showPanel}
           onCheckedChange={setShowPanel}

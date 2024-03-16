@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import { fetchSearchGlobal } from "@/app/[locale]/(main)/search/actions/fetch-search-global"
 import {
   CommandEmpty,
   CommandGroup,
@@ -8,12 +9,11 @@ import {
   CommandSeparator,
 } from "@/components/ui/command"
 import { IIconKeys, Icons } from "@/components/ui/icons"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useQuery } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useDebounce } from "use-debounce"
-import { useQuery } from "@tanstack/react-query"
-import { SearchGlobalResults } from "@/types/search-global-results"
-import { fetchSearchGlobal } from "@/app/[locale]/(main)/search/actions/fetch-search-global"
 
 interface SearchResultsProps {
   searchQuery: string
@@ -33,20 +33,19 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
 
   const enabled = !!debouncedSearchQuery
 
-  const {
-    data,
-    isLoading: isLoadingOrig,
-    isError,
-  } = useQuery<SearchGlobalResults>({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["searchQuery", debouncedSearchQuery],
-    queryFn: () => fetchSearchGlobal(debouncedSearchQuery, null, null),
+    queryFn: async () => {
+      const res = await fetchSearchGlobal({
+        search: debouncedSearchQuery,
+        take: 4,
+        skip: 0,
+      })
+
+      return res
+    },
     enabled,
   })
-
-  const isLoading = React.useMemo(
-    () => enabled && isLoadingOrig,
-    [enabled, isLoadingOrig]
-  )
 
   const renderLink = React.useCallback((data: SearchType) => {
     const Icon = Icons[data.icon]
@@ -74,7 +73,7 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
           className="[&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-2"
           heading={heading}
         >
-          {fieldsData?.slice(0, 4).map((data: SearchType) =>
+          {fieldsData?.map((data: SearchType) =>
             renderLink({
               icon: icon,
               id: data.id,
@@ -88,29 +87,47 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
     [renderLink]
   )
 
-  if (!enabled) return null
+  const renderLoading = React.useMemo(() => {
+    return Array.from({ length: 4 }).map((_, index) => (
+      <CommandItem key={index} className="space-x-2">
+        <Skeleton className="h-14 w-full" />
+        <Skeleton className="h-14 w-full" />
+      </CommandItem>
+    ))
+  }, [])
 
-  var quizBanksData = data?.quizBanks || null
-  var classroomsData = data?.classrooms || null
+  if (isLoading) {
+    return <CommandList>{renderLoading}</CommandList>
+  }
+
+  if (isError) {
+    return (
+      <CommandList>
+        <CommandEmpty className="flex min-h-48 flex-col items-center justify-center text-neutral-500">
+          <Icons.Empty className="h-16 w-16" />
+          {tNav("nav_search.error_fetching_search")}
+        </CommandEmpty>
+      </CommandList>
+    )
+  }
+  if (!data || (data.classrooms.length === 0 && data.quizBanks.length === 0)) {
+    return (
+      <CommandList>
+        <CommandEmpty className="flex  min-h-48 flex-col items-center justify-center text-neutral-500">
+          <Icons.Empty className="h-16 w-16" />
+          {tNav("nav_search.no_search_result_found")}
+        </CommandEmpty>
+      </CommandList>
+    )
+  }
+
+  const { quizBanks, classrooms } = data
+  console.log("quizBanks", quizBanks, "classrooms", classrooms)
 
   return (
     <CommandList>
-      {isLoading && (
-        <div className="p-4 text-sm">{tNav("nav_search.type_something")}</div>
-      )}
-      {!isError &&
-        !isLoading &&
-        !quizBanksData?.length &&
-        !classroomsData?.length && (
-          <div className="py-6 text-center text-sm">
-            {tNav("nav_search.no_search_result_found")}
-          </div>
-        )}
-      {isError && (
-        <CommandEmpty>{tNav("nav_search.error_fetching_search")}</CommandEmpty>
-      )}
       {renderCommandGroup(
-        quizBanksData,
+        quizBanks,
         tNav("quizbanks"),
         "Icon",
         "quizbank",
@@ -120,7 +137,7 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
       <CommandSeparator />
 
       {renderCommandGroup(
-        classroomsData,
+        classrooms,
         tNav("classrooms"),
         "School",
         "classrooms",

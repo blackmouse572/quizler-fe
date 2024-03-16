@@ -6,7 +6,7 @@ import React, { useMemo } from "react"
 
 import NotificationDropdown from "@/components/notification-dropdown"
 import { AnimatedListItem } from "@/components/ui/animated-list-item"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { IIconKeys, Icons } from "@/components/ui/icons"
 import {
@@ -18,6 +18,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import UserDropdown from "@/components/user-dropdown"
+import { SUBJECTS_NAVBAR_ITEMS } from "@/lib/config/navbar-config"
 import { cn } from "@/lib/utils"
 import { Classroom } from "@/types"
 import { User } from "@/types/User"
@@ -132,13 +133,6 @@ export default function LoggedInNavbar({
   }, [tNav])
 
   const renderMiddleMenu = useMemo(() => {
-    const subjects = [
-      { id: "1", title: tNav("subject_item.Math"), href: "/quizbank" },
-      { id: "2", title: tNav("subject_item.Literatue"), href: "/quizbank" },
-      { id: "3", title: tNav("subject_item.Science"), href: "/quizbank" },
-      { id: "4", title: tNav("subject_item.Other"), href: "/quizbank" },
-    ]
-
     return (
       <>
         <GlobalSearch className={"hidden text-sm md:flex"} />
@@ -156,7 +150,7 @@ export default function LoggedInNavbar({
         <NavigationMenuItem>
           <NavigationMenuTrigger>{tNav("my_classrooms")}</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul className="grid w-[400px] grid-rows-4 gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {myClassroomData!.data.map((passingClassroomData) => (
                 <div key={passingClassroomData.id}>
                   <div>
@@ -167,6 +161,19 @@ export default function LoggedInNavbar({
                   </div>
                 </div>
               ))}
+              <li className="row-span-5 flex flex-col items-center justify-center gap-6 bg-dot-slate-300">
+                <div className="space-y-1 px-4">
+                  <h3 className="text-3xl font-bold text-emerald-500">
+                    {tNav("buy-premium.title")}
+                  </h3>
+                  <h3 className="text-sm text-neutral-500">
+                    {tNav("buy-premium.description")}
+                  </h3>
+                </div>
+                <Button className="bg-emerald-500 hover:bg-emerald-500/80">
+                  {tNav("buy-premium.action")}
+                </Button>
+              </li>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -175,9 +182,15 @@ export default function LoggedInNavbar({
           <NavigationMenuTrigger>{tNav("subjects")}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {subjects.map((data) => (
-                <LoggedInAnimatedListItemSubject key={data.id} {...data} />
-              ))}
+              {SUBJECTS_NAVBAR_ITEMS.map((data) => {
+                return (
+                  <LoggedInAnimatedListItemSubject
+                    key={data.title}
+                    {...data}
+                    title={tNav(data.title as any)}
+                  />
+                )
+              })}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>

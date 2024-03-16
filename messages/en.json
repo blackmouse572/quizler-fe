@@ -138,6 +138,11 @@
     "my_classrooms": "My classrooms",
     "subjects": "Subject",
     "notification": "Notifications",
+    "buy-premium": {
+      "title": "Join more, get more",
+      "description": "Get more fun with premium account",
+      "action": "Buy premium"
+    },
     "getting_started_sec": {
       "introduction": {
         "title": "Introduction",
@@ -154,9 +159,13 @@
     },
     "subject_item": {
       "Math": "Math",
-      "Literatue": "Literatue",
       "Science": "Science",
-      "Other": "Other"
+      "History": "History",
+      "Geography": "Geography",
+      "Literature": "Literature",
+      "Language": "Languages",
+      "Computer": "Computer Science",
+      "Other": "Others"
     },
     "nav_search": {
       "search": "I should learn...",

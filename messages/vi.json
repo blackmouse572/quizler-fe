@@ -37,6 +37,11 @@
       "Math": "Toán",
       "Literatue": "Ngữ văn",
       "Science": "Khoa học",
+      "History": "Lịch sử",
+      "Geography": "Địa lý",
+      "Literature": "Văn học",
+      "Language": "Ngoại ngữ",
+      "Computer": "Khoa học máy tính",
       "Other": "Khác"
     },
     "nav_search": {

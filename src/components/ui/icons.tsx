@@ -3,9 +3,12 @@ import {
   IconAlertCircle,
   IconArrowDown,
   IconArrowDownRight,
+  IconArrowRight,
   IconArrowRoundaboutLeft,
   IconArrowUp,
   IconArrowUpLeft,
+  IconArrowsRight,
+  IconArrowsShuffle2,
   IconBook,
   IconBrandGithub,
   IconBrandGoogle,
@@ -23,15 +26,21 @@ import {
   IconCircleOff,
   IconCopy,
   IconDashboard,
+  IconDeviceDesktop,
+  IconDots,
   IconDotsVertical,
   IconEye,
   IconFilter,
+  IconFlask,
+  IconGlobe,
   IconHandStop,
+  IconLanguage,
   IconLifebuoy,
   IconLink,
   IconLoader2,
   IconLogout2,
   IconMail,
+  IconMath,
   IconMaximize,
   IconMenu,
   IconMinus,
@@ -44,17 +53,14 @@ import {
   IconRefresh,
   IconSearch,
   IconSmartHome,
+  IconStar,
   IconTableFilled,
   IconTrash,
+  IconTypography,
   IconUserFilled,
   IconUsers,
   IconX,
   TablerIconsProps,
-  IconPencil,
-  IconArrowsShuffle2,
-  IconStar,
-  IconArrowRight,
-  IconArrowsRight,
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -104,6 +110,7 @@ export const Icons = {
   Edit: IconPencil,
   Empty: IconMoodEmptyFilled,
   Send: IconBrandTelegram,
+  Dot: IconDots,
 
   //Chevrons
   ChevronUp: IconChevronUp,
@@ -118,6 +125,15 @@ export const Icons = {
   Shuffle: IconArrowsShuffle2,
   Star: IconStar,
   Fullscreen: IconMaximize,
+
+  //Subjects
+  Math: IconMath,
+  Literature: IconTypography,
+  History: IconArrowRoundaboutLeft,
+  Science: IconFlask,
+  Languague: IconLanguage,
+  Computer: IconDeviceDesktop,
+  Geography: IconGlobe,
 }
 
 type IIconKeys = keyof typeof Icons

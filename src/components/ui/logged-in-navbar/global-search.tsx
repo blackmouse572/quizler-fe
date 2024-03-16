@@ -3,18 +3,18 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 
+import SearchBox from "@/components/searchbox"
 import {
   CommandDialog,
-  CommandInput,
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
+import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "../button"
 import SearchResults from "./search-results"
-import { cn } from "@/lib/utils"
 
 type Props = {
   className: string
@@ -71,9 +71,10 @@ export default function GlobalSearch({ className }: Props) {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput
+        <SearchBox
           value={searchQuery}
-          onValueChange={setSearchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="flex h-12 w-full items-center rounded-none border-b border-input bg-transparent text-sm outline-none placeholder:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-neutral-400 [&_svg]:left-3"
           placeholder={tNav("nav_search.type_something")}
         />
 
@@ -88,7 +89,7 @@ export default function GlobalSearch({ className }: Props) {
           asChild
         >
           <Link href={{ pathname: "/search", query: { search: searchQuery } }}>
-            {tNav("nav_search.see_more_results")}
+            {tNav("nav_search.see_more_results")}&nbsp;
             <CommandShortcut>(⌘Enter)</CommandShortcut>
           </Link>
         </Button>
