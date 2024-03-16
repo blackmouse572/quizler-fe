@@ -45,7 +45,7 @@ function GenerateJoinDialog({ classroomId }: Props) {
     refetchOnMount: false,
     refetchIntervalInBackground: false,
   })
-  const t = useTranslations("Invite_classroom")
+  const t = useTranslations("Invite_classroom.code")
   const errorI18n = useTranslations("Errors")
   const { toast } = useToast()
   const [isURLCopied, setIsURLCopied] = useState(false)
@@ -166,7 +166,17 @@ function GenerateJoinDialog({ classroomId }: Props) {
         </div>
       </div>
     )
-  }, [buttonCode, buttonLink, data?.data?.code, error?.message, errorI18n, isError, isLoading, refetch, t])
+  }, [
+    buttonCode,
+    buttonLink,
+    data?.data?.code,
+    error?.message,
+    errorI18n,
+    isError,
+    isLoading,
+    refetch,
+    t,
+  ])
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>

@@ -1,13 +1,15 @@
 "use server"
 
-import { AddClassroom } from "@/app/[locale]/(main)/classrooms/add/components/add-classroom-form"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { User } from "@/types"
 
-export async function addNewClassroom(data: AddClassroom) {
-  const url = getAPIServerURL("/classrooms")
+export async function sendInviteAction(users: User[], classroomId: string) {
+  const url = getAPIServerURL(
+    `/classrooms/sent-invitation-email/${classroomId}`
+  )
   const { token } = getToken()
-  const body = JSON.stringify(data)
+  const body = JSON.stringify({ memberIds: users.map((user) => user.id) })
   const options: RequestInit = {
     method: "POST",
     headers: {

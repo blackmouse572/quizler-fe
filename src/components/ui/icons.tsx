@@ -9,6 +9,7 @@ import {
   IconBook,
   IconBrandGithub,
   IconBrandGoogle,
+  IconBrandTelegram,
   IconCalendar,
   IconCards,
   IconCaretDownFilled,
@@ -97,6 +98,7 @@ export const Icons = {
   DotVertical: IconDotsVertical,
   Edit: IconPencil,
   Empty: IconMoodEmptyFilled,
+  Send: IconBrandTelegram,
 
   //Chevrons
   ChevronUp: IconChevronUp,

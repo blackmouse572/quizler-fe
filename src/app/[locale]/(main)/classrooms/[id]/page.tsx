@@ -1,5 +1,6 @@
 import getClassroomDetails from "@/app/[locale]/(main)/classrooms/actions/get-classroom-details-action"
 import GenerateJoinDialog from "@/app/[locale]/(main)/classrooms/components/generate-join-dialog"
+import SendInviteDialog from "@/app/[locale]/(main)/classrooms/components/send-invite-dialog"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
@@ -21,13 +22,18 @@ async function ClassroomDetailsPage({ params }: Props) {
 
   return (
     <NextIntlClientProvider
-      messages={_.pick(messages, "Invite_classroom", "Errors")}
+      messages={_.pick(messages, "Invite_classroom", "Errors", "Validations")}
     >
       <div>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-4xl font-bold">{data?.classname}</h3>
-            <GenerateJoinDialog classroomId={id} />
+            {data?.isStudentAllowInvite && (
+              <div className="space-x-2">
+                <GenerateJoinDialog classroomId={id} />
+                <SendInviteDialog classroomId={id} />
+              </div>
+            )}
           </div>
           <p>{data?.description}</p>
         </div>
