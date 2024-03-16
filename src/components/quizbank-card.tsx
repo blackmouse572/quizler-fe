@@ -22,18 +22,33 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useCallback, useMemo, useState } from "react"
 
-
-type Props = {
+export type QuizbankCardProps = {
   item: QuizBank
   translations?: {
     terms: string
   }
+  onDeleteQuizBank?: (itemId: number, deleteSucceedCb: () => void) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
-function QuizbankCard({ item, translations, className, ...props }: Props) {
+function QuizbankCard({
+  item,
+  translations,
+  className,
+  onDeleteQuizBank,
+  ...props
+}: QuizbankCardProps) {
   const [isDelete, setIsDelete] = useState(false)
+  const router = useRouter()
 
-  const router = useRouter();
+  const onDeleteSucceed = () => {
+    router.refresh()
+  }
+
+  const onDelete = async (itemId: number) => {
+    setIsDelete(false)
+    onDeleteQuizBank?.(itemId, onDeleteSucceed)
+  }
+
   const options = useMemo<
     {
       icon?: IIconKeys
@@ -76,8 +91,10 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
               return (
                 <DropdownMenuItem key={href} asChild>
                   <Link className={className} href={href}>
-                    {Icon && <Icon className="mr-2 inline-block h-4 w-4" />}
-                    {title}
+                    <>
+                      {Icon && <Icon className="mr-2 inline-block h-4 w-4" />}
+                      {title}
+                    </>
                   </Link>
                 </DropdownMenuItem>
               )
@@ -85,7 +102,10 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
               <DropdownMenuItem
                 key={title}
                 className={className}
-                onClick={onClick}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onClick?.()
+                }}
               >
                 {Icon && <Icon className="mr-2 inline-block h-4 w-4" />}
                 <span>{title}</span>
@@ -97,16 +117,18 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
     )
   }, [options])
 
-  
-  const onQuizBankLick = useCallback((item: QuizBank) => {
-    router.push(`quizbank\\${item.id}`)
-  }, [router])
+  const onQuizBankLick = useCallback(
+    (item: QuizBank) => {
+      router.push(`quizbank\\${item.id}`)
+    },
+    [router]
+  )
 
   return (
     <Card
       className={cn("cursor-pointer hover:bg-neutral-50", className)}
       {...props}
-      onClick={e => onQuizBankLick(item)}
+      onClick={(e) => onQuizBankLick(item)}
     >
       <Link href={`/quizbank/${item.id}`}>
         <CardHeader>
@@ -128,11 +150,11 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
           </div>
           {renderOptions}
           <DeleteDialogConfirm
-            deleteUrl=""
             description=""
             title="Delete Quiz Bank"
             isOpen={isDelete}
             setOpen={setIsDelete}
+            onDelete={() => onDelete(item.id)}
           />
         </CardContent>
       </Link>

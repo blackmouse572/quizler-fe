@@ -697,5 +697,14 @@
       "title": "Tham gia lớp học thành công",
       "description": "Bạn đã tham gia lớp học thành công"
     }
+  },
+  "Delete_quizbank": {
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Thành công xóa ngân hàng câu hỏi"
+      },
+      "failed": { "title": "Thất bại" }
+    }
   }
 }

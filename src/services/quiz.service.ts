@@ -1,6 +1,7 @@
+"use server"
+
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank, { TAPIQuizResponse } from "@/types/QuizBank"
-
 
 export async function getQuizBankDetailPage(id: string) {
   const url = getAPIServerURL(`/quizbank/${id}`)
@@ -39,8 +40,14 @@ export async function getQuizByQuizBankId(id: string) {
     })
 }
 
-export async function copyQuizBankToClassroom(token: string, quizbankId: string, classroomId: string) {
-  const url = getAPIServerURL(`/api/classrooms/copyquizbank/${quizbankId}/${classroomId}`)
+export async function copyQuizBankToClassroom(
+  token: string,
+  quizbankId: string,
+  classroomId: string
+) {
+  const url = getAPIServerURL(
+    `/api/classrooms/copyquizbank/${quizbankId}/${classroomId}`
+  )
 
   const options = {
     method: "POST",
@@ -49,12 +56,11 @@ export async function copyQuizBankToClassroom(token: string, quizbankId: string,
       Authorization: `Bearer ${token}`,
     },
   }
-  return fetch(url, options)
-    .then(async(res) => {
-      if (!res?.ok) {
-        throw new Error(res.statusText)
-      }
-      return true
-    })
+  return fetch(url, options).then(async (res) => {
+    if (!res?.ok) {
+      throw new Error(res.statusText)
+    }
+    return true
+  })
 }
 
