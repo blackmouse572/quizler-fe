@@ -1,10 +1,6 @@
 import { useLocale, useTranslations } from "next-intl"
-import Link from "next/link"
 
 import { Boxes } from "@/components/background-box"
-import LogoutButton from "@/components/logout-btn"
-import { Button } from "@/components/ui/button"
-import UserSelector from "@/components/user-selector/user-selector"
 import { isAuthenticated } from "@/lib/auth"
 
 export default function Home() {
@@ -21,34 +17,8 @@ export default function Home() {
           {t("title")}
         </p>
         <p className="relative z-20 bg-gradient-to-b from-slate-300 to-slate-700 bg-clip-text text-sm font-black tracking-wider  text-transparent sm:text-base ">
-          Bring joy and fun to your classroom
+          {t("description")}
         </p>
-      </div>
-
-      <div className="space-y-4 text-center">
-        <div className="space-x-2">
-          <Link href="signup">
-            <Button variant="default" color={"primary"}>
-              Sign up
-            </Button>
-          </Link>
-          <Link href={locale === "vi" ? "/en" : "vi"}>
-            <Button variant="default" color={"primary"}>
-              {locale === "vi" ? "English" : "Vietnamese"}
-            </Button>
-          </Link>
-        </div>
-        {isAuth && (
-          <div className="space-x-2">
-            <Button variant="flat" color={"primary"}>
-              If you see this. You are authenticated!
-            </Button>
-            <LogoutButton />
-          </div>
-        )}
-      </div>
-      <div className="mx-auto w-fit">
-        <UserSelector />
       </div>
     </div>
   )
