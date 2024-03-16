@@ -25,12 +25,13 @@ import React, { useCallback, useMemo, useState } from "react"
 import { toast } from "./ui/use-toast"
 import { useTranslations } from "next-intl"
 
-type Props = {
+export type QuizbankCardProps = {
   item: QuizBank
   translations?: {
     terms: string
   }
   token: string
+  onDeleteQuizBank?: (itemId: number) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
 function QuizbankCard({
@@ -38,39 +39,16 @@ function QuizbankCard({
   translations,
   className,
   token,
+  onDeleteQuizBank,
   ...props
-}: Props) {
+}: QuizbankCardProps) {
   const [isDelete, setIsDelete] = useState(false)
-  const router = useRouter()
-  const i18n = useTranslations("Delete_quizbank")
-  const errorI18n = useTranslations("Errors")
 
-  const onSuccessDeleteCb = useCallback(() => {
-    // reload page
-    router.refresh()
-  }, [router])
-
-  const onDeleteQuizBank = async (itemId: number) => {
-    const result = await deleteQuizBank(token, itemId.toString())
+  const onDelete = async (itemId: number) => {
     setIsDelete(false)
-    if (!result.isSuccess) {
-      return toast({
-        title: i18n("message.failed.title"),
-        description: errorI18n(result.message as any),
-        variant: "flat",
-        color: "danger",
-      })
-    } else {
-      onSuccessDeleteCb()
-      return toast({
-        title: i18n("message.success.title"),
-        description: i18n("message.success.description"),
-        variant: "flat",
-        color: "success",
-      })
-    }
+    onDeleteQuizBank?.(itemId)
   }
-  
+
   const options = useMemo<
     {
       icon?: IIconKeys
@@ -162,7 +140,7 @@ function QuizbankCard({
           title="Delete Quiz Bank"
           isOpen={isDelete}
           setOpen={setIsDelete}
-          onDelete={() => onDeleteQuizBank(item.id)}
+          onDelete={() => onDelete(item.id)}
         />
       </CardContent>
     </Card>

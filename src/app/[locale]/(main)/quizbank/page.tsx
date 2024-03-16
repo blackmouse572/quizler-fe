@@ -1,4 +1,3 @@
-import QuizbankCard from "@/components/quizbank-card"
 import SearchBox from "@/components/searchbox"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
@@ -8,6 +7,7 @@ import PagedResponse from "@/types/paged-response"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
+import QuizBankCardComp from "./components/quiz-card"
 
 type Props = {}
 
@@ -80,7 +80,7 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           {data.data.map((item) => {
             return (
-              <QuizbankCard
+              <QuizBankCardComp
                 item={item}
                 key={item.id}
                 translations={{
@@ -89,7 +89,7 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
                 token={token}
               >
                 {item.bankName}
-              </QuizbankCard>
+              </QuizBankCardComp>
             )
           })}
         </div>
