@@ -8,23 +8,21 @@ import {
 } from "@/components/ui/dialog"
 
 type Props = {
-  deleteUrl: string
   title: string
   description: string
   isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onDelete: () =>void
 }
 
 function DeleteDialogConfirm({
-  deleteUrl,
   title,
   description,
   isOpen,
   setOpen,
+  onDelete
 }: Props) {
-  const onDelete = async () => {
-    // TODO: Implement delete
-  }
+
   return (
     <Dialog onOpenChange={setOpen} open={isOpen}>
       <DialogContent>

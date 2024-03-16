@@ -79,11 +79,14 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
+  const data = await getQuizBank(options)
+  const m = await getMessages()
   const res = await getQuizBank(options)
   if (!res.ok) throw new Error(res.message)
 
   const messages = await getMessages()
   const t = await getTranslations("MyQuizbanks")
+  const { token } = getToken()
 
   return (
     <main>
@@ -91,8 +94,8 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
         <h3 className="text-lg font-bold">{t("headers.index")}</h3>
         <SearchBox className="bg-background" />
       </div>
-      <NextIntlClientProvider messages={pick(messages, "MyQuizbanks")}>
-        <QuizBankList data={res.data!} filter={options} />
+      <NextIntlClientProvider messages={pick(messages, "MyQuizbanks", "Errors", "Delete_quizbank")}>
+        <QuizBankList data={res.data!} filter={options} token={token} />
       </NextIntlClientProvider>
     </main>
   )

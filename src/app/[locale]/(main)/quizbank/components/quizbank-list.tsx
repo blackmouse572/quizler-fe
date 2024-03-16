@@ -9,16 +9,22 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { useInView } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useRef } from "react"
+import { deleteQuizBank } from "../actions/detete-quiz-bank"
+import { toast } from "@/components/ui/use-toast"
 
 type Props = {
   data: PagedResponse<QuizBank>
   filter: Partial<PagedRequest>
+  token: string
 }
 
-function QuizBankList({ data: initData, filter }: Props) {
+function QuizBankList({ data: initData, token, filter }: Props) {
   const t = useTranslations("MyQuizbanks")
   const inViewRef = useRef<HTMLDivElement>(null)
   const inView = useInView(inViewRef, {})
+
+  const i18n = useTranslations("Delete_quizbank")
+  const errorI18n = useTranslations("Errors")
   const {
     isFetchingNextPage,
     isLoading,
@@ -50,6 +56,26 @@ function QuizBankList({ data: initData, filter }: Props) {
     initialData: { pages: [initData], pageParams: [0] },
   })
 
+  const onDeleteQuizBank = useCallback( async (itemId: number, deleteSucceedCb: () => void) => {
+    const result = await deleteQuizBank(token, itemId.toString())
+    if (!result.isSuccess) {
+      return toast({
+        title: i18n("message.failed.title"),
+        description: errorI18n(result.message as any),
+        variant: "flat",
+        color: "danger",
+      })
+    } else {
+      deleteSucceedCb()
+      return toast({
+        title: i18n("message.success.title"),
+        description: i18n("message.success.description"),
+        variant: "flat",
+        color: "success",
+      })
+    }
+  },[errorI18n, i18n, token])
+
   const renderItem = useCallback(
     (item: QuizBank) => (
       <QuizbankCard
@@ -58,9 +84,10 @@ function QuizBankList({ data: initData, filter }: Props) {
         translations={{
           terms: t("terms"),
         }}
+        onDeleteQuizBank={onDeleteQuizBank}
       />
     ),
-    [t]
+    [onDeleteQuizBank, t]
   )
   const renderLoading = useCallback((length?: number) => {
     return Array.from({ length: length ?? 5 }).map((_, index) => (

@@ -22,18 +22,33 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useCallback, useMemo, useState } from "react"
 
-
-type Props = {
+export type QuizbankCardProps = {
   item: QuizBank
   translations?: {
     terms: string
   }
+  onDeleteQuizBank?: (itemId: number, deleteSucceedCb: ()=>void) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
-function QuizbankCard({ item, translations, className, ...props }: Props) {
+function QuizbankCard({
+  item,
+  translations,
+  className,
+  onDeleteQuizBank,
+  ...props
+}: QuizbankCardProps) {
   const [isDelete, setIsDelete] = useState(false)
-
   const router = useRouter();
+
+  const onDeleteSucceed = () => {
+    router.push(`/quizbank`)
+  }
+
+  const onDelete = async (itemId: number) => {
+    setIsDelete(false)
+    onDeleteQuizBank?.(itemId, onDeleteSucceed)
+  }
+
   const options = useMemo<
     {
       icon?: IIconKeys
@@ -98,7 +113,8 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
   }, [options])
 
   
-  const onQuizBankLick = useCallback((item: QuizBank) => {
+  const onQuizBankLick = useCallback((e: any, item: QuizBank) => {
+    e.stopPropagation()
     router.push(`quizbank\\${item.id}`)
   }, [router])
 
@@ -106,7 +122,7 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
     <Card
       className={cn("cursor-pointer hover:bg-neutral-50", className)}
       {...props}
-      onClick={e => onQuizBankLick(item)}
+      onClick={e => onQuizBankLick(e, item)}
     >
       <Link href={`/quizbank/${item.id}`}>
         <CardHeader>
@@ -128,11 +144,11 @@ function QuizbankCard({ item, translations, className, ...props }: Props) {
           </div>
           {renderOptions}
           <DeleteDialogConfirm
-            deleteUrl=""
             description=""
             title="Delete Quiz Bank"
             isOpen={isDelete}
             setOpen={setIsDelete}
+            onDelete={() => onDelete(item.id)}
           />
         </CardContent>
       </Link>
