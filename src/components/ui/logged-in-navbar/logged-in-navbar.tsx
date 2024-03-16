@@ -19,9 +19,10 @@ import {
 } from "@/components/ui/navigation-menu"
 import UserDropdown from "@/components/user-dropdown"
 import { cn } from "@/lib/utils"
+import { Classroom } from "@/types"
 import { User } from "@/types/User"
 import { MenuItem } from "@/types/dropdown-menu"
-import { MyClassrooms } from "@/types/my-classrooms"
+import PagedResponse from "@/types/paged-response"
 import { useMotionValueEvent, useScroll } from "framer-motion"
 import { useTranslations } from "next-intl"
 import GlobalSearch from "./global-search"
@@ -42,7 +43,7 @@ type Props = {
   isAuthed?: boolean
   user?: User
   menuItems?: MenuItem[][]
-  myClassroomData?: MyClassrooms
+  myClassroomData?: PagedResponse<Classroom>
 }
 
 export default function LoggedInNavbar({
@@ -156,7 +157,7 @@ export default function LoggedInNavbar({
           <NavigationMenuTrigger>{tNav("my_classrooms")}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {myClassroomData!.data.slice(0, 4).map((passingClassroomData) => (
+              {myClassroomData!.data.map((passingClassroomData) => (
                 <div key={passingClassroomData.id}>
                   <div>
                     <LoggedInAnimatedListItemMyClassroom

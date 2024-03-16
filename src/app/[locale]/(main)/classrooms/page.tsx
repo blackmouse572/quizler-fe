@@ -1,3 +1,4 @@
+import ClassroomList from "@/app/[locale]/(main)/classrooms/components/classroom-list"
 import JoinClassroomDialog from "@/app/[locale]/(main)/classrooms/components/join-classroom-dialog"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
@@ -6,7 +7,6 @@ import PagedResponse from "@/types/paged-response"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
-import Link from "next/link"
 
 type Props = {}
 
@@ -37,22 +37,7 @@ async function ClassroomPage({}: Props) {
         <h1 className="text-xl font-bold">Classrooms</h1>
         <JoinClassroomDialog />
       </div>
-      <div className="grid grid-cols-4 gap-3">
-        {classrooms.data.map((classroom: Classroom, index: number) => {
-          return (
-            <Link
-              href={`/classrooms/${classroom.id}`}
-              key={index}
-              className="rounded-md border border-border bg-background px-4 py-6 text-foreground hover:bg-muted"
-            >
-              <h3 className="text-lg font-bold">{classroom.classname}</h3>
-              <p className="line-clamp-2 text-sm text-neutral-500">
-                {classroom.description}
-              </p>
-            </Link>
-          )
-        })}
-      </div>
+      <ClassroomList initialData={classrooms} filter={{}} />
     </NextIntlClientProvider>
   )
 }

@@ -125,7 +125,6 @@ function QuizBankList({ data: initData, token, filter }: Props) {
   if (isLoading) {
     return (
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-        ERROR:
         {renderLoading()}
       </div>
     )
