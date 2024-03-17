@@ -403,6 +403,52 @@
       }
     }
   },
+  "ReportQuizBank": {
+    "title": "Báo cáo QuizBank này",
+    "description": "Bạn có muốn báo cáo học phần này không?",
+    "form_report": {
+      "reason": {
+        "label": "Lý do",
+        "text": "Lý do",
+        "placeholder": "Lạm dụng"
+      },
+      "more_details": {
+        "label": "Chi tiết hơn",
+        "text": "Chi tiết hơn",
+        "placeholder": "Nhập thêm chi tiết..."
+      },
+      "button": {
+        "cancel": "Hủy",
+        "submit": "Báo cáo"
+      },
+      "text_area": {
+        "placeholder": "Xin hãy cung cấp thông tin chi tiết hơn"
+      }
+    },
+    "form_result_report": {
+      "report_success": "Báo cáo thành công",
+      "thank_you_reported": "Cảm ơn bạn đã đóng góp cho không gian học tập tốt hơn",
+      "received_submission": "Chúng tôi đã nhận được đơn báo cáo của bạn về quizbank",
+      "of": "của",
+      "against": "đối với",
+      "violation_rules": "Quy tắc vi phạm",
+      "take_action_soon": "chúng tôi. Hành động sẽ được thực hiện sớm.",
+      "recorded": "Đã ghi lại:",
+      "ticket_id": "Mã ticket:",
+      "contact_us": "Để biết thêm thông tin, vui lòng liên hệ chúng tôi tại",
+      "Quizlearn_email": "Quizlearn",
+      "confirm": "Xác nhận"
+    },
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Báo cáo quizbank thành công"
+      },
+      "failed": {
+        "title": "Đã xảy ra lỗi."
+      }
+    }
+  },
   "Validations": {
     "errors": {
       "invalid_type": "Dự kiến {expected}, nhận được {received}",

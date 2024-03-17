@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl"
 import { use, useMemo } from "react"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 import EditQuizBank from "./edit-button"
+import ReportQuizBankDialog from "./report-quizbank-dialog.tsx/report-quizbank-dialog"
 
 type Props = {
   authorData: User
@@ -59,14 +60,11 @@ export default function AuthorQuizBank({
       </Tooltip>,
     ]
     const visitorQuizBankButtons = [
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button color="accent" isIconOnly>
-            <Icons.Report />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>{i18n("author.report_button")}</TooltipContent>
-      </Tooltip>,
+      <ReportQuizBankDialog
+        token={token}
+        quizbankId={quizbankId}
+        buttonContent={i18n("author.report_button")}
+      />
     ]
 
     let shouldUsedButtons: React.JSX.Element[]
@@ -75,7 +73,7 @@ export default function AuthorQuizBank({
     } else {
       shouldUsedButtons = [...visitorQuizBankButtons]
     }
-    return shouldUsedButtons = [...defaultButtons, ...shouldUsedButtons]
+    return (shouldUsedButtons = [...defaultButtons, ...shouldUsedButtons])
   }, [i18n, isOwnQuizBank, quizbankId, token, userCurrentClass])
 
   return (
@@ -118,7 +116,9 @@ export default function AuthorQuizBank({
             </div>
           </div>
         </div>
-        <div className="flex justify-between gap-2">{quizBankActions.map(btn => btn)}</div>
+        <div className="flex justify-between gap-2">
+          {quizBankActions.map((btn) => btn)}
+        </div>
       </div>
     </div>
   )
