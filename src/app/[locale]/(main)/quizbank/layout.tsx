@@ -7,7 +7,7 @@ function QuizbankLayout({ children }: QuizbankLayoutProps) {
   return (
     <BackgroundSquare
       variant={"topDown"}
-      className="container mx-auto items-start pt-20"
+      className="container mx-auto items-start pb-36 pt-20"
     >
       {children}
     </BackgroundSquare>

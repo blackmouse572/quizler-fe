@@ -4,23 +4,22 @@ import { getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
 import Footer from "@/components/footer"
-import { MainNavItem } from "@/components/ui/guest-navbar/guest-navbar"
+import GuestNavbar, {
+  MainNavItem,
+} from "@/components/ui/guest-navbar/guest-navbar"
+import LoggedInNavbar from "@/components/ui/logged-in-navbar/logged-in-navbar"
 import { getUser, isAuthenticated } from "@/lib/auth"
 import { MenuItem } from "@/types/dropdown-menu"
 import { fetchMyClassrooms } from "./classrooms/actions/fetch-my-classroom"
-import GuestNavbar from "@/components/ui/guest-navbar/guest-navbar"
-import LoggedInNavbar from "@/components/ui/logged-in-navbar/logged-in-navbar"
 
 type Props = {
   children?: React.ReactNode
 }
 
 async function getNavbarLoggedIn() {
-  const [myClassroomRes] = await Promise.all([fetchMyClassrooms()])
+  const myClassroomRes = await fetchMyClassrooms({ take: 4 })
 
-  const myClassroomData = await myClassroomRes.json()
-
-  return { myClassroomData }
+  return myClassroomRes
 }
 
 async function MainLayout({ children }: Props) {
@@ -113,25 +112,26 @@ async function MainLayout({ children }: Props) {
 
   let myClassroomData = null
   if (isAuth && user) {
-    const { myClassroomData: data } = await getNavbarLoggedIn()
-    myClassroomData = data
+    const myClassroomRes = await getNavbarLoggedIn()
+    myClassroomData = myClassroomRes.data
   }
 
-  const navbarComponent = isAuth && user ? (
-    <LoggedInNavbar
-      className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
-      items={mainNavbarItems}
-      menuItems={menuItems}
-      isAuthed={isAuth}
-      user={user}
-      myClassroomData={myClassroomData}
-    />
-  ) : (
-    <GuestNavbar
-      className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
-      items={mainNavbarItems}
-    />
-  );
+  const navbarComponent =
+    isAuth && user ? (
+      <LoggedInNavbar
+        className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
+        items={mainNavbarItems}
+        menuItems={menuItems}
+        isAuthed={isAuth}
+        user={user}
+        myClassroomData={myClassroomData!}
+      />
+    ) : (
+      <GuestNavbar
+        className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
+        items={mainNavbarItems}
+      />
+    )
 
   return (
     <main className="relative">

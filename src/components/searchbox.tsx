@@ -28,24 +28,23 @@ function SearchBox({ className, ...props }: InputProps) {
     router.push(pathname + "?" + params.toString())
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div
-        className={cn(
-          "relative w-fit max-w-2xl items-center rounded-md",
-          "border border-none border-border",
-          "focus:border-primary-500 focus:ring-0",
-          className
-        )}
-      >
-        <Icons.Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 " />
-        <Input
-          type="text"
-          placeholder="Search"
-          className=" max-w-sm bg-transparent pl-9"
-          {...register("search")}
-          {...props}
-        />
-      </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn(
+        "relative w-fit max-w-2xl items-center rounded-md",
+        "border border-input",
+        "focus:border-primary-500 focus:ring-0",
+        className
+      )}
+    >
+      <Icons.Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 " />
+      <Input
+        type="text"
+        placeholder="Search"
+        className="w-full border-none border-transparent bg-transparent pl-9 outline-none ring-transparent ring-offset-transparent focus-within:ring-0 focus:border-none focus:ring-0"
+        {...register("search")}
+        {...props}
+      />
     </form>
   )
 }

@@ -19,6 +19,11 @@
     "my_classrooms": "Lớp học của tôi",
     "subjects": "Môn",
     "notification": "Thông báo",
+    "buy-premium": {
+      "title": "Càng đông, càng vui",
+      "description": "Lớp vui hơn với tài khoản cao cấp",
+      "action": "Nâng cấp tài khoản"
+    },
     "getting_started_sec": {
       "introduction": {
         "title": "Giới thiệu",
@@ -37,6 +42,11 @@
       "Math": "Toán",
       "Literatue": "Ngữ văn",
       "Science": "Khoa học",
+      "History": "Lịch sử",
+      "Geography": "Địa lý",
+      "Literature": "Văn học",
+      "Language": "Ngoại ngữ",
+      "Computer": "Khoa học máy tính",
       "Other": "Khác"
     },
     "nav_search": {

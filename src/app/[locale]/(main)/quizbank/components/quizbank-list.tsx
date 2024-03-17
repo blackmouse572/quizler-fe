@@ -91,7 +91,7 @@ function QuizBankList({ data: initData, token, filter }: Props) {
   )
   const renderLoading = useCallback((length?: number) => {
     return Array.from({ length: length ?? 5 }).map((_, index) => (
-      <Skeleton className="h-40 w-full rounded-md" />
+      <Skeleton key={index} className="h-40 w-full rounded-md" />
     ))
   }, [])
 
@@ -125,7 +125,6 @@ function QuizBankList({ data: initData, token, filter }: Props) {
   if (isLoading) {
     return (
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-        ERROR:
         {renderLoading()}
       </div>
     )

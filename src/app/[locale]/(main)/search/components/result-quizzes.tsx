@@ -1,10 +1,10 @@
-import { QuizzesData } from "@/types/quizzesData"
+import { Quiz } from "@/types"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import ResultLoading from "../loading/result-loading"
-import { useTranslations } from "next-intl"
 
 type Props = {
-  quizzesData: QuizzesData
+  quizzesData: Quiz[]
   isLoading: boolean
 }
 
@@ -24,11 +24,14 @@ export default function ResultQuizzes({ quizzesData, isLoading }: Props) {
           {quizzesData &&
             quizzesData.map((data) => {
               return (
-                <div key={data.id} className="flex w-3/12 flex-col max-md:ml-0 max-md:w-full">
+                <div
+                  key={data.id}
+                  className="flex w-3/12 flex-col max-md:ml-0 max-md:w-full"
+                >
                   <div className="flex w-full grow flex-col justify-center rounded-3xl border border-solid border-zinc-200 bg-white shadow max-md:mt-6">
                     <div className="flex flex-col p-6 max-md:px-5">
                       <div className="truncate text-base font-semibold leading-6 text-zinc-950">
-                        <Link href={`quizbank/${data.quizBank.id}`}>
+                        <Link href={`quizbank/${data.quizBank?.id}`}>
                           {data.question}
                         </Link>
                       </div>

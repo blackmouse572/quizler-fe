@@ -1,6 +1,13 @@
+"use server"
+import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
-export const fetchAIquestion = async (token: string, question: string, answer: string, explaination?: string) => {
+export const fetchAIquestion = async (
+  question: string,
+  answer: string,
+  explaination?: string
+) => {
+  const token = getToken().token
   const URL = getAPIServerURL(`/quiz/text-only-input`)
 
   const options = {
@@ -21,4 +28,4 @@ export const fetchAIquestion = async (token: string, question: string, answer: s
   })
 
   return res
-} 
+}

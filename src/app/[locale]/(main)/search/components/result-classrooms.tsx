@@ -4,9 +4,10 @@ import { ClassroomsData } from "@/types/classroomsData"
 import Link from "next/link"
 import ResultLoading from "../loading/result-loading"
 import { useTranslations } from "next-intl"
+import { Classroom } from "@/types"
 
 type Props = {
-  classroomsData: ClassroomsData
+  classroomsData: Classroom[]
   isLoading: boolean
 }
 
@@ -55,7 +56,9 @@ export default function ResultClassrooms({ classroomsData, isLoading }: Props) {
                       </Avatar>
                       <div className="my-auto grow text-lg font-bold">
                         {data.author.fullName.slice(0, maxLength) +
-                            (data.author.fullName.length > maxLength ? "..." : "")}
+                          (data.author.fullName.length > maxLength
+                            ? "..."
+                            : "")}
                       </div>
                     </div>
                   </div>

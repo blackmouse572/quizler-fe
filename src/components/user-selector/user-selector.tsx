@@ -190,8 +190,8 @@ function UserSelector({
 
   const renderLoading = useMemo(
     () =>
-      Array.from({ length: 5 }).map((_, i) => (
-        <CommandItem className="flex gap-2" disabled>
+      Array.from({ length: 5 }).map((_, index) => (
+        <CommandItem key={index} className="flex gap-2" disabled>
           <Skeleton className="aspect-square rounded-full" />
           <div className="flex-1 space-y-1">
             <Skeleton className="h-5 w-full rounded-sm" />

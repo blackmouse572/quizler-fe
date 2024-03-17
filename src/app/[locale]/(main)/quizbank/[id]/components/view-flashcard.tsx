@@ -1,3 +1,4 @@
+import { fetchQuiz } from "@/app/[locale]/(main)/quizbank/[id]/actions/fetch-quiz"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -8,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Toggle } from "@/components/ui/toggle"
 import {
@@ -17,38 +19,24 @@ import {
 } from "@/components/ui/tooltip"
 import QuizBank, { Quiz } from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
-import {
-  EnterFullScreenIcon,
-  PauseIcon,
-  PlayIcon,
-  ShuffleIcon,
-  StarIcon,
-} from "@radix-ui/react-icons"
-import { InfiniteData } from "@tanstack/react-query"
+
+import { useInfiniteQuery } from "@tanstack/react-query"
 import Autoplay from "embla-carousel-autoplay"
 import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 type Props = {
-  data: InfiniteData<PagedResponse<Quiz> | null, unknown>
+  initialData: PagedResponse<Quiz>
   quizBankData: QuizBank
-  onSeeMore: () => void
-  isLoading: boolean
-  isError: boolean
-  take: number
-  totals: number
-  hasMore: boolean
+  id: string
 }
 
+const LOAD_MORE_THRESHOLD = 3 // Load more when 3 items are left
+
 export default function ViewFlashcard({
-  data,
-  hasMore,
-  isError,
-  isLoading,
-  onSeeMore,
-  totals,
-  take,
   quizBankData,
+  initialData,
+  id,
 }: Props) {
   const i18n = useTranslations("ViewQuizBank")
 
@@ -57,17 +45,55 @@ export default function ViewFlashcard({
     Autoplay({ delay: 4000, stopOnInteraction: true, playOnInit: false })
   )
 
-  const [current, setCurrent] = useState(0)
-  const [count, setCount] = useState(0)
+  const [isShuffle, setIsShuffle] = useState(false)
+  const [count] = useState(initialData?.metadata?.totals ?? 0)
+  const [current, setCurrent] = useState(count > 0 ? 1 : 0)
+  const [totalLoaded, setTotalLoaded] = useState(initialData.data.length)
   const [selectedItem, setSelectedItem] = useState(true)
   const [isPlaying, setIsPlaying] = useState(true)
-  const totalLoaded = useMemo(() => data.pages.length * take, [data, take])
+
+  const {
+    data,
+    error,
+    isLoading,
+    isFetching,
+    fetchNextPage,
+    isError,
+    refetch,
+    isRefetching,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["fetchQuiz", "flashcard", id],
+    queryFn: async ({ pageParam }) => {
+      const res = await fetchQuiz(id, {
+        take: 10,
+        skip: pageParam,
+        sortBy: !isShuffle ? "question" : "created", // due to async state, setState will not be updated immediately
+      })
+      if (!res.ok) {
+        throw new Error(res.message)
+      }
+
+      setTotalLoaded((pre) => pre + 10)
+      return res.data
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const params =
+        (lastPage?.metadata.skip || 0) + (lastPage?.metadata.take || 10)
+      const hasMore = lastPage?.metadata.hasMore
+      return hasMore ? params : undefined
+    },
+    initialData: { pages: [initialData], pageParams: [0] },
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
+  })
+
   useEffect(() => {
     if (!api) {
       return
     }
 
-    setCount(totals)
     setCurrent(api.selectedScrollSnap() + 1)
 
     api.on("select", () => {
@@ -77,16 +103,20 @@ export default function ViewFlashcard({
     api.on("pointerDown", () => {
       setSelectedItem(!selectedItem)
     })
-  }, [api, selectedItem, totals])
+  }, [api, selectedItem])
 
-  // trigger see more on near end of the list
-  useEffect(() => {
-    if (hasMore && !isLoading && !isError) {
-      if (totalLoaded - current < 5) {
-        onSeeMore()
-      }
+  const onSeeMore = useCallback(() => {
+    if (!isError && !isLoading && hasNextPage) {
+      fetchNextPage()
     }
-  }, [current, hasMore, isError, isLoading, onSeeMore, totalLoaded])
+  }, [fetchNextPage, hasNextPage, isError, isLoading])
+
+  useEffect(() => {
+    console.log({ current, totalLoaded })
+    if (current === totalLoaded - LOAD_MORE_THRESHOLD) {
+      onSeeMore()
+    }
+  }, [current, fetchNextPage, onSeeMore, totalLoaded])
 
   const loadingItem = useMemo(() => {
     if (isLoading) {
@@ -97,6 +127,12 @@ export default function ViewFlashcard({
       )
     }
   }, [isLoading])
+  const shuffle = useCallback(() => {
+    setCurrent(1)
+    setIsShuffle(!isShuffle)
+    setTotalLoaded(10)
+    refetch()
+  }, [refetch, isShuffle])
 
   const renderItem = useCallback(
     (item: Quiz) => {
@@ -105,30 +141,19 @@ export default function ViewFlashcard({
         .map((line: string, index: number) => <div key={index}>{line}</div>)
 
       return (
-        <CarouselItem key={item.id}>
-          <div className="p-1">
-            <Card>
-              <CardContent className="flex aspect-video items-center justify-center p-6">
-                <span className="text-4xl">
-                  {selectedItem ? questionWithDiv : item.answer}
-                </span>
-              </CardContent>
-            </Card>
-          </div>
+        <CarouselItem key={item.id + "-carousel"} className="p-8">
+          <Card>
+            <CardContent className="flex aspect-video items-center justify-center">
+              <span className="text-4xl">
+                {selectedItem ? questionWithDiv : item.answer}
+              </span>
+            </CardContent>
+          </Card>
         </CarouselItem>
       )
     },
     [selectedItem]
   )
-
-  const handleButtonClick = (newValue: boolean) => {
-    setIsPlaying(newValue)
-    if (autoPlay.current.isPlaying()) {
-      autoPlay.current.stop()
-    } else {
-      autoPlay.current.play()
-    }
-  }
 
   const toggleAutoPlay = useCallback(() => {
     const autoplay = api?.plugins()?.autoplay as any
@@ -163,7 +188,7 @@ export default function ViewFlashcard({
           </div>
         </div>
         <div className="my-auto flex justify-end gap-2.5 px-5 text-base leading-6 text-neutral-900">
-          <StarIcon width="3rem" height="1.5rem" />
+          <Icons.Star width="3rem" height="1.5rem" />
           <div className="grow">{quizBankData.averageRating} • 5</div>
         </div>
       </div>
@@ -191,10 +216,24 @@ export default function ViewFlashcard({
         }}
         plugins={[autoPlay.current]}
       >
-        <CarouselContent>
-          {data.pages.map((page) => page?.data.map((item) => renderItem(item)))}
-          {loadingItem}
-        </CarouselContent>
+        {isRefetching ? (
+          <CarouselContent>
+            <CarouselItem key={"loading-carousel"} className="p-8">
+              <Card>
+                <CardContent className="flex aspect-video items-center justify-center">
+                  <Icons.Spinner className="h-10 w-10 animate-spin" />
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          </CarouselContent>
+        ) : (
+          <CarouselContent>
+            {data.pages.map(
+              (page) => page?.data.map((item, index) => renderItem(item))
+            )}
+            {loadingItem}
+          </CarouselContent>
+        )}
 
         <CarouselPrevious />
         <CarouselNext />
@@ -212,7 +251,7 @@ export default function ViewFlashcard({
                     : i18n("ViewFlashcard.play_button")
                 }
               >
-                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                {isPlaying ? <Icons.Pause /> : <Icons.Play />}
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>
@@ -226,8 +265,11 @@ export default function ViewFlashcard({
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Toggle aria-label={i18n("ViewFlashcard.shuffle_button")}>
-                <ShuffleIcon />
+              <Toggle
+                aria-label={i18n("ViewFlashcard.shuffle_button")}
+                onClick={shuffle}
+              >
+                {isShuffle ? <Icons.ArrowsRight /> : <Icons.Shuffle />}
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>
@@ -243,7 +285,7 @@ export default function ViewFlashcard({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="light" isIconOnly>
-              <EnterFullScreenIcon />
+              <Icons.FullScreen />
             </Button>
           </TooltipTrigger>
           <TooltipContent>

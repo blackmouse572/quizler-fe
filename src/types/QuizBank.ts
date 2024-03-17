@@ -29,6 +29,7 @@ export interface Quiz {
   explaination?: string
   created: string
   updated?: string
+  quizBank?: QuizBank
 }
 
 export default QuizBank

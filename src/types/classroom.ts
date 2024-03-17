@@ -13,11 +13,12 @@ type ClassroomInvitation = {
 
 type Classroom = {
   classname: string
-  account: User
+  author: User
   id: string
   description: string
   bankIds: string[]
-  isStudentAllowInvite: boolean
+  isStudentAllowInvite?: boolean
+  studentNumber?: number
   accountIds: string[]
   created: string
 }
