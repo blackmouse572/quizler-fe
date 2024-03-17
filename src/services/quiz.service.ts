@@ -46,7 +46,7 @@ export async function copyQuizBankToClassroom(
   classroomId: string
 ) {
   const url = getAPIServerURL(
-    `/api/classrooms/copyquizbank/${quizbankId}/${classroomId}`
+    `/classrooms/copyquizbank/${quizbankId}/${classroomId}`
   )
 
   const options = {
@@ -90,6 +90,14 @@ export async function copyQuizBankToPersonal(
     if (!res?.ok) {
       throw new Error(res.statusText)
     }
-    return true
+    return {
+      ok: true
+    }
+  })
+  .catch((e) => {
+    return {
+      ok: false,
+      message: e.message as string,
+    }
   })
 }
