@@ -19,6 +19,11 @@
     "my_classrooms": "Lớp học của tôi",
     "subjects": "Môn",
     "notification": "Thông báo",
+    "buy-premium": {
+      "title": "Càng đông, càng vui",
+      "description": "Lớp vui hơn với tài khoản cao cấp",
+      "action": "Nâng cấp tài khoản"
+    },
     "getting_started_sec": {
       "introduction": {
         "title": "Giới thiệu",

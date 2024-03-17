@@ -32,8 +32,8 @@ function ClassroomList({ initialData, filter }: Props) {
     []
   )
   const renderLoading = useCallback((length?: number) => {
-    return Array.from({ length: length ?? 5 }).map(() => (
-      <Skeleton className="h-40 w-full rounded-md" />
+    return Array.from({ length: length ?? 5 }).map((_, index) => (
+      <Skeleton key={index} className="h-40 w-full rounded-md" />
     ))
   }, [])
 

@@ -20,7 +20,7 @@ function LoadingQuizbank({}: Props) {
       </div>
       <div className="space-y-2">
         {Array.from({ length: 5 }).map((_, index) => (
-          <Skeleton className="h-32 w-full bg-white" />
+          <Skeleton key={index} className="h-32 w-full bg-white" />
         ))}
       </div>
     </main>

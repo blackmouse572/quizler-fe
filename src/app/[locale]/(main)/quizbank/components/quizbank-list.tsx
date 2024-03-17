@@ -91,7 +91,7 @@ function QuizBankList({ data: initData, token, filter }: Props) {
   )
   const renderLoading = useCallback((length?: number) => {
     return Array.from({ length: length ?? 5 }).map((_, index) => (
-      <Skeleton className="h-40 w-full rounded-md" />
+      <Skeleton key={index} className="h-40 w-full rounded-md" />
     ))
   }, [])
 
