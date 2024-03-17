@@ -72,6 +72,24 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
+  "ClassroomDetails": {
+    "members": "Members",
+    "posts": {
+      "index": "Posts",
+      "action": "Post",
+      "link-game": "Attach game",
+      "link-quiz": "Attach quizbank",
+      "comments-count": "{count} members has commented",
+      "report": {
+        "action": "Report"
+      },
+      "game-post-title": "{user} created a game: {game}. Join now !!!",
+      "quizbank-post-title": "{user} created a quizbank: {quizbank}. Learned now !!!",
+      "questions": "{count} questions",
+      "cards": "{count} cards",
+      "empty": "There are no posts in this classroom, let's create one"
+    }
+  },
   "MyQuizbanks": {
     "metadata": {
       "title": "My Quiz Banks",
@@ -491,6 +509,7 @@
     "username-existed": "The username has been existed, please try another username",
     "verification-failed": "The verification code is not correct, please try again",
     "Unauthorized": "Account not authorized, please login",
+    "refresh": "Refresh",
     "classroom": {
       "code-invalid": "The code is not valid, please try again",
       "code-expire": "The code has been expired, please try again",
