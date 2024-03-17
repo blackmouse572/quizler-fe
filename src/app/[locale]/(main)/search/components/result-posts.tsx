@@ -1,10 +1,10 @@
-import { PostsData } from "@/types/postsData"
+import { Post } from "@/types/postsData"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import ResultLoading from "../loading/result-loading"
-import { useTranslations } from "next-intl"
 
 type Props = {
-  postsData: PostsData
+  postsData: Post[]
   isLoading: boolean
 }
 
@@ -32,10 +32,7 @@ export default function ResultPosts({ postsData, isLoading }: Props) {
                   <div className="flex w-full grow flex-col justify-center rounded-3xl border border-solid border-zinc-200 bg-white shadow max-md:mt-6">
                     <div className="flex flex-col p-6 max-md:px-5">
                       <div className="text-base font-semibold leading-6 text-zinc-950">
-                        <Link
-                          className="text-wrap"
-                          href={`/classrooms`}
-                        >
+                        <Link className="text-wrap" href={`/classrooms`}>
                           {data.title.slice(0, maxLength) +
                             (data.title.length > maxLength ? "..." : "")}
                         </Link>

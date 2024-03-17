@@ -17,7 +17,6 @@ type Classroom = {
   id: string
   description: string
   bankIds: string[]
-  accountIds: string[]
   isStudentAllowInvite?: boolean
   studentNumber?: number
   accountIds: string[]

@@ -1,24 +1,23 @@
 "use client"
 
+import { useQuery } from "@tanstack/react-query"
+import { useTranslations } from "next-intl"
+import { notFound, useSearchParams } from "next/navigation"
+import React from "react"
 import { useDebounce } from "use-debounce"
+import { fetchSearchGlobal } from "./actions/fetch-search-global"
 import ResultClassrooms from "./components/result-classrooms"
 import ResultFilterTag from "./components/result-filter-tag"
-import ResultQuizbanks from "./components/result-quizbanks"
-import ResultUsers from "./components/result-users"
-import { notFound, useSearchParams } from "next/navigation"
-import { SearchGlobalResults } from "@/types/search-global-results"
-import { useQuery } from "@tanstack/react-query"
-import { fetchSearchGlobal } from "./actions/fetch-search-global"
-import React from "react"
-import { useTranslations } from "next-intl"
-import ResultQuizzes from "./components/result-quizzes"
 import ResultPosts from "./components/result-posts"
+import ResultQuizbanks from "./components/result-quizbanks"
+import ResultQuizzes from "./components/result-quizzes"
+import ResultUsers from "./components/result-users"
 
 export default function SearchGlobalPage() {
   const searchParams = useSearchParams()
   const search = searchParams.get("search")
-  const take = searchParams.get("take")
-  const skip = searchParams.get("skip")
+  const take = Number(searchParams.get("take") || 10)
+  const skip = Number(searchParams.get("skip") || 0)
   const tSearch = useTranslations("SearchPage")
 
   {
@@ -33,9 +32,10 @@ export default function SearchGlobalPage() {
     data,
     isLoading: isLoadingOrig,
     isError,
-  } = useQuery<SearchGlobalResults>({
+  } = useQuery({
     queryKey: [debouncedSearchQuery, take, skip],
-    queryFn: () => fetchSearchGlobal(debouncedSearchQuery!, take, skip),
+    queryFn: () =>
+      fetchSearchGlobal({ search: debouncedSearchQuery!, take, skip }),
     enabled,
   })
 
@@ -43,32 +43,25 @@ export default function SearchGlobalPage() {
     () => enabled && isLoadingOrig,
     [enabled, isLoadingOrig]
   )
-
-  var quizzesData = data?.quizzes || null
-  var quizBanksData = data?.quizBanks || null
-  var postsData = data?.posts || null
-  var classroomsData = data?.classrooms || null
-  var usersData = data?.users || null
+  if (!data) return null
+  const { classrooms, posts, quizBanks, quizzes, users } = data
 
   return (
     <>
       {isError && tSearch("search_error")}
 
-      <div className="container">
+      <div className="container mx-auto">
         <ResultFilterTag search={search!} />
 
-        <ResultQuizbanks quizBanksData={quizBanksData} isLoading={isLoading} />
+        <ResultQuizbanks quizBanksData={quizBanks} isLoading={isLoading} />
 
-        <ResultClassrooms
-          classroomsData={classroomsData}
-          isLoading={isLoading}
-        />
+        <ResultClassrooms classroomsData={classrooms} isLoading={isLoading} />
 
-        <ResultQuizzes quizzesData={quizzesData} isLoading={isLoading} />
+        <ResultQuizzes quizzesData={quizzes} isLoading={isLoading} />
 
-        <ResultUsers usersData={usersData} isLoading={isLoading} />
+        <ResultUsers usersData={users} isLoading={isLoading} />
 
-        <ResultPosts postsData={postsData} isLoading={isLoading} />
+        <ResultPosts postsData={posts} isLoading={isLoading} />
       </div>
     </>
   )

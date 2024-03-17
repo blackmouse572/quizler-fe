@@ -2,9 +2,10 @@ import { QuizBanksData } from "@/types/quizBanksData"
 import Link from "next/link"
 import ResultLoading from "../loading/result-loading"
 import { useTranslations } from "next-intl"
+import QuizBank from "@/types/QuizBank"
 
 type Props = {
-  quizBanksData: QuizBanksData
+  quizBanksData: QuizBank[]
   isLoading: boolean
 }
 

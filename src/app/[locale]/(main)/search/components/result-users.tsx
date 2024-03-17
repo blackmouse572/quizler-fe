@@ -1,12 +1,11 @@
-import { UsersData } from "@/types/usersData"
-import Link from "next/link"
-import ResultLoading from "../loading/result-loading"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getShortName } from "@/lib/string-helper"
+import { User } from "@/types"
 import { useTranslations } from "next-intl"
+import ResultLoading from "../loading/result-loading"
 
 type Props = {
-  usersData: UsersData
+  usersData: User[]
   isLoading: boolean
 }
 
