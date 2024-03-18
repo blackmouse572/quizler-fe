@@ -10,11 +10,7 @@ export interface SearchBarProps extends InputProps {
 
 const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
   ({ container, className, type, ...props }, ref) => {
-    return (
-      <div className={cn("relative w-[100%]", container?.className)}>
-        <GlobalSearch className={cn("p-6 pl-12 pr-4", className)} />
-      </div>
-    )
+    return <GlobalSearch className={cn("min-h-8", className)} {...props} />
   }
 )
 

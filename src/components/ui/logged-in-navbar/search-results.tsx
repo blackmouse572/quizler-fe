@@ -11,6 +11,7 @@ import {
 import { IIconKeys, Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useQuery } from "@tanstack/react-query"
+import { CommandLoading } from "cmdk"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useDebounce } from "use-debounce"
@@ -51,12 +52,12 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
     const Icon = Icons[data.icon]
 
     return (
-      <CommandItem key={data.id} value={data.id + data.displayName}>
-        <Icon className="mr-2 h-4 w-4" />
-        <Link href={data.href} className="truncate">
+      <Link href={data.href} className="cursor-pointer truncate">
+        <CommandItem key={data.id} value={data.id + data.displayName}>
+          <Icon className="mr-2 h-4 w-4" />
           {data.displayName}
-        </Link>
-      </CommandItem>
+        </CommandItem>
+      </Link>
     )
   }, [])
 
@@ -89,10 +90,10 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
 
   const renderLoading = React.useMemo(() => {
     return Array.from({ length: 4 }).map((_, index) => (
-      <CommandItem key={index} className="space-x-2">
+      <CommandLoading key={index} className="grid grid-cols-2 gap-2">
         <Skeleton className="h-14 w-full" />
         <Skeleton className="h-14 w-full" />
-      </CommandItem>
+      </CommandLoading>
     ))
   }, [])
 
@@ -110,10 +111,11 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
       </CommandList>
     )
   }
+  console.log("Data:", data)
   if (!data || (data.classrooms.length === 0 && data.quizBanks.length === 0)) {
     return (
       <CommandList>
-        <CommandEmpty className="flex  min-h-48 flex-col items-center justify-center text-neutral-500">
+        <CommandEmpty className="flex min-h-48 flex-col items-center justify-center text-neutral-500">
           <Icons.Empty className="h-16 w-16" />
           {tNav("nav_search.no_search_result_found")}
         </CommandEmpty>
@@ -122,7 +124,7 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
   }
 
   const { quizBanks, classrooms } = data
-  console.log("quizBanks", quizBanks, "classrooms", classrooms)
+  console.log("quizBanks", quizBanks)
 
   return (
     <CommandList>
