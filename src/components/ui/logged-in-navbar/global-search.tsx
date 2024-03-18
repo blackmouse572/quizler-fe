@@ -3,9 +3,9 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 
-import SearchBox from "@/components/searchbox"
 import {
   CommandDialog,
+  CommandInput,
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
@@ -76,9 +76,9 @@ export default function GlobalSearch({ className }: Props) {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <SearchBox
+        <CommandInput
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onValueChange={(e) => setSearchQuery(e)}
           className="flex h-12 w-full items-center rounded-none border-b border-input bg-transparent text-sm outline-none placeholder:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-neutral-400 [&_svg]:left-3"
           placeholder={tNav("nav_search.type_something")}
         />
@@ -88,7 +88,7 @@ export default function GlobalSearch({ className }: Props) {
 
         <Button
           onClick={() => setOpen(!open)}
-          className="mt-2 self-end whitespace-nowrap font-bold text-zinc-500"
+          className="mt-2 self-end whitespace-nowrap text-sm font-bold text-zinc-500"
           variant="light"
           color={null}
           asChild

@@ -81,6 +81,10 @@
       "placeholder": "What's on your mind?",
       "link-quiz": "Attach quizbank",
       "comments-count": "{count} members has commented",
+      "search": {
+        "placeholder": "Search ...",
+        "empty": "No results"
+      },
       "comments": {
         "index": "Comment",
         "action": "Comment",
@@ -101,6 +105,10 @@
         "index": "{user} created a post",
         "game": "{user} created a game: {game}. Join now !!!",
         "quizbank": "{user} created a quizbank. Learned now !!!"
+      },
+      "help": {
+        "title": "Help",
+        "confirm": "Confirm"
       },
       "questions": "{count} questions",
       "cards": "{count} cards",
@@ -776,6 +784,10 @@
       "blockquote": "Blockquote",
       "code": "Code block",
       "list": "List"
+    },
+    "history": {
+      "undo": "Undo",
+      "redo": "Redo"
     }
   }
 }

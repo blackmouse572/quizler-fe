@@ -19,9 +19,19 @@ type Props = {
   onSelected: (quiz: QuizBank) => void
   selected?: QuizBank
   classId: string
+  terms: {
+    placeholder: string
+    noResults: string
+  }
 }
 
-function AttachQuizbank({ onSelected, classId, selected, ...props }: Props) {
+function AttachQuizbank({
+  onSelected,
+  classId,
+  selected,
+  terms,
+  ...props
+}: Props) {
   const [query, setQuery] = useState("")
   const [debouncedQuery] = useDebounce(query, 300)
   const { isLoading, data, error, isError } = useQuizbankList({
@@ -64,7 +74,12 @@ function AttachQuizbank({ onSelected, classId, selected, ...props }: Props) {
       return <CommandEmpty>{error?.message}</CommandEmpty>
     }
     if (!data || data.pages.length === 0 || data.pages[0]?.data.length === 0) {
-      return <CommandEmpty>No quizbanks found.</CommandEmpty>
+      return (
+        <CommandEmpty>
+          <Icons.Empty className="h-20 w-20 text-accent" />
+          <p>{terms.noResults}</p>
+        </CommandEmpty>
+      )
     }
     return (
       <CommandList>
@@ -85,12 +100,20 @@ function AttachQuizbank({ onSelected, classId, selected, ...props }: Props) {
         ))}
       </CommandList>
     )
-  }, [data, error?.message, isError, isLoading, onSelected, selected?.id])
+  }, [
+    data,
+    error?.message,
+    isError,
+    isLoading,
+    onSelected,
+    selected?.id,
+    terms.noResults,
+  ])
 
   return (
     <CommandDialog {...props}>
       <CommandInput
-        placeholder={"Search quizbank..."}
+        placeholder={terms.placeholder}
         value={query}
         onValueChange={(e) => setQuery(e)}
       />

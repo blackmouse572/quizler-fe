@@ -40,6 +40,7 @@ import {
   IconH2,
   IconH3,
   IconHandStop,
+  IconHelp,
   IconHighlight,
   IconItalic,
   IconLanguage,
@@ -69,6 +70,7 @@ import {
   IconTableFilled,
   IconTrash,
   IconTypography,
+  IconUnderline,
   IconUserFilled,
   IconUsers,
   IconX,
@@ -123,6 +125,7 @@ export const Icons = {
   Empty: IconMoodEmptyFilled,
   Send: IconBrandTelegram,
   Dot: IconDots,
+  Help: IconHelp,
 
   //Chevrons
   ChevronUp: IconChevronUp,
@@ -154,6 +157,7 @@ export const Icons = {
   Italic: IconItalic,
   Strike: IconStrikethrough,
   Code: IconBraces,
+  Underline: IconUnderline,
   Hightline: IconHighlight,
   Bullet: IconList,
   Heading1: IconH1,

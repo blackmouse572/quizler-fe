@@ -1,6 +1,7 @@
 "use client"
 import { createNewPost } from "@/app/[locale]/(main)/classrooms/[id]/actions/create-post-action"
 import AttachQuizbank from "@/app/[locale]/(main)/classrooms/[id]/components/attach-quizbank"
+import NewPostHelperDialog from "@/app/[locale]/(main)/classrooms/[id]/components/new-post-helper"
 import { queryClient } from "@/app/[locale]/provider"
 import Editor, { RefEditor } from "@/components/editor/editor"
 import { Button } from "@/components/ui/button"
@@ -153,6 +154,10 @@ function NewPostForm({ initialValues }: Props) {
         onOpenChange={setAttachQuizbankOpen}
         onSelected={handleAttachQuizbank}
         selected={selectedQuiz}
+        terms={{
+          noResults: t("search.empty"),
+          placeholder: t("search.placeholder"),
+        }}
       />
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -201,20 +206,29 @@ function NewPostForm({ initialValues }: Props) {
               </Button>
             </NamedToolTip>
           </div>
-          <NamedToolTip content={t("action")}>
-            <Button
-              type="submit"
-              isIconOnly
-              variant="ghost"
-              disabled={isPending}
-            >
-              {isPending ? (
-                <Icons.Spinner className="animate-spin" />
-              ) : (
-                <Icons.Send />
-              )}
-            </Button>
-          </NamedToolTip>
+          <div className="flex items-center space-x-2">
+            <NamedToolTip content={t("action")}>
+              <NewPostHelperDialog>
+                <Button type="submit" isIconOnly variant="ghost" color="accent">
+                  <Icons.Help />
+                </Button>
+              </NewPostHelperDialog>
+            </NamedToolTip>
+            <NamedToolTip content={t("action")}>
+              <Button
+                type="submit"
+                isIconOnly
+                variant="ghost"
+                disabled={isPending}
+              >
+                {isPending ? (
+                  <Icons.Spinner className="animate-spin" />
+                ) : (
+                  <Icons.Send />
+                )}
+              </Button>
+            </NamedToolTip>
+          </div>
         </div>
       </form>
     </div>

@@ -63,7 +63,9 @@ async function ClassroomDetailsPage({ params }: Props) {
             </div>
           )}
         </div>
-        <p>{data?.studentNumber}</p>
+        <p>
+          {data?.studentNumber}&nbsp;{t("members")}
+        </p>
         <Separator className="h-1 rounded-full [mask-image:radial-gradient(ellipse_at_center,var(--neutral-200)_70%),transparent_0%]" />
       </div>
       <div className="mt-6 space-y-12">
