@@ -1,15 +1,23 @@
 "use client"
 import { createNewPost } from "@/app/[locale]/(main)/classrooms/[id]/actions/create-post-action"
+import AttachQuizbank from "@/app/[locale]/(main)/classrooms/[id]/components/attach-quizbank"
 import { queryClient } from "@/app/[locale]/provider"
-import Editor from "@/components/editor/editor"
+import Editor, { RefEditor } from "@/components/editor/editor"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { NamedToolTip } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
+import QuizBank from "@/types/QuizBank"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
-import { useCallback } from "react"
+import { useCallback, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -49,6 +57,9 @@ export type NewPost = z.infer<typeof NewPostSchema>
 
 function NewPostForm({ initialValues }: Props) {
   const t = useTranslations("ClassroomDetails.posts")
+  const [attachQuizbankOpen, setAttachQuizbankOpen] = useState(false)
+  const [selectedQuiz, setSelectedQuiz] = useState<QuizBank>()
+  const editorRef = useRef<RefEditor | null>(null)
   const errorI18n = useTranslations("Errors")
   const { toast } = useToast()
   const { mutate, isPending } = useMutation({
@@ -65,6 +76,7 @@ function NewPostForm({ initialValues }: Props) {
         console.error(error)
       }
       queryClient.invalidateQueries({ queryKey: ["posts"] })
+      editorRef.current?.resetContent()
     },
     onError: (error) => {
       toast({
@@ -74,10 +86,57 @@ function NewPostForm({ initialValues }: Props) {
       })
     },
   })
-  const { handleSubmit, setValue } = useForm<NewPost>({
+  const { handleSubmit, setValue, watch } = useForm<NewPost>({
     resolver: zodResolver(NewPostSchema),
     defaultValues: initialValues,
   })
+
+  const renderAttachCard = useCallback(
+    (quizbank: QuizBank) => (
+      <Card className="relative">
+        <CardHeader>
+          <CardDescription>
+            {t("link-quiz")} ({quizbank.quizCount})
+          </CardDescription>
+          <CardTitle>{quizbank.bankName}</CardTitle>
+          <Button
+            isIconOnly
+            type="button"
+            size="sm"
+            color="accent"
+            variant="outline"
+            className="absolute right-2 top-2"
+            onClick={() => {
+              setValue("bankLink", "")
+              setSelectedQuiz(undefined)
+            }}
+          >
+            <Icons.X />
+          </Button>
+        </CardHeader>
+      </Card>
+    ),
+    [setValue, t]
+  )
+
+  const handleAttachQuizbank = useCallback(
+    (quiz: QuizBank) => {
+      console.log(quiz)
+      setValue("bankLink", quiz.id.toString())
+      setValue("title", "posts.post.quizbank")
+      setValue("gameLink", "")
+      setSelectedQuiz(quiz)
+      setAttachQuizbankOpen(false)
+    },
+    [setValue]
+  )
+
+  const handleRemoveAttach = useCallback(() => {
+    setValue("bankLink", "")
+    setValue("gameLink", "")
+    setSelectedQuiz(undefined)
+    setValue("title", initialValues?.title ?? "")
+  }, [initialValues?.title, setValue])
 
   const onSubmit = useCallback(
     (data: NewPost) => {
@@ -88,6 +147,13 @@ function NewPostForm({ initialValues }: Props) {
 
   return (
     <div>
+      <AttachQuizbank
+        open={attachQuizbankOpen}
+        classId={initialValues?.classroomId?.toString() ?? ""}
+        onOpenChange={setAttachQuizbankOpen}
+        onSelected={handleAttachQuizbank}
+        selected={selectedQuiz}
+      />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="relative min-h-32 space-y-2 rounded-lg border border-input bg-background px-4 py-5 shadow-md"
@@ -108,6 +174,7 @@ function NewPostForm({ initialValues }: Props) {
           }}
           limit={5000}
         />
+        {selectedQuiz && renderAttachCard(selectedQuiz)}
         <div className="flex items-center justify-between">
           <div className="space-x-2">
             <NamedToolTip content={t("link-game")}>
@@ -128,6 +195,7 @@ function NewPostForm({ initialValues }: Props) {
                 color="accent"
                 variant="ghost"
                 disabled={isPending}
+                onClick={() => setAttachQuizbankOpen(true)}
               >
                 <Icons.Icon />
               </Button>

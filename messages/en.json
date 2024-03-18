@@ -83,7 +83,16 @@
       "comments-count": "{count} members has commented",
       "comments": {
         "index": "Comment",
-        "action": "Comment"
+        "action": "Comment",
+        "delete": "Delete",
+        "delete_success": "Comment deleted successfully"
+      },
+      "delete": {
+        "title": "Delete post",
+        "description": "Are you sure you want to delete this post?",
+        "confirm": "Delete",
+        "cancel": "Cancel",
+        "success": "Post deleted successfully"
       },
       "report": {
         "action": "Report"

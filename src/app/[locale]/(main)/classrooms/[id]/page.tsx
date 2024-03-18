@@ -5,6 +5,7 @@ import getClassroomDetails from "@/app/[locale]/(main)/classrooms/actions/get-cl
 import GenerateJoinDialog from "@/app/[locale]/(main)/classrooms/components/generate-join-dialog"
 import SendInviteDialog from "@/app/[locale]/(main)/classrooms/components/send-invite-dialog"
 import { Separator } from "@/components/ui/separator"
+import { polyfill } from "interweave-ssr"
 import _ from "lodash"
 import { Metadata } from "next"
 import { NextIntlClientProvider } from "next-intl"
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: data?.description,
   }
 }
+polyfill()
 
 async function ClassroomDetailsPage({ params }: Props) {
   const { id } = params

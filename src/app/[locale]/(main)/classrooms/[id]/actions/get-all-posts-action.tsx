@@ -15,7 +15,11 @@ async function getAllPostActions({
   filter,
   classroomId,
 }: Props): Promise<TAPIResult<PagedResponse<Post>>> {
-  const query = toURLSeachParams(filter)
+  const query = toURLSeachParams({
+    ...filter,
+    sortBy: "created",
+    sortDirection: "DESC",
+  })
   const token = getToken().token
   const url = getAPIServerURL(
     `/post/classroom/${classroomId}?${query.toString()}`

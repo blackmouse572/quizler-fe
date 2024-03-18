@@ -36,7 +36,7 @@ export default function GlobalSearch({ className }: Props) {
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.altKey)) {
         e.preventDefault()
         setOpen((open) => !open)
       }
@@ -61,12 +61,17 @@ export default function GlobalSearch({ className }: Props) {
         onClick={handleClick}
         variant={"ghost"}
         color={"accent"}
-        className={cn(className)}
+        className={cn(
+          "min-w-56 justify-start border border-input bg-accent text-accent-foreground/50",
+          className
+        )}
       >
-        <MagnifyingGlassIcon />
-        <div className="mr-4">{tNav("nav_search.search")}</div>
-        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs">⌘</span>J
+        <MagnifyingGlassIcon className="h-5 w-5" />
+        <div className="flex-1 pr-5 text-start">
+          {tNav("nav_search.search")}
+        </div>
+        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium text-muted-foreground">
+          <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
 

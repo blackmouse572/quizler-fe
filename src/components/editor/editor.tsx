@@ -22,13 +22,15 @@ import {
 } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import { useTranslations } from "next-intl"
-import React, { useMemo, useRef } from "react"
+import React, { useImperativeHandle, useMemo, useRef } from "react"
 type Props = Partial<EditorOptions> & {
   placeholder?: string
   limit?: number
 }
-
-const Editor = React.forwardRef<EditorJs | null, Props>(
+export type RefEditor = {
+  resetContent: () => void
+}
+const Editor = React.forwardRef<RefEditor | null, Props>(
   ({ extensions, placeholder, editorProps, limit, ...props }, ref) => {
     const exts = extensions || []
     const editorI18N = useTranslations("Editor")
@@ -65,7 +67,17 @@ const Editor = React.forwardRef<EditorJs | null, Props>(
       ...props,
     })
     const editorRef: React.MutableRefObject<EditorJs | null> = useRef(null)
-
+    useImperativeHandle(
+      ref,
+      () => {
+        return {
+          resetContent: () => {
+            editor?.commands.setContent("")
+          },
+        }
+      },
+      [editor?.commands]
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const menuItems: EditorConfig[][] = [
       [

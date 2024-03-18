@@ -1,18 +1,29 @@
 "use client"
+import DeletePostConfirmDialog from "@/app/[locale]/(main)/classrooms/[id]/components/delete-post-confirm"
 import { usePostList } from "@/app/[locale]/(main)/classrooms/[id]/components/usePostList"
+import Preview from "@/components/editor/preview"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { NamedToolTip } from "@/components/ui/tooltip"
+import { useToast } from "@/components/ui/use-toast"
 import UserDisplay from "@/components/user-display"
+import { useUser } from "@/hooks/useUser"
+import QuizBank from "@/types/QuizBank"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { Post } from "@/types/postsData"
 import { useInView } from "framer-motion"
-import { Interweave } from "interweave"
 import { useFormatter, useTranslations } from "next-intl"
-import { useCallback, useEffect, useMemo, useRef } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 type Props = {
   classroomId: string
@@ -26,6 +37,10 @@ function PostList({ ...props }: Props) {
   const timeI18n = useFormatter()
   const loadmoreRef = useRef<HTMLDivElement>(null)
   const inView = useInView(loadmoreRef)
+  const user = useUser().user
+  const { toast } = useToast()
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null)
+  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
   const {
     isLoading,
     data,
@@ -41,20 +56,33 @@ function PostList({ ...props }: Props) {
   const renderLoadingItem = useMemo(() => {
     return <Skeleton className="h-32 w-full bg-white" />
   }, [])
-
+  const renderAttachCard = useCallback(
+    (quizbank: QuizBank) => (
+      <Card className="relative">
+        <CardHeader>
+          <CardDescription>
+            {t("posts.link-quiz")} ({quizbank.quizCount})
+          </CardDescription>
+          <CardTitle>{quizbank.bankName}</CardTitle>
+        </CardHeader>
+      </Card>
+    ),
+    [t]
+  )
   const renderItem = useCallback(
-    ({
-      author,
-      bankLink,
-      classroom,
-      comments,
-      content,
-      gameLink,
-      title,
-      created,
-      updated,
-      ...post
-    }: Post) => {
+    (post: Post) => {
+      const {
+        author,
+        bankLink,
+        classroom,
+        comments,
+        content,
+        gameLink,
+        title,
+        created,
+        updated,
+        ...rest
+      } = post
       const date = new Date(updated || created)
       const now = new Date()
       return (
@@ -74,10 +102,31 @@ function PostList({ ...props }: Props) {
               }
             />
           </CardHeader>
-          <CardContent className="prose prose-sm w-full max-w-none rounded-md sm:prose-base dark:prose-invert prose-p:my-0">
-            <Interweave content={content} />
+          <CardContent>
+            <Preview
+              content={content}
+              className="border-none bg-transparent p-0"
+            />
+            {/* TODO: need to have quizbank to display */}
+            {/* {bankLink && renderAttachCard({})} */}
           </CardContent>
           <CardFooter className="flex items-center justify-end gap-2">
+            {user?.id === author.id && (
+              <NamedToolTip content={t("posts.comments.delete")}>
+                <Button
+                  color="danger"
+                  isIconOnly
+                  variant="ghost"
+                  disabled={deletePostDialogOpen}
+                  onClick={() => {
+                    setSelectedPost(post)
+                    setDeletePostDialogOpen(true)
+                  }}
+                >
+                  <Icons.Delete />
+                </Button>
+              </NamedToolTip>
+            )}
             <NamedToolTip content={t("posts.report.action")}>
               <Button color="accent" isIconOnly variant="ghost">
                 <Icons.Report />
@@ -92,11 +141,11 @@ function PostList({ ...props }: Props) {
         </Card>
       )
     },
-    [t, timeI18n]
+    [deletePostDialogOpen, t, timeI18n, user?.id]
   )
 
   const renderItems = useMemo(() => {
-    return data?.pages.map((page) => page.data.map(renderItem))
+    return data?.pages.map((page) => page?.data.map(renderItem))
   }, [data?.pages, renderItem])
 
   const renderLoadmore = useMemo(() => {
@@ -133,6 +182,11 @@ function PostList({ ...props }: Props) {
     <div className="space-y-2">
       {renderItems}
       {renderLoadmore}
+      <DeletePostConfirmDialog
+        open={deletePostDialogOpen}
+        onOpenChange={setDeletePostDialogOpen}
+        post={selectedPost}
+      />
     </div>
   )
 }
