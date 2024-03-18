@@ -359,6 +359,52 @@
       "account-fail": "The account has been terminated, please contact the Support"
     }
   },
+  "Settings": {
+    "title": "Settings",
+    "description": "Manage your account settings, feel free to change!",
+    "navigation_menu": {
+      "edit_account": "Edit account",
+      "edit_profile": "Edit profile",
+      "edit_preference": "Edit preference"
+    },
+    "account": {
+      "title": "Account",
+      "old_password": "Old password",
+      "new_password": "New password",
+      "confirm_password": "Confirm password",
+      "cancel_btn": "Cancel",
+      "submit_btn": "Change password"
+    },
+    "profile": {
+      "title": "Profile",
+      "edit_profile": "Edit profile",
+      "label": {
+        "email": "Email",
+        "username": "Username",
+        "display_name": "Display name",
+        "dob": "Date of birth"
+      },
+      "update_dialog": {
+        "title": "Edit profile",
+        "description": "Make changes to your profile here. Click save when done.",
+        "label": {
+          "display_name": "Display name",
+          "dob": "Date of birth"
+        },
+        "submit_btn": "Save changes"
+      }
+    },
+    "preference": "Preference"
+  },
+  "ViewOtherProfile": {
+    "title": "Profile",
+    "label": {
+      "email": "Email",
+      "username": "Username",
+      "display_name": "Display name",
+      "dob": "Date of birth"
+    }
+  },
   "UserDropdown": {
     "my_account": "My account",
     "profile": "Profile",
@@ -789,5 +835,9 @@
       "undo": "Undo",
       "redo": "Redo"
     }
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"
   }
 }
