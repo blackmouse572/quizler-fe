@@ -1,4 +1,4 @@
-import GetAllPostActions from "@/app/[locale]/(main)/classrooms/[id]/actions/get-all-posts-action"
+import getAllPostActions from "@/app/[locale]/(main)/classrooms/[id]/actions/get-all-posts-action"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { Post } from "@/types/postsData"
@@ -16,9 +16,9 @@ export function usePostList({
   initialData,
 }: UsePostListProps) {
   return useInfiniteQuery({
-    queryKey: ["posts", "classroom"],
+    queryKey: ["posts"],
     queryFn: async ({ pageParam }) => {
-      const res = await GetAllPostActions({
+      const res = await getAllPostActions({
         classroomId,
         filter: { ...filter, skip: pageParam },
       })

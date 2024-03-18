@@ -9,7 +9,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental"
 import { usePathname, useRouter } from "next/navigation"
 import * as React from "react"
-
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 1000,
+    },
+  },
+})
 export function Providers(props: {
   children: React.ReactNode
   user: User | undefined
@@ -17,16 +23,7 @@ export function Providers(props: {
   const { setUser, user, isAuth, logout } = useUser()
   const router = useRouter()
   const pathName = usePathname()
-  const [queryClient] = React.useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 5 * 1000,
-          },
-        },
-      })
-  )
+
   React.useEffect(() => {
     if (!props.user) return
     setUser(props.user)

@@ -78,13 +78,21 @@
       "index": "Posts",
       "action": "Post",
       "link-game": "Attach game",
+      "placeholder": "What's on your mind?",
       "link-quiz": "Attach quizbank",
       "comments-count": "{count} members has commented",
+      "comments": {
+        "index": "Comment",
+        "action": "Comment"
+      },
       "report": {
         "action": "Report"
       },
-      "game-post-title": "{user} created a game: {game}. Join now !!!",
-      "quizbank-post-title": "{user} created a quizbank: {quizbank}. Learned now !!!",
+      "post": {
+        "index": "{user} created a post",
+        "game": "{user} created a game: {game}. Join now !!!",
+        "quizbank": "{user} created a quizbank. Learned now !!!"
+      },
       "questions": "{count} questions",
       "cards": "{count} cards",
       "empty": "There are no posts in this classroom, let's create one"
@@ -742,6 +750,23 @@
         "description": "Successfully delete quizbank"
       },
       "failed": { "title": "Failed" }
+    }
+  },
+  "Editor": {
+    "marks": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strikethrough",
+      "code": "Code",
+      "highlight": "Highlight"
+    },
+    "nodes": {
+      "paragraph": "Paragraph",
+      "heading": "Heading",
+      "blockquote": "Blockquote",
+      "code": "Code block",
+      "list": "List"
     }
   }
 }
