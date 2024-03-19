@@ -751,6 +751,15 @@
       "description": "Bạn đã tham gia lớp học thành công"
     }
   },
+  "Delete_clasroom": {
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully delete classroom"
+      },
+      "failed": { "title": "Failed" }
+    }
+  },
   "Delete_quizbank": {
     "message": {
       "success": {

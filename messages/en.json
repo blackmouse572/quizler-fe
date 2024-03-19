@@ -760,6 +760,15 @@
       "description": "You have joined the classroom successfully"
     }
   },
+  "Delete_classroom": {
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully delete clasrrom"
+      },
+      "failed": { "title": "Failed" }
+    }
+  },
   "Delete_quizbank": {
     "message": {
       "success": {
