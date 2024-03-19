@@ -1,5 +1,6 @@
 "use client"
 import DeletePostConfirmDialog from "@/app/[locale]/(main)/classrooms/[id]/components/delete-post-confirm"
+import EditPost from "@/app/[locale]/(main)/classrooms/[id]/components/edit-post"
 import { usePostList } from "@/app/[locale]/(main)/classrooms/[id]/components/usePostList"
 import Preview from "@/components/editor/preview"
 import { Button } from "@/components/ui/button"
@@ -41,6 +42,7 @@ function PostList({ ...props }: Props) {
   const { toast } = useToast()
   const [selectedPost, setSelectedPost] = useState<Post | null>(null)
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
+  const [editPostDialogOpen, setEditPostDialogOpen] = useState(false)
   const {
     isLoading,
     data,
@@ -112,20 +114,37 @@ function PostList({ ...props }: Props) {
           </CardContent>
           <CardFooter className="flex items-center justify-end gap-2">
             {user?.id === author.id && (
-              <NamedToolTip content={t("posts.comments.delete")}>
-                <Button
-                  color="danger"
-                  isIconOnly
-                  variant="ghost"
-                  disabled={deletePostDialogOpen}
-                  onClick={() => {
-                    setSelectedPost(post)
-                    setDeletePostDialogOpen(true)
-                  }}
-                >
-                  <Icons.Delete />
-                </Button>
-              </NamedToolTip>
+              <>
+                <NamedToolTip content={t("posts.comments.delete")}>
+                  <Button
+                    color="danger"
+                    isIconOnly
+                    variant="ghost"
+                    disabled={deletePostDialogOpen}
+                    onClick={() => {
+                      setSelectedPost(post)
+                      setDeletePostDialogOpen(true)
+                    }}
+                  >
+                    <Icons.Delete />
+                  </Button>
+                </NamedToolTip>
+
+                <NamedToolTip content={t("posts.comments.delete")}>
+                  <Button
+                    color="success"
+                    isIconOnly
+                    variant="ghost"
+                    disabled={deletePostDialogOpen}
+                    onClick={() => {
+                      setSelectedPost(post)
+                      setEditPostDialogOpen(true)
+                    }}
+                  >
+                    <Icons.Edit />
+                  </Button>
+                </NamedToolTip>
+              </>
             )}
             <NamedToolTip content={t("posts.report.action")}>
               <Button color="accent" isIconOnly variant="ghost">
@@ -186,6 +205,11 @@ function PostList({ ...props }: Props) {
         open={deletePostDialogOpen}
         onOpenChange={setDeletePostDialogOpen}
         post={selectedPost}
+      />
+      <EditPost
+        post={selectedPost}
+        open={editPostDialogOpen}
+        onOpenChange={setEditPostDialogOpen}
       />
     </div>
   )
