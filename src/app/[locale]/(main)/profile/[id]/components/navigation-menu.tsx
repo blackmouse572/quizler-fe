@@ -9,29 +9,31 @@ import {
 } from "@/components/ui/tooltip"
 import { GearIcon, PersonIcon } from "@radix-ui/react-icons"
 import { useTranslations } from "next-intl"
-import { useRouter } from "next/navigation"
-import { Router } from "next/router"
 import { PiFingerprint } from "react-icons/pi"
+import EditAccount from "./edit-account"
+import EditProfile from "./edit-profile"
+import EditPreference from "./edit-preference"
+import { User } from "@/types"
+import { useCallback, useState } from "react"
 
 type Props = {
-  id: string | number
+  userData: User
+  locale: string
 }
 
 type TooltipProps = {
   icon: React.ReactNode
   tooltipContent: string
-  href: string
+  handleClick: (id: string) => void
+  nextSelectId: string
 }
 
-const TooltipButton = ({ icon, tooltipContent, href }: TooltipProps) => {
-  const router = useRouter()
-  
-  const handleClick = () => {
-    if (href) {
-      router.push(href)
-    }
-  }
-
+const TooltipButton = ({
+  icon,
+  tooltipContent,
+  handleClick,
+  nextSelectId,
+}: TooltipProps) => {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -39,7 +41,7 @@ const TooltipButton = ({ icon, tooltipContent, href }: TooltipProps) => {
           <Button
             variant={"ghost"}
             className="mt-2.5 flex h-10 w-10/12 justify-center gap-2.5 rounded-xl p-1.5 shadow-sm"
-            onClick={handleClick}
+            onClick={() => handleClick(nextSelectId)}
           >
             {icon}
           </Button>
@@ -52,26 +54,40 @@ const TooltipButton = ({ icon, tooltipContent, href }: TooltipProps) => {
   )
 }
 
-export default function NavigationMenu({ id }: Props) {
+export default function NavigationMenu({ userData, locale }: Props) {
   const t = useTranslations("Settings")
+  const [selectedId, setSelectedId] = useState("2")
+
+  const handleNavigationClick = useCallback((id: string) => {
+    setSelectedId(id)
+  }, [])
 
   return (
-    <div className="ml-20 mt-5 flex w-16 flex-col items-start self-start rounded-lg border border-solid border-neutral-300 bg-neutral-50 py-3 pl-3 shadow-md max-md:ml-2.5">
-      <TooltipButton
-        icon={<PersonIcon />}
-        tooltipContent={t("navigation_menu.edit_account")}
-        href="/account"
-      />
-      <TooltipButton
-        icon={<PiFingerprint />}
-        tooltipContent={t("navigation_menu.edit_profile")}
-        href="/account"
-      />
-      <TooltipButton
-        icon={<GearIcon />}
-        tooltipContent={t("navigation_menu.edit_preference")}
-        href="/account"
-      />
-    </div>
+    <>
+      <div className="ml-20 mt-5 fixed w-16 flex-col items-start self-start rounded-lg border border-solid border-neutral-300 bg-neutral-50 py-3 pl-3 shadow-md max-md:ml-2.5">
+        <TooltipButton
+          icon={<PersonIcon />}
+          tooltipContent={t("navigation_menu.edit_account")}
+          handleClick={handleNavigationClick}
+          nextSelectId={"1"}
+        />
+        <TooltipButton
+          icon={<PiFingerprint />}
+          tooltipContent={t("navigation_menu.edit_profile")}
+          handleClick={handleNavigationClick}
+          nextSelectId={"2"}
+        />
+        <TooltipButton
+          icon={<GearIcon />}
+          tooltipContent={t("navigation_menu.edit_preference")}
+          handleClick={handleNavigationClick}
+          nextSelectId={"3"}
+        />
+      </div>
+
+      {selectedId === "1" && <EditAccount />}
+      {selectedId === "2" && <EditProfile userData={userData} />}
+      {selectedId === "3" && <EditPreference locale={locale} />}
+    </>
   )
 }

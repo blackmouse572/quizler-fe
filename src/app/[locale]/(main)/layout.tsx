@@ -32,7 +32,7 @@ async function MainLayout({ children }: Props) {
     [
       {
         label: tUserDropdown("profile"),
-        href: "/profile",
+        href: `/profile/${user?.id}`,
         shortcut: "⌘+P",
       },
       {
@@ -40,11 +40,11 @@ async function MainLayout({ children }: Props) {
         href: "/billing",
         shortcut: "⌘+B",
       },
-      {
-        label: tUserDropdown("settings"),
-        href: "/settings",
-        shortcut: "⌘+,",
-      },
+      // {
+      //   label: tUserDropdown("settings"),
+      //   href: "/settings",
+      //   shortcut: "⌘+,",
+      // },
     ],
     [
       {

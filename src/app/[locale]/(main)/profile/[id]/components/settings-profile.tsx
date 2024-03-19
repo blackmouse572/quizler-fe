@@ -1,9 +1,6 @@
 import { User } from "@/types"
-import EditProfile from "./edit-profile"
 import NavigationMenu from "./navigation-menu"
-import EditAccount from "./edit-account"
 import { getLocale, getTranslations } from "next-intl/server"
-import EditPreference from "./edit-preference"
 
 type Props = {
   userData: User
@@ -24,12 +21,8 @@ export default async function SettingsProfile({ userData }: Props) {
         </div>
       </div>
 
-      <div className="relative mb-64 mt-5 flex w-full flex-col items-center px-5 max-md:mb-10 max-md:max-w-full">
-        <EditAccount />
-        <EditProfile userData={userData} />
-        <EditPreference locale={locale} />
-
-        <NavigationMenu id={userData.id} />
+      <div className="relative mt-5 flex w-full flex-col items-center px-5 max-md:mb-10 max-md:max-w-full">
+        <NavigationMenu locale={locale} userData={userData} />
       </div>
     </>
   )
