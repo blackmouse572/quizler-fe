@@ -3,7 +3,7 @@ import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
 export const deleteClassroom = async (classroomId: string) => {
-  const URL = getAPIServerURL(`/classrooms/${classroomId}}`)
+  const URL = getAPIServerURL(`/classrooms/${classroomId}`)
   const { token } = getToken()
 
   const options = {

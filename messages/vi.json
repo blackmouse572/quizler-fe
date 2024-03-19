@@ -755,7 +755,7 @@
     "message": {
       "success": {
         "title": "Success",
-        "description": "Successfully delete classroom"
+        "description": "Thành công xóa lớp học"
       },
       "failed": { "title": "Failed" }
     }

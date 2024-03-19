@@ -764,7 +764,7 @@
     "message": {
       "success": {
         "title": "Success",
-        "description": "Successfully delete clasrrom"
+        "description": "Successfully delete clasroom"
       },
       "failed": { "title": "Failed" }
     }
