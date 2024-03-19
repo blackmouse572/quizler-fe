@@ -21,7 +21,6 @@ export const deleteClassroom = async (classroomId: string) => {
         message: res.statusText,
       }
     }
-    console.log(res.json())
     return {
       isSuccess: true,
       message: ''
