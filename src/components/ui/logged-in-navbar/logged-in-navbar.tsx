@@ -55,7 +55,6 @@ export default function LoggedInNavbar({
   myClassroomData,
 }: Props) {
   const segment = useSelectedLayoutSegment()
-  // const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
   const tNav = useTranslations("Navbar")
   const tIndex = useTranslations("Index")
   const { scrollY } = useScroll()
@@ -151,7 +150,7 @@ export default function LoggedInNavbar({
           <NavigationMenuTrigger>{tNav("my_classrooms")}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] grid-rows-4 gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {myClassroomData!.data.map((passingClassroomData) => (
+              {myClassroomData?.data.map((passingClassroomData) => (
                 <div key={passingClassroomData.id}>
                   <div>
                     <LoggedInAnimatedListItemMyClassroom

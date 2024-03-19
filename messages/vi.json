@@ -83,6 +83,13 @@
         "cancel": "Hủy",
         "success": "Xóa bài đăng thành công"
       },
+      "edit": {
+        "title": "Chỉnh sửa bài đăng",
+        "description": "Chỉnh sửa bài đăng của bạn",
+        "confirm": "Lưu thay đổi",
+        "cancel": "Hủy bỏ",
+        "success": "Đã cập nhật bài đăng"
+      },
       "report": {
         "action": "Báo cáo"
       },

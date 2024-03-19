@@ -57,7 +57,7 @@ function DeletePostConfirmDialog({ post, onOpenChange, ...props }: Props) {
             <p>{t("description")}</p>
             <Preview
               content={post?.content}
-              className="max-h-[20vh] overflow-auto "
+              className="max-h-[20vh] overflow-auto"
             />
           </AlertDialogDescription>
         </AlertDialogHeader>
