@@ -201,7 +201,7 @@ export default function LoggedInNavbar({
   return (
     <NavigationMenu
       className={cn(
-        "duration-600 container z-[100] mx-auto w-full justify-between py-2 transition-all ease-in-out",
+        "duration-600 container z-[1] mx-auto w-full justify-between py-2 transition-all ease-in-out",
         segment === null && "bg-transparent",
         segment !== null && "backdrop-blur-sm",
         hidden ? "-translate-y-16 opacity-10" : "translate-y-0 opacity-100",

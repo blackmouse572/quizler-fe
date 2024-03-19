@@ -7,6 +7,7 @@ import { useMemo } from "react"
 
 type Props = {
   user: User
+  secondaryText?: string
   withLink?: boolean
   options?: [
     {
@@ -18,7 +19,14 @@ type Props = {
   avatarSize?: "sm" | "md" | "lg"
 } & React.HTMLAttributes<HTMLDivElement>
 
-function UserDisplay({ user, options, withLink, className, ...props }: Props) {
+function UserDisplay({
+  user,
+  options,
+  secondaryText: secondary,
+  withLink,
+  className,
+  ...props
+}: Props) {
   const renderAcitons = useMemo(() => {
     return <></>
   }, [])
@@ -26,7 +34,7 @@ function UserDisplay({ user, options, withLink, className, ...props }: Props) {
     const userItem = (
       <>
         <h3 className="">{user.fullName}</h3>
-        <p className="text-xs text-neutral-500">{user.email}</p>
+        <p className="text-xs text-neutral-500">{secondary ?? user.email}</p>
       </>
     )
     return withLink ? (
@@ -34,7 +42,7 @@ function UserDisplay({ user, options, withLink, className, ...props }: Props) {
     ) : (
       userItem
     )
-  }, [user.email, user.fullName, user.id, withLink])
+  }, [secondary, user.email, user.fullName, user.id, withLink])
   return (
     <div
       className={cn("flex items-center justify-between gap-2", className)}

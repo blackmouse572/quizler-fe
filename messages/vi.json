@@ -57,6 +57,49 @@
       "see_more_results": "Xem thêm"
     }
   },
+  "ClassroomDetails": {
+    "members": "Thành viên",
+    "posts": {
+      "index": "Bài đăng",
+      "action": "Đăng",
+      "link-game": "Đính kèm trò chơi",
+      "placeholder": "Bạn đang nghĩ gì?",
+      "link-quiz": "Đính kèm ngân hàng câu hỏi",
+      "comments-count": "{count} thành viên đã bình luận",
+      "search": {
+        "placeholder": "Tìm kiếm ...",
+        "empty": "Không có kết quả"
+      },
+      "comments": {
+        "index": "Bình luận",
+        "action": "Bình luận",
+        "delete": "Xóa",
+        "delete_success": "Xóa bình luận thành công"
+      },
+      "delete": {
+        "title": "Xóa bài đăng",
+        "description": "Bạn có chắc chắn muốn xóa bài đăng này không?",
+        "confirm": "Xóa",
+        "cancel": "Hủy",
+        "success": "Xóa bài đăng thành công"
+      },
+      "report": {
+        "action": "Báo cáo"
+      },
+      "post": {
+        "index": "{user} đã tạo một bài đăng",
+        "game": "{user} đã tạo một trò chơi: {game}. Tham gia ngay !!!",
+        "quizbank": "{user} đã tạo một quizbank. Học ngay !!!"
+      },
+      "help": {
+        "title": "Trợ giúp",
+        "confirm": "Xác nhận"
+      },
+      "questions": "{count} câu hỏi",
+      "cards": "{count} thẻ",
+      "empty": "Không có bài đăng nào trong lớp học này, hãy tạo một"
+    }
+  },
   "SearchPage": {
     "search_error": "Đã có lỗi xảy ra, vui lòng thử lại sau",
     "results_for": "Kết quả cho",
@@ -715,6 +758,27 @@
         "description": "Thành công xóa ngân hàng câu hỏi"
       },
       "failed": { "title": "Thất bại" }
+    }
+  },
+  "Editor": {
+    "marks": {
+      "bold": "Đậm",
+      "italic": "Nghiêng",
+      "underline": "Gạch dưới",
+      "strike": "Gạch ngang",
+      "code": "Mã",
+      "highlight": "Đánh dấu"
+    },
+    "nodes": {
+      "paragraph": "Đoạn văn",
+      "heading": "Tiêu đề",
+      "blockquote": "Trích dẫn",
+      "code": "Khối mã",
+      "list": "Danh sách"
+    },
+    "history": {
+      "undo": "Hoàn tác",
+      "redo": "Làm lại"
     }
   }
 }

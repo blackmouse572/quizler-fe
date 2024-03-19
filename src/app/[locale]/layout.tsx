@@ -12,6 +12,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { getUser } from "@/lib/auth"
 import { pick } from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
+import "./editor.css"
 import "./global.css"
 
 const montserrat = Montserrat({
@@ -87,7 +88,13 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
             <Providers user={user}>
               <NextIntlClientProvider
                 locale={locale}
-                messages={pick(messages, "NotFound", "Error", "Errors", "Navbar")}
+                messages={pick(
+                  messages,
+                  "NotFound",
+                  "Error",
+                  "Errors",
+                  "Navbar"
+                )}
               >
                 {children}
               </NextIntlClientProvider>

@@ -5,11 +5,11 @@ import { getAPIServerURL } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { AddQuizbank } from "../components/add-quizbank-form"
 
-export type TAPIResult =
+export type TAPIResult<T> =
   | {
       ok: boolean
       message: string
-      data: any
+      data: T
     }
   | {
       ok: boolean
@@ -17,7 +17,9 @@ export type TAPIResult =
       data: null
     }
 
-export const addQuizBankAction = (data: AddQuizbank): Promise<TAPIResult> => {
+export const addQuizBankAction = (
+  data: AddQuizbank
+): Promise<TAPIResult<any>> => {
   const url = getAPIServerURL("/quizbank")
   const { token } = getToken()
   const body = JSON.stringify(data)
@@ -57,7 +59,7 @@ export const addQuizBankAction = (data: AddQuizbank): Promise<TAPIResult> => {
 export const editQuizBankAction = (
   data: AddQuizbank,
   quizBankId: string
-): Promise<TAPIResult> => {
+): Promise<TAPIResult<any>> => {
   const url = getAPIServerURL(`/quizbank/${quizBankId}`)
   const { token } = getToken()
 

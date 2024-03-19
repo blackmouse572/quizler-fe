@@ -1,6 +1,7 @@
 "use server"
 
 import { getToken } from "@/lib/auth"
+import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import PagedRequest from "@/types/paged-request"
@@ -8,13 +9,12 @@ import PagedResponse from "@/types/paged-response"
 
 export async function getMyQuizbankAction(options: Partial<PagedRequest>) {
   //Convert object to query string
-  const params = new URLSearchParams()
   const { token } = getToken()
-  for (const [key, value] of Object.entries(options)) {
-    if (value !== undefined) {
-      params.set(key, String(value)) // Ensure value is a string
-    }
-  }
+  const query = toURLSeachParams({
+    ...options,
+    search:
+      options.search && options.search.length > 0 ? options.search : undefined,
+  })
   const option: RequestInit = {
     method: "GET",
     headers: {
@@ -25,7 +25,7 @@ export async function getMyQuizbankAction(options: Partial<PagedRequest>) {
       revalidate: 1, // Revalidate every 1 second
     },
   }
-  const url = getAPIServerURL(`/QuizBank/GetMyQuizBank?${params.toString()}`)
+  const url = getAPIServerURL(`/QuizBank/GetMyQuizBank?${query.toString()}`)
   return fetch(url, option)
     .then(async (res) => {
       const data = await res.json()

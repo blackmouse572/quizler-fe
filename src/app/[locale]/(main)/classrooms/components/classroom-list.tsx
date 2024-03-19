@@ -14,6 +14,7 @@ type Props = {
 }
 
 function ClassroomList({ initialData, filter }: Props) {
+  console.log(initialData)
   const inViewRef = useRef<HTMLDivElement>(null)
   const inView = useInView(inViewRef, {})
   const {
@@ -68,6 +69,12 @@ function ClassroomList({ initialData, filter }: Props) {
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
         {renderLoading()}
       </div>
+    )
+  }
+
+  if (data.pages.length === 0) {
+    return (
+      <div className="flex min-h-52 items-center justify-center">No data</div>
     )
   }
   return (

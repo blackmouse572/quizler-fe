@@ -28,7 +28,7 @@ export function ErrorFn({ type, error, reset }: TErrorPageProps) {
             </pre>
           ) : (
             <SearchBar
-              container={{ className: "w-[399px]" }}
+              container={{ className: "" }}
               className="bg-white"
               placeholder={t("input.placeholder")}
             />

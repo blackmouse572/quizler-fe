@@ -78,7 +78,7 @@ export default function AddClassroomForm({
     values: initialValues,
   })
   const onSubmitCallback = useCallback(
-    (res: TAPIResult) => {
+    (res: TAPIResult<any>) => {
       if (!res.ok) {
         toast({
           title: errori18n("index"),
@@ -94,7 +94,7 @@ export default function AddClassroomForm({
 
   const onSubmit = useCallback(
     async (value: AddClassroom) => {
-      let res = {} as TAPIResult
+      let res = {} as TAPIResult<any>
       if (+action === +EFormAction.Add) {
         res = await addNewClassroom(value)
       } else {
