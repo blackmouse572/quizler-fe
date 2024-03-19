@@ -1,5 +1,6 @@
 "use client"
 import "@/app/[locale]/editor.css"
+import { AutoCompleteExtension } from "@/components/editor/auto-complete-extension"
 import { Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
@@ -36,6 +37,7 @@ const Editor = React.forwardRef<RefEditor | null, Props>(
     const editorI18N = useTranslations("Editor")
     const editor = useEditor({
       extensions: [
+        AutoCompleteExtension,
         StarterKit,
         Placeholder.configure({
           placeholder: placeholder,
