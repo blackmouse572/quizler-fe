@@ -57,7 +57,7 @@ export const addQuizBankAction = (
 }
 
 export const editQuizBankAction = (
-  data: AddQuizbank,
+  data: Partial<AddQuizbank>,
   quizBankId: string
 ): Promise<TAPIResult<any>> => {
   const url = getAPIServerURL(`/quizbank/${quizBankId}`)

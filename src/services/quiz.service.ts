@@ -1,5 +1,6 @@
 "use server"
 
+import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank, { TAPIQuizResponse } from "@/types/QuizBank"
 
@@ -41,14 +42,13 @@ export async function getQuizByQuizBankId(id: string) {
 }
 
 export async function copyQuizBankToClassroom(
-  token: string,
   quizbankId: string,
   classroomId: string
 ) {
   const url = getAPIServerURL(
     `/classrooms/copyquizbank/${quizbankId}/${classroomId}`
   )
-
+    const {token} = getToken()
   const options = {
     method: "POST",
     headers: {
@@ -74,10 +74,10 @@ export async function copyQuizBankToClassroom(
 }
 
 export async function copyQuizBankToPersonal(
-  token: string,
   quizbankId: string
 ) {
   const url = getAPIServerURL(`/quizbank/copyquizbank/${quizbankId}`)
+  const {token} = getToken()
 
   const options = {
     method: "POST",

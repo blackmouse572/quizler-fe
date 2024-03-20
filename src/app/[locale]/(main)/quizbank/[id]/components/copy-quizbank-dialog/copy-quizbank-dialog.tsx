@@ -49,7 +49,6 @@ type Props = {
   buttonContent: string
   classes?: Classroom[]
   quizbankId: string
-  token: string
 } & React.ComponentProps<"div">
 
 type TClassroomChoices = {
@@ -61,7 +60,6 @@ export default function CopyQuizBankDialog({
   buttonContent,
   classes,
   quizbankId,
-  token,
   ...props
 }: Props) {
   const i18n = useTranslations("CopyQuizBank")
@@ -163,9 +161,9 @@ export default function CopyQuizBankDialog({
     setIsLoading(true)
     let result;
     if (copyToValue === ECopyTo.classroom){
-      result = await copyQuizBankToClassroom(token, quizbankId, classroom)
+      result = await copyQuizBankToClassroom(quizbankId, classroom)
     } else {
-      result = await copyQuizBankToPersonal(token, quizbankId)
+      result = await copyQuizBankToPersonal(quizbankId)
     }
     onSubmitCb(result)
   }
