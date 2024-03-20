@@ -2,11 +2,14 @@
 import ClassroomCard from "@/app/[locale]/(main)/classrooms/components/classroom-card"
 import useClassroomList from "@/app/[locale]/(main)/classrooms/components/useClassroomList"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Classroom } from "@/types"
+import { Classroom, TClassRoomCardRef } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { useInView } from "framer-motion"
-import { useCallback, useEffect, useRef } from "react"
+import {  useCallback, useEffect, useRef } from "react"
+import { toast } from "@/components/ui/use-toast"
+import { useTranslations } from "next-intl"
+import { onDeleteClassroom } from "./mixin"
 
 type Props = {
   initialData: PagedResponse<Classroom>
@@ -17,6 +20,9 @@ function ClassroomList({ initialData, filter }: Props) {
   console.log(initialData)
   const inViewRef = useRef<HTMLDivElement>(null)
   const inView = useInView(inViewRef, {})
+  const i18n = useTranslations("Delete_classroom")
+  const errorI18n = useTranslations("Errors")
+  const classroomCardRef = useRef<TClassRoomCardRef>(null)
   const {
     data,
     isError,
@@ -28,9 +34,31 @@ function ClassroomList({ initialData, filter }: Props) {
   } = useClassroomList({
     initialData,
   })
+
+  const deleteSucceedCb = useCallback(() => {
+    classroomCardRef.current?.setIsDelete(false)
+    return toast({
+      title: i18n("message.success.title"),
+      description: i18n("message.success.description"),
+      variant: "flat",
+      color: "success",
+    })
+  },[i18n])
+  
+  const deleteFailCb = useCallback((message: string) => {
+    classroomCardRef.current?.setIsDelete(false)
+    return toast({
+      title: i18n("message.failed.title"),
+      description: errorI18n(message as any),
+      variant: "flat",
+      color: "danger",
+    })
+  },[errorI18n, i18n])
+
+
   const renderItem = useCallback(
-    (item: Classroom) => <ClassroomCard key={item.id} item={item} />,
-    []
+    (item: Classroom) => <ClassroomCard ref={classroomCardRef} key={item.id} item={item} displayActions={true} onDeleteClassrooom={() => onDeleteClassroom(+item.id, deleteSucceedCb, deleteFailCb)}/>,
+    [deleteFailCb, deleteSucceedCb]
   )
   const renderLoading = useCallback((length?: number) => {
     return Array.from({ length: length ?? 5 }).map((_, index) => (

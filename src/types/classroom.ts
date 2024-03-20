@@ -23,4 +23,8 @@ type Classroom = {
   created: string
 }
 
-export type { Classroom, ClassroomInvitation }
+type TClassRoomCardRef = {
+  setIsDelete: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export type { Classroom, ClassroomInvitation, TClassRoomCardRef }

@@ -31,7 +31,7 @@ async function getAllPostActions({
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["posts"],
+      tags: ["posts", `classroom-${classroomId}`],
       revalidate: 60, // revalidate every 60 seconds
     },
   }
