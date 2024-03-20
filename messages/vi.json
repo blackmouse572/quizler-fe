@@ -525,6 +525,15 @@
         "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
         "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
       },
+      "edit_account": {
+        "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",
+        "new_password": "Mật khẩu mới phải có ít nhất 8 kí tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 kí tự.",
+        "mismatch_password": "Các mật khẩu không trùng khớp."
+      },
+      "update_profile_form": {
+        "fullname": "Tên của bạn nên có ít nhất 2 kí tự."
+      },
       "too_small": {
         "array": {
           "exact": "Mảng phải chứa đúng {minimum} phần tử",

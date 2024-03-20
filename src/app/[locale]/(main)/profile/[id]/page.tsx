@@ -33,7 +33,7 @@ export default async function UserProfile({ params }: Props) {
     return (
       <NextIntlClientProvider
         locale={params.locale}
-        messages={_.pick(msg, "LocaleSwitcher", "ViewOtherProfile")}
+        messages={_.pick(msg, "LocaleSwitcher", "ViewOtherProfile", "Validations")}
       >
         <ViewOtherProfile userData={userData} />
       </NextIntlClientProvider>
@@ -44,7 +44,7 @@ export default async function UserProfile({ params }: Props) {
     <>
       <NextIntlClientProvider
         locale={params.locale}
-        messages={_.pick(msg, "LocaleSwitcher", "Settings")}
+        messages={_.pick(msg, "LocaleSwitcher", "Settings", "Validations")}
       >
         <SettingsProfile userData={userData} />
       </NextIntlClientProvider>

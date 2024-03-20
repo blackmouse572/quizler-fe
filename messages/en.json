@@ -401,7 +401,11 @@
         "submit_btn": "Save changes"
       }
     },
-    "preference": "Preference"
+    "preference": "Preference",
+    "success": {
+      "title": "Update account",
+      "description": "Your account has been changed successfully"
+    }
   },
   "ViewOtherProfile": {
     "title": "Profile",
@@ -623,6 +627,15 @@
         "datetime": "Invalid {validation}",
         "startsWith": "Invalid input: must start with \"{startsWith}\"",
         "endsWith": "Invalid input: must end with \"{endsWith}\""
+      },
+      "edit_account": {
+        "old_password": "Old password must be at least 8 characters.",
+        "new_password": "New password must be at least 8 characters.",
+        "confirm_password": "Confirm password must be at least 8 characters.",
+        "mismatch_password": "Passwords don't match"
+      },
+      "update_profile_form": {
+        "fullname": "Display name must be at least 2 characters."
       },
       "too_small": {
         "array": {

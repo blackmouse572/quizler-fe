@@ -11,7 +11,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import { toast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
@@ -20,21 +19,22 @@ import { useTranslations } from "next-intl"
 const FormSchema = z
   .object({
     old_password: z.string().min(8, {
-      message: "Old password must be at least 8 characters.",
+      message: "errors.edit_account.old_password",
     }),
     new_password: z.string().min(8, {
-      message: "Old password must be at least 8 characters.",
+      message: "errors.edit_account.new_password",
     }),
     confirm_password: z.string().min(8, {
-      message: "Old password must be at least 8 characters.",
+      message: "errors.edit_account.confirm_password",
     }),
   })
   .refine((data) => data.new_password === data.confirm_password, {
-    message: "Passwords don't match",
+    message: "errors.edit_account.mismatch_password",
   })
 
 export default function EditAccount() {
   const i18n = useTranslations("Settings")
+  const validationsi18n = useTranslations("Validations")
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -73,13 +73,20 @@ export default function EditAccount() {
           <FormField
             control={form.control}
             name="old_password"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel required>{i18n("account.old_password")}</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder="**************" {...field} />
                 </FormControl>
-                <FormMessage />
+                {fieldState.error && (
+                  <p className="text-xs text-danger-500">
+                    {validationsi18n(fieldState.error?.message as any, {
+                      maximum: 255,
+                      minimum: 3,
+                    })}
+                  </p>
+                )}
               </FormItem>
             )}
           />
@@ -87,13 +94,20 @@ export default function EditAccount() {
           <FormField
             control={form.control}
             name="new_password"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel required>{i18n("account.new_password")}</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder="**************" {...field} />
                 </FormControl>
-                <FormMessage />
+                {fieldState.error && (
+                  <p className="text-xs text-danger-500">
+                    {validationsi18n(fieldState.error?.message as any, {
+                      maximum: 255,
+                      minimum: 3,
+                    })}
+                  </p>
+                )}
               </FormItem>
             )}
           />
@@ -101,13 +115,20 @@ export default function EditAccount() {
           <FormField
             control={form.control}
             name="confirm_password"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel required>{i18n("account.confirm_password")}</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder="**************" {...field} />
                 </FormControl>
-                <FormMessage />
+                {fieldState.error && (
+                  <p className="text-xs text-danger-500">
+                    {validationsi18n(fieldState.error?.message as any, {
+                      maximum: 255,
+                      minimum: 3,
+                    })}
+                  </p>  
+                )}
               </FormItem>
             )}
           />
