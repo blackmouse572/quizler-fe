@@ -25,6 +25,7 @@ import {
   IconChevronRight,
   IconChevronUp,
   IconCircleOff,
+  IconClock,
   IconCopy,
   IconDashboard,
   IconDeviceDesktop,
@@ -129,6 +130,7 @@ export const Icons = {
   Send: IconBrandTelegram,
   Dot: IconDots,
   Help: IconHelp,
+  Timer: IconClock,
 
   //Chevrons
   ChevronUp: IconChevronUp,
