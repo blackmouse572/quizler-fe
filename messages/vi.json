@@ -796,5 +796,18 @@
       "undo": "Hoàn tác",
       "redo": "Làm lại"
     }
+  },
+  "Change_quizbank_visibility": {
+    "visibility": {
+      "Public": "công khai",
+      "Private": "cá nhân"
+    },
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Thành công chuyển trạng thái ngân hàng câu hỏi sang {visibility}"
+      },
+      "failed": { "title": "Thất bại" }
+    }
   }
 }

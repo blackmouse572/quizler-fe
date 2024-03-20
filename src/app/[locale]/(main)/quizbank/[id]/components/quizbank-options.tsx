@@ -3,7 +3,7 @@
 import React, { useCallback, useMemo, useState } from "react"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 import { toast } from "@/components/ui/use-toast"
-import { editQuizBankAction } from "../../add/actions/add-quiz-bank-action"
+import { updateQuizBankAction } from "../../add/actions/add-quiz-bank-action"
 import {
   Tooltip,
   TooltipContent,
@@ -28,32 +28,35 @@ const QuizBankActions = ({
   quizBankVisibility,
 }: Props) => {
   const i18n = useTranslations("ViewQuizBank")
+  const i18N = useTranslations("Change_quizbank_visibility")
+  const iErrors = useTranslations("Errors")
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const toggleQuizBankVisibility = useCallback(async () => {
     const togglevalue = quizBankVisibility === "Private" ? "Public" : "Private"
-    const result = await editQuizBankAction(
+    const result = await updateQuizBankAction(
       { visibility: togglevalue },
       quizbankId.toString()
     )
     if (!result.ok) {
       setIsLoading(false)
       return toast({
-        title: "Toggle fail",
-        description: "",
+        title: i18N("message.failed.title"),
+        description: iErrors(result.message),
         variant: "flat",
         color: "danger",
       })
     } else {
       setIsLoading(false)
+      const visibility = i18N(`visibility.${togglevalue}`)
       return toast({
-        title: "Toggle success",
-        description: "",
+        title: i18N("message.success.title"),
+        description: i18N("message.success.description", {visibility}),
         variant: "flat",
         color: "success",
       })
     }
-  }, [quizBankVisibility, quizbankId])
+  }, [i18N, iErrors, quizBankVisibility, quizbankId])
 
   const quizBankActions = useMemo(() => {
     const defaultButtons = [

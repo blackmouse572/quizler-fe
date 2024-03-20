@@ -805,5 +805,18 @@
       "undo": "Undo",
       "redo": "Redo"
     }
+  },
+  "Change_quizbank_visibility": {
+    "visibility": {
+      "Public": "public",
+      "Private": "private"
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully change quizbank visibility to {visibility}"
+      },
+      "failed": { "title": "Failed" }
+    }
   }
 }
