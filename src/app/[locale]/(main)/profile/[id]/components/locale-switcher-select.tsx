@@ -1,46 +1,55 @@
 "use client"
 
-import clsx from "clsx"
 import { redirect, useParams } from "next/navigation"
-import { ChangeEvent, ReactNode, useTransition } from "react"
+import { useTransition } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { locales } from "@/config"
+import { useTranslations } from "next-intl"
 
 type Props = {
-  children: ReactNode
   defaultValue: string
   label: string
 }
 
-export default function LocaleSwitcherSelect({
-  children,
-  defaultValue,
-  label,
-}: Props) {
+export default function LocaleSwitcherSelect({ defaultValue, label }: Props) {
   const [isPending, startTransition] = useTransition()
   const params = useParams()
-
-  function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
-    const nextLocale = event.target.value
+  const t = useTranslations("LocaleSwitcher")
+  function onSelectChange(newValue: string) {
+    const nextLocale = newValue
     startTransition(() => {
       redirect(`/${nextLocale}` + `/profile/` + `${params.id}`)
     })
   }
 
   return (
-    <label
-      className={clsx(
-        "relative text-gray-400",
-        isPending && "transition-opacity [&:disabled]:opacity-30"
-      )}
+    <Select
+      defaultValue={defaultValue}
+      onValueChange={(value) => onSelectChange(value)}
+      disabled={isPending}
     >
-      <p className="sr-only">{label}</p>
-      <select
-        className="inline-flex appearance-none bg-transparent py-3 pl-2 pr-6"
-        defaultValue={defaultValue}
-        disabled={isPending}
-        onChange={onSelectChange}
-      >
-        {children}
-      </select>
-    </label>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder={label} />
+      </SelectTrigger>
+
+      <SelectContent>
+        <SelectGroup defaultValue={defaultValue}>
+          <SelectLabel>{label}</SelectLabel>
+          {locales.map((cur) => (
+            <SelectItem key={cur} value={cur}>
+              {t("locale", { locale: cur })}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   )
 }

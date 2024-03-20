@@ -26,13 +26,7 @@ export default function EditPreference({ locale }: Props) {
           {t("label")}
         </div>
         <div>
-          <LocaleSwitcherSelect defaultValue={locale} label={t("label")}>
-            {locales.map((cur) => (
-              <option key={cur} value={cur}>
-                {t("locale", { locale: cur })}
-              </option>
-            ))}
-          </LocaleSwitcherSelect>
+          <LocaleSwitcherSelect defaultValue={locale} label={t("label")} />
         </div>
       </div>
     </>
