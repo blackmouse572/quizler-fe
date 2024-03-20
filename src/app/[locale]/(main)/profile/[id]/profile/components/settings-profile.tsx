@@ -1,5 +1,5 @@
 import { User } from "@/types"
-import NavigationMenu from "./navigation-menu"
+import NavigationMenu from "../../components/navigation-menu"
 import { getLocale, getTranslations } from "next-intl/server"
 
 type Props = {

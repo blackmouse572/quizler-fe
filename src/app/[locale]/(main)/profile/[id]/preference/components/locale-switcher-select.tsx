@@ -1,6 +1,6 @@
 "use client"
 
-import { redirect, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useTransition } from "react"
 import {
   Select,
@@ -23,10 +23,14 @@ export default function LocaleSwitcherSelect({ defaultValue, label }: Props) {
   const [isPending, startTransition] = useTransition()
   const params = useParams()
   const t = useTranslations("LocaleSwitcher")
+  const link = `/profile/${params.id}/preference`
+  const router = useRouter()
+
   function onSelectChange(newValue: string) {
     const nextLocale = newValue
     startTransition(() => {
-      redirect(`/${nextLocale}` + `/profile/` + `${params.id}`)
+      router.push(`/${nextLocale}${link}`)
+      router.refresh()
     })
   }
 

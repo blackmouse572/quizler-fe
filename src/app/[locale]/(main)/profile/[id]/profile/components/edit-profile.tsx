@@ -1,14 +1,16 @@
+"use client"
+
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {
-    CalendarIcon,
-    EnvelopeClosedIcon,
-    EnvelopeOpenIcon,
-    PersonIcon,
+  CalendarIcon,
+  EnvelopeClosedIcon,
+  EnvelopeOpenIcon,
+  PersonIcon,
 } from "@radix-ui/react-icons"
 import { User } from "@/types"
 import { format } from "date-fns"

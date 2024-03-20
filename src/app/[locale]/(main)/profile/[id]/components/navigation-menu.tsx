@@ -10,11 +10,8 @@ import {
 import { GearIcon, PersonIcon } from "@radix-ui/react-icons"
 import { useTranslations } from "next-intl"
 import { PiFingerprint } from "react-icons/pi"
-import EditAccount from "./edit-account"
-import EditProfile from "./edit-profile"
-import EditPreference from "./edit-preference"
 import { User } from "@/types"
-import { useCallback, useState } from "react"
+import { useRouter } from "next/navigation"
 
 type Props = {
   userData: User
@@ -23,17 +20,21 @@ type Props = {
 
 type TooltipProps = {
   icon: React.ReactNode
-  tooltipContent: string
-  handleClick: (id: string) => void
-  nextSelectId: string
+  tooltipContent: string,
+  href: string
 }
 
 const TooltipButton = ({
   icon,
   tooltipContent,
-  handleClick,
-  nextSelectId,
+  href
 }: TooltipProps) => {
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push(href)
+  }
+
   return (
     <TooltipProvider>
       <Tooltip>
@@ -41,7 +42,8 @@ const TooltipButton = ({
           <Button
             variant={"ghost"}
             className="mt-2.5 flex h-10 w-10/12 justify-center gap-2.5 rounded-xl p-1.5 shadow-sm"
-            onClick={() => handleClick(nextSelectId)}
+            onClick={handleClick}
+            isIconOnly
           >
             {icon}
           </Button>
@@ -54,13 +56,8 @@ const TooltipButton = ({
   )
 }
 
-export default function NavigationMenu({ userData, locale }: Props) {
+export default function NavigationMenu({ userData }: Props) {
   const t = useTranslations("Settings")
-  const [selectedId, setSelectedId] = useState("2")
-
-  const handleNavigationClick = useCallback((id: string) => {
-    setSelectedId(id)
-  }, [])
 
   return (
     <>
@@ -68,26 +65,19 @@ export default function NavigationMenu({ userData, locale }: Props) {
         <TooltipButton
           icon={<PersonIcon />}
           tooltipContent={t("navigation_menu.edit_account")}
-          handleClick={handleNavigationClick}
-          nextSelectId={"1"}
+          href={`/profile/${userData.id}/account`}
         />
         <TooltipButton
           icon={<PiFingerprint />}
           tooltipContent={t("navigation_menu.edit_profile")}
-          handleClick={handleNavigationClick}
-          nextSelectId={"2"}
+          href={`/profile/${userData.id}/profile`}
         />
         <TooltipButton
           icon={<GearIcon />}
           tooltipContent={t("navigation_menu.edit_preference")}
-          handleClick={handleNavigationClick}
-          nextSelectId={"3"}
+          href={`/profile/${userData.id}/preference`}
         />
       </div>
-
-      {selectedId === "1" && <EditAccount />}
-      {selectedId === "2" && <EditProfile userData={userData} />}
-      {selectedId === "3" && <EditPreference locale={locale} />}
     </>
   )
 }

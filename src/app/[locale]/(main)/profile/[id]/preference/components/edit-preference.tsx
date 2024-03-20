@@ -1,7 +1,6 @@
 "use client"
 
 import LocaleSwitcherSelect from "./locale-switcher-select"
-import { locales } from "@/config"
 import { useTranslations } from "next-intl"
 
 type Props = {

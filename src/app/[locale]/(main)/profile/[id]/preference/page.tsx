@@ -1,10 +1,11 @@
 import { getUser } from "@/lib/auth"
-import { fetchUserProfile } from "./profile/actions/fetch-user-profile"
-import { notFound, redirect } from "next/navigation"
-import ViewOtherProfile from "./components/view-other-profile"
+import { notFound } from "next/navigation"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import _ from "lodash"
+import { fetchUserProfile } from "../profile/actions/fetch-user-profile"
+import SettingsProfile from "../profile/components/settings-profile"
+import EditPreference from "./components/edit-preference"
 
 type Props = {
   params: {
@@ -25,23 +26,21 @@ export default async function UserProfile({ params }: Props) {
 
   const isAuthor = user?.id.toString() === params.id
 
-  if (userData === null) {
+  if (!isAuthor || userData === null) {
     notFound()
   }
-  if (!isAuthor) {
-    return (
+
+  return (
+    <>
       <NextIntlClientProvider
         locale={params.locale}
-        messages={_.pick(
-          msg,
-          "LocaleSwitcher",
-          "ViewOtherProfile",
-          "Validations"
-        )}
+        messages={_.pick(msg, "LocaleSwitcher", "Settings", "Validations")}
       >
-        <ViewOtherProfile userData={userData} />
+        <SettingsProfile userData={userData} />
+        <div className="flex w-full flex-col items-center px-5 max-md:mb-10 max-md:max-w-full">
+          <EditPreference locale={params.locale} />
+        </div>
       </NextIntlClientProvider>
-    )
-  }
-  redirect(`/profile/${params.id}/profile`)
+    </>
+  )
 }
