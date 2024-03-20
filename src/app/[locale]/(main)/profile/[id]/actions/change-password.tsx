@@ -1,18 +1,18 @@
 import { getAPIServerURL } from "@/lib/utils"
-import { UpdateProfileForm } from "@/types/update-profile-form"
 
-type UpdateProfileSchema = {
-  id: string
+type ChangePasswordSchema = {
   token: string
-  values: UpdateProfileForm
+  values: {
+    oldPassword: string
+    password: string
+  }
 }
 
-export const updateUserProfile = async ({
-  id,
+export const ChangePassword = async ({
   token,
   values,
-}: UpdateProfileSchema) => {
-  const URL = getAPIServerURL(`/accounts/${id}`)
+}: ChangePasswordSchema) => {
+  const URL = getAPIServerURL(`/accounts/change-password`)
 
   const options = {
     method: "PUT",

@@ -47,11 +47,11 @@ export default function UpdateProfileForm({ userData }: Props) {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const result = await updateUserProfile(
-      userData.id.toString(),
-      user.user!.accessToken.token,
-      values
-    )
+    const result = await updateUserProfile({
+      id: userData.id.toString(),
+      token: user.user!.accessToken.token,
+      values: values,
+    })
 
     if (!result.ok) {
       return toast({

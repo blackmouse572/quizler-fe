@@ -15,45 +15,69 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
+import { Icons } from "@/components/ui/icons"
+import { ChangePassword } from "../actions/change-password"
+import { useUser } from "@/hooks/useUser"
 
 const FormSchema = z
   .object({
-    old_password: z.string().min(8, {
+    oldPassword: z.string().min(8, {
       message: "errors.edit_account.old_password",
     }),
-    new_password: z.string().min(8, {
+    password: z.string().min(8, {
       message: "errors.edit_account.new_password",
     }),
-    confirm_password: z.string().min(8, {
+    confirmPassword: z.string().min(8, {
       message: "errors.edit_account.confirm_password",
     }),
   })
-  .refine((data) => data.new_password === data.confirm_password, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "errors.edit_account.mismatch_password",
+    path: ["confirmPassword"],
   })
 
 export default function EditAccount() {
   const i18n = useTranslations("Settings")
   const validationsi18n = useTranslations("Validations")
+  const e = useTranslations("Errors")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const user = useUser()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      old_password: "",
-      new_password: "",
-      confirm_password: "",
+      oldPassword: "",
+      password: "",
+      confirmPassword: "",
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <div className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </div>
-      ),
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setIsLoading(true)
+    const result = await ChangePassword({
+      token: user.user!.accessToken.token,
+      values: { oldPassword: data.oldPassword, password: data.password },
     })
+
+    if (!result.ok) {
+      setIsLoading(false)
+      return toast({
+        title: e("index"),
+        description: e(result.message),
+        variant: "flat",
+        color: "danger",
+      })
+    }
+
+    toast({
+      title: i18n("success.title"),
+      description: i18n("success.description"),
+      variant: "flat",
+      color: "success",
+    })
+
+    setIsLoading(false)
   }
 
   return (
@@ -72,12 +96,17 @@ export default function EditAccount() {
         >
           <FormField
             control={form.control}
-            name="old_password"
+            name="oldPassword"
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel required>{i18n("account.old_password")}</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="**************" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="**************"
+                    {...field}
+                    autoComplete="true"
+                  />
                 </FormControl>
                 {fieldState.error && (
                   <p className="text-xs text-danger-500">
@@ -93,12 +122,17 @@ export default function EditAccount() {
 
           <FormField
             control={form.control}
-            name="new_password"
+            name="password"
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel required>{i18n("account.new_password")}</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="**************" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="**************"
+                    {...field}
+                    autoComplete="true"
+                  />
                 </FormControl>
                 {fieldState.error && (
                   <p className="text-xs text-danger-500">
@@ -114,12 +148,19 @@ export default function EditAccount() {
 
           <FormField
             control={form.control}
-            name="confirm_password"
+            name="confirmPassword"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel required>{i18n("account.confirm_password")}</FormLabel>
+                <FormLabel required>
+                  {i18n("account.confirm_password")}
+                </FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="**************" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="**************"
+                    {...field}
+                    autoComplete="true"
+                  />
                 </FormControl>
                 {fieldState.error && (
                   <p className="text-xs text-danger-500">
@@ -127,16 +168,25 @@ export default function EditAccount() {
                       maximum: 255,
                       minimum: 3,
                     })}
-                  </p>  
+                  </p>
                 )}
               </FormItem>
             )}
           />
           <div className="mt-2">
-            <Button className="mr-2" type="reset" variant={"ghost"}>
+            <Button
+              className="mr-2"
+              type="reset"
+              variant={"ghost"}
+              disabled={isLoading}
+            >
+              {isLoading && <Icons.Loader className="animate-spin" />}
               {i18n("account.cancel_btn")}
             </Button>
-            <Button type="submit">{i18n("account.submit_btn")}</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading && <Icons.Loader className="animate-spin" />}
+              {i18n("account.submit_btn")}
+            </Button>
           </div>
         </form>
       </Form>
