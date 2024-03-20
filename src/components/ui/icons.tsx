@@ -25,6 +25,7 @@ import {
   IconChevronRight,
   IconChevronUp,
   IconCircleOff,
+  IconClock,
   IconCopy,
   IconDashboard,
   IconDeviceDesktop,
@@ -79,7 +80,7 @@ import {
   IconFingerprint,
   TablerIconsProps,
   IconBan,
-  IconEyeOff
+  IconEyeOff,
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -133,6 +134,7 @@ export const Icons = {
   Dot: IconDots,
   Help: IconHelp,
   Ban: IconBan,
+  Timer: IconClock,
 
   //Chevrons
   ChevronUp: IconChevronUp,
