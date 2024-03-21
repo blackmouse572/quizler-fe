@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import {
@@ -6,8 +5,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import UserDisplay from "@/components/user-display"
 import { getToken } from "@/lib/auth"
-import { getShortName } from "@/lib/string-helper"
 import { fetchClassroomCurrentUser } from "@/services/account.service"
 import { Classroom, User } from "@/types"
 import { useTranslations } from "next-intl"
@@ -15,7 +14,6 @@ import { use, useMemo } from "react"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 import EditQuizBank from "./edit-button"
 import ReportQuizBankDialog from "./report-quizbank-dialog/report-quizbank-dialog"
-import Link from "next/link"
 
 type Props = {
   authorData: User
@@ -65,7 +63,7 @@ export default function AuthorQuizBank({
         token={token}
         quizbankId={quizbankId}
         buttonContent={i18n("author.report_button")}
-      />
+      />,
     ]
 
     let shouldUsedButtons: React.JSX.Element[]
@@ -97,30 +95,7 @@ export default function AuthorQuizBank({
 
       <div className="flex max-w-full justify-between gap-5 pr-6 max-md:flex-wrap max-md:pr-5">
         <div className="flex justify-between gap-2 whitespace-nowrap">
-          <Link href={`/profile/${authorData?.id}`}>
-            <Avatar>
-              <AvatarImage
-                src={authorData?.avatar ?? ""}
-                alt={authorData?.fullName}
-              />
-              <AvatarFallback className="bg-gradient-to-bl ">
-                <span className="text-white">
-                  {getShortName(authorData.fullName)}
-                </span>
-              </AvatarFallback>
-            </Avatar>
-          </Link>
-          <div className="flex flex-1 flex-col">
-            <Link
-              href={`/profile/${authorData?.id}`}
-              className="text-sm font-medium leading-5 text-zinc-950"
-            >
-              {authorData.fullName}
-            </Link>
-            <div className="text-xs leading-4 text-zinc-500">
-              {authorData.email}
-            </div>
-          </div>
+          <UserDisplay user={authorData} withLink={true} />
         </div>
         <div className="flex justify-between gap-2">
           {quizBankActions.map((btn) => btn)}

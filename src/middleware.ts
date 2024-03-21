@@ -12,7 +12,7 @@ import { Token } from "@/types/User"
 
 const authPages = ["/login", "/signup"]
 
-const requireAuthPages = ["/profile"]
+const requireAuthPages = ["/as-needed"]
 
 const locales = ["en", "vi"]
 
@@ -87,6 +87,7 @@ export default async function middleware(req: NextRequest) {
     const refreshToken = getRefreshToken()
 
     if (!isRefreshTokenValid(refreshToken)) {
+      console.log("refresh token expired  ")
       const { ok, ...data } = await refresh(refreshToken.token)
 
       if (ok) {

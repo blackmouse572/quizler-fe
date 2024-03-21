@@ -28,7 +28,7 @@ import { EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-import { useCallback, useMemo } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import { z } from "zod"
 import {
@@ -112,6 +112,7 @@ function AddQuizbankForm({
 }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
   const i18Term = +action === +EFormAction.Add ? "AddQuiz" : "EditQuiz"
+  const [isLoading, setIsLoading] = useState(false)
   const i18n = useTranslations(i18Term)
   const errorI18n = useTranslations("Errors")
   const router = useRouter()
@@ -128,6 +129,7 @@ function AddQuizbankForm({
   const onSubmitCallback = useCallback(
     (res: TAPIResult<any>) => {
       if (!res.ok) {
+        setIsLoading(false)
         toast({
           title: errorI18n("index"),
           color: "danger",
@@ -142,6 +144,7 @@ function AddQuizbankForm({
 
   const onSubmit = useCallback(
     async (value: AddQuizbank) => {
+      setIsLoading(true)
       let res
       if (+action === +EFormAction.Add) {
         res = await addQuizBankAction(value)
@@ -269,7 +272,7 @@ function AddQuizbankForm({
   return (
     <Form {...form}>
       <div className="mx-auto w-full max-w-xl space-y-8 pb-6">
-        {form.formState.isSubmitting && (
+        {isLoading && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-neutral-900/50">
             <Icons.Loader className="text-primary-500 h-10 w-10 animate-spin" />
           </div>
