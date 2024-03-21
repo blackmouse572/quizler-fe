@@ -62,7 +62,7 @@ type QuizBankTableProps = {
   locale?: string
 }
 
-export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
+export function QuizBankTable({ data }: QuizBankTableProps) {
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
@@ -105,22 +105,23 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
         ),
       },
       {
-        accessorKey: "authorName",
+        accessorKey: "author",
         header: i18n("headers.author"),
-        cell: ({ row }) => (
-          <div className="min-w-52 capitalize">
-            {row.getValue("authorName")}
-          </div>
-        ),
+        cell: ({ row }) => {
+          const author = row.getValue("author") as QuizBank["author"]
+          return (
+            <div className="min-w-52 capitalize">
+              {author.fullName as string}
+            </div>
+          )
+        },
       },
       {
-        accessorKey: "quizes",
-        header: i18n("headers.quizzes"),
+        id: "quizCount",
+        accessorKey: "quizCount",
         cell: ({ row }) => {
-          const value = row.getValue("quizes") as Array<any>
-          const count = value.length
-
-          return <div>{count}</div>
+          const value = row.getValue("quizCount") as number
+          return <Badge>{value}</Badge>
         },
       },
       {
@@ -191,7 +192,7 @@ export function QuizBankTable({ data, locale = "en" }: QuizBankTableProps) {
             </ContextMenuItem>
             <ContextMenuItem
               onClick={() =>
-                navigator.clipboard.writeText(bank.authorName ?? "")
+                navigator.clipboard.writeText(bank.author.fullName ?? "")
               }
             >
               <Icons.Copy className="mr-2 inline-block h-4 w-4 " />

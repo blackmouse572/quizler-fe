@@ -1,7 +1,10 @@
+"use server"
+import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
-export async function deleteQuizBank(token: string, quizbankId: string) {
-  const url = getAPIServerURL(`/quizbank/${quizbankId}`)
+export const deleteClassroom = async (classroomId: string) => {
+  const URL = getAPIServerURL(`/classrooms/${classroomId}`)
+  const { token } = getToken()
 
   const options = {
     method: "DELETE",
@@ -10,7 +13,8 @@ export async function deleteQuizBank(token: string, quizbankId: string) {
       Authorization: `Bearer ${token}`,
     },
   }
-  return fetch(url, options).then(async (res) => {
+
+  return fetch(URL, options).then(async (res) => {
     if (!res?.ok) {
       return {
         isSuccess: false,
@@ -19,6 +23,7 @@ export async function deleteQuizBank(token: string, quizbankId: string) {
     }
     return {
       isSuccess: true,
+      message: ''
     }
   })
 }

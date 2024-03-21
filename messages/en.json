@@ -98,6 +98,13 @@
         "cancel": "Cancel",
         "success": "Post deleted successfully"
       },
+      "edit": {
+        "title": "Edit post",
+        "description": "Edit your post",
+        "confirm": "Save",
+        "cancel": "Cancel",
+        "success": "Post edited successfully"
+      },
       "report": {
         "action": "Report"
       },
@@ -758,6 +765,15 @@
     "success": {
       "title": "Joined classroom",
       "description": "You have joined the classroom successfully"
+    }
+  },
+  "Delete_classroom": {
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully delete clasroom"
+      },
+      "failed": { "title": "Failed" }
     }
   },
   "Delete_quizbank": {

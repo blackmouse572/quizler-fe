@@ -83,6 +83,13 @@
         "cancel": "Hủy",
         "success": "Xóa bài đăng thành công"
       },
+      "edit": {
+        "title": "Chỉnh sửa bài đăng",
+        "description": "Chỉnh sửa bài đăng của bạn",
+        "confirm": "Lưu thay đổi",
+        "cancel": "Hủy bỏ",
+        "success": "Đã cập nhật bài đăng"
+      },
       "report": {
         "action": "Báo cáo"
       },
@@ -749,6 +756,15 @@
     "success": {
       "title": "Tham gia lớp học thành công",
       "description": "Bạn đã tham gia lớp học thành công"
+    }
+  },
+  "Delete_clasroom": {
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Thành công xóa lớp học"
+      },
+      "failed": { "title": "Failed" }
     }
   },
   "Delete_quizbank": {

@@ -38,7 +38,7 @@ async function ClassroomPage({ searchParams }: Props) {
 
   return (
     <NextIntlClientProvider
-      messages={_.pick(msg, "Validations", "Join_classroom", "Errors")}
+      messages={_.pick(msg, "Validations", "Join_classroom", "Errors", "Delete_classroom")}
     >
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">Classrooms</h1>

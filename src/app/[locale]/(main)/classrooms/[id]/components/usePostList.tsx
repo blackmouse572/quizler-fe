@@ -16,7 +16,7 @@ export function usePostList({
   initialData,
 }: UsePostListProps) {
   return useInfiniteQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts", classroomId, filter],
     queryFn: async ({ pageParam }) => {
       const res = await getAllPostActions({
         classroomId,
