@@ -360,6 +360,52 @@
       "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay"
     }
   },
+  "Settings": {
+    "title": "Cài đặt",
+    "description": "Quản lý cài đặt tài khoản của bạn, hãy thoải mái thay đổi!",
+    "navigation_menu": {
+      "edit_account": "Chỉnh sửa tài khoản",
+      "edit_profile": "Chỉnh sửa hồ sơ",
+      "edit_preference": "Chỉnh sửa sở thích"
+    },
+    "account": {
+      "title": "Tài khoản",
+      "old_password": "Mật khẩu cũ",
+      "new_password": "Mật khẩu mới",
+      "confirm_password": "Xác nhận mật khẩu",
+      "cancel_btn": "Hủy",
+      "submit_btn": "Thay đổi mật khẩu"
+    },
+    "profile": {
+      "title": "Hồ sơ",
+      "edit_profile": "Chỉnh sửa hồ sơ",
+      "label": {
+        "email": "Email",
+        "username": "Tên người dùng",
+        "display_name": "Tên hiển thị",
+        "dob": "Ngày sinh"
+      },
+      "update_dialog": {
+        "title": "Chỉnh sửa hồ sơ",
+        "description": "Thực hiện các thay đổi vào hồ sơ của bạn ở đây. Nhấn Lưu khi hoàn thành.",
+        "label": {
+          "display_name": "Tên hiển thị",
+          "dob": "Ngày sinh"
+        },
+        "submit_btn": "Lưu thay đổi"
+      }
+    },
+    "preference": "Sở thích"
+  },
+  "ViewOtherProfile": {
+    "title": "Hồ sơ",
+    "label": {
+      "email": "Email",
+      "username": "Tên người dùng",
+      "display_name": "Tên hiển thị",
+      "dob": "Ngày sinh"
+    }
+  },
   "UserDropdown": {
     "my_account": "Tài khoản của tôi",
     "profile": "Hồ sơ",
@@ -478,6 +524,15 @@
         "datetime": "{validation} không hợp lệ",
         "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
         "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
+      },
+      "edit_account": {
+        "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",
+        "new_password": "Mật khẩu mới phải có ít nhất 8 kí tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 kí tự.",
+        "mismatch_password": "Các mật khẩu không trùng khớp."
+      },
+      "update_profile_form": {
+        "fullname": "Tên của bạn nên có ít nhất 2 kí tự."
       },
       "too_small": {
         "array": {
@@ -796,5 +851,9 @@
       "undo": "Hoàn tác",
       "redo": "Làm lại"
     }
+  },
+  "LocaleSwitcher": {
+    "label": "Đổi ngôn ngữ",
+    "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"
   }
 }

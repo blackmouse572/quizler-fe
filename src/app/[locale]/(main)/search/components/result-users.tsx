@@ -3,6 +3,7 @@ import { getShortName } from "@/lib/string-helper"
 import { User } from "@/types"
 import { useTranslations } from "next-intl"
 import ResultLoading from "../loading/result-loading"
+import Link from "next/link"
 
 type Props = {
   usersData: User[]
@@ -24,8 +25,9 @@ export default function ResultUsers({ usersData, isLoading }: Props) {
         {usersData &&
           usersData.map((data) => {
             return (
-              <div
+              <Link
                 key={data.id}
+                href={`/profile/${data?.id}`}
                 className="flex max-w-[25%] flex-1 flex-col items-start justify-center rounded-3xl border border-solid border-zinc-200 bg-white py-6 pl-6 pr-16 shadow max-md:px-5"
               >
                 <div className="flex gap-2.5">
@@ -39,7 +41,7 @@ export default function ResultUsers({ usersData, isLoading }: Props) {
                     {data.fullName}
                   </div>
                 </div>
-              </div>
+              </Link>
             )
           })}
       </div>
