@@ -67,7 +67,6 @@ export default function ViewFlashcard({
       const res = await fetchQuiz(id, {
         take: 10,
         skip: pageParam,
-        sortBy: !isShuffle ? "question" : "created", // due to async state, setState will not be updated immediately
       })
       if (!res.ok) {
         throw new Error(res.message)
@@ -111,7 +110,6 @@ export default function ViewFlashcard({
   }, [fetchNextPage, hasNextPage, isError, isLoading])
 
   useEffect(() => {
-    console.log({ current, totalLoaded })
     if (current === totalLoaded - LOAD_MORE_THRESHOLD) {
       onSeeMore()
     }
@@ -135,11 +133,6 @@ export default function ViewFlashcard({
 
   const renderItem = useCallback(
     (item: Quiz) => {
-      const questionWithDiv = item.question
-        .split("\n")
-        .map((line: string, index: number) => <div key={index}>{line}</div>)
-
-      console.log(selectedItem)
       return (
         <CarouselItem key={item.id + "-carousel"} className="p-8">
           <ReactCardFlipper isFlipped={selectedItem} flipDirection="vertical">
