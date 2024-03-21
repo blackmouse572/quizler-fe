@@ -14,11 +14,12 @@ import { Icons } from "@/components/ui/icons"
 import EditQuizBank from "./edit-button"
 import { useTranslations } from "next-intl"
 import PublicButton from "./public-button"
+import { Classroom } from "@/types"
 
 type Props = {
   quizBankVisibility: "Private" | "Public"
   quizbankId: string
-  userCurrentClass: any
+  userCurrentClass?: Classroom[]
   isOwnQuizBank?: boolean
 }
 

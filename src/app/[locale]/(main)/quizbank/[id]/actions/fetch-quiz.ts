@@ -16,12 +16,23 @@ export const fetchQuiz = async (id: string, option: Partial<PagedRequest>) => {
   })
   const url = getAPIServerURL(`/quiz/${id}?${query.toString()}`)
 
-  const options = {
+  const defaultOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
+  }
+  let options
+  if (!token) {
+    options = { ...defaultOptions }
+  } else {
+    options = {
+      ...defaultOptions,
+      headers: {
+        ...defaultOptions.headers,
+        Authorization: `${token ? `Bearer ${token}` : ""}`,
+      },
+    }
   }
 
   return fetch(url, options)

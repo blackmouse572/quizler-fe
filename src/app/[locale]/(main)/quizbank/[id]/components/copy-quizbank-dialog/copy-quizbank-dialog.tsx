@@ -44,6 +44,7 @@ import { Label } from "@/components/ui/label"
 import { Classroom } from "@/types"
 import { copyQuizBankToClassroom, copyQuizBankToPersonal } from "@/services/quiz.service"
 import { toast } from "@/components/ui/use-toast"
+import { isEmpty } from "lodash"
 
 type Props = {
   buttonContent: string
@@ -97,8 +98,8 @@ export default function CopyQuizBankDialog({
           required
         >
           <SelectTrigger>
-            {items && (
-              <SelectValue placeholder={items[0].text} />
+            {!isEmpty(items) && (
+              <SelectValue placeholder={items?.[0].text} />
             )}
           </SelectTrigger>
           <SelectContent>
