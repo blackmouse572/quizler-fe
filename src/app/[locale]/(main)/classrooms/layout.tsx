@@ -12,7 +12,7 @@ function ClassroomLayout({ children }: Props) {
       variant={"topDown"}
       className="container mx-auto items-start pt-20"
     >
-      {children}
+      <div className="relative">{children}</div>
     </BackgroundSquare>
   )
 }

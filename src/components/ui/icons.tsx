@@ -79,6 +79,7 @@ import {
   IconUser,
   IconFingerprint,
   TablerIconsProps,
+  IconArtboard,
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -131,6 +132,7 @@ export const Icons = {
   Dot: IconDots,
   Help: IconHelp,
   Timer: IconClock,
+  ArtBoard: IconArtboard,
 
   //Chevrons
   ChevronUp: IconChevronUp,
