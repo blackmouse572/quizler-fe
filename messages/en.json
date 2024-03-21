@@ -628,6 +628,58 @@
       }
     }
   },
+  "ReportQuizBank": {
+    "title": "Report this QuizBank",
+    "description": "Do you want to report this bank?",
+    "form_report": {
+      "reason": {
+        "label": "Reason",
+        "text": "Reason",
+        "placeholder": "Abuse",
+        "reason_choice": {
+          "abuse": "Abuse",
+          "inapproriate": "Inappropriate",
+          "violate_intellectual": "Violates my intellectual property rights",
+          "other": "Other"
+        }
+      },
+      "more_details": {
+        "label": "More details",
+        "text": "More details",
+        "placeholder": "Input more details..."
+      },
+      "button": {
+        "cancel": "Cancel",
+        "submit": "Report"
+      },
+      "text_area": {
+        "placeholder": "Please provide more details"
+      }
+    },
+    "form_result_report": {
+      "report_success": "Report successfully",
+      "thank_you_reported": "Thank you for your contribute for better learning space",
+      "received_submission": "We have received your submission on quizbank",
+      "of": "of",
+      "against": "that against the",
+      "violation_rules": "Violation Rules",
+      "take_action_soon": "of us. The action will be taken soon.",
+      "recorded": "Recorded:",
+      "ticket_id": "Ticket id:",
+      "contact_us": "For more information, please contact us at",
+      "Quizlearn_email": "Quizlearn",
+      "confirm": "Confirm"
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Report quizbank successfully"
+      },
+      "failed": {
+        "title": "Something went wrong."
+      }
+    }
+  },
   "Errors": {
     "index": "Error",
     "token-expire": "The url has been expire, please create another request",
@@ -682,6 +734,12 @@
       },
       "update_profile_form": {
         "fullname": "Display name must be at least 2 characters."
+      },
+      "report_quizbank": {
+        "more_details": {
+          "min_error": "Details must be at least 10 characters.",
+          "max_error": "Details must not be longer than 100 characters."
+        }
       },
       "too_small": {
         "array": {

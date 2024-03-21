@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl"
 import { use, useMemo } from "react"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 import EditQuizBank from "./edit-button"
+import ReportQuizBankDialog from "./report-quizbank-dialog/report-quizbank-dialog"
 import Link from "next/link"
 
 type Props = {
@@ -60,14 +61,11 @@ export default function AuthorQuizBank({
       </Tooltip>,
     ]
     const visitorQuizBankButtons = [
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button color="accent" isIconOnly>
-            <Icons.Report />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>{i18n("author.report_button")}</TooltipContent>
-      </Tooltip>,
+      <ReportQuizBankDialog
+        token={token}
+        quizbankId={quizbankId}
+        buttonContent={i18n("author.report_button")}
+      />
     ]
 
     let shouldUsedButtons: React.JSX.Element[]
