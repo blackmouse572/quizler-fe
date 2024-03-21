@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl"
 import { use, useMemo } from "react"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 import EditQuizBank from "./edit-button"
-import ReportQuizBankDialog from "./report-quizbank-dialog.tsx/report-quizbank-dialog"
+import ReportQuizBankDialog from "./report-quizbank-dialog/report-quizbank-dialog"
 
 type Props = {
   authorData: User

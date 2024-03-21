@@ -5,10 +5,10 @@ const ReportQuizBankSchema = z.object({
   more_details: z
     .string()
     .min(10, {
-      message: "Details must be at least 10 characters.",
+      message: "errors.report_quizbank.more_details.min_error",
     })
     .max(100, {
-      message: "Details must not be longer than 100 characters.",
+      message: "errors.report_quizbank.more_details.max_error",
     }),
 })
 type ReportQuizBankSchemaType = z.infer<typeof ReportQuizBankSchema>
@@ -19,10 +19,10 @@ const getReportQuizSchema = (reasonOptions: [string, ...string[]]) =>
     more_details: z
       .string()
       .min(10, {
-        message: "Details must be at least 10 characters.",
+        message: "errors.report_quizbank.more_details.min_error",
       })
       .max(100, {
-        message: "Details must not be longer than 100 characters.",
+        message: "errors.report_quizbank.more_details.max_error",
       }),
   })
 
@@ -36,19 +36,19 @@ export enum EReport {
 export const reasonChoice = [
   {
     id: EReport.abuse,
-    text: "Abuse",
+    text: "form_report.reason.reason_choice.abuse",
   },
   {
     id: EReport.inapproriate,
-    text: "Inappropriate",
+    text: "form_report.reason.reason_choice.inapproriate",
   },
   {
     id: EReport.violate_intellectual,
-    text: "Violates my intellectual property rights",
+    text: "form_report.reason.reason_choice.violate_intellectual",
   },
   {
     id: EReport.other,
-    text: "Other",
+    text: "form_report.reason.reason_choice.other",
   },
 ]
 

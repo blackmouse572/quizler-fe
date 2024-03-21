@@ -460,7 +460,13 @@
       "reason": {
         "label": "Lý do",
         "text": "Lý do",
-        "placeholder": "Lạm dụng"
+        "placeholder": "Lạm dụng",
+        "reason_choice": {
+          "abuse": "Lạm dụng",
+          "inapproriate": "Không phù hợp",
+          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+          "other": "Khác"
+        }
       },
       "more_details": {
         "label": "Chi tiết hơn",
@@ -484,7 +490,7 @@
       "violation_rules": "Quy tắc vi phạm",
       "take_action_soon": "chúng tôi. Hành động sẽ được thực hiện sớm.",
       "recorded": "Đã ghi lại:",
-      "ticket_id": "Mã ticket:",
+      "ticket_id": "Mã báo cáo:",
       "contact_us": "Để biết thêm thông tin, vui lòng liên hệ chúng tôi tại",
       "Quizlearn_email": "Quizlearn",
       "confirm": "Xác nhận"
@@ -524,6 +530,12 @@
         "datetime": "{validation} không hợp lệ",
         "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
         "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
+      },
+      "report_quizbank": {
+        "more_details": {
+          "min_error": "Phải ít nhất 10 kí tự.",
+          "max_error": "Không được vượt quá 100 kí tự."
+        }
       },
       "too_small": {
         "array": {

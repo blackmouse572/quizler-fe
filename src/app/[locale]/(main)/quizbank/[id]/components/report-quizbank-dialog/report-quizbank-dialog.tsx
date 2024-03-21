@@ -55,6 +55,7 @@ export default function ReportQuizBankDialog({
 }: Props) {
   const i18n = useTranslations("ReportQuizBank")
   const errorI18n = useTranslations("Errors")
+  const validationsi18n = useTranslations("Validations")
   const [open, setOpen] = useState<boolean>(false)
   const [openResultDialog, setOpenResultDialog] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -78,18 +79,18 @@ export default function ReportQuizBankDialog({
           onValueChange={(value) => {
             field.onChange(value)
           }}
-          defaultValue={field.value}
+          defaultValue={items && items[0].id}
           required
         >
           <SelectTrigger>
-            {items && <SelectValue placeholder={items[0].text} />}
+            {items && <SelectValue />}
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>{label}</SelectLabel>
               {items?.map((item) => (
                 <SelectItem key={item.id} value={item.id}>
-                  {item.text}
+                  {i18n(item.text as any)}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -97,7 +98,7 @@ export default function ReportQuizBankDialog({
         </Select>
       )
     },
-    [isLoading]
+    [i18n, isLoading]
   )
 
   const reasonChoices = reasonChoice.map((choice) => choice.id) as [
@@ -156,7 +157,7 @@ export default function ReportQuizBankDialog({
         <FormField
           control={form.control}
           name="reason"
-          render={({ field }) => {
+          render={({ field, fieldState }) => {
             return (
               <div className="space-y-1">
                 <FormLabel required htmlFor="">
@@ -169,7 +170,14 @@ export default function ReportQuizBankDialog({
                     reasonChoice
                   )}
                 </FormControl>
-                <FormMessage />
+                {fieldState.error && (
+                  <p className="text-xs text-danger-500">
+                    {validationsi18n(fieldState.error?.message as any, {
+                      maximum: 255,
+                      minimum: 3,
+                    })}
+                  </p>
+                )}
               </div>
             )
           }}
@@ -178,7 +186,7 @@ export default function ReportQuizBankDialog({
         <FormField
           control={form.control}
           name="more_details"
-          render={({ field }) => {
+          render={({ field, fieldState }) => {
             return (
               <div className="space-y-1">
                 <FormLabel required htmlFor="">
@@ -191,14 +199,21 @@ export default function ReportQuizBankDialog({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                {fieldState.error && (
+                  <p className="text-xs text-danger-500">
+                    {validationsi18n(fieldState.error?.message as any, {
+                      maximum: 255,
+                      minimum: 3,
+                    })}
+                  </p>
+                )}
               </div>
             )
           }}
         />
       </>
     ),
-    [form.control, i18n, renderReportChoice]
+    [form.control, i18n, renderReportChoice, validationsi18n]
   )
 
   return (

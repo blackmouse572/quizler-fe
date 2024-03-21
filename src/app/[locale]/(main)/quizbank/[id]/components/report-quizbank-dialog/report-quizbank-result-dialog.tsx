@@ -52,7 +52,7 @@ export default function ReportQuizBankResultDialog({
             {i18n("form_result_report.received_submission")} &nbsp;
             <span className="font-bold">{quizBankId}</span>&nbsp;
             {i18n("form_result_report.of")} &nbsp;
-            <span className="font-bold">{reason?.text}</span>&nbsp;
+            <span className="font-bold">{i18n(reason?.text as any)}</span>&nbsp;
             {i18n("form_result_report.against")} &nbsp;
             <span className="underline">
               {i18n("form_result_report.violation_rules")}

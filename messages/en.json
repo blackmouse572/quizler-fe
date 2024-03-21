@@ -539,7 +539,13 @@
       "reason": {
         "label": "Reason",
         "text": "Reason",
-        "placeholder": "Abuse"
+        "placeholder": "Abuse",
+        "reason_choice": {
+          "abuse": "Abuse",
+          "inapproriate": "Inappropriate",
+          "violate_intellectual": "Violates my intellectual property rights",
+          "other": "Other"
+        }
       },
       "more_details": {
         "label": "More details",
@@ -623,6 +629,12 @@
         "datetime": "Invalid {validation}",
         "startsWith": "Invalid input: must start with \"{startsWith}\"",
         "endsWith": "Invalid input: must end with \"{endsWith}\""
+      },
+      "report_quizbank": {
+        "more_details": {
+          "min_error": "Details must be at least 10 characters.",
+          "max_error": "Details must not be longer than 100 characters."
+        }
       },
       "too_small": {
         "array": {
