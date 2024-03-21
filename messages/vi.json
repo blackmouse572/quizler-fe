@@ -921,6 +921,10 @@
         "description": "Thành công chuyển trạng thái ngân hàng câu hỏi sang {visibility}"
       },
       "failed": { "title": "Thất bại" }
+    },
+    "confirm_dialog": {
+      "title": "Bạn có muốn thay đổi trạng thái của ngân hàng câu hỏi",
+      "description": "Trạng thái ngân hàng câu hỏi sẽ được chuyển sang {visibility}"
     }
   },
   "LocaleSwitcher": {
