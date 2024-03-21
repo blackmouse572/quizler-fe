@@ -937,7 +937,9 @@
     },
     "confirm_dialog": {
       "title": "Do you want to change quizbank visibility?",
-      "description": "Quizbank visibility will be change to {visibility}"
+      "description": "Quizbank visibility will be change to {visibility}",
+      "cancel": "Cancel",
+      "continue": "Continue"
     }
   },
   "LocaleSwitcher": {

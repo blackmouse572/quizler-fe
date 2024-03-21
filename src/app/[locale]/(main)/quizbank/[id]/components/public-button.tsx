@@ -65,7 +65,7 @@ const PublicButton = React.forwardRef(
                   setIsLoading(false)
                 }}
               >
-                Cancel
+                {i18N("confirm_dialog.cancel")}
               </AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
@@ -74,7 +74,7 @@ const PublicButton = React.forwardRef(
                   setIsLoading(false)
                 }}
               >
-                Continue
+                {i18N("confirm_dialog.continue")}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

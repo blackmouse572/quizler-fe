@@ -924,7 +924,9 @@
     },
     "confirm_dialog": {
       "title": "Bạn có muốn thay đổi trạng thái của ngân hàng câu hỏi",
-      "description": "Trạng thái ngân hàng câu hỏi sẽ được chuyển sang {visibility}"
+      "description": "Trạng thái ngân hàng câu hỏi sẽ được chuyển sang {visibility}",
+      "cancel": "Hủy",
+      "continue": "Tiếp tục"
     }
   },
   "LocaleSwitcher": {
