@@ -36,7 +36,8 @@ export default async function UserProfile({ params }: Props) {
           msg,
           "LocaleSwitcher",
           "ViewOtherProfile",
-          "Validations"
+          "Validations",
+          "Errors"
         )}
       >
         <ViewOtherProfile userData={userData} />

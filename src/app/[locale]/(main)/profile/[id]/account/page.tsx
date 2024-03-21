@@ -35,7 +35,7 @@ export default async function UserProfile({ params }: Props) {
     <>
       <NextIntlClientProvider
         locale={params.locale}
-        messages={_.pick(msg, "LocaleSwitcher", "Settings", "Validations")}
+        messages={_.pick(msg, "LocaleSwitcher", "Settings", "Validations", "Errors")}
       >
         <SettingsProfile userData={userData} />
         <div className="flex w-full flex-col items-center px-5 max-md:mb-10 max-md:max-w-full">
