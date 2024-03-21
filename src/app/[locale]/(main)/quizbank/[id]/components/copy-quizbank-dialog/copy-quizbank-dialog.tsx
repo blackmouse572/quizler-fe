@@ -42,7 +42,7 @@ import { useTranslations } from "next-intl"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Classroom } from "@/types"
-import { copyQuizBankToClassroom } from "@/services/quiz.service"
+import { copyQuizBankToClassroom, copyQuizBankToPersonal } from "@/services/quiz.service"
 import { toast } from "@/components/ui/use-toast"
 
 type Props = {
@@ -82,7 +82,7 @@ export default function CopyQuizBankDialog({
         {
           name: string
           copyTo: string
-          classRoom: string
+          classroom: string
         },
         any
       >,
@@ -134,14 +134,14 @@ export default function CopyQuizBankDialog({
     defaultValues: {
       name: "",
       copyTo: copyTochoices[0],
-      classRoom: classRoomchoicesSchema?.[0] ?? "",
+      classroom: classRoomchoicesSchema?.[0] ?? "",
     },
   })
 
   const onSubmitCb = (result: any) => {
     setOpen(false)
     setIsLoading(false)
-    if (!result) {
+    if (!result.ok) {
       return toast({
         title: i18n("message.failed.title"),
         description: errorI18n(result.message as any),
@@ -159,9 +159,14 @@ export default function CopyQuizBankDialog({
   }
 
   async function onSubmit(values: CopyQuizBankSchemaType) {
-    const { classRoom } = values
+    const { classroom } = values
     setIsLoading(true)
-    const result = await copyQuizBankToClassroom(token, quizbankId, classRoom)
+    let result;
+    if (copyToValue === ECopyTo.classroom){
+      result = await copyQuizBankToClassroom(token, quizbankId, classroom)
+    } else {
+      result = await copyQuizBankToPersonal(token, quizbankId)
+    }
     onSubmitCb(result)
   }
 
@@ -220,7 +225,7 @@ export default function CopyQuizBankDialog({
 
         <FormField
           control={form.control}
-          name="classRoom"
+          name="classroom"
           render={({ field }) => {
             return copyToValue === ECopyTo.classroom ? (
               <div className="space-y-1">

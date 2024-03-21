@@ -126,7 +126,7 @@ function AddQuizbankForm({
   })
 
   const onSubmitCallback = useCallback(
-    (res: TAPIResult) => {
+    (res: TAPIResult<any>) => {
       if (!res.ok) {
         toast({
           title: errorI18n("index"),

@@ -46,8 +46,38 @@ export async function copyQuizBankToClassroom(
   classroomId: string
 ) {
   const url = getAPIServerURL(
-    `/api/classrooms/copyquizbank/${quizbankId}/${classroomId}`
+    `/classrooms/copyquizbank/${quizbankId}/${classroomId}`
   )
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  return fetch(url, options)
+    .then(async (res) => {
+      if (!res?.ok) {
+        throw new Error(res.statusText)
+      }
+      return {
+        ok: true
+      }
+    })
+    .catch((e) => {
+      return {
+        ok: false,
+        message: e.message as string,
+      }
+    })
+}
+
+export async function copyQuizBankToPersonal(
+  token: string,
+  quizbankId: string
+) {
+  const url = getAPIServerURL(`/quizbank/copyquizbank/${quizbankId}`)
 
   const options = {
     method: "POST",
@@ -60,7 +90,14 @@ export async function copyQuizBankToClassroom(
     if (!res?.ok) {
       throw new Error(res.statusText)
     }
-    return true
+    return {
+      ok: true
+    }
+  })
+  .catch((e) => {
+    return {
+      ok: false,
+      message: e.message as string,
+    }
   })
 }
-

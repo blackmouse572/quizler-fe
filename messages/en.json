@@ -72,6 +72,56 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
+  "ClassroomDetails": {
+    "members": "Members",
+    "posts": {
+      "index": "Posts",
+      "action": "Post",
+      "link-game": "Attach game",
+      "placeholder": "What's on your mind?",
+      "link-quiz": "Attach quizbank",
+      "comments-count": "{count} members has commented",
+      "search": {
+        "placeholder": "Search ...",
+        "empty": "No results"
+      },
+      "comments": {
+        "index": "Comment",
+        "action": "Comment",
+        "delete": "Delete",
+        "delete_success": "Comment deleted successfully"
+      },
+      "delete": {
+        "title": "Delete post",
+        "description": "Are you sure you want to delete this post?",
+        "confirm": "Delete",
+        "cancel": "Cancel",
+        "success": "Post deleted successfully"
+      },
+      "edit": {
+        "title": "Edit post",
+        "description": "Edit your post",
+        "confirm": "Save",
+        "cancel": "Cancel",
+        "success": "Post edited successfully"
+      },
+      "report": {
+        "action": "Report"
+      },
+      "post": {
+        "index": "{user} created a post",
+        "game": "{user} created a game: {game}. Join now !!!",
+        "quizbank": "{user} created a quizbank. Learned now !!!"
+      },
+      "help": {
+        "title": "Help",
+        "confirm": "Confirm"
+      },
+      "questions": "{count} questions",
+      "cards": "{count} cards",
+      "empty": "There are no posts in this classroom, let's create one"
+    }
+  },
   "MyQuizbanks": {
     "metadata": {
       "title": "My Quiz Banks",
@@ -537,6 +587,7 @@
     "username-existed": "The username has been existed, please try another username",
     "verification-failed": "The verification code is not correct, please try again",
     "Unauthorized": "Account not authorized, please login",
+    "refresh": "Refresh",
     "classroom": {
       "code-invalid": "The code is not valid, please try again",
       "code-expire": "The code has been expired, please try again",
@@ -762,6 +813,15 @@
       "description": "You have joined the classroom successfully"
     }
   },
+  "Delete_classroom": {
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully delete clasroom"
+      },
+      "failed": { "title": "Failed" }
+    }
+  },
   "Delete_quizbank": {
     "message": {
       "success": {
@@ -769,6 +829,27 @@
         "description": "Successfully delete quizbank"
       },
       "failed": { "title": "Failed" }
+    }
+  },
+  "Editor": {
+    "marks": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strikethrough",
+      "code": "Code",
+      "highlight": "Highlight"
+    },
+    "nodes": {
+      "paragraph": "Paragraph",
+      "heading": "Heading",
+      "blockquote": "Blockquote",
+      "code": "Code block",
+      "list": "List"
+    },
+    "history": {
+      "undo": "Undo",
+      "redo": "Redo"
     }
   }
 }

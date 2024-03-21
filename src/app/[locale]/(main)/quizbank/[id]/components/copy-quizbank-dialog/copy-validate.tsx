@@ -6,16 +6,16 @@ const CopyQuizBankSchema = z
       required_error: "errors.invalid_type_received_undefined",
     }),
     copyTo: z.string(),
-    classRoom: z.string(),
+    classroom: z.string(),
   })
 
-const getCopyQuizShema = (copyToOptions: [string, ...string[]], classRoomOptions: [string, ...string[]]) => (z
+const getCopyQuizShema = (copyToOptions: [string, ...string[]], classroomOptions: [string, ...string[]]) => (z
     .object({
       name: z.string({
         required_error: "errors.invalid_type_received_undefined",
       }),
       copyTo: z.enum(copyToOptions),
-      classRoom: z.enum(classRoomOptions),
+      classroom: z.enum(classroomOptions),
     }))
 type CopyQuizBankSchemaType = z.infer<typeof CopyQuizBankSchema>
 

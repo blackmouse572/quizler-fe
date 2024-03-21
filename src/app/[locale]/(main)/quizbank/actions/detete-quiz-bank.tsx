@@ -17,7 +17,6 @@ export async function deleteQuizBank(token: string, quizbankId: string) {
         message: res.statusText,
       }
     }
-    console.log(res.json())
     return {
       isSuccess: true,
     }
