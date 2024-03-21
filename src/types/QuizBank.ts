@@ -3,9 +3,7 @@ import { User } from "@/types"
 interface QuizBank {
   id: number
   bankName: string
-  authorName: string
   author: User
-  quizes: Quiz[]
   description: string
   visibility: "Public" | "Private"
   rating: []

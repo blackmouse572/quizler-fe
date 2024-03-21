@@ -1,5 +1,5 @@
 export interface User {
-  id: number
+  id: number | string
   username: string
   fullName: string
   avatar: string | null

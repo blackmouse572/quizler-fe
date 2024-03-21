@@ -74,6 +74,9 @@ import {
   IconUserFilled,
   IconUsers,
   IconX,
+  IconSettings,
+  IconUser,
+  IconFingerprint,
   TablerIconsProps,
   IconEyeOff
 } from "@tabler/icons-react"
@@ -166,6 +169,11 @@ export const Icons = {
   Heading2: IconH2,
   Heading3: IconH3,
   Quote: IconQuote,
+
+  // Navigation menu
+  NavAccount: IconUser,
+  NavProfile: IconFingerprint,
+  NavPreference: IconSettings,
 }
 
 type IIconKeys = keyof typeof Icons

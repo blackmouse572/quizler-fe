@@ -2,9 +2,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getShortName } from "@/lib/string-helper"
 import { Classroom, User } from "@/types"
 import { useTranslations } from "next-intl"
-import { use, useCallback, useMemo } from "react"
 import { fetchClassroomCurrentUser } from "../actions/fetch-classroom"
 import QuizBankActions from "./quizbank-options"
+import { use } from "react"
+import Link from "next/link"
 
 type Props = {
   authorData: User
@@ -36,7 +37,7 @@ export default function AuthorQuizBank({
           <div className="flex-auto text-2xl leading-10 text-black">
             {i18n("author.class_title")}:{" "}
             <span className="font-bold">
-              {i18n("author.class_title")} Biology {i18n("author.of")}{" "}
+              {i18n("author.class_title")} $Biology {i18n("author.of")}{" "}
               {authorData.fullName}
             </span>
           </div>
@@ -45,21 +46,26 @@ export default function AuthorQuizBank({
 
       <div className="flex max-w-full justify-between gap-5 pr-6 max-md:flex-wrap max-md:pr-5">
         <div className="flex justify-between gap-2 whitespace-nowrap">
-          <Avatar>
-            <AvatarImage
-              src={authorData?.avatar ?? ""}
-              alt={authorData?.fullName}
-            />
-            <AvatarFallback className="bg-gradient-to-bl ">
-              <span className="text-white">
-                {getShortName(authorData.fullName)}
-              </span>
-            </AvatarFallback>
-          </Avatar>
+          <Link href={`/profile/${authorData?.id}`}>
+            <Avatar>
+              <AvatarImage
+                src={authorData?.avatar ?? ""}
+                alt={authorData?.fullName}
+              />
+              <AvatarFallback className="bg-gradient-to-bl ">
+                <span className="text-white">
+                  {getShortName(authorData.fullName)}
+                </span>
+              </AvatarFallback>
+            </Avatar>
+          </Link>
           <div className="flex flex-1 flex-col">
-            <div className="text-sm font-medium leading-5 text-zinc-950">
+            <Link
+              href={`/profile/${authorData?.id}`}
+              className="text-sm font-medium leading-5 text-zinc-950"
+            >
               {authorData.fullName}
-            </div>
+            </Link>
             <div className="text-xs leading-4 text-zinc-500">
               {authorData.email}
             </div>

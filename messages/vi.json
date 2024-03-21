@@ -360,6 +360,52 @@
       "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay"
     }
   },
+  "Settings": {
+    "title": "Cài đặt",
+    "description": "Quản lý cài đặt tài khoản của bạn, hãy thoải mái thay đổi!",
+    "navigation_menu": {
+      "edit_account": "Chỉnh sửa tài khoản",
+      "edit_profile": "Chỉnh sửa hồ sơ",
+      "edit_preference": "Chỉnh sửa sở thích"
+    },
+    "account": {
+      "title": "Tài khoản",
+      "old_password": "Mật khẩu cũ",
+      "new_password": "Mật khẩu mới",
+      "confirm_password": "Xác nhận mật khẩu",
+      "cancel_btn": "Hủy",
+      "submit_btn": "Thay đổi mật khẩu"
+    },
+    "profile": {
+      "title": "Hồ sơ",
+      "edit_profile": "Chỉnh sửa hồ sơ",
+      "label": {
+        "email": "Email",
+        "username": "Tên người dùng",
+        "display_name": "Tên hiển thị",
+        "dob": "Ngày sinh"
+      },
+      "update_dialog": {
+        "title": "Chỉnh sửa hồ sơ",
+        "description": "Thực hiện các thay đổi vào hồ sơ của bạn ở đây. Nhấn Lưu khi hoàn thành.",
+        "label": {
+          "display_name": "Tên hiển thị",
+          "dob": "Ngày sinh"
+        },
+        "submit_btn": "Lưu thay đổi"
+      }
+    },
+    "preference": "Sở thích"
+  },
+  "ViewOtherProfile": {
+    "title": "Hồ sơ",
+    "label": {
+      "email": "Email",
+      "username": "Tên người dùng",
+      "display_name": "Tên hiển thị",
+      "dob": "Ngày sinh"
+    }
+  },
   "UserDropdown": {
     "my_account": "Tài khoản của tôi",
     "profile": "Hồ sơ",
@@ -453,6 +499,58 @@
       }
     }
   },
+  "ReportQuizBank": {
+    "title": "Báo cáo QuizBank này",
+    "description": "Bạn có muốn báo cáo học phần này không?",
+    "form_report": {
+      "reason": {
+        "label": "Lý do",
+        "text": "Lý do",
+        "placeholder": "Lạm dụng",
+        "reason_choice": {
+          "abuse": "Lạm dụng",
+          "inapproriate": "Không phù hợp",
+          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+          "other": "Khác"
+        }
+      },
+      "more_details": {
+        "label": "Chi tiết hơn",
+        "text": "Chi tiết hơn",
+        "placeholder": "Nhập thêm chi tiết..."
+      },
+      "button": {
+        "cancel": "Hủy",
+        "submit": "Báo cáo"
+      },
+      "text_area": {
+        "placeholder": "Xin hãy cung cấp thông tin chi tiết hơn"
+      }
+    },
+    "form_result_report": {
+      "report_success": "Báo cáo thành công",
+      "thank_you_reported": "Cảm ơn bạn đã đóng góp cho không gian học tập tốt hơn",
+      "received_submission": "Chúng tôi đã nhận được đơn báo cáo của bạn về quizbank",
+      "of": "của",
+      "against": "đối với",
+      "violation_rules": "Quy tắc vi phạm",
+      "take_action_soon": "chúng tôi. Hành động sẽ được thực hiện sớm.",
+      "recorded": "Đã ghi lại:",
+      "ticket_id": "Mã báo cáo:",
+      "contact_us": "Để biết thêm thông tin, vui lòng liên hệ chúng tôi tại",
+      "Quizlearn_email": "Quizlearn",
+      "confirm": "Xác nhận"
+    },
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Báo cáo quizbank thành công"
+      },
+      "failed": {
+        "title": "Đã xảy ra lỗi."
+      }
+    }
+  },
   "Validations": {
     "errors": {
       "invalid_type": "Dự kiến {expected}, nhận được {received}",
@@ -478,6 +576,21 @@
         "datetime": "{validation} không hợp lệ",
         "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
         "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
+      },
+      "edit_account": {
+        "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",
+        "new_password": "Mật khẩu mới phải có ít nhất 8 kí tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 kí tự.",
+        "mismatch_password": "Các mật khẩu không trùng khớp."
+      },
+      "update_profile_form": {
+        "fullname": "Tên của bạn nên có ít nhất 2 kí tự."
+      },
+      "report_quizbank": {
+        "more_details": {
+          "min_error": "Phải ít nhất 10 kí tự.",
+          "max_error": "Không được vượt quá 100 kí tự."
+        }
       },
       "too_small": {
         "array": {
@@ -809,5 +922,9 @@
       },
       "failed": { "title": "Thất bại" }
     }
+  },
+  "LocaleSwitcher": {
+    "label": "Đổi ngôn ngữ",
+    "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"
   }
 }
