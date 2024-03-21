@@ -1,10 +1,10 @@
+import { getUserProfileAction } from "@/app/[locale]/(main)/profile/actions/fetch-user-profile"
 import { getUser } from "@/lib/auth"
-import { getUserProfileAction } from "./profile/actions/fetch-user-profile"
-import { notFound, redirect } from "next/navigation"
-import ViewOtherProfile from "./components/view-other-profile"
+import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
-import _ from "lodash"
+import { notFound } from "next/navigation"
+import EditAccount from "./components/edit-account"
 
 type Props = {
   params: {
@@ -19,30 +19,25 @@ const getUserProfile = async (id: string) => {
 }
 
 export default async function UserProfile({ params }: Props) {
-  const userData = await getUserProfile(params.id)
   const user = getUser()
+  if (!user) return notFound()
+  const userData = await getUserProfile(user.id.toString())
   const msg = await getMessages()
 
-  const isAuthor = user?.id.toString() === params.id
-
-  if (userData === null) {
-    notFound()
-  }
-  if (!isAuthor) {
-    return (
+  return (
+    <>
       <NextIntlClientProvider
         locale={params.locale}
         messages={_.pick(
           msg,
           "LocaleSwitcher",
-          "ViewOtherProfile",
+          "Settings",
           "Validations",
           "Errors"
         )}
       >
-        <ViewOtherProfile userData={userData} />
+        <EditAccount />
       </NextIntlClientProvider>
-    )
-  }
-  redirect(`/profile/${params.id}/profile`)
+    </>
+  )
 }

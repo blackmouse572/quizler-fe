@@ -1,18 +1,28 @@
 "use server"
 
-import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
-export const getUserProfileAction = async (id: string) => {
-  const URL = getAPIServerURL(`/accounts/${id}`)
-  const token = getToken().token
+type ChangePasswordSchema = {
+  token: string
+  values: {
+    oldPassword: string
+    password: string
+  }
+}
+
+export const changePasswordAction = async ({
+  token,
+  values,
+}: ChangePasswordSchema) => {
+  const URL = getAPIServerURL(`/accounts/change-password`)
 
   const options = {
-    method: "GET",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify(values),
   }
 
   return fetch(URL, options)

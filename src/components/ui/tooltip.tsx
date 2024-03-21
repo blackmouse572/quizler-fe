@@ -34,12 +34,13 @@ TooltipContent.displayName = TooltipPrimitive.Content.displayName
 export type NamedToolTip = {
   content: string
   children: React.ReactNode
+  side?: "top" | "right" | "bottom" | "left"
 }
-export function NamedToolTip({ children, content, ...props }: NamedToolTip) {
+export function NamedToolTip({ children, content, side = 'top', ...props }: NamedToolTip) {
   return (
     <Tooltip {...props}>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
-      <TooltipContent>{content}</TooltipContent>
+      <TooltipContent side={side}>{content}</TooltipContent>
     </Tooltip>
   )
 }

@@ -450,12 +450,19 @@
           "dob": "Date of birth"
         },
         "submit_btn": "Save changes"
+      },
+      "verify": {
+        "title": "Verify",
+        "not_verified": "Not verified"
       }
     },
     "preference": "Preference",
     "success": {
       "title": "Update account",
       "description": "Your account has been changed successfully"
+    },
+    "report": {
+      "index": "Report"
     }
   },
   "ViewOtherProfile": {

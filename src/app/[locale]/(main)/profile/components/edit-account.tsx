@@ -12,13 +12,13 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
-import { toast } from "@/components/ui/use-toast"
+import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
+import { toast } from "@/components/ui/use-toast"
+import { useUser } from "@/hooks/useUser"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
-import { Icons } from "@/components/ui/icons"
 import { changePasswordAction } from "../actions/change-password"
-import { useUser } from "@/hooks/useUser"
 
 const FormSchema = z
   .object({
@@ -81,9 +81,8 @@ export default function EditAccount() {
   }
 
   return (
-    <>
-      <div className="h-px shrink-0 self-stretch max-md:max-w-full" />
-      <div className="mt-5 flex w-7/12 max-w-full items-start justify-between gap-5 border-b border-solid border-neutral-400 pb-2.5 max-md:flex-wrap">
+    <div className="w-full space-y-8">
+      <div className="w-full gap-5 border-b border-solid border-neutral-400 pb-2.5 max-md:flex-wrap">
         <div className="text-xl font-semibold leading-8 text-black">
           {i18n("account.title")}
         </div>
@@ -92,7 +91,7 @@ export default function EditAccount() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid w-7/12 max-w-full justify-between gap-2 whitespace-nowrap text-base leading-6 text-black max-md:flex-wrap"
+          className="w-full max-w-sm justify-between space-y-4 leading-6 text-black"
         >
           <FormField
             control={form.control}
@@ -190,6 +189,6 @@ export default function EditAccount() {
           </div>
         </form>
       </Form>
-    </>
+    </div>
   )
 }

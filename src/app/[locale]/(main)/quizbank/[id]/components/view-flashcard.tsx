@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/tooltip"
 import QuizBank, { Quiz } from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
+import ReactCardFlipper from "react-card-flip"
 
 import { useInfiniteQuery } from "@tanstack/react-query"
 import Autoplay from "embla-carousel-autoplay"
@@ -54,9 +55,7 @@ export default function ViewFlashcard({
 
   const {
     data,
-    error,
     isLoading,
-    isFetching,
     fetchNextPage,
     isError,
     refetch,
@@ -139,15 +138,21 @@ export default function ViewFlashcard({
         .split("\n")
         .map((line: string, index: number) => <div key={index}>{line}</div>)
 
+      console.log(selectedItem)
       return (
         <CarouselItem key={item.id + "-carousel"} className="p-8">
-          <Card>
-            <CardContent className="flex aspect-video items-center justify-center">
-              <span className="text-4xl">
-                {selectedItem ? questionWithDiv : item.answer}
-              </span>
-            </CardContent>
-          </Card>
+          <ReactCardFlipper isFlipped={selectedItem} flipDirection="vertical">
+            <Card>
+              <CardContent className="flex aspect-video items-center justify-center">
+                <span className="text-4xl">{item.question}</span>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="flex aspect-video items-center justify-center">
+                <span className="text-4xl">{item.answer}</span>
+              </CardContent>
+            </Card>
+          </ReactCardFlipper>
         </CarouselItem>
       )
     },
@@ -243,6 +248,7 @@ export default function ViewFlashcard({
           <Tooltip>
             <TooltipTrigger asChild>
               <Toggle
+                data-state={isPlaying ? "on" : "off"}
                 onClick={toggleAutoPlay}
                 aria-label={
                   isPlaying
@@ -267,6 +273,7 @@ export default function ViewFlashcard({
               <Toggle
                 aria-label={i18n("ViewFlashcard.shuffle_button")}
                 onClick={shuffle}
+                data-state={isShuffle ? "on" : "off"}
               >
                 {isShuffle ? <Icons.ArrowsRight /> : <Icons.Shuffle />}
               </Toggle>

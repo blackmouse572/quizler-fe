@@ -22,7 +22,7 @@ export default function UpdateUserDialog({ userData }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"ghost"} color={"accent"} isIconOnly>
+        <Button color={"accent"} isIconOnly>
           <Pencil1Icon />
         </Button>
       </DialogTrigger>

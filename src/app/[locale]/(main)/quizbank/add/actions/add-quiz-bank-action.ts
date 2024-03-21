@@ -17,7 +17,7 @@ export type TAPIResult<T> =
       data: null
     }
 
-export const addQuizBankAction = (
+export const addQuizBankAction = async (
   data: AddQuizbank
 ): Promise<TAPIResult<any>> => {
   const url = getAPIServerURL("/quizbank")
@@ -32,28 +32,25 @@ export const addQuizBankAction = (
     body,
   }
 
-  return fetch(url, options)
-    .then(async (res) => {
-      const json = await res.json()
-      if (!res.ok) {
-        throw new Error(json)
-      }
-      return json
-    })
-    .then((res) => {
-      return {
-        ok: true,
-        message: "success",
-        data: res,
-      }
-    })
-    .catch((error) => {
-      return {
-        ok: false,
-        message: error.message,
-        data: null,
-      }
-    })
+  try {
+    const res = await fetch(url, options)
+    const json = await res.json()
+    if (!res.ok) {
+      throw new Error(json.message)
+    }
+    const res_1 = await json
+    return {
+      ok: true,
+      message: "success",
+      data: res_1,
+    }
+  } catch (error: any) {
+    return {
+      ok: false,
+      message: error.message,
+      data: null,
+    }
+  }
 }
 
 export const editQuizBankAction = (

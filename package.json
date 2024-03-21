@@ -66,6 +66,8 @@
     "next": "14.0.4",
     "next-intl": "^3.4.0",
     "react": "^18",
+    "react-card-flip": "^1.2.2",
+    "react-card-flipper": "^1.0.1",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",

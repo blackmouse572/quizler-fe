@@ -6,16 +6,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { User } from "@/types"
 import {
   CalendarIcon,
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
   PersonIcon,
 } from "@radix-ui/react-icons"
-import { User } from "@/types"
 import { format } from "date-fns"
-import UpdateUserDialog from "./update-profile-dialog"
 import { useTranslations } from "next-intl"
+import UpdateUserDialog from "./update-profile-dialog"
 
 type Props = {
   userData: User
@@ -28,7 +28,7 @@ type SettingsProps = React.ComponentPropsWithoutRef<"a"> & {
 }
 
 const ContactInfo = ({ icon, label, value }: SettingsProps) => (
-  <div className="mt-3 flex w-7/12 max-w-full justify-between gap-5 whitespace-nowrap text-base leading-6 text-black max-md:flex-wrap">
+  <div className="flex justify-between gap-5 whitespace-nowrap text-base leading-6 text-black max-md:flex-wrap">
     <div className="flex justify-center gap-1 font-semibold">
       {icon}
       <div>{label}:</div>
@@ -41,9 +41,8 @@ export default function EditProfile({ userData }: Props) {
   const i18n = useTranslations("Settings")
 
   return (
-    <>
-      <div className="h-px shrink-0 self-stretch max-md:max-w-full" />
-      <div className="mt-5 flex w-7/12 max-w-full items-start justify-between gap-5 border-b border-solid border-neutral-400 pb-2.5 max-md:flex-wrap">
+    <div className="w-full space-y-4">
+      <div className="flex max-w-full items-start justify-between border-b border-solid border-neutral-400  pb-2.5 max-md:flex-wrap">
         <div className="text-xl font-semibold leading-8 text-black">
           {i18n("profile.title")}
         </div>
@@ -86,6 +85,6 @@ export default function EditProfile({ userData }: Props) {
         label={i18n("profile.label.dob")}
         value={format(new Date(userData.dob), "dd/MM/yyyy")}
       />
-    </>
+    </div>
   )
 }

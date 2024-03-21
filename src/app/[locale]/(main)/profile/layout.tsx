@@ -1,20 +1,26 @@
+import NavigationMenu from "@/app/[locale]/(main)/profile/components/navigation-menu"
+import SettingsProfile from "@/app/[locale]/(main)/profile/components/settings-profile"
 import BackgroundSquare from "@/components/background-square"
-import { getUser } from "@/lib/auth"
-import { notFound } from "next/navigation"
+import _ from "lodash"
+import { NextIntlClientProvider } from "next-intl"
+import { getMessages } from "next-intl/server"
 
-type Props = { children?: React.ReactNode }
-
-function ProfileLayout({ children }: Props) {
-  const user = getUser()
-  if (!user) return notFound()
+type QuizbankLayoutProps = {
+  children?: React.ReactNode
+}
+async function QuizbankLayout({ children }: QuizbankLayoutProps) {
+  const msg = await getMessages()
   return (
-    <BackgroundSquare
-      variant={"topDown"}
-      className="container mx-auto items-start pt-10"
-    >
-      {children}
+    <BackgroundSquare variant={"default"} className="items-start py-16">
+      <NextIntlClientProvider messages={_.pick(msg, "Settings")}>
+        <div className="container relative mx-auto space-y-4">
+          <SettingsProfile />
+          {children}
+          <NavigationMenu />
+        </div>
+      </NextIntlClientProvider>
     </BackgroundSquare>
   )
 }
 
-export default ProfileLayout
+export default QuizbankLayout
