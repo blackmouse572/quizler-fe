@@ -1,6 +1,7 @@
-import NavigationMenu from "@/app/[locale]/(main)/profile/components/navigation-menu"
+import SideMenu from "@/app/[locale]/(main)/profile/components/side-menu"
 import SettingsProfile from "@/app/[locale]/(main)/profile/components/settings-profile"
 import BackgroundSquare from "@/components/background-square"
+import { PROFILE_SIDEBAR_ITEMS } from "@/lib/config/navbar-config"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
@@ -16,7 +17,7 @@ async function QuizbankLayout({ children }: QuizbankLayoutProps) {
         <div className="container relative mx-auto space-y-4">
           <SettingsProfile />
           {children}
-          <NavigationMenu />
+          <SideMenu items={PROFILE_SIDEBAR_ITEMS} />
         </div>
       </NextIntlClientProvider>
     </BackgroundSquare>

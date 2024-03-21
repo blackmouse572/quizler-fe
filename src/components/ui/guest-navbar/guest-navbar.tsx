@@ -29,6 +29,7 @@ export type MainNavItem = {
   href: string
   description?: string
   disabled?: boolean
+  actived?: boolean
 }
 
 type Props = {

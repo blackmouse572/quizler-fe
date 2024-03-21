@@ -124,6 +124,12 @@
       "questions": "{count} questions",
       "cards": "{count} cards",
       "empty": "There are no posts in this classroom, let's create one"
+    },
+    "navbar": {
+      "index": "Classroom",
+      "members": "Members",
+      "games": "Games",
+      "quizbanks": "Quizbanks"
     }
   },
   "Members_classroom": {
