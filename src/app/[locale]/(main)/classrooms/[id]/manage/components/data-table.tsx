@@ -1,12 +1,10 @@
 "use client"
 
-import * as React from "react"
-import {
-  ChevronDownIcon
-} from "@radix-ui/react-icons"
 import {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -16,14 +14,22 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import * as React from "react"
 
-import { Button } from "@/components/ui/button"
+import Pagination from "@/components/pagination"
+import SizeSelector from "@/components/size-selector"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
-  DropdownMenuContent, DropdownMenuTrigger
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+import { Icons } from "@/components/ui/icons"
 import {
   Table,
   TableBody,
@@ -32,27 +38,182 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import usePaginationValue from "@/hooks/usePaginationValue"
+import PagedResponse from "@/types/paged-response"
+import { useFormatter, useTranslations } from "next-intl"
+import FilterDropdown from "./filter"
+import { ClassroomMembers } from "@/types"
+import { DotsHorizontalIcon } from "@radix-ui/react-icons"
+import DeleteBatchDialog from "./delete-batch-dialog"
+import DeleteDialog from "./delete-dialog"
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+type ClassroomMembersTableProps = {
+  data: PagedResponse<ClassroomMembers>
+  locale?: string
+  params: {
+    id: string
+  }
 }
 
-export function DataTable<TData, TValue>({
-  columns,
+export function ClassroomMembersTable({
   data,
-}: DataTableProps<TData, TValue>) {
+  params: { id },
+}: ClassroomMembersTableProps) {
+  const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
+    data.metadata
+  )
+  const t = useTranslations("Table")
+  const i18n = useTranslations("Members_classroom")
+  const format = useFormatter()
+
+  const columns: ColumnDef<ClassroomMembers>[] = React.useMemo(
+    () => [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <Checkbox
+            className="rounded-[0.25rem] opacity-100"
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected() || false}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+          />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+      },
+      {
+        accessorKey: "fullName",
+        header: ({ column }) => {
+          return (
+            <div
+              className="flex h-full cursor-pointer items-center justify-start gap-2 [&_svg]:h-4 [&_svg]:w-4"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              {i18n("headers.fullName")}
+              {column.getIsSorted() === "asc" ? (
+                <Icons.CaretUpFilled className="ml-auto" />
+              ) : (
+                <Icons.CaretDownFilled className="ml-auto" />
+              )}
+            </div>
+          )
+        },
+        cell: ({ row }) => (
+          <div className="capitalize">{row.getValue("fullName")}</div>
+        ),
+      },
+
+      {
+        accessorKey: "email",
+        header: ({ column }) => {
+          return (
+            <div
+              className="flex h-full cursor-pointer items-center justify-start gap-2 [&_svg]:h-4 [&_svg]:w-4"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              {i18n("headers.email")}
+              {column.getIsSorted() === "asc" ? (
+                <Icons.CaretUpFilled className="ml-auto" />
+              ) : (
+                <Icons.CaretDownFilled className="ml-auto" />
+              )}
+            </div>
+          )
+        },
+        cell: ({ row }) => (
+          <div className="lowercase">{row.getValue("email")}</div>
+        ),
+      },
+      {
+        accessorKey: "dob",
+        header: ({ column }) => {
+          return (
+            <div
+              className="flex h-full cursor-pointer items-center justify-start gap-2 [&_svg]:h-4 [&_svg]:w-4"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              {i18n("headers.dob")}
+              {column.getIsSorted() === "asc" ? (
+                <Icons.CaretUpFilled className="ml-auto" />
+              ) : (
+                <Icons.CaretDownFilled className="ml-auto" />
+              )}
+            </div>
+          )
+        },
+        cell: ({ row }) => (
+          <div className="capitalize">
+            {format.dateTime(new Date(row.getValue("dob")), {
+              dateStyle: "long",
+            })}
+          </div>
+        ),
+      },
+      {
+        id: "options",
+        enableHiding: false,
+        cell: ({ row }) => {
+          const student = row.original
+
+          return (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <DotsHorizontalIcon className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>{i18n("options.title")}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DeleteDialog student={student} classroomId={id} />
+
+                <DropdownMenuItem>
+                  {i18n("options.ban_student")}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )
+        },
+      },
+    ],
+    [format, i18n]
+  )
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: Math.floor(skip / take),
+    pageSize: take,
+  })
+
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
 
   const table = useReactTable({
-    data,
+    data: data.data,
     columns,
+    pageCount: totalPages,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -60,70 +221,108 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: (updater) => {
+      if (typeof updater === "function") {
+        setRowSelection(updater(rowSelection))
+      }
+    },
+    getRowId: (row) => row.id.toString(),
+    manualPagination: true,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination,
     },
   })
 
+  const renderDeleteButton = React.useCallback(() => {
+    if (Object.keys(rowSelection).length) {
+      const model = table.getSelectedRowModel()
+
+      return (
+        <DeleteBatchDialog
+          ids={model.rows.map((row) => row.original.id.toString())}
+        />
+      )
+    }
+  }, [rowSelection, table])
+
+  const renderVisibibleColumnDropdown = React.useCallback(() => {
+    return (
+      <DropdownMenu modal>
+        <DropdownMenuTrigger asChild>
+          <div className="relative">
+            <Button color="accent" className="ml-auto" size="sm" isIconOnly>
+              <Icons.Eye />
+            </Button>
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="min-w-52">
+          <DropdownMenuLabel className="flex items-center">
+            <Icons.Eye className="mr-2 inline-block h-4 w-4 text-emerald-500" />
+            {t("column_visibility")}
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {table
+            .getAllColumns()
+            .filter((column) => column.getCanHide())
+            .map((column) => {
+              return (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  onSelect={(e) => e.preventDefault()} // prevent closing when selecting
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              )
+            })}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.preventDefault()
+              table.resetColumnVisibility()
+            }}
+            className={buttonVariants({
+              className: "w-full",
+            })}
+            disabled={Object.keys(columnVisibility).length === 0}
+          >
+            {t("reset")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+  }, [columnVisibility, t, table])
+
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Search by name"
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="flex items-center justify-between py-4">
+        <div className="flex items-center gap-2">{renderDeleteButton()}</div>
+        <div className="flex items-center gap-2">
+          {renderVisibibleColumnDropdown()}
+          <FilterDropdown table={table} />
+        </div>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+      <div className="rounded-md border border-primary bg-background">
+        <Table className="rounded-md">
+          <TableHeader className="rounded-lg">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id} className="text-sm !font-bold">
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -132,7 +331,9 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
+                  onClick={() => row.toggleSelected()}
                   data-state={row.getIsSelected() && "selected"}
+                  className="h-14"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -145,41 +346,41 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               ))
             ) : (
-              <TableRow>
+              <TableRow key={"empty"}>
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {t("no_results")}
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+      <div className="my-3 flex items-center justify-between">
+        <div className="text-sm text-muted-foreground">
+          {t("selected_rows", {
+            count: table.getFilteredSelectedRowModel().rows.length,
+            total: table.getFilteredRowModel().rows.length,
+          })}
         </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          className="w-fit flex-1"
+          perPage={take}
+          hasNext={hasMore}
+          totalPages={totalPages}
+        />
+        <SizeSelector
+          onValueChange={(value) =>
+            setPagination((prev) => ({
+              ...prev,
+              pageSize: parseInt(value, 10),
+            }))
+          }
+          defaultValue={take.toString()}
+        />
       </div>
     </div>
   )
