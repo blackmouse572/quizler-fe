@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { updateUserProfile } from "../actions/update-user-profile"
+import { updateUserProfileAction } from "../actions/update-user-profile"
 import { toast } from "@/components/ui/use-toast"
 import { useUser } from "@/hooks/useUser"
 import { useRouter } from "next/navigation"
@@ -47,7 +47,7 @@ export default function UpdateProfileForm({ userData }: Props) {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const result = await updateUserProfile({
+    const result = await updateUserProfileAction({
       id: userData.id.toString(),
       token: user.user!.accessToken.token,
       values: values,

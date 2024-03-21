@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { Icons } from "@/components/ui/icons"
-import { ChangePassword } from "../actions/change-password"
+import { changePasswordAction } from "../actions/change-password"
 import { useUser } from "@/hooks/useUser"
 
 const FormSchema = z
@@ -55,7 +55,7 @@ export default function EditAccount() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true)
-    const result = await ChangePassword({
+    const result = await changePasswordAction({
       token: user.user!.accessToken.token,
       values: { oldPassword: data.oldPassword, password: data.password },
     })

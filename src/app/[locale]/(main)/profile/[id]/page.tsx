@@ -1,5 +1,5 @@
 import { getUser } from "@/lib/auth"
-import { fetchUserProfile } from "./profile/actions/fetch-user-profile"
+import { getUserProfileAction } from "./profile/actions/fetch-user-profile"
 import { notFound, redirect } from "next/navigation"
 import ViewOtherProfile from "./components/view-other-profile"
 import { NextIntlClientProvider } from "next-intl"
@@ -14,7 +14,7 @@ type Props = {
 }
 
 const getUserProfile = async (id: string) => {
-  const response = await fetchUserProfile(id)
+  const response = await getUserProfileAction(id)
   return response.data
 }
 

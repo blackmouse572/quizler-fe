@@ -1,3 +1,5 @@
+"use server"
+
 import { getAPIServerURL } from "@/lib/utils"
 import { UpdateProfileForm } from "@/types/update-profile-form"
 
@@ -7,7 +9,7 @@ type UpdateProfileSchema = {
   values: UpdateProfileForm
 }
 
-export const updateUserProfile = async ({
+export const updateUserProfileAction = async ({
   id,
   token,
   values,

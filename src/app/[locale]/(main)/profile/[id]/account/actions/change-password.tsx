@@ -1,3 +1,5 @@
+"use server"
+
 import { getAPIServerURL } from "@/lib/utils"
 
 type ChangePasswordSchema = {
@@ -8,7 +10,7 @@ type ChangePasswordSchema = {
   }
 }
 
-export const ChangePassword = async ({
+export const changePasswordAction = async ({
   token,
   values,
 }: ChangePasswordSchema) => {

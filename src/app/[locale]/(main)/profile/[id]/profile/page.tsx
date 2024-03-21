@@ -3,8 +3,7 @@ import { notFound } from "next/navigation"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import _ from "lodash"
-import { fetchUserProfile } from "./actions/fetch-user-profile"
-import ViewOtherProfile from "../components/view-other-profile"
+import { getUserProfileAction } from "./actions/fetch-user-profile"
 import SettingsProfile from "./components/settings-profile"
 import EditProfile from "./components/edit-profile"
 
@@ -16,7 +15,7 @@ type Props = {
 }
 
 const getUserProfile = async (id: string) => {
-  const response = await fetchUserProfile(id)
+  const response = await getUserProfileAction(id)
   return response.data
 }
 

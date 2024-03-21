@@ -1,7 +1,9 @@
+"use server"
+
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
-export const fetchUserProfile = async (id: string) => {
+export const getUserProfileAction = async (id: string) => {
   const URL = getAPIServerURL(`/accounts/${id}`)
   const token = getToken().token
 
