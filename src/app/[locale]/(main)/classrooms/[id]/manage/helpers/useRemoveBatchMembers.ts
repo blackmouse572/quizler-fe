@@ -1,22 +1,21 @@
-import { queryClient } from "@/app/[locale]/provider"
 import { useMutation } from "@tanstack/react-query"
-import { deleteMemberAction } from "../actions/delete-member-action"
+import { deleteBatchMemberAction } from "../actions/delete-batch-member-action"
 
 type Props = {
   onSuccess?: () => void
   onError?: (error: Error) => void
 }
 
-type Cyka = {
-  memberId: string
+type Blyat = {
+  memberIds: string[]
   classroomId: string
 }
 
-export function useKickStudent({ onSuccess, onError }: Props) {
+export function useRemoveBatchMember({ onSuccess, onError }: Props) {
   return useMutation({
-    mutationFn: async ({ memberId, classroomId }: Cyka) => {
-      const res = await deleteMemberAction({
-        memberId: memberId,
+    mutationFn: async ({ memberIds, classroomId }: Blyat) => {
+      const res = await deleteBatchMemberAction({
+        memberIds: { memberIds },
         classroomId: classroomId,
       })
       if (!res.ok) {

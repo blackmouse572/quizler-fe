@@ -15,7 +15,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { ClassroomMembers } from "@/types"
 import { useTranslations } from "next-intl"
 import { useCallback, useState } from "react"
-import { useKickStudent } from "./useKickStudent"
+import { useKickStudent } from "../helpers/useKickStudent"
 
 type Props = {
   student: ClassroomMembers

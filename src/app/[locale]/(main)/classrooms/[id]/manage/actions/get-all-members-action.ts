@@ -26,7 +26,7 @@ export default async function getAllMembers(
       Authorization: `Bearer ${token.token}`,
     },
     next: {
-      tags: ["classrooms"],
+      tags: ["classroom_management"],
       revalidate: 60, // revalidate every 60 seconds
     },
   }

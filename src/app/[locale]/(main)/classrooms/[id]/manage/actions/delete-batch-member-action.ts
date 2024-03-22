@@ -2,17 +2,20 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
-import { revalidatePath, revalidateTag } from "next/cache"
+import { revalidateTag } from "next/cache"
 
 type Props = {
-  memberId: string
   classroomId: string
+  memberIds: {
+    memberIds: string[]
+  }
 }
 
-export async function deleteMemberAction({ memberId, classroomId }: Props) {
-  const url = getAPIServerURL(
-    `/classrooms/removemember/${memberId}/${classroomId}`
-  )
+export async function deleteBatchMemberAction({
+  classroomId,
+  memberIds,
+}: Props) {
+  const url = getAPIServerURL(`/classrooms/batchremovemember/${classroomId}`)
   const { token } = getToken()
   const options: RequestInit = {
     method: "DELETE",
@@ -20,6 +23,7 @@ export async function deleteMemberAction({ memberId, classroomId }: Props) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify(memberIds)
   }
 
   return fetch(url, options)
@@ -31,7 +35,7 @@ export async function deleteMemberAction({ memberId, classroomId }: Props) {
       return true
     })
     .then((data) => {
-      revalidateTag(`classrooms`)
+      revalidateTag(`classroom_management`)
       return {
         ok: true,
         message: "success",

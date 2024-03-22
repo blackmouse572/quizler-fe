@@ -176,7 +176,7 @@ export function ClassroomMembersTable({
           return (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
+                <Button variant="ghost" className="h-8 w-8 p-0" isIconOnly>
                   <DotsHorizontalIcon className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -194,7 +194,7 @@ export function ClassroomMembersTable({
         },
       },
     ],
-    [format, i18n]
+    [format, i18n, id]
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -244,10 +244,11 @@ export function ClassroomMembersTable({
       return (
         <DeleteBatchDialog
           ids={model.rows.map((row) => row.original.id.toString())}
+          classroomId={id}
         />
       )
     }
-  }, [rowSelection, table])
+  }, [id, rowSelection, table])
 
   const renderVisibibleColumnDropdown = React.useCallback(() => {
     return (

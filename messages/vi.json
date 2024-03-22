@@ -150,7 +150,8 @@
       "title": "Xóa nhiều người",
       "delete_message": "Bạn có chắc chắn muốn xoá <span></span> học sinh không?",
       "cancel_btn": "Hủy",
-      "delete_btn": "Xoá"
+      "delete_btn": "Xoá",
+      "success": "Đã xóa học sinh khỏi lớp"
     }
   },
   "SearchPage": {

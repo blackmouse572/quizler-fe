@@ -165,7 +165,8 @@
       "title": "Remove users",
       "delete_message": "Are you sure you want to remove <span></span> student(s)?",
       "cancel_btn": "Cancel",
-      "delete_btn": "Delete"
+      "delete_btn": "Delete",
+      "success": "User(s) has been removed from class"
     }
   },
   "MyQuizbanks": {
