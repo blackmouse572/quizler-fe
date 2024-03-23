@@ -78,6 +78,7 @@ import {
   IconUser,
   IconFingerprint,
   TablerIconsProps,
+  IconEyeOff
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -111,6 +112,7 @@ export const Icons = {
   ArrowDownRight: IconArrowDownRight,
   CircleOff: IconCircleOff,
   Eye: IconEye,
+  EyeOff: IconEyeOff,
   Filter: IconFilter,
   Report: IconFlag2,
   Search: IconSearch,

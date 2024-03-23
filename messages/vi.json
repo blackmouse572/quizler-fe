@@ -913,6 +913,25 @@
       "redo": "Làm lại"
     }
   },
+  "Change_quizbank_visibility": {
+    "visibility": {
+      "Public": "công khai",
+      "Private": "cá nhân"
+    },
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Thành công chuyển trạng thái ngân hàng câu hỏi sang {visibility}"
+      },
+      "failed": { "title": "Thất bại" }
+    },
+    "confirm_dialog": {
+      "title": "Bạn có muốn thay đổi trạng thái của ngân hàng câu hỏi",
+      "description": "Trạng thái ngân hàng câu hỏi sẽ được chuyển sang {visibility}",
+      "cancel": "Hủy",
+      "continue": "Tiếp tục"
+    }
+  },
   "LocaleSwitcher": {
     "label": "Đổi ngôn ngữ",
     "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"

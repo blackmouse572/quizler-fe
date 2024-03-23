@@ -97,3 +97,51 @@ export const editQuizBankAction = (
       }
     })
 }
+
+/**
+ * Used to update some of the fields, not all fields
+ * @param data 
+ * @param quizBankId 
+ * @returns 
+ */
+export const updateQuizBankAction = (
+  data: Partial<AddQuizbank>,
+  quizBankId: string
+): Promise<TAPIResult<any>> => {
+  const url = getAPIServerURL(`/quizbank/${quizBankId}`)
+  const { token } = getToken()
+
+  const body = JSON.stringify(data)
+  const options: RequestInit = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body,
+  }
+
+  return fetch(url, { ...options, body })
+    .then(async (res) => {
+      const json = await res.json()
+      if (!res.ok) {
+        throw new Error(json)
+      }
+      return json
+    })
+    .then((res) => {
+      revalidatePath(`/quizbank/${quizBankId}`)
+      return {
+        ok: true,
+        message: "success",
+        data: res,
+      }
+    })
+    .catch((error) => {
+      return {
+        ok: false,
+        message: error.message as string,
+        data: null,
+      }
+    })
+}

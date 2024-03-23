@@ -30,6 +30,7 @@ function ViewQuizBank({
         authorData={quizBankData.author}
         classname={classname}
         isOwnQuizBank={isOwnQuizBank}
+        quizBankVisibility={quizBankData.visibility}
       />
     </div>
   )

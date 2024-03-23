@@ -926,6 +926,25 @@
       "redo": "Redo"
     }
   },
+  "Change_quizbank_visibility": {
+    "visibility": {
+      "Public": "public",
+      "Private": "private"
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully change quizbank visibility to {visibility}"
+      },
+      "failed": { "title": "Failed" }
+    },
+    "confirm_dialog": {
+      "title": "Do you want to change quizbank visibility?",
+      "description": "Quizbank visibility will be change to {visibility}",
+      "cancel": "Cancel",
+      "continue": "Continue"
+    }
+  },
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"

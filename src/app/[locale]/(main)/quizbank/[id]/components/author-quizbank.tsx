@@ -1,20 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/ui/icons"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { getToken } from "@/lib/auth"
 import { getShortName } from "@/lib/string-helper"
-import { fetchClassroomCurrentUser } from "@/services/account.service"
 import { Classroom, User } from "@/types"
 import { useTranslations } from "next-intl"
-import { use, useMemo } from "react"
-import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
-import EditQuizBank from "./edit-button"
-import ReportQuizBankDialog from "./report-quizbank-dialog/report-quizbank-dialog"
+import { fetchClassroomCurrentUser } from "../actions/fetch-classroom"
+import QuizBankActions from "./quizbank-options"
+import { use } from "react"
 import Link from "next/link"
 
 type Props = {
@@ -22,6 +12,7 @@ type Props = {
   classname?: string
   quizbankId: string
   isOwnQuizBank?: boolean
+  quizBankVisibility: "Public" | "Private"
 }
 
 export default function AuthorQuizBank({
@@ -29,54 +20,12 @@ export default function AuthorQuizBank({
   classname,
   quizbankId,
   isOwnQuizBank,
+  quizBankVisibility,
 }: Props) {
   const i18n = useTranslations("ViewQuizBank")
-  const { token } = getToken()
   const { data: userCurrentClass }: { data: Classroom[] } = use(
-    fetchClassroomCurrentUser(token)
+    fetchClassroomCurrentUser()
   )
-
-  // TODO: set action for public button
-  const quizBankActions = useMemo(() => {
-    const defaultButtons = [
-      <CopyQuizBankDialog
-        token={token}
-        quizbankId={quizbankId}
-        buttonContent={i18n("author.copy_button")}
-        classes={userCurrentClass}
-      />,
-    ]
-    const OwnerQuizBankButtons = [
-      <EditQuizBank
-        quizbankId={quizbankId}
-        content={i18n("author.edit_button")}
-      />,
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button color="accent" isIconOnly>
-            <Icons.Eye />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>{i18n("author.public_button")}</TooltipContent>
-      </Tooltip>,
-    ]
-    const visitorQuizBankButtons = [
-      <ReportQuizBankDialog
-        token={token}
-        quizbankId={quizbankId}
-        buttonContent={i18n("author.report_button")}
-      />
-    ]
-
-    let shouldUsedButtons: React.JSX.Element[]
-    if (isOwnQuizBank) {
-      shouldUsedButtons = [...OwnerQuizBankButtons]
-    } else {
-      shouldUsedButtons = [...visitorQuizBankButtons]
-    }
-    return (shouldUsedButtons = [...defaultButtons, ...shouldUsedButtons])
-  }, [i18n, isOwnQuizBank, quizbankId, token, userCurrentClass])
-
   return (
     <div className="space-y-4">
       <div className=" border-b-2 border-gray-300 text-xl font-bold leading-8 text-black max-md:mt-10 max-md:max-w-full" />
@@ -122,9 +71,12 @@ export default function AuthorQuizBank({
             </div>
           </div>
         </div>
-        <div className="flex justify-between gap-2">
-          {quizBankActions.map((btn) => btn)}
-        </div>
+        <QuizBankActions
+          quizbankId={quizbankId}
+          quizBankVisibility={quizBankVisibility}
+          isOwnQuizBank={isOwnQuizBank}
+          userCurrentClass={userCurrentClass}
+        />
       </div>
     </div>
   )
