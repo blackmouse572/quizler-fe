@@ -44,8 +44,13 @@ export default async function ManageClassroomPage({
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
-  const data = await getAllMembers(id, options)
+  const {ok: ok, data: data} = await getAllMembers(id, options)
 
+  if (!ok || !data) {
+    return notFound()
+  }
+
+  // TODO: check role here
   // const isAuthor = user?.role === "User" && user?.email === data
 
   // {
@@ -68,7 +73,7 @@ export default async function ManageClassroomPage({
           </div>
         </div>
         <div className="border-t-2 border-zinc-400"></div>
-        <ClassroomMembersTable data={data} params={params} />
+        <ClassroomMembersTable data={data!} params={params} />
       </div>
     </NextIntlClientProvider>
   )

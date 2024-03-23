@@ -33,11 +33,32 @@ export default async function getAllMembers(
 
   const url = getAPIServerURL(`/classrooms/get-all-member/${classroomId}?` + params)
 
-  const res: PagedResponse<ClassroomMembers> = await fetch(url, option)
-    .then((res) => res.json())
-    .catch((err) => {
-      console.error(`[ERROR] getClassroomMembers: ${url} `, err)
-      throw new Error(err)
+  return fetch(url, option)
+    .then(async (res) => {
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.message)
+      }
+      return data
     })
-  return res
+    .then((res: PagedResponse<ClassroomMembers>) => ({
+      ok: true,
+      message: "success",
+      data: res,
+    }))
+    .catch((err) => {
+      return {
+        ok: false,
+        message: err.message,
+        data: null,
+      }
+    })
+
+  // const res: PagedResponse<ClassroomMembers> = await fetch(url, option)
+  //   .then((res) => res.json())
+  //   .catch((err) => {
+  //     console.error(`[ERROR] getClassroomMembers: ${url} `, err)
+  //     throw new Error(err)
+  //   })
+  // return res
 }

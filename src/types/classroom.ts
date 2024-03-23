@@ -23,22 +23,15 @@ type Classroom = {
   created: string
 }
 
-type ClassroomMembers = {
-  id: string
-  username: string
-  fullName: string
-  email: string
-  avatar: string
-  dob: string
-  useAICount: number
-  favoriteBankIds: number[]
-  created: string
-  updated: string
-  isVerified: boolean
-}
+type ClassroomMembers = Omit<User, "accessToken" | "refreshToken" | "role">
 
 type TClassRoomCardRef = {
   setIsDelete: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export type { Classroom, ClassroomInvitation, TClassRoomCardRef, ClassroomMembers }
+export type {
+  Classroom,
+  ClassroomInvitation,
+  TClassRoomCardRef,
+  ClassroomMembers,
+}
