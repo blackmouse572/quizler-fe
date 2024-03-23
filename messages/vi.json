@@ -236,6 +236,8 @@
     "delete_message": "Bạn có chắc chắn muốn xoá <span></span> bản ghi không?",
     "ban": "Cấm",
     "ban_message": "Bạn có chắc chắn muốn cấm <span></span> thành viên không?",
+    "unban": "Phục Hồi",
+    "unban_message": "Bạn có chắc chắn muốn phục hồi <span></span> thành viên không?",
     "edit": "Chỉnh sửa",
     "create": "Tạo mới",
     "show": "Xem",
@@ -930,6 +932,12 @@
               "cancel": "Hủy",
               "ban": "Cấm"
             }
+          }
+        },
+        "unban": {
+          "buttons": {
+            "cancel": "Hủy",
+            "ban": "Phục hồi"
           }
         }
       },

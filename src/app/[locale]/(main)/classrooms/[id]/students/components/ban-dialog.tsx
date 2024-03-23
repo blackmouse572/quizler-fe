@@ -9,21 +9,24 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Icons } from "@/components/ui/icons"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 type Props = {
-  ids: string[],
+  ids: string[]
   disabled?: boolean
+  /**
+   * If current action is to ban user
+   */
+  isBan?: boolean
 } & React.ComponentProps<"div">
 
-function BanDialog({ ids, disabled,...props }: Props) {
+function BanDialog({ ids, disabled, isBan = true, ...props }: Props) {
   const tableI18n = useTranslations("Table")
   const banActionI18n = useTranslations(
-    "Classroom_student.table.headers.actions.ban"
+    `Classroom_student.table.headers.actions.${isBan ? "ban" : "unban"}`
   )
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
@@ -33,7 +36,7 @@ function BanDialog({ ids, disabled,...props }: Props) {
           <DialogHeader>
             <DialogTitle>Delete Items</DialogTitle>
             <DialogDescription>
-              {tableI18n.rich("ban_message", {
+              {tableI18n.rich(`${isBan ? "ban" : "unban"}_message`, {
                 span: (children) => (
                   <span className="font-bold">({ids.length})</span>
                 ),
@@ -52,9 +55,14 @@ function BanDialog({ ids, disabled,...props }: Props) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <Button disabled={disabled} color="danger" size={"sm"} onClick={() => setIsOpen(true)}>
+      <Button
+        disabled={disabled}
+        color={`${isBan ? "danger" : "success"}`}
+        size={"sm"}
+        onClick={() => setIsOpen(true)}
+      >
         <Icons.Ban />
-        {tableI18n("ban")}
+        {tableI18n(`${isBan ? "ban" : "unban"}`)}
       </Button>
     </>
   )
