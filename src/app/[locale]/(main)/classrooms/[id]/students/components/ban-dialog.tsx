@@ -49,7 +49,7 @@ function BanDialog({ ids, disabled, isBan = true, ...props }: Props) {
                 {banActionI18n("buttons.cancel")}
               </Button>
             </DialogClose>
-            <Button variant="default" color="danger">
+            <Button variant="default" color={`${isBan ? "danger" : "success"}`}>
               {banActionI18n("buttons.ban")}
             </Button>
           </DialogFooter>
