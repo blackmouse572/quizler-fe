@@ -80,22 +80,22 @@ const CLASSROOM_SIDEBAR_ITEMS: (id: string) => MainNavItem[] = (id) => [
   {
     icon: "ArtBoard",
     title: "navbar.index",
-    href: `/${id}/`,
+    href: `/classrooms/${id}/`,
   },
   {
     icon: "Game",
     title: "navbar.games",
-    href: `/${id}/games`,
+    href: `/classrooms/${id}/games`,
   },
   {
     icon: "Icon",
     title: "navbar.quizbanks",
-    href: `/${id}/quizbanks`,
+    href: `/classrooms/${id}/quizbanks`,
   },
   {
     icon: "MultiUsers",
     title: "navbar.members",
-    href: `/${id}/members`,
+    href: `/classrooms/${id}/members`,
   },
 ]
 export {

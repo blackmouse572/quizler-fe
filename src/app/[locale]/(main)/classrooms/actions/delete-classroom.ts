@@ -1,6 +1,7 @@
 "use server"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { revalidateTag } from "next/cache"
 
 export const deleteClassroom = async (classroomId: string) => {
   const URL = getAPIServerURL(`/classrooms/${classroomId}`)
@@ -21,9 +22,11 @@ export const deleteClassroom = async (classroomId: string) => {
         message: res.statusText,
       }
     }
+    revalidateTag(`classroom-details-${classroomId}`)
+    revalidateTag("classrooms")
     return {
       isSuccess: true,
-      message: ''
+      message: "",
     }
   })
 }

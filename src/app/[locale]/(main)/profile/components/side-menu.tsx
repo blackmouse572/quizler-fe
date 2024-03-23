@@ -51,7 +51,8 @@ export default function SideMenu({
             <Link href={href} key={href}>
               <NamedToolTip content={t(title)} side="left">
                 <Button
-                  variant={actived ? "default" : "flat"}
+                  variant={actived ? "default" : "light"}
+                  className={cn(actived && "bg-emerald-500")}
                   onClick={() => handleClick(href!)}
                   isIconOnly
                 >

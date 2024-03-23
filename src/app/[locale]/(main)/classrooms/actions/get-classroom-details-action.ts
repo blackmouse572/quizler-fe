@@ -4,8 +4,8 @@ import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { Classroom } from "@/types"
 export const TAGS_CLASSROOM_DETAILS = (id: string) => [
-  "Classroom",
-  `ClassroomDetails-${id}`,
+  "classroom-details",
+  `classroom-details-${id}`,
 ]
 async function getClassroomDetails(id: string) {
   const url = getAPIServerURL(`/classrooms/${id}`)
@@ -17,7 +17,7 @@ async function getClassroomDetails(id: string) {
       Authorization: `Bearer ${token}`,
     },
     next: {
-      revalidate: 60,
+      revalidate: 3600,
       tags: TAGS_CLASSROOM_DETAILS(id),
     },
   }

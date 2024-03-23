@@ -43,6 +43,10 @@ export function fetchClassroomCurrentUser(token: string) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    next: {
+      revalidate: 3600,
+      tags: ["classrooms"],
+    },
   }
 
   return fetch(URL, options).then(async (response) => {
@@ -51,6 +55,6 @@ export function fetchClassroomCurrentUser(token: string) {
       throw new Error(error.message)
     }
     const result = await response.json()
-    return result;
+    return result
   })
 }
