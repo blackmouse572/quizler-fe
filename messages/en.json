@@ -948,5 +948,15 @@
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"
+  },
+  "Classroom_student": {
+    "table": {
+      "headers": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role"
+      },
+      "filters": {}
+    }
   }
 }
