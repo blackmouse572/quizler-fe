@@ -234,6 +234,8 @@
     "delete": "Xoá",
     "delete_title": "Xoá bản ghi",
     "delete_message": "Bạn có chắc chắn muốn xoá <span></span> bản ghi không?",
+    "ban": "Cấm",
+    "ban_message": "Bạn có chắc chắn muốn cấm <span></span> thành viên không?",
     "edit": "Chỉnh sửa",
     "create": "Tạo mới",
     "show": "Xem",
@@ -921,7 +923,15 @@
       "headers": {
         "name": "Tên",
         "email": "Email",
-        "role": "Vai trò"
+        "role": "Vai trò",
+        "actions": {
+          "ban": {
+            "buttons": {
+              "cancel": "Hủy",
+              "ban": "Cấm"
+            }
+          }
+        }
       },
       "filters": {}
     }

@@ -31,6 +31,8 @@
     "delete": "Delete",
     "delete_title": "Delete items",
     "delete_message": "Are you sure you want to delete <span></span> items?",
+    "ban": "Ban",
+    "ban_message": "Are you sure you want to delete <span></span> members?",
     "edit": "Edit",
     "create": "Create",
     "show": "Show",
@@ -932,7 +934,15 @@
       "headers": {
         "name": "Name",
         "email": "Email",
-        "role": "Role"
+        "role": "Role",
+        "actions": {
+          "ban": {
+            "buttons": {
+              "cancel": "Cancel",
+              "ban": "Ban"
+            }
+          }
+        }
       },
       "filters": {}
     }
