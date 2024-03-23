@@ -1,6 +1,5 @@
 "use client"
 
-import DeleteDialog from "@/app/[locale]/admin/quizbank/components/delete-dialog"
 import Pagination from "@/components/pagination"
 import SizeSelector from "@/components/size-selector"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -28,8 +27,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { useTranslations } from "next-intl"
+import { useFormatter, useTranslations } from "next-intl"
 import React from "react"
+import BanDialog from "./ban-dialog"
 
 type StudentTableProps = {
   data: PagedResponse<User>
@@ -42,6 +42,7 @@ const StudentTable = ({ data }: StudentTableProps) => {
   )
   const t = useTranslations("Table")
   const i18n = useTranslations("Classroom_student")
+  const format = useFormatter()
 
   const columns: ColumnDef<User>[] = React.useMemo(
     () => [
@@ -86,15 +87,21 @@ const StudentTable = ({ data }: StudentTableProps) => {
         },
       },
       {
-        header: i18n("table.headers.role"),
-        accessorKey: "role",
+        header: i18n("table.headers.dob"),
+        accessorKey: "dob",
         cell: ({ row }) => {
-          const role = row.getValue("role") as User["role"]
-          return <div className="min-w-52 capitalize">{role}</div>
+          const dob = row.getValue("dob") as User["dob"]
+          return (
+            <div className="min-w-52">
+              {format.dateTime(new Date(dob), {
+                dateStyle: "long",
+              })}
+            </div>
+          )
         },
       },
     ],
-    [i18n]
+    [format, i18n]
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -133,24 +140,21 @@ const StudentTable = ({ data }: StudentTableProps) => {
     },
   })
 
-  const renderDeleteButton = React.useCallback(() => {
-    if (Object.keys(rowSelection).length) {
-      const model = table.getSelectedRowModel()
+  const renderBanButton = React.useCallback(() => {
+    const model = table.getSelectedRowModel()
 
-      return (
-        <DeleteDialog
-          ids={model.rows.map((row) => row.original.id.toString())}
-        />
-      )
-    }
+    return (
+      <BanDialog
+        ids={model?.rows.map((row) => row.original.id.toString())}
+        disabled={Object.keys(rowSelection).length <= 0}
+      />
+    )
   }, [rowSelection, table])
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
-        <div className="flex items-center gap-2">{renderDeleteButton()}</div>
-        <div className="flex items-center gap-2">
-        </div>
+        <div className="flex items-center gap-2">{renderBanButton()}</div>
       </div>
       <div className="rounded-md border border-primary bg-background">
         <Table className="rounded-md">

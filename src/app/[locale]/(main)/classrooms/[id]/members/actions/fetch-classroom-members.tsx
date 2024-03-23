@@ -2,7 +2,7 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
-import { ClassroomMembers } from "@/types"
+import { User } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 
@@ -41,7 +41,7 @@ export default async function getAllMembers(
       }
       return data
     })
-    .then((res: PagedResponse<ClassroomMembers>) => ({
+    .then((res: PagedResponse<User>) => ({
       ok: true,
       message: "success",
       data: res,

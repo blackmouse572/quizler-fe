@@ -78,6 +78,7 @@ import {
   IconUser,
   IconFingerprint,
   TablerIconsProps,
+  IconBan,
   IconEyeOff
 } from "@tabler/icons-react"
 
@@ -131,6 +132,7 @@ export const Icons = {
   Send: IconBrandTelegram,
   Dot: IconDots,
   Help: IconHelp,
+  Ban: IconBan,
 
   //Chevrons
   ChevronUp: IconChevronUp,
