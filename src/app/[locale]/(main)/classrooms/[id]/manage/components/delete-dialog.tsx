@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button"
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Icons } from "@/components/ui/icons"
@@ -86,7 +86,10 @@ export default function DeleteDialog({
             variant="default"
             color="danger"
             onClick={() =>
-              mutate({ memberId: student.id, classroomId: classroomId })
+              mutate({
+                memberId: student.id.toString(),
+                classroomId: classroomId,
+              })
             }
           >
             {isPending && <Icons.Spinner className="animate-spin" />}
