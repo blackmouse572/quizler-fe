@@ -107,6 +107,53 @@
       "empty": "Không có bài đăng nào trong lớp học này, hãy tạo một"
     }
   },
+  "Members_classroom": {
+    "metadata": {
+      "title": "Thành viên trong lớp",
+      "description": "Tất cả các thành viên trong lớp"
+    },
+    "headers": {
+      "fullName": "Tên",
+      "email": "Email",
+      "dob": "Ngày sinh"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "options": {
+      "title": "Tùy chọn",
+      "kick_student": "Xóa học sinh",
+      "ban_student": "Cấm học sinh"
+    },
+    "kick_user": {
+      "title": "Xóa học sinh",
+      "delete_message": "Bạn có chắc chắn muốn xoá <span></span> không?",
+      "cancel_btn": "Hủy",
+      "delete_btn": "Xóa",
+      "success": "Đã xóa học sinh khỏi lớp"
+    },
+    "remove_batch": {
+      "title": "Xóa nhiều người",
+      "delete_message": "Bạn có chắc chắn muốn xoá <span></span> học sinh không?",
+      "cancel_btn": "Hủy",
+      "delete_btn": "Xoá",
+      "success": "Đã xóa học sinh khỏi lớp"
+    }
+  },
   "SearchPage": {
     "search_error": "Đã có lỗi xảy ra, vui lòng thử lại sau",
     "results_for": "Kết quả cho",
@@ -786,6 +833,12 @@
       "not_found": "Không tìm thấy lớp học",
       "user_not_found": "Không tìm thấy người dùng",
       "user_in_classroom": "Người dùng đã ở trong lớp học"
+    }
+  },
+  "ManageClassroomMembers": {
+    "metadata": {
+      "title": "Thành viên trong lớp",
+      "description": "Tất cả các thành viên trong lớp"
     }
   },
   "AddClassroom": {

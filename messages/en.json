@@ -30,7 +30,7 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "delete_title": "Delete items",
-    "delete_message": "Are you sure you want to delete <span></span> items?",
+    "delete_message": "Are you sure you want to delete <span></span> item(s)?",
     "edit": "Edit",
     "create": "Create",
     "show": "Show",
@@ -120,6 +120,53 @@
       "questions": "{count} questions",
       "cards": "{count} cards",
       "empty": "There are no posts in this classroom, let's create one"
+    }
+  },
+  "Members_classroom": {
+    "metadata": {
+      "title": "Classroom members",
+      "description": "All classroom members"
+    },
+    "headers": {
+      "fullName": "Name",
+      "email": "Email",
+      "dob": "Date of birth"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "options": {
+      "title": "Options",
+      "kick_student": "Kick student",
+      "ban_student": "Ban student"
+    },
+    "kick_user": {
+      "title": "Kick student",
+      "delete_message": "Are you sure you want to kick <span></span>?",
+      "cancel_btn": "Cancel",
+      "delete_btn": "Kick",
+      "success": "User has been kicked from class"
+    },
+    "remove_batch": {
+      "title": "Remove users",
+      "delete_message": "Are you sure you want to remove <span></span> student(s)?",
+      "cancel_btn": "Cancel",
+      "delete_btn": "Delete",
+      "success": "User(s) has been removed from class"
     }
   },
   "MyQuizbanks": {
@@ -798,6 +845,12 @@
       "placeholder": "New Quiz"
     },
     "errorBtn": "Errors messages"
+  },
+  "ManageClassroomMembers": {
+    "metadata": {
+      "title": "Classroom members",
+      "description": "All classroom members"
+    }
   },
   "AddClassroom": {
     "metadata": {
