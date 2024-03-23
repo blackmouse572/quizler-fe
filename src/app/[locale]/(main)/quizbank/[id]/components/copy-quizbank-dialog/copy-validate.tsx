@@ -27,11 +27,11 @@ export enum ECopyTo  {
 export const copyToChoice = [
   {
     id: ECopyTo.classroom,
-    text: "Classroom",
+    text: "form.classroom.text",
   },
   {
     id: ECopyTo.personal,
-    text: "Personal",
+    text: "form.personal.text",
   },
 ]
 export default getCopyQuizShema
