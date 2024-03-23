@@ -480,6 +480,9 @@
         "text": "Lớp",
         "placeholder": "Chọn lớp để sao chép tới"
       },
+      "personal": {
+        "text": "Kho cá nhân"
+      },
       "public": {
         "label": "public",
         "text": "Công khai"
