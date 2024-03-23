@@ -563,6 +563,9 @@
         "text": "Classroom",
         "placeholder": "Chose classroom to copy to"
       },
+      "personal": {
+        "text": "Personal"
+      },
       "public": {
         "label": "public",
         "text": "Public"

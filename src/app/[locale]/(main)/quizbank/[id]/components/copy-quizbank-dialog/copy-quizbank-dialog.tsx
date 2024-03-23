@@ -42,7 +42,10 @@ import { useTranslations } from "next-intl"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Classroom } from "@/types"
-import { copyQuizBankToClassroom, copyQuizBankToPersonal } from "@/services/quiz.service"
+import {
+  copyQuizBankToClassroom,
+  copyQuizBankToPersonal,
+} from "@/services/quiz.service"
 import { toast } from "@/components/ui/use-toast"
 
 type Props = {
@@ -99,16 +102,14 @@ export default function CopyQuizBankDialog({
           required
         >
           <SelectTrigger>
-            {items && (
-              <SelectValue placeholder={items[0].text} />
-            )}
+            {items && <SelectValue placeholder={items[0].text} />}
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>{label}</SelectLabel>
               {items?.map((item) => (
                 <SelectItem key={item.id} value={item.id}>
-                  {item.text}
+                  {field.name === "copyTo" ? i18n(item.text as any) : item.text}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -116,7 +117,7 @@ export default function CopyQuizBankDialog({
         </Select>
       )
     },
-    [isLoading]
+    [i18n, isLoading]
   )
 
   const copyTochoices = copyToChoice.map((choice) => choice.id) as [
@@ -161,8 +162,8 @@ export default function CopyQuizBankDialog({
   async function onSubmit(values: CopyQuizBankSchemaType) {
     const { classroom } = values
     setIsLoading(true)
-    let result;
-    if (copyToValue === ECopyTo.classroom){
+    let result
+    if (copyToValue === ECopyTo.classroom) {
       result = await copyQuizBankToClassroom(token, quizbankId, classroom)
     } else {
       result = await copyQuizBankToPersonal(token, quizbankId)
