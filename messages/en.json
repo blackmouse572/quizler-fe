@@ -1011,7 +1011,7 @@
       "headers": {
         "name": "Name",
         "email": "Email",
-        "role": "Role",
+        "dob": "Date of birth",
         "actions": {
           "ban": {
             "buttons": {

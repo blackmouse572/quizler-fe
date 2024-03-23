@@ -61,18 +61,7 @@ export default async function ManageClassroomPage({
     <NextIntlClientProvider
       messages={_.pick(msg, "Validations", "Join_classroom", "Table", "Members_classroom", "Errors")}
     >
-      <div className="container">
-        <div className="relative mt-5 flex w-[658px] max-w-full justify-between gap-5 self-center pr-2.5 max-md:flex-wrap">
-          <div className="flex flex-col">
-            <div className="text-2xl font-bold leading-9 text-black">
-              VND: Viettnam Dong
-            </div>
-            <div className="text-lg font-medium leading-8 text-neutral-400">
-              123 students
-            </div>
-          </div>
-        </div>
-        <div className="border-t-2 border-zinc-400"></div>
+      <div className="mt-6 space-y-12">
         <ClassroomMembersTable data={data!} params={params} />
       </div>
     </NextIntlClientProvider>

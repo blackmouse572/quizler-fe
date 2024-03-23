@@ -1000,7 +1000,7 @@
       "headers": {
         "name": "Tên",
         "email": "Email",
-        "role": "Vai trò",
+        "dob": "Ngày sinh",
         "actions": {
           "ban": {
             "buttons": {
