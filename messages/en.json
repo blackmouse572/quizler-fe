@@ -126,6 +126,53 @@
       "empty": "There are no posts in this classroom, let's create one"
     }
   },
+  "Members_classroom": {
+    "metadata": {
+      "title": "Classroom members",
+      "description": "All classroom members"
+    },
+    "headers": {
+      "fullName": "Name",
+      "email": "Email",
+      "dob": "Date of birth"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "options": {
+      "title": "Options",
+      "kick_student": "Kick student",
+      "ban_student": "Ban student"
+    },
+    "kick_user": {
+      "title": "Kick student",
+      "delete_message": "Are you sure you want to kick <span></span>?",
+      "cancel_btn": "Cancel",
+      "delete_btn": "Kick",
+      "success": "User has been kicked from class"
+    },
+    "remove_batch": {
+      "title": "Remove users",
+      "delete_message": "Are you sure you want to remove <span></span> student(s)?",
+      "cancel_btn": "Cancel",
+      "delete_btn": "Delete",
+      "success": "User(s) has been removed from class"
+    }
+  },
   "MyQuizbanks": {
     "metadata": {
       "title": "My Quiz Banks",
@@ -567,6 +614,9 @@
         "text": "Classroom",
         "placeholder": "Chose classroom to copy to"
       },
+      "personal": {
+        "text": "Personal"
+      },
       "public": {
         "label": "public",
         "text": "Public"
@@ -800,6 +850,12 @@
     },
     "errorBtn": "Errors messages"
   },
+  "ManageClassroomMembers": {
+    "metadata": {
+      "title": "Classroom members",
+      "description": "All classroom members"
+    }
+  },
   "AddClassroom": {
     "metadata": {
       "title": "Create new classroom",
@@ -925,6 +981,25 @@
     "history": {
       "undo": "Undo",
       "redo": "Redo"
+    }
+  },
+  "Change_quizbank_visibility": {
+    "visibility": {
+      "Public": "public",
+      "Private": "private"
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully change quizbank visibility to {visibility}"
+      },
+      "failed": { "title": "Failed" }
+    },
+    "confirm_dialog": {
+      "title": "Do you want to change quizbank visibility?",
+      "description": "Quizbank visibility will be change to {visibility}",
+      "cancel": "Cancel",
+      "continue": "Continue"
     }
   },
   "LocaleSwitcher": {
