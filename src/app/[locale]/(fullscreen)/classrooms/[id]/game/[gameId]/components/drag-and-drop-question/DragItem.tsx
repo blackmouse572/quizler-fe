@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils"
 import { Draggable, DraggableProps } from "@hello-pangea/dnd"
 type Props = {
   item: {
-    id: number
+    id: string
     answer: string
   }
   index: number

@@ -4,7 +4,7 @@ import { Droppable, DroppableProps } from "@hello-pangea/dnd"
 
 type Props = {
   item: {
-    id: number
+    id: string
     title: string
   }
   children?: React.ReactNode
@@ -24,16 +24,15 @@ function Dropable({ item, children, droppableId, className, ...props }: Props) {
           {...provided.droppableProps}
           ref={provided.innerRef}
           className={cn(
-            "bg-background",
+            "bg-background transition-all",
             snapshot.isDraggingOver && "border-emerald-500",
             className
           )}
         >
           <CardHeader>
-            <CardTitle>{item.title}</CardTitle>
+            <CardTitle className="text-center">{item.title}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 text-lg font-bold">
-            {provided.placeholder}
             {children}
           </CardContent>
         </Card>

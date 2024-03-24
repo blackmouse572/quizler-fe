@@ -115,7 +115,7 @@ function PostList({ ...props }: Props) {
           <CardFooter className="flex items-center justify-end gap-2">
             {user?.id === author.id && (
               <>
-                <NamedToolTip content={t("posts.comments.delete")}>
+                <NamedToolTip content={t("posts.delete.title")}>
                   <Button
                     color="danger"
                     isIconOnly
@@ -130,7 +130,7 @@ function PostList({ ...props }: Props) {
                   </Button>
                 </NamedToolTip>
 
-                <NamedToolTip content={t("posts.comments.delete")}>
+                <NamedToolTip content={t("posts.edit.title")}>
                   <Button
                     color="success"
                     isIconOnly

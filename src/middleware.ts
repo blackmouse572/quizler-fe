@@ -1,18 +1,13 @@
 import createMiddleware from "next-intl/middleware"
 import { NextRequest, NextResponse } from "next/server"
 
-import {
-  getRefreshToken,
-  isAuthenticated,
-  setRefreshToken,
-  setToken,
-} from "@/lib/auth"
-import { getAPIServerURL } from "@/lib/utils"
+import { refreshTokenAction } from "@/app/[locale]/(auth)/login/actions/refresh-token-action"
+import { getRefreshToken, getToken, isAuthenticated } from "@/lib/auth"
 import { Token } from "@/types/User"
 
 const authPages = ["/login", "/signup"]
 
-const requireAuthPages = ["/as-needed"]
+const requireAuthPages = ["/logout"]
 
 const locales = ["en", "vi"]
 
@@ -21,35 +16,6 @@ const intlMiddleware = createMiddleware({
   defaultLocale: "en",
   localePrefix: "as-needed",
 })
-
-async function refresh(token: string) {
-  const URL = getAPIServerURL("/auth/refresh-token")
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ token }),
-  }
-
-  try {
-    const response = await fetch(URL, options)
-    if (!response.ok) {
-      throw new Error(response.statusText)
-    }
-    const response_1 = await response.json()
-    return {
-      ok: true,
-      accessToken: response_1.accessToken,
-      refreshToken: response_1.refreshToken,
-    }
-  } catch (error: any) {
-    return {
-      ok: false,
-      message: error.message,
-    }
-  }
-}
 
 function isRefreshTokenValid(refreshToken: Token): boolean {
   if (!refreshToken || refreshToken.expiredAt < Date.now()) {
@@ -80,26 +46,31 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.url))
   }
 
-  if (isRequiredAuthPage) {
-    if (!isAuth) {
-      return NextResponse.redirect(new URL("/login", req.url))
-    }
-    const refreshToken = getRefreshToken()
+  if (isRequiredAuthPage && isAuth) {
+    return intlMiddleware(req)
+  }
 
-    if (!isRefreshTokenValid(refreshToken)) {
-      console.log("refresh token expired  ")
-      const { ok, ...data } = await refresh(refreshToken.token)
+  if (isAuth) {
+    const refreshToken = getRefreshToken(req)
+    const accessToken = getToken(req)
 
-      if (ok) {
-        const { accessToken, refreshToken } = data
-        setToken(accessToken)
-        setRefreshToken(refreshToken)
-        return intlMiddleware(req)
-      } else {
-        return NextResponse.redirect(new URL("/login", req.url))
+    if (accessToken.token === "0" || accessToken.expiredAt < Date.now()) {
+      console.log("[TOKEN] access token expired or invalid")
+      // do refresh
+      if (!isRefreshTokenValid(refreshToken)) {
+        const { ok } = await refreshTokenAction()
+
+        if (ok) {
+          console.log("[TOKEN] refreshed token")
+          return intlMiddleware(req)
+        } else {
+          console.log("[TOKEN] refresh token expired or invalid, logging out")
+          return NextResponse.redirect(new URL("/logout", req.url))
+        }
       }
+      console.log("[TOKEN] can not refresh token, logging out")
+      return NextResponse.redirect(new URL("/logout", req.url))
     }
-    return NextResponse.redirect(new URL("/login", req.url))
   }
 
   return intlMiddleware(req)

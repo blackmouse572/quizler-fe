@@ -10,7 +10,7 @@ type Props = {
 function GamePage({ params }: Props) {
   return (
     <div>
-      <Link href={`/classrooms/${params.id}/quizbank/21/game`}>
+      <Link href={`/classrooms/${params.id}/game/1`}>
         <Button>GAME GO HERE</Button>
       </Link>
     </div>
