@@ -27,6 +27,7 @@ type Props = {
   setDeletePostDialogOpen: (open: boolean) => void
   setEditPostDialogOpen: (open: boolean) => void
   setViewPostDialogOpen: (open: boolean) => void
+  setCommentDialogOpen: (open: boolean) => void
 }
 function PostItem({
   post,
@@ -35,6 +36,7 @@ function PostItem({
   setEditPostDialogOpen,
   setViewPostDialogOpen,
   setSelectedPost,
+  setCommentDialogOpen,
 }: Props) {
   const { author, title, content, created } = post
   const containerRef = useRef<HTMLDivElement>(null)
@@ -157,7 +159,15 @@ function PostItem({
             </Button>
           </NamedToolTip>
           <NamedToolTip content={t("posts.comments.index")}>
-            <Button color="accent" isIconOnly variant="ghost">
+            <Button
+              color="accent"
+              isIconOnly
+              variant="ghost"
+              onClick={() => {
+                setSelectedPost(post)
+                setCommentDialogOpen(true)
+              }}
+            >
               <Icons.Comment />
             </Button>
           </NamedToolTip>

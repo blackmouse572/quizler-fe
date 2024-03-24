@@ -1,4 +1,5 @@
 "use client"
+import CommentList from "@/app/[locale]/(main)/classrooms/[id]/components/comment-list"
 import DeletePostConfirmDialog from "@/app/[locale]/(main)/classrooms/[id]/components/delete-post-confirm"
 import EditPost from "@/app/[locale]/(main)/classrooms/[id]/components/edit-post"
 import PostItem from "@/app/[locale]/(main)/classrooms/[id]/components/post-item"
@@ -24,10 +25,11 @@ function PostList({ ...props }: Props) {
   const errorI18n = useTranslations("Errors")
   const loadmoreRef = useRef<HTMLDivElement>(null)
   const inView = useInView(loadmoreRef)
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null)
+  const [selectedPost, setSelectedPost] = useState<Post | undefined>()
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
   const [editPostDialogOpen, setEditPostDialogOpen] = useState(false)
   const [viewPostDialogOpen, setViewPostDialogOpen] = useState(false)
+  const [commentDialogOpen, setCommentialogOpen] = useState(false)
 
   const {
     isLoading,
@@ -42,13 +44,13 @@ function PostList({ ...props }: Props) {
   })
 
   const renderLoadingItem = useMemo(() => {
-    return <Skeleton className="h-32 w-full bg-white" />
+    return <Skeleton className="h-18 w-full" />
   }, [])
 
   const renderItems = useMemo(() => {
-    return data?.pages.map(
-      (page) =>
-        page?.data.map((post) => (
+    return data?.pages.map((page) => {
+      return page?.data.map((post) => {
+        return (
           <PostItem
             key={post.id}
             classroomId={props.classroomId}
@@ -57,9 +59,11 @@ function PostList({ ...props }: Props) {
             setViewPostDialogOpen={setViewPostDialogOpen}
             setDeletePostDialogOpen={setDeletePostDialogOpen}
             setEditPostDialogOpen={setEditPostDialogOpen}
+            setCommentDialogOpen={setCommentialogOpen}
           />
-        ))
-    )
+        )
+      })
+    })
   }, [data?.pages, props.classroomId])
 
   const renderLoadmore = useMemo(() => {
@@ -110,6 +114,11 @@ function PostList({ ...props }: Props) {
         postId={selectedPost?.id}
         open={viewPostDialogOpen}
         onOpenChange={setViewPostDialogOpen}
+      />
+      <CommentList
+        post={selectedPost}
+        open={commentDialogOpen}
+        onOpenChange={setCommentialogOpen}
       />
     </div>
   )
