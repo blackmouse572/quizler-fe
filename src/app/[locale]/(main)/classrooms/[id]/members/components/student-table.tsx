@@ -20,6 +20,7 @@ import {
   PaginationState,
   RowSelectionState,
   SortingState,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -30,18 +31,36 @@ import {
 import { useFormatter, useTranslations } from "next-intl"
 import React from "react"
 import BanDialog from "./ban-dialog"
+import FilterDropdown from "./filter"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { DotsHorizontalIcon } from "@radix-ui/react-icons"
+import DeleteDialog from "./delete-dialog"
+import { Icons } from "@/components/ui/icons"
+import DeleteBatchDialog from "./delete-batch-dialog"
 
 type StudentTableProps = {
   data: PagedResponse<User>
   locale?: string
+  params: {
+    id: string
+  }
 }
 
-const StudentTable = ({ data }: StudentTableProps) => {
+const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
   const t = useTranslations("Table")
-  const i18n = useTranslations("Classroom_student")
+  const i18n = useTranslations("Classroom_student.table")
   const format = useFormatter()
 
   const columns: ColumnDef<User>[] = React.useMemo(
@@ -73,21 +92,21 @@ const StudentTable = ({ data }: StudentTableProps) => {
       },
       {
         accessorKey: "fullName",
-        header: i18n("table.headers.name"),
+        header: i18n("headers.name"),
         cell: ({ row }) => (
           <div className="min-w-52 capitalize">{row.getValue("fullName")}</div>
         ),
       },
       {
         accessorKey: "email",
-        header: i18n("table.headers.email"),
+        header: i18n("headers.email"),
         cell: ({ row }) => {
           const email = row.getValue("email") as User["email"]
           return <div className="min-w-52 capitalize">{email}</div>
         },
       },
       {
-        header: i18n("table.headers.dob"),
+        header: i18n("headers.dob"),
         accessorKey: "dob",
         cell: ({ row }) => {
           const dob = row.getValue("dob") as User["dob"]
@@ -100,8 +119,39 @@ const StudentTable = ({ data }: StudentTableProps) => {
           )
         },
       },
+      {
+        id: "options",
+        enableHiding: false,
+        cell: ({ row }) => {
+          const student = row.original
+          return (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0" isIconOnly>
+                  <DotsHorizontalIcon className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>{i18n("actions.title")}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DeleteDialog student={student} classroomId={id} />
+
+                <BanDialog
+                  users={[
+                    { id: student.id.toString(), fullName: student.fullName },
+                  ]}
+                >
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    {i18n("actions.ban.title")}
+                  </DropdownMenuItem>
+                </BanDialog>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )
+        },
+      },
     ],
-    [format, i18n]
+    [format, i18n, id]
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -113,6 +163,8 @@ const StudentTable = ({ data }: StudentTableProps) => {
     pageSize: take,
   })
 
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
 
   const table = useReactTable({
@@ -141,20 +193,102 @@ const StudentTable = ({ data }: StudentTableProps) => {
   })
 
   const renderBanButton = React.useCallback(() => {
-    const model = table.getSelectedRowModel()
+    if (Object.keys(rowSelection).length) {
+      const model = table.getSelectedRowModel()
 
+      return (
+        <BanDialog
+          users={model?.rows.map((row) => ({
+            fullName: row.original.fullName,
+            id: row.original.fullName.toString(),
+          }))}
+        >
+          <Button
+            disabled={Object.keys(rowSelection).length <= 0}
+            color="danger"
+            size={"sm"}
+          >
+            <Icons.Ban />
+            {i18n("actions.ban.title")}
+          </Button>
+        </BanDialog>
+      )
+    }
+  }, [i18n, rowSelection, table])
+
+  const renderDeleteButton = React.useCallback(() => {
+    if (Object.keys(rowSelection).length) {
+      const model = table.getSelectedRowModel()
+
+      return (
+        <DeleteBatchDialog
+          ids={model.rows.map((row) => row.original.id.toString())}
+          classroomId={id}
+        />
+      )
+    }
+  }, [id, rowSelection, table])
+
+  const renderVisibibleColumnDropdown = React.useCallback(() => {
     return (
-      <BanDialog
-        ids={model?.rows.map((row) => row.original.id.toString())}
-        disabled={Object.keys(rowSelection).length <= 0}
-      />
+      <DropdownMenu modal>
+        <DropdownMenuTrigger asChild>
+          <div className="relative">
+            <Button color="accent" className="ml-auto" size="sm" isIconOnly>
+              <Icons.Eye />
+            </Button>
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="min-w-52">
+          <DropdownMenuLabel className="flex items-center">
+            <Icons.Eye className="mr-2 inline-block h-4 w-4 text-emerald-500" />
+            {t("column_visibility")}
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {table
+            .getAllColumns()
+            .filter((column) => column.getCanHide())
+            .map((column) => {
+              return (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  onSelect={(e) => e.preventDefault()} // prevent closing when selecting
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              )
+            })}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.preventDefault()
+              table.resetColumnVisibility()
+            }}
+            className={buttonVariants({
+              className: "w-full",
+            })}
+            disabled={Object.keys(columnVisibility).length === 0}
+          >
+            {t("reset")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     )
-  }, [rowSelection, table])
+  }, [columnVisibility, t, table])
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
-        <div className="flex items-center gap-2">{renderBanButton()}</div>
+        <div className="flex items-center gap-2">
+          {renderBanButton()} {renderDeleteButton()}
+        </div>
+        <div className="flex items-center gap-2">
+          {renderVisibibleColumnDropdown()}
+          <FilterDropdown table={table} />
+        </div>
       </div>
       <div className="rounded-md border border-primary bg-background">
         <Table className="rounded-md">
@@ -176,28 +310,23 @@ const StudentTable = ({ data }: StudentTableProps) => {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(
-                (row) => (
-                  // renderContextMenuAction(
-                  <TableRow
-                    key={row.id}
-                    onClick={() => row.toggleSelected()}
-                    data-state={row.getIsSelected() && "selected"}
-                    className="h-14"
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                )
-                //   row.original as QuizBank
-                // )
-              )
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  onClick={() => row.toggleSelected()}
+                  data-state={row.getIsSelected() && "selected"}
+                  className="h-14"
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
             ) : (
               <TableRow key={"empty"}>
                 <TableCell
