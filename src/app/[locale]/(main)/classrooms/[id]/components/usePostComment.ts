@@ -25,11 +25,14 @@ export function usePostComment(postId: string) {
             if (!oldData) return oldData
             return {
               ...oldData,
-              pages: oldData.pages.map((page) => {
-                console.log("page", page)
-                return {
-                  ...page,
-                  data: [...page.data, data],
+              pages: oldData.pages.map((page, index) => {
+                if (index === 0) {
+                  return {
+                    ...page,
+                    data: [data, ...page.data],
+                  }
+                } else {
+                  return page
                 }
               }),
             }
