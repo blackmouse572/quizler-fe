@@ -32,9 +32,7 @@
     "delete_title": "Delete items",
     "delete_message": "Are you sure you want to delete <span></span> items?",
     "ban": "Ban",
-    "ban_message": "Are you sure you want to ban <span></span> members?",
     "unban": "Unban",
-    "unban_message": "Are you sure you want to unban <span></span> members?",
     "edit": "Edit",
     "create": "Create",
     "show": "Show",
@@ -1011,23 +1009,78 @@
       "headers": {
         "name": "Name",
         "email": "Email",
-        "dob": "Date of birth",
-        "actions": {
-          "ban": {
-            "buttons": {
-              "cancel": "Cancel",
-              "ban": "Ban"
-            }
+        "dob": "Date of birth"
+      },
+      "actions": {
+        "title": "Options",
+        "ban": {
+          "title": "Ban User",
+          "title_batch": "Ban Users",
+          "description": "User(s) will be banned from classroom. User(s) will be in banned table",
+          "buttons": {
+            "cancel": "Cancel",
+            "ban": "Ban"
           },
-          "unban": {
-            "buttons": {
-              "cancel": "Cancel",
-              "ban": "Unban"
-            }
+          "message": {
+            "ban_message_single": "Are you sure you want to ban user <span></span>?",
+            "ban_message_mutiple": "Are you sure you want to ban <span></span> members?"
+          }
+        },
+        "unban": {
+          "title": "Unban User",
+          "title_batch": "Unban Users",
+          "description": "User(s) will be unbanned from classroom. User(s) will can access class's content",
+          "buttons": {
+            "cancel": "Cancel",
+            "ban": "Unban"
+          },
+          "message": {
+            "unban_message_single": "Are you sure you want to ban user <span></span>?",
+            "unban_message_mutiple": "Are you sure you want to unban <span></span> members?"
+          }
+        },
+        "kick_user": {
+          "title": "Remove User",
+          "description": "Remove user out of the classroom",
+          "message": {
+            "delete_message": "Are you sure you want to kick <span></span>?",
+            "success": "User has been kicked from class"
+          },
+          "buttons": {
+            "cancel": "Cancel",
+            "delete": "Kick"
+          }
+        },
+        "remove_batch": {
+          "title": "Remove users",
+          "description": "Remove users out of the classroom",
+          "message": {
+            "delete_message": "Are you sure you want to remove <span></span> student(s)?",
+            "success": "User(s) has been removed from class"
+          },
+          "button": {
+            "cancel": "Cancel",
+            "delete": "Delete"
           }
         }
       },
-      "filters": {}
+      "filters": {
+        "visibility": {
+          "label": "Visibility",
+          "placeholder": "Select visibility",
+          "type": {
+            "Public": {
+              "value": "Public"
+            },
+            "Private": {
+              "value": "Private"
+            },
+            "All": {
+              "value": "All"
+            }
+          }
+        }
+      }
     }
   }
 }
