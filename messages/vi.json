@@ -258,7 +258,7 @@
   },
   "Table": {
     "no_data": "Không có dữ liệu",
-    "no_search": "Không tìm thấy kết quả",
+    "no_results": "Không tìm thấy kết quả",
     "loading": "Đang tải...",
     "selected_rows": "Đã chọn {count} hàng",
     "action": "Hành động",
