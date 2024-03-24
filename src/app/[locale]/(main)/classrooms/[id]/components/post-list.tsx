@@ -3,14 +3,14 @@ import DeletePostConfirmDialog from "@/app/[locale]/(main)/classrooms/[id]/compo
 import EditPost from "@/app/[locale]/(main)/classrooms/[id]/components/edit-post"
 import PostItem from "@/app/[locale]/(main)/classrooms/[id]/components/post-item"
 import { usePostList } from "@/app/[locale]/(main)/classrooms/[id]/components/usePostList"
+import ViewList from "@/app/[locale]/(main)/classrooms/[id]/components/view-list"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useUser } from "@/hooks/useUser"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { Post } from "@/types/postsData"
 import { useInView } from "framer-motion"
-import { useFormatter, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { useEffect, useMemo, useRef, useState } from "react"
 
 type Props = {
@@ -22,13 +22,13 @@ type Props = {
 function PostList({ ...props }: Props) {
   const t = useTranslations("ClassroomDetails")
   const errorI18n = useTranslations("Errors")
-  const timeI18n = useFormatter()
   const loadmoreRef = useRef<HTMLDivElement>(null)
   const inView = useInView(loadmoreRef)
-  const user = useUser().user
   const [selectedPost, setSelectedPost] = useState<Post | null>(null)
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
   const [editPostDialogOpen, setEditPostDialogOpen] = useState(false)
+  const [viewPostDialogOpen, setViewPostDialogOpen] = useState(false)
+
   const {
     isLoading,
     data,
@@ -54,6 +54,7 @@ function PostList({ ...props }: Props) {
             classroomId={props.classroomId}
             post={post}
             setSelectedPost={setSelectedPost}
+            setViewPostDialogOpen={setViewPostDialogOpen}
             setDeletePostDialogOpen={setDeletePostDialogOpen}
             setEditPostDialogOpen={setEditPostDialogOpen}
           />
@@ -104,6 +105,11 @@ function PostList({ ...props }: Props) {
         post={selectedPost}
         open={editPostDialogOpen}
         onOpenChange={setEditPostDialogOpen}
+      />
+      <ViewList
+        postId={selectedPost?.id}
+        open={viewPostDialogOpen}
+        onOpenChange={setViewPostDialogOpen}
       />
     </div>
   )

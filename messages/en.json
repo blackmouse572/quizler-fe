@@ -688,6 +688,7 @@
   },
   "Errors": {
     "index": "Error",
+    "unknown": "Something went wrong",
     "token-expire": "The url has been expire, please create another request",
     "invalid-pin": "Pin is not correct, please try again",
     "account-fail": "The account has been terminated, please contact the Support",

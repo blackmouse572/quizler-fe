@@ -4,7 +4,7 @@ import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-
 import { getToken } from "@/lib/auth"
 import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
-import { Post } from "@/types"
+import { Post, User } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 
@@ -14,17 +14,15 @@ type Props = {
 }
 async function getViewDetails({
   filter,
-  postId: classroomId,
-}: Props): Promise<TAPIResult<PagedResponse<Post>>> {
+  postId,
+}: Props): Promise<TAPIResult<PagedResponse<User>>> {
   const query = toURLSeachParams({
     ...filter,
     sortBy: "created",
     sortDirection: "DESC",
   })
   const token = getToken().token
-  const url = getAPIServerURL(
-    `/post/classroom/${classroomId}?${query.toString()}`
-  )
+  const url = getAPIServerURL(`/post/${postId}/views?${query.toString()}`)
   const options: RequestInit = {
     method: "GET",
     headers: {
@@ -32,7 +30,7 @@ async function getViewDetails({
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["posts", `classroom-${classroomId}`],
+      tags: ["posts", `view-${postId}`],
       revalidate: 60, // revalidate every 60 seconds
     },
   }
@@ -44,7 +42,7 @@ async function getViewDetails({
       }
       return json
     })
-    .then((res: PagedResponse<Post>) => {
+    .then((res: PagedResponse<User>) => {
       return {
         ok: true,
         message: "success",

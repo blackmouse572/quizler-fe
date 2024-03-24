@@ -26,12 +26,14 @@ type Props = {
   setSelectedPost: (post: Post) => void
   setDeletePostDialogOpen: (open: boolean) => void
   setEditPostDialogOpen: (open: boolean) => void
+  setViewPostDialogOpen: (open: boolean) => void
 }
 function PostItem({
   post,
   classroomId,
   setDeletePostDialogOpen,
   setEditPostDialogOpen,
+  setViewPostDialogOpen,
   setSelectedPost,
 }: Props) {
   const { author, title, content, created } = post
@@ -104,7 +106,14 @@ function PostItem({
       </CardContent>
       <CardFooter className="flex items-center justify-between">
         <div>
-          <Button variant="light" color="accent">
+          <Button
+            variant="light"
+            color="accent"
+            onClick={() => {
+              setSelectedPost(post)
+              setViewPostDialogOpen(true)
+            }}
+          >
             <Icons.Eye />
             {post.view}
             {isPending && <Icons.Loader />}
