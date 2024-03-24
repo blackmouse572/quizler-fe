@@ -20,6 +20,7 @@ import {
   PaginationState,
   RowSelectionState,
   SortingState,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -33,13 +34,14 @@ import BanDialog from "./ban-dialog"
 import FilterDropdown from "./filter"
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import DeleteDialog from "./delete-dialog"
 import { Icons } from "@/components/ui/icons"
@@ -161,6 +163,8 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
     pageSize: take,
   })
 
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
 
   const table = useReactTable({
@@ -225,11 +229,64 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
     }
   }, [id, rowSelection, table])
 
+  const renderVisibibleColumnDropdown = React.useCallback(() => {
+    return (
+      <DropdownMenu modal>
+        <DropdownMenuTrigger asChild>
+          <div className="relative">
+            <Button color="accent" className="ml-auto" size="sm" isIconOnly>
+              <Icons.Eye />
+            </Button>
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="min-w-52">
+          <DropdownMenuLabel className="flex items-center">
+            <Icons.Eye className="mr-2 inline-block h-4 w-4 text-emerald-500" />
+            {t("column_visibility")}
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {table
+            .getAllColumns()
+            .filter((column) => column.getCanHide())
+            .map((column) => {
+              return (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  onSelect={(e) => e.preventDefault()} // prevent closing when selecting
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              )
+            })}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.preventDefault()
+              table.resetColumnVisibility()
+            }}
+            className={buttonVariants({
+              className: "w-full",
+            })}
+            disabled={Object.keys(columnVisibility).length === 0}
+          >
+            {t("reset")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+  }, [columnVisibility, t, table])
+
   return (
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
-        <div className="flex items-center gap-2">{renderBanButton()} {renderDeleteButton()}</div>
         <div className="flex items-center gap-2">
+          {renderBanButton()} {renderDeleteButton()}
+        </div>
+        <div className="flex items-center gap-2">
+          {renderVisibibleColumnDropdown()}
           <FilterDropdown table={table} />
         </div>
       </div>
@@ -253,25 +310,23 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(
-                (row) => (
-                  <TableRow
-                    key={row.id}
-                    onClick={() => row.toggleSelected()}
-                    data-state={row.getIsSelected() && "selected"}
-                    className="h-14"
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                )
-              )
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  onClick={() => row.toggleSelected()}
+                  data-state={row.getIsSelected() && "selected"}
+                  className="h-14"
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
             ) : (
               <TableRow key={"empty"}>
                 <TableCell
