@@ -282,9 +282,7 @@
     "delete_title": "Xoá bản ghi",
     "delete_message": "Bạn có chắc chắn muốn xoá <span></span> bản ghi không?",
     "ban": "Cấm",
-    "ban_message": "Bạn có chắc chắn muốn cấm <span></span> thành viên không?",
     "unban": "Phục Hồi",
-    "unban_message": "Bạn có chắc chắn muốn phục hồi <span></span> thành viên không?",
     "edit": "Chỉnh sửa",
     "create": "Tạo mới",
     "show": "Xem",
@@ -304,6 +302,7 @@
     "warning": "Cảnh báo",
     "success": "Thành công",
     "apply": "Áp dụng",
+    "take-placeholder": "Hành động",
     "take-value": "Hiển thị {count} dòng"
   },
   "MyQuizbanks": {
@@ -1000,19 +999,58 @@
       "headers": {
         "name": "Tên",
         "email": "Email",
-        "dob": "Ngày sinh",
-        "actions": {
-          "ban": {
-            "buttons": {
-              "cancel": "Hủy",
-              "ban": "Cấm"
-            }
+        "dob": "Ngày sinh"
+      },
+      "actions": {
+        "title": "Lựa chọn",
+        "ban": {
+          "title": "Cấm người dùng",
+          "title_batch": "Cấm người dùng",
+          "description": "Người dùng sẽ bị cấm vào lớp học. Người dùng sẽ ở trong bảng bị cấm",
+          "buttons": {
+            "cancel": "Hủy",
+            "ban": "Cấm"
+          },
+          "message": {
+            "ban_message_single": "Bạn có muốn cấm người dùng <span></span>?",
+            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?"
           }
         },
         "unban": {
+          "title": "Phục hồi người dùng",
+          "title_batch": "Phục hồi người dùng",
+          "description": "Người dùng sẽ được bỏ cấm khỏi lớp học. Người dùng sẽ có thể truy cập nội dung của lớp",
           "buttons": {
             "cancel": "Hủy",
             "ban": "Phục hồi"
+          },
+          "message": {
+            "unban_message_single": "Bạn có muốn phục hồi người dùng <span></span>?",
+            "unban_message_mutiple": "ạn có muốn phục hồi <span></span> người dùng ?"
+          }
+        },
+        "kick_user": {
+          "title": "Xóa người dùng",
+          "descrption": "Xóa người dùng khỏi lớp học",
+          "message": {
+            "delete_message": "Bạn có muốn xóa người dùng <span></span>?",
+            "success": "Người dùng đã được xóa khỏi lớp học"
+          },
+          "buttons": {
+            "cancel": "Hủy",
+            "delete": "Xóa"
+          }
+        },
+        "remove_batch": {
+          "title": "Xóa người dùng",
+          "description": "Xóa người dùng khỏi lớp học",
+          "message": {
+            "delete_message": "Bạn có chắc chắn muốn xoá <span></span> người dùng không?",
+            "success": "Người dùng đã được xóa khỏi lớp học"
+          },
+          "button": {
+            "cancel": "Hủy",
+            "delete": "Xóa"
           }
         }
       },

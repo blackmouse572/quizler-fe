@@ -41,7 +41,7 @@ async function ClassroomStudentPage({ params, searchParams }: Props) {
 
   return (
       <div className="mt-6 space-y-12">
-        <StudentTable data={data} />
+        <StudentTable data={data} params={params} />
       </div>
   )
 }

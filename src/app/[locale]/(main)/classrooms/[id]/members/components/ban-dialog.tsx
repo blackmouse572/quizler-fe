@@ -9,36 +9,49 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
-import { Icons } from "@/components/ui/icons"
 import { useTranslations } from "next-intl"
-import { useState } from "react"
+import { useMemo } from "react"
 
 type Props = {
-  ids: string[]
+  users: {
+    id: string
+    fullName: string
+  }[]
   disabled?: boolean
   /**
    * If current action is to ban user
    */
   isBan?: boolean
+  children?: React.ReactNode
 } & React.ComponentProps<"div">
 
-function BanDialog({ ids, disabled, isBan = true, ...props }: Props) {
-  const tableI18n = useTranslations("Table")
+function BanDialog({
+  children,
+  users,
+  disabled,
+  isBan = true,
+  ...props
+}: Props) {
   const banActionI18n = useTranslations(
-    `Classroom_student.table.headers.actions.${isBan ? "ban" : "unban"}`
+    `Classroom_student.table.actions.${isBan ? "ban" : "unban"}`
   )
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const isBatch = useMemo(() => users.length > 1, [users.length])
+
   return (
     <>
-      <Dialog {...props} open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog {...props}>
+        <DialogTrigger>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Delete Items</DialogTitle>
+            <DialogTitle>{banActionI18n(`${isBatch? "title_batch": "title"}`)}</DialogTitle>
             <DialogDescription>
-              {tableI18n.rich(`${isBan ? "ban" : "unban"}_message`, {
-                span: (children) => (
-                  <span className="font-bold">({ids.length})</span>
+              {banActionI18n.rich(`message.${isBan ? "ban" : "unban"}_message_${isBatch? "mutiple": "single"}`, {
+                span: (children) => isBatch ? (
+                  <span className="font-bold">({users.length})</span>
+                ) : (
+                  <span className="font-bold">({users[0].fullName})</span>
                 ),
               })}
             </DialogDescription>
@@ -55,15 +68,6 @@ function BanDialog({ ids, disabled, isBan = true, ...props }: Props) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <Button
-        disabled={disabled}
-        color={`${isBan ? "danger" : "success"}`}
-        size={"sm"}
-        onClick={() => setIsOpen(true)}
-      >
-        <Icons.Ban />
-        {tableI18n(`${isBan ? "ban" : "unban"}`)}
-      </Button>
     </>
   )
 }
