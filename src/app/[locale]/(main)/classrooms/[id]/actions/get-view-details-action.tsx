@@ -1,19 +1,20 @@
 "use server"
+
 import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-bank-action"
 import { getToken } from "@/lib/auth"
 import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
+import { Post } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
-import { Post } from "@/types/postsData"
 
 type Props = {
   filter: Partial<PagedRequest>
-  classroomId: string
+  postId: string
 }
-async function getAllPostActions({
+async function getViewDetails({
   filter,
-  classroomId,
+  postId: classroomId,
 }: Props): Promise<TAPIResult<PagedResponse<Post>>> {
   const query = toURLSeachParams({
     ...filter,
@@ -31,7 +32,7 @@ async function getAllPostActions({
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["posts", `post-classroom-${classroomId}`],
+      tags: ["posts", `classroom-${classroomId}`],
       revalidate: 60, // revalidate every 60 seconds
     },
   }
@@ -59,4 +60,4 @@ async function getAllPostActions({
     })
 }
 
-export default getAllPostActions
+export default getViewDetails
