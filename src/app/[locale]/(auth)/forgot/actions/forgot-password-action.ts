@@ -27,7 +27,6 @@ export const ForgotPasswordAction = async (
       return response.json()
     })
     .then((response) => {
-      console.log(response, URL)
       return {
         ok: true,
         message: response.message,
