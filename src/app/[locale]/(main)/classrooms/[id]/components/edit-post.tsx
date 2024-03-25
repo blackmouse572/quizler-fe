@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl"
 import dynamic from "next/dynamic"
 import { useCallback, useState } from "react"
 type Props = DialogProps & {
-  post: Post | null
+  post?: Post
 }
 const Editor = dynamic(() => import("@/components/editor/editor"))
 

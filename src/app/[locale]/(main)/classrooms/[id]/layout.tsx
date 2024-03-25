@@ -1,12 +1,14 @@
+import logoutAction from "@/components/logout-btn/logout-action"
+import { Separator } from "@/components/ui/separator"
+import { getUser } from "@/lib/auth"
+import _ from "lodash"
+import { NextIntlClientProvider } from "next-intl"
+import { getMessages, getTranslations } from "next-intl/server"
+import { notFound } from "next/navigation"
 import React from "react"
 import getClassroomDetails from "../actions/get-classroom-details-action"
-import { NextIntlClientProvider } from "next-intl"
 import GenerateJoinDialog from "../components/generate-join-dialog"
 import SendInviteDialog from "../components/send-invite-dialog"
-import { Separator } from "@/components/ui/separator"
-import { getMessages, getTranslations } from "next-intl/server"
-import _ from "lodash"
-import { notFound } from "next/navigation"
 
 type Props = {
   children: React.ReactNode
@@ -17,11 +19,14 @@ async function ClassroomDetailLayout({ children, params }: Props) {
   const { id } = params
   const messages = await getMessages()
   const t = await getTranslations("ClassroomDetails")
-
+  const user = getUser()
   const { ok, data } = await getClassroomDetails(id)
 
   if (!ok) {
     return notFound()
+  }
+  if (!user) {
+    return logoutAction()
   }
 
   return (
@@ -41,7 +46,7 @@ async function ClassroomDetailLayout({ children, params }: Props) {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-4xl font-bold">{data?.classname}</h3>
-            {data?.isStudentAllowInvite && (
+            {(data?.isStudentAllowInvite || data?.author.id === user.id) && (
               <div className="space-x-2">
                 <GenerateJoinDialog classroomId={id} />
                 <SendInviteDialog classroomId={id} />

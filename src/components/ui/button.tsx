@@ -146,7 +146,7 @@ const buttonVariants = cva(
       {
         color: "accent",
         variant: "light",
-        className: "bg-transparent text-accent hover:bg-accent/70",
+        className: "bg-transparent text-accent-foreground hover:bg-accent/70",
       },
       {
         color: "danger",
