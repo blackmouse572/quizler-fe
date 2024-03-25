@@ -5,10 +5,11 @@ import { getToken, getUser } from "@/lib/auth"
 import { notFound } from "next/navigation"
 import ResultGameStudent from "./components/result-game-student"
 import ResultGameTeacher from "./components/result-game-teacher"
+import getAllRecordsEndGame from "./components/actions/get-all-records-end-game-action"
 
 type Props = {
   params: {
-    id: string
+    gameID: string
   }
   searchParams: { [key: string]: string | string[] | undefined }
 }
@@ -20,7 +21,7 @@ export async function generateMetadata({
 }) {
   const t = await getTranslations({
     locale,
-    namespace: "ManageClassroomMembers.metadata",
+    namespace: "GameResults.metadata",
   })
 
   return {
@@ -34,7 +35,7 @@ export default async function ManageClassroomPage({
   searchParams,
 }: Props) {
   const msg = await getMessages()
-  const { id } = params
+  const { gameID } = params
   const { token } = getToken()
   const user = getUser()
 
@@ -44,11 +45,11 @@ export default async function ManageClassroomPage({
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
-  //   const {ok: ok, data: data} = await getAllMembers(id, options)
+  const { ok: ok, data: data } = await getAllRecordsEndGame(gameID, options)
 
-  //   if (!ok || !data) {
-  //     return notFound()
-  //   }
+  if (!ok || !data) {
+    return notFound()
+  }
 
   // TODO: check role here
   // const isAuthor = user?.role === "User" && user?.email === data
@@ -64,24 +65,14 @@ export default async function ManageClassroomPage({
         "Validations",
         "Join_classroom",
         "Table",
-        "Members_classroom",
+        "GameResults",
         "Errors"
       )}
     >
-      <div className="container">
-        <div className="relative mt-5 flex w-[658px] max-w-full justify-between gap-5 self-center pr-2.5 max-md:flex-wrap">
-          <div className="flex flex-col">
-            <div className="text-2xl font-bold leading-9 text-black">
-              Report end game
-            </div>
-            <div className="text-lg font-medium leading-8 text-neutral-400">
-              $game_name
-            </div>
-          </div>
-        </div>
-        <div className="border-t-2 border-zinc-400"></div>
-          <ResultGameStudent />
-          {/* <ResultGameTeacher data={data!} params={params} /> */}
+      <div>
+        {/* <ResultGameStudent /> */}
+
+        <ResultGameTeacher data={data!} params={params} />
       </div>
     </NextIntlClientProvider>
   )

@@ -119,17 +119,17 @@
     },
     "filters": {
       "visibility": {
-        "label": "Visibility",
-        "placeholder": "Select visibility",
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
         "type": {
           "Public": {
-            "value": "Public"
+            "value": "Công khai"
           },
           "Private": {
-            "value": "Private"
+            "value": "Riêng tư"
           },
           "All": {
-            "value": "All"
+            "value": "Tất cả"
           }
         }
       }
@@ -152,6 +152,55 @@
       "cancel_btn": "Hủy",
       "delete_btn": "Xoá",
       "success": "Đã xóa học sinh khỏi lớp"
+    }
+  },
+  "GameResults": {
+    "metadata": {
+      "title": "Kết quả trò chơi",
+      "description": "Kết quả trò chơi"
+    },
+    "headers": {
+      "fullName": "Tên",
+      "correct": "Số câu đúng",
+      "points": "Điểm"
+    },
+    "teacher": {
+      "horizontal_chart": {
+        "title": "Biểu đồ cột",
+        "plugins": "Biểu đồ cột sinh viên",
+        "datasets": {
+          "label": "Thống kê điểm sinh viên"
+        },
+        "x_data": "x: Tên sinh viên",
+        "y_data": "y: Tổng điểm của sinh viên"
+      },
+      "bubble_chart": {
+        "title": "Biểu đồ bong bóng",
+        "datasets": {
+          "label": "Thống kê điểm sinh viên"
+        },
+        "sample_data": "A(x, y, r)",
+        "x_data": "x: Điểm giữa của khoảng điểm",
+        "y_data": "y: Phần trăm sinh viên trong khoảng điểm",
+        "r_data": "r: Số lượng sinh viên trong khoảng điểm",
+        "default_range": "Hiện tại khoảng điểm mặc định là"
+      },
+      "pie_chart": {
+        "title": "Biểu đồ hình tròn",
+        "datasets": {
+          "label": "Thống kê điểm sinh viên"
+        }
+      },
+      "scatter_chart": {
+        "title": "Biểu đồ phân tán",
+        "datasets": {
+          "label": "Thống kê điểm sinh viên"
+        },
+        "sample_data": "A(x, y)",
+        "x_data": "x: Điểm giữa của khoảng điểm",
+        "y_data": "y: Số lượng sinh viên trong khoảng điểm",
+        "default_range": "Hiện tại khoảng điểm mặc định là"
+      }
     }
   },
   "SearchPage": {

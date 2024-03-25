@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -9,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
-import { ClassroomMembers } from "@/types"
+import { ClassroomGameResults } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PopoverClose } from "@radix-ui/react-popover"
 import { Table } from "@tanstack/react-table"
@@ -20,11 +19,10 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 type FilterDropdownProps = {
-  table: Table<ClassroomMembers>
+  table: Table<ClassroomGameResults>
 }
 function FilterDropdown(props: FilterDropdownProps) {
   const t = useTranslations("Table")
-  const i18n = useTranslations("Members_classroom")
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathName = usePathname()

@@ -40,33 +40,30 @@ import {
 } from "@/components/ui/table"
 import usePaginationValue from "@/hooks/usePaginationValue"
 import PagedResponse from "@/types/paged-response"
-import { useFormatter, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import FilterDropdown from "./filter"
-import { ClassroomMembers } from "@/types"
-import { DotsHorizontalIcon } from "@radix-ui/react-icons"
-import DeleteBatchDialog from "./delete-batch-dialog"
-import DeleteDialog from "./delete-dialog"
+import { ClassroomGameResults } from "@/types"
 
-type ClassroomMembersTableProps = {
-  data: PagedResponse<ClassroomMembers>
+type ClassroomGameResultsTableProps = {
+  data: PagedResponse<ClassroomGameResults>
   locale?: string
   params: {
-    id: string
+    gameID: string
   }
 }
 
 export function StudentResultsTable({
   data,
-  params: { id },
-}: ClassroomMembersTableProps) {
+  params: { gameID },
+}: ClassroomGameResultsTableProps) {
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
   const t = useTranslations("Table")
-  const i18n = useTranslations("Members_classroom")
-  const format = useFormatter()
+  const i18n = useTranslations("GameResults")
+  const multiplyMark = 20
 
-  const columns: ColumnDef<ClassroomMembers>[] = React.useMemo(
+  const columns: ColumnDef<ClassroomGameResults>[] = React.useMemo(
     () => [
       {
         id: "select",
@@ -95,6 +92,7 @@ export function StudentResultsTable({
       },
       {
         accessorKey: "fullName",
+        accessorFn: (row) => row.account.fullName,
         header: ({ column }) => {
           return (
             <div
@@ -116,9 +114,9 @@ export function StudentResultsTable({
           <div className="capitalize">{row.getValue("fullName")}</div>
         ),
       },
-
       {
-        accessorKey: "email",
+        accessorKey: "totalMark",
+        accessorFn: (row) => row.totalMark,
         header: ({ column }) => {
           return (
             <div
@@ -127,7 +125,7 @@ export function StudentResultsTable({
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
             >
-              {i18n("headers.email")}
+              {i18n("headers.correct")}
               {column.getIsSorted() === "asc" ? (
                 <Icons.CaretUpFilled className="ml-auto" />
               ) : (
@@ -137,11 +135,12 @@ export function StudentResultsTable({
           )
         },
         cell: ({ row }) => (
-          <div className="lowercase">{row.getValue("email")}</div>
+          <div className="lowercase">{row.getValue("totalMark")}</div>
         ),
       },
       {
-        accessorKey: "dob",
+        accessorKey: "totalMark",
+        accessorFn: (row) => row.totalMark,
         header: ({ column }) => {
           return (
             <div
@@ -150,7 +149,7 @@ export function StudentResultsTable({
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
             >
-              {i18n("headers.dob")}
+              {i18n("headers.points")}
               {column.getIsSorted() === "asc" ? (
                 <Icons.CaretUpFilled className="ml-auto" />
               ) : (
@@ -160,41 +159,13 @@ export function StudentResultsTable({
           )
         },
         cell: ({ row }) => (
-          <div className="capitalize">
-            {format.dateTime(new Date(row.getValue("dob")), {
-              dateStyle: "long",
-            })}
+          <div className="lowercase">
+            {parseInt(row.getValue("totalMark")) * multiplyMark}
           </div>
         ),
       },
-      {
-        id: "options",
-        enableHiding: false,
-        cell: ({ row }) => {
-          const student = row.original
-
-          return (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0" isIconOnly>
-                  <DotsHorizontalIcon className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{i18n("options.title")}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DeleteDialog student={student} classroomId={id} />
-
-                <DropdownMenuItem>
-                  {i18n("options.ban_student")}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )
-        },
-      },
     ],
-    [format, i18n, id]
+    [i18n]
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -236,19 +207,6 @@ export function StudentResultsTable({
       pagination,
     },
   })
-
-  const renderDeleteButton = React.useCallback(() => {
-    if (Object.keys(rowSelection).length) {
-      const model = table.getSelectedRowModel()
-
-      return (
-        <DeleteBatchDialog
-          ids={model.rows.map((row) => row.original.id.toString())}
-          classroomId={id}
-        />
-      )
-    }
-  }, [id, rowSelection, table])
 
   const renderVisibibleColumnDropdown = React.useCallback(() => {
     return (
@@ -301,9 +259,8 @@ export function StudentResultsTable({
   }, [columnVisibility, t, table])
 
   return (
-    <div className="w-full">
+    <div className="w-4/6 relative left-1/2 -translate-x-1/2">
       <div className="flex items-center justify-between py-4">
-        <div className="flex items-center gap-2">{renderDeleteButton()}</div>
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}
           <FilterDropdown table={table} />
