@@ -3,8 +3,9 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import { getToken, getUser } from "@/lib/auth"
 import { notFound } from "next/navigation"
-import getAllMembers from "./actions/get-all-members-action"
-import { ClassroomMembersTable } from "./components/data-table"
+import getAllMembers from "../actions/fetch-classroom-members"
+import { ClassroomMembersTable } from "../components/data-table"
+import { NavigationBar } from "../components/navigation-bar"
 
 type Props = {
   params: {
@@ -44,11 +45,7 @@ export default async function ManageClassroomPage({
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
-  const {ok: ok, data: data} = await getAllMembers(id, options)
-
-  if (!ok || !data) {
-    return notFound()
-  }
+  const data = await getAllMembers(id, options)
 
   // TODO: check role here
   // const isAuthor = user?.role === "User" && user?.email === data
@@ -58,12 +55,9 @@ export default async function ManageClassroomPage({
   // }
 
   return (
-    <NextIntlClientProvider
-      messages={_.pick(msg, "Validations", "Join_classroom", "Table", "Members_classroom", "Errors")}
-    >
-      <div className="mt-6 space-y-12">
-        <ClassroomMembersTable data={data!} params={params} />
-      </div>
-    </NextIntlClientProvider>
+    <div className="mt-6 space-y-12">
+
+      <ClassroomMembersTable data={data!} params={params} />
+    </div>
   )
 }

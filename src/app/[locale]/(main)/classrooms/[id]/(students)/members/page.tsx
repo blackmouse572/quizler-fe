@@ -2,9 +2,10 @@ import getClassroomDetails from "@/app/[locale]/(main)/classrooms/actions/get-cl
 import { polyfill } from "interweave-ssr"
 import _ from "lodash"
 import { Metadata } from "next"
-import StudentTable from "./components/student-table"
+import StudentTable from "../components/student-table"
 import { notFound } from "next/navigation"
-import getAllMembers from "./actions/fetch-classroom-members"
+import getAllMembers from "../actions/fetch-classroom-members"
+import { NavigationBar } from "../components/navigation-bar"
 
 type Props = {
   params: {
@@ -33,16 +34,15 @@ async function ClassroomStudentPage({ params, searchParams }: Props) {
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
-  const {ok: ok, data: data} = await getAllMembers(id, options)
+  const data = await getAllMembers(id, options)
 
-  if (!ok || !data) {
-    return notFound()
-  }
+  console.log("data", data)
 
   return (
-      <div className="mt-6 space-y-12">
-        <StudentTable data={data} params={params} />
-      </div>
+    <div className="mt-6 space-y-12">
+
+      <StudentTable data={data} params={params} />
+    </div>
   )
 }
 

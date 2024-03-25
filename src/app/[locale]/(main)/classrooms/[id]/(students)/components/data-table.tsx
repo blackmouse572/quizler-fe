@@ -42,13 +42,14 @@ import usePaginationValue from "@/hooks/usePaginationValue"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
 import FilterDropdown from "./filter"
-import { ClassroomMembers } from "@/types"
+import { ClassroomMembers, User } from "@/types"
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import DeleteBatchDialog from "./delete-batch-dialog"
 import DeleteDialog from "./delete-dialog"
+import { StudentClasroomData } from "../actions/fetch-classroom-members"
 
 type ClassroomMembersTableProps = {
-  data: PagedResponse<ClassroomMembers>
+  data: PagedResponse<StudentClasroomData>
   locale?: string
   params: {
     id: string
@@ -62,11 +63,13 @@ export function ClassroomMembersTable({
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
+  const accounts = data.data.map(d => ({...d.account, joinDate: d.joinDate}))
+
   const t = useTranslations("Table")
   const i18n = useTranslations("Members_classroom")
   const format = useFormatter()
 
-  const columns: ColumnDef<ClassroomMembers>[] = React.useMemo(
+  const columns: ColumnDef<User>[] = React.useMemo(
     () => [
       {
         id: "select",
@@ -211,7 +214,7 @@ export function ClassroomMembersTable({
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
 
   const table = useReactTable({
-    data: data.data,
+    data: accounts,
     columns,
     pageCount: totalPages,
     onSortingChange: setSorting,

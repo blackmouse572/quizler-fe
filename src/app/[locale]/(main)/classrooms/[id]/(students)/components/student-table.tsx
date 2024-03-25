@@ -46,9 +46,10 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import DeleteDialog from "./delete-dialog"
 import { Icons } from "@/components/ui/icons"
 import DeleteBatchDialog from "./delete-batch-dialog"
+import { StudentClasroomData } from "../actions/fetch-classroom-members"
 
 type StudentTableProps = {
-  data: PagedResponse<User>
+  data: PagedResponse<StudentClasroomData>
   locale?: string
   params: {
     id: string
@@ -59,6 +60,8 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
+  const accounts = data.data.map(d => ({...d.account, joinDate: d.joinDate}))
+
   const t = useTranslations("Table")
   const i18n = useTranslations("Classroom_student.table")
   const format = useFormatter()
@@ -168,7 +171,7 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
 
   const table = useReactTable({
-    data: data.data,
+    data: accounts,
     columns,
     pageCount: totalPages,
     onSortingChange: setSorting,
