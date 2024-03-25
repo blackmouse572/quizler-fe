@@ -47,16 +47,47 @@ export default async function ManageClassroomPage({
   const options = { take, skip, search }
   const { ok: ok, data: data } = await getAllRecordsEndGame(gameID, options)
 
-  if (!ok || !data) {
-    return notFound()
+  if (!token || !ok) {
+    notFound()
   }
 
-  // TODO: check role here
-  // const isAuthor = user?.role === "User" && user?.email === data
+  const studentIds = data!.data.map((result) => result.accountId.toString())
+  const isStudent = studentIds.includes(user!.id.toString())
 
-  // {
-  //   ;(!token || !isAuthor) && notFound()
-  // }
+  // check if student
+  if (isStudent) {
+    const studentGameResult = data?.data.find(
+      (result) => result.account.id === user?.id
+    )
+    // ranking student
+    const sortedData = data!.data
+      .filter((entry) => entry.totalMark !== null)
+      .sort((a, b) => b.totalMark - a.totalMark)
+
+    const studentRank =
+      sortedData.findIndex((entry) => entry.account.id === user?.id) + 1
+
+    return (
+      <NextIntlClientProvider
+        messages={_.pick(
+          msg,
+          "Validations",
+          "Join_classroom",
+          "Table",
+          "GameResults",
+          "Errors"
+        )}
+      >
+        <div>
+          <ResultGameStudent
+            data={data!}
+            studentGameResult={studentGameResult!}
+            studentRank={studentRank}
+          />
+        </div>
+      </NextIntlClientProvider>
+    )
+  }
 
   return (
     <NextIntlClientProvider
@@ -70,8 +101,6 @@ export default async function ManageClassroomPage({
       )}
     >
       <div>
-        {/* <ResultGameStudent /> */}
-
         <ResultGameTeacher data={data!} params={params} />
       </div>
     </NextIntlClientProvider>

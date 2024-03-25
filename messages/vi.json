@@ -201,6 +201,20 @@
         "y_data": "y: Số lượng sinh viên trong khoảng điểm",
         "default_range": "Hiện tại khoảng điểm mặc định là"
       }
+    },
+    "students": {
+      "plugins": "Kết quả trò chơi",
+      "datasets": {
+        "label": {
+          "correct_answer": "Số câu đúng",
+          "wrong_or_not_answered": "Số câu sai hoặc chưa trả lời"
+        }
+      },
+      "text": {
+        "ranking": "Bạn đứng thứ #{rank} trên tổng số {count} học sinh",
+        "correct_questions": "{right}/{total} số câu đúng",
+        "score": "Bạn đạt được {point} điểm"
+      }
     }
   },
   "SearchPage": {

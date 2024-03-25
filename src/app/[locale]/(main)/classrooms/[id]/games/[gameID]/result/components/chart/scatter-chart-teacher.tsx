@@ -15,6 +15,7 @@ import { ClassroomGameResults } from "@/types"
 import PagedResponse from "@/types/paged-response"
 import { generateRandomColors } from "../helpers/random-color-chart"
 import { useTranslations } from "next-intl"
+import { ScatterChart } from "@/types/chart-type"
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend)
 
@@ -28,19 +29,6 @@ export const options = {
 
 type Props = {
   data: PagedResponse<ClassroomGameResults>
-}
-
-type DataChart = {
-  datasets: Dataset[]
-}
-
-type Dataset = {
-  label: string
-  data: {
-    x: number
-    y: number
-  }[]
-  backgroundColor: string[]
 }
 
 // x: midpoint of the mark range
@@ -60,7 +48,7 @@ export function ScatterChartTeacher({ data }: Props) {
     return { x, y }
   })
 
-  const dataChart: DataChart = {
+  const dataChart: ScatterChart = {
     datasets: [
       {
         label: i18n("teacher.scatter_chart.datasets.label"),

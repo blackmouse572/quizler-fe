@@ -1,9 +1,17 @@
-import ChartStudents from "./chart/chart-student";
+import { ClassroomGameResults } from "@/types"
+import { ChartStudents } from "./chart/stacked-chart-student"
+import PagedResponse from "@/types/paged-response"
 
-export default function ResultGameStudent() {
-    return (
-        <>
-            <ChartStudents />
-        </>
-    )
+type Props = {
+  data: PagedResponse<ClassroomGameResults>
+  studentGameResult: ClassroomGameResults
+  studentRank: number
+}
+
+export default function ResultGameStudent({ data, studentGameResult, studentRank }: Props) {
+  return (
+    <>
+      <ChartStudents data={data} studentGameResult={studentGameResult} studentRank={studentRank} />
+    </>
+  )
 }

@@ -12,6 +12,7 @@ import PagedResponse from "@/types/paged-response"
 import { ClassroomGameResults } from "@/types"
 import { generateRandomColors } from "../helpers/random-color-chart"
 import { useTranslations } from "next-intl"
+import { BubbleChart } from "@/types/chart-type"
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend)
 
@@ -25,20 +26,6 @@ export const options = {
 
 type Props = {
   data: PagedResponse<ClassroomGameResults>
-}
-
-type DataChart = {
-  datasets: Dataset[]
-}
-
-type Dataset = {
-  label: string
-  data: {
-    x: number
-    y: number
-    r: number
-  }[]
-  backgroundColor: string[]
 }
 
 // This chart contains statistic of totalMark of students in classroom:
@@ -63,7 +50,7 @@ export function BubbleChartTeacher({ data }: Props) {
     return { x, y, r }
   })
 
-  const dataChart: DataChart = {
+  const dataChart: BubbleChart = {
     datasets: [
       {
         label: i18n("teacher.bubble_chart.datasets.label"),

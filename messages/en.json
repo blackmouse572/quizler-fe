@@ -218,6 +218,20 @@
         "y_data": "y: Number of students in the range",
         "default_range": "Now the default range is"
       }
+    },
+    "students": {
+      "plugins": "Game result",
+      "datasets": {
+        "label": {
+          "correct_answer": "Correct answer",
+          "wrong_or_not_answered": "Wrong or not answered"
+        }
+      },
+      "text": {
+        "ranking": "You place #{rank} out of {count} students",
+        "correct_questions": "{right}/{total} correct questions",
+        "score": "Score {point}"
+      }
     }
   },
   "MyQuizbanks": {

@@ -17,7 +17,7 @@ export function TabsResultGameTeacher({ data }: Props) {
   return (
     <Tabs
       defaultValue="horizontal_chart"
-      className="relative left-1/2 w-4/6 -translate-x-1/2"
+      className="relative left-1/2 -translate-x-1/2"
     >
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="horizontal_chart">{i18n("teacher.horizontal_chart.title")}</TabsTrigger>

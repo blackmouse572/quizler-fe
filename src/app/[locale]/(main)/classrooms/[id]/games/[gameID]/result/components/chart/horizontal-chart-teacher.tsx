@@ -15,22 +15,12 @@ import { ClassroomGameResults } from "@/types"
 import PagedResponse from "@/types/paged-response"
 import { generateRandomColors } from "../helpers/random-color-chart"
 import { useTranslations } from "next-intl"
+import { DataChart } from "@/types/chart-type"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 type Props = {
   data: PagedResponse<ClassroomGameResults>
-}
-
-type DataChart = {
-  labels: string[]
-  datasets: Dataset[]
-}
-
-type Dataset = {
-  label: string
-  data: {}
-  backgroundColor: string[]
 }
 
 export default function HorizontalChartTeacher({ data }: Props) {

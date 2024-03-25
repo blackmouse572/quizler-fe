@@ -1,4 +1,3 @@
-import { boolean, string } from "zod"
 import { User } from "."
 
 type ClassroomInvitation = {
@@ -32,6 +31,7 @@ type ClassroomGameResults = {
   game: {
     id: string
     gameName: string
+    isTest: boolean
     classroomId: string
     quizBankId: string
     numberOfQuizzes: number,

@@ -61,7 +61,7 @@ export function StudentResultsTable({
   )
   const t = useTranslations("Table")
   const i18n = useTranslations("GameResults")
-  const multiplyMark = 20
+  const multiplyMark = 10
 
   const columns: ColumnDef<ClassroomGameResults>[] = React.useMemo(
     () => [
@@ -259,7 +259,7 @@ export function StudentResultsTable({
   }, [columnVisibility, t, table])
 
   return (
-    <div className="w-4/6 relative left-1/2 -translate-x-1/2">
+    <div className="relative left-1/2 -translate-x-1/2">
       <div className="flex items-center justify-between py-4">
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}

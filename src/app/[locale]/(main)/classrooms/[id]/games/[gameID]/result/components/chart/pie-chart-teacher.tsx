@@ -7,24 +7,12 @@ import { ClassroomGameResults } from "@/types"
 import PagedResponse from "@/types/paged-response"
 import { generateRandomColors } from "../helpers/random-color-chart"
 import { useTranslations } from "next-intl"
+import { PieChart } from "@/types/chart-type"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 type Props = {
   data: PagedResponse<ClassroomGameResults>
-}
-
-type DataChart = {
-  labels: string[]
-  datasets: Dataset[]
-}
-
-type Dataset = {
-  label: string
-  data: number[]
-  backgroundColor: string[]
-  borderColor: string[]
-  borderWidth: number
 }
 
 // labels: range of mark (for example: max is 20 => ["0-5", "5-10", "10-15", "15-20"])
@@ -43,7 +31,7 @@ export function PieChartTeacher({ data }: Props) {
     return y
   })
 
-  const dataChart: DataChart = {
+  const dataChart: PieChart = {
     labels: rangeOfMarks,
     datasets: [
       {
