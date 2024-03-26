@@ -2,13 +2,20 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
-import { User } from "@/types"
+import { Classroom, User } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 
+export type StudentClasroomData = {
+  account: User,
+  classroom: Classroom,
+  joinDate: string
+}
+
 export default async function getAllMembers(
-  classroomId: string, options: Partial<PagedRequest>
-) {
+  classroomId: string,
+  options: Partial<PagedRequest>
+): Promise<PagedResponse<StudentClasroomData>> {
   const token = getToken()
   //Convert object to query string
   const params = new URLSearchParams()
@@ -31,26 +38,14 @@ export default async function getAllMembers(
     },
   }
 
-  const url = getAPIServerURL(`/classrooms/get-all-member/${classroomId}?` + params)
+  const url = getAPIServerURL(
+    `/classrooms/get-all-member/${classroomId}?` + params
+  )
 
   return fetch(url, option)
-    .then(async (res) => {
-      const data = await res.json()
-      if (!res.ok) {
-        throw new Error(data.message)
-      }
-      return data
-    })
-    .then((res: PagedResponse<User>) => ({
-      ok: true,
-      message: "success",
-      data: res,
-    }))
+    .then(async (res) => res.json())
     .catch((err) => {
-      return {
-        ok: false,
-        message: err.message,
-        data: null,
-      }
+      console.error(`[ERROR] getQuizBank: ${URL} `, err)
+      throw new Error(err)
     })
 }
