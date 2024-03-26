@@ -86,7 +86,7 @@ export function ChartStudents({ data, studentGameResult, studentRank }: Props) {
 
   return (
     <>
-      <div className="flex max-w-[484px] gap-5 text-black max-md:flex-wrap">
+      <div className="mt-4 flex gap-5 text-black max-md:flex-wrap">
         <div className="flex w-fit shrink-0 grow basis-0 flex-col px-5">
           <div className="text-xl font-semibold leading-8">
             {i18n("students.text.ranking", {
@@ -95,13 +95,15 @@ export function ChartStudents({ data, studentGameResult, studentRank }: Props) {
             })}
           </div>
           <div className="mt-3 text-base leading-6">
-            {i18n("students.text.correct_questions", {
+            {i18n.rich("students.text.correct_questions", {
               right: studentGameResult.totalMark,
               total: numberOfQuizzes,
+              strong: (children) => <b>{children}</b>,
             })}
             <br />
-            {i18n("students.text.score", {
+            {i18n.rich("students.text.score", {
               point: studentGameResult.totalMark * multiplyMark,
+              strong: (children) => <b>{children}</b>,
             })}
           </div>
         </div>

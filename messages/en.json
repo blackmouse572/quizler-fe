@@ -231,8 +231,8 @@
       },
       "text": {
         "ranking": "You place #{rank} out of {count} students",
-        "correct_questions": "{right}/{total} correct questions",
-        "score": "Score {point}"
+        "correct_questions": "<strong>{right}/{total}</strong> correct questions",
+        "score": "Score <strong>{point}</strong>"
       }
     }
   },

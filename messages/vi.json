@@ -212,8 +212,8 @@
       },
       "text": {
         "ranking": "Bạn đứng thứ #{rank} trên tổng số {count} học sinh",
-        "correct_questions": "{right}/{total} số câu đúng",
-        "score": "Bạn đạt được {point} điểm"
+        "correct_questions": "<strong>{right}/{total}</strong> số câu đúng",
+        "score": "Bạn đạt được <strong>{point}</strong> điểm"
       }
     }
   },
