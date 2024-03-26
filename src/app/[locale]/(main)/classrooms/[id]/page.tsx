@@ -3,7 +3,6 @@ import NewPostForm from "@/app/[locale]/(main)/classrooms/[id]/components/new-po
 import PostList from "@/app/[locale]/(main)/classrooms/[id]/components/post-list"
 import getClassroomDetails from "@/app/[locale]/(main)/classrooms/actions/get-classroom-details-action"
 import { polyfill } from "interweave-ssr"
-import _ from "lodash"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
@@ -25,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 polyfill()
 
 async function ClassroomDetailsPage({ params }: Props) {
-  const {id} = params
+  const { id } = params
   const { ok: okPosts, data: posts } = await getAllPostActions({
     filter: { take: 10, skip: 0 },
     classroomId: id,
@@ -35,7 +34,7 @@ async function ClassroomDetailsPage({ params }: Props) {
   }
 
   return (
-    <div  className="mt-6 space-y-12">
+    <div className="mt-6 space-y-12">
       <NewPostForm
         initialValues={{ classroomId: +id, title: "posts.post.index" }}
       />

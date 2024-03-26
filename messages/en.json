@@ -74,6 +74,21 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
+  "Classroom": {
+    "metadata": {
+      "title": "Classroom",
+      "description": "Manage all classrooms in the system"
+    },
+    "headers": {
+      "name": "Name",
+      "description": "Description",
+      "members": "Members",
+      "games": "Games",
+      "quizbanks": "Quizbanks",
+      "visibility": "Visibility",
+      "created_at": "Created at"
+    }
+  },
   "ClassroomDetails": {
     "members": "Members",
     "posts": {
@@ -187,7 +202,8 @@
     "headers": {
       "index": "My Quiz Banks"
     },
-    "terms": "Terms"
+    "terms": "Terms",
+    "add_quizbank": "Add quiz bank"
   },
   "QuizBankAdmin": {
     "metadata": {

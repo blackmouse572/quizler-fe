@@ -48,7 +48,7 @@ function PostItem({
   const user = useUser().user
   const date = new Date(post.updated || post.created)
   const now = new Date()
-  const { mutate, isPending } = useAddView({
+  const { mutate } = useAddView({
     classroomId: classroomId,
     onError: (e, i, context) => {
       queryClient.setQueryData(["post"], context.previousPosts)
@@ -111,6 +111,7 @@ function PostItem({
           <Button
             variant="light"
             color="accent"
+            className="p-0 hover:bg-transparent focus:bg-transparent"
             onClick={() => {
               setSelectedPost(post)
               setViewPostDialogOpen(true)
@@ -118,7 +119,6 @@ function PostItem({
           >
             <Icons.Eye />
             {post.view}
-            {isPending && <Icons.Loader />}
           </Button>
         </div>
         <div className="space-x-2">

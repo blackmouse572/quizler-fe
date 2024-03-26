@@ -29,7 +29,7 @@ function PostList({ ...props }: Props) {
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
   const [editPostDialogOpen, setEditPostDialogOpen] = useState(false)
   const [viewPostDialogOpen, setViewPostDialogOpen] = useState(false)
-  const [commentDialogOpen, setCommentialogOpen] = useState(false)
+  const [commentDialogOpen, setCommentDialogOpen] = useState(false)
 
   const {
     isLoading,
@@ -46,110 +46,6 @@ function PostList({ ...props }: Props) {
   const renderLoadingItem = useMemo(() => {
     return <Skeleton className="h-18 w-full" />
   }, [])
-  const renderAttachCard = useCallback(
-    (quizbank: QuizBank) => (
-      <Card className="relative">
-        <CardHeader>
-          <CardDescription>
-            {t("posts.link-quiz")} ({quizbank.quizCount})
-          </CardDescription>
-          <CardTitle>{quizbank.bankName}</CardTitle>
-        </CardHeader>
-      </Card>
-    ),
-    [t]
-  )
-  const renderItem = useCallback(
-    (post: Post) => {
-      const {
-        author,
-        bankLink,
-        classroom,
-        comments,
-        content,
-        gameLink,
-        title,
-        created,
-        updated,
-        ...rest
-      } = post
-      const date = new Date(updated || created)
-      const now = new Date()
-      return (
-        <Card key={post.id}>
-          <CardHeader>
-            <UserDisplay
-              user={{
-                ...author,
-                fullName: t(title as any, {
-                  user: author.fullName,
-                }),
-              }}
-              secondaryText={
-                now.getTime() - date.getTime() < 86400000
-                  ? timeI18n.relativeTime(new Date(created))
-                  : timeI18n.dateTime(date, { timeStyle: "short" })
-              }
-            />
-          </CardHeader>
-          <CardContent>
-            <Preview
-              content={content}
-              className="border-none bg-transparent p-0"
-            />
-            {/* TODO: need to have quizbank to display */}
-            {/* {bankLink && renderAttachCard({})} */}
-          </CardContent>
-          <CardFooter className="flex items-center justify-end gap-2">
-            {user?.id === author.id && (
-              <>
-                <NamedToolTip content={t("posts.delete.title")}>
-                  <Button
-                    color="danger"
-                    isIconOnly
-                    variant="ghost"
-                    disabled={deletePostDialogOpen}
-                    onClick={() => {
-                      setSelectedPost(post)
-                      setDeletePostDialogOpen(true)
-                    }}
-                  >
-                    <Icons.Delete />
-                  </Button>
-                </NamedToolTip>
-
-                <NamedToolTip content={t("posts.edit.title")}>
-                  <Button
-                    color="success"
-                    isIconOnly
-                    variant="ghost"
-                    disabled={deletePostDialogOpen}
-                    onClick={() => {
-                      setSelectedPost(post)
-                      setEditPostDialogOpen(true)
-                    }}
-                  >
-                    <Icons.Edit />
-                  </Button>
-                </NamedToolTip>
-              </>
-            )}
-            <NamedToolTip content={t("posts.report.action")}>
-              <Button color="accent" isIconOnly variant="ghost">
-                <Icons.Report />
-              </Button>
-            </NamedToolTip>
-            <NamedToolTip content={t("posts.comments.index")}>
-              <Button color="accent" isIconOnly variant="ghost">
-                <Icons.Comment />
-              </Button>
-            </NamedToolTip>
-          </CardFooter>
-        </Card>
-      )
-    },
-    [deletePostDialogOpen, t, timeI18n, user?.id]
-  )
 
   const renderItems = useMemo(() => {
     return data?.pages.map((page) => {
@@ -163,7 +59,7 @@ function PostList({ ...props }: Props) {
             setViewPostDialogOpen={setViewPostDialogOpen}
             setDeletePostDialogOpen={setDeletePostDialogOpen}
             setEditPostDialogOpen={setEditPostDialogOpen}
-            setCommentDialogOpen={setCommentialogOpen}
+            setCommentDialogOpen={setCommentDialogOpen}
           />
         )
       })
@@ -222,7 +118,7 @@ function PostList({ ...props }: Props) {
       <CommentList
         post={selectedPost}
         open={commentDialogOpen}
-        onOpenChange={setCommentialogOpen}
+        onOpenChange={setCommentDialogOpen}
       />
     </div>
   )
