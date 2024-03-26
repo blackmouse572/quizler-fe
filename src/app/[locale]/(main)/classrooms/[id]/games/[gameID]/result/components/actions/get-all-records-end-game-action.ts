@@ -1,23 +1,19 @@
 "use server"
 
 import { getToken } from "@/lib/auth"
+import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
 import { ClassroomGameResults } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 
 export default async function getAllRecordsEndGame(
-  gameId: string, options: Partial<PagedRequest>
+  gameId: string,
+  options: Partial<PagedRequest>
 ) {
   const token = getToken()
   //Convert object to query string
-  const params = new URLSearchParams()
-
-  for (const [key, value] of Object.entries(options)) {
-    if (value !== undefined) {
-      params.set(key, String(value)) // Ensure value is a string
-    }
-  }
+  const params = toURLSeachParams(options)
 
   const option: RequestInit = {
     method: "GET",
@@ -26,7 +22,7 @@ export default async function getAllRecordsEndGame(
       Authorization: `Bearer ${token.token}`,
     },
     next: {
-      tags: ["classroom_game_result"],
+      tags: [`classroom_game_` + `${gameId}` + `_result`],
       revalidate: 60, // revalidate every 60 seconds
     },
   }

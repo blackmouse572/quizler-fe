@@ -45,7 +45,7 @@ export default async function ManageClassroomPage({
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
-  const { ok: ok, data: data } = await getAllRecordsEndGame(gameID, options)
+  const { ok, data } = await getAllRecordsEndGame(gameID, options)
 
   if (!token || !ok) {
     notFound()
