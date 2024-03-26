@@ -87,6 +87,10 @@
       "quizbanks": "Quizbanks",
       "visibility": "Visibility",
       "created_at": "Created at"
+    },
+    "actions": {
+      "create": "Create classroom",
+      "join": "Join classroom"
     }
   },
   "ClassroomDetails": {
@@ -145,6 +149,31 @@
       "members": "Members",
       "games": "Games",
       "quizbanks": "Quizbanks"
+    }
+  },
+  "ClassroomGame": {
+    "metadata": {
+      "title": "Classroom games",
+      "description": "All classroom games"
+    },
+    "headers": {},
+    "actions": {
+      "create": {
+        "index": "New game",
+        "title": "Create new game",
+        "description": "Create a new game for your classroom",
+        "form": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Enter the name of the game"
+          },
+          "description": {
+            "label": "Description",
+            "placeholder": "Enter the description of the game"
+          },
+          "submit": "Create"
+        }
+      }
     }
   },
   "Members_classroom": {

@@ -17,6 +17,18 @@ type Props = {
   }
 }
 
+export async function generateMetadata(props: Props) {
+  const data = await getClassroomDetails(props.params.id)
+
+  return {
+    title: {
+      template: `%s | ${data.data?.classname}`,
+      default: data.data?.classname,
+    },
+    description: data.data?.description,
+  }
+}
+
 async function ClassroomDetailLayout({ children, params }: Props) {
   const msg = await getMessages()
   const data = await getClassroomDetails(params.id)
