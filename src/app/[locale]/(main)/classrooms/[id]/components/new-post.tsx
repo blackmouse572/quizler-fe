@@ -122,7 +122,6 @@ function NewPostForm({ initialValues }: Props) {
 
   const handleAttachQuizbank = useCallback(
     (quiz: QuizBank) => {
-      console.log(quiz)
       setValue("bankLink", quiz.id.toString())
       setValue("title", "posts.post.quizbank")
       setValue("gameLink", "")

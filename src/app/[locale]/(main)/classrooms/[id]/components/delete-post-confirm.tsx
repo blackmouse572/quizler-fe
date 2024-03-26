@@ -19,7 +19,7 @@ import { useTranslations } from "next-intl"
 import { useCallback } from "react"
 
 type Props = {
-  post: Post | null
+  post?: Post
 } & DialogProps
 
 function DeletePostConfirmDialog({ post, onOpenChange, ...props }: Props) {
@@ -67,6 +67,7 @@ function DeletePostConfirmDialog({ post, onOpenChange, ...props }: Props) {
             disabled={isPending}
             autoFocus
             onClick={() => mutate(post?.id || "")}
+            color="danger"
           >
             {isPending && <Icons.Spinner className="animate-spin" />}
             {t("confirm")}

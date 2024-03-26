@@ -1,5 +1,6 @@
 "use client"
 import { joinClassroomAction } from "@/app/[locale]/(main)/classrooms/actions/join-classroom"
+import { queryClient } from "@/app/[locale]/provider"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -19,6 +20,7 @@ import {
 } from "@/components/ui/form"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
+import { NamedToolTip } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
@@ -43,11 +45,12 @@ const JoinClassroomSchema = z.object({
 type Props = {
   defaultOpen?: boolean
   defaultValue?: string
+  trigger?: React.ReactNode
 }
 
 type FormData = z.infer<typeof JoinClassroomSchema>
 
-function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
+function JoinClassroomDialog({ defaultOpen, defaultValue, trigger }: Props) {
   const [isOpen, setOpen] = useState(defaultOpen)
   const t = useTranslations("Join_classroom")
   const validationsi18n = useTranslations("Validations")
@@ -73,6 +76,8 @@ function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
       })
     } else {
       setOpen(false)
+      queryClient.invalidateQueries({ queryKey: ["classrooms"] })
+
       toast({
         title: t("success.title"),
         color: "success",
@@ -84,9 +89,7 @@ function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>{t("title")}</Button>
-      </DialogTrigger>
+      <DialogTrigger>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>

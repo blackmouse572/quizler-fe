@@ -21,13 +21,11 @@ export function useQuizbankList({
     ...options,
     queryKey: ["quizbank", classroomId, filter?.search],
     queryFn: async ({ pageParam }) => {
-      console.log("pageParam", pageParam)
       const res = await getMyQuizbankAction({
         // classroomId,
         ...filter,
         skip: pageParam as number,
       })
-      console.log("res", res)
       if (!res.ok) {
         throw new Error(res.message)
       }

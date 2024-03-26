@@ -1,5 +1,8 @@
 import QuizBankList from "@/app/[locale]/(main)/quizbank/components/quizbank-list"
 import SearchBox from "@/components/searchbox"
+import { Button } from "@/components/ui/button"
+import { Icons } from "@/components/ui/icons"
+import { NamedToolTip } from "@/components/ui/tooltip"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
@@ -8,6 +11,7 @@ import PagedResponse from "@/types/paged-response"
 import { pick } from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
+import Link from "next/link"
 
 type Props = {}
 
@@ -79,8 +83,6 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
-  const data = await getQuizBank(options)
-  const m = await getMessages()
   const res = await getQuizBank(options)
   if (!res.ok) throw new Error(res.message)
 
@@ -92,9 +94,20 @@ async function MyQuizbankPage({ searchParams }: MyQuizbankProps) {
     <main>
       <div className="mb-3 flex items-center justify-between">
         <h3 className="text-lg font-bold">{t("headers.index")}</h3>
-        <SearchBox className="bg-background" />
+        <div className="flex items-center gap-2">
+          <SearchBox className="bg-background" />
+          <NamedToolTip content={t("add_quizbank")} side="bottom">
+            <Link href="/quizbank/add">
+              <Button isIconOnly>
+                <Icons.Plus />
+              </Button>
+            </Link>
+          </NamedToolTip>
+        </div>
       </div>
-      <NextIntlClientProvider messages={pick(messages, "MyQuizbanks", "Errors", "Delete_quizbank")}>
+      <NextIntlClientProvider
+        messages={pick(messages, "MyQuizbanks", "Errors", "Delete_quizbank")}
+      >
         <QuizBankList data={res.data!} filter={options} token={token} />
       </NextIntlClientProvider>
     </main>

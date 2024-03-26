@@ -1,4 +1,4 @@
-import { User } from "@/types"
+import { User } from "."
 
 type ClassroomInvitation = {
   id: string
@@ -23,8 +23,15 @@ type Classroom = {
   created: string
 }
 
+type ClassroomMembers = Omit<User, "accessToken" | "refreshToken" | "role">
+
 type TClassRoomCardRef = {
   setIsDelete: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export type { Classroom, ClassroomInvitation, TClassRoomCardRef }
+export type {
+  Classroom,
+  ClassroomInvitation,
+  TClassRoomCardRef,
+  ClassroomMembers,
+}

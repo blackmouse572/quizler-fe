@@ -31,6 +31,8 @@
     "delete": "Delete",
     "delete_title": "Delete items",
     "delete_message": "Are you sure you want to delete <span></span> items?",
+    "ban": "Ban",
+    "unban": "Unban",
     "edit": "Edit",
     "create": "Create",
     "show": "Show",
@@ -72,6 +74,25 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
+  "Classroom": {
+    "metadata": {
+      "title": "Classroom",
+      "description": "Manage all classrooms in the system"
+    },
+    "headers": {
+      "name": "Name",
+      "description": "Description",
+      "members": "Members",
+      "games": "Games",
+      "quizbanks": "Quizbanks",
+      "visibility": "Visibility",
+      "created_at": "Created at"
+    },
+    "actions": {
+      "create": "Create classroom",
+      "join": "Join classroom"
+    }
+  },
   "ClassroomDetails": {
     "members": "Members",
     "posts": {
@@ -87,13 +108,15 @@
       },
       "comments": {
         "index": "Comment",
-        "action": "Comment",
+        "load_more": "Load more comments",
+        "action": "Delete comment",
         "delete": "Delete",
         "delete_success": "Comment deleted successfully"
       },
       "delete": {
         "title": "Delete post",
         "description": "Are you sure you want to delete this post?",
+        "comment_description": "Are you sure you want to delete this comment?",
         "confirm": "Delete",
         "cancel": "Cancel",
         "success": "Post deleted successfully"
@@ -128,6 +151,78 @@
       "quizbanks": "Quizbanks"
     }
   },
+  "ClassroomGame": {
+    "metadata": {
+      "title": "Classroom games",
+      "description": "All classroom games"
+    },
+    "headers": {},
+    "actions": {
+      "create": {
+        "index": "New game",
+        "title": "Create new game",
+        "description": "Create a new game for your classroom",
+        "form": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Enter the name of the game"
+          },
+          "description": {
+            "label": "Description",
+            "placeholder": "Enter the description of the game"
+          },
+          "submit": "Create"
+        }
+      }
+    }
+  },
+  "Members_classroom": {
+    "metadata": {
+      "title": "Classroom members",
+      "description": "All classroom members"
+    },
+    "headers": {
+      "fullName": "Name",
+      "email": "Email",
+      "dob": "Date of birth"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "options": {
+      "title": "Options",
+      "kick_student": "Kick student",
+      "ban_student": "Ban student"
+    },
+    "kick_user": {
+      "title": "Kick student",
+      "delete_message": "Are you sure you want to kick <span></span>?",
+      "cancel_btn": "Cancel",
+      "delete_btn": "Kick",
+      "success": "User has been kicked from class"
+    },
+    "remove_batch": {
+      "title": "Remove users",
+      "delete_message": "Are you sure you want to remove <span></span> student(s)?",
+      "cancel_btn": "Cancel",
+      "delete_btn": "Delete",
+      "success": "User(s) has been removed from class"
+    }
+  },
   "MyQuizbanks": {
     "metadata": {
       "title": "My Quiz Banks",
@@ -136,7 +231,8 @@
     "headers": {
       "index": "My Quiz Banks"
     },
-    "terms": "Terms"
+    "terms": "Terms",
+    "add_quizbank": "Add quiz bank"
   },
   "QuizBankAdmin": {
     "metadata": {
@@ -576,6 +672,9 @@
         "text": "Classroom",
         "placeholder": "Chose classroom to copy to"
       },
+      "personal": {
+        "text": "Personal"
+      },
       "public": {
         "label": "public",
         "text": "Public"
@@ -649,6 +748,7 @@
   },
   "Errors": {
     "index": "Error",
+    "unknown": "Something went wrong",
     "token-expire": "The url has been expire, please create another request",
     "invalid-pin": "Pin is not correct, please try again",
     "account-fail": "The account has been terminated, please contact the Support",
@@ -809,6 +909,12 @@
     },
     "errorBtn": "Errors messages"
   },
+  "ManageClassroomMembers": {
+    "metadata": {
+      "title": "Classroom members",
+      "description": "All classroom members"
+    }
+  },
   "AddClassroom": {
     "metadata": {
       "title": "Create new classroom",
@@ -936,8 +1042,106 @@
       "redo": "Redo"
     }
   },
+  "Change_quizbank_visibility": {
+    "visibility": {
+      "Public": "public",
+      "Private": "private"
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Successfully change quizbank visibility to {visibility}"
+      },
+      "failed": { "title": "Failed" }
+    },
+    "confirm_dialog": {
+      "title": "Do you want to change quizbank visibility?",
+      "description": "Quizbank visibility will be change to {visibility}",
+      "cancel": "Cancel",
+      "continue": "Continue"
+    }
+  },
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"
+  },
+  "Classroom_student": {
+    "table": {
+      "headers": {
+        "name": "Name",
+        "email": "Email",
+        "dob": "Date of birth"
+      },
+      "actions": {
+        "title": "Options",
+        "ban": {
+          "title": "Ban User",
+          "title_batch": "Ban Users",
+          "description": "User(s) will be banned from classroom. User(s) will be in banned table",
+          "buttons": {
+            "cancel": "Cancel",
+            "ban": "Ban"
+          },
+          "message": {
+            "ban_message_single": "Are you sure you want to ban user <span></span>?",
+            "ban_message_mutiple": "Are you sure you want to ban <span></span> members?"
+          }
+        },
+        "unban": {
+          "title": "Unban User",
+          "title_batch": "Unban Users",
+          "description": "User(s) will be unbanned from classroom. User(s) will can access class's content",
+          "buttons": {
+            "cancel": "Cancel",
+            "ban": "Unban"
+          },
+          "message": {
+            "unban_message_single": "Are you sure you want to ban user <span></span>?",
+            "unban_message_mutiple": "Are you sure you want to unban <span></span> members?"
+          }
+        },
+        "kick_user": {
+          "title": "Remove User",
+          "description": "Remove user out of the classroom",
+          "message": {
+            "delete_message": "Are you sure you want to kick <span></span>?",
+            "success": "User has been kicked from class"
+          },
+          "buttons": {
+            "cancel": "Cancel",
+            "delete": "Kick"
+          }
+        },
+        "remove_batch": {
+          "title": "Remove users",
+          "description": "Remove users out of the classroom",
+          "message": {
+            "delete_message": "Are you sure you want to remove <span></span> student(s)?",
+            "success": "User(s) has been removed from class"
+          },
+          "button": {
+            "cancel": "Cancel",
+            "delete": "Delete"
+          }
+        }
+      },
+      "filters": {
+        "visibility": {
+          "label": "Visibility",
+          "placeholder": "Select visibility",
+          "type": {
+            "Public": {
+              "value": "Public"
+            },
+            "Private": {
+              "value": "Private"
+            },
+            "All": {
+              "value": "All"
+            }
+          }
+        }
+      }
+    }
   }
 }

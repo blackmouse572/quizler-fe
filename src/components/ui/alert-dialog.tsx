@@ -5,6 +5,7 @@ import * as React from "react"
 
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { VariantProps } from "class-variance-authority"
 
 const AlertDialog = AlertDialogPrimitive.Root
 
@@ -100,11 +101,20 @@ AlertDialogDescription.displayName =
 
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Action>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action> &
+    VariantProps<typeof buttonVariants>
+>(({ className, color, size, variant, ...props }, ref) => (
   <AlertDialogPrimitive.Action
     ref={ref}
-    className={cn(buttonVariants(), className)}
+    autoFocus
+    className={cn(
+      buttonVariants({
+        color,
+        size,
+        variant,
+      }),
+      className
+    )}
     {...props}
   />
 ))
@@ -112,12 +122,13 @@ AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName
 
 const AlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Cancel>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel> &
+    VariantProps<typeof buttonVariants>
+>(({ className, size, color = "accent", variant = "light", ...props }, ref) => (
   <AlertDialogPrimitive.Cancel
     ref={ref}
     className={cn(
-      buttonVariants({ variant: "default", color: "accent" }),
+      buttonVariants({ variant, color, size }),
       "mt-2 sm:mt-0",
       className
     )}

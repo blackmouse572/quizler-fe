@@ -22,7 +22,6 @@ function SizeSelector({ ...props }: Props) {
   const pathName = usePathname()
 
   function handleChange(value: string) {
-    console.log(value)
     const params = new URLSearchParams(searchParams.toString())
     params.set("take", value)
     router.push(pathName + "?" + params.toString())

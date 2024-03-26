@@ -20,6 +20,7 @@ type Props = {
   classname?: string
   quizbankId: string
   isOwnQuizBank?: boolean
+  quizBankVisibility: "Public" | "Private"
 }
 
 export default function AuthorQuizBank({
@@ -27,11 +28,11 @@ export default function AuthorQuizBank({
   classname,
   quizbankId,
   isOwnQuizBank,
+  quizBankVisibility,
 }: Props) {
   const i18n = useTranslations("ViewQuizBank")
-  const { token } = getToken()
   const { data: userCurrentClass }: { data: Classroom[] } = use(
-    fetchClassroomCurrentUser(token)
+    fetchClassroomCurrentUser()
   )
 
   // TODO: set action for public button
@@ -97,9 +98,12 @@ export default function AuthorQuizBank({
         <div className="flex justify-between gap-2 whitespace-nowrap">
           <UserDisplay user={authorData} withLink={true} />
         </div>
-        <div className="flex justify-between gap-2">
-          {quizBankActions.map((btn) => btn)}
-        </div>
+        <QuizBankActions
+          quizbankId={quizbankId}
+          quizBankVisibility={quizBankVisibility}
+          isOwnQuizBank={isOwnQuizBank}
+          userCurrentClass={userCurrentClass}
+        />
       </div>
     </div>
   )
