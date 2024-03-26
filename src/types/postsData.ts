@@ -1,4 +1,5 @@
 import { Classroom, User } from "@/types"
+import QuizBank from "@/types/QuizBank"
 
 export type Post = {
   id: string
@@ -7,10 +8,23 @@ export type Post = {
   content: string
   author: User
   comments: [Comment]
-  gameLink: string | null
-  bankLink: string | null
   created: string
+  view: number
   updated: string | null
+} & (PostQuizbank | PostGame)
+
+export type PostQuizbank = {
+  bankLink: string
+  quizBank: QuizBank
+  gameLink: never
+  game: never
+}
+
+export type PostGame = {
+  gameLink: string
+  quizBank: never
+  bankLink: never
+  game: any // Todo: Define game type
 }
 
 export type Comment = {

@@ -111,7 +111,6 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
       </CommandList>
     )
   }
-  console.log("Data:", data)
   if (!data || (data.classrooms.length === 0 && data.quizBanks.length === 0)) {
     return (
       <CommandList>
@@ -124,7 +123,6 @@ export default function SearchResults({ searchQuery }: SearchResultsProps) {
   }
 
   const { quizBanks, classrooms } = data
-  console.log("quizBanks", quizBanks)
 
   return (
     <CommandList>

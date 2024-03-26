@@ -112,7 +112,6 @@ export default function ViewFlashcard({
   }, [fetchNextPage, hasNextPage, isError, isLoading])
 
   useEffect(() => {
-    console.log({ current, totalLoaded })
     if (current === totalLoaded - LOAD_MORE_THRESHOLD) {
       onSeeMore()
     }

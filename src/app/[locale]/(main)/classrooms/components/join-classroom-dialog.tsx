@@ -1,5 +1,6 @@
 "use client"
 import { joinClassroomAction } from "@/app/[locale]/(main)/classrooms/actions/join-classroom"
+import { queryClient } from "@/app/[locale]/provider"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -73,6 +74,8 @@ function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
       })
     } else {
       setOpen(false)
+      queryClient.invalidateQueries({ queryKey: ["classrooms"] })
+
       toast({
         title: t("success.title"),
         color: "success",

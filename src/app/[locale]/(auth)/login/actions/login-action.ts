@@ -30,7 +30,6 @@ export const LoginAction = async (values: LoginSchemaType) => {
     .then((response: User) => {
       setToken(response.accessToken)
       setRefreshToken(response.refreshToken)
-      console.log(response)
       setUser(response)
       revalidatePath("/")
       return {
