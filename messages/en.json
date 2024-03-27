@@ -165,13 +165,31 @@
         "form": {
           "name": {
             "label": "Name",
-            "placeholder": "Enter the name of the game"
+            "placeholder": "Game name"
           },
-          "description": {
-            "label": "Description",
-            "placeholder": "Enter the description of the game"
+          "amount": {
+            "label": "Num of Questions",
+            "placeholder": "How much questions?"
           },
-          "submit": "Create"
+          "duration": {
+            "label": "Duration",
+            "placeholder": "How game will last?"
+          },
+          "startTime": {
+            "label": "Start time",
+            "placeholder": "When will game start?"
+          },
+          "endTime": {
+            "label": "End time",
+            "placeholder": "When will game end?"
+          },
+          "quizbank": {
+            "label": "Quizbank",
+            "placeholder": "Select quizbank",
+            "empty": "No result"
+          },
+          "submit": "Create",
+          "cancel": "Cancel"
         }
       }
     }
@@ -830,9 +848,9 @@
           "not_inclusive": "Invalid input"
         },
         "date": {
-          "exact": "Date must be exactly {- minimum, datetime}",
-          "inclusive": "Date must be greater than or equal to {- minimum, datetime}",
-          "not_inclusive": "Date must be greater than {- minimum, datetime}"
+          "exact": "Date must be exactly {datetime}",
+          "inclusive": "Date must be greater than or equal to {datetime}",
+          "not_inclusive": "Date must be greater than {datetime}"
         }
       },
       "too_big": {
@@ -857,9 +875,9 @@
           "not_inclusive": "Invalid input"
         },
         "date": {
-          "exact": "Date must be exactly {- maximum, datetime}",
-          "inclusive": "Date must be smaller than or equal to {- maximum, datetime}",
-          "not_inclusive": "Date must be smaller than {- maximum, datetime}"
+          "exact": "Date must be exactly {datetime}",
+          "inclusive": "Date must be smaller than or equal to {datetime}",
+          "not_inclusive": "Date must be smaller than {datetime}"
         }
       }
     },

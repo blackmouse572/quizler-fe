@@ -3,18 +3,18 @@ import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-
 import { getToken } from "@/lib/auth"
 import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
+import { Game } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
-import { Post } from "@/types/postsData"
 
 type Props = {
   filter: Partial<PagedRequest>
   classroomId: string
 }
-async function getAllPostActions({
+async function getAllGamesByClassroomAction({
   filter,
   classroomId,
-}: Props): Promise<TAPIResult<PagedResponse<Post>>> {
+}: Props): Promise<TAPIResult<PagedResponse<Game>>> {
   const query = toURLSeachParams({
     ...filter,
     sortBy: "created",
@@ -22,7 +22,7 @@ async function getAllPostActions({
   })
   const token = getToken().token
   const url = getAPIServerURL(
-    `/post/classroom/${classroomId}?${query.toString()}`
+    `Game/get-all-by-classroom/${classroomId}?${query.toString()}`
   )
   const options: RequestInit = {
     method: "GET",
@@ -31,7 +31,7 @@ async function getAllPostActions({
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["posts", `post-classroom-${classroomId}`],
+      tags: ["games", `game-classroom-${classroomId}`],
       revalidate: 60, // revalidate every 60 seconds
     },
   }
@@ -43,7 +43,7 @@ async function getAllPostActions({
       }
       return json
     })
-    .then((res: PagedResponse<Post>) => {
+    .then((res: PagedResponse<Game>) => {
       return {
         ok: true,
         message: "success",
@@ -59,4 +59,4 @@ async function getAllPostActions({
     })
 }
 
-export default getAllPostActions
+export default getAllGamesByClassroomAction

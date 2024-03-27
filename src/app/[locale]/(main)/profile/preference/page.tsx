@@ -12,10 +12,12 @@ const getUserProfile = async (id: string) => {
 }
 
 type Props = {
-  locale: string
+  params: {
+    locale: string
+  }
 }
 
-export default async function UserProfile(params: Props) {
+export default async function UserProfile({ params }: Props) {
   const user = getUser()
   if (!user) return notFound()
   const userData = await getUserProfile(user.id.toString())

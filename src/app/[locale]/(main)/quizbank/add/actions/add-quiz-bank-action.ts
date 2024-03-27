@@ -14,7 +14,7 @@ export type TAPIResult<T> =
   | {
       ok: boolean
       message: any
-      data: null
+      data: undefined
     }
 
 export const addQuizBankAction = async (
@@ -97,9 +97,9 @@ export const editQuizBankAction = (
 
 /**
  * Used to update some of the fields, not all fields
- * @param data 
- * @param quizBankId 
- * @returns 
+ * @param data
+ * @param quizBankId
+ * @returns
  */
 export const updateQuizBankAction = (
   data: Partial<AddQuizbank>,
