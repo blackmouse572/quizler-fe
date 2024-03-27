@@ -50,6 +50,7 @@ async function GamePage({ params, searchParams }: Props) {
             <AddGameForm
               intialValues={{
                 classroomId: params.id,
+                isTest: false,
               }}
               trigger={
                 <NamedToolTip content={t("actions.create.index")}>

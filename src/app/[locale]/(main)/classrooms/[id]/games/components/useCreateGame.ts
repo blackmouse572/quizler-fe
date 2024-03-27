@@ -8,7 +8,7 @@ import { InfiniteData, useMutation } from "@tanstack/react-query"
 type UseCreateGameProps = {
   onError: (e: Error) => void
   onSuccess: (game: Game) => void
-  options: any
+  options?: any
   classroomId: string
 }
 export function useCreateGame({

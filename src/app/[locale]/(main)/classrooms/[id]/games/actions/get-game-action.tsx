@@ -22,7 +22,7 @@ async function getAllGamesByClassroomAction({
   })
   const token = getToken().token
   const url = getAPIServerURL(
-    `Game/get-all-by-classroom/${classroomId}?${query.toString()}`
+    `/Game/get-all-by-classroom/${classroomId}?${query.toString()}`
   )
   const options: RequestInit = {
     method: "GET",

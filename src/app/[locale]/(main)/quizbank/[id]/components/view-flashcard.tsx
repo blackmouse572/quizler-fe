@@ -192,7 +192,7 @@ export default function ViewFlashcard({
       </div>
 
       <div className="flex gap-2 self-start whitespace-nowrap text-center text-xs font-medium leading-4 text-zinc-500 max-md:ml-2.5">
-        {Object.keys(quizBankData.tags).map((_, index) => {
+        {quizBankData.tags?.map((_, index) => {
           const tag = quizBankData.tags[index]
           return (
             <div

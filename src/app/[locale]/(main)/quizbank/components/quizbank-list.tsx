@@ -92,6 +92,7 @@ function QuizBankList({ data: initData, token, filter }: Props) {
     ),
     [onDeleteQuizBank, t]
   )
+
   const renderLoading = useCallback((length?: number) => {
     return Array.from({ length: length ?? 5 }).map((_, index) => (
       <Skeleton key={index} className="h-40 w-full rounded-md" />

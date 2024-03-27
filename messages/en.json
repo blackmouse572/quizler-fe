@@ -157,6 +157,12 @@
       "description": "All classroom games"
     },
     "headers": {},
+    "card": {
+      "active": "On-going",
+      "inactive": "Ended",
+      "join": "Join gamee",
+      "unlimited": "Unlimited"
+    },
     "actions": {
       "create": {
         "index": "New game",
@@ -189,7 +195,11 @@
             "empty": "No result"
           },
           "submit": "Create",
-          "cancel": "Cancel"
+          "cancel": "Cancel",
+          "success": {
+            "title": "Create game successfully",
+            "description": "Click here to copy the game link"
+          }
         }
       }
     }

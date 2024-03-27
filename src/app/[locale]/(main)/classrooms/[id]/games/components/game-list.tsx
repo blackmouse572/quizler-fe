@@ -1,13 +1,20 @@
 "use client"
 import { useGameList } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useGameList"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Game } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { useInView } from "framer-motion"
-import { useTranslations } from "next-intl"
+import { useFormatter, useTranslations } from "next-intl"
 import { useEffect, useMemo, useRef } from "react"
 type Props = {
   classroomId: string
@@ -17,6 +24,7 @@ type Props = {
 
 function GameList(props: Props) {
   const t = useTranslations("ClassroomGame")
+  const format = useFormatter()
   const errorI18n = useTranslations("Errors")
   const loadmoreRef = useRef<HTMLDivElement>(null)
   const inView = useInView(loadmoreRef)
@@ -45,11 +53,45 @@ function GameList(props: Props) {
             <CardHeader>
               <CardTitle>{game.gameName}</CardTitle>
             </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <p>
+                  {t("actions.create.form.amount.label")}:&nbsp;
+                  {game.numberOfQuizzes}
+                </p>
+                {new Date(game.endTime) < new Date() ? (
+                  <p>
+                    {t("actions.create.form.endTime.label")}:&nbsp;
+                    {format.relativeTime(new Date(game.endTime))}
+                  </p>
+                ) : (
+                  <p>
+                    {t("actions.create.form.startTime.label")}:&nbsp;
+                    {format.relativeTime(new Date(game.startTime))}
+                  </p>
+                )}
+                <p>
+                  {t("actions.create.form.duration.label")}:&nbsp;
+                  {game.duration ?? t("card.unlimited")}
+                </p>
+                {new Date(game.endTime) < new Date() ? (
+                  <Badge color="accent">{t("card.inactive")}</Badge>
+                ) : (
+                  <Badge color="success">{t("card.active")}</Badge>
+                )}
+              </div>
+            </CardContent>
+            <CardFooter>
+              {(new Date(game.endTime) < new Date() ||
+                game.numberOfQuizzes === 0) ?? (
+                <Button>{t("card.join")}</Button>
+              )}
+            </CardFooter>
           </Card>
         )
       })
     })
-  }, [data?.pages])
+  }, [data?.pages, format, t])
 
   useEffect(() => {
     if (inView && hasNextPage && !isLoading) {

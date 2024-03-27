@@ -4,12 +4,15 @@ import { cn } from "@/lib/utils"
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   prefix?: React.ReactNode
+  input?: {
+    className?: string
+  }
 }
 
 export type InputRef = HTMLInputElement
 
 const Input = React.forwardRef<InputRef, InputProps>(
-  ({ className, type, disabled, readOnly, prefix, ...props }, ref) => {
+  ({ className, type, disabled, readOnly, prefix, input, ...props }, ref) => {
     return (
       <div
         className={cn(
@@ -24,7 +27,10 @@ const Input = React.forwardRef<InputRef, InputProps>(
         {prefix && <div className="mr-2">{prefix}</div>}
         <input
           type={type}
-          className="w-full rounded-md bg-transparent p-2 placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          className={cn(
+            "w-full rounded-md bg-transparent p-3 placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+            input?.className
+          )}
           ref={ref}
           readOnly={readOnly}
           disabled={disabled}

@@ -17,23 +17,27 @@ import {
 import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { useDebounce } from "use-debounce"
 
 type MyQuizbankAutocompleteProps = {
   classroomId?: string //for cache
   onSelect: (value: QuizBank) => void
+  initialData?: string
   terms: {
     inputPlaceholder: string
     empty: string
   }
+  disabled?: boolean
 }
 function MyQuizbankAutocomplete({
   classroomId,
   onSelect,
   terms,
+  initialData,
+  disabled,
 }: MyQuizbankAutocompleteProps) {
-  const [selectedValue, setSelectedValue] = useState<QuizBank>()
+  const [selectedValue, setSelectedValue] = useState<QuizBank | undefined>()
   const [query, setQuery] = useState("")
   const [debouncedQuery] = useDebounce(query, 300)
   const { isLoading, isError, data, error } = useQuizbankList({
@@ -42,6 +46,15 @@ function MyQuizbankAutocomplete({
       search: debouncedQuery,
     },
   })
+  useEffect(() => {
+    if (data?.pages) {
+      const selectedValue = data?.pages
+        .map((e) => e.data.map((m) => m))
+        .flat()
+        .find((e) => e.id.toString() === initialData)
+      setSelectedValue(selectedValue)
+    }
+  }, [data?.pages, data?.pages.length, initialData])
   const renderLoadingItem = useMemo(() => {
     return <Skeleton className="h-18 w-full" />
   }, [])
@@ -75,11 +88,12 @@ function MyQuizbankAutocomplete({
       <PopoverTrigger asChild>
         <FormControl>
           <Button
+            disabled={disabled}
             variant="outline"
             color="accent"
             role="combobox"
             className={cn(
-              "h-10 justify-between",
+              "h-10 w-full justify-between",
               !selectedValue ? "text-muted-foreground" : ""
             )}
           >

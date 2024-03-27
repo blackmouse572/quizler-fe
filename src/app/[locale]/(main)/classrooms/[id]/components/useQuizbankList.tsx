@@ -1,4 +1,4 @@
-import { getMyQuizbankAction } from "@/app/[locale]/(main)/quizbank/actions/get-my-quizbank-action"
+import { getClassroomQuizbankAction } from "@/app/[locale]/(main)/classrooms/[id]/actions/get-classroom-quizbank"
 import QuizBank from "@/types/QuizBank"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
@@ -21,7 +21,7 @@ export function useQuizbankList({
     ...options,
     queryKey: ["quizbank", classroomId, filter?.search],
     queryFn: async ({ pageParam }) => {
-      const res = await getMyQuizbankAction({
+      const res = await getClassroomQuizbankAction(classroomId, {
         // classroomId,
         ...filter,
         skip: pageParam as number,

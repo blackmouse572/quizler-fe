@@ -1,6 +1,8 @@
 "use client"
 import MyQuizbankAutocomplete from "@/app/[locale]/(main)/classrooms/[id]/games/components/quizbank-autocomplete"
+import { useCreateGame } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useCreateGame"
 import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
 import {
   Dialog,
   DialogContent,
@@ -17,8 +19,18 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
+import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { TimePicker } from "@/components/ui/time-picker/time-picker"
+import { useToast } from "@/components/ui/use-toast"
+import { cn, getAbsoluteURL } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { format } from "date-fns"
 import { useTranslations } from "next-intl"
 import { useCallback, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -38,7 +50,9 @@ const AddGameSchema = z
       }),
     isTest: z.boolean().default(false),
     classroomId: z.string(),
-    quizbankId: z.string(),
+    quizbankId: z.string({
+      required_error: "errors.invalid_type_received_undefined",
+    }),
     amount: z
       .number({ required_error: "errors.invalid_type_received_undefined" })
       .min(10, {
@@ -57,26 +71,25 @@ const AddGameSchema = z
       .max(1000, {
         message: "errors.too_big.number.not_inclusive",
       }),
-    startTime: z.string({
-      invalid_type_error: "errors.invalid_date",
-      required_error: "invalid_type_received_undefined",
-    }),
-    endTime: z.string({
-      invalid_type_error: "errors.invalid_date",
-      required_error: "invalid_type_received_undefined",
-    }),
+    startTime: z
+      .date({
+        invalid_type_error: "errors.invalid_date",
+        required_error: "invalid_type_received_undefined",
+      })
+      .optional()
+      .default(() => new Date()),
+    endTime: z
+      .date({
+        invalid_type_error: "errors.invalid_date",
+        required_error: "invalid_type_received_undefined",
+      })
+      .optional()
+      .default(() => new Date()),
   })
-  .refine(
-    (data) => {
-      if (new Date(data.startTime) > new Date(data.endTime)) {
-        return false
-      }
-    },
-    {
-      message: "errors.too_big.date.not_inclusive",
-      path: ["startTime", "endTime"],
-    }
-  )
+  .refine((data) => new Date(data.startTime) < new Date(data.endTime), {
+    message: "errors.too_small.date.not_inclusive",
+    path: ["endTime"],
+  })
 
 export type AddGameFormType = z.infer<typeof AddGameSchema>
 
@@ -87,15 +100,57 @@ type AddGameFormProp = {
 
 function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
   const [isOpen, setOpen] = useState(false)
-  const t = useTranslations("ClassroomGame")
-  const errorsI18n = useTranslations("Errors")
-  const vali18n = useTranslations("Validations")
   const form = useForm<AddGameFormType>({
     resolver: zodResolver(AddGameSchema),
-    defaultValues: intialValues,
+    defaultValues: {
+      ...intialValues,
+      startTime: new Date(),
+      endTime: new Date(),
+    },
   })
+  const t = useTranslations("ClassroomGame")
+  const errorsI18n = useTranslations("Errors")
+  const { toast } = useToast()
+  const { mutate, isPending } = useCreateGame({
+    classroomId: intialValues.classroomId ?? "",
+    onSuccess: (game) => {
+      toast({
+        title: t("actions.create.form.success.title"),
+        description: t("actions.create.form.success.description"),
+        color: "success",
+        action: (
+          <Button
+            onClick={() => {
+              const link = getAbsoluteURL(
+                `/classrooms/${game.classroomId}/games/${game.id}`
+              )
+              //copy to clipboard
+              navigator.clipboard.writeText(link)
+            }}
+            isIconOnly
+          >
+            <Icons.Copy />
+          </Button>
+        ),
+      })
+      form.reset()
+    },
+    onError(e) {
+      toast({
+        title: errorsI18n("index"),
+        description: errorsI18n(e.message as any),
+        color: "danger",
+      })
+    },
+  })
+  const vali18n = useTranslations("Validations")
 
-  const onSubmit = useCallback(() => {}, [])
+  const onSubmit = useCallback(
+    (data: AddGameFormType) => {
+      mutate(data)
+    },
+    [mutate]
+  )
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
@@ -109,7 +164,7 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                 {t("actions.create.description")}
               </DialogDescription>
             </DialogHeader>
-            <div className="grid grid-cols-2 gap-x-8">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
               <FormField
                 control={form.control}
                 name="gameName"
@@ -120,6 +175,7 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={isPending}
                         {...field}
                         placeholder={t("actions.create.form.name.placeholder")}
                       />
@@ -145,7 +201,11 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={isPending}
                         {...field}
+                        onChange={(e) => {
+                          field.onChange(parseInt(e.target.value))
+                        }}
                         type="number"
                         placeholder={t(
                           "actions.create.form.duration.placeholder"
@@ -173,7 +233,11 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={isPending}
                         {...field}
+                        onChange={(e) => {
+                          field.onChange(parseInt(e.target.value))
+                        }}
                         type="number"
                         placeholder={t(
                           "actions.create.form.amount.placeholder"
@@ -199,15 +263,43 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                     <FormLabel>
                       {t("actions.create.form.startTime.label")}
                     </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="datetime-local"
-                        placeholder={t(
-                          "actions.create.form.startTime.placeholder"
-                        )}
-                      />
-                    </FormControl>
+                    <Popover>
+                      <FormControl>
+                        <PopoverTrigger asChild>
+                          <Button
+                            disabled={isPending}
+                            variant="outline"
+                            color="accent"
+                            className={cn(
+                              "w-full justify-start text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            <Icons.Calendar className="mr-2 h-4 w-4" />
+                            {field.value ? (
+                              format(field.value, "PPP HH:mm:ss")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                          </Button>
+                        </PopoverTrigger>
+                      </FormControl>
+                      <PopoverContent className="w-auto p-0" side="bottom">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          initialFocus
+                        />
+                        <div className="border-t border-border p-3">
+                          <TimePicker
+                            setDate={field.onChange}
+                            date={field.value}
+                          />
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+
                     {fieldState.error && (
                       <p className="text-xs text-danger-500">
                         {vali18n(fieldState.error?.message as any, {
@@ -227,15 +319,77 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                     <FormLabel>
                       {t("actions.create.form.endTime.label")}
                     </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="datetime-local"
-                        placeholder={t(
-                          "actions.create.form.endTime.placeholder"
-                        )}
-                      />
-                    </FormControl>
+                    <Popover>
+                      <FormControl>
+                        <PopoverTrigger asChild>
+                          <Button
+                            disabled={isPending}
+                            variant="outline"
+                            color="accent"
+                            className={cn(
+                              "w-full justify-start text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            <Icons.Calendar className="mr-2 h-4 w-4" />
+                            {field.value ? (
+                              format(field.value, "PPP HH:mm:ss")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                          </Button>
+                        </PopoverTrigger>
+                      </FormControl>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          fromYear={new Date(
+                            form.getValues("startTime")
+                          ).getFullYear()}
+                          fromDate={new Date(form.getValues("startTime"))}
+                          fromMonth={new Date(form.getValues("startTime"))}
+                          initialFocus
+                        />
+                        <div className="border-t border-border p-3">
+                          <TimePicker
+                            setDate={field.onChange}
+                            date={field.value}
+                          />
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {vali18n(fieldState.error?.message as any, {
+                          datetime: t("actions.create.form.startTime.label"),
+                        })}
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="quizbankId"
+                render={({ field, fieldState }) => (
+                  <FormItem className="flex flex-col items-start justify-end gap-1">
+                    <FormLabel>
+                      {t("actions.create.form.quizbank.label")}
+                    </FormLabel>
+                    <MyQuizbankAutocomplete
+                      onSelect={(e) => field.onChange(e.id.toString())}
+                      disabled={isPending}
+                      initialData={field.value}
+                      classroomId={intialValues.classroomId ?? ""}
+                      terms={{
+                        empty: t("actions.create.form.quizbank.empty"),
+                        inputPlaceholder: t(
+                          "actions.create.form.quizbank.placeholder"
+                        ),
+                      }}
+                    />
                     {fieldState.error && (
                       <p className="text-xs text-danger-500">
                         {vali18n(fieldState.error?.message as any, {
@@ -247,36 +401,20 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="quizbankId"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col justify-between gap-0 pt-2">
-                    <FormLabel>
-                      {t("actions.create.form.quizbank.label")}
-                    </FormLabel>
-                    <MyQuizbankAutocomplete
-                      onSelect={(e) => field.onChange(e.id)}
-                      terms={{
-                        empty: t("actions.create.form.quizbank.empty"),
-                        inputPlaceholder: t(
-                          "actions.create.form.quizbank.placeholder"
-                        ),
-                      }}
-                    />
-                  </FormItem>
-                )}
-              />
             </div>
             <DialogFooter>
               <Button
                 type="reset"
                 onClick={() => setOpen(false)}
                 color="accent"
+                disabled={isPending}
               >
                 {t("actions.create.form.cancel")}
               </Button>
-              <Button type="submit">{t("actions.create.form.submit")}</Button>
+              <Button type="submit" disabled={isPending}>
+                {isPending && <Icons.Loader className="animate-spin" />}
+                {t("actions.create.form.submit")}
+              </Button>
             </DialogFooter>
           </form>
         </Form>
