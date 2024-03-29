@@ -23,7 +23,7 @@ async function getClassroomDetails(id: string) {
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        throw new Error(json)
+        throw new Error(json.message)
       }
       return json
     })

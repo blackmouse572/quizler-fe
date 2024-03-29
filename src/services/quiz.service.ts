@@ -21,7 +21,7 @@ export async function getQuizByQuizBankId(id: string) {
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        throw new Error(json)
+        throw new Error(json.message)
       }
       return json as TAPIQuizResponse
     })
@@ -48,7 +48,7 @@ export async function copyQuizBankToClassroom(
   const url = getAPIServerURL(
     `/classrooms/copyquizbank/${quizbankId}/${classroomId}`
   )
-    const {token} = getToken()
+  const { token } = getToken()
   const options = {
     method: "POST",
     headers: {
@@ -62,7 +62,7 @@ export async function copyQuizBankToClassroom(
         throw new Error(res.statusText)
       }
       return {
-        ok: true
+        ok: true,
       }
     })
     .catch((e) => {
@@ -73,11 +73,9 @@ export async function copyQuizBankToClassroom(
     })
 }
 
-export async function copyQuizBankToPersonal(
-  quizbankId: string
-) {
+export async function copyQuizBankToPersonal(quizbankId: string) {
   const url = getAPIServerURL(`/quizbank/copyquizbank/${quizbankId}`)
-  const {token} = getToken()
+  const { token } = getToken()
 
   const options = {
     method: "POST",
@@ -86,18 +84,19 @@ export async function copyQuizBankToPersonal(
       Authorization: `Bearer ${token}`,
     },
   }
-  return fetch(url, options).then(async (res) => {
-    if (!res?.ok) {
-      throw new Error(res.statusText)
-    }
-    return {
-      ok: true
-    }
-  })
-  .catch((e) => {
-    return {
-      ok: false,
-      message: e.message as string,
-    }
-  })
+  return fetch(url, options)
+    .then(async (res) => {
+      if (!res?.ok) {
+        throw new Error(res.statusText)
+      }
+      return {
+        ok: true,
+      }
+    })
+    .catch((e) => {
+      return {
+        ok: false,
+        message: e.message as string,
+      }
+    })
 }

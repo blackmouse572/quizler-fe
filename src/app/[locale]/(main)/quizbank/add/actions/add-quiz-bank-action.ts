@@ -74,7 +74,7 @@ export const editQuizBankAction = (
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        throw new Error(json)
+        throw new Error(json.message)
       }
       return json
     })
@@ -122,7 +122,7 @@ export const updateQuizBankAction = (
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        throw new Error(json)
+        throw new Error(json.message)
       }
       return json
     })
