@@ -20,5 +20,11 @@
     "type": "fib",
     "questions": ["What is the capital of France?"],
     "answers": []
+  },
+  {
+    "id": 4,
+    "type": "tf",
+    "questions": ["What is the capital of France?"],
+    "answers": ["Berlin"]
   }
 ]

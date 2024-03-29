@@ -2,7 +2,7 @@
 import DragItem from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/drag-and-drop-question/DragItem"
 import Dropable from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/drag-and-drop-question/Dropable"
 import useGame, {
-  Game,
+  GameQuestion,
 } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { useToast } from "@/components/ui/use-toast"
 import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd"
@@ -10,7 +10,7 @@ import { nanoid } from "nanoid"
 import React, { useCallback, useEffect, useMemo } from "react"
 
 type Props = {
-  data: Game
+  data: GameQuestion
 }
 // const DATA = {
 //   questions: [

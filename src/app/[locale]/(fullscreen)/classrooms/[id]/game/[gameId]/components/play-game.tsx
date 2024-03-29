@@ -1,20 +1,21 @@
 "use client"
 import DndQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/drag-and-drop-question/DragContext"
+import FillInQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/fill-in-question"
 import MultipleChoiceQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/mcq-question"
+import TrueFalseQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/tf-question"
 import useGame, {
-  Game,
+  GameQuestion,
 } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { Icons } from "@/components/ui/icons"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Confetti from "react-confetti"
 
 type PlayGameProps = {
-  initData?: Game[]
+  initData?: GameQuestion[]
 }
 
 function PlayGame({ initData }: PlayGameProps) {
   const [conffeti, setConffeti] = useState(false)
-  const deplayTimeout = useRef<NodeJS.Timeout>()
   const { questions, addQuestions, currentQuestion, duration, nextQuestion } =
     useGame()
 
@@ -22,28 +23,19 @@ function PlayGame({ initData }: PlayGameProps) {
     if (!initData) return
     addQuestions(initData)
   }, [addQuestions, initData])
-  const renderQuestion = useCallback((question: Game) => {
+  const renderQuestion = useCallback((question: GameQuestion) => {
     switch (question.type) {
       case "dnd":
         return <DndQuestion data={question} />
       case "mcq":
         return <MultipleChoiceQuestion data={question} onSubmit={() => {}} />
+      case "fib":
+        return <FillInQuestion data={question} onSubmit={() => {}} />
+      default:
+        return <TrueFalseQuestion data={question} onSubmit={() => {}} />
     }
   }, [])
 
-  useEffect(() => {
-    if (duration === 0) {
-      // setConffeti(true)
-      // deplayTimeout.current = setTimeout(() => {
-      //   nextQuestion()
-      //   setConffeti(false)
-      // }, 2000)
-    }
-
-    return () => {
-      clearTimeout(deplayTimeout.current)
-    }
-  }, [duration, nextQuestion])
   if (!currentQuestion) {
     return (
       <div className="flex h-[80vh] items-center justify-center">

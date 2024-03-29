@@ -1,10 +1,10 @@
-import { Game } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
+import { GameQuestion } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { useCallback, useMemo, useState } from "react"
 
 type Props = {
-  data: Game
+  data: GameQuestion
   onSubmit: (answer: string) => void
 }
 function MultipleChoiceQuestion({ data }: Props) {

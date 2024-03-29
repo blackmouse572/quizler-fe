@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import MOCK_DATA from "../DATA.json"
-export type Game = {
+export type GameQuestion = {
   type: "mcq" | "dnd" | "fib"
   id: number
   questions: string[]
@@ -12,16 +12,16 @@ export type UserGameAnswer = {
 }
 
 type GameState = {
-  questions: Game[]
+  questions: GameQuestion[]
   currentIndex: number
-  currentQuestion: Game | undefined
+  currentQuestion: GameQuestion | undefined
   isNextDisabled: boolean
   isPrevDisabled: boolean
   duration: number
   userAnswers: UserGameAnswer[]
 }
 type GameAction = {
-  addQuestions: (questions: Game[]) => void
+  addQuestions: (questions: GameQuestion[]) => void
   nextQuestion: () => void
   prevQuestion: () => void
   submitAnswer: (answer: UserGameAnswer) => void
@@ -29,7 +29,7 @@ type GameAction = {
 }
 
 export default create<GameState & GameAction>((set, get) => ({
-  questions: MOCK_DATA as Game[],
+  questions: MOCK_DATA as GameQuestion[],
   currentIndex: 0,
   duration: 60,
   currentQuestion: undefined,
