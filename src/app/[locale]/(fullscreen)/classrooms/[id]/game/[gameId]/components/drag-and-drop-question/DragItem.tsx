@@ -1,4 +1,4 @@
-import { Card, CardDescription, CardHeader } from "@/components/ui/card"
+import { Card, CardHeader } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { Draggable, DraggableProps } from "@hello-pangea/dnd"
 type Props = {
@@ -29,10 +29,7 @@ function DragItem({ item, index, className, ...props }: Props) {
             className
           )}
         >
-          <CardHeader className="text-center">
-            {item.answer}
-            <CardDescription>{item.id}</CardDescription>
-          </CardHeader>
+          <CardHeader className="text-center">{item.answer}</CardHeader>
         </Card>
       )}
     </Draggable>

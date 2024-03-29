@@ -52,7 +52,7 @@ async function getAllCommentActions({
       return {
         ok: false,
         message: error.message as string,
-        data: null,
+        data: undefined,
       }
     })
 }
