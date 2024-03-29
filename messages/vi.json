@@ -57,8 +57,67 @@
       "see_more_results": "Xem thêm"
     }
   },
+  "ClassroomGame": {
+    "actions": {
+      "create": {
+        "description": "Tạo trò chơi mới cho lớp học của bạn",
+        "form": {
+          "amount": {
+            "label": "Số câu hỏi",
+            "placeholder": "Số câu hỏi?"
+          },
+          "cancel": "Hủy",
+          "duration": {
+            "label": "Thời gian",
+            "placeholder": "Trò chơi kéo dài trong bao lâu?"
+          },
+          "endTime": {
+            "label": "Thời gian kết thúc",
+            "placeholder": "Trò chơi sẽ kết thúc khi nào?"
+          },
+          "name": {
+            "label": "Tên",
+            "placeholder": "Tên trò chơi"
+          },
+          "quizbank": {
+            "empty": "Không tìm thấy kết quả",
+            "label": "Ngân hàng câu hỏi",
+            "placeholder": "Chọn ngân hàng câu hỏi"
+          },
+          "startTime": {
+            "label": "Thời gian bắt đầu",
+            "placeholder": "Trò chơi sẽ bắt đầu khi nào?"
+          },
+          "submit": "Tạo",
+          "success": {
+            "description": "Nhấp vào đây để sao chép liên kết trò chơi",
+            "title": "Tạo trò chơi thành công"
+          }
+        },
+        "index": "Trò chơi mới",
+        "title": "Tạo trò chơi mới"
+      }
+    },
+    "card": {
+      "active": "Đang diễn ra",
+      "inactive": "Đã kết thúc",
+      "join": "Tham gia trò chơi",
+      "unlimited": "Không giới hạn"
+    },
+    "headers": {},
+    "metadata": {
+      "description": "Tất cả các trò chơi của lớp học",
+      "title": "Trò chơi lớp học"
+    }
+  },
   "ClassroomDetails": {
     "members": "Thành viên",
+    "navbar": {
+      "games": "Trò chơi",
+      "index": "Lớp học",
+      "members": "Thành viên",
+      "quizbanks": "Quizbanks"
+    },
     "posts": {
       "index": "Bài đăng",
       "action": "Đăng",
@@ -74,11 +133,13 @@
         "index": "Bình luận",
         "action": "Bình luận",
         "delete": "Xóa",
-        "delete_success": "Xóa bình luận thành công"
+        "delete_success": "Xóa bình luận thành công",
+        "load_more": "Tải thêm bình luận"
       },
       "delete": {
         "title": "Xóa bài đăng",
         "description": "Bạn có chắc chắn muốn xóa bài đăng này không?",
+        "comment_description": "Bạn có chắc chắn muốn xoá bình luận này không?",
         "confirm": "Xóa",
         "cancel": "Hủy",
         "success": "Xóa bài đăng thành công"
@@ -105,6 +166,25 @@
       "questions": "{count} câu hỏi",
       "cards": "{count} thẻ",
       "empty": "Không có bài đăng nào trong lớp học này, hãy tạo một"
+    }
+  },
+  "Classroom": {
+    "actions": {
+      "create": "Tạo lớp học",
+      "join": "Tham gia lớp học"
+    },
+    "headers": {
+      "created_at": "Ngày tạo",
+      "description": "Mô tả",
+      "games": "Trò chơi",
+      "members": "Thành viên",
+      "name": "Tên",
+      "quizbanks": "Ngân hàng câu hỏi",
+      "visibility": "Hiển thị"
+    },
+    "metadata": {
+      "description": "Quản lý tất cả các lớp học trong hệ thống",
+      "title": "Lớp học"
     }
   },
   "Members_classroom": {
@@ -376,7 +456,8 @@
     "headers": {
       "index": "Quizbank của tôi"
     },
-    "terms": "Thuật ngữ"
+    "terms": "Thuật ngữ",
+    "add_quizbank": "Tạo quizbank mới"
   },
   "QuizBankAdmin": {
     "metadata": {
@@ -730,9 +811,9 @@
           "not_inclusive": "Đầu vào không hợp lệ"
         },
         "date": {
-          "exact": "Ngày phải đúng bằng {- minimum, datetime}",
-          "inclusive": "Ngày phải lớn hơn hoặc bằng {- minimum, datetime}",
-          "not_inclusive": "Ngày phải lớn hơn {- minimum, datetime}"
+          "exact": "Ngày phải đúng bằng {datetime}",
+          "inclusive": "Ngày phải lớn hơn hoặc bằng {datetime}",
+          "not_inclusive": "Ngày phải lớn hơn {datetime}"
         }
       },
       "too_big": {

@@ -74,6 +74,25 @@
     "take-placeholder": "Take action",
     "take-value": "Display {count} rows"
   },
+  "Classroom": {
+    "metadata": {
+      "title": "Classroom",
+      "description": "Manage all classrooms in the system"
+    },
+    "headers": {
+      "name": "Name",
+      "description": "Description",
+      "members": "Members",
+      "games": "Games",
+      "quizbanks": "Quizbanks",
+      "visibility": "Visibility",
+      "created_at": "Created at"
+    },
+    "actions": {
+      "create": "Create classroom",
+      "join": "Join classroom"
+    }
+  },
   "ClassroomDetails": {
     "members": "Members",
     "posts": {
@@ -124,6 +143,65 @@
       "questions": "{count} questions",
       "cards": "{count} cards",
       "empty": "There are no posts in this classroom, let's create one"
+    },
+    "navbar": {
+      "index": "Classroom",
+      "members": "Members",
+      "games": "Games",
+      "quizbanks": "Quizbanks"
+    }
+  },
+  "ClassroomGame": {
+    "metadata": {
+      "title": "Classroom games",
+      "description": "All classroom games"
+    },
+    "headers": {},
+    "card": {
+      "active": "On-going",
+      "inactive": "Ended",
+      "join": "Join gamee",
+      "unlimited": "Unlimited"
+    },
+    "actions": {
+      "create": {
+        "index": "New game",
+        "title": "Create new game",
+        "description": "Create a new game for your classroom",
+        "form": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Game name"
+          },
+          "amount": {
+            "label": "Num of Questions",
+            "placeholder": "How much questions?"
+          },
+          "duration": {
+            "label": "Duration",
+            "placeholder": "How game will last?"
+          },
+          "startTime": {
+            "label": "Start time",
+            "placeholder": "When will game start?"
+          },
+          "endTime": {
+            "label": "End time",
+            "placeholder": "When will game end?"
+          },
+          "quizbank": {
+            "label": "Quizbank",
+            "placeholder": "Select quizbank",
+            "empty": "No result"
+          },
+          "submit": "Create",
+          "cancel": "Cancel",
+          "success": {
+            "title": "Create game successfully",
+            "description": "Click here to copy the game link"
+          }
+        }
+      }
     }
   },
   "Members_classroom": {
@@ -244,7 +322,8 @@
     "headers": {
       "index": "My Quiz Banks"
     },
-    "terms": "Terms"
+    "terms": "Terms",
+    "add_quizbank": "Add quiz bank"
   },
   "QuizBankAdmin": {
     "metadata": {
@@ -513,12 +592,19 @@
           "dob": "Date of birth"
         },
         "submit_btn": "Save changes"
+      },
+      "verify": {
+        "title": "Verify",
+        "not_verified": "Not verified"
       }
     },
     "preference": "Preference",
     "success": {
       "title": "Update account",
       "description": "Your account has been changed successfully"
+    },
+    "report": {
+      "index": "Report"
     }
   },
   "ViewOtherProfile": {
@@ -835,9 +921,9 @@
           "not_inclusive": "Invalid input"
         },
         "date": {
-          "exact": "Date must be exactly {- minimum, datetime}",
-          "inclusive": "Date must be greater than or equal to {- minimum, datetime}",
-          "not_inclusive": "Date must be greater than {- minimum, datetime}"
+          "exact": "Date must be exactly {datetime}",
+          "inclusive": "Date must be greater than or equal to {datetime}",
+          "not_inclusive": "Date must be greater than {datetime}"
         }
       },
       "too_big": {
@@ -862,9 +948,9 @@
           "not_inclusive": "Invalid input"
         },
         "date": {
-          "exact": "Date must be exactly {- maximum, datetime}",
-          "inclusive": "Date must be smaller than or equal to {- maximum, datetime}",
-          "not_inclusive": "Date must be smaller than {- maximum, datetime}"
+          "exact": "Date must be exactly {datetime}",
+          "inclusive": "Date must be smaller than or equal to {datetime}",
+          "not_inclusive": "Date must be smaller than {datetime}"
         }
       }
     },

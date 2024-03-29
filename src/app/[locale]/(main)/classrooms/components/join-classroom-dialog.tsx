@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/form"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
+import { NamedToolTip } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
@@ -44,11 +45,12 @@ const JoinClassroomSchema = z.object({
 type Props = {
   defaultOpen?: boolean
   defaultValue?: string
+  trigger?: React.ReactNode
 }
 
 type FormData = z.infer<typeof JoinClassroomSchema>
 
-function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
+function JoinClassroomDialog({ defaultOpen, defaultValue, trigger }: Props) {
   const [isOpen, setOpen] = useState(defaultOpen)
   const t = useTranslations("Join_classroom")
   const validationsi18n = useTranslations("Validations")
@@ -87,9 +89,7 @@ function JoinClassroomDialog({ defaultOpen, defaultValue }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>{t("title")}</Button>
-      </DialogTrigger>
+      <DialogTrigger>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 import { cookies } from "next/headers"
 import { NextRequest } from "next/server"
 
-const TOKEN_KEY = {
+export const TOKEN_KEY = {
   accessToken: "accessToken",
   refreshToken: "refreshToken",
   accessTokenExp: "accessTokenExp",
@@ -47,7 +47,15 @@ export function setToken(token: Token) {
   })
 }
 
-export function getToken(): Token {
+export function getToken(req?: NextRequest): Token {
+  if (req) {
+    return {
+      expiredAt: parseInt(
+        req.cookies.get(TOKEN_KEY.accessTokenExp)?.value || "0"
+      ),
+      token: req.cookies.get(TOKEN_KEY.accessToken)?.value || "",
+    }
+  }
   return {
     expiredAt: parseInt(cookies().get(TOKEN_KEY.accessTokenExp)?.value || "0"),
     token: cookies().get(TOKEN_KEY.accessToken)?.value || "",
@@ -59,7 +67,15 @@ export function removeAccesstoken() {
   cookies().delete(TOKEN_KEY.accessTokenExp)
 }
 
-export function getRefreshToken(): Token {
+export function getRefreshToken(req?: NextRequest): Token {
+  if (req) {
+    return {
+      expiredAt: parseInt(
+        req.cookies.get(TOKEN_KEY.refreshTokenExp)?.value || "0"
+      ),
+      token: req.cookies.get(TOKEN_KEY.refreshToken)?.value || "",
+    }
+  }
   return {
     expiredAt: parseInt(cookies().get(TOKEN_KEY.refreshTokenExp)?.value || "0"),
     token: cookies().get(TOKEN_KEY.refreshToken)?.value || "",

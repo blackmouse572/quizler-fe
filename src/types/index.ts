@@ -8,4 +8,4 @@ export * from "./paged-request"
 export * from "./paged-response"
 export * from "./postsData"
 export * from "./search-global-results"
-export * from './chart-type'
+export * from "./chart-type"

@@ -4,7 +4,7 @@ import React from "react"
 
 // TODO: apply mask image style
 const backgroundSquareVariants = cva(
-  "flex min-h-screen items-center justify-center bg-neutral-200 bg-grid-xl-slate-300/20",
+  "flex min-h-screen items-center justify-center bg-grid-xl-slate-300/20",
   {
     variants: {
       variant: {

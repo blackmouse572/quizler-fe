@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "type": "dnd",
+    "questions": [
+      "What is the capital of France?",
+      "What is the capital of Germany?",
+      "What is the capital of Italy?"
+    ],
+    "answers": ["Paris", "Berlin", "Rome"]
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "questions": ["What is the capital of France?"],
+    "answers": ["Paris", "Berlin", "Rome", "Italy"]
+  },
+  {
+    "id": 3,
+    "type": "fib",
+    "questions": ["What is the capital of France?"],
+    "answers": []
+  },
+  {
+    "id": 4,
+    "type": "tf",
+    "questions": ["What is the capital of France?"],
+    "answers": ["Berlin"]
+  }
+]

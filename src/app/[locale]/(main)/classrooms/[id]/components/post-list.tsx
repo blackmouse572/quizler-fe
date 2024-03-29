@@ -29,7 +29,7 @@ function PostList({ ...props }: Props) {
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
   const [editPostDialogOpen, setEditPostDialogOpen] = useState(false)
   const [viewPostDialogOpen, setViewPostDialogOpen] = useState(false)
-  const [commentDialogOpen, setCommentialogOpen] = useState(false)
+  const [commentDialogOpen, setCommentDialogOpen] = useState(false)
 
   const {
     isLoading,
@@ -59,7 +59,7 @@ function PostList({ ...props }: Props) {
             setViewPostDialogOpen={setViewPostDialogOpen}
             setDeletePostDialogOpen={setDeletePostDialogOpen}
             setEditPostDialogOpen={setEditPostDialogOpen}
-            setCommentDialogOpen={setCommentialogOpen}
+            setCommentDialogOpen={setCommentDialogOpen}
           />
         )
       })
@@ -118,7 +118,7 @@ function PostList({ ...props }: Props) {
       <CommentList
         post={selectedPost}
         open={commentDialogOpen}
-        onOpenChange={setCommentialogOpen}
+        onOpenChange={setCommentDialogOpen}
       />
     </div>
   )

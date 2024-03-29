@@ -38,7 +38,7 @@ async function getViewDetails({
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        throw new Error(json)
+        throw new Error(json.message)
       }
       return json
     })
@@ -53,7 +53,7 @@ async function getViewDetails({
       return {
         ok: false,
         message: error.message as string,
-        data: null,
+        data: undefined,
       }
     })
 }

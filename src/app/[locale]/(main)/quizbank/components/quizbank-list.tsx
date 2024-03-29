@@ -49,32 +49,35 @@ function QuizBankList({ data: initData, token, filter }: Props) {
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       const params =
-        (lastPage?.metadata.skip || 0) + (lastPage?.metadata.take || 10)
+        (lastPage?.metadata.skip ?? 0) + (lastPage?.metadata.take ?? 10)
       const hasMore = lastPage?.metadata.hasMore
       return hasMore ? params : undefined
     },
     initialData: { pages: [initData], pageParams: [0] },
   })
 
-  const onDeleteQuizBank = useCallback( async (itemId: number, deleteSucceedCb: () => void) => {
-    const result = await deleteQuizBank(token, itemId.toString())
-    if (!result.isSuccess) {
-      return toast({
-        title: i18n("message.failed.title"),
-        description: errorI18n(result.message as any),
-        variant: "flat",
-        color: "danger",
-      })
-    } else {
-      deleteSucceedCb()
-      return toast({
-        title: i18n("message.success.title"),
-        description: i18n("message.success.description"),
-        variant: "flat",
-        color: "success",
-      })
-    }
-  },[errorI18n, i18n, token])
+  const onDeleteQuizBank = useCallback(
+    async (itemId: number, deleteSucceedCb: () => void) => {
+      const result = await deleteQuizBank(token, itemId.toString())
+      if (!result.isSuccess) {
+        return toast({
+          title: i18n("message.failed.title"),
+          description: errorI18n(result.message as any),
+          variant: "flat",
+          color: "danger",
+        })
+      } else {
+        deleteSucceedCb()
+        return toast({
+          title: i18n("message.success.title"),
+          description: i18n("message.success.description"),
+          variant: "flat",
+          color: "success",
+        })
+      }
+    },
+    [errorI18n, i18n, token]
+  )
 
   const renderItem = useCallback(
     (item: QuizBank) => (
@@ -89,6 +92,7 @@ function QuizBankList({ data: initData, token, filter }: Props) {
     ),
     [onDeleteQuizBank, t]
   )
+
   const renderLoading = useCallback((length?: number) => {
     return Array.from({ length: length ?? 5 }).map((_, index) => (
       <Skeleton key={index} className="h-40 w-full rounded-md" />
@@ -132,7 +136,7 @@ function QuizBankList({ data: initData, token, filter }: Props) {
 
   return (
     <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-      {data?.pages.map((page, index) => {
+      {data?.pages.map((page) => {
         return page?.data.map((item) => renderItem(item))
       })}
       {isFetchingNextPage && renderLoading(4)}

@@ -79,7 +79,10 @@ function CommentList({ onOpenChange, open, post, ...props }: Props) {
     return data?.pages.map(
       (page, i) =>
         page?.data.map((comment) => (
-          <div className="group space-y-2 focus-within:bg-accent hover:bg-accent/40">
+          <div
+            key={comment.id}
+            className="group space-y-2 focus-within:bg-accent hover:bg-accent/40"
+          >
             <div className="flex justify-between">
               <UserDisplay
                 user={comment.author}

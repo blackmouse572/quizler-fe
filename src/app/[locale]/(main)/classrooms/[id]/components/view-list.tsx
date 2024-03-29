@@ -70,14 +70,16 @@ function ViewList({ open: isOpen, onOpenChange, postId = "" }: Props) {
       <DialogContent>
         {isLoading && renderLoading}
         {renderError}
-        <ScrollArea className="max-h-32">
-          {data &&
-            data.pages.map(
-              (page) =>
-                page?.data.map((view) => (
-                  <UserDisplay key={view.id} user={view} />
-                ))
-            )}
+        <ScrollArea className="max-h-32 ">
+          <div className="space-y-4">
+            {data &&
+              data.pages.map(
+                (page) =>
+                  page?.data.map((view) => (
+                    <UserDisplay key={view.id} user={view} />
+                  ))
+              )}
+          </div>
           <div id="loadmore" ref={loadmoreRef} />
         </ScrollArea>
       </DialogContent>

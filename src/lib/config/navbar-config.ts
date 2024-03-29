@@ -57,4 +57,50 @@ const SUBJECTS_NAVBAR_ITEMS: MainNavItem[] = [
     icon: "Dot",
   },
 ]
-export { MAIN_NAVBAR_ITEMS, SUBJECTS_NAVBAR_ITEMS }
+
+const PROFILE_SIDEBAR_ITEMS: MainNavItem[] = [
+  {
+    icon: "NavProfile",
+    title: "navigation_menu.edit_profile",
+    href: "/profile/",
+  },
+  {
+    icon: "NavAccount",
+    title: "navigation_menu.edit_account",
+    href: "/profile/account",
+  },
+  {
+    icon: "NavPreference",
+    title: "navigation_menu.edit_preference",
+    href: "/profile/preference",
+  },
+]
+
+const CLASSROOM_SIDEBAR_ITEMS: (id: string) => MainNavItem[] = (id) => [
+  {
+    icon: "ArtBoard",
+    title: "navbar.index",
+    href: `/classrooms/${id}/`,
+  },
+  {
+    icon: "Game",
+    title: "navbar.games",
+    href: `/classrooms/${id}/games`,
+  },
+  {
+    icon: "Icon",
+    title: "navbar.quizbanks",
+    href: `/classrooms/${id}/quizbanks`,
+  },
+  {
+    icon: "MultiUsers",
+    title: "navbar.members",
+    href: `/classrooms/${id}/members`,
+  },
+]
+export {
+  CLASSROOM_SIDEBAR_ITEMS,
+  MAIN_NAVBAR_ITEMS,
+  PROFILE_SIDEBAR_ITEMS,
+  SUBJECTS_NAVBAR_ITEMS,
+}
