@@ -251,6 +251,69 @@
       "success": "User(s) has been removed from class"
     }
   },
+  "GameResults": {
+    "metadata": {
+      "title": "Game result",
+      "description": "Game result"
+    },
+    "headers": {
+      "fullName": "Name",
+      "correct": "Correct",
+      "points": "Points"
+    },
+    "teacher": {
+      "horizontal_chart": {
+        "title": "Horizontal chart",
+        "plugins": "Students bar chart",
+        "datasets": {
+          "label": "Students point statistic"
+        },
+        "x_data": "x: Name of students",
+        "y_data": "y: Total marks of students"
+      },
+      "bubble_chart": {
+        "title": "Bubble chart",
+        "datasets": {
+          "label": "Students point statistic"
+        },
+        "sample_data": "A(x, y, r)",
+        "x_data": "x: Midpoint of the mark range",
+        "y_data": "y: Percentage of students within the range",
+        "r_data": "r: Number of students in the range",
+        "default_range": "Now the default range is"
+      },
+      "pie_chart": {
+        "title": "Pie chart",
+        "datasets": {
+          "label": "Students point statistic"
+        }
+      },
+      "scatter_chart": {
+        "title": "Scatter chart",
+        "datasets": {
+          "label": "Students point statistic"
+        },
+        "sample_data": "A(x, y)",
+        "x_data": "x: Midpoint of the mark range",
+        "y_data": "y: Number of students in the range",
+        "default_range": "Now the default range is"
+      }
+    },
+    "students": {
+      "plugins": "Game result",
+      "datasets": {
+        "label": {
+          "correct_answer": "Correct answer",
+          "wrong_or_not_answered": "Wrong or not answered"
+        }
+      },
+      "text": {
+        "ranking": "You place #{rank} out of {count} students",
+        "correct_questions": "<strong>{right}/{total}</strong> correct questions",
+        "score": "Score <strong>{point}</strong>"
+      }
+    }
+  },
   "MyQuizbanks": {
     "metadata": {
       "title": "My Quiz Banks",
