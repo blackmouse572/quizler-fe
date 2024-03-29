@@ -139,6 +139,7 @@
       "delete": {
         "title": "Xóa bài đăng",
         "description": "Bạn có chắc chắn muốn xóa bài đăng này không?",
+        "comment_description": "Bạn có chắc chắn muốn xoá bình luận này không?",
         "confirm": "Xóa",
         "cancel": "Hủy",
         "success": "Xóa bài đăng thành công"
@@ -455,7 +456,8 @@
     "headers": {
       "index": "Quizbank của tôi"
     },
-    "terms": "Thuật ngữ"
+    "terms": "Thuật ngữ",
+    "add_quizbank": "Tạo quizbank mới"
   },
   "QuizBankAdmin": {
     "metadata": {

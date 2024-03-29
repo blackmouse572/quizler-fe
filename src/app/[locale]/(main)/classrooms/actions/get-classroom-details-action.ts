@@ -3,10 +3,7 @@
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { Classroom } from "@/types"
-export const TAGS_CLASSROOM_DETAILS = (id: string) => [
-  "classroom-details",
-  `classroom-details-${id}`,
-]
+
 async function getClassroomDetails(id: string) {
   const url = getAPIServerURL(`/classrooms/${id}`)
   const { token } = getToken()
@@ -18,7 +15,7 @@ async function getClassroomDetails(id: string) {
     },
     next: {
       revalidate: 3600,
-      tags: TAGS_CLASSROOM_DETAILS(id),
+      tags: ["classroom-details", `classroom-details-${id}`],
     },
   }
 
