@@ -110,6 +110,21 @@
       "title": "Trò chơi lớp học"
     }
   },
+  "ClassroomQuizBank": {
+    "metadata": {
+      "title": "QuizBank trong lớp học",
+      "description": "Tất cả Quiz Bank trong lớp"
+    },
+    "actions": {
+      "create": {
+        "index": "Thêm quiz bank trong lớp"
+      }
+    },
+    "terms": "Thuật ngữ",
+    "delete": "Xoá",
+    "edit": "Chỉnh sửa",
+    "cancel": "Huỷ bỏ"
+  },
   "ClassroomDetails": {
     "members": "Thành viên",
     "navbar": {
