@@ -1,3 +1,4 @@
+"use server"
 import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
 import { Classroom, User } from "@/types"
@@ -18,7 +19,6 @@ export const fetchSearchGlobal: (
   const fitler = toURLSeachParams(filter)
 
   const URL = getAPIServerURL(`/searchglobal/searchglobal?${fitler.toString()}`)
-
   const options = {
     method: "GET",
     headers: {

@@ -36,11 +36,8 @@ async function ClassroomStudentPage({ params, searchParams }: Props) {
   const options = { take, skip, search }
   const data = await getAllMembers(id, options)
 
-  console.log("data", data)
-
   return (
     <div className="mt-6 space-y-12">
-
       <StudentTable data={data} params={params} />
     </div>
   )
