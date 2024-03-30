@@ -1,5 +1,7 @@
+import { IconCreditCard } from "@tabler/icons-react"
 import {
   IconAffiliate,
+  IconAlertCircle,
   IconArrowDown,
   IconArrowDownRight,
   IconArrowRight,
@@ -49,6 +51,7 @@ import {
   IconHandStop,
   IconHelp,
   IconHighlight,
+  IconInfoCircle,
   IconItalic,
   IconLanguage,
   IconLifebuoy,
@@ -186,6 +189,13 @@ export const Icons = {
   NavAccount: IconUser,
   NavProfile: IconFingerprint,
   NavPreference: IconSettings,
+
+  // Notification
+  Info: IconInfoCircle,
+  Warning: IconAlertCircle,
+  Settings: IconSettings,
+  Error: IconBan,
+  Payment: IconCreditCard,
 }
 
 type IIconKeys = keyof typeof Icons

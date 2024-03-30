@@ -7,6 +7,7 @@ import { setRefreshToken, setToken, setUser } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { User } from "@/types/User"
 import { getTranslations } from "next-intl/server"
+import { redirect } from "next/navigation"
 
 export const LoginAction = async (values: LoginSchemaType) => {
   const URL = getAPIServerURL("/auth/login")
@@ -28,14 +29,18 @@ export const LoginAction = async (values: LoginSchemaType) => {
       return response.json()
     })
     .then((response: User) => {
-      setToken(response.accessToken)
-      setRefreshToken(response.refreshToken)
-      setUser(response)
-      revalidatePath("/")
-      return {
-        ok: true,
-        message: t("SignIn.success.index"),
-        token: response.accessToken.token,
+      if (!response.isVerified) {
+        redirect(`/verify?email=${response.email}`)
+      } else {
+        setToken(response.accessToken)
+        setRefreshToken(response.refreshToken)
+        setUser(response)
+        revalidatePath("/")
+        return {
+          ok: true,
+          message: t("SignIn.success.index"),
+          token: response.accessToken.token,
+        }
       }
     })
     .catch((error) => {
