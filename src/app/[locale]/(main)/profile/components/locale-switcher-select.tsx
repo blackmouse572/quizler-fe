@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/select"
 import { locales } from "@/config"
 import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import { useTransition } from "react"
 
 type Props = {
@@ -22,20 +21,21 @@ type Props = {
 
 export default function LocaleSwitcherSelect({ defaultValue, label }: Props) {
   const [isPending, startTransition] = useTransition()
-  const params = useParams()
   const t = useTranslations("LocaleSwitcher")
   const router = useRouter()
 
   function onSelectChange(newValue: string) {
     const path = "/profile/preference"
-    router.push(
-      {
-        pathname: path as any,
-      },
-      {
-        locale: newValue,
-      }
-    )
+    startTransition(() => {
+      router.push(
+        {
+          pathname: path as any,
+        },
+        {
+          locale: newValue,
+        }
+      )
+    })
   }
 
   return (
