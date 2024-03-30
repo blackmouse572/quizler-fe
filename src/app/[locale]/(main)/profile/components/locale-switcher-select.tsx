@@ -1,7 +1,6 @@
 "use client"
 
-import { useParams, useRouter } from "next/navigation"
-import { useTransition } from "react"
+import { useRouter } from "@/app/[locale]/(main)/profile/components/navigation"
 import {
   Select,
   SelectContent,
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/select"
 import { locales } from "@/config"
 import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
+import { useTransition } from "react"
 
 type Props = {
   defaultValue: string
@@ -23,15 +24,18 @@ export default function LocaleSwitcherSelect({ defaultValue, label }: Props) {
   const [isPending, startTransition] = useTransition()
   const params = useParams()
   const t = useTranslations("LocaleSwitcher")
-  const link = `/profile/${params.id}/preference`
   const router = useRouter()
 
   function onSelectChange(newValue: string) {
-    const nextLocale = newValue
-    startTransition(() => {
-      router.push(`/${nextLocale}${link}`)
-      router.refresh()
-    })
+    const path = "/profile/preference"
+    router.push(
+      {
+        pathname: path as any,
+      },
+      {
+        locale: newValue,
+      }
+    )
   }
 
   return (
