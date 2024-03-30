@@ -12,7 +12,6 @@ type Props = {
 export function useBanAndUnbanBatchMember({ onSuccess, onError }: Props) {
   return useMutation({
     mutationFn: async ({ memberIds, classroomId, action }: TBanAPIProps) => {
-      debugger
       const res = await banAndUnbanMemberAction({
         memberIds: memberIds,
         classroomId: classroomId,
