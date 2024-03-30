@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils"
 import { EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useCallback, useMemo, useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import { z } from "zod"
@@ -105,14 +105,15 @@ type AddQuizbankFormProps = {
    * needed when action is edit
    */
   quizBankId?: string
+  classroomId?: string
 }
 function AddQuizbankForm({
   initialValues,
   action = EFormAction.Add,
   quizBankId,
+  classroomId
 }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
-  const searchParams = useSearchParams()
   const i18Term = +action === +EFormAction.Add ? "AddQuiz" : "EditQuiz"
   const [isLoading, setIsLoading] = useState(false)
   const i18n = useTranslations(i18Term)
@@ -148,7 +149,6 @@ function AddQuizbankForm({
     async (value: AddQuizbank) => {
       setIsLoading(true)
       let res
-      const classroomId = searchParams.get("classroomId")
       if (+action === +EFormAction.Add) {
         if (!classroomId || classroomId === null) {
           res = await addQuizBankAction(value)
@@ -160,7 +160,7 @@ function AddQuizbankForm({
       }
       onSubmitCallback(res)
     },
-    [action, onSubmitCallback, quizBankId, searchParams]
+    [action, classroomId, onSubmitCallback, quizBankId]
   )
 
   const onTagChange = useCallback(
