@@ -47,6 +47,7 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import DeleteBatchDialog from "./delete-batch-dialog"
 import DeleteDialog from "./delete-dialog"
 import { StudentClasroomData } from "../actions/fetch-classroom-members"
+import BanDialog from "./ban-dialog"
 
 type ClassroomMembersTableProps = {
   data: PagedResponse<StudentClasroomData>
@@ -63,10 +64,11 @@ export function ClassroomMembersTable({
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
-  const accounts = data.data.map(d => ({...d.account, joinDate: d.joinDate}))
+  const accounts = data.data as unknown as User[]
 
   const t = useTranslations("Table")
-  const i18n = useTranslations("Members_classroom")
+  const i18n = useTranslations("Classroom_student.table")
+
   const format = useFormatter()
 
   const columns: ColumnDef<User>[] = React.useMemo(
@@ -106,7 +108,7 @@ export function ClassroomMembersTable({
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
             >
-              {i18n("headers.fullName")}
+              {i18n("headers.name")}
               {column.getIsSorted() === "asc" ? (
                 <Icons.CaretUpFilled className="ml-auto" />
               ) : (
@@ -184,13 +186,21 @@ export function ClassroomMembersTable({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{i18n("options.title")}</DropdownMenuLabel>
+                <DropdownMenuLabel>{i18n("actions.title")}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DeleteDialog student={student} classroomId={id} />
 
-                <DropdownMenuItem>
-                  {i18n("options.ban_student")}
-                </DropdownMenuItem>
+                <BanDialog
+                  users={[
+                    { id: student.id.toString(), fullName: student.fullName },
+                  ]}
+                  classroomId={id}
+                  isBan={false}
+                >
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    {i18n("actions.unban.title")}
+                  </DropdownMenuItem>
+                </BanDialog>
               </DropdownMenuContent>
             </DropdownMenu>
           )
@@ -253,6 +263,32 @@ export function ClassroomMembersTable({
     }
   }, [id, rowSelection, table])
 
+  const renderUnbanButton = React.useCallback(() => {
+    if (Object.keys(rowSelection).length) {
+      const model = table.getSelectedRowModel()
+
+      return (
+        <BanDialog
+          users={model?.rows.map((row) => ({
+            fullName: row.original.fullName,
+            id: row.original.id.toString(),
+          }))}
+          classroomId={id}
+          isBan={false}
+        >
+          <Button
+            disabled={Object.keys(rowSelection).length <= 0}
+            color="success"
+            size={"sm"}
+          >
+            <Icons.Ban />
+            {i18n("actions.unban.title")}
+          </Button>
+        </BanDialog>
+      )
+    }
+  }, [i18n, id, rowSelection, table])
+
   const renderVisibibleColumnDropdown = React.useCallback(() => {
     return (
       <DropdownMenu modal>
@@ -306,7 +342,9 @@ export function ClassroomMembersTable({
   return (
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
-        <div className="flex items-center gap-2">{renderDeleteButton()}</div>
+        <div className="flex items-center gap-2">
+          {renderUnbanButton()} {renderDeleteButton()}
+        </div>
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}
           <FilterDropdown table={table} />
