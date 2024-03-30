@@ -1,6 +1,6 @@
 "use client"
-import { addNewClassroom } from "@/app/[locale]/(main)/classrooms/add/actions/add-classroom-action"
-import PlanSelectionForm from "@/app/[locale]/(main)/classrooms/add/components/plan-selection-form"
+import { addNewClassroom } from "@/app/[locale]/(main)/classrooms/actions/add-classroom-action"
+import PlanSelectionForm from "@/app/[locale]/(main)/classrooms/components/plan-selection-form"
 import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-bank-action"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,7 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
-import { EFormAction } from "@/types"
+import { Classroom, EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -56,20 +56,20 @@ const addClassroomSchema = z.object({
 export type AddClassroom = z.infer<typeof addClassroomSchema>
 
 type AddClassroomFormProps = {
-  classRoomId?: string
+  classroom?: Classroom
   initialValues?: AddClassroom
   action: EFormAction
 }
 
 export default function AddClassroomForm({
-  classRoomId,
+  classroom,
   initialValues,
   action,
 }: AddClassroomFormProps) {
   const validationsi18n = useTranslations("Validations")
-  const i18Term = +action === +EFormAction.Add ? "AddQuiz" : "EditQuiz"
+  const i18Term = +action === +EFormAction.Add ? "AddClassroom" : "EditClassroom"
 
-  const i18n = useTranslations("AddClassroom")
+  const i18n = useTranslations(i18Term)
   const errori18n = useTranslations("Errors")
   const router = useRouter()
   const { toast } = useToast()
@@ -149,6 +149,7 @@ export default function AddClassroomForm({
                 <FormLabel required>{i18n("form.name.label")}</FormLabel>
                 <FormControl>
                   <Input
+                    defaultValue={classroom?.classname}
                     placeholder={i18n("form.name.placeholder")}
                     {...field}
                   />
@@ -173,6 +174,7 @@ export default function AddClassroomForm({
                 <FormControl>
                   <Textarea
                     required
+                    defaultValue={classroom?.description}
                     placeholder={i18n("form.description.placeholder")}
                     {...field}
                   />
@@ -192,7 +194,7 @@ export default function AddClassroomForm({
             control={form.control}
             name="planId"
             render={({ field, fieldState }) => (
-              <PlanSelectionForm onPlanSelection={(id) => field.onChange(id)} />
+              <PlanSelectionForm onPlanSelection={(id) => field.onChange(id)} action={action} />
             )}
           />
         </form>

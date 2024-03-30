@@ -10,11 +10,13 @@ import React from "react"
 import getClassroomDetails from "../actions/get-classroom-details-action"
 import GenerateJoinDialog from "../components/generate-join-dialog"
 import SendInviteDialog from "../components/send-invite-dialog"
+import { Classroom } from "@/types"
 
 type Props = {
   children: React.ReactNode
   params: {
-    id: string
+    id: string,
+    classroom?: Classroom
   }
 }
 
@@ -41,6 +43,8 @@ async function ClassroomDetailLayout({ children, params }: Props) {
   if (!data.data) {
     return notFound()
   }
+  // set classroom data for Edit
+  params.classroom = data.data
 
   return (
     <main className="container mx-auto">
@@ -59,7 +63,7 @@ async function ClassroomDetailLayout({ children, params }: Props) {
         </NextIntlClientProvider>
       </div>
       <Separator />
-      <NextIntlClientProvider messages={_.pick(msg, "ClassroomDetails")}>
+      <NextIntlClientProvider messages={_.pick(msg, "ClassroomDetails", "Errors")}>
         <SideMenu
           items={CLASSROOM_SIDEBAR_ITEMS(params.id)}
           namespace="ClassroomDetails"

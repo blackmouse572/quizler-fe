@@ -1027,6 +1027,45 @@
         "submit": "Tạo"
       }
     }
+  },"EditClassroom": {
+    "metadata": {
+      "title": "Thay đổi lớp học",
+      "description": "Điểu chỉnh thông tin lớp học"
+    },
+    "form": {
+      "title": "Điểu chỉnh thông tin lớp học",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên của lớp học"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả của lớp học"
+      },
+      "plan-form": {
+        "starter": {
+          "title": "Gói cơ bản",
+          "description": "Miễn phí",
+          "currency": "USD",
+          "features": {
+            "feature1": "Bài kiểm tra không giới hạn",
+            "feature2": "10 học sinh",
+            "feature3": "10 trò chơi"
+          }
+        },
+        "premium": {
+          "title": "Gói cao cấp",
+          "description": "Có nhiều niềm vui hơn",
+          "currency": "USD",
+          "features": {
+            "feature1": "Bài kiểm tra không giới hạn",
+            "feature2": "Học sinh không giới hạn",
+            "feature3": "Trò chơi không giới hạn"
+          }
+        },
+        "submit": "Tạo"
+      }
+    }
   },
   "Invite_classroom": {
     "code": {
