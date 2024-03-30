@@ -1,13 +1,18 @@
+import { IconCreditCard } from "@tabler/icons-react"
 import {
   IconAffiliate,
+  IconAlertCircle,
   IconArrowDown,
   IconArrowDownRight,
   IconArrowRight,
   IconArrowRoundaboutLeft,
   IconArrowUp,
   IconArrowUpLeft,
+  IconArrowsJoin,
   IconArrowsRight,
   IconArrowsShuffle2,
+  IconArtboard,
+  IconBan,
   IconBold,
   IconBook,
   IconBraces,
@@ -33,7 +38,9 @@ import {
   IconDots,
   IconDotsVertical,
   IconEye,
+  IconEyeOff,
   IconFilter,
+  IconFingerprint,
   IconFlag2,
   IconFlask,
   IconGlobe,
@@ -43,6 +50,7 @@ import {
   IconHandStop,
   IconHelp,
   IconHighlight,
+  IconInfoCircle,
   IconItalic,
   IconLanguage,
   IconLifebuoy,
@@ -65,6 +73,7 @@ import {
   IconQuote,
   IconRefresh,
   IconSearch,
+  IconSettings,
   IconSmartHome,
   IconStar,
   IconStrikethrough,
@@ -72,17 +81,11 @@ import {
   IconTrash,
   IconTypography,
   IconUnderline,
+  IconUser,
   IconUserFilled,
   IconUsers,
   IconX,
-  IconSettings,
-  IconUser,
-  IconFingerprint,
   TablerIconsProps,
-  IconBan,
-  IconEyeOff,
-  IconArtboard,
-  IconArrowsJoin,
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -182,6 +185,13 @@ export const Icons = {
   NavAccount: IconUser,
   NavProfile: IconFingerprint,
   NavPreference: IconSettings,
+
+  // Notification
+  Info: IconInfoCircle,
+  Warning: IconAlertCircle,
+  Settings: IconSettings,
+  Error: IconBan,
+  Payment: IconCreditCard,
 }
 
 type IIconKeys = keyof typeof Icons
