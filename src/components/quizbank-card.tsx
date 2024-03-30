@@ -26,6 +26,9 @@ export type QuizbankCardProps = {
   item: QuizBank
   translations?: {
     terms: string
+    delete: string
+    edit: string
+    cancel: string
   }
   onDeleteQuizBank?: (itemId: number, deleteSucceedCb: () => void) => void
   allowActions?: boolean
@@ -40,6 +43,15 @@ function QuizbankCard({
   ...props
 }: QuizbankCardProps) {
   const [isDelete, setIsDelete] = useState(false)
+  const [isDeleteing, setIsDeleteing] = useState(false)
+
+  const onDeleteConfirm = useCallback(() => {
+    setIsDeleteing(true)
+    onDeleteQuizBank?.(item.id, () => {
+      setIsDelete(false)
+      setIsDeleteing(false)
+    })
+  }, [item.id, onDeleteQuizBank])
 
   const router = useRouter()
   const options = useMemo<
@@ -53,12 +65,12 @@ function QuizbankCard({
   >(
     () => [
       {
-        title: "Edit",
-        icon: "About",
+        title: translations?.edit || "Edit",
+        icon: "Edit",
         href: `/quizbank/${item.id}/edit`,
       },
       {
-        title: "Delete",
+        title: translations?.delete || "Delete",
         icon: "Delete",
         className:
           "text-destructive hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive",
@@ -67,7 +79,7 @@ function QuizbankCard({
         },
       },
     ],
-    [item.id]
+    [item.id, translations?.delete, translations?.edit]
   )
   const renderOptions = useMemo(() => {
     if (!allowActions) return null
@@ -111,47 +123,44 @@ function QuizbankCard({
     )
   }, [allowActions, options])
 
-  const onQuizBankLick = useCallback(
-    (item: QuizBank) => {
-      router.push(`/quizbank/${item.id}`)
-    },
-    [router]
-  )
-
   return (
     <Card
       className={cn("cursor-pointer hover:bg-accent", className)}
       {...props}
-      onClick={(e) => onQuizBankLick(item)}
     >
-      <Link href={`/quizbank/${item.id}`}>
-        <CardHeader>
+      <CardHeader>
+        <Link href={`/quizbank/${item.id}`}>
           <CardTitle>{item.bankName}</CardTitle>
           <CardDescription>
             {item.quizCount} {translations?.terms}
           </CardDescription>
-        </CardHeader>
-        <CardContent className="flex">
-          <div className="flex flex-1 items-center gap-2">
-            <Avatar>
-              <AvatarFallback>{item.bankName.charAt(0)}</AvatarFallback>
-              <AvatarImage
-                src={item.author.avatar || ""}
-                alt={item.author.fullName}
-              />
-            </Avatar>
-            <h3 className="text-sm font-bold">{item.author.fullName}</h3>
-          </div>
-          {renderOptions}
-          <DeleteDialogConfirm
-            description=""
-            title="Delete Quiz Bank"
-            isOpen={isDelete}
-            setOpen={setIsDelete}
-            onDelete={() => onDeleteQuizBank?.(item.id, () => {})}
-          />
-        </CardContent>
-      </Link>
+        </Link>
+      </CardHeader>
+      <CardContent className="flex">
+        <div className="flex flex-1 items-center gap-2">
+          <Avatar>
+            <AvatarFallback>{item.bankName.charAt(0)}</AvatarFallback>
+            <AvatarImage
+              src={item.author.avatar || ""}
+              alt={item.author.fullName}
+            />
+          </Avatar>
+          <h3 className="text-sm font-bold">{item.author.fullName}</h3>
+        </div>
+        {renderOptions}
+      </CardContent>
+      <DeleteDialogConfirm
+        description=""
+        title={translations?.delete || "Delete"}
+        terms={{
+          cancel: translations?.cancel || "Cancel",
+          delete: translations?.delete || "Delete",
+        }}
+        isOpen={isDelete}
+        disabled={isDeleteing}
+        setOpen={setIsDelete}
+        onDelete={onDeleteConfirm}
+      />
     </Card>
   )
 }

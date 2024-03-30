@@ -1,5 +1,6 @@
 import { fetchQuiz } from "@/app/[locale]/(main)/quizbank/[id]/actions/fetch-quiz"
 import { Button } from "@/components/ui/button"
+import { Icons } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import {
@@ -13,7 +14,6 @@ import PagedResponse from "@/types/paged-response"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 import { useCallback, useMemo, useState } from "react"
-import { PiSparkle } from "react-icons/pi"
 import { fetchAIquestion } from "../actions/fetch-AI-question"
 import ViewAIExplain from "./view-AI-explain"
 
@@ -34,36 +34,29 @@ export default function ViewQuizzes({ initialData, id }: Props) {
   const i18n = useTranslations("ViewQuizBank")
   const [hiddenAIAnswer, setHiddenAIAnswer] = useState<HiddenAIAnswerState>({})
 
-  const {
-    data,
-    error,
-    isLoading,
-    isFetching,
-    fetchNextPage,
-    isError,
-    hasNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["fetchQuiz", id],
-    queryFn: async ({ pageParam }) => {
-      const res = await fetchQuiz(id, {
-        take: 10,
-        skip: pageParam,
-      })
-      if (!res.ok) {
-        throw new Error(res.message)
-      }
+  const { data, error, isLoading, fetchNextPage, isError, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: ["fetchQuiz", id],
+      queryFn: async ({ pageParam }) => {
+        const res = await fetchQuiz(id, {
+          take: 10,
+          skip: pageParam,
+        })
+        if (!res.ok) {
+          throw new Error(res.message)
+        }
 
-      return res.data
-    },
-    initialPageParam: 0,
-    getNextPageParam: (lastPage) => {
-      const params =
-        (lastPage?.metadata.skip || 0) + (lastPage?.metadata.take || 10)
-      const hasMore = lastPage?.metadata.hasMore
-      return hasMore ? params : undefined
-    },
-    initialData: { pages: [initialData], pageParams: [0] },
-  })
+        return res.data
+      },
+      initialPageParam: 0,
+      getNextPageParam: (lastPage) => {
+        const params =
+          (lastPage?.metadata.skip || 0) + (lastPage?.metadata.take || 10)
+        const hasMore = lastPage?.metadata.hasMore
+        return hasMore ? params : undefined
+      },
+      initialData: { pages: [initialData], pageParams: [0] },
+    })
 
   const handleButtonAIClick = useCallback(
     async (
@@ -143,9 +136,10 @@ export default function ViewQuizzes({ initialData, id }: Props) {
                           )
                         }
                         variant="light"
-                        color={null}
+                        isIconOnly
+                        color="accent"
                       >
-                        <PiSparkle />
+                        <Icons.AI />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>

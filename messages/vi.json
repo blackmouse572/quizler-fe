@@ -45,8 +45,8 @@
       "History": "Lịch sử",
       "Geography": "Địa lý",
       "Literature": "Văn học",
-      "Language": "Ngoại ngữ",
-      "Computer": "Khoa học máy tính",
+      "Languages": "Ngoại ngữ",
+      "Computer Science": "Khoa học máy tính",
       "Other": "Khác"
     },
     "nav_search": {
@@ -457,6 +457,9 @@
       "index": "Quizbank của tôi"
     },
     "terms": "Thuật ngữ",
+    "edit": "Chỉnh sửa",
+    "delete": "Xoá",
+    "cancel": "Huỷ",
     "add_quizbank": "Tạo quizbank mới"
   },
   "QuizBankAdmin": {
@@ -947,6 +950,10 @@
       "report_button": "Báo cáo",
       "edit_button": "Chỉnh sửa",
       "public_button": "Công khai"
+    },
+    "rating": {
+      "title": "Đánh giá",
+      "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
     }
   },
   "NotFound": {

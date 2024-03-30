@@ -2,10 +2,15 @@ import { Badge } from "@/components/ui/badge"
 import { FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { EFormAction } from "@/types"
 import { AnimatePresence, motion } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 
 type AddTagFormProps = {
@@ -14,22 +19,42 @@ type AddTagFormProps = {
   action?: EFormAction
 }
 
+const TAGS = [
+  "Math",
+  "Science",
+  "History",
+  "Geography",
+  "Literature",
+  "Languages",
+  "Computer Science",
+]
+
 function AddTagForm({
   initialValues,
   onTagChange,
   action = EFormAction.Add,
 }: AddTagFormProps) {
   const [tags, setTags] = useState(initialValues || [])
+  const [filterTags, setFilterTags] = useState(TAGS)
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const i18n = useTranslations(
     +action === EFormAction.Add ? "AddQuiz.form" : "EditQuiz.form"
   )
+  const subjectI18n = useTranslations("Navbar.subject_item") 
   const error18n = useTranslations("Validations.errors")
-  const { register, setError, formState, handleSubmit, setValue, ...form } =
-    useForm({
-      values: {
-        input: "",
-      },
-    })
+  const {
+    register,
+    setError,
+    formState,
+    handleSubmit,
+    setValue,
+    watch,
+    ...form
+  } = useForm({
+    values: {
+      input: "",
+    },
+  })
 
   const handleAddTag = ({ input }: { input: string }) => {
     input = input.trim()
@@ -76,16 +101,65 @@ function AddTagForm({
     onTagChange?.(tagsArr)
   }
 
+  const inputRef = useRef<HTMLInputElement>(null)
+
   return (
     <form onSubmit={handleSubmit(handleAddTag)} className="space-y-2">
       <FormItem>
         <Label htmlFor="input">{i18n("tags.label")}</Label>
-        <Input {...register("input")} placeholder={i18n("tags.placeholder")} />
-        {formState.errors.input && (
-          <span className="text-xs text-danger-500">
-            {formState.errors.input.message}
-          </span>
-        )}
+        <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+          <PopoverTrigger className="w-full">
+            <Input
+              {...register("input", {
+                onChange: (e) => {
+                  e.preventDefault()
+                  const value = e.target.value
+                  if (value.length >= 3) {
+                    setFilterTags(
+                      TAGS.filter((tag) =>
+                        tag.toLowerCase().includes(value.toLowerCase())
+                      )
+                    )
+                  } else {
+                    setFilterTags(TAGS)
+                  }
+                },
+              })}
+              // ref={inputRef}
+              placeholder={i18n("tags.placeholder")}
+            />
+          </PopoverTrigger>
+          {formState.errors.input && (
+            <span className="text-xs text-danger-500">
+              {formState.errors.input.message}
+            </span>
+          )}
+          <PopoverContent
+            className="w-full"
+            side="top"
+            sideOffset={5}
+            onOpenAutoFocus={(e) => {
+              e.preventDefault()
+              inputRef.current?.focus()
+            }}
+          >
+            <div className="flex flex-wrap gap-2">
+              {filterTags.map((tag) => (
+                <Badge
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setIsPopoverOpen(false)
+                    setFilterTags(TAGS)
+                    return handleAddTag({ input: tag })
+                  }}
+                  key={tag}
+                >
+                  {subjectI18n(tag as any)}
+                </Badge>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
       </FormItem>
       <div className="flex flex-wrap gap-2">
         <AnimatePresence mode="popLayout">

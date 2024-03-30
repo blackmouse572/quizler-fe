@@ -3,6 +3,7 @@
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank, { TAPIQuizResponse } from "@/types/QuizBank"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export async function getQuizBankDetailPage(id: string) {
   const url = getAPIServerURL(`/quizbank/${id}`)
@@ -61,6 +62,8 @@ export async function copyQuizBankToClassroom(
       if (!res?.ok) {
         throw new Error(res.statusText)
       }
+      revalidatePath(`/classrooms/${classroomId}/quizbank`)
+      revalidateTag("ClassroomQuizBank")
       return {
         ok: true,
       }
@@ -89,6 +92,8 @@ export async function copyQuizBankToPersonal(quizbankId: string) {
       if (!res?.ok) {
         throw new Error(res.statusText)
       }
+      revalidatePath("/quizbank")
+      revalidateTag("QuizBank")
       return {
         ok: true,
       }

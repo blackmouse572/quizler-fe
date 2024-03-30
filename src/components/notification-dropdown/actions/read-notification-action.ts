@@ -1,32 +1,30 @@
 "use server"
-
-import { AddClassroom } from "@/app/[locale]/(main)/classrooms/add/components/add-classroom-form"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { revalidateTag } from "next/cache"
 
-export async function addNewClassroom(data: AddClassroom) {
-  const url = getAPIServerURL("/classrooms")
-  const { token } = getToken()
-  const body = JSON.stringify(data)
+export async function readNotificationAction(notificationId: string) {
+  const url = getAPIServerURL(`/Notification/read/${notificationId}`)
+  const token = getToken().token
+
   const options: RequestInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body,
   }
 
   return fetch(url, options)
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        console.log("error", json)
         throw new Error(json.message)
       }
       return json
     })
     .then((res) => {
+      revalidateTag("notification")
       return {
         ok: true,
         message: "success",
@@ -36,8 +34,8 @@ export async function addNewClassroom(data: AddClassroom) {
     .catch((error) => {
       return {
         ok: false,
-        message: error.message,
-        data: null,
+        message: error.message as string,
+        data: undefined,
       }
     })
 }

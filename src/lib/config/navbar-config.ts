@@ -37,12 +37,12 @@ const SUBJECTS_NAVBAR_ITEMS: MainNavItem[] = [
     icon: "Science",
   },
   {
-    title: "subject_item.Language",
+    title: "subject_item.Languages",
     href: "quizbank?subject=Language",
     icon: "Languague",
   },
   {
-    title: "subject_item.Computer",
+    title: "subject_item.Computer Science",
     href: "quizbank?subject=Computer",
     icon: "Computer",
   },
