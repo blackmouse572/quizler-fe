@@ -1061,6 +1061,14 @@
         "label": "Description",
         "placeholder": "Enter the description of the classroom"
       },
+      "actions": {
+        "edit": {
+          "message": {
+            "title": "Success",
+            "description" : "Update classroom successfully"
+          }
+        }
+      },
       "plan-form": {
         "starter": {
           "title": "Starter",

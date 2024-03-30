@@ -14,7 +14,7 @@ import { useCallback, useMemo, useState } from "react"
 type Props = {
   onPlanSelection: (planId: string) => void
   action: EFormAction
-  defaultPlan?: Plan
+  defaultPlanId?: string
 }
 
 // TODO: Move this to a shared location
@@ -36,7 +36,7 @@ const initialPlan = {
   features: [],
 }
 
-function PlanSelectionForm({ onPlanSelection, action, defaultPlan }: Props) {
+function PlanSelectionForm({ onPlanSelection, action, defaultPlanId }: Props) {
   const t = useTranslations(
     `${
       +action === +EFormAction.Add ? "AddClassroom" : "EditClassroom"
@@ -70,7 +70,7 @@ function PlanSelectionForm({ onPlanSelection, action, defaultPlan }: Props) {
       },
     ]
   }, [t])
-  const [selectedPlan, setSelectedPlan] = useState<Plan>(defaultPlan ?? initialPlan)
+  const [selectedPlan, setSelectedPlan] = useState<Plan>(plans.find(plan => plan.id === defaultPlanId) ?? initialPlan)
 
   const onPlanChange = useCallback(
     (id: string) => {

@@ -27,11 +27,22 @@ export async function generateMetadata({
 function EditClassroomPage({ params: { classroom } }: Props) {
   const message = useMessages()
 
+  const initialvalues = {
+    className: classroom?.classname ?? "",
+    description: classroom?.description ?? "",
+    // TODO: Get planIDs from API
+    planId: "",
+  }
+
   return (
     <NextIntlClientProvider
       messages={_.pick(message, "Validations", "EditClassroom", "Errors")}
     >
-      <AddClassroomForm action={EFormAction.Edit} classroom={classroom} />
+      <AddClassroomForm
+        classroomId={classroom?.id}
+        action={EFormAction.Edit}
+        initialValues={initialvalues}
+      />
     </NextIntlClientProvider>
   )
 }

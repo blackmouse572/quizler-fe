@@ -1027,13 +1027,14 @@
         "submit": "Tạo"
       }
     }
-  },"EditClassroom": {
+  },
+  "EditClassroom": {
     "metadata": {
-      "title": "Thay đổi lớp học",
-      "description": "Điểu chỉnh thông tin lớp học"
+      "title": "Cập nhật lớp học",
+      "description": "Thay đổi thông tin lớp học"
     },
     "form": {
-      "title": "Điểu chỉnh thông tin lớp học",
+      "title": "Thay đổi thông tin lớp học",
       "name": {
         "label": "Tên",
         "placeholder": "Nhập tên của lớp học"
@@ -1041,6 +1042,14 @@
       "description": {
         "label": "Mô tả",
         "placeholder": "Nhập mô tả của lớp học"
+      },
+      "actions": {
+        "edit": {
+          "message": {
+            "title": "Thành công",
+            "description": "Thành công cập nhật thông tin lớp học"
+          }
+        }
       },
       "plan-form": {
         "starter": {
