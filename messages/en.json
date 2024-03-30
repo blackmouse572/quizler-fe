@@ -204,6 +204,21 @@
       }
     }
   },
+  "ClassroomQuizBank": {
+    "metadata": {
+      "title": "Classroom QuizBank",
+      "description": "All classroom Quiz Banks"
+    },
+    "actions": {
+      "create": {
+        "index": "Add classroom quiz bank"
+      }
+    },
+    "terms": "Terms",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
   "Members_classroom": {
     "metadata": {
       "title": "Classroom members",
@@ -1182,7 +1197,8 @@
           },
           "message": {
             "ban_message_single": "Are you sure you want to ban user <span></span>?",
-            "ban_message_mutiple": "Are you sure you want to ban <span></span> members?"
+            "ban_message_mutiple": "Are you sure you want to ban <span></span> members?",
+            "success": "User(s) has been banned from class"
           }
         },
         "unban": {
@@ -1195,7 +1211,9 @@
           },
           "message": {
             "unban_message_single": "Are you sure you want to ban user <span></span>?",
-            "unban_message_mutiple": "Are you sure you want to unban <span></span> members?"
+            "unban_message_mutiple": "Are you sure you want to unban <span></span> members?",
+            "success": "User(s) has been unbanned from class"
+
           }
         },
         "kick_user": {
