@@ -23,6 +23,7 @@ export async function getMyQuizbankAction(options: Partial<PagedRequest>) {
     },
     next: {
       revalidate: 1, // Revalidate every 1 second
+      tags: ["QuizBank", "MyQuizBank"],
     },
   }
   const url = getAPIServerURL(`/QuizBank/GetMyQuizBank?${query.toString()}`)

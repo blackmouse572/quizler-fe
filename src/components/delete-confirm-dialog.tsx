@@ -1,18 +1,26 @@
-import { Button } from "@/components/ui/button"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-} from "@/components/ui/dialog"
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import { Icons } from "@/components/ui/icons"
 
 type Props = {
   title: string
   description: string
+  disabled?: boolean
   isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   onDelete: () => void
+  terms?: {
+    cancel: string
+    delete: string
+  }
 }
 
 function DeleteDialogConfirm({
@@ -20,37 +28,36 @@ function DeleteDialogConfirm({
   description,
   isOpen,
   setOpen,
+  terms,
   onDelete,
+  disabled = false,
 }: Props) {
   return (
-    <Dialog onOpenChange={setOpen} open={isOpen}>
-      <DialogContent>
-        <DialogHeader>
-          {title}
-          <DialogDescription>{description}</DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <Button
-            variant={"ghost"}
-            onClick={(e) => {
-              e.stopPropagation()
-              setOpen(false)
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={(e) => {
-              e.stopPropagation()
-              onDelete()
-            }}
+    <AlertDialog onOpenChange={setOpen} open={isOpen}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={() => setOpen(false)} disabled={disabled}>
+            {terms?.cancel || "Cancel"}
+          </AlertDialogCancel>
+          <AlertDialogAction
+            onClick={onDelete}
             color="danger"
+            disabled={disabled}
           >
-            Delete
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+            {disabled ? (
+              <Icons.Loader className="animate-spin" />
+            ) : (
+              <Icons.Delete />
+            )}
+            {terms?.delete || "Delete"}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }
 

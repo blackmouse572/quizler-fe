@@ -2,6 +2,7 @@
 
 import CopyButton from "@/components/copy-button"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   DialogClose,
   DialogContent,
@@ -15,38 +16,36 @@ import {
   Form,
   FormControl,
   FormField,
-  FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
-  SelectTrigger,
-  SelectValue,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectLabel,
-  SelectGroup,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select"
+import { toast } from "@/components/ui/use-toast"
+import {
+  copyQuizBankToClassroom,
+  copyQuizBankToPersonal,
+} from "@/services/quiz.service"
+import { Classroom } from "@/types"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Dialog } from "@radix-ui/react-dialog"
 import { Select } from "@radix-ui/react-select"
+import { useTranslations } from "next-intl"
 import { useCallback, useMemo, useState } from "react"
+import { ControllerRenderProps, useForm } from "react-hook-form"
 import getCopyQuizShema, {
   CopyQuizBankSchemaType,
   ECopyTo,
   copyToChoice,
 } from "./copy-validate"
-import { ControllerRenderProps, useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useTranslations } from "next-intl"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { Classroom } from "@/types"
-import {
-  copyQuizBankToClassroom,
-  copyQuizBankToPersonal,
-} from "@/services/quiz.service"
-import { toast } from "@/components/ui/use-toast"
 
 type Props = {
   buttonContent: string
@@ -279,7 +278,7 @@ export default function CopyQuizBankDialog({
                 </DialogDescription>
               </div>
 
-              <div className="grid w-full max-w-sm items-center gap-1.5">
+              <div className="grid w-full max-w-sm items-center gap-4">
                 {copyForm()}
               </div>
             </DialogHeader>

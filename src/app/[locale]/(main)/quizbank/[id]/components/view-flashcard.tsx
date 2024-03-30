@@ -34,6 +34,11 @@ type Props = {
 
 const LOAD_MORE_THRESHOLD = 3 // Load more when 3 items are left
 
+import RateQuizbank from "@/app/[locale]/(main)/quizbank/[id]/components/rate-quizbank"
+import { Badge } from "@/components/ui/badge"
+import _ from "lodash"
+import { useHotkeys } from "react-hotkeys-hook"
+
 export default function ViewFlashcard({
   quizBankData,
   initialData,
@@ -45,12 +50,23 @@ export default function ViewFlashcard({
   const autoPlay = useRef(
     Autoplay({ delay: 4000, stopOnInteraction: true, playOnInit: false })
   )
+  const ref = useRef<HTMLDivElement>(null)
 
   const [isShuffle, setIsShuffle] = useState(false)
   const [count] = useState(initialData?.metadata?.totals ?? 0)
-  const [current, setCurrent] = useState(count > 0 ? 1 : 0)
+  const [currentIndex, setCurrentIndex] = useState(count > 0 ? 1 : 0)
   const [totalLoaded, setTotalLoaded] = useState(initialData.data.length)
-  const [selectedItem, setSelectedItem] = useState(true)
+  // const [isFlipped, setIsFlipped] = useState(true)
+  const [currentItem, setCurrentItem] = useState<Quiz>()
+  const [flipMap, setFlipMap] = useState<{ [key: number]: boolean }>(
+    initialData.data.reduce(
+      (acc, _, index) => {
+        acc[index] = false
+        return acc
+      },
+      {} as { [key: number]: boolean }
+    )
+  )
   const [isPlaying, setIsPlaying] = useState(true)
 
   const {
@@ -71,7 +87,13 @@ export default function ViewFlashcard({
       if (!res.ok) {
         throw new Error(res.message)
       }
-
+      setFlipMap((pre) => {
+        const newMap = { ...pre }
+        res.data?.data.forEach((_, index) => {
+          newMap[index] = false
+        })
+        return newMap
+      })
       setTotalLoaded((pre) => pre + 10)
       return res.data
     },
@@ -92,16 +114,17 @@ export default function ViewFlashcard({
       return
     }
 
-    setCurrent(api.selectedScrollSnap() + 1)
-
     api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1)
+      setCurrentIndex(api.selectedScrollSnap() + 1)
+      data.pages.forEach((page) => {
+        page?.data.find((item, index) => {
+          if (index === api.selectedScrollSnap()) {
+            setCurrentItem(item)
+          }
+        })
+      })
     })
-
-    api.on("pointerDown", () => {
-      setSelectedItem(!selectedItem)
-    })
-  }, [api, selectedItem])
+  }, [api, currentItem?.id, data.pages])
 
   const onSeeMore = useCallback(() => {
     if (!isError && !isLoading && hasNextPage) {
@@ -110,10 +133,10 @@ export default function ViewFlashcard({
   }, [fetchNextPage, hasNextPage, isError, isLoading])
 
   useEffect(() => {
-    if (current === totalLoaded - LOAD_MORE_THRESHOLD) {
+    if (currentIndex === totalLoaded - LOAD_MORE_THRESHOLD) {
       onSeeMore()
     }
-  }, [current, fetchNextPage, onSeeMore, totalLoaded])
+  }, [currentIndex, fetchNextPage, onSeeMore, totalLoaded])
 
   const loadingItem = useMemo(() => {
     if (isLoading) {
@@ -125,23 +148,69 @@ export default function ViewFlashcard({
     }
   }, [isLoading])
   const shuffle = useCallback(() => {
-    setCurrent(1)
+    setCurrentIndex(1)
     setIsShuffle(!isShuffle)
     setTotalLoaded(10)
     refetch()
   }, [refetch, isShuffle])
 
+  useHotkeys("right,l", () => {
+    api?.scrollNext()
+  })
+
+  useHotkeys("left,k", () => {
+    api?.scrollPrev()
+  })
+
+  useHotkeys("up,down,h,j", () => {
+    // do flip
+    // setIsFlipped(!isFlipped)
+  })
+
+  useHotkeys("r", () => {
+    // do randown
+    shuffle()
+  })
+
+  useHotkeys("p", () => {
+    // do play
+    toggleAutoPlay()
+  })
+
   const renderItem = useCallback(
     (item: Quiz) => {
+      const isFlip = flipMap[item.id] || false
       return (
-        <CarouselItem key={item.id + "-carousel"} className="p-8">
-          <ReactCardFlipper isFlipped={selectedItem} flipDirection="vertical">
-            <Card>
+        <CarouselItem
+          key={item.id + "-carousel"}
+          className="p-8"
+          onClick={() => {
+            setFlipMap((pre) => {
+              const newMap = { ...pre }
+              newMap[item.id] = !newMap[item.id]
+              return newMap
+            })
+          }}
+        >
+          <ReactCardFlipper isFlipped={isFlip} flipDirection="vertical">
+            <Card className="relative">
+              <Badge className="fixed left-2 top-2">
+                <Icons.LightBulb className="mr-2 h-4 w-4" />
+                {_.truncate(item.answer, {
+                  length: item.answer.length * 0.5,
+                })}
+              </Badge>
               <CardContent className="flex aspect-video items-center justify-center">
                 <span className="text-4xl">{item.question}</span>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="relative">
+              <Badge className="fixed left-2 top-2 ">
+                <Icons.LightBulb className="mr-2 h-4 w-4" />
+                {_.truncate(item.question, {
+                  length: item.question.length * 0.2,
+                })}
+              </Badge>
               <CardContent className="flex aspect-video items-center justify-center">
                 <span className="text-4xl">{item.answer}</span>
               </CardContent>
@@ -150,7 +219,7 @@ export default function ViewFlashcard({
         </CarouselItem>
       )
     },
-    [selectedItem]
+    [flipMap]
   )
 
   const toggleAutoPlay = useCallback(() => {
@@ -174,6 +243,23 @@ export default function ViewFlashcard({
       .on("reInit", () => setIsPlaying(false))
   }, [api])
 
+  useEffect(() => {
+    // disable scroll by keyboard when carousel is focused
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!ref.current?.contains(document.activeElement)) {
+        return
+      }
+      if (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === " ") {
+        e.preventDefault()
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [])
+
   return (
     <>
       <div className="mt-7 flex w-full justify-between gap-5 whitespace-nowrap max-md:flex-wrap">
@@ -186,21 +272,20 @@ export default function ViewFlashcard({
           </div>
         </div>
         <div className="my-auto flex justify-end gap-2.5 px-5 text-base leading-6 text-neutral-900">
-          <Icons.Star width="3rem" height="1.5rem" />
-          <div className="grow">{quizBankData.averageRating} • 5</div>
+          <RateQuizbank
+            quizbankId={id}
+            averageRating={quizBankData.averageRating}
+          />
         </div>
       </div>
 
-      <div className="flex gap-2 self-start whitespace-nowrap text-center text-xs font-medium leading-4 text-zinc-500 max-md:ml-2.5">
+      <div className="flex gap-2 self-start whitespace-nowrap px-5 text-center text-xs font-medium leading-4 text-zinc-500 max-md:ml-2.5 ">
         {quizBankData.tags?.map((_, index) => {
           const tag = quizBankData.tags[index]
           return (
-            <div
-              key={index}
-              className="aspect-[3.05] justify-center rounded-lg border border-solid border-border bg-white px-2 py-0.5 shadow-sm"
-            >
+            <Badge size="sm" color="accent" key={index}>
               {tag}
-            </div>
+            </Badge>
           )
         })}
       </div>
@@ -213,6 +298,9 @@ export default function ViewFlashcard({
           align: "start",
         }}
         plugins={[autoPlay.current]}
+        autoFocus
+        tabIndex={-1}
+        ref={ref}
       >
         {isRefetching ? (
           <CarouselContent>
@@ -279,7 +367,7 @@ export default function ViewFlashcard({
         </div>
 
         <div className="flex-1 text-center text-xs font-semibold leading-4 text-black">
-          {current}/{count}
+          {currentIndex}/{count}
         </div>
 
         <Tooltip>

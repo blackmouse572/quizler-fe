@@ -1,9 +1,9 @@
+import { getToken } from "@/lib/auth"
 import { EFormAction } from "@/types"
 import _ from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
-import AddQuizbankForm, { AddQuizbank } from "./components/add-quizbank-form"
-import { getToken } from "@/lib/auth"
 import { notFound } from "next/navigation"
+import AddQuizbankForm, { AddQuizbank } from "./components/add-quizbank-form"
 
 function AddQuizbank() {
   const message = useMessages()
@@ -28,7 +28,14 @@ function AddQuizbank() {
 
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "AddQuiz", "QuizForm", "Errors")}
+      messages={_.pick(
+        message,
+        "Validations",
+        "AddQuiz",
+        "QuizForm",
+        "Errors",
+        "Navbar"
+      )}
     >
       <AddQuizbankForm initialValues={initialValues} action={EFormAction.Add} />
     </NextIntlClientProvider>
