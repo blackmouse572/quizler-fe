@@ -109,7 +109,7 @@ const QuizBankActions = ({
 
   return (
     <div className="flex justify-between gap-2">
-      {isGuess && quizBankActions.map((btn) => btn)}
+      {!isGuess && quizBankActions.map((btn) => btn)}
     </div>
   )
 }

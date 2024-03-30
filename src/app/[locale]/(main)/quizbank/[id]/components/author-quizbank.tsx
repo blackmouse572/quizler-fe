@@ -7,6 +7,7 @@ import QuizBankActions from "./quizbank-options"
 import { use } from "react"
 import Link from "next/link"
 import { getToken } from "@/lib/auth"
+import { isEmpty } from "lodash"
 
 type Props = {
   authorData: User
@@ -28,7 +29,8 @@ export default function AuthorQuizBank({
     fetchClassroomCurrentUser()
   )
   const { token } = getToken()
-  const isGuess = token === null
+  const isGuess = isEmpty(token) 
+  
   return (
     <div className="space-y-4">
       <div className=" border-b-2 border-gray-300 text-xl font-bold leading-8 text-black max-md:mt-10 max-md:max-w-full" />
