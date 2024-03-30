@@ -14,16 +14,19 @@ import { Icons } from "@/components/ui/icons"
 import EditQuizBank from "./edit-button"
 import { useTranslations } from "next-intl"
 import PublicButton from "./public-button"
+import { Classroom } from "@/types"
 
 type Props = {
   quizBankVisibility: "Private" | "Public"
   quizbankId: string
-  userCurrentClass: any
+  isGuess: boolean
+  userCurrentClass: Classroom[]
   isOwnQuizBank?: boolean
 }
 
 const QuizBankActions = ({
   isOwnQuizBank,
+  isGuess,
   userCurrentClass,
   quizbankId,
   quizBankVisibility,
@@ -106,7 +109,7 @@ const QuizBankActions = ({
 
   return (
     <div className="flex justify-between gap-2">
-      {quizBankActions.map((btn) => btn)}
+      {!isGuess && quizBankActions.map((btn) => btn)}
     </div>
   )
 }
