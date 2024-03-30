@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { IIconKeys, Icons } from "@/components/ui/icons"
+import { getShortName } from "@/lib/string-helper"
 import { cn } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import Link from "next/link"
@@ -139,7 +140,7 @@ function QuizbankCard({
       <CardContent className="flex">
         <div className="flex flex-1 items-center gap-2">
           <Avatar>
-            <AvatarFallback>{item.bankName.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{getShortName(item.author.fullName)}</AvatarFallback>
             <AvatarImage
               src={item.author.avatar || ""}
               alt={item.author.fullName}

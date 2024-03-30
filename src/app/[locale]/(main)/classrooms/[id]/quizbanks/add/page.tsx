@@ -34,7 +34,7 @@ export default function AddQuizbankClassroom({ params }: Props) {
 
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "AddQuiz", "QuizForm", "Errors")}
+      messages={_.pick(message, "Validations", "Navbar", "AddQuiz", "QuizForm", "Errors")}
     >
       <AddQuizbankForm
         initialValues={initialValues}

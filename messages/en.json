@@ -204,6 +204,21 @@
       }
     }
   },
+  "ClassroomQuizBank": {
+    "metadata": {
+      "title": "Classroom QuizBank",
+      "description": "All classroom Quiz Banks"
+    },
+    "actions": {
+      "create": {
+        "index": "Add classroom quiz bank"
+      }
+    },
+    "terms": "Terms",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
   "Members_classroom": {
     "metadata": {
       "title": "Classroom members",

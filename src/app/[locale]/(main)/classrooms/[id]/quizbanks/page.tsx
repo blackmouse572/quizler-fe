@@ -1,5 +1,3 @@
-import getAllGamesByClassroomAction from "@/app/[locale]/(main)/classrooms/[id]/games/actions/get-game-action"
-import GameList from "@/app/[locale]/(main)/classrooms/[id]/games/components/game-list"
 import SearchBox from "@/components/searchbox"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
@@ -8,6 +6,9 @@ import { pick } from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import Link from "next/link"
+import getAllClassroomQuizBanksAction from "./actions/get-classroom-quizbanks-action"
+import ClassroomQuizBanksList from "./components/classroom-quizbanks-list"
+import { getToken } from "@/lib/auth"
 
 type Props = {
   params: {
@@ -17,7 +18,7 @@ type Props = {
 }
 
 export async function generateMetadata() {
-  const t = await getTranslations("ClassroomGame.metadata")
+  const t = await getTranslations("ClassroomQuizBank.metadata")
 
   return {
     title: t("title"),
@@ -29,26 +30,27 @@ export default async function ClassroomQuizBanks({
   params,
   searchParams,
 }: Props) {
-  const t = await getTranslations("ClassroomGame")
+  const t = await getTranslations("ClassroomQuizBank")
   const { search } = searchParams
-  const data = await getAllGamesByClassroomAction({
+  const data = await getAllClassroomQuizBanksAction({
     classroomId: params.id,
     filter: {
       search: search?.toString(),
     },
   })
   const msg = await getMessages()
+  const { token } = getToken()
   if (!data.ok) {
     throw Error(data.message)
   }
   return (
     <div>
       <div className="flex items-center justify-between py-5">
-        <h1 className="text-lg font-medium">{t("metadata.title")}</h1>
+        <h1 className="text-lg font-medium">{t("metadata.description")}</h1>
         <div className="flex items-center gap-2">
           <SearchBox className="bg-background" />
           <Link href="quizbanks/add">
-            <NamedToolTip side="top" content={"Add classroom quizbank"}>
+            <NamedToolTip side="top" content={t("actions.create.index")}>
               <Button isIconOnly>
                 <Icons.Plus className="h-4 w-4" />
               </Button>
@@ -56,17 +58,18 @@ export default async function ClassroomQuizBanks({
           </Link>
         </div>
       </div>
-      {/* <NextIntlClientProvider
-        messages={pick(msg, "ClassroomGame", "Validations", "Errors")}
+      <NextIntlClientProvider
+        messages={pick(msg, "ClassroomQuizBank", "Delete_quizbank", "Validations", "Errors")}
       >
-        <GameList
+        <ClassroomQuizBanksList
           classroomId={params.id}
           initialData={data.data}
           filter={{
             search: search?.toString(),
           }}
+          token={token}
         />
-      </NextIntlClientProvider> */}
+      </NextIntlClientProvider>
     </div>
   )
 }
