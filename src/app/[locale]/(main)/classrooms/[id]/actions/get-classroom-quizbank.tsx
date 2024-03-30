@@ -26,9 +26,12 @@ export async function getClassroomQuizbankAction(
     },
     next: {
       revalidate: 1, // Revalidate every 1 second
+      tags: ["QuizBank", "ClassroomQuizBank"],
     },
   }
-  const url = getAPIServerURL(`/Classrooms/classroom/${classroomId}/quizbank?${query.toString()}`)
+  const url = getAPIServerURL(
+    `/Classrooms/classroom/${classroomId}/quizbank?${query.toString()}`
+  )
   return fetch(url, option)
     .then(async (res) => {
       const data = await res.json()
