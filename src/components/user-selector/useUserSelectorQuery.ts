@@ -27,7 +27,7 @@ export default function useUserSelectorQuery({
       if (!res.ok) {
         throw new Error(res.message)
       }
-      const users = res.data!
+      const users = res.data?.data!
       if (
         filter?.search !== "" &&
         filter &&

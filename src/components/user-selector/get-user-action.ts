@@ -1,11 +1,15 @@
 "use server"
 
+import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-bank-classroom-action"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { User } from "@/types"
 import PagedRequest from "@/types/paged-request"
+import PagedResponse from "@/types/paged-response"
 
-export default async function getUsersAction(req: Partial<PagedRequest>) {
+export default async function getUsersAction(
+  req: Partial<PagedRequest>
+): Promise<TAPIResult<PagedResponse<User>>> {
   const url = getAPIServerURL("/accounts")
   const { token } = getToken()
 
@@ -25,7 +29,7 @@ export default async function getUsersAction(req: Partial<PagedRequest>) {
       }
       return data
     })
-    .then((res: User[]) => ({
+    .then((res: PagedResponse<User>) => ({
       ok: true,
       message: "success",
       data: res,
