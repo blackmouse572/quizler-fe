@@ -10,13 +10,11 @@ import React from "react"
 import getClassroomDetails from "../actions/get-classroom-details-action"
 import GenerateJoinDialog from "../components/generate-join-dialog"
 import SendInviteDialog from "../components/send-invite-dialog"
-import { Classroom } from "@/types"
 
 type Props = {
   children: React.ReactNode
   params: {
-    id: string,
-    classroom?: Classroom
+    id: string
   }
 }
 
@@ -43,8 +41,6 @@ async function ClassroomDetailLayout({ children, params }: Props) {
   if (!data.data) {
     return notFound()
   }
-  // set classroom data for Edit
-  params.classroom = data.data
 
   return (
     <main className="container mx-auto">

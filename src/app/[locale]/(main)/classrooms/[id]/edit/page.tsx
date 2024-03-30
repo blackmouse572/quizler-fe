@@ -3,6 +3,9 @@ import { Classroom, EFormAction } from "@/types"
 import _ from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
 import { getTranslations } from "next-intl/server"
+import { notFound } from "next/navigation"
+import getClassroomDetails from "../../actions/get-classroom-details-action"
+import { use } from "react"
 
 type Props = {
   params: { id: string; locale?: string; classroom?: Classroom }
@@ -24,8 +27,18 @@ export async function generateMetadata({
   }
 }
 
-function EditClassroomPage({ params: { classroom } }: Props) {
+function EditClassroomPage({ params: { id } }: Props) {
   const message = useMessages()
+  const data = use(getClassroomDetails(id))
+  if (!data.ok) {
+    throw Error(data.message)
+  }
+
+  if (!data.data) {
+    return notFound()
+  }
+
+  const classroom = data.data
 
   const initialvalues = {
     className: classroom?.classname ?? "",
