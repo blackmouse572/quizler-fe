@@ -1192,7 +1192,8 @@
           },
           "message": {
             "unban_message_single": "Bạn có muốn phục hồi người dùng <span></span>?",
-            "unban_message_mutiple": "ạn có muốn phục hồi <span></span> người dùng ?"
+            "unban_message_mutiple": "Bạn có muốn phục hồi <span></span> người dùng ?",
+            "success": "Người dùng đã bị cấm vào lớp"
           }
         },
         "kick_user": {

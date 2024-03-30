@@ -1197,7 +1197,8 @@
           },
           "message": {
             "ban_message_single": "Are you sure you want to ban user <span></span>?",
-            "ban_message_mutiple": "Are you sure you want to ban <span></span> members?"
+            "ban_message_mutiple": "Are you sure you want to ban <span></span> members?",
+            "success": "User(s) has been banned from class"
           }
         },
         "unban": {
@@ -1210,7 +1211,9 @@
           },
           "message": {
             "unban_message_single": "Are you sure you want to ban user <span></span>?",
-            "unban_message_mutiple": "Are you sure you want to unban <span></span> members?"
+            "unban_message_mutiple": "Are you sure you want to unban <span></span> members?",
+            "success": "User(s) has been unbanned from class"
+
           }
         },
         "kick_user": {
