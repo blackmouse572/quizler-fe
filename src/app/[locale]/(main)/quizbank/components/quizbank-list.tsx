@@ -1,7 +1,9 @@
 "use client"
 import { getMyQuizbankAction } from "@/app/[locale]/(main)/quizbank/actions/get-my-quizbank-action"
+import { queryClient } from "@/app/[locale]/provider"
 import QuizbankCard from "@/components/quizbank-card"
 import { Skeleton } from "@/components/ui/skeleton"
+import { toast } from "@/components/ui/use-toast"
 import QuizBank from "@/types/QuizBank"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
@@ -10,7 +12,6 @@ import { useInView } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useRef } from "react"
 import { deleteQuizBank } from "../actions/detete-quiz-bank"
-import { toast } from "@/components/ui/use-toast"
 
 type Props = {
   data: PagedResponse<QuizBank>
@@ -68,6 +69,18 @@ function QuizBankList({ data: initData, token, filter }: Props) {
         })
       } else {
         deleteSucceedCb()
+        queryClient.setQueryData(["quizbank"], (oldData: typeof data) => {
+          const newData = oldData.pages.map((page) => {
+            return {
+              ...page,
+              data: page?.data.filter((item: any) => item.id !== itemId),
+            }
+          })
+          return {
+            pages: newData,
+            pageParams: oldData.pageParams,
+          }
+        })
         return toast({
           title: i18n("message.success.title"),
           description: i18n("message.success.description"),
@@ -86,8 +99,12 @@ function QuizBankList({ data: initData, token, filter }: Props) {
         item={item}
         translations={{
           terms: t("terms"),
+          delete: t("delete"),
+          edit: t("edit"),
+          cancel: t("cancel"),
         }}
         onDeleteQuizBank={onDeleteQuizBank}
+        allowActions
       />
     ),
     [onDeleteQuizBank, t]

@@ -323,6 +323,9 @@
       "index": "My Quiz Banks"
     },
     "terms": "Terms",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
     "add_quizbank": "Add quiz bank"
   },
   "QuizBankAdmin": {
@@ -741,6 +744,10 @@
       "report_button": "Report",
       "edit_button": "Edit",
       "public_button": "Public"
+    },
+    "rating": {
+      "title": "Rate this quizbank",
+      "success": "Thank you for your rating ({rating} ⭐)"
     }
   },
   "CopyQuizBank": {
