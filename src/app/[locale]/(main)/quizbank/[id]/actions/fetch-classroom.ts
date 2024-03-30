@@ -35,8 +35,8 @@ export async function fetchClassroomCurrentUser() {
 
   return fetch(URL, options).then(async (response) => {
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message)
+      // return empty if has no classroom
+      return []
     }
     const result = await response.json()
     return result
