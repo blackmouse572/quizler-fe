@@ -21,7 +21,6 @@ export async function addNewClassroom(data: AddClassroom) {
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        console.log("error", json)
         throw new Error(json.message)
       }
       return json

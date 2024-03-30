@@ -45,7 +45,6 @@ function UserSelector({
   const { data, isLoading, isError, error } = useUserSelectorQuery({
     filter: { search },
   })
-  console.log(data)
   useEffect(() => {
     if (data) {
       setCachedData(_.flatten(data.pages))
