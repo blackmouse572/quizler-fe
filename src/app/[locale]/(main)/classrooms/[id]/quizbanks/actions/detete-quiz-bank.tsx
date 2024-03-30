@@ -1,36 +1,37 @@
 "use server"
-
-import { AddClassroom } from "@/app/[locale]/(main)/classrooms/components/add-classroom-form"
-import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { revalidatePath, revalidateTag } from "next/cache"
 
-export async function addNewClassroom(data: AddClassroom) {
-  const url = getAPIServerURL("/classrooms")
-  const { token } = getToken()
-  const body = JSON.stringify(data)
-  const options: RequestInit = {
-    method: "POST",
+export async function deleteQuizBank(
+  token: string,
+  classroomId: string,
+  quizbankId: string
+) {
+  const url = getAPIServerURL(`/quizbank/${quizbankId}`)
+
+  const options = {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body,
   }
 
   return fetch(url, options)
     .then(async (res) => {
-      const json = await res.json()
       if (!res.ok) {
-        console.log("error", json)
+        const json = await res.json()
         throw new Error(json.message)
       }
-      return json
+      return true
     })
-    .then((res) => {
+    .then((data) => {
+      revalidatePath(`/classrooms/${classroomId}/quizbanks`)
+      revalidateTag(`classroom-${classroomId}-quizbanks`)
       return {
         ok: true,
         message: "success",
-        data: res,
+        data: data,
       }
     })
     .catch((error) => {

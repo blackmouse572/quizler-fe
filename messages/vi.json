@@ -45,8 +45,8 @@
       "History": "Lịch sử",
       "Geography": "Địa lý",
       "Literature": "Văn học",
-      "Language": "Ngoại ngữ",
-      "Computer": "Khoa học máy tính",
+      "Languages": "Ngoại ngữ",
+      "Computer Science": "Khoa học máy tính",
       "Other": "Khác"
     },
     "nav_search": {
@@ -109,6 +109,21 @@
       "description": "Tất cả các trò chơi của lớp học",
       "title": "Trò chơi lớp học"
     }
+  },
+  "ClassroomQuizBank": {
+    "metadata": {
+      "title": "QuizBank trong lớp học",
+      "description": "Tất cả Quiz Bank trong lớp"
+    },
+    "actions": {
+      "create": {
+        "index": "Thêm quiz bank trong lớp"
+      }
+    },
+    "terms": "Thuật ngữ",
+    "delete": "Xoá",
+    "edit": "Chỉnh sửa",
+    "cancel": "Huỷ bỏ"
   },
   "ClassroomDetails": {
     "members": "Thành viên",
@@ -457,6 +472,9 @@
       "index": "Quizbank của tôi"
     },
     "terms": "Thuật ngữ",
+    "edit": "Chỉnh sửa",
+    "delete": "Xoá",
+    "cancel": "Huỷ",
     "add_quizbank": "Tạo quizbank mới"
   },
   "QuizBankAdmin": {
@@ -947,6 +965,10 @@
       "report_button": "Báo cáo",
       "edit_button": "Chỉnh sửa",
       "public_button": "Công khai"
+    },
+    "rating": {
+      "title": "Đánh giá",
+      "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
     }
   },
   "NotFound": {
@@ -1218,7 +1240,8 @@
           },
           "message": {
             "unban_message_single": "Bạn có muốn phục hồi người dùng <span></span>?",
-            "unban_message_mutiple": "ạn có muốn phục hồi <span></span> người dùng ?"
+            "unban_message_mutiple": "Bạn có muốn phục hồi <span></span> người dùng ?",
+            "success": "Người dùng đã bị cấm vào lớp"
           }
         },
         "kick_user": {

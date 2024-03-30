@@ -20,7 +20,7 @@ import {
 import UserDropdown from "@/components/user-dropdown"
 import { SUBJECTS_NAVBAR_ITEMS } from "@/lib/config/navbar-config"
 import { cn } from "@/lib/utils"
-import { Classroom } from "@/types"
+import { Classroom, INotification } from "@/types"
 import { User } from "@/types/User"
 import { MenuItem } from "@/types/dropdown-menu"
 import PagedResponse from "@/types/paged-response"
@@ -45,6 +45,10 @@ type Props = {
   user?: User
   menuItems?: MenuItem[][]
   myClassroomData?: PagedResponse<Classroom>
+  notification?: {
+    unreadCount: number
+    notification?: PagedResponse<INotification>
+  }
 }
 
 export default function LoggedInNavbar({
@@ -53,6 +57,7 @@ export default function LoggedInNavbar({
   items = [],
   menuItems = [],
   myClassroomData,
+  notification,
 }: Props) {
   const segment = useSelectedLayoutSegment()
   const tNav = useTranslations("Navbar")
@@ -72,11 +77,11 @@ export default function LoggedInNavbar({
   const renderRightContent = useMemo(() => {
     return (
       <>
-        <NotificationDropdown user={user!} menuItems={menuItems} />
+        <NotificationDropdown unreadCount={notification?.unreadCount || 0} />
         <UserDropdown user={user!} menuItems={menuItems} />
       </>
     )
-  }, [menuItems, user])
+  }, [menuItems, notification?.unreadCount, user])
 
   const renderDrawerMenu = useMemo(() => {
     return (

@@ -1,11 +1,17 @@
-import { getToken } from "@/lib/auth"
 import { EFormAction } from "@/types"
 import _ from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
+import { getToken } from "@/lib/auth"
 import { notFound } from "next/navigation"
-import AddQuizbankForm, { AddQuizbank } from "./components/add-quizbank-form"
+import AddQuizbankForm, { AddQuizbank } from "@/app/[locale]/(main)/quizbank/add/components/add-quizbank-form"
 
-function AddQuizbank() {
+type Props = {
+  params: {
+    id: string
+  }
+}
+
+export default function AddQuizbankClassroom({ params }: Props) {
   const message = useMessages()
   const initialValues: AddQuizbank = {
     bankName: "",
@@ -28,18 +34,13 @@ function AddQuizbank() {
 
   return (
     <NextIntlClientProvider
-      messages={_.pick(
-        message,
-        "Validations",
-        "AddQuiz",
-        "QuizForm",
-        "Errors",
-        "Navbar"
-      )}
+      messages={_.pick(message, "Validations", "Navbar", "AddQuiz", "QuizForm", "Errors")}
     >
-      <AddQuizbankForm initialValues={initialValues} action={EFormAction.Add} />
+      <AddQuizbankForm
+        initialValues={initialValues}
+        action={EFormAction.Add}
+        classroomId={params.id}
+      />
     </NextIntlClientProvider>
   )
 }
-
-export default AddQuizbank

@@ -4,6 +4,8 @@ import { getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
 import Footer from "@/components/footer"
+import { getNotificationAction } from "@/components/notification-dropdown/actions/get-notification-action"
+import { getUnreadNotificationAction } from "@/components/notification-dropdown/actions/get-unread-notification-action"
 import GuestNavbar, {
   MainNavItem,
 } from "@/components/ui/guest-navbar/guest-navbar"
@@ -111,8 +113,18 @@ async function MainLayout({ children }: Props) {
   ]
 
   let myClassroomData = null
+  let unreadCount = 0
+  let notificationData
   if (isAuth && user) {
     const myClassroomRes = await getNavbarLoggedIn()
+    const unreadRes = await getUnreadNotificationAction()
+    const notificationRes = await getNotificationAction()
+    if (unreadRes.ok) {
+      unreadCount = unreadRes.data || 0
+    }
+    if (notificationRes.ok) {
+      notificationData = notificationRes.data
+    }
     myClassroomData = myClassroomRes.data
   }
 
@@ -124,6 +136,10 @@ async function MainLayout({ children }: Props) {
         menuItems={menuItems}
         isAuthed={isAuth}
         user={user}
+        notification={{
+          unreadCount,
+          notification: notificationData,
+        }}
         myClassroomData={myClassroomData!}
       />
     ) : (

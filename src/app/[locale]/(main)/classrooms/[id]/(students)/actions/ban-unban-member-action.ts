@@ -1,36 +1,47 @@
 "use server"
 
-import { AddClassroom } from "@/app/[locale]/(main)/classrooms/components/add-classroom-form"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { revalidateTag } from "next/cache"
 
-export async function addNewClassroom(data: AddClassroom) {
-  const url = getAPIServerURL("/classrooms")
+export type TBanAPIProps = {
+  classroomId: string
+  memberIds: number[]
+  action: "ban" | "unban"
+}
+
+export async function banAndUnbanMemberAction({
+  classroomId,
+  memberIds,
+  action,
+}: TBanAPIProps) {
+  debugger
+  const url = getAPIServerURL(`/classrooms/${+classroomId}/users`)
   const { token } = getToken()
-  const body = JSON.stringify(data)
+  const members = { memberIds: memberIds }
   const options: RequestInit = {
-    method: "POST",
+    method: action === "ban" ? "POST" : "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body,
+    body: JSON.stringify(members),
   }
 
   return fetch(url, options)
     .then(async (res) => {
-      const json = await res.json()
       if (!res.ok) {
-        console.log("error", json)
+        const json = await res.json()
         throw new Error(json.message)
       }
-      return json
+      return true
     })
-    .then((res) => {
+    .then((data) => {
+      revalidateTag(`classroom_management`)
       return {
         ok: true,
         message: "success",
-        data: res,
+        data: data,
       }
     })
     .catch((error) => {

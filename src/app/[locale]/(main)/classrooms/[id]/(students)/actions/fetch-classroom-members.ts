@@ -49,3 +49,42 @@ export default async function getAllMembers(
       throw new Error(err)
     })
 }
+
+export async function getBanMembers(
+  classroomId: string,
+  options: Partial<PagedRequest>
+): Promise<PagedResponse<StudentClasroomData>> {
+  const token = getToken()
+  //Convert object to query string
+  const params = new URLSearchParams()
+
+  for (const [key, value] of Object.entries(options)) {
+    if (value !== undefined) {
+      params.set(key, String(value)) // Ensure value is a string
+    }
+  }
+
+  const option: RequestInit = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token.token}`,
+    },
+    next: {
+      tags: ["classroom_management"],
+      revalidate: 60, // revalidate every 60 seconds
+    },
+  }
+
+  const url = getAPIServerURL(
+    `/classrooms/${classroomId}/users?` + params
+  )
+
+  return fetch(url, option)
+    .then(async (res) => res.json())
+    .catch((err) => {
+      console.error(`[ERROR] get Banned Users: ${URL} `, err)
+      throw new Error(err)
+    })
+}
+

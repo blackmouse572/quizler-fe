@@ -49,7 +49,7 @@ async function ClassroomDetailLayout({ children, params }: Props) {
   return (
     <main className="container mx-auto">
       <div className="mb-4 flex items-center justify-between">
-        <NextIntlClientProvider messages={_.pick(msg, "Invite_classroom")}>
+        <NextIntlClientProvider messages={_.pick(msg, "Invite_classroom", "Errors", "Validations")}>
           <div className="space-y-1">
             <h1 className="text-4xl font-bold">{data.data.classname}</h1>
             <p className="text-accent-foreground">
