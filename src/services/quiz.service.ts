@@ -45,18 +45,22 @@ export async function getQuizByQuizBankId(id: string) {
 
 export async function copyQuizBankToClassroom(
   quizbankId: string,
-  classroomId: string
+  classroomId: string,
+  newName: string
 ) {
   const url = getAPIServerURL(
     `/classrooms/copyquizbank/${quizbankId}/${classroomId}`
   )
   const { token } = getToken()
+  const data: Partial<AddQuizbank> = { bankName: newName }
+  const body = JSON.stringify(data)
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    body,
   }
   return fetch(url, options)
     .then(async (res) => {

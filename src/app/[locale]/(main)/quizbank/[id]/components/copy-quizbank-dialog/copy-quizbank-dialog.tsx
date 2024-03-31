@@ -168,7 +168,7 @@ export default function CopyQuizBankDialog({
     setIsLoading(true)
     let result
     if (copyToValue === ECopyTo.classroom) {
-      result = await copyQuizBankToClassroom(quizbankId, classroom)
+      result = await copyQuizBankToClassroom(quizbankId, classroom, name)
     } else {
       result = await copyQuizBankToPersonal(name, quizbankId)
     }
