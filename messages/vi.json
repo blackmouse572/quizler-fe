@@ -312,6 +312,19 @@
       }
     }
   },
+  "CategoryQuizBank":{
+    "metadata": {
+      "title": "Mục lục ngân hàng câu hỏi",
+      "description": "Tìm kiếm ngân hàng bẳng thẻ"
+    },
+    "headers": {
+      "index": "Tất cả ngân hàng câu hỏi chứa thẻ {category}"
+    },
+    "terms": "Thuật ngữ",
+    "delete": "Xoá",
+    "edit": "Chỉnh sửa",
+    "cancel": "Huỷ bỏ"
+  },
   "SearchPage": {
     "search_error": "Đã có lỗi xảy ra, vui lòng thử lại sau",
     "results_for": "Kết quả cho",
