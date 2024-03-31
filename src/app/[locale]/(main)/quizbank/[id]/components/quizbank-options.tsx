@@ -4,16 +4,11 @@ import React, { useCallback, useMemo, useRef, useState } from "react"
 import CopyQuizBankDialog from "./copy-quizbank-dialog/copy-quizbank-dialog"
 import { toast } from "@/components/ui/use-toast"
 import { updateQuizBankAction } from "../../add/actions/add-quiz-bank-action"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/ui/icons"
 import EditQuizBank from "./edit-button"
 import { useTranslations } from "next-intl"
 import PublicButton from "./public-button"
+import { Classroom } from "@/types"
+import ReportQuizBankDialog from "./report-quizbank-dialog/report-quizbank-dialog"
 
 type Props = {
   quizBankVisibility: "Private" | "Public"
@@ -78,14 +73,10 @@ const QuizBankActions = ({
       />,
     ]
     const visitorQuizBankButtons = [
-      <Tooltip key="report-quiz-bank">
-        <TooltipTrigger asChild>
-          <Button color="accent" isIconOnly>
-            <Icons.Report />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>{i18n("author.report_button")}</TooltipContent>
-      </Tooltip>,
+      <ReportQuizBankDialog
+        buttonContent={i18n("author.report_button")}
+        quizbankId={quizbankId}
+      />,
     ]
 
     let shouldUsedButtons: React.JSX.Element[]
