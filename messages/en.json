@@ -436,6 +436,19 @@
       "see_more_results": "See more"
     }
   },
+  "CategoryQuizBank": {
+    "metadata": {
+      "title": "Category QuizBank",
+      "description": "Search QuizBank by tag"
+    },
+    "headers": {
+      "index": "All quizbank with {category} tag"
+    },
+    "terms": "Terms in this bank",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
   "SearchPage": {
     "search_error": "Something went wrong",
     "results_for": "Results for",
@@ -1213,7 +1226,6 @@
             "unban_message_single": "Are you sure you want to ban user <span></span>?",
             "unban_message_mutiple": "Are you sure you want to unban <span></span> members?",
             "success": "User(s) has been unbanned from class"
-
           }
         },
         "kick_user": {
