@@ -22,12 +22,12 @@ const MAIN_NAVBAR_ITEMS: MainNavItem[] = [
 const SUBJECTS_NAVBAR_ITEMS: MainNavItem[] = [
   {
     title: "subject_item.Math",
-    href: "category?tag=Math",
+    href: "/category?tag=Math",
     icon: "Math",
   },
   {
     title: "subject_item.Literature",
-    href: "category?tag=Literature",
+    href: "/category?tag=Literature",
     icon: "Literature",
   },
 
@@ -38,22 +38,22 @@ const SUBJECTS_NAVBAR_ITEMS: MainNavItem[] = [
   },
   {
     title: "subject_item.Languages",
-    href: "category?tag=Language",
+    href: "/category?tag=Language",
     icon: "Languague",
   },
   {
     title: "subject_item.Computer Science",
-    href: "category?tag=Computer",
+    href: "/category?tag=Computer",
     icon: "Computer",
   },
   {
     title: "subject_item.Geography",
-    href: "category?tag=Geography",
+    href: "/category?tag=Geography",
     icon: "Geography",
   },
   {
     title: "subject_item.Other",
-    href: "category?tag=Other",
+    href: "/category?tag=Other",
     icon: "Dot",
   },
 ]

@@ -38,6 +38,7 @@ import RateQuizbank from "@/app/[locale]/(main)/quizbank/[id]/components/rate-qu
 import { Badge } from "@/components/ui/badge"
 import _ from "lodash"
 import { useHotkeys } from "react-hotkeys-hook"
+import Link from "next/link"
 
 export default function ViewFlashcard({
   quizBankData,
@@ -283,9 +284,11 @@ export default function ViewFlashcard({
         {quizBankData.tags?.map((_, index) => {
           const tag = quizBankData.tags[index]
           return (
-            <Badge size="sm" color="accent" key={index}>
-              {tag}
-            </Badge>
+            <Link key={index} href={`/category?tag=${tag}`}>
+              <Badge size="sm" color="accent">
+                {tag}
+              </Badge>
+            </Link>
           )
         })}
       </div>
