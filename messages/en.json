@@ -415,6 +415,9 @@
       "ban": "Ban",
       "warn": "Warn"
     },
+    "data_table": {
+      "active": "No"
+    },
     "filters": {
       "visibility": {
         "label": "Visibility",
@@ -440,16 +443,42 @@
       "ban": "Ban user",
       "unban": "Unban user"
     },
-    "success": {
+    "dialog": {
       "ban_user": {
-        "index": "User has been banned"
+        "title": "Ban User",
+        "description": "Ban user <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Ban user"
+      },
+      "unban_user": {
+        "title": "Unban User",
+        "description": "Unban user <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Unban user"
       },
       "warn_user": {
-        "index": "User has been warned"
+        "title": "Warn User",
+        "description": "Warn user <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Warn user"
+      }
+    },
+    "success": {
+      "ban_user": {
+        "index": "User has been banned",
+        "title": "Ban user"
+      },
+      "unban_user": {
+        "index": "User has been unbanned",
+        "title": "Unban user"
+      },
+      "warn_user": {
+        "index": "User has been warned",
+        "title": "Warn user"
       }
     },
     "errors": {
-      "index": "Something went wrong"
+      "title": "Something went wrong."
     }
   },
   "Navbar": {

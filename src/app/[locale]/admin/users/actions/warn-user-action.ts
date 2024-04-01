@@ -1,12 +1,22 @@
+"use server"
+
+import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { User } from "@/types"
 import PagedResponse from "@/types/paged-response"
+import { revalidatePath, revalidateTag } from "next/cache"
 
-export default async function warnUserAction(id: string) {
+type Props = {
+  id: string
+}
+
+export default async function warnUserAction({ id }: Props) {
+  const token = getToken().token
   const option: RequestInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     next: {
       revalidate: 60, // Revalidate every 60 second
@@ -21,11 +31,15 @@ export default async function warnUserAction(id: string) {
       }
       return data
     })
-    .then((res: PagedResponse<User>) => ({
-      ok: true,
-      message: "success",
-      data: res,
-    }))
+    .then((res: PagedResponse<User>) => {
+      revalidatePath("/admin/users")
+      revalidateTag("AdminUser")
+      return {
+        ok: true,
+        message: "success",
+        data: res,
+      }
+    })
     .catch((err) => {
       console.error(`[ERROR] warnUserAction: `, err.message)
       return {

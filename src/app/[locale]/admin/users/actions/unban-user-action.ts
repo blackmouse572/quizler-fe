@@ -10,7 +10,7 @@ type Props = {
   id: string
 }
 
-export default async function banUserAction({ id }: Props) {
+export default async function unbanUserAction({ id }: Props) {
   const token = getToken().token
   const option: RequestInit = {
     method: "POST",
@@ -22,7 +22,7 @@ export default async function banUserAction({ id }: Props) {
       revalidate: 60, // Revalidate every 60 second
     },
   }
-  const url = getAPIServerURL(`/accounts/ban/${id}`)
+  const url = getAPIServerURL(`/accounts/unban/${id}`)
   const res = await fetch(url, option)
     .then(async (res) => {
       const data = await res.json()
@@ -41,7 +41,7 @@ export default async function banUserAction({ id }: Props) {
       }
     })
     .catch((err) => {
-      console.error(`[ERROR] banUserAction: `, err.message)
+      console.error(`[ERROR] unbanUserAction: `, err.message)
       return {
         ok: false,
         message: err.message,

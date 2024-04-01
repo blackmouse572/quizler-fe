@@ -25,7 +25,8 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuLabel,
-  ContextMenuSeparator, ContextMenuTrigger
+  ContextMenuSeparator,
+  ContextMenuTrigger,
 } from "@/components/ui/context-menu"
 import {
   DropdownMenu,
@@ -52,9 +53,10 @@ import FilterDropdown from "./filter"
 import { User } from "@/types"
 import DeleteDialog from "./delete-dialog"
 import { useRouter } from "next/navigation"
-import banUserAction from "../actions/ban-user-action"
-import { toast } from "@/components/ui/use-toast"
-import warnUserAction from "../actions/warn-user-action"
+import { Badge } from "@/components/ui/badge"
+import BanUserDialog from "./ban-user-dialog"
+import WarnUserDialog from "./warn-user-dialog"
+import UnbanUserDialog from "./unban-user-dialog"
 
 type UserTableProps = {
   data: PagedResponse<User>
@@ -69,7 +71,6 @@ export function UserTable({ data }: UserTableProps) {
   const i18n = useTranslations("UserAdmin")
   const format = useFormatter()
   const router = useRouter()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   const columns: ColumnDef<User>[] = React.useMemo(
     () => [
@@ -150,57 +151,70 @@ export function UserTable({ data }: UserTableProps) {
       },
       {
         accessorKey: "role",
-        header: () => <div className="text-center">{i18n("headers.role")}</div>,
+        header: ({ column }) => {
+          return (
+            <div
+              className="flex h-full cursor-pointer items-center justify-start gap-2 [&_svg]:h-4 [&_svg]:w-4"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              {i18n("headers.role")}
+              {column.getIsSorted() === "asc" ? (
+                <Icons.CaretUpFilled className="ml-auto" />
+              ) : (
+                <Icons.CaretDownFilled className="ml-auto" />
+              )}
+            </div>
+          )
+        },
         cell: ({ row }) => {
           const role = row.getValue("role") as string
-          // const isPublic = role.toLowerCase() === "public"
-
-          return (
-            <div className="flex w-full justify-center">
-              {/* <Checkbox
-                role="cell"
-                checked={isPublic}
-                className="mx-auto data-[state=checked]:bg-success-500"
-              /> */}
-              {role}
-            </div>
-          )
+          return <div className="flex w-full justify-center">{role}</div>
         },
       },
       {
-        accessorKey: "ban",
+        accessorKey: "isBan",
         header: () => <div className="text-center">{i18n("headers.ban")}</div>,
         cell: ({ row }) => {
-          const ban = row.getValue("ban") as string
-          // const isPublic = role.toLowerCase() === "public"
+          const ban = row.getValue("isBan")
+          if (!ban)
+            return (
+              <div className="text-center">
+                <Badge>{i18n("data_table.active")}</Badge>
+              </div>
+            )
 
           return (
-            <div className="flex w-full justify-center">
-              {/* <Checkbox
-                role="cell"
-                checked={isPublic}
-                className="mx-auto data-[state=checked]:bg-success-500"
-              /> */}
-              {ban}
+            <div className="text-center">
+              <Badge variant="outline">
+                {format.dateTime(new Date(ban as string), {
+                  dateStyle: "short",
+                })}
+              </Badge>
             </div>
           )
         },
       },
       {
-        accessorKey: "warn",
+        accessorKey: "isWarning",
         header: () => <div className="text-center">{i18n("headers.warn")}</div>,
         cell: ({ row }) => {
-          const warn = row.getValue("warn") as string
-          // const isPublic = role.toLowerCase() === "public"
+          const warn = row.getValue("isWarning")
+          if (!warn)
+            return (
+              <div className="text-center">
+                <Badge>{i18n("data_table.active")}</Badge>
+              </div>
+            )
 
           return (
-            <div className="flex w-full justify-center">
-              {/* <Checkbox
-                role="cell"
-                checked={isPublic}
-                className="mx-auto data-[state=checked]:bg-success-500"
-              /> */}
-              {warn}
+            <div className="text-center">
+              <Badge variant="outline">
+                {format.dateTime(new Date(warn as string), {
+                  dateStyle: "short",
+                })}
+              </Badge>
             </div>
           )
         },
@@ -218,58 +232,6 @@ export function UserTable({ data }: UserTableProps) {
       router.push(`/users/${id}`)
     },
     [router]
-  )
-
-  const handleBanUser = React.useCallback(
-    async (id: string) => {
-      setIsLoading(true)
-      const result = await banUserAction(id)
-
-      if (!result.ok) {
-        setIsLoading(false)
-        return toast({
-          title: i18n("errors.index"),
-          description: i18n(result.message),
-          variant: "flat",
-          color: "danger",
-        })
-      }
-
-      toast({
-        title: "Success",
-        description: i18n("success.ban_user.index"),
-        variant: "flat",
-        color: "success",
-      })
-      setIsLoading(false)
-    },
-    [i18n]
-  )
-
-  const handleWarnUser = React.useCallback(
-    async (id: string) => {
-      setIsLoading(true)
-      const result = await warnUserAction(id)
-
-      if (!result.ok) {
-        setIsLoading(false)
-        return toast({
-          title: i18n("errors.index"),
-          description: i18n(result.message),
-          variant: "flat",
-          color: "danger",
-        })
-      }
-
-      toast({
-        title: "Success",
-        description: i18n("success.warn_user.index"),
-        variant: "flat",
-        color: "success",
-      })
-      setIsLoading(false)
-    },
-    [i18n]
   )
 
   const renderContextMenuAction = React.useCallback(
@@ -297,32 +259,45 @@ export function UserTable({ data }: UserTableProps) {
               <Icons.NavAccount className="mr-2 inline-block h-4 w-4 " />
               {i18n("actions.view_profile")}
             </ContextMenuItem>
-            <ContextMenuItem
-              disabled={isLoading}
-              onClick={() => handleBanUser(user.id.toString())}
-            >
-              <Icons.Ban className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.ban")}
-            </ContextMenuItem>
-            <ContextMenuItem
-              disabled={isLoading}
-              // onClick={() => handleWarnUser(user.id.toString())}
-            >
-              <Icons.Unban className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.unban")}
-            </ContextMenuItem>
-            <ContextMenuItem
-              disabled={isLoading}
-              onClick={() => handleWarnUser(user.id.toString())}
-            >
-              <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.warn_user")}
-            </ContextMenuItem>
+
+            {!user.isBan && (
+              <BanUserDialog
+                id={user.id.toString()}
+                trigger={
+                  <ContextMenuItem>
+                    <Icons.Ban className="mr-2 inline-block h-4 w-4 " />
+                    {i18n("actions.ban")}
+                  </ContextMenuItem>
+                }
+              />
+            )}
+
+            {user.isBan && (
+              <UnbanUserDialog
+                id={user.id.toString()}
+                trigger={
+                  <ContextMenuItem>
+                    <Icons.Unban className="mr-2 inline-block h-4 w-4 " />
+                    {i18n("actions.unban")}
+                  </ContextMenuItem>
+                }
+              />
+            )}
+
+            <WarnUserDialog
+              id={user.id.toString()}
+              trigger={
+                <ContextMenuItem>
+                  <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.warn_user")}
+                </ContextMenuItem>
+              }
+            />
           </ContextMenuContent>
         </ContextMenu>
       )
     },
-    [handleBanUser, handleViewUserProfile, handleWarnUser, i18n, isLoading, t]
+    [handleViewUserProfile, i18n, t]
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])

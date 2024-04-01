@@ -562,6 +562,9 @@
       "ban": "Cấm",
       "warn": "Cảnh cáo"
     },
+    "data_table": {
+      "active": "Không"
+    },
     "filters": {
       "visibility": {
         "label": "Hiển thị",
@@ -587,12 +590,38 @@
       "ban": "Cấm người dùng",
       "unban": "Khôi phục người dùng"
     },
-    "success": {
+    "dialog": {
       "ban_user": {
-        "index": "Người dùng đã bị cấm"
+        "title": "Cấm người dùng",
+        "description": "Cấm người dùng <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Cấm người dùng"
+      },
+      "unban_user": {
+        "title": "Khôi phục người dùng",
+        "description": "Khôi phục người dùng <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Khôi phục người dùng"
       },
       "warn_user": {
-        "index": "Người dùng đã bị cảnh cáo"
+        "title": "Cảnh cáo người dùng",
+        "description": "Cảnh cáo người dùng <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Cảnh cáo người dùng"
+      }
+    },
+    "success": {
+      "ban_user": {
+        "index": "Người dùng đã bị cấm",
+        "title": "Cấm người dùng"
+      },
+      "unban_user": {
+        "index": "Người dùng đã được khôi phục",
+        "title": "Khôi phục người dùng"
+      },
+      "warn_user": {
+        "index": "Người dùng đã bị cảnh cáo",
+        "title": "Cảnh cáo người dùng"
       }
     },
     "errors": {

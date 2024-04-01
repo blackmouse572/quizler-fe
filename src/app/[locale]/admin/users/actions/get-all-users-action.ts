@@ -1,27 +1,32 @@
+"use server"
+
+import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
 import { User } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 
-export default async function getAllUsersAction(options: Partial<PagedRequest>) {
-  //Convert object to query string
-  const params = new URLSearchParams()
+type Props = {
+  options: Partial<PagedRequest>
+}
 
-  for (const [key, value] of Object.entries(options)) {
-    if (value !== undefined) {
-      params.set(key, String(value)) // Ensure value is a string
-    }
-  }
+export default async function getAllUsersAction({ options }: Props) {
+  const query = toURLSeachParams({
+    ...options,
+    sortBy: "created",
+    sortDirection: "DESC",
+  })
   const option: RequestInit = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
     next: {
-      revalidate: 1, // Revalidate every 1 second
+      tags: ["AdminUser"],
+      revalidate: 60, // Revalidate every 60 second
     },
   }
-  const url = getAPIServerURL("/accounts") + "?" + params
+  const url = getAPIServerURL("/accounts") + "?" + query
 
   const res = await fetch(url, option)
     .then(async (res) => {
