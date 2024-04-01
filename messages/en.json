@@ -384,6 +384,57 @@
       }
     }
   },
+  "UserAdmin": {
+    "metadata": {
+      "title": "User Management",
+      "description": "Manage all users in the system"
+    },
+    "headers": {
+      "name": "Name",
+      "email": "Email",
+      "username": "Username",
+      "dob": "Date of birth",
+      "role": "Role",
+      "ban": "Ban",
+      "warn": "Warn"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Copy user ID",
+      "copy_user_name": "Copy user name",
+      "view_profile": "View profile",
+      "warn_user": "Warn user",
+      "ban": "Ban user",
+      "unban": "Unban user"
+    },
+    "success": {
+      "ban_user": {
+        "index": "User has been banned"
+      },
+      "warn_user": {
+        "index": "User has been warned"
+      }
+    },
+    "errors": {
+      "index": "Something went wrong"
+    }
+  },
   "Navbar": {
     "home": "Home",
     "classrooms": "Classrooms",

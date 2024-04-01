@@ -55,7 +55,7 @@ async function getQuizBank(options: Partial<PagedRequest>) {
   return res
 }
 
-async function AdminUserPage({ searchParams }: AdminQuizBankProps) {
+async function AdminQuizBankPage({ searchParams }: AdminQuizBankProps) {
   const take = searchParams.take ? parseInt(searchParams.take as string) : 20
   const skip = searchParams.skip ? parseInt(searchParams.skip as string) : 0
   const search = searchParams.search
@@ -76,4 +76,4 @@ async function AdminUserPage({ searchParams }: AdminQuizBankProps) {
   )
 }
 
-export default AdminUserPage
+export default AdminQuizBankPage

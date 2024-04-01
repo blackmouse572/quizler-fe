@@ -531,6 +531,57 @@
       }
     }
   },
+  "UserAdmin": {
+    "metadata": {
+      "title": "Quản lí người dùng",
+      "description": "Quản lí tất cả người dùng trong hệ thống"
+    },
+    "headers": {
+      "name": "Tên",
+      "email": "Email",
+      "username": "Tài khoản",
+      "dob": "Ngày sinh",
+      "role": "Vai trò",
+      "ban": "Cấm",
+      "warn": "Cảnh cáo"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
+        "type": {
+          "Public": {
+            "value": "Công khai"
+          },
+          "Private": {
+            "value": "Riêng tư"
+          },
+          "All": {
+            "value": "Tất cả"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Sao chép ID người dùng",
+      "copy_user_name": "Sao chép tên",
+      "view_profile": "Xem hồ sơ",
+      "warn_user": "Cảnh cáo người dùng",
+      "ban": "Cấm người dùng",
+      "unban": "Khôi phục người dùng"
+    },
+    "success": {
+      "ban_user": {
+        "index": "Người dùng đã bị cấm"
+      },
+      "warn_user": {
+        "index": "Người dùng đã bị cảnh cáo"
+      }
+    },
+    "errors": {
+      "index": "Đã có lỗi xảy ra, vui lòng thử lại sau"
+    }
+  },
   "ForgotPassword": {
     "title": "Quên mật khẩu? Đừng lo",
     "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",
