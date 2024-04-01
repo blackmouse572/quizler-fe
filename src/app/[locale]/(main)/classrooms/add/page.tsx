@@ -1,4 +1,4 @@
-import AddClassroomForm from "@/app/[locale]/(main)/classrooms/add/components/add-classroom-form"
+import AddClassroomForm from "@/app/[locale]/(main)/classrooms/components/add-classroom-form"
 import { EFormAction } from "@/types"
 import _ from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"

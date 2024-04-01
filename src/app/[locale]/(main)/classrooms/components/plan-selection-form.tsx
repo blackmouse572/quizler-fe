@@ -7,11 +7,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { EFormAction } from "@/types"
 import { useTranslations } from "next-intl"
 import { useCallback, useMemo, useState } from "react"
 
 type Props = {
   onPlanSelection: (planId: string) => void
+  action: EFormAction
+  defaultPlanId?: string
 }
 
 // TODO: Move this to a shared location
@@ -24,8 +27,21 @@ type Plan = {
   features: string[]
 }
 
-function PlanSelectionForm({ onPlanSelection }: Props) {
-  const t = useTranslations("AddClassroom.form.plan-form")
+const initialPlan = {
+  id: '',
+  name: '',
+  description: '',
+  price: 0,
+  currency: '',
+  features: [],
+}
+
+function PlanSelectionForm({ onPlanSelection, action, defaultPlanId }: Props) {
+  const t = useTranslations(
+    `${
+      +action === +EFormAction.Add ? "AddClassroom" : "EditClassroom"
+    }.form.plan-form`
+  )
   const plans = useMemo<Plan[]>(() => {
     return [
       {
@@ -54,7 +70,7 @@ function PlanSelectionForm({ onPlanSelection }: Props) {
       },
     ]
   }, [t])
-  const [selectedPlan, setSelectedPlan] = useState<Plan>()
+  const [selectedPlan, setSelectedPlan] = useState<Plan>(plans.find(plan => plan.id === defaultPlanId) ?? initialPlan)
 
   const onPlanChange = useCallback(
     (id: string) => {

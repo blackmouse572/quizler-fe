@@ -1,6 +1,6 @@
 "use server"
 
-import { AddClassroom } from "@/app/[locale]/(main)/classrooms/add/components/add-classroom-form"
+import { AddClassroom } from "@/app/[locale]/(main)/classrooms/components/add-classroom-form"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 
