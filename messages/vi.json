@@ -527,8 +527,25 @@
       "go_to": {
         "index": "Xem chi tiết",
         "author": "Xem tác giả",
-        "quiz": "Xem Quiz"
+        "quizbank": "Xem QuizBank"
       }
+    },
+    "dialog": {
+      "delete_quizbank": {
+        "title": "Xóa ngân hàng câu hỏi",
+        "description": "Xóa ngân hàng câu hỏi <strong>{quizBankID}</strong> ?",
+        "cancel": "Hủy",
+        "delete": "Xóa"
+      }
+    },
+    "success": {
+      "title": "Xóa ngân hàng câu hỏi",
+      "message": {
+        "success": "Xóa ngân hàng câu hỏi thành công"
+      }
+    },
+    "error": {
+      "title": "Đã có lỗi xảy ra, vui lòng thử lại sau"
     }
   },
   "UserAdmin": {

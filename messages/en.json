@@ -380,8 +380,25 @@
       "go_to": {
         "index": "Go to",
         "author": "Go to author",
-        "quiz": "Go to quiz"
+        "quizbank": "Go to quizbank"
       }
+    },
+    "dialog": {
+      "delete_quizbank": {
+        "title": "Delete QuizBank",
+        "description": "Delete QuizBank <strong>{quizBankID}</strong> ?",
+        "cancel": "Cancel",
+        "delete": "Delete"
+      }
+    },
+    "success": {
+      "title": "Delete QuizBank",
+      "message": {
+        "success": "Delete QuizBank successfully"
+      }
+    },
+    "error": {
+      "title": "Something went wrong."
     }
   },
   "UserAdmin": {
