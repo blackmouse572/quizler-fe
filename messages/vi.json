@@ -668,6 +668,67 @@
       }
     }
   },
+  "ReportAdmin": {
+    "metadata": {
+      "title": "Quản lí các báo cáo",
+      "description": "Quản lí tất cả báo cáo trong hệ thống"
+    },
+    "headers": {
+      "reported_quizbank": "Ngân hàng bị báo cáo",
+      "reported_account": "Tài khoản bị báo cáo",
+      "account_report_name": "Người báo cáo",
+      "reason": "Lí do",
+      "created_at": "Ngày tạo",
+      "report_type": "Loại báo cáo"
+    },
+    "data_table": {
+      "report_user": "Người dùng",
+      "report_quizbank": "Ngân hàng"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Sao chép ID",
+      "copy_reporter_name": "Sao chép tên người báo cáo",
+      "view_details": "Xem chi tiết báo cáo",
+      "go_to": {
+        "index": "Đi đến",
+        "reporter": "Đi đến người báo cáo",
+        "reported_account": "Đi đến tài khoản bị báo cáo",
+        "reported_quizbank": "Đi đến ngân hàng bị báo cáo"
+      }
+    },
+    "dialog": {
+      "report_details": {
+        "title": "Báo cáo chi tiết",
+        "content": {
+          "quizbank_name": "Tên ngân hàng bị báo cáo",
+          "quizbank_id": "ID ngân hàng bị báo cáo",
+          "account_name": "Tên tài khoản bị báo cáo",
+          "account_id": "ID tài khoản bị báo cáo",
+          "reason": "Lí do",
+          "created_at": "Ngày tạo"
+        },
+        "cancel": "Hủy",
+        "confirm": "Chấp nhận báo cáo"
+      }
+    }
+  },
   "ForgotPassword": {
     "title": "Quên mật khẩu? Đừng lo",
     "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",
