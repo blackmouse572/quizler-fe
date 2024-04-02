@@ -5,7 +5,7 @@ import AdminDashboard from "./components/admin-dashboard-page"
 import getAllUsersAction from "../users/actions/get-all-users-action"
 import getAllClassroomsAction from "../classrooms/actions/get-all-classrooms-action"
 import getAllQuizBanksAction from "../quizbank/actions/get-all-quizbanks-action"
-import getAllReportsAction from "./actions/get-all-reports-action"
+import getAllReportsAction from "../reports/actions/get-all-reports-action"
 // export const metadata = {
 //   title: "Dashboard",
 //   description: "Dashboard page, control your site",

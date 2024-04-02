@@ -524,6 +524,67 @@
       }
     }
   },
+  "ReportAdmin": {
+    "metadata": {
+      "title": "Reports Management",
+      "description": "Manage all reports in the system"
+    },
+    "headers": {
+      "reported_quizbank": "Reported quiz bank",
+      "reported_account": "Reported account",
+      "account_report_name": "Reporter name",
+      "reason": "Reason",
+      "created_at": "Created at",
+      "report_type": "Report type"
+    },
+    "data_table": {
+      "report_user": "User",
+      "report_quizbank": "Quizbank"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Copy ID",
+      "copy_reporter_name": "Copy reporter name",
+      "view_details": "View report details",
+      "go_to": {
+        "index": "Go to",
+        "reporter": "Go to reporter",
+        "reported_account": "Go to reported account",
+        "reported_quizbank": "Go to reported quizbank"
+      }
+    },
+    "dialog": {
+      "report_details": {
+        "title": "Report details",
+        "content": {
+          "quizbank_name": "Reported Quizbank Name",
+          "quizbank_id": "Reported Quizbank ID",
+          "account_name": "Reported Account Name",
+          "account_id": "Reported Account ID",
+          "reason": "Reason",
+          "created_at": "Created at"
+        },
+        "cancel": "Cancel",
+        "confirm": "Accept report"
+      }
+    }
+  },
   "Navbar": {
     "home": "Home",
     "classrooms": "Classrooms",

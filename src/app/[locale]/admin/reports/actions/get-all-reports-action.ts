@@ -25,6 +25,7 @@ export default async function getAllReportsAction({ filter }: Props) {
       Authorization: `Bearer ${token}`,
     },
     next: {
+      tags: ["AdminReport"],
       revalidate: 60, // Revalidate every 60 second
     },
   }
