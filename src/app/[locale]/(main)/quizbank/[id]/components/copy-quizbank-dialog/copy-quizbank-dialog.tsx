@@ -164,13 +164,13 @@ export default function CopyQuizBankDialog({
   }
 
   async function onSubmit(values: CopyQuizBankSchemaType) {
-    const { classroom } = values
+    const { name, classroom } = values
     setIsLoading(true)
     let result
     if (copyToValue === ECopyTo.classroom) {
-      result = await copyQuizBankToClassroom(quizbankId, classroom)
+      result = await copyQuizBankToClassroom(quizbankId, classroom, name)
     } else {
-      result = await copyQuizBankToPersonal(quizbankId)
+      result = await copyQuizBankToPersonal(name, quizbankId)
     }
     onSubmitCb(result)
   }

@@ -44,13 +44,11 @@ import ReportQuizBankResultDialog from "./report-quizbank-result-dialog"
 type Props = {
   buttonContent: string
   quizbankId: string
-  token: string
 } & React.ComponentProps<"div">
 
 export default function ReportQuizBankDialog({
   buttonContent,
   quizbankId,
-  token,
   ...props
 }: Props) {
   const i18n = useTranslations("ReportQuizBank")

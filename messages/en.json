@@ -1282,6 +1282,54 @@
       }
     }
   },
+  "EditClassroom": {
+    "metadata": {
+      "title": "Edit classroom",
+      "description": "Edit classroom properties"
+    },
+    "form": {
+      "title": "Edit classroom",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the name of the classroom"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the description of the classroom"
+      },
+      "actions": {
+        "edit": {
+          "message": {
+            "title": "Success",
+            "description" : "Update classroom successfully"
+          }
+        }
+      },
+      "plan-form": {
+        "starter": {
+          "title": "Starter",
+          "description": "Free",
+          "currency": "USD",
+          "features": {
+            "feature1": "Unlimited quizzes",
+            "feature2": "10 students",
+            "feature3": "10 games"
+          }
+        },
+        "premium": {
+          "title": "Premium",
+          "description": "Get more fun",
+          "currency": "USD",
+          "features": {
+            "feature1": "Unlimited quizzes",
+            "feature2": "Unlimited students",
+            "feature3": "Unlimited games"
+          }
+        },
+        "submit": "Create"
+      }
+    }
+  },
   "Invite_classroom": {
     "code": {
       "title": "Invite a friend",

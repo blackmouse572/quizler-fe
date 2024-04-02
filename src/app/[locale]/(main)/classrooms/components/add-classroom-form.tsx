@@ -1,6 +1,6 @@
 "use client"
-import { addNewClassroom } from "@/app/[locale]/(main)/classrooms/add/actions/add-classroom-action"
-import PlanSelectionForm from "@/app/[locale]/(main)/classrooms/add/components/plan-selection-form"
+import { addNewClassroom } from "@/app/[locale]/(main)/classrooms/actions/add-classroom-action"
+import PlanSelectionForm from "@/app/[locale]/(main)/classrooms/components/plan-selection-form"
 import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-bank-action"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,13 +19,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
-import { EFormAction } from "@/types"
+import { Classroom, EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-import { useCallback } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { editClassroom } from "../actions/edit-classroom-action"
 
 const addClassroomSchema = z.object({
   className: z
@@ -56,26 +57,29 @@ const addClassroomSchema = z.object({
 export type AddClassroom = z.infer<typeof addClassroomSchema>
 
 type AddClassroomFormProps = {
-  classRoomId?: string
+  classroomId?: string
   initialValues?: AddClassroom
   action: EFormAction
 }
 
 export default function AddClassroomForm({
-  classRoomId,
+  classroomId,
   initialValues,
   action,
 }: AddClassroomFormProps) {
   const validationsi18n = useTranslations("Validations")
-  const i18Term = +action === +EFormAction.Add ? "AddQuiz" : "EditQuiz"
+  const isAddAction = useMemo(() => +action === +EFormAction.Add, [action])
+  const [initialValuesState, setInitialValuesState] = useState<AddClassroom>(
+    initialValues ?? { className: "", description: "", planId: "" }
+  )
 
-  const i18n = useTranslations("AddClassroom")
+  const i18n = useTranslations(isAddAction ? "AddClassroom" : "EditClassroom")
   const errori18n = useTranslations("Errors")
   const router = useRouter()
   const { toast } = useToast()
   const form = useForm<AddClassroom>({
     resolver: zodResolver(addClassroomSchema),
-    values: initialValues,
+    values: initialValuesState,
   })
   const onSubmitCallback = useCallback(
     (res: TAPIResult<any>) => {
@@ -86,23 +90,35 @@ export default function AddClassroomForm({
           description: errori18n(res.message),
         })
       } else {
-        router.push(`/classrooms/${res.data.id}`)
+        // If action is add
+        if (isAddAction) {
+          router.push(`/classrooms/${res.data.id}`)
+        } else {
+          // Stays in route when edit
+          toast({
+            title: i18n("form.actions.edit.message.title"),
+            color: "success",
+            description: i18n("form.actions.edit.message.description"),
+          })
+          // set state data for edit form
+          setInitialValuesState(res.data)
+        }
       }
     },
-    [errori18n, router, toast]
+    [errori18n, i18n, isAddAction, router, toast]
   )
 
   const onSubmit = useCallback(
     async (value: AddClassroom) => {
       let res = {} as TAPIResult<any>
-      if (+action === +EFormAction.Add) {
+      if (isAddAction) {
         res = await addNewClassroom(value)
       } else {
-        // res = await editQuizBankAction(value, quizBankId?.toString() ?? "")
+        res = await editClassroom(classroomId ?? "0", value)
       }
       onSubmitCallback(res)
     },
-    [action, onSubmitCallback]
+    [classroomId, isAddAction, onSubmitCallback]
   )
 
   return (
@@ -192,7 +208,10 @@ export default function AddClassroomForm({
             control={form.control}
             name="planId"
             render={({ field, fieldState }) => (
-              <PlanSelectionForm onPlanSelection={(id) => field.onChange(id)} />
+              <PlanSelectionForm
+                onPlanSelection={(id) => field.onChange(id)}
+                action={action}
+              />
             )}
           />
         </form>
