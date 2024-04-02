@@ -6,6 +6,8 @@ import { fetchClassroomCurrentUser } from "../actions/fetch-classroom"
 import QuizBankActions from "./quizbank-options"
 import { use } from "react"
 import Link from "next/link"
+import { getToken } from "@/lib/auth"
+import { isEmpty } from "lodash"
 
 type Props = {
   authorData: User
@@ -26,6 +28,9 @@ export default function AuthorQuizBank({
   const { data: userCurrentClass }: { data: Classroom[] } = use(
     fetchClassroomCurrentUser()
   )
+  const { token } = getToken()
+  const isGuess = isEmpty(token) 
+  
   return (
     <div className="space-y-4">
       <div className=" border-b-2 border-gray-300 text-xl font-bold leading-8 text-black max-md:mt-10 max-md:max-w-full" />
@@ -72,6 +77,7 @@ export default function AuthorQuizBank({
           </div>
         </div>
         <QuizBankActions
+          isGuess={isGuess}
           quizbankId={quizbankId}
           quizBankVisibility={quizBankVisibility}
           isOwnQuizBank={isOwnQuizBank}

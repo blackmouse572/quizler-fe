@@ -56,6 +56,8 @@ import QuizBank from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
 import FilterDropdown from "./filter"
+import { useRouter } from "next/navigation"
+import DeleteQuizBankDialog from "./delete-quizbank-dialog"
 
 type QuizBankTableProps = {
   data: PagedResponse<QuizBank>
@@ -69,6 +71,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
   const t = useTranslations("Table")
   const i18n = useTranslations("QuizBankAdmin")
   const format = useFormatter()
+  const router = useRouter()
 
   const columns: ColumnDef<QuizBank>[] = React.useMemo(
     () => [
@@ -119,6 +122,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
       {
         id: "quizCount",
         accessorKey: "quizCount",
+        header: i18n("headers.quizzes"),
         cell: ({ row }) => {
           const value = row.getValue("quizCount") as number
           return <Badge>{value}</Badge>
@@ -176,6 +180,17 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
     [format, i18n]
   )
 
+  const handleCopyClipboard = (content: string) => {
+    navigator.clipboard.writeText(content)
+  }
+
+  const handleView = React.useCallback(
+    (url: string) => {
+      router.push(url)
+    },
+    [router]
+  )
+
   const renderContextMenuAction = React.useCallback(
     (children: React.ReactNode, bank: QuizBank) => {
       return (
@@ -185,15 +200,13 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
             <ContextMenuLabel>{t("action")} </ContextMenuLabel>
             <ContextMenuSeparator />
             <ContextMenuItem
-              onClick={() => navigator.clipboard.writeText(bank.id.toString())}
+              onClick={() => handleCopyClipboard(bank.id.toString())}
             >
               <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
               {i18n("actions.copy_id")}
             </ContextMenuItem>
             <ContextMenuItem
-              onClick={() =>
-                navigator.clipboard.writeText(bank.author.fullName ?? "")
-              }
+              onClick={() => handleCopyClipboard(bank.author.fullName ?? "")}
             >
               <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
               {i18n("actions.copy_author_id")}
@@ -203,18 +216,29 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
               <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
               {i18n("actions.take_action")}
             </ContextMenuItem>
-            <ContextMenuItem>
-              <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.delete")}
-            </ContextMenuItem>
+            <DeleteQuizBankDialog
+              id={bank.id.toString()}
+              trigger={
+                <ContextMenuItem>
+                  <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.delete")}
+                </ContextMenuItem>
+              }
+            />
             <ContextMenuSub>
               <ContextMenuSubTrigger>
                 <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />
                 {i18n("actions.go_to.index")}
               </ContextMenuSubTrigger>
               <ContextMenuSubContent>
-                <ContextMenuItem>{i18n("actions.go_to.quiz")}</ContextMenuItem>
-                <ContextMenuItem>
+                <ContextMenuItem
+                  onClick={() => handleView(`/quizbank/${bank.id}`)}
+                >
+                  {i18n("actions.go_to.quizbank")}
+                </ContextMenuItem>
+                <ContextMenuItem
+                  onClick={() => handleView(`/users/${bank.author.id}`)}
+                >
                   {i18n("actions.go_to.author")}
                 </ContextMenuItem>
               </ContextMenuSubContent>
@@ -223,7 +247,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         </ContextMenu>
       )
     },
-    [i18n, t]
+    [handleView, i18n, t]
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])

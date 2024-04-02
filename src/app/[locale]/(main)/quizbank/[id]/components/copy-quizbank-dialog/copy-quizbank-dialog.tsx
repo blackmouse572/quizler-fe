@@ -46,10 +46,11 @@ import getCopyQuizShema, {
   ECopyTo,
   copyToChoice,
 } from "./copy-validate"
+import { isEmpty } from "lodash"
 
 type Props = {
   buttonContent: string
-  classes?: Classroom[]
+  classes: Classroom[]
   quizbankId: string
 } & React.ComponentProps<"div">
 
@@ -67,12 +68,18 @@ export default function CopyQuizBankDialog({
   const i18n = useTranslations("CopyQuizBank")
   const errorI18n = useTranslations("Errors")
   const [copyToValue, setCopyToValue] = useState<ECopyTo>(ECopyTo.classroom)
-  const classRoomChoices: TClassroomChoices = useMemo(
-    // cast id to string to change field value
-    () =>
-      classes?.map((c) => ({ id: c.id.toString(), text: c.classname })) ?? [],
-    [classes]
-  )
+  const classRoomChoices: TClassroomChoices | [] =
+    useMemo(
+      // cast id to string to change field value
+      () =>
+        !isEmpty(classes)
+          ? classes?.map((c) => ({
+              id: c.id.toString(),
+              text: c.classname,
+            })) ?? []
+          : [],
+      [classes]
+    )
   const [open, setOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -157,13 +164,13 @@ export default function CopyQuizBankDialog({
   }
 
   async function onSubmit(values: CopyQuizBankSchemaType) {
-    const { classroom } = values
+    const { name, classroom } = values
     setIsLoading(true)
     let result
     if (copyToValue === ECopyTo.classroom) {
-      result = await copyQuizBankToClassroom(quizbankId, classroom)
+      result = await copyQuizBankToClassroom(quizbankId, classroom, name)
     } else {
-      result = await copyQuizBankToPersonal(quizbankId)
+      result = await copyQuizBankToPersonal(name, quizbankId)
     }
     onSubmitCb(result)
   }
@@ -220,35 +227,36 @@ export default function CopyQuizBankDialog({
             )
           }}
         />
-
-        <FormField
-          control={form.control}
-          name="classroom"
-          render={({ field }) => {
-            return copyToValue === ECopyTo.classroom ? (
-              <div className="space-y-1">
-                <FormLabel required htmlFor="">
-                  {i18n("form.classroom.text")}
-                </FormLabel>
-                <FormControl>
-                  {renderClassChoice(
-                    field,
-                    i18n("form.classroom.text"),
-                    classRoomChoices
-                  )}
-                </FormControl>
-                <FormMessage />
-              </div>
-            ) : (
-              <div className="ml-1 mt-2 flex items-center space-x-2">
-                <Checkbox id={i18n("form.public.label")} variant={"square"} />
-                <Label htmlFor={i18n("form.public.label")}>
-                  {i18n("form.public.text")}
-                </Label>
-              </div>
-            )
-          }}
-        />
+        {!isEmpty(classRoomChoices) && (
+          <FormField
+            control={form.control}
+            name="classroom"
+            render={({ field }) => {
+              return copyToValue === ECopyTo.classroom ? (
+                <div className="space-y-1">
+                  <FormLabel required htmlFor="">
+                    {i18n("form.classroom.text")}
+                  </FormLabel>
+                  <FormControl>
+                    {renderClassChoice(
+                      field,
+                      i18n("form.classroom.text"),
+                      classRoomChoices
+                    )}
+                  </FormControl>
+                  <FormMessage />
+                </div>
+              ) : (
+                <div className="ml-1 mt-2 flex items-center space-x-2">
+                  <Checkbox id={i18n("form.public.label")} variant={"square"} />
+                  <Label htmlFor={i18n("form.public.label")}>
+                    {i18n("form.public.text")}
+                  </Label>
+                </div>
+              )
+            }}
+          />
+        )}
       </>
     ),
     [

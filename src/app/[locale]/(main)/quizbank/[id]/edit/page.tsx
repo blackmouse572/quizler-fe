@@ -35,7 +35,7 @@ function EditQuizbank({ params }: QuizBankDetailPageProps) {
   const { token } = getToken()
   const user = getUser()
 
-  const isAuthor = user?.role === "User" && user?.email === data.author.email
+  const isAuthor = user?.email === data.author.email
 
   {
     ;(!token || !isAuthor) && notFound()

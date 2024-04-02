@@ -13,12 +13,14 @@ import ReportQuizBankDialog from "./report-quizbank-dialog/report-quizbank-dialo
 type Props = {
   quizBankVisibility: "Private" | "Public"
   quizbankId: string
-  userCurrentClass: any
+  isGuess: boolean
+  userCurrentClass: Classroom[]
   isOwnQuizBank?: boolean
 }
 
 const QuizBankActions = ({
   isOwnQuizBank,
+  isGuess,
   userCurrentClass,
   quizbankId,
   quizBankVisibility,
@@ -97,7 +99,7 @@ const QuizBankActions = ({
 
   return (
     <div className="flex justify-between gap-2">
-      {quizBankActions.map((btn) => btn)}
+      {!isGuess && quizBankActions.map((btn) => btn)}
     </div>
   )
 }

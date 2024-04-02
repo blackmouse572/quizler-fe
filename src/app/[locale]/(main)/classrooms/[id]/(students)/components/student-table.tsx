@@ -143,6 +143,7 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
                   users={[
                     { id: student.id.toString(), fullName: student.fullName },
                   ]}
+                  classroomId={id}
                 >
                   <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     {i18n("actions.ban.title")}
@@ -203,8 +204,9 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
         <BanDialog
           users={model?.rows.map((row) => ({
             fullName: row.original.fullName,
-            id: row.original.fullName.toString(),
+            id: row.original.id.toString(),
           }))}
+          classroomId={id}
         >
           <Button
             disabled={Object.keys(rowSelection).length <= 0}
@@ -217,7 +219,7 @@ const StudentTable = ({ data, params: { id } }: StudentTableProps) => {
         </BanDialog>
       )
     }
-  }, [i18n, rowSelection, table])
+  }, [i18n, id, rowSelection, table])
 
   const renderDeleteButton = React.useCallback(() => {
     if (Object.keys(rowSelection).length) {

@@ -11,6 +11,8 @@ export interface User {
   created: string
   updated: string
   isVerified: boolean
+  isBan: Date
+  isWarning: Date
   accessToken: Token
   refreshToken: Token
 }
