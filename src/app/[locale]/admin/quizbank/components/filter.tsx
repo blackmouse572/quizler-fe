@@ -24,7 +24,7 @@ type FilterDropdownProps = {
 }
 function FilterDropdown(props: FilterDropdownProps) {
   const t = useTranslations("Table")
-  // const i18n = useTranslations("QuizBankAdmin")
+  const i18n = useTranslations("QuizBankAdmin")
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathName = usePathname()
@@ -149,7 +149,7 @@ function FilterDropdown(props: FilterDropdownProps) {
               <Icons.X className="h-4 w-4" />
             </PopoverClose>
           </div>
-          {/* <div className="px-3">
+          <div className="px-3">
             <Label>{i18n("filters.visibility.label")}</Label>
             <div className="mt-2 space-y-1">
               <div className="flex items-center gap-2">
@@ -177,7 +177,7 @@ function FilterDropdown(props: FilterDropdownProps) {
             </div>
           </div>
 
-          <Separator /> */}
+          <Separator />
           <div className="px-3">
             <Label>{t("search")}</Label>
             <div className="relative max-w-2xl items-center ">
