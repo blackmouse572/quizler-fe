@@ -88,6 +88,7 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
+  IconLockOpen
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -142,6 +143,7 @@ export const Icons = {
   Dot: IconDots,
   Help: IconHelp,
   Ban: IconBan,
+  Unban: IconLockOpen,
   Timer: IconClock,
   ArtBoard: IconArtboard,
   Join: IconArrowsJoin,

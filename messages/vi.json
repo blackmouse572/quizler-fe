@@ -527,7 +527,144 @@
       "go_to": {
         "index": "Xem chi tiết",
         "author": "Xem tác giả",
-        "quiz": "Xem Quiz"
+        "quizbank": "Xem QuizBank"
+      }
+    },
+    "dialog": {
+      "delete_quizbank": {
+        "title": "Xóa ngân hàng câu hỏi",
+        "description": "Xóa ngân hàng câu hỏi <strong>{quizBankID}</strong> ?",
+        "cancel": "Hủy",
+        "delete": "Xóa"
+      }
+    },
+    "success": {
+      "title": "Xóa ngân hàng câu hỏi",
+      "message": {
+        "success": "Xóa ngân hàng câu hỏi thành công"
+      }
+    },
+    "error": {
+      "title": "Đã có lỗi xảy ra, vui lòng thử lại sau"
+    }
+  },
+  "UserAdmin": {
+    "metadata": {
+      "title": "Quản lí người dùng",
+      "description": "Quản lí tất cả người dùng trong hệ thống"
+    },
+    "headers": {
+      "name": "Tên",
+      "email": "Email",
+      "username": "Tài khoản",
+      "dob": "Ngày sinh",
+      "role": "Vai trò",
+      "ban": "Cấm",
+      "warn": "Cảnh cáo"
+    },
+    "data_table": {
+      "active": "Không"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
+        "type": {
+          "Public": {
+            "value": "Công khai"
+          },
+          "Private": {
+            "value": "Riêng tư"
+          },
+          "All": {
+            "value": "Tất cả"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Sao chép ID người dùng",
+      "copy_user_name": "Sao chép tên",
+      "view_profile": "Xem hồ sơ",
+      "warn_user": "Cảnh cáo người dùng",
+      "ban": "Cấm người dùng",
+      "unban": "Khôi phục người dùng"
+    },
+    "dialog": {
+      "ban_user": {
+        "title": "Cấm người dùng",
+        "description": "Cấm người dùng <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Cấm người dùng"
+      },
+      "unban_user": {
+        "title": "Khôi phục người dùng",
+        "description": "Khôi phục người dùng <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Khôi phục người dùng"
+      },
+      "warn_user": {
+        "title": "Cảnh cáo người dùng",
+        "description": "Cảnh cáo người dùng <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Cảnh cáo người dùng"
+      }
+    },
+    "success": {
+      "ban_user": {
+        "index": "Người dùng đã bị cấm",
+        "title": "Cấm người dùng"
+      },
+      "unban_user": {
+        "index": "Người dùng đã được khôi phục",
+        "title": "Khôi phục người dùng"
+      },
+      "warn_user": {
+        "index": "Người dùng đã bị cảnh cáo",
+        "title": "Cảnh cáo người dùng"
+      }
+    },
+    "errors": {
+      "index": "Đã có lỗi xảy ra, vui lòng thử lại sau"
+    }
+  },
+  "ClassroomAdmin": {
+    "metadata": {
+      "title": "Quản lí lớp học",
+      "description": "Quản lí tất cả lớp học trong hệ thống"
+    },
+    "headers": {
+      "class_name": "Tên lớp học",
+      "name": "Tên giáo viên",
+      "email": "Email",
+      "studentNumber": "Số lượng học sinh",
+      "created_at": "Ngày tạo",
+      "isStudentAllowInvite": "Học sinh có thể mời"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Sao chép ID lớp học",
+      "copy_user_name": "Sao chép tên giáo viên",
+      "go_to": {
+        "index": "Đi đến",
+        "author": "Đi đến giáo viên",
+        "classroom": "Đi đến lớp học"
       }
     }
   },

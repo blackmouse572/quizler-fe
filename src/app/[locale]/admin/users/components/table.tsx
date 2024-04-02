@@ -16,10 +16,8 @@ import {
 } from "@tanstack/react-table"
 import * as React from "react"
 
-import DeleteDialog from "@/app/[locale]/admin/quizbank/components/delete-dialog"
 import Pagination from "@/components/pagination"
 import SizeSelector from "@/components/size-selector"
-import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -28,9 +26,6 @@ import {
   ContextMenuItem,
   ContextMenuLabel,
   ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu"
 import {
@@ -52,28 +47,32 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import usePaginationValue from "@/hooks/usePaginationValue"
-import QuizBank from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
 import FilterDropdown from "./filter"
+import { User } from "@/types"
+import DeleteDialog from "./delete-dialog"
 import { useRouter } from "next/navigation"
-import DeleteQuizBankDialog from "./delete-quizbank-dialog"
+import { Badge } from "@/components/ui/badge"
+import BanUserDialog from "./ban-user-dialog"
+import WarnUserDialog from "./warn-user-dialog"
+import UnbanUserDialog from "./unban-user-dialog"
 
-type QuizBankTableProps = {
-  data: PagedResponse<QuizBank>
+type UserTableProps = {
+  data: PagedResponse<User>
   locale?: string
 }
 
-export function QuizBankTable({ data }: QuizBankTableProps) {
+export function UserTable({ data }: UserTableProps) {
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
   const t = useTranslations("Table")
-  const i18n = useTranslations("QuizBankAdmin")
+  const i18n = useTranslations("UserAdmin")
   const format = useFormatter()
   const router = useRouter()
 
-  const columns: ColumnDef<QuizBank>[] = React.useMemo(
+  const columns: ColumnDef<User>[] = React.useMemo(
     () => [
       {
         id: "select",
@@ -101,35 +100,30 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         enableHiding: false,
       },
       {
-        accessorKey: "bankName",
+        accessorKey: "fullName",
         header: i18n("headers.name"),
         cell: ({ row }) => (
-          <div className="min-w-52 capitalize">{row.getValue("bankName")}</div>
+          <div className="min-w-52">{row.getValue("fullName")}</div>
         ),
       },
       {
-        accessorKey: "author",
-        header: i18n("headers.author"),
+        accessorKey: "email",
+        header: i18n("headers.email"),
         cell: ({ row }) => {
-          const author = row.getValue("author") as QuizBank["author"]
-          return (
-            <div className="min-w-52 capitalize">
-              {author.fullName as string}
-            </div>
-          )
+          const email = row.getValue("email") as string
+          return <div className="min-w-52">{email}</div>
         },
       },
       {
-        id: "quizCount",
-        accessorKey: "quizCount",
-        header: i18n("headers.quizzes"),
+        accessorKey: "username",
+        header: i18n("headers.username"),
         cell: ({ row }) => {
-          const value = row.getValue("quizCount") as number
-          return <Badge>{value}</Badge>
+          const username = row.getValue("username") as string
+          return <div className="min-w-52">{username}</div>
         },
       },
       {
-        accessorKey: "created",
+        accessorKey: "dob",
         header: ({ column }) => {
           return (
             <div
@@ -138,7 +132,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
             >
-              {i18n("headers.created_at")}
+              {i18n("headers.dob")}
               {column.getIsSorted() === "asc" ? (
                 <Icons.CaretUpFilled className="ml-auto" />
               ) : (
@@ -149,29 +143,78 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         },
         cell: ({ row }) => (
           <div className="lowercase">
-            {format.dateTime(new Date(row.getValue("created")), {
+            {format.dateTime(new Date(row.getValue("dob")), {
               dateStyle: "short",
-              timeStyle: "short",
             })}
           </div>
         ),
       },
       {
-        accessorKey: "visibility",
-        header: () => (
-          <div className="text-center">{i18n("headers.visibility")}</div>
-        ),
+        accessorKey: "role",
+        header: ({ column }) => {
+          return (
+            <div
+              className="flex h-full cursor-pointer items-center justify-start gap-2 [&_svg]:h-4 [&_svg]:w-4"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              {i18n("headers.role")}
+              {column.getIsSorted() === "asc" ? (
+                <Icons.CaretUpFilled className="ml-auto" />
+              ) : (
+                <Icons.CaretDownFilled className="ml-auto" />
+              )}
+            </div>
+          )
+        },
         cell: ({ row }) => {
-          const visibility = row.getValue("visibility") as string
-          const isPublic = visibility.toLowerCase() === "public"
+          const role = row.getValue("role") as string
+          return <div className="flex w-full justify-center">{role}</div>
+        },
+      },
+      {
+        accessorKey: "isBan",
+        header: () => <div className="text-center">{i18n("headers.ban")}</div>,
+        cell: ({ row }) => {
+          const ban = row.getValue("isBan")
+          if (!ban)
+            return (
+              <div className="text-center">
+                <Badge>{i18n("data_table.active")}</Badge>
+              </div>
+            )
 
           return (
-            <div className="flex w-full justify-center">
-              <Checkbox
-                role="cell"
-                checked={isPublic}
-                className="mx-auto data-[state=checked]:bg-success-500"
-              />
+            <div className="text-center">
+              <Badge variant="outline">
+                {format.dateTime(new Date(ban as string), {
+                  dateStyle: "short",
+                })}
+              </Badge>
+            </div>
+          )
+        },
+      },
+      {
+        accessorKey: "isWarning",
+        header: () => <div className="text-center">{i18n("headers.warn")}</div>,
+        cell: ({ row }) => {
+          const warn = row.getValue("isWarning")
+          if (!warn)
+            return (
+              <div className="text-center">
+                <Badge>{i18n("data_table.active")}</Badge>
+              </div>
+            )
+
+          return (
+            <div className="text-center">
+              <Badge variant="outline">
+                {format.dateTime(new Date(warn as string), {
+                  dateStyle: "short",
+                })}
+              </Badge>
             </div>
           )
         },
@@ -184,15 +227,15 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
     navigator.clipboard.writeText(content)
   }
 
-  const handleView = React.useCallback(
-    (url: string) => {
-      router.push(url)
+  const handleViewUserProfile = React.useCallback(
+    (id: string) => {
+      router.push(`/users/${id}`)
     },
     [router]
   )
 
   const renderContextMenuAction = React.useCallback(
-    (children: React.ReactNode, bank: QuizBank) => {
+    (children: React.ReactNode, user: User) => {
       return (
         <ContextMenu>
           <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
@@ -200,54 +243,61 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
             <ContextMenuLabel>{t("action")} </ContextMenuLabel>
             <ContextMenuSeparator />
             <ContextMenuItem
-              onClick={() => handleCopyClipboard(bank.id.toString())}
+              onClick={() => handleCopyClipboard(user.id.toString())}
             >
               <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
               {i18n("actions.copy_id")}
             </ContextMenuItem>
-            <ContextMenuItem
-              onClick={() => handleCopyClipboard(bank.author.fullName ?? "")}
-            >
+            <ContextMenuItem onClick={() => handleCopyClipboard(user.fullName)}>
               <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.copy_author_id")}
+              {i18n("actions.copy_user_name")}
             </ContextMenuItem>
             <ContextMenuSeparator />
-            <ContextMenuItem>
-              <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.take_action")}
+            <ContextMenuItem
+              onClick={() => handleViewUserProfile(user.id.toString())}
+            >
+              <Icons.NavAccount className="mr-2 inline-block h-4 w-4 " />
+              {i18n("actions.view_profile")}
             </ContextMenuItem>
-            <DeleteQuizBankDialog
-              id={bank.id.toString()}
+
+            {!user.isBan && (
+              <BanUserDialog
+                id={user.id.toString()}
+                trigger={
+                  <ContextMenuItem>
+                    <Icons.Ban className="mr-2 inline-block h-4 w-4 " />
+                    {i18n("actions.ban")}
+                  </ContextMenuItem>
+                }
+              />
+            )}
+
+            {user.isBan && (
+              <UnbanUserDialog
+                id={user.id.toString()}
+                trigger={
+                  <ContextMenuItem>
+                    <Icons.Unban className="mr-2 inline-block h-4 w-4 " />
+                    {i18n("actions.unban")}
+                  </ContextMenuItem>
+                }
+              />
+            )}
+
+            <WarnUserDialog
+              id={user.id.toString()}
               trigger={
                 <ContextMenuItem>
-                  <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.delete")}
+                  <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.warn_user")}
                 </ContextMenuItem>
               }
             />
-            <ContextMenuSub>
-              <ContextMenuSubTrigger>
-                <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />
-                {i18n("actions.go_to.index")}
-              </ContextMenuSubTrigger>
-              <ContextMenuSubContent>
-                <ContextMenuItem
-                  onClick={() => handleView(`/quizbank/${bank.id}`)}
-                >
-                  {i18n("actions.go_to.quizbank")}
-                </ContextMenuItem>
-                <ContextMenuItem
-                  onClick={() => handleView(`/users/${bank.author.id}`)}
-                >
-                  {i18n("actions.go_to.author")}
-                </ContextMenuItem>
-              </ContextMenuSubContent>
-            </ContextMenuSub>
           </ContextMenuContent>
         </ContextMenu>
       )
     },
-    [handleView, i18n, t]
+    [handleViewUserProfile, i18n, t]
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -398,7 +448,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
                       </TableCell>
                     ))}
                   </TableRow>,
-                  row.original as QuizBank
+                  row.original as User
                 )
               )
             ) : (

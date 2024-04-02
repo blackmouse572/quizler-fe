@@ -16,7 +16,6 @@ import {
 } from "@tanstack/react-table"
 import * as React from "react"
 
-import DeleteDialog from "@/app/[locale]/admin/quizbank/components/delete-dialog"
 import Pagination from "@/components/pagination"
 import SizeSelector from "@/components/size-selector"
 import { Badge } from "@/components/ui/badge"
@@ -52,28 +51,28 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import usePaginationValue from "@/hooks/usePaginationValue"
-import QuizBank from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
 import FilterDropdown from "./filter"
 import { useRouter } from "next/navigation"
-import DeleteQuizBankDialog from "./delete-quizbank-dialog"
+import { Classroom } from "@/types"
+import DeleteDialog from "./delete-dialog"
 
-type QuizBankTableProps = {
-  data: PagedResponse<QuizBank>
+type ClassroomsTableProps = {
+  data: PagedResponse<Classroom>
   locale?: string
 }
 
-export function QuizBankTable({ data }: QuizBankTableProps) {
+export function ClassroomsTable({ data }: ClassroomsTableProps) {
   const { skip, take, currentPage, totalPages, hasMore } = usePaginationValue(
     data.metadata
   )
   const t = useTranslations("Table")
-  const i18n = useTranslations("QuizBankAdmin")
+  const i18n = useTranslations("ClassroomAdmin")
   const format = useFormatter()
   const router = useRouter()
 
-  const columns: ColumnDef<QuizBank>[] = React.useMemo(
+  const columns: ColumnDef<Classroom>[] = React.useMemo(
     () => [
       {
         id: "select",
@@ -101,31 +100,39 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         enableHiding: false,
       },
       {
-        accessorKey: "bankName",
-        header: i18n("headers.name"),
+        accessorKey: "classname",
+        header: i18n("headers.class_name"),
         cell: ({ row }) => (
-          <div className="min-w-52 capitalize">{row.getValue("bankName")}</div>
+          <div className="min-w-52 capitalize">{row.getValue("classname")}</div>
         ),
       },
       {
         accessorKey: "author",
-        header: i18n("headers.author"),
+        header: i18n("headers.name"),
         cell: ({ row }) => {
-          const author = row.getValue("author") as QuizBank["author"]
-          return (
-            <div className="min-w-52 capitalize">
-              {author.fullName as string}
-            </div>
-          )
+          const author = row.getValue("author") as Classroom["author"]
+          return <div className="min-w-52">{author.fullName as string}</div>
         },
       },
       {
-        id: "quizCount",
-        accessorKey: "quizCount",
-        header: i18n("headers.quizzes"),
+        accessorKey: "author",
+        header: i18n("headers.email"),
         cell: ({ row }) => {
-          const value = row.getValue("quizCount") as number
-          return <Badge>{value}</Badge>
+          const author = row.getValue("author") as Classroom["author"]
+          return <div className="min-w-52">{author.email as string}</div>
+        },
+      },
+      {
+        id: "studentNumber",
+        accessorKey: "studentNumber",
+        header: i18n("headers.studentNumber"),
+        cell: ({ row }) => {
+          const value = row.getValue("studentNumber") as number
+          return (
+            <div className="text-center">
+              <Badge>{value}</Badge>
+            </div>
+          )
         },
       },
       {
@@ -157,19 +164,18 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
         ),
       },
       {
-        accessorKey: "visibility",
+        accessorKey: "isStudentAllowInvite",
         header: () => (
-          <div className="text-center">{i18n("headers.visibility")}</div>
+          <div className="text-center">{i18n("headers.isStudentAllowInvite")}</div>
         ),
         cell: ({ row }) => {
-          const visibility = row.getValue("visibility") as string
-          const isPublic = visibility.toLowerCase() === "public"
+          const isStudentAllowInvite = row.getValue("isStudentAllowInvite") as boolean
 
           return (
             <div className="flex w-full justify-center">
               <Checkbox
                 role="cell"
-                checked={isPublic}
+                checked={isStudentAllowInvite}
                 className="mx-auto data-[state=checked]:bg-success-500"
               />
             </div>
@@ -192,7 +198,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
   )
 
   const renderContextMenuAction = React.useCallback(
-    (children: React.ReactNode, bank: QuizBank) => {
+    (children: React.ReactNode, classroom: Classroom) => {
       return (
         <ContextMenu>
           <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
@@ -200,31 +206,18 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
             <ContextMenuLabel>{t("action")} </ContextMenuLabel>
             <ContextMenuSeparator />
             <ContextMenuItem
-              onClick={() => handleCopyClipboard(bank.id.toString())}
+              onClick={() => handleCopyClipboard(classroom.id.toString())}
             >
               <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
               {i18n("actions.copy_id")}
             </ContextMenuItem>
             <ContextMenuItem
-              onClick={() => handleCopyClipboard(bank.author.fullName ?? "")}
+              onClick={() => handleCopyClipboard(classroom.author.fullName)}
             >
               <Icons.Copy className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.copy_author_id")}
+              {i18n("actions.copy_user_name")}
             </ContextMenuItem>
             <ContextMenuSeparator />
-            <ContextMenuItem>
-              <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.take_action")}
-            </ContextMenuItem>
-            <DeleteQuizBankDialog
-              id={bank.id.toString()}
-              trigger={
-                <ContextMenuItem>
-                  <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.delete")}
-                </ContextMenuItem>
-              }
-            />
             <ContextMenuSub>
               <ContextMenuSubTrigger>
                 <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />
@@ -232,12 +225,12 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
               </ContextMenuSubTrigger>
               <ContextMenuSubContent>
                 <ContextMenuItem
-                  onClick={() => handleView(`/quizbank/${bank.id}`)}
+                  onClick={() => handleView(`/classrooms/${classroom.id}`)}
                 >
-                  {i18n("actions.go_to.quizbank")}
+                  {i18n("actions.go_to.classroom")}
                 </ContextMenuItem>
                 <ContextMenuItem
-                  onClick={() => handleView(`/users/${bank.author.id}`)}
+                  onClick={() => handleView(`/users/${classroom.author.id}`)}
                 >
                   {i18n("actions.go_to.author")}
                 </ContextMenuItem>
@@ -398,7 +391,7 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
                       </TableCell>
                     ))}
                   </TableRow>,
-                  row.original as QuizBank
+                  row.original as Classroom
                 )
               )
             ) : (

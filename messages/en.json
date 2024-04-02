@@ -380,7 +380,147 @@
       "go_to": {
         "index": "Go to",
         "author": "Go to author",
-        "quiz": "Go to quiz"
+        "quizbank": "Go to quizbank"
+      }
+    },
+    "dialog": {
+      "delete_quizbank": {
+        "title": "Delete QuizBank",
+        "description": "Delete QuizBank <strong>{quizBankID}</strong> ?",
+        "cancel": "Cancel",
+        "delete": "Delete"
+      }
+    },
+    "success": {
+      "title": "Delete QuizBank",
+      "message": {
+        "success": "Delete QuizBank successfully"
+      }
+    },
+    "error": {
+      "title": "Something went wrong."
+    }
+  },
+  "UserAdmin": {
+    "metadata": {
+      "title": "User Management",
+      "description": "Manage all users in the system"
+    },
+    "headers": {
+      "name": "Name",
+      "email": "Email",
+      "username": "Username",
+      "dob": "Date of birth",
+      "role": "Role",
+      "ban": "Ban",
+      "warn": "Warn"
+    },
+    "data_table": {
+      "active": "No"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Copy user ID",
+      "copy_user_name": "Copy user name",
+      "view_profile": "View profile",
+      "warn_user": "Warn user",
+      "ban": "Ban user",
+      "unban": "Unban user"
+    },
+    "dialog": {
+      "ban_user": {
+        "title": "Ban User",
+        "description": "Ban user <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Ban user"
+      },
+      "unban_user": {
+        "title": "Unban User",
+        "description": "Unban user <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Unban user"
+      },
+      "warn_user": {
+        "title": "Warn User",
+        "description": "Warn user <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Warn user"
+      }
+    },
+    "success": {
+      "ban_user": {
+        "index": "User has been banned",
+        "title": "Ban user"
+      },
+      "unban_user": {
+        "index": "User has been unbanned",
+        "title": "Unban user"
+      },
+      "warn_user": {
+        "index": "User has been warned",
+        "title": "Warn user"
+      }
+    },
+    "errors": {
+      "title": "Something went wrong."
+    }
+  },
+  "ClassroomAdmin": {
+    "metadata": {
+      "title": "Classroom Management",
+      "description": "Manage all classrooms in the system"
+    },
+    "headers": {
+      "class_name": "Class name",
+      "name": "Teacher name",
+      "email": "Email",
+      "studentNumber": "Number of students",
+      "created_at": "Created at",
+      "isStudentAllowInvite": "Students can invite"
+    },
+    "data_table": {
+      "active": "No"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Copy ID",
+      "copy_user_name": "Copy user name",
+      "go_to": {
+        "index": "Go to",
+        "author": "Go to author",
+        "classroom": "Go to classroom"
       }
     }
   },
