@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -9,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
-import QuizBank from "@/types/QuizBank"
+import { Classroom } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PopoverClose } from "@radix-ui/react-popover"
 import { Table } from "@tanstack/react-table"
@@ -20,11 +19,10 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 type FilterDropdownProps = {
-  table: Table<QuizBank>
+  table: Table<Classroom>
 }
 function FilterDropdown(props: FilterDropdownProps) {
   const t = useTranslations("Table")
-  // const i18n = useTranslations("QuizBankAdmin")
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathName = usePathname()
@@ -149,35 +147,6 @@ function FilterDropdown(props: FilterDropdownProps) {
               <Icons.X className="h-4 w-4" />
             </PopoverClose>
           </div>
-          {/* <div className="px-3">
-            <Label>{i18n("filters.visibility.label")}</Label>
-            <div className="mt-2 space-y-1">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  value={"public"}
-                  checked={
-                    watch("visibility") === "public" ||
-                    watch("visibility") === "all"
-                  }
-                  onCheckedChange={(e) => onSelected("public", e as boolean)}
-                />
-                <Label>{i18n("filters.visibility.type.Public.value")}</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  value={"private"}
-                  checked={
-                    watch("visibility") === "private" ||
-                    watch("visibility") === "all"
-                  }
-                  onCheckedChange={(e) => onSelected("private", e as boolean)}
-                />
-                <Label>{i18n("filters.visibility.type.Private.value")}</Label>
-              </div>
-            </div>
-          </div>
-
-          <Separator /> */}
           <div className="px-3">
             <Label>{t("search")}</Label>
             <div className="relative max-w-2xl items-center ">

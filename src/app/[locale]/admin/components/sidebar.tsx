@@ -56,9 +56,19 @@ const ITEMS: SidebarItem[] = [
     href: "users",
   },
   {
+    label: "Classrooms",
+    icon: "School",
+    href: "classrooms",
+  },
+  {
     label: "Quiz Bank",
     icon: "Icon",
     href: "quizbank",
+  },
+  {
+    label: "Reports",
+    icon: "Info",
+    href: "reports",
   },
 ]
 

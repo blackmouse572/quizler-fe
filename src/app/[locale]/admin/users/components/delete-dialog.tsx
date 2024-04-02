@@ -28,7 +28,7 @@ function DeleteDialog({ ids, ...props }: Props) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Delete Items</DialogTitle>
+          <DialogTitle>{tableI18n("delete_title")}</DialogTitle>
           <DialogDescription>
             {tableI18n.rich("delete_message", {
               span: (children) => (
@@ -40,11 +40,11 @@ function DeleteDialog({ ids, ...props }: Props) {
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline" color="accent">
-              Cancel
+              {tableI18n("cancel")}
             </Button>
           </DialogClose>
           <Button variant="default" color="danger">
-            Delete
+            {tableI18n("delete")}
           </Button>
         </DialogFooter>
       </DialogContent>

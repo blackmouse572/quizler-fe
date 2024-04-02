@@ -628,6 +628,46 @@
       "index": "Đã có lỗi xảy ra, vui lòng thử lại sau"
     }
   },
+  "ClassroomAdmin": {
+    "metadata": {
+      "title": "Quản lí lớp học",
+      "description": "Quản lí tất cả lớp học trong hệ thống"
+    },
+    "headers": {
+      "class_name": "Tên lớp học",
+      "name": "Tên giáo viên",
+      "email": "Email",
+      "studentNumber": "Số lượng học sinh",
+      "created_at": "Ngày tạo",
+      "isStudentAllowInvite": "Học sinh có thể mời"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Sao chép ID lớp học",
+      "copy_user_name": "Sao chép tên giáo viên",
+      "go_to": {
+        "index": "Đi đến",
+        "author": "Đi đến giáo viên",
+        "classroom": "Đi đến lớp học"
+      }
+    }
+  },
   "ForgotPassword": {
     "title": "Quên mật khẩu? Đừng lo",
     "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",

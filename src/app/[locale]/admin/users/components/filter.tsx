@@ -24,7 +24,6 @@ type FilterDropdownProps = {
 }
 function FilterDropdown(props: FilterDropdownProps) {
   const t = useTranslations("Table")
-  const i18n = useTranslations("UserAdmin")
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathName = usePathname()
@@ -149,35 +148,7 @@ function FilterDropdown(props: FilterDropdownProps) {
               <Icons.X className="h-4 w-4" />
             </PopoverClose>
           </div>
-          <div className="px-3">
-            <Label>{i18n("filters.visibility.label")}</Label>
-            <div className="mt-2 space-y-1">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  value={"public"}
-                  checked={
-                    watch("visibility") === "public" ||
-                    watch("visibility") === "all"
-                  }
-                  onCheckedChange={(e) => onSelected("public", e as boolean)}
-                />
-                <Label>{i18n("filters.visibility.type.Public.value")}</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  value={"private"}
-                  checked={
-                    watch("visibility") === "private" ||
-                    watch("visibility") === "all"
-                  }
-                  onCheckedChange={(e) => onSelected("private", e as boolean)}
-                />
-                <Label>{i18n("filters.visibility.type.Private.value")}</Label>
-              </div>
-            </div>
-          </div>
 
-          <Separator />
           <div className="px-3">
             <Label>{t("search")}</Label>
             <div className="relative max-w-2xl items-center ">

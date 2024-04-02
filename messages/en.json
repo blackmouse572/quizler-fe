@@ -481,6 +481,49 @@
       "title": "Something went wrong."
     }
   },
+  "ClassroomAdmin": {
+    "metadata": {
+      "title": "Classroom Management",
+      "description": "Manage all classrooms in the system"
+    },
+    "headers": {
+      "class_name": "Class name",
+      "name": "Teacher name",
+      "email": "Email",
+      "studentNumber": "Number of students",
+      "created_at": "Created at",
+      "isStudentAllowInvite": "Students can invite"
+    },
+    "data_table": {
+      "active": "No"
+    },
+    "filters": {
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Select visibility",
+        "type": {
+          "Public": {
+            "value": "Public"
+          },
+          "Private": {
+            "value": "Private"
+          },
+          "All": {
+            "value": "All"
+          }
+        }
+      }
+    },
+    "actions": {
+      "copy_id": "Copy ID",
+      "copy_user_name": "Copy user name",
+      "go_to": {
+        "index": "Go to",
+        "author": "Go to author",
+        "classroom": "Go to classroom"
+      }
+    }
+  },
   "Navbar": {
     "home": "Home",
     "classrooms": "Classrooms",
