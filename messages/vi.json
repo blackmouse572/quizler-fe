@@ -312,7 +312,7 @@
       }
     }
   },
-  "CategoryQuizBank":{
+  "CategoryQuizBank": {
     "metadata": {
       "title": "Mục lục ngân hàng câu hỏi",
       "description": "Tìm kiếm ngân hàng bẳng thẻ"
@@ -849,6 +849,22 @@
     "faq": "Câu hỏi thường gặp",
     "support": "Hỗ trợ",
     "signout": "Đăng xuất"
+  },
+  "AdminSidebar": {
+    "sidebar": {
+      "label": {
+        "dashboard": "Điều khiển",
+        "users": "Người dùng",
+        "classrooms": "Lớp học",
+        "quizbank": "Ngân hàng",
+        "reports": "Báo cáo"
+      }
+    },
+    "dropdown": {
+      "my_account": "Tài khoản của tôi",
+      "profile": "Hồ sơ",
+      "signout": "Đăng xuất"
+    }
   },
   "EditQuiz": {
     "form": {
