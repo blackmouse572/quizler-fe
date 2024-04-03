@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog"
 import { Dispatch, SetStateAction, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { useTranslations } from "next-intl"
+import { useFormatter, useTranslations } from "next-intl"
 import { reasonChoice } from "./report-validate"
 
 type Props = {
@@ -37,6 +37,7 @@ export default function ReportQuizBankResultDialog({
   const setOpen = useCallback(() => {
     setOpenResultDialog(!openResultDialog)
   }, [openResultDialog, setOpenResultDialog])
+  const format = useFormatter()
 
   return (
     <Dialog {...props} open={openResultDialog} onOpenChange={setOpen}>
@@ -60,7 +61,10 @@ export default function ReportQuizBankResultDialog({
             &nbsp;
             {i18n("form_result_report.take_action_soon")}
             <div className="mt-4">
-              {i18n("form_result_report.recorded")} {time}&nbsp;
+              {i18n("form_result_report.recorded")}
+              {format.dateTime(new Date(time), {
+                dateStyle: "long",
+              })} &nbsp;
             </div>
             <div>
               {i18n("form_result_report.ticket_id")} {ticket_id}&nbsp;

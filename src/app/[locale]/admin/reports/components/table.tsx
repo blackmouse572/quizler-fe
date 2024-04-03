@@ -133,7 +133,11 @@ export function ReportsTable({ data }: ReportTableProps) {
         header: i18n("headers.reason"),
         cell: ({ row }) => {
           const reason = row.getValue("reason") as ReportType["reason"]
-          return <div className="min-w-52">{reason as string}</div>
+          return (
+            <div className="min-w-52">
+              {i18n(`report_reason.reason_choice.${reason}` as any)}
+            </div>
+          )
         },
       },
       {

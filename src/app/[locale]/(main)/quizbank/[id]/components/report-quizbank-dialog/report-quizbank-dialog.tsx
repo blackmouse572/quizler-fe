@@ -40,6 +40,7 @@ import getReportQuizSchema, {
 } from "./report-validate"
 import { Textarea } from "@/components/ui/textarea"
 import ReportQuizBankResultDialog from "./report-quizbank-result-dialog"
+import { reportQuizbankAction } from "../../actions/report-quizbank-action"
 
 type Props = {
   buttonContent: string
@@ -58,6 +59,8 @@ export default function ReportQuizBankDialog({
   const [openResultDialog, setOpenResultDialog] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [selectedReason, setSelectedReason] = useState<string>("")
+  const [timeReport, setTimeReport] = useState("")
+  const [idReport, setIdReport] = useState("")
 
   const renderReportChoice = useCallback(
     (
@@ -80,9 +83,7 @@ export default function ReportQuizBankDialog({
           defaultValue={items && items[0].id}
           required
         >
-          <SelectTrigger>
-            {items && <SelectValue />}
-          </SelectTrigger>
+          <SelectTrigger>{items && <SelectValue />}</SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>{label}</SelectLabel>
@@ -115,9 +116,7 @@ export default function ReportQuizBankDialog({
     (result: any, reason: string) => {
       setOpen(false)
       setIsLoading(false)
-      setOpenResultDialog(!openResultDialog)
-      setSelectedReason(reason)
-
+      
       if (!result) {
         return toast({
           title: i18n("message.failed.title"),
@@ -125,14 +124,19 @@ export default function ReportQuizBankDialog({
           variant: "flat",
           color: "danger",
         })
-      } else {
-        return toast({
-          title: i18n("message.success.title"),
-          description: i18n("message.success.description"),
-          variant: "flat",
-          color: "success",
-        })
       }
+
+      setOpenResultDialog(!openResultDialog)
+      setSelectedReason(reason)
+      setTimeReport(result.data.created)
+      setIdReport(result.data.id)
+
+      return toast({
+        title: i18n("message.success.title"),
+        description: i18n("message.success.description"),
+        variant: "flat",
+        color: "success",
+      })
     },
     [errorI18n, i18n, openResultDialog]
   )
@@ -141,12 +145,10 @@ export default function ReportQuizBankDialog({
     async (values: ReportQuizBankSchemaType) => {
       const { reason } = values
       setIsLoading(true)
-      // const result = await copyQuizBankToClassroom(token, quizbankId, classRoom)
-      // TODO: call api PUT report
-      const result = "TODO"
+      const result = await reportQuizbankAction(quizbankId, reason)
       onSubmitCb(result, reason)
     },
-    [onSubmitCb]
+    [onSubmitCb, quizbankId]
   )
 
   const reportForm = useCallback(
@@ -260,8 +262,8 @@ export default function ReportQuizBankDialog({
           buttonContent={buttonContent}
           quizBankId={quizbankId}
           reasonChoiceID={selectedReason}
-          time="17/3/2024"
-          ticket_id="12"
+          time={timeReport}
+          ticket_id={idReport}
         />
       )}
     </div>
