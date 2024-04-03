@@ -260,7 +260,7 @@
       "points": "Điểm"
     },
     "teacher": {
-      "horizontal_chart": {
+      "bar_chart": {
         "title": "Biểu đồ cột",
         "plugins": "Biểu đồ cột sinh viên",
         "datasets": {

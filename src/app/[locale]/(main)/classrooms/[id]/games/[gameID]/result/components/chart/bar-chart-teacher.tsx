@@ -23,7 +23,7 @@ type Props = {
   data: PagedResponse<ClassroomGameResults>
 }
 
-export default function HorizontalChartTeacher({ data }: Props) {
+export default function BarChartTeacher({ data }: Props) {
   const i18n = useTranslations("GameResults")
 
   const labels = data.data.map((result) => ({
@@ -47,7 +47,7 @@ export default function HorizontalChartTeacher({ data }: Props) {
       },
       title: {
         display: true,
-        text: i18n("teacher.horizontal_chart.plugins"),
+        text: i18n("teacher.bar_chart.plugins"),
       },
     },
   }
@@ -56,7 +56,7 @@ export default function HorizontalChartTeacher({ data }: Props) {
     labels: blyat,
     datasets: [
       {
-        label: i18n("teacher.horizontal_chart.datasets.label"),
+        label: i18n("teacher.bar_chart.datasets.label"),
         data: horizontalChart,
         backgroundColor: [],
       },
@@ -74,8 +74,8 @@ export default function HorizontalChartTeacher({ data }: Props) {
     <>
       <Bar options={options} data={dataChart} />
       <div>
-        {i18n("teacher.horizontal_chart.x_data")} <br />
-        {i18n("teacher.horizontal_chart.y_data")} <br />
+        {i18n("teacher.bar_chart.x_data")} <br />
+        {i18n("teacher.bar_chart.y_data")} <br />
       </div>
     </>
   )

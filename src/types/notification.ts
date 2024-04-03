@@ -4,4 +4,5 @@ export type INotification = {
   title: string
   read: Date | null
   created: Date
+  objectName: string
 }

@@ -16,7 +16,7 @@ export async function generateMetadata({
 }) {
   const t = await getTranslations({
     locale,
-    namespace: "UserAdmin.metadata",
+    namespace: "ReportAdmin.metadata",
   })
 
   return {

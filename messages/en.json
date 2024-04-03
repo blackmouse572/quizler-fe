@@ -277,8 +277,8 @@
       "points": "Points"
     },
     "teacher": {
-      "horizontal_chart": {
-        "title": "Horizontal chart",
+      "bar_chart": {
+        "title": "Bar chart",
         "plugins": "Students bar chart",
         "datasets": {
           "label": "Students point statistic"

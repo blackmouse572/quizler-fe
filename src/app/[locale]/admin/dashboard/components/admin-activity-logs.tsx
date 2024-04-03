@@ -20,6 +20,7 @@ export default async function AdminActivityLogs() {
             />
           </div>
         </div>
+        
         <div className="mt-2.5 flex gap-2.5 pr-7 text-black max-md:flex-wrap max-md:pr-5">
           <img
             loading="lazy"
@@ -85,6 +86,7 @@ export default async function AdminActivityLogs() {
             <div className="text-xs leading-4">23:21 1/1/2023</div>
           </div>
         </div>
+        
       </div>
     </div>
   )
