@@ -34,7 +34,7 @@ function AccountPlanSelectionForm({
   action,
   defaultPlanId,
 }: Props) {
-  const t = useTranslations("Settings.plan")
+  const t = useTranslations("Settings.plans.plans")
   // TODO: change plans info in the future
   const mockPlans = useMemo(
     () => [

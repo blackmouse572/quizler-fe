@@ -807,34 +807,44 @@
       "cancel_btn": "Hủy",
       "submit_btn": "Thay đổi mật khẩu"
     },
-    "plan": {
-      "hobby": {
-        "title": "Sở thích",
-        "description": "Khởi động",
-        "features": {
-          "feature1": "Học các ngân hàng công hỏi công khai",
-          "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
-          "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
-          "feature4": "Sở hữu đến 3 lớp học"
+    "plans": {
+      "plans": {
+        "hobby": {
+          "title": "Sở thích",
+          "description": "Khởi động",
+          "features": {
+            "feature1": "Học các ngân hàng công hỏi công khai",
+            "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
+            "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
+            "feature4": "Sở hữu đến 3 lớp học"
+          }
+        },
+        "learner": {
+          "title": "Học viên",
+          "description": "Học theo cách của mình",
+          "features": {
+            "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
+            "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
+            "feature3": "Sở hữu đến 10 lớp học"
+          }
+        },
+        "expert": {
+          "title": "Chuyên gia",
+          "description": "Tìm kiếm kiến thức",
+          "features": {
+            "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
+            "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
+            "feature3": "Sở hữu đến 20 lớp học"
+          }
         }
       },
-      "learner": {
-        "title": "Học viên",
-        "description": "Học theo cách của mình",
-        "features": {
-          "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
-          "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
-          "feature3": "Sở hữu đến 10 lớp học"
-        }
-      },
-      "expert": {
-        "title": "Chuyên gia",
-        "description": "Tìm kiếm kiến thức",
-        "features": {
-          "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
-          "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
-          "feature3": "Sở hữu đến 20 lớp học"
-        }
+      "upgrade_dialog": {
+        "buttons": {
+          "upgrade": "Nâng cấp",
+          "cancel": "Hủy"
+        },
+        "title": "Nâng cấp gói cá nhân thành {plan}",
+        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
       }
     },
     "profile": {

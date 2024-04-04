@@ -11,19 +11,20 @@ import {
 } from "@/components/ui/dialog"
 import { AccountPlan } from "../type"
 import { fetchStripeSessionId } from "../actions/feat-checkout-sessionid"
-import { useRouter } from "next/navigation"
 import checkout from "@/lib/stripe"
+import { useTranslations } from "next-intl"
 
 type Props = {
   plan: AccountPlan
 }
 
 const UpgradeDialog = ({ plan }: Props) => {
-  const router = useRouter()
+  const i18n = useTranslations("Settings.plans.upgrade_dialog")
   const navigateToCheckout = async () => {
     const res = await fetchStripeSessionId(plan)
     const { sessionId, pubKey } = res.data
 
+    // Navigate to Stripe
     checkout(sessionId, pubKey)
   }
   return (
@@ -36,28 +37,28 @@ const UpgradeDialog = ({ plan }: Props) => {
           }}
           type="submit"
         >
-          {"Upgrade"}
+          {i18n("buttons.upgrade")}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{"title"}</DialogTitle>
-          <DialogDescription>{"desc"}</DialogDescription>
+          <DialogTitle>{i18n("title", { plan: plan.title })}</DialogTitle>
+          <DialogDescription>{i18n("description")}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline" color="accent">
-              {"Close"}
+              {i18n("buttons.cancel")}
             </Button>
           </DialogClose>
           <Button
             variant="default"
-            color="danger"
+            color="success"
             onClick={() => {
               navigateToCheckout()
             }}
           >
-            {"Upgrade"}
+            {i18n("buttons.upgrade")}
           </Button>
         </DialogFooter>
       </DialogContent>
