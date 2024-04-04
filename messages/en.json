@@ -593,6 +593,28 @@
       }
     }
   },
+  "Notification": {
+    "user": {
+      "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
+      "reported_quizbank": "QuizBank {objectName} has been reported due to violation",
+      "invite_classroom": "You have been invited to join classroom {objectName}",
+      "kick_classroom": "You have been kicked from classroom {objectName}",
+      "ban_classroom": "You have been banned from classroom {objectName}",
+      "create_post": "New post create in classroom {objectName}",
+      "reported": "You has been reported due to violation",
+      "warning": "You have been warned due to violation"
+    },
+    "admin": {
+      "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
+      "reported_quizbank": "QuizBank {objectName} has been reported due to violation",
+      "invite_classroom": "User {user} has been invited to join classroom {objectName}",
+      "kick_classroom": "User {user} has been kicked from classroom {objectName}",
+      "ban_classroom": "User {user} has been banned from classroom {objectName}",
+      "create_post": "New post create in classroom {objectName}",
+      "reported": "User {user} has been reported due to violation",
+      "warning": "User {user} has been warned due to violation"
+    }
+  },
   "Navbar": {
     "home": "Home",
     "classrooms": "Classrooms",

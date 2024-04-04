@@ -1,3 +1,5 @@
+import { User } from "."
+
 export type INotification = {
   id: string
   type: string
@@ -6,3 +8,5 @@ export type INotification = {
   created: Date
   objectName: string
 }
+
+export type AdminNotification = INotification & { account: User }

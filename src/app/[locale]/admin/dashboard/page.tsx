@@ -6,6 +6,9 @@ import getAllUsersAction from "../users/actions/get-all-users-action"
 import getAllClassroomsAction from "../classrooms/actions/get-all-classrooms-action"
 import getAllQuizBanksAction from "../quizbank/actions/get-all-quizbanks-action"
 import getAllReportsAction from "../reports/actions/get-all-reports-action"
+import getAllTransactionsAction from "./actions/get-all-transaction-data-action"
+import getAllNotificationsAction from "./actions/get-all-notification-action"
+import { notFound } from "next/navigation"
 // export const metadata = {
 //   title: "Dashboard",
 //   description: "Dashboard page, control your site",
@@ -38,17 +41,50 @@ async function AdminDashboardPage({ searchParams }: AdminDashboardProps) {
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
+  const month = 3
+  const time = {
+    month: month,
+    year: 2024,
+  }
 
-  const reportData = await getAllReportsAction({ filter: options })
-  const userData = await getAllUsersAction({ options: options })
-  const classroomData = await getAllClassroomsAction({ filter: options })
-  const quizbankData = await getAllQuizBanksAction({ filter: options })
+  const [
+    reportData,
+    userData,
+    classroomData,
+    quizbankData,
+    transactionData,
+    notificationData,
+  ] = await Promise.all([
+    getAllReportsAction({ filter: options }),
+    getAllUsersAction({ options: options }),
+    getAllClassroomsAction({ filter: options }),
+    getAllQuizBanksAction({ filter: options }),
+    getAllTransactionsAction({ filter: options, month }),
+    getAllNotificationsAction({ filter: options }),
+  ])
+
+  const isOk =
+    reportData.ok &&
+    userData.ok &&
+    classroomData.ok &&
+    quizbankData.ok &&
+    transactionData.ok &&
+    notificationData.ok
+  const isDataOk =
+    reportData.data &&
+    userData.data &&
+    classroomData.data &&
+    quizbankData.data &&
+    transactionData.data &&
+    notificationData.data
+
+  if (!isOk || !isDataOk) notFound()
 
   const totalCount = {
-    totalReport: reportData.data?.metadata.totals,
-    totalUser: userData.data?.metadata.totals,
-    totalClassrooms: classroomData.data?.metadata.totals,
-    totalQuizBanks: quizbankData.data?.metadata.totals,
+    totalReport: reportData.data.metadata.totals,
+    totalUser: userData.data.metadata.totals,
+    totalClassrooms: classroomData.data.metadata.totals,
+    totalQuizBanks: quizbankData.data.metadata.totals,
   }
 
   const messages = await getMessages()
@@ -59,12 +95,18 @@ async function AdminDashboardPage({ searchParams }: AdminDashboardProps) {
         messages={_.pick(
           messages,
           "Table",
-          "QuizBankAdmin",
+          "Notification",
           "Validations",
-          "Errors"
+          "Errors",
+          "GameResults"
         )}
       >
-        <AdminDashboard totalCount={totalCount!} />
+        <AdminDashboard
+          totalCount={totalCount}
+          transactionData={transactionData.data}
+          time={time}
+          notificationData={notificationData.data}
+        />
       </NextIntlClientProvider>
     </div>
   )

@@ -4,6 +4,28 @@
     "back": "Quay lại",
     "description": "Học tập với các phương pháp siêu tốc"
   },
+  "Notification": {
+    "user": {
+      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
+      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
+      "invite_classroom": "Bạn đã được mời tham gia lớp học {objectName}",
+      "kick_classroom": "Bạn đã bị đá ra khỏi lớp học {objectName}",
+      "ban_classroom": "Bạn đã bị cấm tham gia lớp học {objectName}",
+      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "reported": "Bạn đã bị báo cáo do vi phạm",
+      "warning": "Bạn đã bị cảnh cáo do vi phạm"
+    },
+    "admin": {
+      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
+      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
+      "invite_classroom": "Người dùng {user} đã được mời tham gia lớp học {objectName}",
+      "kick_classroom": "Người dùng {user} đã bị đá ra khỏi lớp học {objectName}",
+      "ban_classroom": "Người dùng {user} đã bị cấm tham gia lớp học {objectName}",
+      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
+      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm"
+    }
+  },
   "Navbar": {
     "home": "Trang chủ",
     "classrooms": "Lớp học",
@@ -312,7 +334,7 @@
       }
     }
   },
-  "CategoryQuizBank":{
+  "CategoryQuizBank": {
     "metadata": {
       "title": "Mục lục ngân hàng câu hỏi",
       "description": "Tìm kiếm ngân hàng bẳng thẻ"

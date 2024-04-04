@@ -2,10 +2,10 @@ import { AdminCardHeader } from "./admin-card-header"
 
 type Props = {
   totalCount: {
-    totalReport?: number
-    totalUser?: number
-    totalClassrooms?: number
-    totalQuizBanks?: number
+    totalReport: number
+    totalUser: number
+    totalClassrooms: number
+    totalQuizBanks: number
   }
 }
 
