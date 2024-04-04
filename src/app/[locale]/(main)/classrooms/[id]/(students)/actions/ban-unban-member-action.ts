@@ -15,7 +15,6 @@ export async function banAndUnbanMemberAction({
   memberIds,
   action,
 }: TBanAPIProps) {
-  debugger
   const url = getAPIServerURL(`/classrooms/${+classroomId}/users`)
   const { token } = getToken()
   const members = { memberIds: memberIds }

@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils"
 import { EFormAction } from "@/types"
 import { useTranslations } from "next-intl"
 import { useCallback, useMemo, useState } from "react"
+import { AccountPlan } from "../type"
+import UpgradeDialog from "./upgrade-dialog"
 
 type Props = {
   onPlanSelection: (planId: string) => void
@@ -18,21 +20,11 @@ type Props = {
   defaultPlanId?: string
 }
 
-// TODO: Move this to a shared location
-type Plan = {
-  id: string
-  name: string
-  description: string
-  price: number
-  currency: string
-  features: string[]
-}
-
-const initialPlan = {
+const initialPlan: AccountPlan = {
   id: "",
-  name: "",
+  title: "",
   description: "",
-  price: 0,
+  amount: 0,
   currency: "",
   features: [],
 }
@@ -43,13 +35,15 @@ function AccountPlanSelectionForm({
   defaultPlanId,
 }: Props) {
   const t = useTranslations("Settings.plan")
-  const plans = useMemo<Plan[]>(() => {
-    return [
+  // TODO: change plans info in the future
+  const mockPlans = useMemo(
+    () => [
       {
         id: "0",
-        name: t("hobby.title"),
+        title: t("hobby.title"),
+        duration: 0,
         description: t("hobby.description"),
-        price: 0,
+        amount: 0,
         currency: "USD",
         features: [
           t("hobby.features.feature1"),
@@ -60,9 +54,9 @@ function AccountPlanSelectionForm({
       },
       {
         id: "1",
-        name: t("learner.title"),
+        title: t("learner.title"),
         description: t("learner.description"),
-        price: 50,
+        amount: 50,
         currency: "USD",
         features: [
           t("learner.features.feature1"),
@@ -72,9 +66,9 @@ function AccountPlanSelectionForm({
       },
       {
         id: "2",
-        name: t("expert.title"),
+        title: t("expert.title"),
         description: t("expert.description"),
-        price: 100,
+        amount: 100,
         currency: "USD",
         features: [
           t("expert.features.feature1"),
@@ -82,9 +76,13 @@ function AccountPlanSelectionForm({
           t("expert.features.feature3"),
         ],
       },
-    ]
-  }, [t])
-  const [selectedPlan, setSelectedPlan] = useState<Plan>(
+    ],
+    [t]
+  )
+  const plans = useMemo<AccountPlan[]>(() => {
+    return mockPlans
+  }, [mockPlans])
+  const [selectedPlan, setSelectedPlan] = useState<AccountPlan>(
     plans.find((plan) => plan.id === defaultPlanId) ?? initialPlan
   )
   const [availablePlanIds, setAvailablePlanIds] = useState<string[]>(["0"])
@@ -103,20 +101,26 @@ function AccountPlanSelectionForm({
         return (
           <Card
             key={plan.id}
-            onClick={() => onPlanChange(plan.id)}
-            className={cn("h-96 flex-1 cursor-pointer transition-all relative", {
-              "ring-2 ring-emerald-500 ring-offset-2":
-                selectedPlan?.id === plan.id,
-            })}
+            onClick={(e) => {
+              e.stopPropagation()
+              onPlanChange(plan.id)
+            }}
+            className={cn(
+              "relative h-96 flex-1 cursor-pointer transition-all",
+              {
+                "ring-2 ring-emerald-500 ring-offset-2":
+                  selectedPlan?.id === plan.id,
+              }
+            )}
             aria-selected={selectedPlan?.id === plan.id}
           >
             <CardHeader>
-              <CardTitle>{plan.name}</CardTitle>
+              <CardTitle>{plan.title}</CardTitle>
               <CardDescription>{plan.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="font-heading text-3xl font-bold">
-                <span className="text-7xl">{plan.price}</span> {plan.currency}
+                <span className="text-7xl">{plan.amount}</span> {plan.currency}
                 <span className="text-gray-500">/months</span>
               </p>
             </CardContent>
@@ -129,7 +133,7 @@ function AccountPlanSelectionForm({
             </CardFooter>
             {!availablePlanIds.includes(plan.id) && (
               <div className="absolute bottom-10 left-5">
-                <Button type="submit">{"Upgrade"}</Button>
+                <UpgradeDialog plan={plan} />
               </div>
             )}
           </Card>
