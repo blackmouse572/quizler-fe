@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 import EditAccount from "./components/edit-account"
+import UpgradePlan from "./components/upgrade-plan"
 
 type Props = {
   params: {
@@ -37,6 +38,7 @@ export default async function UserProfile({ params }: Props) {
         )}
       >
         <EditAccount />
+        <UpgradePlan />
       </NextIntlClientProvider>
     </>
   )
