@@ -194,6 +194,13 @@
             "placeholder": "Select quizbank",
             "empty": "No result"
           },
+          "gameType": {
+            "label": "Game type",
+            "dnd": "Drag and drop",
+            "mcq": "Multiple choice question",
+            "tf": "True or false",
+            "fill": "Fill in the blank"
+          },
           "submit": "Create",
           "cancel": "Cancel",
           "success": {

@@ -6,23 +6,33 @@ import TrueFalseQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/
 import useGame, {
   GameQuestion,
 } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
+import { useGameSignal } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGameSignal"
 import { Icons } from "@/components/ui/icons"
+import { Game } from "@/types"
 import { useCallback, useEffect, useState } from "react"
 import Confetti from "react-confetti"
 
 type PlayGameProps = {
-  initData?: GameQuestion[]
+  initData: Game
 }
 
 function PlayGame({ initData }: PlayGameProps) {
   const [conffeti, setConffeti] = useState(false)
+  const { connectToGame, leave, start } = useGameSignal()
+
+  useEffect(() => {
+    start(() => {
+      connectToGame(+initData.id)
+    })
+  }, [connectToGame, initData.id, start])
   const { questions, addQuestions, currentQuestion, duration, nextQuestion } =
     useGame()
 
-  useEffect(() => {
-    if (!initData) return
-    addQuestions(initData)
-  }, [addQuestions, initData])
+  // useEffect(() => {
+  //   if (!initData) return
+  //   addQuestions(initData)
+  // }, [addQuestions, initData])
+
   const renderQuestion = useCallback((question: GameQuestion) => {
     switch (question.type) {
       case "dnd":

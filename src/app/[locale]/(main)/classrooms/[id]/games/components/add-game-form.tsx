@@ -3,6 +3,7 @@ import MyQuizbankAutocomplete from "@/app/[locale]/(main)/classrooms/[id]/games/
 import { useCreateGame } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useCreateGame"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
   DialogContent,
@@ -29,6 +30,7 @@ import {
 import { TimePicker } from "@/components/ui/time-picker/time-picker"
 import { useToast } from "@/components/ui/use-toast"
 import { cn, getAbsoluteURL } from "@/lib/utils"
+import { GameType } from "@/types/game"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { useTranslations } from "next-intl"
@@ -85,12 +87,30 @@ const AddGameSchema = z
       })
       .optional()
       .default(() => new Date()),
+    gameType: z
+      .nativeEnum(GameType)
+      .array()
+      .default([
+        GameType.MultipleChoice,
+        GameType.TrueFalse,
+        GameType.Dnd,
+        GameType.ConstructedResponse,
+      ])
+      .optional(),
   })
   .refine((data) => new Date(data.startTime) < new Date(data.endTime), {
     message: "errors.too_small.date.not_inclusive",
     path: ["endTime"],
   })
-
+const GAME_TYPE_OPTIONS = [
+  { label: "actions.create.form.gameType.mcq", value: GameType.MultipleChoice },
+  { label: "actions.create.form.gameType.tf", value: GameType.TrueFalse },
+  { label: "actions.create.form.gameType.dnd", value: GameType.Dnd },
+  {
+    label: "actions.create.form.gameType.fill",
+    value: GameType.ConstructedResponse,
+  },
+]
 export type AddGameFormType = z.infer<typeof AddGameSchema>
 
 type AddGameFormProp = {
@@ -390,6 +410,36 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                         ),
                       }}
                     />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {vali18n(fieldState.error?.message as any, {
+                          maximum: 1000,
+                          minimum: 10,
+                        })}
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="gameType"
+                render={({ field, fieldState }) => (
+                  <FormItem className="flex flex-col items-start justify-end gap-1">
+                    <FormLabel>
+                      {t("actions.create.form.gameType.label")}
+                    </FormLabel>
+                    <Checkbox
+                      disabled={isPending}
+                      {...field}
+                      value={GameType.Dnd}
+                      onCheckedChange={(e) => {
+                        field.onChange()
+                      }}
+                    >
+                      {t("actions.create.form.gameType.mcq")}
+                    </Checkbox>
                     {fieldState.error && (
                       <p className="text-xs text-danger-500">
                         {vali18n(fieldState.error?.message as any, {
