@@ -40,13 +40,17 @@ export default function NotificationDropdown({
 
   const renderNotificationIcon = useCallback((type: string) => {
     switch (type) {
-      case "warning":
+      case "Information":
+        return <Icons.Info />
+      case "Alert":
+        return <Icons.Alert />
+      case "Warning":
         return <Icons.Warning />
-      case "error":
+      case "Error":
         return <Icons.Error />
-      case "payment":
+      case "Payment":
         return <Icons.Payment />
-      case "classroom":
+      case "Classroom":
         return <Icons.School />
       default:
         return <Icons.Info />
@@ -105,6 +109,7 @@ function NotificationItem({
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, {})
   const { mutateAsync } = useReadNotification()
+  const i18nNoti = useTranslations("Notification")
 
   useEffect(() => {
     if (inView && !item.read) {
@@ -124,7 +129,12 @@ function NotificationItem({
     >
       {icon}
       <div className="flex flex-1 items-center justify-between">
-        <h3 className="text-sm font-medium">{item.title}</h3>
+        {/* <h3 className="text-sm font-medium">{item.title}</h3> */}
+        <h3 className="text-sm font-medium">
+          {i18nNoti.rich(`user.${item.title}` as any, {
+            objectName: item.objectName,
+          })}
+        </h3>
         <span className="text-xs text-accent-foreground">
           {formatDate(item.created)}
         </span>

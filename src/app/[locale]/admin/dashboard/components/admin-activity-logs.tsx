@@ -4,7 +4,6 @@ import { Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
 import { AdminNotification } from "@/types"
 import PagedResponse from "@/types/paged-response"
-import { useInView } from "framer-motion"
 import { useFormatter, useTranslations } from "next-intl"
 import { ReactNode, useCallback, useRef } from "react"
 
@@ -13,9 +12,6 @@ type Props = {
 }
 
 export default function AdminActivityLogs({ notificationData }: Props) {
-  const i18nNoti = useTranslations("Notification")
-  const format = useFormatter()
-
   const renderNotificationIcon = useCallback((type: string) => {
     switch (type) {
       case "Information":
@@ -52,26 +48,6 @@ export default function AdminActivityLogs({ notificationData }: Props) {
             className="mt-2.5 flex gap-2.5 pr-7 text-black max-md:flex-wrap max-md:pr-5"
           >
             {renderNotification(result)}
-
-            {/* <img
-              loading="lazy"
-              srcSet="..."
-              className="aspect-square w-10 shrink-0 self-start"
-            />
-            <div className="flex flex-col">
-              <div className="text-base leading-6">
-                {i18nNoti.rich(`admin.${result.title}` as any, {
-                  objectName: result.objectName,
-                  user: result.account.fullName,
-                })}
-              </div>
-              <div className="text-xs leading-4">
-                {format.dateTime(new Date(result.created), {
-                  dateStyle: "long",
-                  timeStyle: "short",
-                })}
-              </div>
-            </div> */}
           </div>
         ))}
       </div>
