@@ -13,7 +13,7 @@ type Props = {
 
 async function GamePage({ params }: Props) {
   const { gameId } = params
-  const id = z.number().parse(gameId)
+  const id = z.number().parse(+gameId)
   const { data, message, ok } = await getGameDetailsAction({ gameId: id })
   if (!ok || data?.status.toLowerCase() === "ended") {
     throw new Error(message)

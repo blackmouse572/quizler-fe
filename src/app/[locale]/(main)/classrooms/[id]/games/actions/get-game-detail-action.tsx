@@ -10,7 +10,7 @@ async function getGameDetailsAction({
   gameId,
 }: Props): Promise<TAPIResult<Game>> {
   const token = getToken().token
-  const url = getAPIServerURL(`/Game/{gameId}`)
+  const url = getAPIServerURL(`/Game/${gameId}`)
   const options: RequestInit = {
     method: "GET",
     headers: {
@@ -26,6 +26,7 @@ async function getGameDetailsAction({
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
+        console.log(json)
         throw new Error(json.message)
       }
       return json

@@ -28,6 +28,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { TimePicker } from "@/components/ui/time-picker/time-picker"
+import { NamedToolTip } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
 import { cn, getAbsoluteURL } from "@/lib/utils"
 import { GameType } from "@/types/game"
@@ -87,16 +88,15 @@ const AddGameSchema = z
       })
       .optional()
       .default(() => new Date()),
-    gameType: z
+    quizTypes: z
       .nativeEnum(GameType)
       .array()
-      .default([
-        GameType.MultipleChoice,
-        GameType.TrueFalse,
-        GameType.Dnd,
-        GameType.ConstructedResponse,
-      ])
-      .optional(),
+      .min(1, {
+        message: "errors.too_small.array.inclusive",
+      })
+      .max(4, {
+        message: "errors.too_big.array.inclusive",
+      }),
   })
   .refine((data) => new Date(data.startTime) < new Date(data.endTime), {
     message: "errors.too_small.date.not_inclusive",
@@ -115,10 +115,9 @@ export type AddGameFormType = z.infer<typeof AddGameSchema>
 
 type AddGameFormProp = {
   intialValues: Partial<AddGameFormType>
-  trigger: React.ReactNode
 }
 
-function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
+function AddGameForm({ intialValues }: AddGameFormProp) {
   const [isOpen, setOpen] = useState(false)
   const form = useForm<AddGameFormType>({
     resolver: zodResolver(AddGameSchema),
@@ -174,7 +173,13 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      <DialogTrigger>{trigger}</DialogTrigger>
+      <NamedToolTip content={t("actions.create.title")}>
+        <DialogTrigger asChild>
+          <Button isIconOnly>
+            <Icons.Plus />
+          </Button>
+        </DialogTrigger>
+      </NamedToolTip>
       <DialogContent className="max-w-screen-md">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -424,27 +429,55 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
 
               <FormField
                 control={form.control}
-                name="gameType"
+                name="quizTypes"
                 render={({ field, fieldState }) => (
-                  <FormItem className="flex flex-col items-start justify-end gap-1">
-                    <FormLabel>
+                  <FormItem className="col-span-2 mt-2 flex flex-col items-start justify-end gap-1">
+                    <FormLabel required>
                       {t("actions.create.form.gameType.label")}
                     </FormLabel>
-                    <Checkbox
-                      disabled={isPending}
-                      {...field}
-                      value={GameType.Dnd}
-                      onCheckedChange={(e) => {
-                        field.onChange()
-                      }}
-                    >
-                      {t("actions.create.form.gameType.mcq")}
-                    </Checkbox>
+                    <div className="grid w-full grid-cols-2 gap-3">
+                      {GAME_TYPE_OPTIONS.map((item) => (
+                        <FormField
+                          key={item.label}
+                          control={form.control}
+                          name="quizTypes"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={item.label}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item.value)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([
+                                            ...(field.value ?? []),
+                                            item.value,
+                                          ])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== item.value
+                                            )
+                                          )
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {t(item.label as any)}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
                     {fieldState.error && (
                       <p className="text-xs text-danger-500">
                         {vali18n(fieldState.error?.message as any, {
-                          maximum: 1000,
-                          minimum: 10,
+                          maximum: 4,
+                          minimum: 1,
                         })}
                       </p>
                     )}
