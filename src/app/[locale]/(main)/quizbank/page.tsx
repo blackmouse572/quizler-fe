@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { NamedToolTip } from "@/components/ui/tooltip"
 import { getToken } from "@/lib/auth"
+import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank from "@/types/QuizBank"
 import PagedRequest from "@/types/paged-request"
@@ -32,13 +33,8 @@ export async function generateMetadata({
 }
 
 async function getQuizBank(options: Partial<PagedRequest>) {
-  const params = new URLSearchParams()
+  const params = toURLSeachParams(options)
   const token = getToken()
-  for (const [key, value] of Object.entries(options)) {
-    if (value !== undefined) {
-      params.set(key, String(value)) // Ensure value is a string
-    }
-  }
   const option: RequestInit = {
     method: "GET",
     headers: {
