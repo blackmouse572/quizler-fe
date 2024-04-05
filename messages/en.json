@@ -369,6 +369,17 @@
       }
     }
   },
+  "Notification": {
+    "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
+    "reported_quizbank": "QuizBank {objectName} has been reported due to violation",
+    "reported_post": "Post {objectName} has been reported due to violation",
+    "deleted_post": "Post {objectName} has been deleted due to violation",
+    "invite_classroom": "You have been invited to join classroom {objectName}",
+    "create_post": "New post created in classroom {objectName}",
+    "kick_classroom": "You have been kicked from classroom {objectName}",
+    "ban_classroom": "You have been banned from classroom {objectName}",
+    "reported": "You has been reported due to violation"
+  },
   "Navbar": {
     "home": "Home",
     "classrooms": "Classrooms",
@@ -645,7 +656,7 @@
       "descriptions": "Paste your data from doc, text, csv here",
       "data": {
         "label": "Data",
-        "placeholder": "term1,definition1;term2,definition2"
+        "placeholder": "term1,definition1;term2,definition2 \nEnter your ideal and press generate quizbank"
       },
       "itemSeperator": {
         "label": "Item seperator",
@@ -654,6 +665,10 @@
       "quizSeperator": {
         "label": "Quiz seperator",
         "placeholder": "Enter the quiz seperator"
+      },
+      "ai": {
+        "label": "Generate quizbank",
+        "placeholder": "English vocabulary about animals"
       }
     },
     "form": {
