@@ -10,6 +10,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.5.0",
     "@hello-pangea/dnd": "^16.5.0",
     "@hookform/resolvers": "^3.3.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
@@ -50,6 +51,7 @@
     "@tiptap/starter-kit": "^2.2.4",
     "@types/lodash": "^4.14.202",
     "@typescript-eslint/parser": "^6.15.0",
+    "ai": "^3.0.18",
     "caniuse-lite": "^1.0.30001571",
     "chart.js": "^4.4.2",
     "class-variance-authority": "^0.7.0",

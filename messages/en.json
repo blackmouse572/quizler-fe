@@ -957,7 +957,7 @@
       "descriptions": "Paste your data from doc, text, csv here",
       "data": {
         "label": "Data",
-        "placeholder": "term1,definition1;term2,definition2"
+        "placeholder": "term1,definition1;term2,definition2 \nEnter your ideal and press generate quizbank"
       },
       "itemSeperator": {
         "label": "Item seperator",
@@ -966,6 +966,10 @@
       "quizSeperator": {
         "label": "Quiz seperator",
         "placeholder": "Enter the quiz seperator"
+      },
+      "ai": {
+        "label": "Generate quizbank",
+        "placeholder": "English vocabulary about animals"
       }
     },
     "form": {
