@@ -19,13 +19,15 @@ import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
+  NamedToolTip,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useCompletion } from "ai/react"
 import { useTranslations } from "next-intl"
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -65,9 +67,8 @@ type Props = {
 
 function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
   const errori18n = useTranslations("Validations")
-  const formRef = useRef<HTMLFormElement>(null)
   const i18n = useTranslations("AddQuiz.import-form")
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(true)
   const form = useForm<BatchImportQuizbank>({
     resolver: zodResolver(batchImportQuizbankSchema),
     defaultValues: {
@@ -76,6 +77,19 @@ function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
       quizSeperator: ";",
     },
   })
+  const { isLoading, complete, completion } = useCompletion({
+    api: "/api/generate",
+    onError: (error) => {
+      form.setError("data", { message: error.message })
+    },
+  })
+
+  useEffect(() => {
+    if (completion) {
+      form.setValue("data", completion)
+    }
+  }, [completion, form])
+
   const onSubmit = useCallback(
     (value: BatchImportQuizbank) => {
       const { data, itemSeperator, quizSeperator } = value
@@ -106,8 +120,19 @@ function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
     [form, onSuccessfulImport]
   )
 
+  const generateQuiz = useCallback(() => {
+    const value = form.getValues("data")
+    complete(value, {
+      body: {
+        prompt: value,
+        itemSeperator: form.getValues("itemSeperator"),
+        quizSeperator: form.getValues("quizSeperator"),
+      },
+    })
+  }, [complete, form])
+
   return (
-    <Dialog open={isOpen} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={setOpen} defaultOpen>
       <DialogTrigger asChild>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -141,7 +166,26 @@ function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
                 name="data"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel required>{i18n("data.label")}</FormLabel>
+                    <div className="flex w-full items-end justify-between">
+                      <FormLabel required>{i18n("data.label")}</FormLabel>
+                      <NamedToolTip content={i18n("ai.label")}>
+                        <Button
+                          onClick={generateQuiz}
+                          variant="light"
+                          color="accent"
+                          isIconOnly
+                          type="button"
+                          size="sm"
+                          disabled={isLoading}
+                        >
+                          {isLoading ? (
+                            <Icons.Loader className="animate-spin" />
+                          ) : (
+                            <Icons.AI />
+                          )}
+                        </Button>
+                      </NamedToolTip>
+                    </div>
                     <FormControl>
                       <Textarea
                         {...field}

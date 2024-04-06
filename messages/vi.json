@@ -687,17 +687,17 @@
     },
     "filters": {
       "visibility": {
-        "label": "Visibility",
-        "placeholder": "Select visibility",
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
         "type": {
           "Public": {
-            "value": "Public"
+            "value": "Công khai"
           },
           "Private": {
-            "value": "Private"
+            "value": "Riêng tư"
           },
           "All": {
-            "value": "All"
+            "value": "Tất cả"
           }
         }
       }
@@ -726,6 +726,14 @@
         },
         "cancel": "Hủy",
         "confirm": "Chấp nhận báo cáo"
+      }
+    },
+    "report_reason": {
+      "reason_choice": {
+        "abuse": "Lạm dụng",
+        "inappropriate": "Không phù hợp",
+        "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+        "other": "Khác"
       }
     }
   },
@@ -951,7 +959,7 @@
         "placeholder": "Lạm dụng",
         "reason_choice": {
           "abuse": "Lạm dụng",
-          "inapproriate": "Không phù hợp",
+          "inappropriate": "Không phù hợp",
           "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
           "other": "Khác"
         }
@@ -1126,7 +1134,7 @@
       "descriptions": "Dán dữ liệu từ doc, csv, text vào đây",
       "data": {
         "label": "Dữ liệu",
-        "placeholder": "term1,definition1;term2,definition2"
+        "placeholder": "term1,definition1;term2,definition2\nĐiền điều bạn muốn học và bấm sáng tạo"
       },
       "itemSeperator": {
         "label": "Dấu phân cách thuật ngữ",
@@ -1135,6 +1143,10 @@
       "quizSeperator": {
         "label": "Dấu phân cách các quizbank",
         "placeholder": "Enter the quiz seperator"
+      },
+      "ai": {
+        "label": "Sáng tạo",
+        "placeholder": "Nhập dữ liệu và bấm sáng tạo"
       }
     },
     "form": {

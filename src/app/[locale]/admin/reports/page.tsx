@@ -44,6 +44,7 @@ export default async function AdminReportPage({ searchParams }: AdminUsersProps)
           messages,
           "Table",
           "ReportAdmin",
+          "ReportQuizBank",
           "Validations",
           "Errors"
         )}

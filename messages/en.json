@@ -583,6 +583,14 @@
         "cancel": "Cancel",
         "confirm": "Accept report"
       }
+    },
+    "report_reason": {
+      "reason_choice": {
+        "abuse": "Abuse",
+        "inappropriate": "Inappropriate",
+        "violate_intellectual": "Violates my intellectual property rights",
+        "other": "Other"
+      }
     }
   },
   "Navbar": {
@@ -890,7 +898,7 @@
       "descriptions": "Paste your data from doc, text, csv here",
       "data": {
         "label": "Data",
-        "placeholder": "term1,definition1;term2,definition2"
+        "placeholder": "term1,definition1;term2,definition2 \nEnter your ideal and press generate quizbank"
       },
       "itemSeperator": {
         "label": "Item seperator",
@@ -899,6 +907,10 @@
       "quizSeperator": {
         "label": "Quiz seperator",
         "placeholder": "Enter the quiz seperator"
+      },
+      "ai": {
+        "label": "Generate quizbank",
+        "placeholder": "English vocabulary about animals"
       }
     },
     "form": {
@@ -1047,7 +1059,7 @@
         "placeholder": "Abuse",
         "reason_choice": {
           "abuse": "Abuse",
-          "inapproriate": "Inappropriate",
+          "inappropriate": "Inappropriate",
           "violate_intellectual": "Violates my intellectual property rights",
           "other": "Other"
         }

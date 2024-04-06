@@ -28,7 +28,7 @@ const getReportQuizSchema = (reasonOptions: [string, ...string[]]) =>
 
 export enum EReport {
   abuse = "abuse",
-  inapproriate = "inappropriate",
+  inappropriate = "inappropriate",
   violate_intellectual = "violate_intellectual",
   other = "other",
 }
@@ -39,8 +39,8 @@ export const reasonChoice = [
     text: "form_report.reason.reason_choice.abuse",
   },
   {
-    id: EReport.inapproriate,
-    text: "form_report.reason.reason_choice.inapproriate",
+    id: EReport.inappropriate,
+    text: "form_report.reason.reason_choice.inappropriate",
   },
   {
     id: EReport.violate_intellectual,
