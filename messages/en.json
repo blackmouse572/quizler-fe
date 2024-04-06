@@ -550,11 +550,29 @@
     "actions": {
       "copy_id": "Copy ID",
       "copy_user_name": "Copy user name",
+      "delete_classroom": "Delete classroom",
       "go_to": {
         "index": "Go to",
         "author": "Go to author",
         "classroom": "Go to classroom"
       }
+    },
+    "dialog": {
+      "delete_classroom": {
+        "title": "Delete classroom",
+        "description": "Delete classroom <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Delete classroom"
+      }
+    },
+    "success": {
+      "delete_classroom": {
+        "index": "Classroom has been deleted",
+        "title": "Delete Classroom"
+      }
+    },
+    "errors": {
+      "title": "Something went wrong."
     }
   },
   "ReportAdmin": {

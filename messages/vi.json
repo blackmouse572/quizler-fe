@@ -718,11 +718,29 @@
     "actions": {
       "copy_id": "Sao chép ID lớp học",
       "copy_user_name": "Sao chép tên giáo viên",
+      "delete_classroom": "Xoá lớp học",
       "go_to": {
         "index": "Đi đến",
         "author": "Đi đến giáo viên",
         "classroom": "Đi đến lớp học"
       }
+    },
+    "dialog": {
+      "delete_classroom": {
+        "title": "Xóa lớp học",
+        "description": "Xóa lớp học <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Xóa lớp học"
+      }
+    },
+    "success": {
+      "delete_classroom": {
+        "index": "Lớp học đã bị xóa",
+        "title": "Xóa lớp học"
+      }
+    },
+    "errors": {
+      "title": "Đã có lỗi xảy ra, vui lòng thử lại sau"
     }
   },
   "ReportAdmin": {

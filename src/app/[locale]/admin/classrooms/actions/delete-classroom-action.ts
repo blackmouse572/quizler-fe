@@ -2,15 +2,15 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
-import QuizBank from "@/types/QuizBank"
+import { Classroom } from "@/types"
 import PagedResponse from "@/types/paged-response"
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 type Props = {
   id: string
 }
 
-export default async function deleteQuizBankAction({ id }: Props) {
+export default async function deleteClassroomAction({ id }: Props) {
   const token = getToken().token
   const option: RequestInit = {
     method: "DELETE",
@@ -22,7 +22,7 @@ export default async function deleteQuizBankAction({ id }: Props) {
       revalidate: 60, // Revalidate every 60 second
     },
   }
-  const url = getAPIServerURL(`/quizbank/${id}`)
+  const url = getAPIServerURL(`/classrooms/${id}`)
   const res = await fetch(url, option)
     .then(async (res) => {
       const data = await res.json()
@@ -31,8 +31,9 @@ export default async function deleteQuizBankAction({ id }: Props) {
       }
       return data
     })
-    .then((res: PagedResponse<QuizBank>) => {
-      revalidateTag(`AdminQuizBank`)
+    .then((res: PagedResponse<Classroom>) => {
+      revalidatePath('/admin/classrooms')
+      revalidateTag(`AdminClassrooms`)
       return {
         ok: true,
         message: "success",
@@ -40,7 +41,7 @@ export default async function deleteQuizBankAction({ id }: Props) {
       }
     })
     .catch((err) => {
-      console.error(`[ERROR] deleteQuizBankAction: `, err.message)
+      console.error(`[ERROR] deleteClassroomAction: `, err.message)
       return {
         ok: false,
         message: err.message,

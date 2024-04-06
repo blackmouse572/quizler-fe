@@ -57,6 +57,7 @@ import FilterDropdown from "./filter"
 import { useRouter } from "next/navigation"
 import { Classroom } from "@/types"
 import DeleteDialog from "./delete-dialog"
+import DeleteClassroomDialog from "./delete-classroom-dialog"
 
 type ClassroomsTableProps = {
   data: PagedResponse<Classroom>
@@ -218,6 +219,15 @@ export function ClassroomsTable({ data }: ClassroomsTableProps) {
               {i18n("actions.copy_user_name")}
             </ContextMenuItem>
             <ContextMenuSeparator />
+            <DeleteClassroomDialog
+              id={classroom.id.toString()}
+              trigger={
+                <ContextMenuItem>
+                  <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
+                  {i18n("actions.delete_classroom")}
+                </ContextMenuItem>
+              }
+            />
             <ContextMenuSub>
               <ContextMenuSubTrigger>
                 <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />
