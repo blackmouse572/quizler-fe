@@ -73,22 +73,24 @@ export default function ViewQuizzes({ initialData, id }: Props) {
         },
       }))
 
-      try {
-        const res = await fetchAIquestion(question, answer, explaination)
-        const answerAIRes = res.candidates[0].content.parts[0].text
+      if (!hiddenAIAnswer[quizKey]) {
+        try {
+          const res = await fetchAIquestion(question, answer, explaination)
+          const answerAIRes = res.candidates[0].content.parts[0].text
 
-        setHiddenAIAnswer((prevState) => ({
-          ...prevState,
-          [quizKey]: {
-            ...prevState[quizKey],
-            answerAIRes: answerAIRes,
-          },
-        }))
-      } catch (error) {
-        console.error("Error fetching AI question:", error)
+          setHiddenAIAnswer((prevState) => ({
+            ...prevState,
+            [quizKey]: {
+              ...prevState[quizKey],
+              answerAIRes: answerAIRes,
+            },
+          }))
+        } catch (error) {
+          console.error("Error fetching AI question:", error)
+        }
       }
     },
-    []
+    [hiddenAIAnswer]
   )
 
   const renderTitle = useMemo(
