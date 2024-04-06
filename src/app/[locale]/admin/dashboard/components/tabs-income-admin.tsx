@@ -1,32 +1,37 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-// import HorizontalChartTeacher from "./chart/horizontal-chart-teacher"
-// import { PieChartTeacher } from "./chart/pie-chart-teacher"
-import PagedResponse from "@/types/paged-response"
+import { Transaction } from "@/types"
 import { useTranslations } from "next-intl"
+import { PieChartAdminDashboard } from "./chart/pie-chart-admin-dashboard"
+import BarChartAdminDashboard from "./chart/bar-chart-admin-dashboard"
 
-// type Props = {
-//   data: PagedResponse<ClassroomGameResults>
-// }
+type Props = {
+  transactionData: Transaction
+  time: {
+    year: number
+  }
+}
 
-export function TabsIncomeAdmin() {
-  const i18n = useTranslations("GameResults")
-  
+export function TabsIncomeAdmin({ transactionData, time }: Props) {
+  const i18n = useTranslations("DashboardAdmin")
+
   return (
     <Tabs
-      defaultValue="bar_chart"
+      defaultValue="pie_chart"
       className="relative left-1/2 -translate-x-1/2"
     >
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="pie_chart">{i18n("teacher.pie_chart.title")}</TabsTrigger>
-        <TabsTrigger value="bar_chart">{i18n("teacher.bar_chart.title")}</TabsTrigger>
+        <TabsTrigger value="pie_chart">
+          {i18n("admin_chart.pie_chart.title")}
+        </TabsTrigger>
+        <TabsTrigger value="bar_chart">
+          {i18n("admin_chart.bar_chart.title")}
+        </TabsTrigger>
       </TabsList>
-      <TabsContent value="bar_chart">
-        {/* <HorizontalChartTeacher data={data} /> */}
-        casdasdk
-      </TabsContent>
       <TabsContent value="pie_chart">
-        adasdad
-        {/* <PieChartTeacher data={data} /> */}
+        <PieChartAdminDashboard data={transactionData} time={time} />
+      </TabsContent>
+      <TabsContent value="bar_chart">
+        <BarChartAdminDashboard data={transactionData} time={time} />
       </TabsContent>
     </Tabs>
   )

@@ -6,13 +6,9 @@ import getAllUsersAction from "../users/actions/get-all-users-action"
 import getAllClassroomsAction from "../classrooms/actions/get-all-classrooms-action"
 import getAllQuizBanksAction from "../quizbank/actions/get-all-quizbanks-action"
 import getAllReportsAction from "../reports/actions/get-all-reports-action"
-import getAllTransactionsAction from "./actions/get-all-transaction-data-action"
+import getAllTransactionsByYearAction from "./actions/get-all-transaction-by-year-action"
 import getAllNotificationsAction from "./actions/get-all-notification-action"
 import { notFound } from "next/navigation"
-// export const metadata = {
-//   title: "Dashboard",
-//   description: "Dashboard page, control your site",
-// }
 
 export async function generateMetadata({
   params: { locale },
@@ -21,7 +17,7 @@ export async function generateMetadata({
 }) {
   const t = await getTranslations({
     locale,
-    namespace: "QuizBankAdmin.metadata",
+    namespace: "DashboardAdmin.metadata",
   })
 
   return {
@@ -41,9 +37,7 @@ async function AdminDashboardPage({ searchParams }: AdminDashboardProps) {
     ? encodeURIComponent(searchParams.search as string)
     : undefined
   const options = { take, skip, search }
-  const month = 3
   const time = {
-    month: month,
     year: 2024,
   }
 
@@ -59,7 +53,7 @@ async function AdminDashboardPage({ searchParams }: AdminDashboardProps) {
     getAllUsersAction({ options: options }),
     getAllClassroomsAction({ filter: options }),
     getAllQuizBanksAction({ filter: options }),
-    getAllTransactionsAction({ filter: options, month }),
+    getAllTransactionsByYearAction({ year: time.year }),
     getAllNotificationsAction({ filter: options }),
   ])
 
@@ -92,14 +86,7 @@ async function AdminDashboardPage({ searchParams }: AdminDashboardProps) {
   return (
     <div className="">
       <NextIntlClientProvider
-        messages={_.pick(
-          messages,
-          "Table",
-          "Notification",
-          "Validations",
-          "Errors",
-          "GameResults"
-        )}
+        messages={_.pick(messages, "Table", "Notification", "DashboardAdmin")}
       >
         <AdminDashboard
           totalCount={totalCount}

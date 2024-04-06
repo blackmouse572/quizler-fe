@@ -1,10 +1,8 @@
 "use client"
 
-import React from "react"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js"
 import { Pie } from "react-chartjs-2"
-import { ClassroomGameResults } from "@/types"
-import PagedResponse from "@/types/paged-response"
+import { Transaction } from "@/types"
 import { useTranslations } from "next-intl"
 import { PieChart } from "@/types/chart-type"
 import { generateRandomColors } from "../helpers/random-color-chart"
@@ -12,30 +10,33 @@ import { generateRandomColors } from "../helpers/random-color-chart"
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 type Props = {
-  data: PagedResponse<ClassroomGameResults>
+  data: Transaction
+  time: {
+    year: number
+  }
 }
 
-// labels: range of mark (for example: max is 20 => ["0-5", "5-10", "10-15", "15-20"])
-// data: number of student in each range
-export function PieChartAdminDashboard({ data }: Props) {
-  const studentsMark = data.data.map((result) => result.totalMark)
-  const i18n = useTranslations("GameResults")
+// labels: range of months in year (for example: year 2024 => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+// data: number of total income in each month
+export function PieChartAdminDashboard({ data, time }: Props) {
+  const i18n = useTranslations("DashboardAdmin")
+  const transactionsCreated = data.map((result) => ({
+    month: result.month.toString(),
+    amount: result.amount,
+  }))
 
-  const rangeOfMarks = ["0-5", "5-10", "10-15", "15-20"]
+  const monthsInYear = transactionsCreated.map((result) => result.month)
 
-  const pieChartData = rangeOfMarks.map((range) => {
-    const [min, max] = range.split("-").map(Number)
-    const filtered = studentsMark.filter((mark) => mark >= min && mark <= max)
-    const count = filtered.length
-    const y = count // Number of students in the range
+  const pieChartData = transactionsCreated.map((result) => {
+    const y = result.amount // Total of money in the range of month
     return y
   })
 
   const dataChart: PieChart = {
-    labels: rangeOfMarks,
+    labels: monthsInYear,
     datasets: [
       {
-        label: i18n("teacher.pie_chart.datasets.label"),
+        label: i18n("admin_chart.pie_chart.datasets.label"),
         data: pieChartData,
         backgroundColor: [],
         borderColor: [],
@@ -45,7 +46,7 @@ export function PieChartAdminDashboard({ data }: Props) {
   }
 
   // Generate random colors without duplicates
-  const colorCount: number = rangeOfMarks.length
+  const colorCount: number = monthsInYear.length
   const randomColors: string[] = generateRandomColors(colorCount)
 
   // Assign random colors to backgroundColor and borderColor

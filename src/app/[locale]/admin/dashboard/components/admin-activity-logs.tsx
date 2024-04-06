@@ -12,6 +12,8 @@ type Props = {
 }
 
 export default function AdminActivityLogs({ notificationData }: Props) {
+  const i18n = useTranslations("DashboardAdmin")
+
   const renderNotificationIcon = useCallback((type: string) => {
     switch (type) {
       case "Information":
@@ -38,7 +40,7 @@ export default function AdminActivityLogs({ notificationData }: Props) {
       <div className="flex w-full grow flex-col rounded-lg border border-solid border-neutral-200 bg-white px-8 py-5 max-md:mt-5 max-md:max-w-full max-md:px-5">
         <div className="flex w-full justify-between gap-5 max-md:max-w-full max-md:flex-wrap">
           <div className="my-auto text-base font-semibold leading-6 text-black">
-            Activities Logs
+            {i18n("activity_logs.title")}
           </div>
         </div>
 

@@ -1,27 +1,17 @@
 "use server"
 
 import { getToken } from "@/lib/auth"
-import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
-import PagedRequest from "@/types/paged-request"
-import PagedResponse from "@/types/paged-response"
 import { Transaction } from "@/types/transaction-type"
 
 type Props = {
-  filter: Partial<PagedRequest>
-  month: number
+  year: number
 }
 
-export default async function getAllTransactionsAction({
-  filter,
-  month,
+export default async function getAllTransactionsByYearAction({
+  year,
 }: Props) {
   const token = getToken().token
-  const query = toURLSeachParams({
-    ...filter,
-    sortBy: "created",
-    sortDirection: "DESC",
-  })
   const option: RequestInit = {
     method: "GET",
     headers: {
@@ -32,8 +22,7 @@ export default async function getAllTransactionsAction({
       revalidate: 60, // Revalidate every 60 second
     },
   }
-  const url = getAPIServerURL(`/transaction/${month}`) + "?" + query
-
+  const url = getAPIServerURL(`/transaction/getbyyear/${year}`)
   const res = await fetch(url, option)
     .then(async (res) => {
       const data = await res.json()
@@ -42,7 +31,7 @@ export default async function getAllTransactionsAction({
       }
       return data
     })
-    .then((res: PagedResponse<Transaction>) => {
+    .then((res: Transaction) => {
       return {
         ok: true,
         message: "success",
@@ -50,7 +39,7 @@ export default async function getAllTransactionsAction({
       }
     })
     .catch((err) => {
-      console.error(`[ERROR] getAllTransactionAction: `, err.message)
+      console.error(`[ERROR] getAllTransactionsByYearAction: `, err.message)
       return {
         ok: false,
         message: err.message,

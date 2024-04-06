@@ -12,6 +12,7 @@
       "kick_classroom": "Bạn đã bị đá ra khỏi lớp học {objectName}",
       "ban_classroom": "Bạn đã bị cấm tham gia lớp học {objectName}",
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Bạn đã bị báo cáo do vi phạm",
       "warning": "Bạn đã bị cảnh cáo do vi phạm"
     },
@@ -22,6 +23,7 @@
       "kick_classroom": "Người dùng {user} đã bị đá ra khỏi lớp học {objectName}",
       "ban_classroom": "Người dùng {user} đã bị cấm tham gia lớp học {objectName}",
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
       "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm"
     }
@@ -511,6 +513,39 @@
     "delete": "Xoá",
     "cancel": "Huỷ",
     "add_quizbank": "Tạo quizbank mới"
+  },
+  "DashboardAdmin": {
+    "metadata": {
+      "title": "Trang điều khiển",
+      "description": "Trang điều khiển, quản lí web của bạn"
+    },
+    "header_card": {
+      "unprocessed_reports": "Báo cáo chưa xử lí",
+      "total_user": "Tổng lượng người dùng",
+      "classroom": "Lớp học đã tạo",
+      "total_quizbank": "Tổng lượng ngân hàng câu hỏi"
+    },
+    "admin_chart": {
+      "title": "Thu nhập",
+      "pie_chart": {
+        "title": "Biểu đồ hình tròn",
+        "datasets":{
+          "label": "Thu nhập"
+        }
+      },
+      "bar_chart": {
+        "title": "Biểu đồ cột",
+        "plugins": "Biểu đồ cột thu nhập",
+        "datasets": {
+          "label": "Thống kê thu nhập"
+        },
+        "x_data": "x: Tháng thu nhập",
+        "y_data": "y: Tổng thu nhập"
+      }
+    },
+    "activity_logs": {
+      "title": "Nhật kí hoạt động"
+    }
   },
   "QuizBankAdmin": {
     "metadata": {

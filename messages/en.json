@@ -343,6 +343,39 @@
     "cancel": "Cancel",
     "add_quizbank": "Add quiz bank"
   },
+  "DashboardAdmin": {
+    "metadata": {
+      "title": "Dashboard",
+      "description": "Dashboard page, control your site"
+    },
+    "header_card": {
+      "unprocessed_reports": "Unprocessed reports",
+      "total_user": "Total users",
+      "classroom": "Classroom created",
+      "total_quizbank": "Total quizbank"
+    },
+    "admin_chart": {
+      "title": "Income",
+      "pie_chart": {
+        "title": "Pie chart",
+        "datasets":{
+          "label": "Income"
+        }
+      },
+      "bar_chart": {
+        "title": "Bar chart",
+        "plugins": "Income bar chart",
+        "datasets": {
+          "label": "Income point statistic"
+        },
+        "x_data": "x: Month of Income",
+        "y_data": "y: Total Income"
+      }
+    },
+    "activity_logs": {
+      "title": "Activities Logs"
+    }
+  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quiz Bank",
@@ -601,6 +634,7 @@
       "kick_classroom": "You have been kicked from classroom {objectName}",
       "ban_classroom": "You have been banned from classroom {objectName}",
       "create_post": "New post create in classroom {objectName}",
+      "create_game": "New game created in classroom {objectName}",
       "reported": "You has been reported due to violation",
       "warning": "You have been warned due to violation"
     },
@@ -611,6 +645,7 @@
       "kick_classroom": "User {user} has been kicked from classroom {objectName}",
       "ban_classroom": "User {user} has been banned from classroom {objectName}",
       "create_post": "New post create in classroom {objectName}",
+      "create_game": "New game created in classroom {objectName}",
       "reported": "User {user} has been reported due to violation",
       "warning": "User {user} has been warned due to violation"
     }

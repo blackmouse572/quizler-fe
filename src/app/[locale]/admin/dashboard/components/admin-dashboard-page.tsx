@@ -11,10 +11,9 @@ type Props = {
     totalClassrooms: number
     totalQuizBanks: number
   }
-  transactionData: PagedResponse<Transaction>
+  transactionData: Transaction
   time: {
     year: number
-    month: number
   }
   notificationData: PagedResponse<AdminNotification>
 }
@@ -26,7 +25,7 @@ export default function AdminDashboard({
   notificationData
 }: Props) {
   return (
-    <div className="flex flex-col rounded-xl pb-20 pt-7">
+    <div className="flex flex-col rounded-xl pt-7">
       <AdminDashboardHeader totalCount={totalCount} />
 
       <div className="mt-11 w-full">
