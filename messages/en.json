@@ -951,6 +951,22 @@
     "support": "Support",
     "signout": "Sign out"
   },
+  "AdminSidebar": {
+    "sidebar": {
+      "label": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "classrooms": "Classrooms",
+        "quizbank": "Quiz Bank",
+        "reports": "Reports"
+      }
+    },
+    "dropdown": {
+      "my_account": "My account",
+      "profile": "Profile",
+      "signout": "Sign out"
+    }
+  },
   "AddQuiz": {
     "import-form": {
       "title": "Import batch quizbank",

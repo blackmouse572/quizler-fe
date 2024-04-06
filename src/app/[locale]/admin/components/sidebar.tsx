@@ -7,13 +7,19 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import AdminSidebarDropdown from "@/components/user-dropdown/admin-sidebar"
 import { cn } from "@/lib/utils"
+import { User } from "@/types"
+import { MenuItem } from "@/types/dropdown-menu"
 import { Variants, motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useSelectedLayoutSegments } from "next/navigation"
 import { useMemo, useState } from "react"
 
-type Props = {}
+type Props = {
+  user: User
+}
 const labelVariants: Variants = {
   open: (custom) => ({
     opacity: 1,
@@ -46,35 +52,36 @@ type SidebarItem = {
 
 const ITEMS: SidebarItem[] = [
   {
-    label: "Dashboard",
+    label: "sidebar.label.dashboard",
     icon: "TableFilled",
     href: "dashboard",
   },
   {
-    label: "Users",
+    label: "sidebar.label.users",
     icon: "UserFilled",
     href: "users",
   },
   {
-    label: "Classrooms",
+    label: "sidebar.label.classrooms",
     icon: "School",
     href: "classrooms",
   },
   {
-    label: "Quiz Bank",
+    label: "sidebar.label.quizbank",
     icon: "Icon",
     href: "quizbank",
   },
   {
-    label: "Reports",
+    label: "sidebar.label.reports",
     icon: "Info",
     href: "reports",
   },
 ]
 
-function Sidebar({}: Props) {
+function Sidebar({ user }: Props) {
   const [isExpanded, setIsExpanded] = useState(true)
   const segments = useSelectedLayoutSegments()
+  const i18n = useTranslations("AdminSidebar")
 
   const renderItems = useMemo(() => {
     return ITEMS.map((item, index) => {
@@ -109,7 +116,7 @@ function Sidebar({}: Props) {
               </div>
             </TooltipTrigger>
             <TooltipContent side="right" sideOffset={28}>
-              <span className="font-medium">{item.label}</span>
+              <span className="font-medium">{i18n(item.label as any)}</span>
             </TooltipContent>
             <motion.div
               className="flex flex-1 flex-col justify-center"
@@ -123,13 +130,23 @@ function Sidebar({}: Props) {
                 bounce: 0,
               }}
             >
-              <span className="font-medium">{item.label}</span>
+              <span className="font-medium">{i18n(item.label as any)}</span>
             </motion.div>
           </Link>
         </Tooltip>
       )
     })
-  }, [isExpanded, segments])
+  }, [i18n, isExpanded, segments])
+
+  const menuItems: MenuItem[][] = [
+    [
+      {
+        label: i18n("dropdown.profile"),
+        href: `/profile`,
+        shortcut: "⌘+P",
+      },
+    ],
+  ]
 
   return (
     <motion.div
@@ -181,6 +198,7 @@ function Sidebar({}: Props) {
           )}
         />
       </Button>
+      <AdminSidebarDropdown user={user} menuItems={menuItems} />
     </motion.div>
   )
 }

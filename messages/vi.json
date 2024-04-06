@@ -933,6 +933,22 @@
     "support": "Hỗ trợ",
     "signout": "Đăng xuất"
   },
+  "AdminSidebar": {
+    "sidebar": {
+      "label": {
+        "dashboard": "Điều khiển",
+        "users": "Người dùng",
+        "classrooms": "Lớp học",
+        "quizbank": "Ngân hàng",
+        "reports": "Báo cáo"
+      }
+    },
+    "dropdown": {
+      "my_account": "Tài khoản của tôi",
+      "profile": "Hồ sơ",
+      "signout": "Đăng xuất"
+    }
+  },
   "EditQuiz": {
     "form": {
       "title": "Chỉnh sửa ngân hàng câu hỏi",
