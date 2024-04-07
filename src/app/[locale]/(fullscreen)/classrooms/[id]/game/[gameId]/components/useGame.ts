@@ -1,35 +1,26 @@
 import { create } from "zustand"
 import MOCK_DATA from "../DATA.json"
-export type GameQuestion = {
-  type: "mcq" | "dnd" | "fib"
-  id: number
-  questions: string[]
-  answers: string[]
-}
-export type UserGameAnswer = {
-  questionId: number
-  answer: string
-}
+import { AnswerHistory, AnswerHistoryResponse, GameQuiz } from "@/types/game"
 
 type GameState = {
-  questions: GameQuestion[]
+  questions: GameQuiz[]
   currentIndex: number
-  currentQuestion: GameQuestion | undefined
+  currentQuestion: GameQuiz | undefined
   isNextDisabled: boolean
   isPrevDisabled: boolean
   duration: number
-  userAnswers: UserGameAnswer[]
+  userAnswers: AnswerHistory[]
 }
 type GameAction = {
-  addQuestions: (questions: GameQuestion[]) => void
+  addQuestions: (questions: GameQuiz[]) => void
   nextQuestion: () => void
   prevQuestion: () => void
-  submitAnswer: (answer: UserGameAnswer) => void
+  submitAnswer: (answer: AnswerHistoryResponse) => void
   updateDuration: (duration: number) => void
 }
 
 export default create<GameState & GameAction>((set, get) => ({
-  questions: MOCK_DATA as GameQuestion[],
+  questions: [],
   currentIndex: 0,
   duration: 60,
   currentQuestion: undefined,

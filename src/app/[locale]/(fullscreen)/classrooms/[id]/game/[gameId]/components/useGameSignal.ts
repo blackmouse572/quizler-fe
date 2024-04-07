@@ -1,17 +1,21 @@
+import useGame from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { useUser } from "@/hooks/useUser"
 import { getAPIServerURL } from "@/lib/utils"
 import { User } from "@/types"
 import { AnswerHistoryResponse, GameQuiz } from "@/types/game"
+import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr"
 import { useCallback, useEffect, useState } from "react"
-
-export function useGameSignal() {
+type GameSignalProp = {
+  gameId: number
+}
+export function useGameSignal({ gameId }: GameSignalProp) {
   const [conn, setConn] = useState<HubConnection | null>(null)
+  const { addQuestions } = useGame()
   const { user } = useUser()
   useEffect(() => {
     if (!user) return
-    console.log("user", user)
     const connect = () => {
       const conn = new HubConnectionBuilder()
         .withUrl(getAPIServerURL("/gameSocket"), {
@@ -63,10 +67,17 @@ export function useGameSignal() {
 
   const connectToGame = useCallback(
     (gameId: number) => {
-      conn?.invoke("JoinGame", gameId)
+      return conn?.invoke("JoinGame", gameId)
     },
     [conn]
   )
 
-  return { start, leave, connectToGame }
+  const getQuizzes = useCallback(
+    (options: Partial<PagedRequest>) => {
+      return conn?.invoke("GetQuizes", gameId, options)
+    },
+    [conn, gameId]
+  )
+
+  return { start, leave, connectToGame, conn, getQuizzes }
 }

@@ -7,31 +7,51 @@ import useGame, {
   GameQuestion,
 } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { useGameSignal } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGameSignal"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { Game } from "@/types"
+import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useState } from "react"
 import Confetti from "react-confetti"
 
 type PlayGameProps = {
   initData: Game
 }
-
+const TAKE = 20
 function PlayGame({ initData }: PlayGameProps) {
   const [conffeti, setConffeti] = useState(false)
-  const { connectToGame, leave, start } = useGameSignal()
+  const [error, setError] = useState<string>()
+  const errorI18n = useTranslations("Errors")
+  const { connectToGame, leave, start, getQuizzes } = useGameSignal({
+    gameId: Number.parseInt(initData.id),
+  })
+  const { questions, addQuestions, currentQuestion, duration, nextQuestion } =
+    useGame()
 
   useEffect(() => {
     start(() => {
       connectToGame(+initData.id)
+        ?.then(() => {
+          getQuizzes({
+            take: TAKE,
+            skip: 0,
+          })?.then((res) => {
+            console.log("get quizzes", res)
+            // addQuestions(res.data.items)
+          })
+        })
+        .catch((e) => {
+          setError(errorI18n("game.already-joined"))
+        })
     })
-  }, [connectToGame, initData.id, start])
-  const { questions, addQuestions, currentQuestion, duration, nextQuestion } =
-    useGame()
-
-  // useEffect(() => {
-  //   if (!initData) return
-  //   addQuestions(initData)
-  // }, [addQuestions, initData])
+  }, [addQuestions, connectToGame, errorI18n, getQuizzes, initData.id, start])
 
   const renderQuestion = useCallback((question: GameQuestion) => {
     switch (question.type) {
@@ -45,7 +65,24 @@ function PlayGame({ initData }: PlayGameProps) {
         return <TrueFalseQuestion data={question} onSubmit={() => {}} />
     }
   }, [])
-
+  if (error) {
+    return (
+      <Card className="mx-auto max-w-sm">
+        <CardHeader>
+          <CardTitle>{errorI18n("index")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <h3 className="text-lg text-danger-500">{error}</h3>
+        </CardContent>
+        <CardFooter>
+          <Button>
+            <Icons.Refresh className="mr-2 h-5 w-5" />
+            {errorI18n("refresh")}
+          </Button>
+        </CardFooter>
+      </Card>
+    )
+  }
   if (!currentQuestion) {
     return (
       <div className="flex h-[80vh] items-center justify-center">

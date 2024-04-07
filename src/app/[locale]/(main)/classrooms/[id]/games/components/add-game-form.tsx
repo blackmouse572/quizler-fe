@@ -73,7 +73,8 @@ const AddGameSchema = z
       })
       .max(1000, {
         message: "errors.too_big.number.not_inclusive",
-      }),
+      })
+      .optional(),
     startTime: z
       .date({
         invalid_type_error: "errors.invalid_date",
@@ -221,7 +222,7 @@ function AddGameForm({ intialValues }: AddGameFormProp) {
                 name="duration"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel required>
+                    <FormLabel>
                       {t("actions.create.form.duration.label")}
                     </FormLabel>
                     <FormControl>
@@ -253,7 +254,7 @@ function AddGameForm({ intialValues }: AddGameFormProp) {
                 name="amount"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel required>
                       {t("actions.create.form.amount.label")}
                     </FormLabel>
                     <FormControl>

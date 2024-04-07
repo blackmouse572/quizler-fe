@@ -11,6 +11,16 @@ type Props = {
   }
 }
 
+export async function generateMetadata({ params }: Props) {
+  const { gameId } = params
+  const id = z.number().parse(+gameId)
+  const { data, message, ok } = await getGameDetailsAction({ gameId: id })
+  return {
+    title: data?.gameName,
+    description: data?.gameName,
+  }
+}
+
 async function GamePage({ params }: Props) {
   const { gameId } = params
   const id = z.number().parse(+gameId)
