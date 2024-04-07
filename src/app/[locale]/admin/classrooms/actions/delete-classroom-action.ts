@@ -1,36 +1,28 @@
 "use server"
 
 import { getToken } from "@/lib/auth"
-import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
 import { Classroom } from "@/types"
-import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 type Props = {
-  filter: Partial<PagedRequest>
+  id: string
 }
 
-export default async function getAllClassroomsAction({ filter }: Props) {
+export default async function deleteClassroomAction({ id }: Props) {
   const token = getToken().token
-  const query = toURLSeachParams({
-    ...filter,
-    sortBy: "created",
-    sortDirection: "DESC",
-  })
   const option: RequestInit = {
-    method: "GET",
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["AdminClassrooms"],
       revalidate: 60, // Revalidate every 60 second
     },
   }
-  const url = getAPIServerURL("/Classrooms") + "?" + query
-
+  const url = getAPIServerURL(`/classrooms/${id}`)
   const res = await fetch(url, option)
     .then(async (res) => {
       const data = await res.json()
@@ -40,6 +32,8 @@ export default async function getAllClassroomsAction({ filter }: Props) {
       return data
     })
     .then((res: PagedResponse<Classroom>) => {
+      revalidatePath('/admin/classrooms')
+      revalidateTag(`AdminClassrooms`)
       return {
         ok: true,
         message: "success",
@@ -47,7 +41,7 @@ export default async function getAllClassroomsAction({ filter }: Props) {
       }
     })
     .catch((err) => {
-      console.error(`[ERROR] getAllClassroomsAction: `, err.message)
+      console.error(`[ERROR] deleteClassroomAction: `, err.message)
       return {
         ok: false,
         message: err.message,

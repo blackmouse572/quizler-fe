@@ -16,7 +16,7 @@ export async function generateMetadata({
 }) {
   const t = await getTranslations({
     locale,
-    namespace: "QuizBankAdmin.metadata",
+    namespace: "ClassroomAdmin.metadata",
   })
 
   return {

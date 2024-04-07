@@ -70,7 +70,7 @@ export default function ViewDetailsReportDialog({ data, trigger }: Props) {
 
             <div className="flex justify-between">
               <div>{i18n("dialog.report_details.content.reason")}:</div>
-              <div>{data.reason}</div>
+              <div>{i18n(`report_reason.reason_choice.${data.reason}` as any)}</div>
             </div>
             <div className="flex justify-between">
               <div>{i18n("dialog.report_details.content.created_at")}:</div>

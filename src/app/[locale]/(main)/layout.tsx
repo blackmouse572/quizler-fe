@@ -152,7 +152,7 @@ async function MainLayout({ children }: Props) {
   return (
     <main className="relative">
       <NextIntlClientProvider
-        messages={pick(m, "UserDropdown", "Navbar", "Index")}
+        messages={pick(m, "UserDropdown", "Navbar", "Index", "Notification")}
       >
         {navbarComponent}
       </NextIntlClientProvider>

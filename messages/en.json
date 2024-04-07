@@ -277,8 +277,8 @@
       "points": "Points"
     },
     "teacher": {
-      "horizontal_chart": {
-        "title": "Horizontal chart",
+      "bar_chart": {
+        "title": "Bar chart",
         "plugins": "Students bar chart",
         "datasets": {
           "label": "Students point statistic"
@@ -342,6 +342,39 @@
     "delete": "Delete",
     "cancel": "Cancel",
     "add_quizbank": "Add quiz bank"
+  },
+  "DashboardAdmin": {
+    "metadata": {
+      "title": "Dashboard",
+      "description": "Dashboard page, control your site"
+    },
+    "header_card": {
+      "unprocessed_reports": "Unprocessed reports",
+      "total_user": "Total users",
+      "classroom": "Classroom created",
+      "total_quizbank": "Total quizbank"
+    },
+    "admin_chart": {
+      "title": "Income",
+      "pie_chart": {
+        "title": "Pie chart",
+        "datasets":{
+          "label": "Income"
+        }
+      },
+      "bar_chart": {
+        "title": "Bar chart",
+        "plugins": "Income bar chart",
+        "datasets": {
+          "label": "Income point statistic"
+        },
+        "x_data": "x: Month of Income",
+        "y_data": "y: Total Income"
+      }
+    },
+    "activity_logs": {
+      "title": "Activities Logs"
+    }
   },
   "QuizBankAdmin": {
     "metadata": {
@@ -517,11 +550,29 @@
     "actions": {
       "copy_id": "Copy ID",
       "copy_user_name": "Copy user name",
+      "delete_classroom": "Delete classroom",
       "go_to": {
         "index": "Go to",
         "author": "Go to author",
         "classroom": "Go to classroom"
       }
+    },
+    "dialog": {
+      "delete_classroom": {
+        "title": "Delete classroom",
+        "description": "Delete classroom <strong>{id}</strong> ?",
+        "cancel": "Cancel",
+        "confirm": "Delete classroom"
+      }
+    },
+    "success": {
+      "delete_classroom": {
+        "index": "Classroom has been deleted",
+        "title": "Delete Classroom"
+      }
+    },
+    "errors": {
+      "title": "Something went wrong."
     }
   },
   "ReportAdmin": {
@@ -591,6 +642,30 @@
         "violate_intellectual": "Violates my intellectual property rights",
         "other": "Other"
       }
+    }
+  },
+  "Notification": {
+    "user": {
+      "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
+      "reported_quizbank": "QuizBank {objectName} has been reported due to violation",
+      "invite_classroom": "You have been invited to join classroom {objectName}",
+      "kick_classroom": "You have been kicked from classroom {objectName}",
+      "ban_classroom": "You have been banned from classroom {objectName}",
+      "create_post": "New post create in classroom {objectName}",
+      "create_game": "New game created in classroom {objectName}",
+      "reported": "You has been reported due to violation",
+      "warning": "You have been warned due to violation"
+    },
+    "admin": {
+      "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
+      "reported_quizbank": "QuizBank {objectName} has been reported due to violation",
+      "invite_classroom": "User {user} has been invited to join classroom {objectName}",
+      "kick_classroom": "User {user} has been kicked from classroom {objectName}",
+      "ban_classroom": "User {user} has been banned from classroom {objectName}",
+      "create_post": "New post create in classroom {objectName}",
+      "create_game": "New game created in classroom {objectName}",
+      "reported": "User {user} has been reported due to violation",
+      "warning": "User {user} has been warned due to violation"
     }
   },
   "Navbar": {
@@ -875,6 +950,22 @@
     "faq": "FAQ",
     "support": "Support",
     "signout": "Sign out"
+  },
+  "AdminSidebar": {
+    "sidebar": {
+      "label": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "classrooms": "Classrooms",
+        "quizbank": "Quiz Bank",
+        "reports": "Reports"
+      }
+    },
+    "dropdown": {
+      "my_account": "My account",
+      "profile": "Profile",
+      "signout": "Sign out"
+    }
   },
   "AddQuiz": {
     "import-form": {

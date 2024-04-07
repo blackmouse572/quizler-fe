@@ -1,35 +1,22 @@
 "use server"
 
 import { getToken } from "@/lib/auth"
-import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
-import { Classroom } from "@/types"
-import PagedRequest from "@/types/paged-request"
-import PagedResponse from "@/types/paged-response"
+import { User } from "@/types"
 
-type Props = {
-  filter: Partial<PagedRequest>
-}
-
-export default async function getAllClassroomsAction({ filter }: Props) {
+export default async function getUserProfileAction() {
   const token = getToken().token
-  const query = toURLSeachParams({
-    ...filter,
-    sortBy: "created",
-    sortDirection: "DESC",
-  })
   const option: RequestInit = {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["AdminClassrooms"],
       revalidate: 60, // Revalidate every 60 second
     },
   }
-  const url = getAPIServerURL("/Classrooms") + "?" + query
+  const url = getAPIServerURL("/accounts/profile")
 
   const res = await fetch(url, option)
     .then(async (res) => {
@@ -39,7 +26,7 @@ export default async function getAllClassroomsAction({ filter }: Props) {
       }
       return data
     })
-    .then((res: PagedResponse<Classroom>) => {
+    .then((res: User) => {
       return {
         ok: true,
         message: "success",
@@ -47,7 +34,7 @@ export default async function getAllClassroomsAction({ filter }: Props) {
       }
     })
     .catch((err) => {
-      console.error(`[ERROR] getAllClassroomsAction: `, err.message)
+      console.error(`[ERROR] getUserProfile: `, err.message)
       return {
         ok: false,
         message: err.message,
