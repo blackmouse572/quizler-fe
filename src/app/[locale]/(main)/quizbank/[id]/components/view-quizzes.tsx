@@ -16,6 +16,9 @@ import { useTranslations } from "next-intl"
 import { useCallback, useMemo, useState } from "react"
 import { fetchAIquestion } from "../actions/fetch-AI-question"
 import ViewAIExplain from "./view-AI-explain"
+import { useRouter } from "next/navigation"
+import OverCountAILoggedInDialog from "./view-AI-explain-dialog/logged-in/over-count-ai-logged-in-dialog"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 
 type Props = {
   initialData: PagedResponse<Quiz>
@@ -33,6 +36,9 @@ interface HiddenAIAnswerState {
 export default function ViewQuizzes({ initialData, id }: Props) {
   const i18n = useTranslations("ViewQuizBank")
   const [hiddenAIAnswer, setHiddenAIAnswer] = useState<HiddenAIAnswerState>({})
+  const [openOverCountLoggedIn, setOpenOverCountLoggedIn] =
+    useState<boolean>(false)
+  const router = useRouter()
 
   const { data, error, isLoading, fetchNextPage, isError, hasNextPage } =
     useInfiniteQuery({
@@ -75,8 +81,17 @@ export default function ViewQuizzes({ initialData, id }: Props) {
 
       if (!hiddenAIAnswer[quizKey]) {
         try {
-          const res = await fetchAIquestion(question, answer, explaination)
-          const answerAIRes = res.candidates[0].content.parts[0].text
+          const res = await fetchAIquestion({ question, answer, explaination })
+
+          if (res.message === "Unauthorized") {
+            router.push("/login")
+          } else {
+            if (!res.ok || !res.data) {
+              setOpenOverCountLoggedIn(true)
+            }
+          }
+
+          const answerAIRes = res.data!.candidates[0].content.parts[0].text
 
           setHiddenAIAnswer((prevState) => ({
             ...prevState,
@@ -90,7 +105,7 @@ export default function ViewQuizzes({ initialData, id }: Props) {
         }
       }
     },
-    [hiddenAIAnswer]
+    [hiddenAIAnswer, router]
   )
 
   const renderTitle = useMemo(
@@ -126,33 +141,38 @@ export default function ViewQuizzes({ initialData, id }: Props) {
               </div>
               <div className="">
                 <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        onClick={async () =>
-                          await handleButtonAIClick(
-                            quiz.id.toString(),
-                            quiz.question,
-                            quiz.answer,
-                            ""
-                          )
-                        }
-                        variant="light"
-                        isIconOnly
-                        color="accent"
-                      >
-                        <Icons.AI />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{i18n("ViewQuizzes.view_AI_answer")}</p>
-                    </TooltipContent>
-                  </Tooltip>
+                  <Dialog>
+                    <Tooltip>
+                      <DialogTrigger asChild>
+                        <TooltipTrigger asChild>
+                          <Button
+                            onClick={async () =>
+                              await handleButtonAIClick(
+                                quiz.id.toString(),
+                                quiz.question,
+                                quiz.answer,
+                                ""
+                              )
+                            }
+                            variant="light"
+                            isIconOnly
+                            color="accent"
+                          >
+                            <Icons.AI />
+                          </Button>
+                        </TooltipTrigger>
+                      </DialogTrigger>
+                      <TooltipContent>
+                        <p>{i18n("ViewQuizzes.view_AI_answer")}</p>
+                      </TooltipContent>
+                      {openOverCountLoggedIn && <OverCountAILoggedInDialog />}
+                    </Tooltip>
+                  </Dialog>
                 </TooltipProvider>
               </div>
             </div>
 
-            {hiddenAIAnswer[quiz.id.toString()] && (
+            {!openOverCountLoggedIn && hiddenAIAnswer[quiz.id.toString()] && (
               <ViewAIExplain
                 key={quiz.id}
                 hiddenOrNot={
@@ -167,7 +187,7 @@ export default function ViewQuizzes({ initialData, id }: Props) {
         </div>
       )
     },
-    [handleButtonAIClick, hiddenAIAnswer, i18n]
+    [handleButtonAIClick, hiddenAIAnswer, i18n, openOverCountLoggedIn]
   )
 
   if (isLoading) {

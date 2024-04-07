@@ -1080,6 +1080,15 @@
     "rating": {
       "title": "Rate this quizbank",
       "success": "Thank you for your rating ({rating} ⭐)"
+    },
+    "view_ai_answer_error": {
+      "overcount_ai": {
+        "title": "Overcount daily view A.I answer",
+        "description": "You have surpass the limitation of view A.I answer for today",
+        "solution": "You can <strong>upgrade your account now</strong>, or wait tomorrow to earn more change to view A.I question.",
+        "cancel": "Cancel",
+        "submit": "Go to upgrade account"
+      }
     }
   },
   "CopyQuizBank": {
