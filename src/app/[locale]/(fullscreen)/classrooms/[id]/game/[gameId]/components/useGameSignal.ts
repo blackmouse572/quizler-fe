@@ -1,7 +1,6 @@
-import useGame from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
+import { useProgress } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useProgress"
 import { useUser } from "@/hooks/useUser"
 import { getAPIServerURL } from "@/lib/utils"
-import { User } from "@/types"
 import { AnswerHistoryResponse, GameQuiz } from "@/types/game"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
@@ -12,7 +11,9 @@ type GameSignalProp = {
 }
 export function useGameSignal({ gameId }: GameSignalProp) {
   const [conn, setConn] = useState<HubConnection | null>(null)
-  const { addQuestions } = useGame()
+  const [questions, setQuestions] = useState<GameQuiz>()
+  const { setTotal, setCurrent } = useProgress()
+
   const { user } = useUser()
   useEffect(() => {
     if (!user) return
@@ -21,7 +22,6 @@ export function useGameSignal({ gameId }: GameSignalProp) {
         .withUrl(getAPIServerURL("/gameSocket"), {
           accessTokenFactory: () => user?.accessToken.token!,
           headers: {
-            "Access-Control-Allow-Origin": "*",
             Authorization: `Bearer ${user?.accessToken.token!}`,
             "x-token": user?.accessToken.token!,
           },
@@ -37,16 +37,19 @@ export function useGameSignal({ gameId }: GameSignalProp) {
         console.log("Get Quizes", quizzes)
       })
 
-      conn.on("Joined Success", (user: User[]) =>
+      conn.on("Joined Success", (game: GameQuiz) => {
         console.log("Joined Success", user)
-      )
+        setQuestions(game)
+        setTotal(game.game?.duration ?? 60)
+        setCurrent(game.game?.duration ?? 60)
+      })
 
       return conn
     }
 
     const conn = connect()
     setConn(conn)
-  }, [user, user?.accessToken.token])
+  }, [setTotal, user, user?.accessToken.token])
 
   const start = useCallback(
     (cb: () => void) => {
@@ -79,5 +82,5 @@ export function useGameSignal({ gameId }: GameSignalProp) {
     [conn, gameId]
   )
 
-  return { start, leave, connectToGame, conn, getQuizzes }
+  return { start, leave, connectToGame, conn, getQuizzes, questions }
 }

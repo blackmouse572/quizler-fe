@@ -3,11 +3,7 @@ import MOCK_DATA from "../DATA.json"
 import { AnswerHistory, AnswerHistoryResponse, GameQuiz } from "@/types/game"
 
 type GameState = {
-  questions: GameQuiz[]
-  currentIndex: number
   currentQuestion: GameQuiz | undefined
-  isNextDisabled: boolean
-  isPrevDisabled: boolean
   duration: number
   userAnswers: AnswerHistory[]
 }

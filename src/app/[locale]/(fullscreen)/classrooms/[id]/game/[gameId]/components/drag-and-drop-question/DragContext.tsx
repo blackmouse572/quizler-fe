@@ -1,49 +1,20 @@
 "use client"
 import DragItem from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/drag-and-drop-question/DragItem"
 import Dropable from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/drag-and-drop-question/Dropable"
-import useGame, {
-  GameQuestion,
-} from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
+import { useProgress } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useProgress"
 import { useToast } from "@/components/ui/use-toast"
+import { GameQuiz } from "@/types/game"
 import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd"
 import { nanoid } from "nanoid"
 import React, { useCallback, useEffect, useMemo } from "react"
 
 type Props = {
-  data: GameQuestion
+  data: GameQuiz
+  onSubmit: (answer: string[]) => void
 }
-// const DATA = {
-//   questions: [
-//     {
-//       questions: "What is the capital of France?",
-//       id: 0,
-//     },
-//     {
-//       questions: "What is the capital of Germany?",
-//       id: 1,
-//     },
-//     {
-//       questions: "What is the capital of Spain?",
-//       id: 2,
-//     },
-//   ],
-//   answers: [
-//     {
-//       answer: "Paris",
-//       id: 0,
-//     },
-//     {
-//       answer: "Berlin",
-//       id: 1,
-//     },
-//     {
-//       answer: "Madrid",
-//       id: 2,
-//     },
-//   ],
-// }
 
-function DndQuestion({ data }: Props) {
+function DndQuestion({ data, onSubmit }: Props) {
+  const { current } = useProgress()
   const mod = useMemo(() => {
     const questions = data.questions.map((e, i) => ({
       id: nanoid(),
@@ -58,18 +29,6 @@ function DndQuestion({ data }: Props) {
   }, [data])
   const [pairs, setPairs] = React.useState<Record<string, string>>({})
   const [containerItems, setContainerItems] = React.useState(mod.answers)
-  const { duration, submitAnswer } = useGame()
-
-  useEffect(() => {
-    if (duration === 0) {
-      const answers = Object.entries(pairs).map(([questionId, answerId]) => ({
-        questionId: parseInt(questionId),
-        answer: mod.answers.find((e) => e.id === answerId),
-      }))
-      console.log(answers)
-    }
-    // submitAnswer({ questionId: data.id, answer:  })
-  }, [data, duration, mod.answers, pairs, submitAnswer])
 
   const { toast } = useToast()
 
@@ -130,9 +89,16 @@ function DndQuestion({ data }: Props) {
     [containerItems, mod.answers, pairs, toast]
   )
 
+  useEffect(() => {
+    if (Object.keys(pairs).length === mod.questions.length) {
+      const answers = mod.questions.map((e) => pairs[e.id])
+      console.log(answers)
+      onSubmit(answers)
+    }
+  }, [mod.questions, pairs, onSubmit])
+
   return (
     <DragDropContext onDragEnd={onDragEnd} enableDefaultSensors nonce="">
-      <div className="text-center">{duration}</div>
       <div className="grid grid-cols-3 gap-4">
         {mod.questions.map(({ id, question }, index) => {
           const item = mod.answers.find((e) => e.id === pairs[id])

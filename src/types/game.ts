@@ -16,10 +16,10 @@ export interface Game {
 }
 
 enum GameType {
-  Dnd = "Dnd",
-  ConstructedResponse = "ConstructedResponse",
-  TrueFalse = "TrueFalse",
-  MultipleChoice = "MultipleChoice",
+  MultipleChoice = 0,
+  TrueFalse = 2,
+  ConstructedResponse = 3,
+  Dnd = 4,
 }
 interface AnswerHistoryResponse {
   isCorrect: boolean

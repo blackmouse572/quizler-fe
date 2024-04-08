@@ -3,9 +3,6 @@ import DndQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameI
 import FillInQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/fill-in-question"
 import MultipleChoiceQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/mcq-question"
 import TrueFalseQuestion from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/tf-question"
-import useGame, {
-  GameQuestion,
-} from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { useGameSignal } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGameSignal"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,6 +14,7 @@ import {
 } from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { Game } from "@/types"
+import { GameQuiz, GameType } from "@/types/game"
 import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useState } from "react"
 import Confetti from "react-confetti"
@@ -29,37 +27,27 @@ function PlayGame({ initData }: PlayGameProps) {
   const [conffeti, setConffeti] = useState(false)
   const [error, setError] = useState<string>()
   const errorI18n = useTranslations("Errors")
-  const { connectToGame, leave, start, getQuizzes } = useGameSignal({
+  const { connectToGame, leave, start, questions } = useGameSignal({
     gameId: Number.parseInt(initData.id),
   })
-  const { questions, addQuestions, currentQuestion, duration, nextQuestion } =
-    useGame()
 
   useEffect(() => {
     start(() => {
       connectToGame(+initData.id)
-        ?.then(() => {
-          getQuizzes({
-            take: TAKE,
-            skip: 0,
-          })?.then((res) => {
-            console.log("get quizzes", res)
-            // addQuestions(res.data.items)
-          })
-        })
+        ?.then(() => {})
         .catch((e) => {
           setError(errorI18n("game.already-joined"))
         })
     })
-  }, [addQuestions, connectToGame, errorI18n, getQuizzes, initData.id, start])
+  }, [connectToGame, errorI18n, initData.id, start])
 
-  const renderQuestion = useCallback((question: GameQuestion) => {
+  const renderQuestion = useCallback((question: GameQuiz) => {
     switch (question.type) {
-      case "dnd":
-        return <DndQuestion data={question} />
-      case "mcq":
+      case GameType.Dnd:
+        return <DndQuestion data={question} onSubmit={() => {}} />
+      case GameType.MultipleChoice:
         return <MultipleChoiceQuestion data={question} onSubmit={() => {}} />
-      case "fib":
+      case GameType.ConstructedResponse:
         return <FillInQuestion data={question} onSubmit={() => {}} />
       default:
         return <TrueFalseQuestion data={question} onSubmit={() => {}} />
@@ -83,7 +71,7 @@ function PlayGame({ initData }: PlayGameProps) {
       </Card>
     )
   }
-  if (!currentQuestion) {
+  if (!questions) {
     return (
       <div className="flex h-[80vh] items-center justify-center">
         <Icons.Loader className="h-8 w-8 animate-spin" />
@@ -92,7 +80,7 @@ function PlayGame({ initData }: PlayGameProps) {
   }
   return (
     <div>
-      {renderQuestion(currentQuestion)}
+      {renderQuestion(questions)}
       {conffeti && <Confetti numberOfPieces={500} recycle={false} />}
     </div>
   )

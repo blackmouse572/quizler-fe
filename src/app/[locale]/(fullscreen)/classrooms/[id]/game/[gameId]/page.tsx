@@ -30,7 +30,7 @@ async function GamePage({ params }: Props) {
   }
   return (
     <BackgroundSquare variant={"topDown"} className="bg-grid-xl-slate-500/20">
-      <GameNavbar duration={60} />
+      <GameNavbar game={data!} />
       <div className="container mx-auto">
         <PlayGame initData={data!} />
       </div>

@@ -1,4 +1,3 @@
-import { GameQuestion } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import {
   Card,
   CardContent,
@@ -7,10 +6,11 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { GameQuiz } from "@/types/game"
 import { useCallback } from "react"
 
 type Props = {
-  data: GameQuestion
+  data: GameQuiz
   onSubmit: (answer: string) => void
 }
 function FillInQuestion({ data, onSubmit }: Props) {
