@@ -1,22 +1,29 @@
-import { GameQuestion } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { GameQuiz } from "@/types/game"
 import { useCallback, useMemo, useState } from "react"
 
 type Props = {
-  data: GameQuestion
+  data: GameQuiz
   onSubmit: (answer: string) => void
+  disabled: boolean
+  isWrong: boolean
 }
-function MultipleChoiceQuestion({ data }: Props) {
+function MultipleChoiceQuestion({
+  data,
+  disabled,
+  onSubmit,
+  isWrong = false,
+}: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<string>()
-  const selecteAnswer = useCallback(
+  const selectecAnswer = useCallback(
     (answer: string) => {
-      if (!selectedAnswer) {
-        setSelectedAnswer(answer)
-        return
-      }
+      if (disabled) return
+      setSelectedAnswer(answer)
+      onSubmit(answer)
+      return
     },
-    [selectedAnswer]
+    [disabled, onSubmit]
   )
   const renderQuestion = useMemo(() => {
     return (
@@ -27,11 +34,16 @@ function MultipleChoiceQuestion({ data }: Props) {
     return data.answers.map((answer, index) => {
       return (
         <Card
+          key={answer}
           className={cn(
             "min-h-32 cursor-pointer transition-all hover:bg-muted active:bg-accent",
-            selectedAnswer === answer && "border border-emerald-500"
+            {
+              "border-red-500 bg-red-200 hover:bg-red-300":
+                isWrong && selectedAnswer === answer,
+              "border border-emerald-500": selectedAnswer === answer,
+            }
           )}
-          onClick={() => selecteAnswer(answer)}
+          onClick={() => selectecAnswer(answer)}
         >
           <CardContent className="flex h-full w-full items-center justify-center text-center text-lg font-medium">
             {answer}
@@ -39,7 +51,8 @@ function MultipleChoiceQuestion({ data }: Props) {
         </Card>
       )
     })
-  }, [data.answers, selecteAnswer, selectedAnswer])
+  }, [data.answers, isWrong, selectecAnswer, selectedAnswer])
+
   return (
     <>
       {renderQuestion}

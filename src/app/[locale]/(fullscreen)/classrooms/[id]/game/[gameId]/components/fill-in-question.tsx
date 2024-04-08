@@ -1,4 +1,3 @@
-import { GameQuestion } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import {
   Card,
   CardContent,
@@ -7,13 +6,17 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+import { GameQuiz } from "@/types/game"
 import { useCallback } from "react"
 
 type Props = {
-  data: GameQuestion
+  data: GameQuiz
+  disabled?: boolean
   onSubmit: (answer: string) => void
+  isWrong: boolean
 }
-function FillInQuestion({ data, onSubmit }: Props) {
+function FillInQuestion({ data, onSubmit, disabled, isWrong = false }: Props) {
   const submitAnswer = useCallback(
     (answer: string) => {
       onSubmit(answer)
@@ -31,8 +34,14 @@ function FillInQuestion({ data, onSubmit }: Props) {
       </CardContent>
       <CardFooter>
         <Input
-          className="h-12 w-full"
-          onChange={(e) => submitAnswer(e.target.value)}
+          className={cn(
+            "h-12 w-full",
+            isWrong ? "border-red-500 bg-red-200" : ""
+          )}
+          onChange={(e) => {
+            if (disabled) return
+            return submitAnswer(e.target.value)
+          }}
         />
       </CardFooter>
     </Card>

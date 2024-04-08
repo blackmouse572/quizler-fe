@@ -52,13 +52,6 @@ async function GamePage({ params, searchParams }: Props) {
                 classroomId: params.id,
                 isTest: false,
               }}
-              trigger={
-                <NamedToolTip content={t("actions.create.index")}>
-                  <Button isIconOnly>
-                    <Icons.Plus />
-                  </Button>
-                </NamedToolTip>
-              }
             />
           </NextIntlClientProvider>
         </div>

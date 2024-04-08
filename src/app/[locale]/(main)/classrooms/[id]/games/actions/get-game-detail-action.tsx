@@ -1,22 +1,27 @@
-"use server"
-import { AddGameFormType } from "@/app/[locale]/(main)/classrooms/[id]/games/components/add-game-form"
+import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-bank-classroom-action"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { Game } from "@/types"
-import { revalidateTag } from "next/cache"
 
-export async function createGameAction(payload: AddGameFormType) {
-  const url = getAPIServerURL(`/game`)
-  const { token } = getToken()
+type Props = {
+  gameId: number
+}
+async function getGameDetailsAction({
+  gameId,
+}: Props): Promise<TAPIResult<Game>> {
+  const token = getToken().token
+  const url = getAPIServerURL(`/Game/${gameId}`)
   const options: RequestInit = {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(payload),
+    next: {
+      tags: ["games", `game-${gameId}`],
+      revalidate: 60, // revalidate every 60 seconds
+    },
   }
-
   return fetch(url, options)
     .then(async (res) => {
       const json = await res.json()
@@ -26,19 +31,20 @@ export async function createGameAction(payload: AddGameFormType) {
       }
       return json
     })
-    .then((data: Game) => {
-      revalidateTag(`game-classroom-${payload.classroomId}`)
+    .then((res: Game) => {
       return {
         ok: true,
         message: "success",
-        data,
+        data: res,
       }
     })
     .catch((error) => {
       return {
         ok: false,
-        message: error.message,
-        data: null,
+        message: error.message as string,
+        data: undefined,
       }
     })
 }
+
+export default getGameDetailsAction

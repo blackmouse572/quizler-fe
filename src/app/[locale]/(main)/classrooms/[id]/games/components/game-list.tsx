@@ -15,6 +15,7 @@ import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { useInView } from "framer-motion"
 import { useFormatter, useTranslations } from "next-intl"
+import Link from "next/link"
 import { useEffect, useMemo, useRef } from "react"
 type Props = {
   classroomId: string
@@ -51,7 +52,9 @@ function GameList(props: Props) {
         return (
           <Card>
             <CardHeader>
-              <CardTitle>{game.gameName}</CardTitle>
+              <Link href={`/classrooms/${props.classroomId}/game/${game.id}`}>
+                <CardTitle>{game.gameName}</CardTitle>
+              </Link>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -91,7 +94,7 @@ function GameList(props: Props) {
         )
       })
     })
-  }, [data?.pages, format, t])
+  }, [data?.pages, format, props.classroomId, t])
 
   useEffect(() => {
     if (inView && hasNextPage && !isLoading) {
