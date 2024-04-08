@@ -41,7 +41,7 @@ function PlayGame({ initData }: PlayGameProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState<string>()
   const errorI18n = useTranslations("Errors")
-  const { current, reduce } = useProgress()
+  const { current, reduce, reset } = useProgress()
 
   const timeInterval = useRef<NodeJS.Timeout>()
 
@@ -56,11 +56,12 @@ function PlayGame({ initData }: PlayGameProps) {
       }
       // next question in 2 seconds
       setTimeout(() => {
+        reset()
         cb()
         setIsWrong(false)
       }, 2000)
     },
-    []
+    [reset]
   )
 
   const { connectToGame, leave, start, questions, submitAnswer } =
