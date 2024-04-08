@@ -1,21 +1,23 @@
-import { GameQuestion } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { Card, CardContent } from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
+import { GameQuiz } from "@/types/game"
 import { useCallback, useMemo, useState } from "react"
 
 type Props = {
-  data: GameQuestion
+  data: GameQuiz
+  disabled?: boolean
   onSubmit: (answer: boolean) => void
 }
-function TrueFalseQuestion({ data, onSubmit }: Props) {
+function TrueFalseQuestion({ data, onSubmit, disabled }: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<boolean>()
   const submitAnswer = useCallback(
     (answer: boolean) => {
+      if (disabled) return  
       setSelectedAnswer(answer)
       onSubmit
     },
-    [onSubmit]
+    [disabled, onSubmit]
   )
   const renderQuestion = useMemo(() => {
     return (

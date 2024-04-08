@@ -10,19 +10,7 @@ type Props = {
 }
 function GameNavbar({ game }: Props) {
   const { current, total, setCurrent, reduce } = useProgress()
-  const timeInterval = useRef<NodeJS.Timeout>()
   const width = useMemo(() => (current / total) * 100, [current, total])
-
-  useEffect(() => {
-    timeInterval.current = setInterval(() => {
-      if (current <= 0) return
-      reduce()
-    }, 1000)
-
-    return () => {
-      clearInterval(timeInterval.current)
-    }
-  }, [current, reduce])
 
   return (
     <div className="fixed top-0 h-16 w-full border-b border-input bg-background shadow-md">

@@ -1,7 +1,6 @@
 "use client"
 import DragItem from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/drag-and-drop-question/DragItem"
 import Dropable from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/drag-and-drop-question/Dropable"
-import { useProgress } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useProgress"
 import { useToast } from "@/components/ui/use-toast"
 import { GameQuiz } from "@/types/game"
 import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd"
@@ -10,11 +9,11 @@ import React, { useCallback, useEffect, useMemo } from "react"
 
 type Props = {
   data: GameQuiz
+  disabled?: boolean
   onSubmit: (answer: string[]) => void
 }
 
-function DndQuestion({ data, onSubmit }: Props) {
-  const { current } = useProgress()
+function DndQuestion({ data, disabled, onSubmit }: Props) {
   const mod = useMemo(() => {
     const questions = data.questions.map((e, i) => ({
       id: nanoid(),
@@ -105,6 +104,7 @@ function DndQuestion({ data, onSubmit }: Props) {
           return (
             <Dropable
               mode="standard"
+              isDropDisabled={disabled}
               item={{
                 id,
                 title: question,
@@ -117,6 +117,7 @@ function DndQuestion({ data, onSubmit }: Props) {
         })}
       </div>
       <Dropable
+        isDropDisabled={disabled}
         item={{
           id: "0",
           title: "",
@@ -127,6 +128,7 @@ function DndQuestion({ data, onSubmit }: Props) {
           {containerItems.map((answer, index) => {
             return (
               <DragItem
+                isDragDisabled={disabled}
                 item={answer}
                 key={`${answer}-${index}`}
                 index={index}

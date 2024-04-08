@@ -6,17 +6,18 @@ import { useCallback, useMemo, useState } from "react"
 type Props = {
   data: GameQuiz
   onSubmit: (answer: string) => void
+  disabled: boolean
 }
-function MultipleChoiceQuestion({ data }: Props) {
+function MultipleChoiceQuestion({ data, disabled, onSubmit }: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<string>()
   const selectecAnswer = useCallback(
     (answer: string) => {
-      if (!selectedAnswer) {
-        setSelectedAnswer(answer)
-        return
-      }
+      if (disabled) return
+      setSelectedAnswer(answer)
+      onSubmit(answer)
+      return
     },
-    [selectedAnswer]
+    [disabled, onSubmit]
   )
   const renderQuestion = useMemo(() => {
     return (
@@ -27,9 +28,11 @@ function MultipleChoiceQuestion({ data }: Props) {
     return data.answers.map((answer, index) => {
       return (
         <Card
+          key={answer}
           className={cn(
             "min-h-32 cursor-pointer transition-all hover:bg-muted active:bg-accent",
-            selectedAnswer === answer && "border border-emerald-500"
+            selectedAnswer === answer &&
+              "border border-emerald-500 bg-emerald-200 hover:bg-emerald-300"
           )}
           onClick={() => selectecAnswer(answer)}
         >

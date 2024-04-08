@@ -11,9 +11,10 @@ import { useCallback } from "react"
 
 type Props = {
   data: GameQuiz
+  disabled?: boolean
   onSubmit: (answer: string) => void
 }
-function FillInQuestion({ data, onSubmit }: Props) {
+function FillInQuestion({ data, onSubmit,disabled }: Props) {
   const submitAnswer = useCallback(
     (answer: string) => {
       onSubmit(answer)
@@ -32,7 +33,10 @@ function FillInQuestion({ data, onSubmit }: Props) {
       <CardFooter>
         <Input
           className="h-12 w-full"
-          onChange={(e) => submitAnswer(e.target.value)}
+          onChange={(e) => {
+            if (disabled) return
+            return submitAnswer(e.target.value)
+          }}
         />
       </CardFooter>
     </Card>

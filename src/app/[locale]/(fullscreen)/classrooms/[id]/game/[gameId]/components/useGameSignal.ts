@@ -1,15 +1,15 @@
 import { useProgress } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useProgress"
 import { useUser } from "@/hooks/useUser"
 import { getAPIServerURL } from "@/lib/utils"
-import { AnswerHistoryResponse, GameQuiz } from "@/types/game"
-import PagedRequest from "@/types/paged-request"
-import PagedResponse from "@/types/paged-response"
+import { AnswerHistory, AnswerHistoryResponse, GameQuiz } from "@/types/game"
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr"
 import { useCallback, useEffect, useState } from "react"
 type GameSignalProp = {
   gameId: number
+  onReceiveAnswer: (answer: AnswerHistoryResponse) => void
+  handleErrors?: (error: string) => void
 }
-export function useGameSignal({ gameId }: GameSignalProp) {
+export function useGameSignal({ gameId, onReceiveAnswer }: GameSignalProp) {
   const [conn, setConn] = useState<HubConnection | null>(null)
   const [questions, setQuestions] = useState<GameQuiz>()
   const { setTotal, setCurrent } = useProgress()
@@ -31,14 +31,11 @@ export function useGameSignal({ gameId }: GameSignalProp) {
 
       conn.on("Answer Result", (result: AnswerHistoryResponse) => {
         console.log("Answer Result", result)
-      })
-
-      conn.on("Get Quizes", (quizzes: PagedResponse<GameQuiz>) => {
-        console.log("Get Quizes", quizzes)
+        onReceiveAnswer(result)
       })
 
       conn.on("Joined Success", (game: GameQuiz) => {
-        console.log("Joined Success", user)
+        console.log("Joined Success", game)
         setQuestions(game)
         setTotal(game.game?.duration ?? 60)
         setCurrent(game.game?.duration ?? 60)
@@ -49,7 +46,7 @@ export function useGameSignal({ gameId }: GameSignalProp) {
 
     const conn = connect()
     setConn(conn)
-  }, [setTotal, user, user?.accessToken.token])
+  }, [onReceiveAnswer, setCurrent, setTotal, user, user?.accessToken.token])
 
   const start = useCallback(
     (cb: () => void) => {
@@ -75,12 +72,13 @@ export function useGameSignal({ gameId }: GameSignalProp) {
     [conn]
   )
 
-  const getQuizzes = useCallback(
-    (options: Partial<PagedRequest>) => {
-      return conn?.invoke("GetQuizes", gameId, options)
+  const submitAnswer = useCallback(
+    (answer: AnswerHistory) => {
+      console.log("Add answer", answer)
+      return conn?.invoke("AddAnswerHistory", answer)
     },
-    [conn, gameId]
+    [conn]
   )
 
-  return { start, leave, connectToGame, conn, getQuizzes, questions }
+  return { start, leave, connectToGame, conn, submitAnswer, questions }
 }
