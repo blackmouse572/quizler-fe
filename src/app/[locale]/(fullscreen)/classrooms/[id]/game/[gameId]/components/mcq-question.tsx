@@ -7,8 +7,14 @@ type Props = {
   data: GameQuiz
   onSubmit: (answer: string) => void
   disabled: boolean
+  isWrong: boolean
 }
-function MultipleChoiceQuestion({ data, disabled, onSubmit }: Props) {
+function MultipleChoiceQuestion({
+  data,
+  disabled,
+  onSubmit,
+  isWrong = false,
+}: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<string>()
   const selectecAnswer = useCallback(
     (answer: string) => {
@@ -31,8 +37,11 @@ function MultipleChoiceQuestion({ data, disabled, onSubmit }: Props) {
           key={answer}
           className={cn(
             "min-h-32 cursor-pointer transition-all hover:bg-muted active:bg-accent",
-            selectedAnswer === answer &&
-              "border border-emerald-500 bg-emerald-200 hover:bg-emerald-300"
+            {
+              "border-red-500 bg-red-200 hover:bg-red-300":
+                isWrong && selectedAnswer === answer,
+              "border border-emerald-500": selectedAnswer === answer,
+            }
           )}
           onClick={() => selectecAnswer(answer)}
         >
@@ -42,7 +51,7 @@ function MultipleChoiceQuestion({ data, disabled, onSubmit }: Props) {
         </Card>
       )
     })
-  }, [data.answers, selectecAnswer, selectedAnswer])
+  }, [data.answers, isWrong, selectecAnswer, selectedAnswer])
 
   return (
     <>

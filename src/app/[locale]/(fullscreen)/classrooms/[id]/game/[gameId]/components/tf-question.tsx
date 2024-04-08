@@ -8,12 +8,13 @@ type Props = {
   data: GameQuiz
   disabled?: boolean
   onSubmit: (answer: boolean) => void
+  isWrong: boolean
 }
-function TrueFalseQuestion({ data, onSubmit, disabled }: Props) {
+function TrueFalseQuestion({ data, onSubmit, disabled, isWrong }: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<boolean>()
   const submitAnswer = useCallback(
     (answer: boolean) => {
-      if (disabled) return  
+      if (disabled) return
       setSelectedAnswer(answer)
       onSubmit
     },
@@ -30,7 +31,10 @@ function TrueFalseQuestion({ data, onSubmit, disabled }: Props) {
         <Card
           className={cn(
             "min-h-32 cursor-pointer transition-all hover:bg-muted active:bg-accent",
-            selectedAnswer === true && "border border-emerald-500"
+            selectedAnswer === true && "border border-emerald-500",
+            isWrong &&
+              selectedAnswer === true &&
+              "border border-red-500 bg-red-200"
           )}
           onClick={() => submitAnswer(true)}
         >
@@ -41,7 +45,10 @@ function TrueFalseQuestion({ data, onSubmit, disabled }: Props) {
         <Card
           className={cn(
             "min-h-32 cursor-pointer transition-all hover:bg-muted active:bg-accent",
-            selectedAnswer === false && "border border-emerald-500"
+            selectedAnswer === false && "border border-emerald-500",
+            isWrong &&
+              selectedAnswer === false &&
+              "border border-red-500 bg-red-200"
           )}
           onClick={() => submitAnswer(false)}
         >
@@ -51,7 +58,7 @@ function TrueFalseQuestion({ data, onSubmit, disabled }: Props) {
         </Card>
       </>
     )
-  }, [submitAnswer, selectedAnswer])
+  }, [selectedAnswer, isWrong, submitAnswer])
   return (
     <>
       {renderQuestion}

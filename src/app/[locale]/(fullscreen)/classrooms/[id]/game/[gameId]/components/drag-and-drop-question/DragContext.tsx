@@ -10,10 +10,11 @@ import React, { useCallback, useEffect, useMemo } from "react"
 type Props = {
   data: GameQuiz
   disabled?: boolean
+  isWrong?: boolean
   onSubmit: (answer: string[]) => void
 }
 
-function DndQuestion({ data, disabled, onSubmit }: Props) {
+function DndQuestion({ data, disabled, onSubmit, isWrong = false }: Props) {
   const mod = useMemo(() => {
     const questions = data.questions.map((e, i) => ({
       id: nanoid(),
@@ -105,6 +106,7 @@ function DndQuestion({ data, disabled, onSubmit }: Props) {
             <Dropable
               mode="standard"
               isDropDisabled={disabled}
+              className={isWrong ? "border-red-500 bg-red-200" : ""}
               item={{
                 id,
                 title: question,

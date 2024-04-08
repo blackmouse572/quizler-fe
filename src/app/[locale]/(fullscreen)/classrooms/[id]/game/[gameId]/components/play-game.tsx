@@ -37,6 +37,7 @@ function PlayGame({ initData }: PlayGameProps) {
   })
   const [conffeti, setConffeti] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isWrong, setIsWrong] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState<string>()
   const errorI18n = useTranslations("Errors")
@@ -44,13 +45,23 @@ function PlayGame({ initData }: PlayGameProps) {
 
   const timeInterval = useRef<NodeJS.Timeout>()
 
-  const handleResult = useCallback((result: AnswerHistoryResponse) => {
-    setIsLoading(false)
-    setIsSubmitted(false)
-    if (result.isCorrect) {
-      setConffeti(true)
-    }
-  }, [])
+  const handleResult = useCallback(
+    (result: AnswerHistoryResponse, cb: () => void) => {
+      setIsLoading(false)
+      setIsSubmitted(false)
+      if (result.isCorrect) {
+        setConffeti(true)
+      } else {
+        setIsWrong(true)
+      }
+      // next question in 2 seconds
+      setTimeout(() => {
+        cb()
+        setIsWrong(false)
+      }, 2000)
+    },
+    []
+  )
 
   const { connectToGame, leave, start, questions, submitAnswer } =
     useGameSignal({
@@ -104,6 +115,7 @@ function PlayGame({ initData }: PlayGameProps) {
           return (
             <DndQuestion
               data={question}
+              isWrong={isWrong}
               disabled={isSubmitted}
               onSubmit={(answer) => {
                 setAnswer((prev) => ({
@@ -116,6 +128,7 @@ function PlayGame({ initData }: PlayGameProps) {
         case GameType.MultipleChoice:
           return (
             <MultipleChoiceQuestion
+              isWrong={isWrong}
               data={question}
               onSubmit={(answer) => {
                 setAnswer((prev) => ({
@@ -129,6 +142,7 @@ function PlayGame({ initData }: PlayGameProps) {
         case GameType.ConstructedResponse:
           return (
             <FillInQuestion
+              isWrong={isWrong}
               data={question}
               disabled={isSubmitted}
               onSubmit={(answerr) => {
@@ -142,6 +156,7 @@ function PlayGame({ initData }: PlayGameProps) {
         default:
           return (
             <TrueFalseQuestion
+              isWrong={isWrong}
               data={question}
               disabled={isSubmitted}
               onSubmit={(answer) => {
@@ -154,7 +169,7 @@ function PlayGame({ initData }: PlayGameProps) {
           )
       }
     },
-    [isSubmitted]
+    [isSubmitted, isWrong]
   )
 
   if (error) {
@@ -185,7 +200,13 @@ function PlayGame({ initData }: PlayGameProps) {
   return (
     <div>
       {renderQuestion(questions)}
-      {conffeti && <Confetti numberOfPieces={500} recycle={false} />}
+      {conffeti && (
+        <Confetti
+          numberOfPieces={500}
+          recycle={false}
+          onConfettiComplete={() => setConffeti(false)}
+        />
+      )}
     </div>
   )
 }

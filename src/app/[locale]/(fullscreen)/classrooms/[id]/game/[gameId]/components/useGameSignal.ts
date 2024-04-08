@@ -6,7 +6,7 @@ import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr"
 import { useCallback, useEffect, useState } from "react"
 type GameSignalProp = {
   gameId: number
-  onReceiveAnswer: (answer: AnswerHistoryResponse) => void
+  onReceiveAnswer: (answer: AnswerHistoryResponse, cb: () => void) => void
   handleErrors?: (error: string) => void
 }
 export function useGameSignal({ gameId, onReceiveAnswer }: GameSignalProp) {
@@ -31,7 +31,9 @@ export function useGameSignal({ gameId, onReceiveAnswer }: GameSignalProp) {
 
       conn.on("Answer Result", (result: AnswerHistoryResponse) => {
         console.log("Answer Result", result)
-        onReceiveAnswer(result)
+        onReceiveAnswer(result, () => {
+          setQuestions(result.quiz)
+        })
       })
 
       conn.on("Joined Success", (game: GameQuiz) => {
