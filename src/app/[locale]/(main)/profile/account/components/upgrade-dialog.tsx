@@ -19,6 +19,7 @@ import {
 } from "../actions/fetch-checkout"
 import { loadStripe } from "@stripe/stripe-js"
 import { EmbeddedCheckoutProvider } from "@stripe/react-stripe-js"
+import { STRIPE_PK } from "@/lib/constant"
 
 type Props = {
   plan: AccountPlan
@@ -40,9 +41,7 @@ const UpgradeDialog = ({ plan }: Props) => {
     const res = await saveTransaction(sessionId)
   }, [sessionId])
 
-  const stripePromise = loadStripe(
-    "pk_test_51L99bOEg8CatoOFy44Ei3Gpgrt58l7M3FeCtE2qDuToOVpahg9dvZwTfCyaKLhwl46SmhlADUHStjSZvwbVLiQM600Jaw3nkDA"
-  )
+  const stripePromise = loadStripe(STRIPE_PK)
 
   const options = useMemo(
     () => ({
