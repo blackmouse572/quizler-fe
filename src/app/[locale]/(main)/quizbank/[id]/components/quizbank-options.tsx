@@ -16,6 +16,7 @@ type Props = {
   isGuess: boolean
   userCurrentClass: Classroom[]
   isOwnQuizBank?: boolean
+  numberOfQuiz: number
 }
 
 const QuizBankActions = ({
@@ -24,6 +25,7 @@ const QuizBankActions = ({
   userCurrentClass,
   quizbankId,
   quizBankVisibility,
+  numberOfQuiz
 }: Props) => {
   const i18n = useTranslations("ViewQuizBank")
   const i18N = useTranslations("Change_quizbank_visibility")
@@ -60,6 +62,7 @@ const QuizBankActions = ({
         quizbankId={quizbankId}
         buttonContent={i18n("author.copy_button")}
         classes={userCurrentClass}
+        numberOfQuiz={numberOfQuiz}
       />,
     ]
     const OwnerQuizBankButtons = [
@@ -88,14 +91,7 @@ const QuizBankActions = ({
       shouldUsedButtons = [...visitorQuizBankButtons]
     }
     return [...defaultButtons, ...shouldUsedButtons]
-  }, [
-    i18n,
-    isOwnQuizBank,
-    quizBankVisibility,
-    quizbankId,
-    toggleQuizBankVisibility,
-    userCurrentClass,
-  ])
+  }, [i18n, isOwnQuizBank, numberOfQuiz, quizBankVisibility, quizbankId, toggleQuizBankVisibility, userCurrentClass])
 
   return (
     <div className="flex justify-between gap-2">

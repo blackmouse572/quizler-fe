@@ -11,6 +11,7 @@ type Props = {
   relativeQuizBankData: QuizBank[]
   classname?: string
   isOwnQuizBank?: boolean
+  numberOfQuiz: number
 }
 
 function ViewQuizBank({
@@ -20,6 +21,7 @@ function ViewQuizBank({
   relativeQuizBankData,
   classname,
   isOwnQuizBank,
+  numberOfQuiz
 }: Props) {
   return (
     <div className="container mx-auto mb-8 space-y-8">
@@ -31,6 +33,7 @@ function ViewQuizBank({
         classname={classname}
         isOwnQuizBank={isOwnQuizBank}
         quizBankVisibility={quizBankData.visibility}
+        numberOfQuiz={numberOfQuiz}
       />
     </div>
   )

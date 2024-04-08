@@ -71,6 +71,7 @@ async function QuizBankDetailPage({ params }: QuizBankDetailPageProps) {
           (item) => item.id !== quizBankData.id
         )}
         isOwnQuizBank={isUserOwnQuizBank}
+        numberOfQuiz={quizData.data.data.metadata.totals}
       />
     </NextIntlClientProvider>
   )

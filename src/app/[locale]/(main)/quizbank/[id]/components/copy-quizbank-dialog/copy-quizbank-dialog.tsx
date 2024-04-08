@@ -52,6 +52,7 @@ type Props = {
   buttonContent: string
   classes: Classroom[]
   quizbankId: string
+  numberOfQuiz: number
 } & React.ComponentProps<"div">
 
 type TClassroomChoices = {
@@ -63,6 +64,7 @@ export default function CopyQuizBankDialog({
   buttonContent,
   classes,
   quizbankId,
+  numberOfQuiz,
   ...props
 }: Props) {
   const i18n = useTranslations("CopyQuizBank")
@@ -282,7 +284,7 @@ export default function CopyQuizBankDialog({
                 <DialogTitle>{i18n("title")}</DialogTitle>
                 <DialogDescription>
                   {i18n("description")}
-                  <span className="font-bold"> 230 {i18n("quizzes")}</span>?
+                  <span className="font-bold"> {numberOfQuiz} {i18n("quizzes")}</span>?
                 </DialogDescription>
               </div>
 

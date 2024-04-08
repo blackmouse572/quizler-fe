@@ -1283,6 +1283,15 @@
     "rating": {
       "title": "Đánh giá",
       "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
+    },
+    "view_ai_answer_error": {
+      "overcount_ai": {
+        "title": "Hạn chế xem câu trả lời A.I hàng ngày",
+        "description": "Bạn đã vượt quá giới hạn xem câu trả lời A.I cho hôm nay",
+        "solution": "Bạn có thể <strong>nâng cấp tài khoản của bạn ngay bây giờ</strong>, hoặc chờ đến ngày mai để có cơ hội xem câu trả lời A.I nhiều hơn.",
+        "cancel": "Hủy",
+        "submit": "Đi đến nâng cấp tài khoản"
+      }
     }
   },
   "NotFound": {

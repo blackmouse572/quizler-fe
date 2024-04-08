@@ -15,6 +15,7 @@ type Props = {
   quizbankId: string
   isOwnQuizBank?: boolean
   quizBankVisibility: "Public" | "Private"
+  numberOfQuiz: number
 }
 
 export default function AuthorQuizBank({
@@ -23,6 +24,7 @@ export default function AuthorQuizBank({
   quizbankId,
   isOwnQuizBank,
   quizBankVisibility,
+  numberOfQuiz
 }: Props) {
   const i18n = useTranslations("ViewQuizBank")
   const { data: userCurrentClass }: { data: Classroom[] } = use(
@@ -82,6 +84,7 @@ export default function AuthorQuizBank({
           quizBankVisibility={quizBankVisibility}
           isOwnQuizBank={isOwnQuizBank}
           userCurrentClass={userCurrentClass}
+          numberOfQuiz={numberOfQuiz}
         />
       </div>
     </div>
