@@ -1,6 +1,7 @@
 "use client"
 import MyQuizbankAutocomplete from "@/app/[locale]/(main)/classrooms/[id]/games/components/quizbank-autocomplete"
 import { useCreateGame } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useCreateGame"
+import { queryClient } from "@/app/[locale]/provider"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -134,6 +135,9 @@ function AddGameForm({ intialValues }: AddGameFormProp) {
   const { mutate, isPending } = useCreateGame({
     classroomId: intialValues.classroomId ?? "",
     onSuccess: (game) => {
+      queryClient.invalidateQueries({
+        queryKey: ["games", `game-classroom-${game.classroomId}`],
+      })
       toast({
         title: t("actions.create.form.success.title"),
         description: t("actions.create.form.success.description"),
@@ -142,7 +146,7 @@ function AddGameForm({ intialValues }: AddGameFormProp) {
           <Button
             onClick={() => {
               const link = getAbsoluteURL(
-                `/classrooms/${game.classroomId}/games/${game.id}`
+                `/classrooms/${game.classroomId}/game/${game.id}`
               )
               //copy to clipboard
               navigator.clipboard.writeText(link)
@@ -154,6 +158,7 @@ function AddGameForm({ intialValues }: AddGameFormProp) {
         ),
       })
       form.reset()
+      setOpen(!isOpen)
     },
     onError(e) {
       toast({
