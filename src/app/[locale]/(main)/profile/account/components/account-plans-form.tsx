@@ -39,12 +39,13 @@ function AccountPlanSelectionForm({
   const mockPlans = useMemo(
     () => [
       {
-        id: "0",
+        id: "1",
         title: t("hobby.title"),
+        mode: 'payment',
         duration: 0,
         description: t("hobby.description"),
         amount: 0,
-        currency: "USD",
+        currency: "usd",
         features: [
           t("hobby.features.feature1"),
           t("hobby.features.feature2"),
@@ -53,11 +54,12 @@ function AccountPlanSelectionForm({
         ],
       },
       {
-        id: "1",
+        id: "2",
+        mode: 'payment',
         title: t("learner.title"),
         description: t("learner.description"),
         amount: 50,
-        currency: "USD",
+        currency: "usd",
         features: [
           t("learner.features.feature1"),
           t("learner.features.feature2"),
@@ -65,11 +67,12 @@ function AccountPlanSelectionForm({
         ],
       },
       {
-        id: "2",
+        id: "3",
+        mode: 'payment',
         title: t("expert.title"),
         description: t("expert.description"),
         amount: 100,
-        currency: "USD",
+        currency: "usd",
         features: [
           t("expert.features.feature1"),
           t("expert.features.feature2"),
@@ -120,7 +123,7 @@ function AccountPlanSelectionForm({
             </CardHeader>
             <CardContent>
               <p className="font-heading text-3xl font-bold">
-                <span className="text-7xl">{plan.amount}</span> {plan.currency}
+                <span className="text-7xl">{plan.amount}</span> {plan.currency.toUpperCase()}
                 <span className="text-gray-500">/months</span>
               </p>
             </CardContent>
