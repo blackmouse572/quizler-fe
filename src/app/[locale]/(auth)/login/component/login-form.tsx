@@ -79,7 +79,6 @@ function LoginForm({}: Props) {
           setIsLoading(false)
           return setErrMsg(t("error.not_found"))
         }
-        setIsLoading(false)
         router.push("/")
       })
     },
