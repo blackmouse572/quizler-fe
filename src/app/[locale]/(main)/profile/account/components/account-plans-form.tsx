@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button"
+"use client"
+
 import {
   Card,
   CardContent,
@@ -15,9 +16,8 @@ import { AccountPlan } from "../type"
 import UpgradeDialog from "./upgrade-dialog"
 
 type Props = {
-  onPlanSelection: (planId: string) => void
   action: EFormAction
-  defaultPlanId?: string
+  plans: AccountPlan[]
 }
 
 const initialPlan: AccountPlan = {
@@ -26,76 +26,30 @@ const initialPlan: AccountPlan = {
   description: "",
   amount: 0,
   currency: "",
+  duration: "0",
+  maxStudent: 0,
+  useAICount: 0,
   features: [],
+  isRelease: false,
+  isCurrent: true,
 }
 
-function AccountPlanSelectionForm({
-  onPlanSelection,
-  action,
-  defaultPlanId,
-}: Props) {
+function AccountPlanSelectionForm({ action, plans }: Props) {
   const t = useTranslations("Settings.plans.plans")
-  // TODO: change plans info in the future
-  const mockPlans = useMemo(
-    () => [
-      {
-        id: "1",
-        title: t("hobby.title"),
-        mode: 'payment',
-        duration: 0,
-        description: t("hobby.description"),
-        amount: 0,
-        currency: "usd",
-        features: [
-          t("hobby.features.feature1"),
-          t("hobby.features.feature2"),
-          t("hobby.features.feature3"),
-          t("hobby.features.feature4"),
-        ],
-      },
-      {
-        id: "2",
-        mode: 'payment',
-        title: t("learner.title"),
-        description: t("learner.description"),
-        amount: 50,
-        currency: "usd",
-        features: [
-          t("learner.features.feature1"),
-          t("learner.features.feature2"),
-          t("learner.features.feature3"),
-        ],
-      },
-      {
-        id: "3",
-        mode: 'payment',
-        title: t("expert.title"),
-        description: t("expert.description"),
-        amount: 100,
-        currency: "usd",
-        features: [
-          t("expert.features.feature1"),
-          t("expert.features.feature2"),
-          t("expert.features.feature3"),
-        ],
-      },
-    ],
-    [t]
-  )
-  const plans = useMemo<AccountPlan[]>(() => {
-    return mockPlans
-  }, [mockPlans])
+  const seletedIds = plans
+    .filter((plan) => plan.isCurrent)
+    .map((plan) => plan.id)
   const [selectedPlan, setSelectedPlan] = useState<AccountPlan>(
-    plans.find((plan) => plan.id === defaultPlanId) ?? initialPlan
+    plans.find((plan) => plan.id === seletedIds[0]) ?? initialPlan
   )
-  const [availablePlanIds, setAvailablePlanIds] = useState<string[]>(["0"])
+
+  const [availablePlanIds, setAvailablePlanIds] = useState<string[]>(seletedIds)
 
   const onPlanChange = useCallback(
     (id: string) => {
       setSelectedPlan(plans.filter((i) => i.id === id)[0])
-      onPlanSelection(id)
     },
-    [onPlanSelection, plans]
+    [plans]
   )
 
   return (
@@ -123,15 +77,16 @@ function AccountPlanSelectionForm({
             </CardHeader>
             <CardContent>
               <p className="font-heading text-3xl font-bold">
-                <span className="text-7xl">{plan.amount}</span> {plan.currency.toUpperCase()}
+                <span className="text-7xl">{plan.amount}</span>{" "}
+                {plan.currency?.toUpperCase() ?? "USD"}
                 <span className="text-gray-500">/months</span>
               </p>
             </CardContent>
             <CardFooter className="flex flex-col items-start space-y-5">
               <ul className="list-inside list-disc text-neutral-500">
-                {plan.features.map((feature, index) => {
+                {/* {plan.features.map((feature, index) => {
                   return <li key={index}>{feature}</li>
-                })}
+                })} */}
               </ul>
             </CardFooter>
             {!availablePlanIds.includes(plan.id) && (

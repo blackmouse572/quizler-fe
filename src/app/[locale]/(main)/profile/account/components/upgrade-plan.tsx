@@ -1,8 +1,15 @@
-"use client"
 import { EFormAction } from "@/types"
 import AccountPlanSelectionForm from "./account-plans-form"
+import { notFound } from "next/navigation"
+import { fetchAllPlans } from "../actions/fetch-plans"
 
-const UpgradePlan = () => {
+const UpgradePlan = async () => {
+  const { data: allPlans, ok } = await fetchAllPlans()
+  if (!ok) {
+    notFound()
+  }
+
+  console.log("allPlans", allPlans)
   return (
     <div className="w-full space-y-8">
       <div className="w-full gap-5 border-b border-solid border-neutral-400 pb-2.5 max-md:flex-wrap">
@@ -12,8 +19,8 @@ const UpgradePlan = () => {
       </div>
 
       <AccountPlanSelectionForm
-        onPlanSelection={(id) => console.log(id)}
         action={EFormAction.None}
+        plans={allPlans ?? []}
       />
     </div>
   )
