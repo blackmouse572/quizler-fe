@@ -4,6 +4,30 @@
     "back": "Quay lại",
     "description": "Học tập với các phương pháp siêu tốc"
   },
+  "Notification": {
+    "user": {
+      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
+      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
+      "invite_classroom": "Bạn đã được mời tham gia lớp học {objectName}",
+      "kick_classroom": "Bạn đã bị đá ra khỏi lớp học {objectName}",
+      "ban_classroom": "Bạn đã bị cấm tham gia lớp học {objectName}",
+      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
+      "reported": "Bạn đã bị báo cáo do vi phạm",
+      "warning": "Bạn đã bị cảnh cáo do vi phạm"
+    },
+    "admin": {
+      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
+      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
+      "invite_classroom": "Người dùng {user} đã được mời tham gia lớp học {objectName}",
+      "kick_classroom": "Người dùng {user} đã bị đá ra khỏi lớp học {objectName}",
+      "ban_classroom": "Người dùng {user} đã bị cấm tham gia lớp học {objectName}",
+      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
+      "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
+      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm"
+    }
+  },
   "Navbar": {
     "home": "Trang chủ",
     "classrooms": "Lớp học",
@@ -260,7 +284,7 @@
       "points": "Điểm"
     },
     "teacher": {
-      "horizontal_chart": {
+      "bar_chart": {
         "title": "Biểu đồ cột",
         "plugins": "Biểu đồ cột sinh viên",
         "datasets": {
@@ -490,6 +514,39 @@
     "cancel": "Huỷ",
     "add_quizbank": "Tạo quizbank mới"
   },
+  "DashboardAdmin": {
+    "metadata": {
+      "title": "Trang điều khiển",
+      "description": "Trang điều khiển, quản lí web của bạn"
+    },
+    "header_card": {
+      "unprocessed_reports": "Báo cáo chưa xử lí",
+      "total_user": "Tổng lượng người dùng",
+      "classroom": "Lớp học đã tạo",
+      "total_quizbank": "Tổng lượng ngân hàng câu hỏi"
+    },
+    "admin_chart": {
+      "title": "Thu nhập",
+      "pie_chart": {
+        "title": "Biểu đồ hình tròn",
+        "datasets":{
+          "label": "Thu nhập"
+        }
+      },
+      "bar_chart": {
+        "title": "Biểu đồ cột",
+        "plugins": "Biểu đồ cột thu nhập",
+        "datasets": {
+          "label": "Thống kê thu nhập"
+        },
+        "x_data": "x: Tháng thu nhập",
+        "y_data": "y: Tổng thu nhập"
+      }
+    },
+    "activity_logs": {
+      "title": "Nhật kí hoạt động"
+    }
+  },
   "QuizBankAdmin": {
     "metadata": {
       "title": "Quản lý Quiz",
@@ -661,11 +718,29 @@
     "actions": {
       "copy_id": "Sao chép ID lớp học",
       "copy_user_name": "Sao chép tên giáo viên",
+      "delete_classroom": "Xoá lớp học",
       "go_to": {
         "index": "Đi đến",
         "author": "Đi đến giáo viên",
         "classroom": "Đi đến lớp học"
       }
+    },
+    "dialog": {
+      "delete_classroom": {
+        "title": "Xóa lớp học",
+        "description": "Xóa lớp học <strong>{id}</strong> ?",
+        "cancel": "Hủy",
+        "confirm": "Xóa lớp học"
+      }
+    },
+    "success": {
+      "delete_classroom": {
+        "index": "Lớp học đã bị xóa",
+        "title": "Xóa lớp học"
+      }
+    },
+    "errors": {
+      "title": "Đã có lỗi xảy ra, vui lòng thử lại sau"
     }
   },
   "ReportAdmin": {
@@ -897,6 +972,22 @@
     "faq": "Câu hỏi thường gặp",
     "support": "Hỗ trợ",
     "signout": "Đăng xuất"
+  },
+  "AdminSidebar": {
+    "sidebar": {
+      "label": {
+        "dashboard": "Điều khiển",
+        "users": "Người dùng",
+        "classrooms": "Lớp học",
+        "quizbank": "Ngân hàng",
+        "reports": "Báo cáo"
+      }
+    },
+    "dropdown": {
+      "my_account": "Tài khoản của tôi",
+      "profile": "Hồ sơ",
+      "signout": "Đăng xuất"
+    }
   },
   "EditQuiz": {
     "form": {
@@ -1158,7 +1249,7 @@
       "descriptions": "Dán dữ liệu từ doc, csv, text vào đây",
       "data": {
         "label": "Dữ liệu",
-        "placeholder": "term1,definition1;term2,definition2"
+        "placeholder": "term1,definition1;term2,definition2\nĐiền điều bạn muốn học và bấm sáng tạo"
       },
       "itemSeperator": {
         "label": "Dấu phân cách thuật ngữ",
@@ -1167,6 +1258,10 @@
       "quizSeperator": {
         "label": "Dấu phân cách các quizbank",
         "placeholder": "Enter the quiz seperator"
+      },
+      "ai": {
+        "label": "Sáng tạo",
+        "placeholder": "Nhập dữ liệu và bấm sáng tạo"
       }
     },
     "form": {
@@ -1228,6 +1323,15 @@
     "rating": {
       "title": "Đánh giá",
       "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
+    },
+    "view_ai_answer_error": {
+      "overcount_ai": {
+        "title": "Hạn chế xem câu trả lời A.I hàng ngày",
+        "description": "Bạn đã vượt quá giới hạn xem câu trả lời A.I cho hôm nay",
+        "solution": "Bạn có thể <strong>nâng cấp tài khoản của bạn ngay bây giờ</strong>, hoặc chờ đến ngày mai để có cơ hội xem câu trả lời A.I nhiều hơn.",
+        "cancel": "Hủy",
+        "submit": "Đi đến nâng cấp tài khoản"
+      }
     }
   },
   "NotFound": {

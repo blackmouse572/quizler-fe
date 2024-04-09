@@ -1,8 +1,5 @@
-import { IconCreditCard } from "@tabler/icons-react"
 import {
-  IconAffiliate,
-  IconAlertCircle,
-  IconArrowDown,
+  IconAffiliate, IconArrowDown,
   IconArrowDownRight,
   IconArrowRight,
   IconArrowRoundaboutLeft,
@@ -88,7 +85,10 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
-  IconLockOpen
+  IconLockOpen,
+  IconAlertTriangle,
+  IconCreditCard,
+  IconAlertSquare
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -194,7 +194,8 @@ export const Icons = {
 
   // Notification
   Info: IconInfoCircle,
-  Warning: IconAlertCircle,
+  Alert: IconAlertTriangle,
+  Warning: IconAlertSquare,
   Settings: IconSettings,
   Error: IconBan,
   Payment: IconCreditCard,

@@ -39,12 +39,12 @@ async function MainLayout({ children }: Props) {
       },
       {
         label: tUserDropdown("billing"),
-        href: "/billing",
+        href: "/profile/account",
         shortcut: "⌘+B",
       },
       {
         label: tUserDropdown("settings"),
-        href: `/profile/${user?.id}/preference`,
+        href: `/profile/preference`,
         shortcut: "⌘+,",
       },
     ],
@@ -152,7 +152,7 @@ async function MainLayout({ children }: Props) {
   return (
     <main className="relative">
       <NextIntlClientProvider
-        messages={pick(m, "UserDropdown", "Navbar", "Index")}
+        messages={pick(m, "UserDropdown", "Navbar", "Index", "Notification")}
       >
         {navbarComponent}
       </NextIntlClientProvider>

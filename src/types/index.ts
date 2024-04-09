@@ -11,3 +11,5 @@ export * from "./paged-response"
 export * from "./postsData"
 export * from "./search-global-results"
 export * from "./report-data"
+export * from "./transaction-type"
+export * from './ai-response-type'

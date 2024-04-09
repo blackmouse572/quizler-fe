@@ -1,8 +1,10 @@
 "use client"
 import MyQuizbankAutocomplete from "@/app/[locale]/(main)/classrooms/[id]/games/components/quizbank-autocomplete"
 import { useCreateGame } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useCreateGame"
+import { queryClient } from "@/app/[locale]/provider"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
   DialogContent,
@@ -27,8 +29,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { TimePicker } from "@/components/ui/time-picker/time-picker"
+import { NamedToolTip } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
 import { cn, getAbsoluteURL } from "@/lib/utils"
+import { GameType } from "@/types/game"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { useTranslations } from "next-intl"
@@ -70,7 +74,8 @@ const AddGameSchema = z
       })
       .max(1000, {
         message: "errors.too_big.number.not_inclusive",
-      }),
+      })
+      .optional(),
     startTime: z
       .date({
         invalid_type_error: "errors.invalid_date",
@@ -85,20 +90,36 @@ const AddGameSchema = z
       })
       .optional()
       .default(() => new Date()),
+    quizTypes: z
+      .nativeEnum(GameType)
+      .array()
+      .min(1, {
+        message: "errors.too_small.array.inclusive",
+      })
+      .max(4, {
+        message: "errors.too_big.array.inclusive",
+      }),
   })
   .refine((data) => new Date(data.startTime) < new Date(data.endTime), {
     message: "errors.too_small.date.not_inclusive",
     path: ["endTime"],
   })
-
+const GAME_TYPE_OPTIONS = [
+  { label: "actions.create.form.gameType.mcq", value: GameType.MultipleChoice },
+  { label: "actions.create.form.gameType.tf", value: GameType.TrueFalse },
+  { label: "actions.create.form.gameType.dnd", value: GameType.Dnd },
+  {
+    label: "actions.create.form.gameType.fill",
+    value: GameType.ConstructedResponse,
+  },
+]
 export type AddGameFormType = z.infer<typeof AddGameSchema>
 
 type AddGameFormProp = {
   intialValues: Partial<AddGameFormType>
-  trigger: React.ReactNode
 }
 
-function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
+function AddGameForm({ intialValues }: AddGameFormProp) {
   const [isOpen, setOpen] = useState(false)
   const form = useForm<AddGameFormType>({
     resolver: zodResolver(AddGameSchema),
@@ -114,6 +135,9 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
   const { mutate, isPending } = useCreateGame({
     classroomId: intialValues.classroomId ?? "",
     onSuccess: (game) => {
+      queryClient.invalidateQueries({
+        queryKey: ["games", `game-classroom-${game.classroomId}`],
+      })
       toast({
         title: t("actions.create.form.success.title"),
         description: t("actions.create.form.success.description"),
@@ -122,7 +146,7 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
           <Button
             onClick={() => {
               const link = getAbsoluteURL(
-                `/classrooms/${game.classroomId}/games/${game.id}`
+                `/classrooms/${game.classroomId}/game/${game.id}`
               )
               //copy to clipboard
               navigator.clipboard.writeText(link)
@@ -134,6 +158,7 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
         ),
       })
       form.reset()
+      setOpen(!isOpen)
     },
     onError(e) {
       toast({
@@ -154,7 +179,13 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      <DialogTrigger>{trigger}</DialogTrigger>
+      <NamedToolTip content={t("actions.create.title")}>
+        <DialogTrigger asChild>
+          <Button isIconOnly>
+            <Icons.Plus />
+          </Button>
+        </DialogTrigger>
+      </NamedToolTip>
       <DialogContent className="max-w-screen-md">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -196,7 +227,7 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                 name="duration"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel required>
+                    <FormLabel>
                       {t("actions.create.form.duration.label")}
                     </FormLabel>
                     <FormControl>
@@ -228,7 +259,7 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                 name="amount"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel required>
                       {t("actions.create.form.amount.label")}
                     </FormLabel>
                     <FormControl>
@@ -395,6 +426,64 @@ function AddGameForm({ intialValues, trigger }: AddGameFormProp) {
                         {vali18n(fieldState.error?.message as any, {
                           maximum: 1000,
                           minimum: 10,
+                        })}
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="quizTypes"
+                render={({ field, fieldState }) => (
+                  <FormItem className="col-span-2 mt-2 flex flex-col items-start justify-end gap-1">
+                    <FormLabel required>
+                      {t("actions.create.form.gameType.label")}
+                    </FormLabel>
+                    <div className="grid w-full grid-cols-2 gap-3">
+                      {GAME_TYPE_OPTIONS.map((item) => (
+                        <FormField
+                          key={item.label}
+                          control={form.control}
+                          name="quizTypes"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={item.label}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item.value)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([
+                                            ...(field.value ?? []),
+                                            item.value,
+                                          ])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== item.value
+                                            )
+                                          )
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {t(item.label as any)}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {vali18n(fieldState.error?.message as any, {
+                          maximum: 4,
+                          minimum: 1,
                         })}
                       </p>
                     )}

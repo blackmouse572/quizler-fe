@@ -11,7 +11,7 @@ import {
   Legend,
 } from "chart.js"
 import { Bar } from "react-chartjs-2"
-import { ClassroomGameResults } from "@/types"
+import { ClassroomGameResults, Transaction } from "@/types"
 import PagedResponse from "@/types/paged-response"
 import { generateRandomColors } from "../helpers/random-color-chart"
 import { useTranslations } from "next-intl"
@@ -20,22 +20,28 @@ import { DataChart } from "@/types/chart-type"
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 type Props = {
-  data: PagedResponse<ClassroomGameResults>
+  data: Transaction
+  time: {
+    year: number
+  }
 }
 
-export default function HorizontalChartTeacher({ data }: Props) {
-  const i18n = useTranslations("GameResults")
+// labels contains all months in year: now is 2024: 
+// months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', "11", "12"]
+// total money: total money of that month
+export default function BarChartAdminDashboard({ data, time }: Props) {
+  const i18n = useTranslations("DashboardAdmin")
 
-  const labels = data.data.map((result) => ({
-    studentName: result.account.fullName,
-    totalMark: result.totalMark,
+  const labels = data.map((result) => ({
+    month: result.month.toString(),
+    amount: result.amount,
   }))
 
-  const blyat = labels.map((result) => result.studentName)
-  const horizontalChart = labels.reduce((acc, result) => {
+  const blyat = labels.map((result) => result.month)
+  const barChart = labels.reduce((acc, result) => {
     return {
       ...acc,
-      [result.studentName]: result.totalMark,
+      [result.month]: result.amount,
     }
   }, {})
 
@@ -47,7 +53,7 @@ export default function HorizontalChartTeacher({ data }: Props) {
       },
       title: {
         display: true,
-        text: i18n("teacher.horizontal_chart.plugins"),
+        text: i18n("admin_chart.bar_chart.plugins"),
       },
     },
   }
@@ -56,8 +62,8 @@ export default function HorizontalChartTeacher({ data }: Props) {
     labels: blyat,
     datasets: [
       {
-        label: i18n("teacher.horizontal_chart.datasets.label"),
-        data: horizontalChart,
+        label: i18n("admin_chart.bar_chart.datasets.label"),
+        data: barChart,
         backgroundColor: [],
       },
     ],
@@ -74,8 +80,8 @@ export default function HorizontalChartTeacher({ data }: Props) {
     <>
       <Bar options={options} data={dataChart} />
       <div>
-        {i18n("teacher.horizontal_chart.x_data")} <br />
-        {i18n("teacher.horizontal_chart.y_data")} <br />
+        {i18n("admin_chart.bar_chart.x_data")} <br />
+        {i18n("admin_chart.bar_chart.y_data")} <br />
       </div>
     </>
   )

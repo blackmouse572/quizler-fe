@@ -25,7 +25,7 @@ export default async function getAllClassroomsAction({ filter }: Props) {
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["AdminQuizBank"],
+      tags: ["AdminClassrooms"],
       revalidate: 60, // Revalidate every 60 second
     },
   }

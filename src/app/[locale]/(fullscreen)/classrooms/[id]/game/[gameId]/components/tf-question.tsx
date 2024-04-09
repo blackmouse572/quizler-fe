@@ -1,21 +1,24 @@
-import { GameQuestion } from "@/app/[locale]/(fullscreen)/classrooms/[id]/game/[gameId]/components/useGame"
 import { Card, CardContent } from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
+import { GameQuiz } from "@/types/game"
 import { useCallback, useMemo, useState } from "react"
 
 type Props = {
-  data: GameQuestion
+  data: GameQuiz
+  disabled?: boolean
   onSubmit: (answer: boolean) => void
+  isWrong: boolean
 }
-function TrueFalseQuestion({ data, onSubmit }: Props) {
+function TrueFalseQuestion({ data, onSubmit, disabled, isWrong }: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<boolean>()
   const submitAnswer = useCallback(
     (answer: boolean) => {
+      if (disabled) return
       setSelectedAnswer(answer)
       onSubmit
     },
-    [onSubmit]
+    [disabled, onSubmit]
   )
   const renderQuestion = useMemo(() => {
     return (
@@ -28,7 +31,10 @@ function TrueFalseQuestion({ data, onSubmit }: Props) {
         <Card
           className={cn(
             "min-h-32 cursor-pointer transition-all hover:bg-muted active:bg-accent",
-            selectedAnswer === true && "border border-emerald-500"
+            selectedAnswer === true && "border border-emerald-500",
+            isWrong &&
+              selectedAnswer === true &&
+              "border border-red-500 bg-red-200"
           )}
           onClick={() => submitAnswer(true)}
         >
@@ -39,7 +45,10 @@ function TrueFalseQuestion({ data, onSubmit }: Props) {
         <Card
           className={cn(
             "min-h-32 cursor-pointer transition-all hover:bg-muted active:bg-accent",
-            selectedAnswer === false && "border border-emerald-500"
+            selectedAnswer === false && "border border-emerald-500",
+            isWrong &&
+              selectedAnswer === false &&
+              "border border-red-500 bg-red-200"
           )}
           onClick={() => submitAnswer(false)}
         >
@@ -49,7 +58,7 @@ function TrueFalseQuestion({ data, onSubmit }: Props) {
         </Card>
       </>
     )
-  }, [submitAnswer, selectedAnswer])
+  }, [selectedAnswer, isWrong, submitAnswer])
   return (
     <>
       {renderQuestion}
