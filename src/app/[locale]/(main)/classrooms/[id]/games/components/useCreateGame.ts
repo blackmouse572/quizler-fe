@@ -32,26 +32,6 @@ export function useCreateGame({
         console.error(error)
       }
       if (!data) return
-      queryClient.setQueryData(
-        ["game", classroomId],
-        (old: InfiniteData<PagedResponse<Game>>) => {
-          if (!old) return old
-          return {
-            ...old,
-            pages: old.pages.map((page) => {
-              return {
-                ...page,
-                data: page.data.map((p) => {
-                  if (p.id === data.id) {
-                    return data
-                  }
-                  return p
-                }),
-              }
-            }),
-          }
-        }
-      )
       onSuccess?.(data)
     },
     onError: onError,
