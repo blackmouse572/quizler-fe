@@ -1,6 +1,6 @@
 import { pick } from "lodash"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages, getTranslations } from "next-intl/server"
+import { getLocale, getMessages, getTranslations } from "next-intl/server"
 import React from "react"
 
 import Footer from "@/components/footer"
@@ -26,6 +26,7 @@ async function getNavbarLoggedIn() {
 
 async function MainLayout({ children }: Props) {
   const tUserDropdown = await getTranslations("UserDropdown")
+  const locale = await getLocale()
   const tNav = await getTranslations("Navbar")
   const isAuth = isAuthenticated()
   const user = getUser()
@@ -157,10 +158,11 @@ async function MainLayout({ children }: Props) {
         {navbarComponent}
       </NextIntlClientProvider>
       <div className="relative z-0">{children}</div>
-      {/* TODO: fix z-position of footer */}
       <footer className="z-10">
-        <NextIntlClientProvider messages={pick(m, "Footer", "Index")}>
-          <Footer className="z-10" />
+        <NextIntlClientProvider
+          messages={pick(m, "Footer", "Index", "LocaleSwitcher")}
+        >
+          <Footer className="z-10" locale={locale} />
         </NextIntlClientProvider>
       </footer>
     </main>

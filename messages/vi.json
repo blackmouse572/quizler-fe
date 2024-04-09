@@ -368,7 +368,7 @@
     "no_results": "Không có kết quả"
   },
   "Footer": {
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
+    "description": "Học nhanh, học vui"
   },
   "SignIn": {
     "title": "Chào mừng trở lại!",
@@ -529,7 +529,7 @@
       "title": "Thu nhập",
       "pie_chart": {
         "title": "Biểu đồ hình tròn",
-        "datasets":{
+        "datasets": {
           "label": "Thu nhập"
         }
       },

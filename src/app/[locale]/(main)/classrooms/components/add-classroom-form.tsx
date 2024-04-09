@@ -1,6 +1,5 @@
 "use client"
 import { addNewClassroom } from "@/app/[locale]/(main)/classrooms/actions/add-classroom-action"
-import PlanSelectionForm from "@/app/[locale]/(main)/classrooms/components/plan-selection-form"
 import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-bank-action"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,7 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
-import { Classroom, EFormAction } from "@/types"
+import { EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -49,9 +48,6 @@ const addClassroomSchema = z.object({
     .max(255, {
       message: "errors.too_big.string.inclusive",
     }),
-  planId: z.string({
-    required_error: "errors.invalid_type_received_undefined",
-  }),
 })
 
 export type AddClassroom = z.infer<typeof addClassroomSchema>
@@ -70,7 +66,7 @@ export default function AddClassroomForm({
   const validationsi18n = useTranslations("Validations")
   const isAddAction = useMemo(() => +action === +EFormAction.Add, [action])
   const [initialValuesState, setInitialValuesState] = useState<AddClassroom>(
-    initialValues ?? { className: "", description: "", planId: "" }
+    initialValues ?? { className: "", description: "" }
   )
 
   const i18n = useTranslations(isAddAction ? "AddClassroom" : "EditClassroom")
@@ -208,16 +204,6 @@ export default function AddClassroomForm({
                   </p>
                 )}
               </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="planId"
-            render={({ field, fieldState }) => (
-              <PlanSelectionForm
-                onPlanSelection={(id) => field.onChange(id)}
-                action={action}
-              />
             )}
           />
         </form>

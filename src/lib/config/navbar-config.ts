@@ -13,10 +13,6 @@ const MAIN_NAVBAR_ITEMS: MainNavItem[] = [
     title: "Contact",
     href: "/contact",
   },
-  {
-    title: "Blog",
-    href: "/blog",
-  },
 ]
 
 const SUBJECTS_NAVBAR_ITEMS: MainNavItem[] = [

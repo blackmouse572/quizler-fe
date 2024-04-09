@@ -365,7 +365,7 @@
       "title": "Income",
       "pie_chart": {
         "title": "Pie chart",
-        "datasets":{
+        "datasets": {
           "label": "Income"
         }
       },
@@ -759,7 +759,7 @@
     "no_results": "No results"
   },
   "Footer": {
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mi risus, lobortis sit amet urna ac, aliquam interdum nibh. Phasellus vestibulum tincidunt tellus"
+    "description": "Learn fast and fun"
   },
   "SignIn": {
     "title": "Welcome back!",
