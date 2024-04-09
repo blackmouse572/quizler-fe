@@ -52,6 +52,10 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
     [plans]
   )
 
+  const getAmount = (amount: number) => {
+    return (amount / 100).toFixed(2)
+  }
+
   return (
     <div className="flex w-full items-center justify-between gap-6">
       {plans.map((plan) => {
@@ -77,16 +81,16 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
             </CardHeader>
             <CardContent>
               <p className="font-heading text-3xl font-bold">
-                <span className="text-7xl">{plan.amount}</span>{" "}
+                <span className="text-7xl">{getAmount(plan.amount)}</span>{" "}
                 {plan.currency?.toUpperCase() ?? "USD"}
                 <span className="text-gray-500">/months</span>
               </p>
             </CardContent>
             <CardFooter className="flex flex-col items-start space-y-5">
               <ul className="list-inside list-disc text-neutral-500">
-                {/* {plan.features.map((feature, index) => {
+                {plan.features?.map((feature, index) => {
                   return <li key={index}>{feature}</li>
-                })} */}
+                })}
               </ul>
             </CardFooter>
             {!availablePlanIds.includes(plan.id) && (
