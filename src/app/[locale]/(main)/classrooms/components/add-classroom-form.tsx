@@ -75,6 +75,7 @@ export default function AddClassroomForm({
 
   const i18n = useTranslations(isAddAction ? "AddClassroom" : "EditClassroom")
   const errori18n = useTranslations("Errors")
+  const t = useTranslations("UpgradeAccount")
   const router = useRouter()
   const { toast } = useToast()
   const form = useForm<AddClassroom>({
@@ -88,6 +89,11 @@ export default function AddClassroomForm({
           title: errori18n("index"),
           color: "danger",
           description: errori18n(res.message),
+          action: (
+            <Button variant={"flat"} onClick={() => router.push("/profile/account")}>
+              {t("upgrade")}
+            </Button>
+          ),
         })
       } else {
         // If action is add
@@ -105,7 +111,7 @@ export default function AddClassroomForm({
         }
       }
     },
-    [errori18n, i18n, isAddAction, router, toast]
+    [errori18n, i18n, isAddAction, router, t, toast]
   )
 
   const onSubmit = useCallback(

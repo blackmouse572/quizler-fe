@@ -1309,6 +1309,9 @@
     },
     "errorBtn": "Thông báo lỗi"
   },
+  "UpgradeAccount": {
+    "upgrade": "Nâng cấp tài khoản" 
+  },
   "Errors": {
     "index": "Lỗi",
     "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
@@ -1324,7 +1327,8 @@
       "already-joined": "Bạn đã tham gia lớp học này rồi",
       "not_found": "Không tìm thấy lớp học",
       "user_not_found": "Không tìm thấy người dùng",
-      "user_in_classroom": "Người dùng đã ở trong lớp học"
+      "user_in_classroom": "Người dùng đã ở trong lớp học",
+      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
     }
   },
   "ManageClassroomMembers": {
