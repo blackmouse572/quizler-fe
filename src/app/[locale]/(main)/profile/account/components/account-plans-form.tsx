@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl"
 import { useCallback, useMemo, useState } from "react"
 import { AccountPlan } from "../type"
 import UpgradeDialog from "./upgrade-dialog"
+import { Icons } from "@/components/ui/icons"
 
 type Props = {
   action: EFormAction
@@ -87,14 +88,21 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
               </p>
             </CardContent>
             <CardFooter className="flex flex-col items-start space-y-5">
-              <ul className="list-inside list-disc text-neutral-500">
+              <ul className="list-inside list-none text-neutral-500">
                 {plan.features?.map((feature, index) => {
-                  return <li key={index}>{feature}</li>
+                  return (
+                    <li className="mt-1" key={index}>
+                      <span className="flex gap-2">
+                        <Icons.Check />
+                        {feature}
+                      </span>
+                    </li>
+                  )
                 })}
               </ul>
             </CardFooter>
             {!availablePlanIds.includes(plan.id) && (
-              <div className="absolute bottom-10 left-5">
+              <div className="absolute bottom-6 left-5">
                 <UpgradeDialog plan={plan} />
               </div>
             )}

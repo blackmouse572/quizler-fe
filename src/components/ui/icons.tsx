@@ -88,7 +88,8 @@ import {
   IconLockOpen,
   IconAlertTriangle,
   IconCreditCard,
-  IconAlertSquare
+  IconAlertSquare,
+  IconProgressCheck
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -148,6 +149,7 @@ export const Icons = {
   ArtBoard: IconArtboard,
   Join: IconArrowsJoin,
   AI: IconSparkles,
+  Check: IconProgressCheck,
 
   //Chevrons
   ChevronUp: IconChevronUp,
