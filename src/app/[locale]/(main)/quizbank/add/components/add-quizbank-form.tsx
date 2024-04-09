@@ -59,7 +59,9 @@ const addQuizbankSchema = z.object({
     })
     .max(255, {
       message: "errors.too_big.string.inclusive",
-    }),
+    })
+    .optional()
+    .default(""),
   visibility: z.enum(["Public", "Private"]).default("Public"),
   tags: z.array(z.string()).default([]),
   quizes: z.array(
@@ -111,7 +113,7 @@ function AddQuizbankForm({
   initialValues,
   action = EFormAction.Add,
   quizBankId,
-  classroomId
+  classroomId,
 }: AddQuizbankFormProps) {
   const errori18n = useTranslations("Validations")
   const i18Term = +action === +EFormAction.Add ? "AddQuiz" : "EditQuiz"
@@ -345,7 +347,7 @@ function AddQuizbankForm({
             name="description"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel required>{i18n("form.description.label")}</FormLabel>
+                <FormLabel>{i18n("form.description.label")}</FormLabel>
                 <FormControl>
                   <Textarea
                     required

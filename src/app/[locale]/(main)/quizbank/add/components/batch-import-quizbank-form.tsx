@@ -132,7 +132,7 @@ function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
   }, [complete, form])
 
   return (
-    <Dialog open={isOpen} onOpenChange={setOpen} defaultOpen>
+    <Dialog open={isOpen} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Tooltip>
           <TooltipTrigger asChild>
