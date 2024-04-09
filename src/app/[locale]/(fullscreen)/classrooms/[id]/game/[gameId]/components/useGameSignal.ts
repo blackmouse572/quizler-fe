@@ -7,12 +7,18 @@ import { useCallback, useEffect, useState } from "react"
 type GameSignalProp = {
   gameId: number
   onReceiveAnswer: (answer: AnswerHistoryResponse, cb: () => void) => void
+  onFinished?: () => void
   handleErrors?: (error: string) => void
 }
-export function useGameSignal({ gameId, onReceiveAnswer }: GameSignalProp) {
+export function useGameSignal({
+  gameId,
+  onReceiveAnswer,
+  onFinished,
+}: GameSignalProp) {
   const [conn, setConn] = useState<HubConnection | null>(null)
   const [questions, setQuestions] = useState<GameQuiz>()
-  const { setTotal, setCurrent } = useProgress()
+
+  const { setTotal, total, setCurrent } = useProgress()
 
   const { user } = useUser()
   useEffect(() => {
@@ -29,15 +35,22 @@ export function useGameSignal({ gameId, onReceiveAnswer }: GameSignalProp) {
         .withAutomaticReconnect()
         .build()
 
-      conn.on("Answer Result", (result: AnswerHistoryResponse) => {
-        console.log("Answer Result", result)
-        onReceiveAnswer(result, () => {
-          setQuestions(result.quiz)
-        })
-      })
+      conn.on(
+        "Answer Result",
+        (result: AnswerHistoryResponse, nextQuiz?: GameQuiz) => {
+          console.log("[Answer Result]", { result, nextQuiz })
+          onReceiveAnswer(result, () => {
+            if (!nextQuiz) {
+              onFinished?.()
+            } else {
+              setQuestions(nextQuiz)
+            }
+          })
+        }
+      )
 
       conn.on("Joined Success", (game: GameQuiz) => {
-        console.log("Joined Success", game)
+        console.log("[Joined Success]", { game })
         setQuestions(game)
         setTotal(game.game?.duration ?? 60)
         setCurrent(game.game?.duration ?? 60)
@@ -48,7 +61,8 @@ export function useGameSignal({ gameId, onReceiveAnswer }: GameSignalProp) {
 
     const conn = connect()
     setConn(conn)
-  }, [onReceiveAnswer, setCurrent, setTotal, user, user?.accessToken.token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.accessToken.token])
 
   const start = useCallback(
     (cb: () => void) => {

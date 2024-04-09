@@ -13,7 +13,7 @@ export const useProgress = create<UseProgressState>((set) => ({
   total: 60,
   setCurrent: (current) => set({ current }),
   setTotal: (total) => set({ total }),
-  reset: () => set({ current: 0, total: 0 }),
+  reset: () => set((state) => ({ ...state, current: state.total })),
   reduce: () =>
     set((state) => {
       if (state.current <= 0) return state
