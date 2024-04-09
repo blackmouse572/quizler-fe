@@ -36,7 +36,7 @@ const initialPlan: AccountPlan = {
 }
 
 function AccountPlanSelectionForm({ action, plans }: Props) {
-  const t = useTranslations("Settings.plans.plans")
+  const t = useTranslations("Settings.plans")
   const seletedIds = plans
     .filter((plan) => plan.isCurrent)
     .map((plan) => plan.id)
@@ -55,6 +55,16 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
 
   const getAmount = (amount: number) => {
     return (amount / 100).toFixed(2)
+  }
+
+  const getCurrency = (currency: string) => {
+    switch (currency) {
+      case "USD": {
+        return "$"
+      }
+      default:
+        return currency
+    }
   }
 
   return (
@@ -82,16 +92,20 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
             </CardHeader>
             <CardContent>
               <p className="font-heading text-3xl font-bold">
-                <span className="text-7xl">{getAmount(plan.amount)}</span>{" "}
-                {plan.currency?.toUpperCase() ?? "USD"}
-                <span className="text-gray-500">/months</span>
+                <span className="text-4xl">
+                  {getCurrency(plan.currency?.toUpperCase() ?? "USD")}
+                  {getAmount(plan.amount)}
+                </span>{" "}
+                <span className="text-gray-500">
+                  /{plan.duration} {t("duration")}
+                </span>
               </p>
             </CardContent>
             <CardFooter className="flex flex-col items-start space-y-5">
               <ul className="list-inside list-none text-neutral-500">
                 {plan.features?.map((feature, index) => {
                   return (
-                    <li className="mt-1" key={index}>
+                    <li className="mt-3" key={index}>
                       <span className="flex gap-2">
                         <Icons.Check />
                         {feature}

@@ -898,6 +898,7 @@
       "submit_btn": "Change password"
     },
     "plans": {
+      "duration": "months",
       "plans": {
         "hobby": {
           "title": "Hobby",
