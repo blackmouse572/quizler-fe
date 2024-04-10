@@ -34,6 +34,7 @@ function ClassroomList({ initialData, filter }: Props) {
     isFetchingNextPage,
   } = useClassroomList({
     initialData,
+    options: filter,
   })
 
   const deleteSucceedCb = useCallback(

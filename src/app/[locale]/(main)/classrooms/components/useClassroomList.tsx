@@ -1,17 +1,23 @@
 import { fetchMyClassrooms } from "@/app/[locale]/(main)/classrooms/actions/fetch-my-classroom"
 import { Classroom } from "@/types"
+import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { useInfiniteQuery } from "@tanstack/react-query"
 
 export default function useClassroomList({
   initialData,
+  options,
 }: {
   initialData: PagedResponse<Classroom>
+  options?: Partial<PagedRequest>
 }) {
+  console.log({ options })
   return useInfiniteQuery({
-    queryKey: ["classrooms"],
+    queryKey: ["classrooms", options?.search],
     queryFn: async ({ pageParam }) => {
+      console.log("options", options)
       const res = await fetchMyClassrooms({
+        ...options,
         skip: pageParam,
         take: 20,
       })
