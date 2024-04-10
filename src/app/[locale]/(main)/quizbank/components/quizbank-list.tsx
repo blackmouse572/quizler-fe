@@ -35,9 +35,10 @@ function QuizBankList({ data: initData, token, filter }: Props) {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["quizbank"],
+    queryKey: ["quizbank", filter],
     queryFn: async ({ pageParam }) => {
       const res = await getMyQuizbankAction({
+        ...filter,
         skip: pageParam,
         take: 20,
       })
