@@ -19,6 +19,9 @@ export const fetchMyClassrooms = async (filter: Partial<PagedRequest>) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    next: {
+      tags: ["classrooms"],
+    },
   }
 
   return fetch(URL, options)

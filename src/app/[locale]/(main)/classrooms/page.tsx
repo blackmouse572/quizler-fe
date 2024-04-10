@@ -26,6 +26,9 @@ async function getAllClassroom(): Promise<PagedResponse<Classroom>> {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token.token}`,
     },
+    next: {
+      tags: ["classrooms"],
+    },
   }
 
   const data = await fetch(getAPIServerURL("/classrooms/getCurrent"), options)
