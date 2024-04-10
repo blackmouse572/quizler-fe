@@ -69,6 +69,18 @@ function QuizBankList({ data: initData, token, filter }: Props) {
           color: "danger",
         })
       } else {
+        queryClient.setQueryData(
+          ["quizbank", filter],
+          (oldData: typeof data) => {
+            if (!oldData) return
+            const newData = oldData.pages.map((page) => {
+              return {
+                ...page,
+                data: page?.data.filter((item: any) => item.id !== itemId),
+              }
+            })
+          }
+        )
         deleteSucceedCb()
         queryClient.setQueryData(["quizbank"], (oldData: typeof data) => {
           const newData = oldData.pages.map((page) => {
@@ -90,7 +102,7 @@ function QuizBankList({ data: initData, token, filter }: Props) {
         })
       }
     },
-    [errorI18n, i18n, token]
+    [errorI18n, filter, i18n, token]
   )
 
   const renderItem = useCallback(

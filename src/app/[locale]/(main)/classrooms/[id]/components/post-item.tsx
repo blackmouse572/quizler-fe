@@ -81,6 +81,20 @@ function PostItem({
             </Card>
           </Link>
         )
+      } else if (post.gameLink) {
+        const game = post.game
+        return (
+          <Link href={`/game/${game.id}`}>
+            <Card className="relative">
+              <CardHeader>
+                <CardDescription>
+                  {t("posts.link-game")} ({post.game.numberOfQuizzes})
+                </CardDescription>
+                <CardTitle>{game.gameName}</CardTitle>
+              </CardHeader>
+            </Card>
+          </Link>
+        )
       }
     },
     [t]

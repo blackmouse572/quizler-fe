@@ -78,7 +78,9 @@ function GameList(props: Props) {
                   {game.duration ?? t("card.unlimited")}
                 </p>
                 {new Date(game.endTime) < new Date() ? (
-                  <Badge color="accent">{t("card.inactive")}</Badge>
+                  <>
+                    <Badge color="accent">{t("card.inactive")}</Badge>
+                  </>
                 ) : (
                   <Badge color="success">{t("card.active")}</Badge>
                 )}

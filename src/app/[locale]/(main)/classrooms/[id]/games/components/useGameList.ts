@@ -8,19 +8,21 @@ type UseGameListProps = {
   classroomId: string
   filter?: Partial<PagedRequest>
   initialData?: PagedResponse<Game>
+  options?: any
 }
 
 export function useGameList({
   classroomId,
   filter,
+  options,
   initialData,
 }: UseGameListProps) {
   return useInfiniteQuery({
     queryKey: ["games", `game-classroom-${classroomId}`],
     queryFn: async ({ pageParam }) => {
       const res = await getAllGamesByClassroomAction({
+        filter: { ...filter, skip: pageParam as number },
         classroomId,
-        filter: { ...filter, skip: pageParam },
       })
       if (!res.ok) {
         throw new Error(res.message)
@@ -37,5 +39,6 @@ export function useGameList({
     },
     initialPageParam: 0,
     initialData: { pages: [initialData], pageParams: [0] },
+    ...options,
   })
 }
