@@ -1,14 +1,16 @@
 "use client"
 import ClassroomCard from "@/app/[locale]/(main)/classrooms/components/classroom-card"
 import useClassroomList from "@/app/[locale]/(main)/classrooms/components/useClassroomList"
+import { queryClient } from "@/app/[locale]/provider"
 import { Skeleton } from "@/components/ui/skeleton"
+import { toast } from "@/components/ui/use-toast"
 import { Classroom, TClassRoomCardRef } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
+import { InfiniteData } from "@tanstack/react-query"
 import { useInView } from "framer-motion"
-import { useCallback, useEffect, useRef } from "react"
-import { toast } from "@/components/ui/use-toast"
 import { useTranslations } from "next-intl"
+import { useCallback, useEffect, useRef } from "react"
 import { onDeleteClassroom } from "./mixin"
 
 type Props = {
@@ -32,17 +34,37 @@ function ClassroomList({ initialData, filter }: Props) {
     isFetchingNextPage,
   } = useClassroomList({
     initialData,
+    options: filter,
   })
 
-  const deleteSucceedCb = useCallback(() => {
-    classroomCardRef.current?.setIsDelete(false)
-    return toast({
-      title: i18n("message.success.title"),
-      description: i18n("message.success.description"),
-      variant: "flat",
-      color: "success",
-    })
-  }, [i18n])
+  const deleteSucceedCb = useCallback(
+    (id: number) => {
+      classroomCardRef.current?.setIsDelete(false)
+      queryClient.setQueryData(
+        ["classrooms"],
+        (oldData: InfiniteData<PagedResponse<Classroom>>) => {
+          if (!oldData) return oldData
+          return {
+            ...oldData,
+            pages: oldData.pages.map((page) => {
+              return {
+                ...page,
+                data: page.data.filter((classroom) => +classroom.id !== id),
+              }
+            }),
+          }
+        }
+      )
+
+      return toast({
+        title: i18n("message.success.title"),
+        description: i18n("message.success.description"),
+        variant: "flat",
+        color: "success",
+      })
+    },
+    [i18n]
+  )
 
   const deleteFailCb = useCallback(
     (message: string) => {
@@ -112,9 +134,7 @@ function ClassroomList({ initialData, filter }: Props) {
   }
 
   if (data.pages.length === 0) {
-    return (
-      <div className="flex min-h-52 items-center justify-center">No data</div>
-    )
+    return <div className="flex min-h-52 items-center justify-center"></div>
   }
   return (
     <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">

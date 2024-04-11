@@ -41,7 +41,7 @@ function SearchBox({ className, ...props }: InputProps) {
       <Input
         type="text"
         placeholder="Search"
-        className="w-full border-none border-transparent bg-transparent pl-9 outline-none ring-transparent ring-offset-transparent focus-within:ring-0 focus:border-none focus:ring-0"
+        className="w-full border-none border-transparent bg-transparent pl-5 outline-none ring-transparent ring-offset-transparent focus-within:ring-0 focus:border-none focus:ring-0"
         {...register("search")}
         {...props}
       />

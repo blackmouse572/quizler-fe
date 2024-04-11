@@ -13,6 +13,11 @@ module.exports = async (phase, { defaultConfig }) => {
         },
       ]
     },
+    logging: {
+      fetches: {
+        fullUrl: true,
+      },
+    },
   }
   return withNextIntl(nextConfig)
 }

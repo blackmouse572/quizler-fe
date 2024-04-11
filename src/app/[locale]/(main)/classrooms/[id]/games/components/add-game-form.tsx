@@ -59,7 +59,7 @@ const AddGameSchema = z
     }),
     amount: z
       .number({ required_error: "errors.invalid_type_received_undefined" })
-      .min(10, {
+      .min(1, {
         message: "errors.too_big.number.inclusive",
       })
       .max(1000, {
@@ -247,7 +247,7 @@ function AddGameForm({ intialValues }: AddGameFormProp) {
                       <p className="text-xs text-danger-500">
                         {vali18n(fieldState.error?.message as any, {
                           maximum: 1000,
-                          minimum: 10,
+                          minimum: 1,
                         })}
                       </p>
                     )}
