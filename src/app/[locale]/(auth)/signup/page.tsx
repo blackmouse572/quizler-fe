@@ -15,7 +15,7 @@ export default async function RegisterPage() {
   return (
     <div className="">
       <GoBackButton />
-      <NextIntlClientProvider messages={_.pick(m, "SignUp", "Errors")}>
+      <NextIntlClientProvider messages={_.pick(m, "SignUp", "Errors", "Validations")}>
         <UserAuthForm />
       </NextIntlClientProvider>
     </div>
