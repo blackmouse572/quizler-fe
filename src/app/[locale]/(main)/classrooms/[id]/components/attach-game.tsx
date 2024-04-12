@@ -1,4 +1,4 @@
-import { useQuizbankList } from "@/app/[locale]/(main)/classrooms/[id]/components/useQuizbankList"
+import { useGameList } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useGameList"
 import {
   CommandDialog,
   CommandEmpty,
@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/command"
 import { Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
-import QuizBank from "@/types/QuizBank"
+import { Game } from "@/types"
 import { CommandLoading } from "cmdk"
 import { useEffect, useMemo, useState } from "react"
 import { useDebounce } from "use-debounce"
@@ -16,8 +16,8 @@ import { useDebounce } from "use-debounce"
 type Props = {
   open: boolean
   onOpenChange: (open: boolean) => void
-  onSelected: (quiz: QuizBank) => void
-  selected?: QuizBank
+  onSelected: (quiz: Game) => void
+  selected?: Game
   classId: string
   terms: {
     placeholder: string
@@ -25,16 +25,10 @@ type Props = {
   }
 }
 
-function AttachQuizbank({
-  onSelected,
-  classId,
-  selected,
-  terms,
-  ...props
-}: Props) {
+function AttachGame({ onSelected, classId, selected, terms, ...props }: Props) {
   const [query, setQuery] = useState("")
   const [debouncedQuery] = useDebounce(query, 300)
-  const { isLoading, data, error, isError } = useQuizbankList({
+  const { isLoading, data, error, isError } = useGameList({
     classroomId: classId,
     filter: {
       take: 4,
@@ -88,10 +82,10 @@ function AttachQuizbank({
             onClick={() => onSelected(quiz)}
             onSelect={() => onSelected(quiz)}
             className="cursor-pointer focus:bg-accent"
-            value={quiz.bankName}
+            value={quiz.gameName}
           >
             <p className="w-full">
-              {quiz.bankName} ({quiz.quizCount})
+              {quiz.gameName} ({quiz.status})
             </p>
             {selected?.id === quiz.id && (
               <Icons.Checked className="mr-2 h-4 w-4 text-emerald-500" />
@@ -122,4 +116,4 @@ function AttachQuizbank({
   )
 }
 
-export default AttachQuizbank
+export default AttachGame

@@ -34,7 +34,7 @@ function UserDropdown({ user, menuItems }: Props) {
   const router = useRouter()
   function logout() {
     logoutAction().then(() => {
-      router.refresh()
+      router.replace("/")
     })
   }
   const renderMenuItem = useCallback(

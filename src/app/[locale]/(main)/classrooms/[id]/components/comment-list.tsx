@@ -112,14 +112,6 @@ function CommentList({ onOpenChange, open, post, ...props }: Props) {
                       {t("posts.comments.delete")}
                     </DropdownMenuItem>
                   )}
-                  {comment.author.id === user?.id && (
-                    <DropdownMenuItem
-                      onClick={() => setIsDeleteDialogOpen(true)}
-                      hidden={comment.author.id !== user?.id}
-                    >
-                      {t("posts.report.action")}
-                    </DropdownMenuItem>
-                  )}
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

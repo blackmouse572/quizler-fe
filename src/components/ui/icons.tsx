@@ -89,7 +89,8 @@ import {
   IconAlertTriangle,
   IconCreditCard,
   IconAlertSquare,
-  IconProgressCheck
+  IconProgressCheck,
+  IconBrandFacebook
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -201,6 +202,7 @@ export const Icons = {
   Settings: IconSettings,
   Error: IconBan,
   Payment: IconCreditCard,
+  Facebook: IconBrandFacebook
 }
 
 type IIconKeys = keyof typeof Icons
