@@ -4,6 +4,27 @@
     "back": "Quay lại",
     "description": "Học tập với các phương pháp siêu tốc"
   },
+  "AboutUs": {
+    "metadata": {
+      "title": "Về chúng tôi",
+      "description": "Về chúng tôi"
+    },
+    "index": "Về QuizLearn",
+    "who_we_are": {
+      "index": "Chúng tôi là",
+      "paragraph": {
+        "para_1": "Chào mừng đến với QuizLearn! Chúng tôi là nhóm QuizLearn, một nhóm sinh viên đến từ Đại học FPT Đà Nẵng, Việt Nam. Chúng tôi rất vui mừng được giới thiệu đồ án tốt nghiệp của chúng tôi với bạn.",
+        "para_2": "Là những người học đầy đam mê và tận tâm, chúng tôi bắt tay vào hành trình này để tạo ra một nền tảng sáng tạo và hấp dẫn, kết hợp giữa giáo dục và niềm vui. QuizLearn là đỉnh cao của sự nỗ lực và cam kết mang lại trải nghiệm học tập quý giá của chúng tôi."
+      }
+    },
+    "explain_offering_customer": {
+      "index": "Trao tiềm lực vô hạn cho mọi sinh viên",
+      "paragraph": {
+        "para_1": "Tại Quizlearn, chúng tôi tin rằng bất cứ ai cũng có thể học bất cứ điều gì. Chỉ cần họ có tinh thần kiên trì, được hướng dẫn đúng cách và có các công cụ phù hợp để thành công. Chúng tôi biết rằng sinh viên đang chịu nhiều áp lực hơn bao giờ hết. Điều đó có thể khiến họ quá tải, gây lo âu và bào mòn sức lực nhanh chóng. ",
+        "para_2": "Nhiệm vụ của chúng tôi là cung cấp cho mọi sinh viên các công cụ và sự tự tin để thành công, bất kể động lực và mục tiêu của họ là gì."
+      }
+    }
+  },
   "Notification": {
     "user": {
       "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",

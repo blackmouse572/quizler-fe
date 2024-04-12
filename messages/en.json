@@ -4,6 +4,27 @@
     "back": "Go back",
     "description": "Learning with supafast methods"
   },
+  "AboutUs": {
+    "metadata": {
+      "title": "About Us",
+      "description": "About us"
+    },
+    "index": "About QuizLearn",
+    "who_we_are": {
+      "index": "Who we are",
+      "paragraph": {
+        "para_1": "Welcome to QuizLearn! We are the QuizLearn team, a group of students from FPT University Danang, Vietnam. We are thrilled to present our graduation project to you.",
+        "para_2": "As passionate and dedicated learners, we embarked on this journey to create an innovative and engaging platform that combines education and fun. QuizLearn is the culmination of our hard work and commitment to delivering a valuable learning experience."
+      }
+    },
+    "explain_offering_customer": {
+      "index": "Making every student unstoppable",
+      "paragraph": {
+        "para_1": "At Quizlearn, we believe that anyone can learn anything. All it takes is a tenacious spirit, the right guidance, and the tools to see it through. We know that students are under more pressure than ever. It can leave them overwhelmed, be anxiety-producing and make it all too easy to burn out.",
+        "para_2": "It’s our job to give every student the tools and confidence to succeed, no matter what their motivation, or what they’re striving to achieve."
+      }
+    }
+  },
   "Table": {
     "no_data": "No data",
     "no_results": "No results",
