@@ -56,16 +56,11 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
         color: "danger",
       })
     } else {
-      setIsLoading(false)
+      router.push("/login")
       toast({
         color: "success",
         duration: 3000,
         title: t("signup-success"),
-        action: (
-          <Button variant={"flat"} onClick={() => router.push("/login")}>
-            {t("login")}
-          </Button>
-        ),
       })
     }
   }
