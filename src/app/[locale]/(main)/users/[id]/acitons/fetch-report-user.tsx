@@ -14,10 +14,7 @@ export async function reportUserAction(accountId: string, reason: string) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ accountId, reason }),
-    next: {
-      revalidate: 60, // Revalidate every 60 second
-    },
+    body: JSON.stringify({ accountId, reason })
   }
 
   const url = getAPIServerURL(`/report`)
