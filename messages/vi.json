@@ -1149,6 +1149,22 @@
         "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
         "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
       },
+      "signup": {
+        "fullname": "Tên hiển thị phải có ít nhất 2 ký tự.",
+        "username": "Tên người dùng phải từ 3 đến 20 ký tự.",
+        "password": "Mật khẩu phải có ít nhất 8 ký tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
+        "mismatch_password": "Mật khẩu không khớp.",
+        "email": "Email không hợp lệ."
+      },
+      "forgot_password": {
+        "email": "Email không hợp lệ."
+      },
+      "set_new_password": {
+        "password": "Mật khẩu phải có ít nhất 8 ký tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
+        "mismatch_password": "Mật khẩu không khớp."
+      },
       "edit_account": {
         "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",
         "new_password": "Mật khẩu mới phải có ít nhất 8 kí tự.",

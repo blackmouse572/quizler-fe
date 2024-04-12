@@ -39,21 +39,10 @@ export default function AuthorQuizBank({
       <div className="mt-16 text-xl font-bold leading-8 text-black max-md:mt-10 max-md:max-w-full">
         {i18n("belong_to")}
       </div>
-      {classname && (
-        <div className="ml-3.5 mt-6 flex w-[874px] max-w-full justify-between gap-5 px-5 font-medium max-md:flex-wrap">
-          <div className="flex-auto text-2xl leading-10 text-black">
-            {i18n("author.class_title")}:{" "}
-            <span className="font-bold">
-              {i18n("author.class_title")} $Biology {i18n("author.of")}{" "}
-              {authorData.fullName}
-            </span>
-          </div>
-        </div>
-      )}
 
       <div className="flex max-w-full justify-between gap-5 pr-6 max-md:flex-wrap max-md:pr-5">
         <div className="flex justify-between gap-2 whitespace-nowrap">
-          <Link href={`/profile/${authorData?.id}`}>
+          <Link href={`/users/${authorData?.id}`}>
             <Avatar>
               <AvatarImage
                 src={authorData?.avatar ?? ""}
@@ -68,7 +57,7 @@ export default function AuthorQuizBank({
           </Link>
           <div className="flex flex-1 flex-col">
             <Link
-              href={`/profile/${authorData?.id}`}
+              href={`/users/${authorData?.id}`}
               className="text-sm font-medium leading-5 text-zinc-950"
             >
               {authorData.fullName}

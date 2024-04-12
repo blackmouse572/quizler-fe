@@ -1291,6 +1291,22 @@
         "startsWith": "Invalid input: must start with \"{startsWith}\"",
         "endsWith": "Invalid input: must end with \"{endsWith}\""
       },
+      "signup": {
+        "fullname": "Display name must be at least 2 characters.",
+        "username": "Username must be between 3 and 20 characters",
+        "password": "Password must be at least 8 characters.",
+        "confirm_password": "Confirm password must be at least 8 characters.",
+        "mismatch_password": "Passwords don't match",
+        "email": "Email is invalid"
+      },
+      "forgot_password": {
+        "email": "Email is invalid"
+      },
+      "set_new_password": {
+        "password": "Password must be at least 8 characters.",
+        "confirm_password": "Confirm password must be at least 8 characters.",
+        "mismatch_password": "Passwords don't match"
+      },
       "edit_account": {
         "old_password": "Old password must be at least 8 characters.",
         "new_password": "New password must be at least 8 characters.",

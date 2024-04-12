@@ -14,7 +14,7 @@ async function ForgotPasswordPage({ searchParams }: ForgotPasswordProps) {
   return (
     <div className="">
       <GoBackButton />
-      <NextIntlClientProvider messages={_.pick(m, "ForgotPassword", "Erros")}>
+      <NextIntlClientProvider messages={_.pick(m, "ForgotPassword", "Erros", "Validations")}>
         <ForgotPasswordForm />
       </NextIntlClientProvider>
     </div>
