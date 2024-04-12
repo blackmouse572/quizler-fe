@@ -28,7 +28,7 @@ function CreateNewClassroomPage({}: Props) {
   const message = useMessages()
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "AddClassroom", "Errors")}
+      messages={_.pick(message, "Validations", "AddClassroom", "Errors", "UpgradeAccount")}
     >
       <AddClassroomForm action={EFormAction.Add} />
     </NextIntlClientProvider>
