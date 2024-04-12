@@ -1707,5 +1707,61 @@
         }
       }
     }
+  },
+  "Report_user" : {
+    "title": "Report User",
+    "description" : "Do you want to report this user?",
+    "terms": {
+      "cancel": "Cancel",
+      "report": "Report"
+    },
+    "form_report": {
+      "reason": {
+        "label": "Reason",
+        "text": "Reason",
+        "placeholder": "Abuse",
+        "reason_choice": {
+          "abuse": "Abuse",
+          "inappropriate": "Inappropriate",
+          "violate_intellectual": "Violates my intellectual property rights",
+          "other": "Other"
+        }
+      },
+      "more_details": {
+        "label": "More details",
+        "text": "More details",
+        "placeholder": "Input more details..."
+      },
+      "button": {
+        "cancel": "Cancel",
+        "submit": "Report"
+      },
+      "text_area": {
+        "placeholder": "Please provide more details"
+      }
+    },
+    "form_result_report": {
+      "report_success": "Report successfully",
+      "thank_you_reported": "Thank you for your contribute for better learning space",
+      "received_submission": "We have received your submission on user",
+      "of": "of",
+      "against": "that against the",
+      "violation_rules": "Violation Rules",
+      "take_action_soon": "of us. The action will be taken soon.",
+      "recorded": "Recorded:",
+      "ticket_id": "Ticket id:",
+      "contact_us": "For more information, please contact us at",
+      "Quizlearn_email": "Quizlearn",
+      "confirm": "Confirm"
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Report user successfully"
+      },
+      "failed": {
+        "title": "Something went wrong."
+      }
+    }
   }
 }

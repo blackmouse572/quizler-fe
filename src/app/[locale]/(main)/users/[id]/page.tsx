@@ -1,6 +1,5 @@
 import { getUserProfileAction } from "@/app/[locale]/(main)/profile/actions/fetch-user-profile"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -11,10 +10,10 @@ import {
 } from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
-import { NamedToolTip } from "@/components/ui/tooltip"
 import { getShortName } from "@/lib/string-helper"
 import { getFormatter, getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
+import ReportUserDialog from "./components/report-user-dialog/report-user-dialog"
 
 type Props = {
   params: {
@@ -72,11 +71,7 @@ export default async function UserProfile({ params }: Props) {
           </div>
         </CardContent>
         <CardFooter className="justify-end">
-          <NamedToolTip content={t("report.index")}>
-            <Button isIconOnly color={"accent"}>
-              <Icons.Report />
-            </Button>
-          </NamedToolTip>
+            <ReportUserDialog accountId={user.id.toString()} accountName={user.fullName ?? user.username} />
         </CardFooter>
       </Card>
     </div>

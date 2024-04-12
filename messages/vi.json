@@ -1657,5 +1657,61 @@
       },
       "filters": {}
     }
+  },
+  "Report_user" : {
+    "title": "Báo Cáo Người dùng",
+    "description" : "Bạn có muốn báo cáo người dùng này?",
+    "terms": {
+      "cancel": "Hủy",
+      "report": "Báo cáo"
+    },
+    "form_report": {
+      "reason": {
+        "label": "Lý do",
+        "text": "Lý do",
+        "placeholder": "Lạm dụng",
+        "reason_choice": {
+          "abuse": "Lạm dụng",
+          "inappropriate": "Không phù hợp",
+          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ của tôi",
+          "other": "Khác"
+        }
+      },
+      "more_details": {
+        "label": "Chi tiết hơn",
+        "text": "Chi tiết hơn",
+        "placeholder": "Diền chi tiết..."
+      },
+      "button": {
+        "cancel": "Hủy",
+        "submit": "Báo cáo"
+      },
+      "text_area": {
+        "placeholder": "Hãy nhập chi tiết vào đây"
+      }
+    },
+    "form_result_report": {
+      "report_success": "Báo cáo thành công",
+      "thank_you_reported": "Thank you for your contribute for better learning space",
+      "received_submission": "Cảm ơn bạn đã đóng góp để có không gian học tập tốt hơn",
+      "of": "của",
+      "against": "đã chống lại",
+      "violation_rules": "các Nội quy vi phạm",
+      "take_action_soon": "của chúng tôi. Sẽ có hành động sớm với tài khoản này.",
+      "recorded": "Được ghi lại vào:",
+      "ticket_id": "Id vé phạt:",
+      "contact_us": "Để biết thêm thông tin, xin vui lòng liên hệ chúng tôi tại",
+      "Quizlearn_email": "Quizlearn",
+      "confirm": "Xác nhận"
+    },
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Thành công báo cáo người dùng"
+      },
+      "failed": {
+        "title": "Có gì đó không đúng đã xảy ra"
+      }
+    }
   }
 }
