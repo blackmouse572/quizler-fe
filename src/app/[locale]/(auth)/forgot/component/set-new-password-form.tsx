@@ -13,7 +13,6 @@ import {
   FormControl,
   FormField,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
@@ -24,29 +23,30 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { ChangePasswordAction } from "../actions/change-password-action"
-import ChangePasswordSchema, {
-  ChangePasswordSchemaType,
-} from "../validations/change-password-validate"
+import SetNewPasswordSchema, {
+  SetNewPasswordSchemaType,
+} from "../validations/set-new-password-validate"
 
 type ChangePasswordPageProps = {
   email: string
   token: string
 }
 
-export default function ChangePasswordForm({
+export default function SetNewPasswordForm({
   email,
   token,
 }: ChangePasswordPageProps) {
   const t = useTranslations("ChangePassword")
   const e = useTranslations("Errors")
+  const validationsi18n = useTranslations("Validations")
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
-  const form = useForm<ChangePasswordSchemaType>({
-    resolver: zodResolver(ChangePasswordSchema),
+  const form = useForm<SetNewPasswordSchemaType>({
+    resolver: zodResolver(SetNewPasswordSchema),
   })
 
-  async function onSubmit(values: ChangePasswordSchemaType) {
+  async function onSubmit(values: SetNewPasswordSchemaType) {
     setIsLoading(true)
     const result = await ChangePasswordAction(values)
 
@@ -87,7 +87,7 @@ export default function ChangePasswordForm({
             <FormField
               control={form.control}
               name="password"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -103,7 +103,14 @@ export default function ChangePasswordForm({
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}
@@ -112,7 +119,7 @@ export default function ChangePasswordForm({
             <FormField
               control={form.control}
               name="confirm"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -128,7 +135,14 @@ export default function ChangePasswordForm({
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}

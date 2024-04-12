@@ -1299,6 +1299,11 @@
         "mismatch_password": "Passwords don't match",
         "email": "Email is invalid"
       },
+      "set_new_password": {
+        "password": "Password must be at least 8 characters.",
+        "confirm_password": "Confirm password must be at least 8 characters.",
+        "mismatch_password": "Passwords don't match"
+      },
       "edit_account": {
         "old_password": "Old password must be at least 8 characters.",
         "new_password": "New password must be at least 8 characters.",

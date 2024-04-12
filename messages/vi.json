@@ -1157,6 +1157,11 @@
         "mismatch_password": "Mật khẩu không khớp.",
         "email": "Email không hợp lệ."
       },
+      "set_new_password": {
+        "password": "Mật khẩu phải có ít nhất 8 ký tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
+        "mismatch_password": "Mật khẩu không khớp."
+      },
       "edit_account": {
         "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",
         "new_password": "Mật khẩu mới phải có ít nhất 8 kí tự.",

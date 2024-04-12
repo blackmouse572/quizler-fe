@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache"
 
 import { setToken } from "@/lib/auth"
-import { ChangePasswordSchemaType } from "../validations/change-password-validate"
+import { ChangePasswordSchemaType } from "../validations/set-new-password-validate"
 import { getAPIServerURL } from "@/lib/utils"
 
 export const ChangePasswordAction = async (

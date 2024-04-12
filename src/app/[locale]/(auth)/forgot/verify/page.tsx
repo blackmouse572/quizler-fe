@@ -5,7 +5,7 @@ import { getMessages } from "next-intl/server"
 import VerifyForgotPasswordForm from "../component/verify-forgot-password-form"
 import { notFound } from "next/navigation"
 import { validateJWT } from "@/lib/auth"
-import ChangePasswordForm from "../component/change-password-form"
+import SetNewPasswordForm from "../component/set-new-password-form"
 
 type VerifyForgotPasswordPageProps = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -27,8 +27,8 @@ export default async function VerifyForgotPasswordPage({
   return (
     <div className="flex h-full w-full justify-center">
       <GoBackButton />
-      <NextIntlClientProvider messages={_.pick(m, "ChangePassword", "Errors")}>
-        <ChangePasswordForm token={t as string} email={isValidToken.email} />
+      <NextIntlClientProvider messages={_.pick(m, "ChangePassword", "Errors", "Validations")}>
+        <SetNewPasswordForm token={t as string} email={isValidToken.email} />
       </NextIntlClientProvider>
     </div>
   )
