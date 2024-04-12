@@ -235,10 +235,6 @@
     }
   },
   "Classroom": {
-    "actions": {
-      "create": "Tạo lớp học",
-      "join": "Tham gia lớp học"
-    },
     "headers": {
       "created_at": "Ngày tạo",
       "description": "Mô tả",
@@ -251,6 +247,31 @@
     "metadata": {
       "description": "Quản lý tất cả các lớp học trong hệ thống",
       "title": "Lớp học"
+    },
+    "actions": {
+      "create": "Tạo lớp học",
+      "join": "Tham gia lớp học",
+      "delete": {
+        "index": "Xoá",
+        "title": "Xoá lớp {name}",
+        "description": "Bạn sắp xoá lớp này, bạn có chắc chắn không?",
+        "confirm": "Xoá",
+        "cancel": "Huỷ bỏ"
+      },
+      "leave": {
+        "index": "Rời lớp",
+        "title": "Rời lớp {name}",
+        "description": "Bạn sắp rời lớp này, bạn có chắc chắn không?",
+        "confirm": "Rời đi",
+        "cancel": "Huỷ bỏ",
+        "success": {
+          "title": "Đã rời khỏi lợp",
+          "description": "Bạn vẫn có thể tham gia lại lớp học này"
+        }
+      },
+      "edit": {
+        "index": "Edit"
+      }
     }
   },
   "Members_classroom": {

@@ -111,7 +111,28 @@
     },
     "actions": {
       "create": "Create classroom",
-      "join": "Join classroom"
+      "join": "Join classroom",
+      "delete": {
+        "index": "Delete",
+        "title": "Delete classroom {name}",
+        "description": "Are you sure you want to delete this classroom?",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      },
+      "leave": {
+        "index": "Leave",
+        "title": "Leave classroom {name}",
+        "description": "Are you sure you want to leave this classroom?",
+        "confirm": "Leave",
+        "cancel": "Cancel",
+        "success": {
+          "title": "Leaved classroom",
+          "description": "You have leave classroom but still re-join"
+        }
+      },
+      "edit": {
+        "index": "Edit"
+      }
     }
   },
   "ClassroomDetails": {

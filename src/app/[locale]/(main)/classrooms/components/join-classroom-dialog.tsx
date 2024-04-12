@@ -53,6 +53,7 @@ type FormData = z.infer<typeof JoinClassroomSchema>
 function JoinClassroomDialog({ defaultOpen, defaultValue, trigger }: Props) {
   const [isOpen, setOpen] = useState(defaultOpen)
   const t = useTranslations("Join_classroom")
+  const classroomT = useTranslations("Classroom")
   const validationsi18n = useTranslations("Validations")
   const errori18n = useTranslations("Errors")
   const form = useForm<FormData>({
@@ -89,7 +90,13 @@ function JoinClassroomDialog({ defaultOpen, defaultValue, trigger }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      <DialogTrigger>{trigger}</DialogTrigger>
+      <NamedToolTip side="bottom" content={classroomT("actions.join")}>
+        <DialogTrigger asChild>
+          <Button isIconOnly>
+            <Icons.Join />
+          </Button>
+        </DialogTrigger>
+      </NamedToolTip>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>

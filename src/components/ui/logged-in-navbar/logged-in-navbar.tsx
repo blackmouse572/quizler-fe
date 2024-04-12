@@ -154,20 +154,22 @@ export default function LoggedInNavbar({
         <NavigationMenuItem>
           <NavigationMenuTrigger>{tNav("my_classrooms")}</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] grid-rows-4 gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {myClassroomData?.data.map((passingClassroomData) => (
-                <div key={passingClassroomData.id}>
-                  <div>
-                    <LoggedInAnimatedListItemMyClassroom
-                      key={passingClassroomData.id}
-                      {...passingClassroomData}
-                    />
+            <ul className="grid min-h-[200px] w-[400px] grid-rows-4 gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              <div className="row-span-5 h-fit">
+                {myClassroomData?.data.map((passingClassroomData) => (
+                  <div key={passingClassroomData.id}>
+                    <div>
+                      <LoggedInAnimatedListItemMyClassroom
+                        key={passingClassroomData.id}
+                        {...passingClassroomData}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
               <li className="row-span-5 flex flex-col items-center justify-center gap-6 bg-dot-slate-300">
-                <div className="space-y-1 px-4">
-                  <h3 className="text-3xl font-bold text-emerald-500">
+                <div className="space-y-2 px-4">
+                  <h3 className="text-2xl font-bold text-emerald-500">
                     {tNav("buy-premium.title")}
                   </h3>
                   <h3 className="text-sm text-neutral-500">

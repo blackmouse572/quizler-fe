@@ -13,7 +13,7 @@ export default function useClassroomList({
 }) {
   console.log({ options })
   return useInfiniteQuery({
-    queryKey: ["classrooms", options?.search],
+    queryKey: ["classrooms", options],
     queryFn: async ({ pageParam }) => {
       console.log("options", options)
       const res = await fetchMyClassrooms({
