@@ -22,7 +22,6 @@ import {
   FormDescription,
   FormField,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -32,6 +31,7 @@ import { useRouter } from "next/navigation"
 
 export default function ForgotPasswordForm() {
   const t = useTranslations("ForgotPassword")
+  const validationsi18n = useTranslations("Validations")
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
@@ -91,7 +91,7 @@ export default function ForgotPasswordForm() {
             <FormField
               control={form.control}
               name="email"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -109,7 +109,14 @@ export default function ForgotPasswordForm() {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}

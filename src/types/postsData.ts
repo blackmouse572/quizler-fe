@@ -1,4 +1,4 @@
-import { Classroom, User } from "@/types"
+import { Classroom, Game, User } from "@/types"
 import QuizBank from "@/types/QuizBank"
 
 export type Post = {
@@ -24,7 +24,7 @@ export type PostGame = {
   gameLink: string
   quizBank: never
   bankLink: never
-  game: any // Todo: Define game type
+  game: Game
 }
 
 export type Comment = {

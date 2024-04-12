@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select"
 import { locales } from "@/config"
 import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 import { useTransition } from "react"
 
 type Props = {
@@ -23,9 +24,16 @@ export default function LocaleSwitcherSelect({ defaultValue, label }: Props) {
   const [isPending, startTransition] = useTransition()
   const t = useTranslations("LocaleSwitcher")
   const router = useRouter()
+  const location = usePathname()
 
   function onSelectChange(newValue: string) {
-    const path = "/profile/preference"
+    var path = location
+    console.log(path)
+    if (path.startsWith("/vi")) {
+      console.log("replace")
+      path = path.replace("/vi", "/")
+    }
+    // const path = "/profile/preference"
     startTransition(() => {
       router.push(
         {

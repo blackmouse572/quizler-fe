@@ -208,6 +208,12 @@
             "description": "Click here to copy the game link"
           }
         }
+      },
+      "leave": {
+        "title": "Leave game",
+        "description": "Are you sure you want to leave this game? You can't join again",
+        "confirm": "Leave",
+        "cancel": "Cancel"
       }
     }
   },
@@ -897,6 +903,47 @@
       "cancel_btn": "Cancel",
       "submit_btn": "Change password"
     },
+    "plans": {
+      "duration": "months",
+      "plans": {
+        "hobby": {
+          "title": "Hobby",
+          "description": "Getting warm",
+          "features": {
+            "feature1": "Learn public quizbank",
+            "feature2": "Create your own quizbank",
+            "feature3": "15 A.I Helper per day",
+            "feature4": "Own upto 3 Classrooms"
+          }
+        },
+        "learner": {
+          "title": "Learner",
+          "description": "Learn as your need",
+          "features": {
+            "feature1": "Everything in Hobby plan",
+            "feature2": "50 A.I Helper perday",
+            "feature3": "Own upto 10 Classrooms"
+          }
+        },
+        "expert": {
+          "title": "Expert",
+          "description": "Explore the knowledge",
+          "features": {
+            "feature1": "Everything in Learner plan",
+            "feature2": "100 A.I Helper perday",
+            "feature3": "Own upto 20 Classrooms"
+          }
+        }
+      },
+      "upgrade_dialog": {
+        "buttons": {
+          "upgrade": "Upgrade",
+          "cancel": "Cancel"
+        },
+        "title": "Upgrade your plan to {plan}",
+        "description": "Upgrade your plan and enjoy the benefits from the plan"
+      }
+    },
     "profile": {
       "title": "Profile",
       "edit_profile": "Edit profile",
@@ -1247,6 +1294,22 @@
         "datetime": "Invalid {validation}",
         "startsWith": "Invalid input: must start with \"{startsWith}\"",
         "endsWith": "Invalid input: must end with \"{endsWith}\""
+      },
+      "signup": {
+        "fullname": "Display name must be at least 2 characters.",
+        "username": "Username must be between 3 and 20 characters",
+        "password": "Password must be at least 8 characters.",
+        "confirm_password": "Confirm password must be at least 8 characters.",
+        "mismatch_password": "Passwords don't match",
+        "email": "Email is invalid"
+      },
+      "forgot_password": {
+        "email": "Email is invalid"
+      },
+      "set_new_password": {
+        "password": "Password must be at least 8 characters.",
+        "confirm_password": "Confirm password must be at least 8 characters.",
+        "mismatch_password": "Passwords don't match"
       },
       "edit_account": {
         "old_password": "Old password must be at least 8 characters.",

@@ -120,6 +120,12 @@
         },
         "index": "Trò chơi mới",
         "title": "Tạo trò chơi mới"
+      },
+      "leave": {
+        "title": "Rời khỏi trò chơi",
+        "description": "Bạn có muốn rời khỏi trò chơi? Bạn sẽ không thể tham gia lại trò chơi",
+        "confirm": "Rời",
+        "cancel": "Hủy"
       }
     },
     "card": {
@@ -882,6 +888,47 @@
       "cancel_btn": "Hủy",
       "submit_btn": "Thay đổi mật khẩu"
     },
+    "plans": {
+      "duration": "Tháng",
+      "plans": {
+        "hobby": {
+          "title": "Sở thích",
+          "description": "Khởi động",
+          "features": {
+            "feature1": "Học các ngân hàng công hỏi công khai",
+            "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
+            "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
+            "feature4": "Sở hữu đến 3 lớp học"
+          }
+        },
+        "learner": {
+          "title": "Học viên",
+          "description": "Học theo cách của mình",
+          "features": {
+            "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
+            "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
+            "feature3": "Sở hữu đến 10 lớp học"
+          }
+        },
+        "expert": {
+          "title": "Chuyên gia",
+          "description": "Tìm kiếm kiến thức",
+          "features": {
+            "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
+            "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
+            "feature3": "Sở hữu đến 20 lớp học"
+          }
+        }
+      },
+      "upgrade_dialog": {
+        "buttons": {
+          "upgrade": "Nâng cấp",
+          "cancel": "Hủy"
+        },
+        "title": "Nâng cấp gói cá nhân thành {plan}",
+        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+      }
+    },
     "profile": {
       "title": "Hồ sơ",
       "edit_profile": "Chỉnh sửa hồ sơ",
@@ -1101,6 +1148,22 @@
         "datetime": "{validation} không hợp lệ",
         "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
         "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
+      },
+      "signup": {
+        "fullname": "Tên hiển thị phải có ít nhất 2 ký tự.",
+        "username": "Tên người dùng phải từ 3 đến 20 ký tự.",
+        "password": "Mật khẩu phải có ít nhất 8 ký tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
+        "mismatch_password": "Mật khẩu không khớp.",
+        "email": "Email không hợp lệ."
+      },
+      "forgot_password": {
+        "email": "Email không hợp lệ."
+      },
+      "set_new_password": {
+        "password": "Mật khẩu phải có ít nhất 8 ký tự.",
+        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
+        "mismatch_password": "Mật khẩu không khớp."
       },
       "edit_account": {
         "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",

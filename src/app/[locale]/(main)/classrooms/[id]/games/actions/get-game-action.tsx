@@ -17,6 +17,8 @@ async function getAllGamesByClassroomAction({
 }: Props): Promise<TAPIResult<PagedResponse<Game>>> {
   const query = toURLSeachParams({
     ...filter,
+    search:
+      filter.search && filter.search.length > 0 ? filter.search : undefined,
     sortBy: "created",
     sortDirection: "DESC",
   })

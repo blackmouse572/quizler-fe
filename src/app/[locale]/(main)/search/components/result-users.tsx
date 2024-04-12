@@ -27,7 +27,7 @@ export default function ResultUsers({ usersData, isLoading }: Props) {
             return (
               <Link
                 key={data.id}
-                href={`/profile/${data?.id}`}
+                href={`/users/${data?.id}`}
                 className="flex max-w-[25%] flex-1 flex-col items-start justify-center rounded-3xl border border-solid border-zinc-200 bg-white py-6 pl-6 pr-16 shadow max-md:px-5"
               >
                 <div className="flex gap-2.5">

@@ -21,14 +21,15 @@ import {
   GameQuiz,
   GameType,
 } from "@/types/game"
+import { AnimatePresence, motion } from "framer-motion"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useRef, useState } from "react"
 import Confetti from "react-confetti"
 
 type PlayGameProps = {
   initData: Game
 }
-const TAKE = 20
 function PlayGame({ initData }: PlayGameProps) {
   const [answer, setAnswer] = useState<AnswerHistory>({
     gameId: Number.parseInt(initData.id),
@@ -42,13 +43,13 @@ function PlayGame({ initData }: PlayGameProps) {
   const [error, setError] = useState<string>()
   const errorI18n = useTranslations("Errors")
   const { current, reduce, reset } = useProgress()
+  const router = useRouter()
 
   const timeInterval = useRef<NodeJS.Timeout>()
 
   const handleResult = useCallback(
     (result: AnswerHistoryResponse, cb: () => void) => {
       setIsLoading(false)
-      setIsSubmitted(false)
       if (result.isCorrect) {
         setConffeti(true)
       } else {
@@ -56,18 +57,26 @@ function PlayGame({ initData }: PlayGameProps) {
       }
       // next question in 2 seconds
       setTimeout(() => {
+        setIsWrong(false)
+        setIsSubmitted(false)
         reset()
         cb()
-        setIsWrong(false)
       }, 2000)
     },
     [reset]
   )
 
+  const onFinished = useCallback(() => {
+    router.push(
+      `/classrooms/${initData.classroomId}/games/${initData.id}/result`
+    )
+  }, [initData.classroomId, initData.id, router])
+
   const { connectToGame, leave, start, questions, submitAnswer } =
     useGameSignal({
       gameId: Number.parseInt(initData.id),
       onReceiveAnswer: handleResult,
+      onFinished,
     })
 
   useEffect(() => {
@@ -85,7 +94,6 @@ function PlayGame({ initData }: PlayGameProps) {
     setIsSubmitted(true)
     submitAnswer(answer)
   }, [answer, submitAnswer])
-  useEffect(() => console.log(answer), [answer])
 
   useEffect(() => {
     if (questions) {
@@ -94,7 +102,7 @@ function PlayGame({ initData }: PlayGameProps) {
   }, [questions])
 
   useEffect(() => {
-    if (current === 0) {
+    if (current <= 0) {
       handleSubmitted()
     }
   }, [answer, current, handleSubmitted, submitAnswer])
@@ -111,6 +119,7 @@ function PlayGame({ initData }: PlayGameProps) {
 
   const renderQuestion = useCallback(
     (question: GameQuiz) => {
+      console.log(isSubmitted)
       switch (question.type) {
         case GameType.Dnd:
           return (
@@ -181,6 +190,9 @@ function PlayGame({ initData }: PlayGameProps) {
         </CardHeader>
         <CardContent>
           <h3 className="text-lg text-danger-500">{error}</h3>
+          {isSubmitted && (
+            <Icons.Loader className="ml-2 h-5 w-5 animate-spin" />
+          )}
         </CardContent>
         <CardFooter>
           <Button>
@@ -208,6 +220,19 @@ function PlayGame({ initData }: PlayGameProps) {
           onConfettiComplete={() => setConffeti(false)}
         />
       )}
+      <AnimatePresence>
+        {isSubmitted && (
+          <motion.div
+            className="fixed bottom-5 right-5 rounded-md border border-input bg-accent p-2 text-foreground shadow-md"
+            key={"submitAnswer"}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            <Icons.Loader className="h-5 w-5 animate-spin" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

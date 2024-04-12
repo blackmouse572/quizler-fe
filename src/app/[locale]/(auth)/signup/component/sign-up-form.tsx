@@ -21,7 +21,6 @@ import {
   FormControl,
   FormField,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
@@ -57,6 +56,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   const t = useTranslations("SignUp")
   const errorI188n = useTranslations("Errors")
+  const validationsi18n = useTranslations("Validations")
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const router = useRouter()
   const { toast } = useToast()
@@ -68,7 +68,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     if (!result?.ok) {
       setIsLoading(false)
       return toast({
-        title: "Something went wrong.",
+        title: errorI188n("unknown"),
         description: errorI188n(result.message),
         variant: "flat",
         color: "danger",
@@ -102,7 +102,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <FormField
               control={form.control}
               name="fullName"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -117,7 +117,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}
@@ -126,7 +133,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <FormField
               control={form.control}
               name="email"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -141,7 +148,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}
@@ -150,7 +164,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <FormField
               control={form.control}
               name="username"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -165,7 +179,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}
@@ -174,7 +195,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <FormField
               control={form.control}
               name="password"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -190,7 +211,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}
@@ -199,7 +227,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <FormField
               control={form.control}
               name="confirm"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required htmlFor="">
@@ -215,7 +243,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}
@@ -224,7 +259,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <FormField
               control={form.control}
               name="dob"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="space-y-1">
                     <FormLabel required>{t("form.dob.label")}</FormLabel>
@@ -263,7 +298,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         </PopoverContent>
                       </Popover>
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error && (
+                      <p className="text-xs text-danger-500">
+                        {validationsi18n(fieldState.error?.message as any, {
+                          maximum: 255,
+                          minimum: 3,
+                        })}
+                      </p>
+                    )}
                   </div>
                 )
               }}
