@@ -174,9 +174,11 @@ export default function LoggedInNavbar({
                     {tNav("buy-premium.description")}
                   </h3>
                 </div>
-                <Button className="bg-emerald-500 hover:bg-emerald-500/80">
-                  {tNav("buy-premium.action")}
-                </Button>
+                <Link href={`/profile/account`}>
+                  <Button className="bg-emerald-500 hover:bg-emerald-500/80">
+                    {tNav("buy-premium.action")}
+                  </Button>
+                </Link>
               </li>
             </ul>
           </NavigationMenuContent>
