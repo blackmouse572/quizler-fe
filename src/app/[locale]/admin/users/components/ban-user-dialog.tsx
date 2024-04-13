@@ -15,13 +15,15 @@ import { useTranslations } from "next-intl"
 import { useCallback, useState } from "react"
 import { Icons } from "@/components/ui/icons"
 import { useBanUser } from "../helpers/useBanUser"
+import { User } from "@/types"
 
 type Props = {
   id: string
+  user: Partial<User>
   trigger: React.ReactNode
 }
 
-export default function BanUserDialog({ id, trigger }: Props) {
+export default function BanUserDialog({ id, user, trigger }: Props) {
   const [isOpen, setOpen] = useState(false)
   const i18n = useTranslations("UserAdmin")
   const errorI188n = useTranslations("Errors")
@@ -61,7 +63,7 @@ export default function BanUserDialog({ id, trigger }: Props) {
             <DialogTitle>{i18n("dialog.ban_user.title")}</DialogTitle>
             <DialogDescription>
               {i18n.rich("dialog.ban_user.description", {
-                id: id,
+                id: user.fullName,
                 strong: (children) => <b>{children}</b>,
               })}
             </DialogDescription>

@@ -1,21 +1,20 @@
 "use client"
 
-import React from "react"
+import { ClassroomGameResults } from "@/types"
+import { DataChart } from "@/types/chart-type"
+import PagedResponse from "@/types/paged-response"
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js"
-import { Bar } from "react-chartjs-2"
-import { ClassroomGameResults } from "@/types"
-import PagedResponse from "@/types/paged-response"
-import { generateRandomColors } from "../helpers/random-color-chart"
 import { useTranslations } from "next-intl"
-import { DataChart } from "@/types/chart-type"
+import { Bar } from "react-chartjs-2"
+import { generateRandomColors } from "../helpers/random-color-chart"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -73,10 +72,11 @@ export default function BarChartTeacher({ data }: Props) {
   return (
     <>
       <Bar options={options} data={dataChart} />
-      <div>
-        {i18n("teacher.bar_chart.x_data")} <br />
-        {i18n("teacher.bar_chart.y_data")} <br />
-      </div>
+      <div></div>
+      <ul className="w-fit rounded-md border border-input bg-accent px-5 py-3 text-xs">
+        <li>{i18n("teacher.bar_chart.x_data")}</li>
+        <li>{i18n("teacher.bar_chart.y_data")}</li>
+      </ul>
     </>
   )
 }

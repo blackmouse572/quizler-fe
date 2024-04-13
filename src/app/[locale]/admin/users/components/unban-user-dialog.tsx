@@ -9,19 +9,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Icons } from "@/components/ui/icons"
 import { useToast } from "@/components/ui/use-toast"
+import { User } from "@/types"
 import { ContextMenu } from "@radix-ui/react-context-menu"
 import { useTranslations } from "next-intl"
 import { useCallback, useState } from "react"
-import { Icons } from "@/components/ui/icons"
 import { useUnbanUser } from "../helpers/useUnbanUser"
 
 type Props = {
   id: string
   trigger: React.ReactNode
+  user: User
 }
 
-export default function UnbanUserDialog({ id, trigger }: Props) {
+export default function UnbanUserDialog({ id, user, trigger }: Props) {
   const [isOpen, setOpen] = useState(false)
   const i18n = useTranslations("UserAdmin")
   const errorI188n = useTranslations("Errors")
@@ -61,7 +63,7 @@ export default function UnbanUserDialog({ id, trigger }: Props) {
             <DialogTitle>{i18n("dialog.unban_user.title")}</DialogTitle>
             <DialogDescription>
               {i18n.rich("dialog.unban_user.description", {
-                id: id,
+                id: user.fullName,
                 strong: (children) => <b>{children}</b>,
               })}
             </DialogDescription>

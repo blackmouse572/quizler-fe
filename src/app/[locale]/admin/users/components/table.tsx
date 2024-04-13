@@ -18,6 +18,7 @@ import * as React from "react"
 
 import Pagination from "@/components/pagination"
 import SizeSelector from "@/components/size-selector"
+import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -47,16 +48,15 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import usePaginationValue from "@/hooks/usePaginationValue"
+import { User } from "@/types"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
-import FilterDropdown from "./filter"
-import { User } from "@/types"
-import DeleteDialog from "./delete-dialog"
 import { useRouter } from "next/navigation"
-import { Badge } from "@/components/ui/badge"
 import BanUserDialog from "./ban-user-dialog"
-import WarnUserDialog from "./warn-user-dialog"
+import DeleteDialog from "./delete-dialog"
+import FilterDropdown from "./filter"
 import UnbanUserDialog from "./unban-user-dialog"
+import WarnUserDialog from "./warn-user-dialog"
 
 type UserTableProps = {
   data: PagedResponse<User>
@@ -263,6 +263,7 @@ export function UserTable({ data }: UserTableProps) {
             {!user.isBan && (
               <BanUserDialog
                 id={user.id.toString()}
+                user={user}
                 trigger={
                   <ContextMenuItem>
                     <Icons.Ban className="mr-2 inline-block h-4 w-4 " />
@@ -275,6 +276,7 @@ export function UserTable({ data }: UserTableProps) {
             {user.isBan && (
               <UnbanUserDialog
                 id={user.id.toString()}
+                user={user}
                 trigger={
                   <ContextMenuItem>
                     <Icons.Unban className="mr-2 inline-block h-4 w-4 " />
@@ -286,6 +288,7 @@ export function UserTable({ data }: UserTableProps) {
 
             <WarnUserDialog
               id={user.id.toString()}
+              user={user}
               trigger={
                 <ContextMenuItem>
                   <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />

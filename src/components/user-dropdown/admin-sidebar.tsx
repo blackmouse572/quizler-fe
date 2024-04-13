@@ -98,9 +98,7 @@ function AdminSidebarDropdown({ user, menuItems, trigger }: Props) {
   }
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="absolute bottom-24">
-        {trigger}
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger className="">{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent
         className="min-w-[12rem]"
         side="bottom"

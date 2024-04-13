@@ -166,7 +166,7 @@ function Sidebar({ user }: Props) {
           bounce: 1,
         },
       }}
-      className={cn("flex min-w-fit flex-col px-4 py-3 text-sm")}
+      className={cn("flex h-full min-w-fit flex-col px-4 py-3 pb-8 text-sm")}
     >
       <motion.span
         className="mx-auto "
@@ -184,7 +184,10 @@ function Sidebar({ user }: Props) {
       >
         <Icons.Icon className="w-6 min-w-6" />
       </motion.span>
-      <motion.div variants={labelVariants} className="my-8 w-full space-y-2.5">
+      <motion.div
+        variants={labelVariants}
+        className="my-8 h-full w-full space-y-2.5"
+      >
         {renderItems}
       </motion.div>
       <Button

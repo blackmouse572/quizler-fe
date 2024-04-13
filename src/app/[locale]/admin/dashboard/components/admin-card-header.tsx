@@ -17,21 +17,16 @@ type Props = {
 
 export function AdminCardHeader({ title, href, total }: Props) {
   return (
-    <Card className="w-1/4">
-      <CardHeader>
-        <CardTitle>
-          <Link
-            className="flex justify-between gap-2.5 text-base leading-6"
-            href={href}
-          >
+    <Link href={href} className="">
+      <Card className="transition-colors hover:bg-accent">
+        <CardHeader>
+          <CardDescription className="flex items-center justify-between">
             <div>{title}</div>
-            <div>
-              <Icons.ChevronRight />
-            </div>
-          </Link>
-        </CardTitle>
-        <CardDescription>{total}</CardDescription>
-      </CardHeader>
-    </Card>
+            <Icons.ChevronRight />
+          </CardDescription>
+          <CardTitle className="text-3xl">{total}</CardTitle>
+        </CardHeader>
+      </Card>
+    </Link>
   )
 }

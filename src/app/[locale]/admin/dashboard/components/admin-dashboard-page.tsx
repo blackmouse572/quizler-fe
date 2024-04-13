@@ -1,8 +1,8 @@
 import { AdminNotification, Transaction } from "@/types"
+import PagedResponse from "@/types/paged-response"
 import AdminActivityLogs from "./admin-activity-logs"
 import AdminDashboardHeader from "./admin-dashboard-header"
 import AdminIncomeChart from "./admin-income-chart"
-import PagedResponse from "@/types/paged-response"
 
 type Props = {
   totalCount: {
@@ -22,17 +22,15 @@ export default function AdminDashboard({
   totalCount,
   transactionData,
   time,
-  notificationData
+  notificationData,
 }: Props) {
   return (
-    <div className="flex flex-col rounded-xl pt-7">
+    <div className="max-h-screen space-y-8">
       <AdminDashboardHeader totalCount={totalCount} />
 
-      <div className="mt-11 w-full">
-        <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-          <AdminIncomeChart transactionData={transactionData} time={time} />
-          <AdminActivityLogs notificationData={notificationData} />
-        </div>
+      <div className="grid grid-cols-1 gap-0 md:gap-5 lg:grid-cols-2">
+        <AdminIncomeChart transactionData={transactionData} time={time} />
+        <AdminActivityLogs notificationData={notificationData} />
       </div>
     </div>
   )
