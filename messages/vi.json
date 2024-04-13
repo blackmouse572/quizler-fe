@@ -1420,7 +1420,7 @@
     "errorBtn": "Thông báo lỗi"
   },
   "UpgradeAccount": {
-    "upgrade": "Nâng cấp tài khoản" 
+    "upgrade": "Nâng cấp tài khoản"
   },
   "Errors": {
     "index": "Lỗi",
@@ -1462,6 +1462,9 @@
         "label": "Mô tả",
         "placeholder": "Nhập mô tả của lớp học"
       },
+      "invite": {
+        "label": "Cho phép thành viên mời người khác"
+      },
       "plan-form": {
         "starter": {
           "title": "Gói cơ bản",
@@ -1501,6 +1504,9 @@
       "description": {
         "label": "Mô tả",
         "placeholder": "Nhập mô tả của lớp học"
+      },
+      "invite": {
+        "label": "Cho phép thành viên mời người khác"
       },
       "actions": {
         "edit": {
@@ -1664,7 +1670,8 @@
           },
           "message": {
             "ban_message_single": "Bạn có muốn cấm người dùng <span></span>?",
-            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?"
+            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?",
+            "success": "Cấm người dùng thành công"
           }
         },
         "unban": {
@@ -1709,9 +1716,9 @@
       "filters": {}
     }
   },
-  "Report_user" : {
+  "Report_user": {
     "title": "Báo Cáo Người dùng",
-    "description" : "Bạn có muốn báo cáo người dùng này?",
+    "description": "Bạn có muốn báo cáo người dùng này?",
     "terms": {
       "cancel": "Hủy",
       "report": "Báo cáo"
