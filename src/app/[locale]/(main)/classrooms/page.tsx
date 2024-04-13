@@ -49,6 +49,7 @@ async function ClassroomPage({ searchParams }: Props) {
           <JoinClassroomDialog
             defaultOpen={!!initCode}
             defaultValue={initCode}
+            filter={{ search }}
           />
           <Link href="/classrooms/add">
             <NamedToolTip side="bottom" content={t("actions.create")}>

@@ -1286,7 +1286,7 @@
     }
   },
   "UpgradeAccount": {
-    "upgrade": "Upgrade account" 
+    "upgrade": "Upgrade account"
   },
   "Errors": {
     "index": "Error",
@@ -1495,6 +1495,9 @@
         "label": "Description",
         "placeholder": "Enter the description of the classroom"
       },
+      "invite": {
+        "label": "Allow student to invite"
+      },
       "plan-form": {
         "starter": {
           "title": "Starter",
@@ -1534,6 +1537,9 @@
       "description": {
         "label": "Description",
         "placeholder": "Enter the description of the classroom"
+      },
+      "invite": {
+        "label": "Allow student to invite"
       },
       "actions": {
         "edit": {
@@ -1759,9 +1765,9 @@
       }
     }
   },
-  "Report_user" : {
+  "Report_user": {
     "title": "Report User",
-    "description" : "Do you want to report this user?",
+    "description": "Do you want to report this user?",
     "terms": {
       "cancel": "Cancel",
       "report": "Report"

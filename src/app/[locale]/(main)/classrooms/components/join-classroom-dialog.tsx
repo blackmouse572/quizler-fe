@@ -22,6 +22,7 @@ import { Icons } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import { NamedToolTip } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
+import PagedRequest from "@/types/paged-request"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -46,11 +47,12 @@ type Props = {
   defaultOpen?: boolean
   defaultValue?: string
   trigger?: React.ReactNode
+  filter?: Partial<PagedRequest>
 }
 
 type FormData = z.infer<typeof JoinClassroomSchema>
 
-function JoinClassroomDialog({ defaultOpen, defaultValue, trigger }: Props) {
+function JoinClassroomDialog({ defaultOpen, defaultValue, filter }: Props) {
   const [isOpen, setOpen] = useState(defaultOpen)
   const t = useTranslations("Join_classroom")
   const classroomT = useTranslations("Classroom")
@@ -77,14 +79,13 @@ function JoinClassroomDialog({ defaultOpen, defaultValue, trigger }: Props) {
       })
     } else {
       setOpen(false)
-      queryClient.invalidateQueries({ queryKey: ["classrooms"] })
+      queryClient.invalidateQueries({ queryKey: ["classrooms", filter] })
 
       toast({
         title: t("success.title"),
         color: "success",
         description: t("success.description"),
       })
-      router.push("/classrooms")
     }
   }
 

@@ -2,6 +2,7 @@
 import { addNewClassroom } from "@/app/[locale]/(main)/classrooms/actions/add-classroom-action"
 import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-bank-action"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -48,6 +49,7 @@ const addClassroomSchema = z.object({
     .max(255, {
       message: "errors.too_big.string.inclusive",
     }),
+  isStudentAllowInvite: z.boolean(),
 })
 
 export type AddClassroom = z.infer<typeof addClassroomSchema>
@@ -66,7 +68,11 @@ export default function AddClassroomForm({
   const validationsi18n = useTranslations("Validations")
   const isAddAction = useMemo(() => +action === +EFormAction.Add, [action])
   const [initialValuesState, setInitialValuesState] = useState<AddClassroom>(
-    initialValues ?? { className: "", description: "" }
+    initialValues ?? {
+      className: "",
+      description: "",
+      isStudentAllowInvite: false,
+    }
   )
 
   const i18n = useTranslations(isAddAction ? "AddClassroom" : "EditClassroom")
@@ -86,28 +92,26 @@ export default function AddClassroomForm({
           color: "danger",
           description: errori18n(res.message),
           action: (
-            <Button variant={"flat"} onClick={() => router.push("/profile/account")}>
+            <Button
+              variant={"flat"}
+              onClick={() => router.push("/profile/account")}
+            >
               {t("upgrade")}
             </Button>
           ),
         })
       } else {
         // If action is add
-        if (isAddAction) {
-          router.push(`/classrooms/${res.data.id}`)
-        } else {
-          // Stays in route when edit
-          toast({
-            title: i18n("form.actions.edit.message.title"),
-            color: "success",
-            description: i18n("form.actions.edit.message.description"),
-          })
-          // set state data for edit form
-          setInitialValuesState(res.data)
-        }
+        router.push(`/classrooms/${res.data.id}`)
+
+        toast({
+          title: i18n("form.actions.edit.message.title"),
+          color: "success",
+          description: i18n("form.actions.edit.message.description"),
+        })
       }
     },
-    [errori18n, i18n, isAddAction, router, t, toast]
+    [errori18n, i18n, router, t, toast]
   )
 
   const onSubmit = useCallback(
@@ -195,6 +199,29 @@ export default function AddClassroomForm({
                     {...field}
                   />
                 </FormControl>
+                {fieldState.error && (
+                  <p className="text-xs text-danger-500">
+                    {validationsi18n(fieldState.error?.message as any, {
+                      maximum: 255,
+                      minimum: 3,
+                    })}
+                  </p>
+                )}
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="isStudentAllowInvite"
+            render={({ field, fieldState }) => (
+              <FormItem className="flex items-center gap-2">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormLabel required>{i18n("form.invite.label")}</FormLabel>
                 {fieldState.error && (
                   <p className="text-xs text-danger-500">
                     {validationsi18n(fieldState.error?.message as any, {

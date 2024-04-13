@@ -4,8 +4,8 @@ import _ from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
 import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
-import getClassroomDetails from "../../actions/get-classroom-details-action"
 import { use } from "react"
+import getClassroomDetails from "../../actions/get-classroom-details-action"
 
 type Props = {
   params: { id: string; locale?: string; classroom?: Classroom }
@@ -43,8 +43,7 @@ function EditClassroomPage({ params: { id } }: Props) {
   const initialvalues = {
     className: classroom?.classname ?? "",
     description: classroom?.description ?? "",
-    // TODO: Get planIDs from API
-    planId: "",
+    isStudentAllowInvite: classroom?.isStudentAllowInvite ?? false,
   }
 
   return (
