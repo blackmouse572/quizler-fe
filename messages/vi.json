@@ -837,950 +837,951 @@
         "reporter": "Đi đến người báo cáo",
         "reported_account": "Đi đến tài khoản bị báo cáo",
         "reported_quizbank": "Đi đến ngân hàng bị báo cáo"
-    },
-    "take_action": "Thực hiện hành động",
-    "delete": "Xóa",
-    "verify_report": {
-      "success": {
-        "title": "Thành công xác minh cáo",
-        "message": {
-          "success": "Báo cáo đã được xác minh thành công"
-        }
       },
-      "error": {
-        "title": "Xác minh báo cáo thất bại"
-      }
-    },
-    "dialog": {
-      "report_details": {
-        "title": "Báo cáo chi tiết",
-        "content": {
-          "quizbank_name": "Tên ngân hàng bị báo cáo",
-          "quizbank_id": "ID ngân hàng bị báo cáo",
-          "account_name": "Tên tài khoản bị báo cáo",
-          "account_id": "ID tài khoản bị báo cáo",
-          "reason": "Lí do",
-          "created_at": "Ngày tạo"
-        },
-        "cancel": "Hủy",
-        "confirm": "Chấp nhận báo cáo"
-      }
-    },
-    "report_reason": {
-      "reason_choice": {
-        "abuse": "Lạm dụng",
-        "inappropriate": "Không phù hợp",
-        "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
-        "other": "Khác"
-      }
-    }
-  },
-  "ForgotPassword": {
-    "title": "Quên mật khẩu? Đừng lo",
-    "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",
-    "form": {
-      "title": "Nhập mã OTP",
-      "email": {
-        "label": "Email",
-        "description": "Chúng tôi sẽ gửi mã xác nhận đến email của bạn",
-        "placeholder": "Nhập email của bạn"
-      },
-      "submit": "Khôi phục mật khẩu"
-    },
-    "card": {
-      "title": "Hãy kiểm tra hòm thư của bạn 📫",
-      "desciption": "Bạn sẽ nhận được email thay đổi mật khẩu",
-      "missing": "Không nhận được? Thử kiểm tra Thư rác hoặc",
-      "try-again": "Thử email khác"
-    },
-    "errors": {
-      "index": "Lỗi",
-      "account-fail": "Tài khoản không tồn tại"
-    }
-  },
-  "VerifyForgotPassword": {
-    "title": "Quên mật khẩu? Đừng lo",
-    "description": "Chúng tôi đã gửi mã xác nhận đến email của bạn.<br></br>Bạn đã nhận được nó chưa? <resent>Gửi lại</resent>",
-    "form": {
-      "title": "Nhập mã OTP",
-      "submit": "Xác nhận"
-    }
-  },
-  "ChangePassword": {
-    "title": "Quên mật khẩu? Đừng lo",
-    "description": "Nhập mật khẩu mới",
-    "form": {
-      "password": {
-        "label": "Mật khẩu",
-        "placeholder": "********"
-      },
-      "confirm": {
-        "label": "Xác nhận mật khẩu",
-        "placeholder": "********"
-      },
-      "submit": "Xác nhận"
-    },
-    "success": {
-      "title": "Thay đổi mật khẩu thành công",
-      "description": "Mật khẩu đã được thay đổi, hãy thử đăng nhập ngay"
-    },
-    "errors": {
-      "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
-      "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay"
-    }
-  },
-  "Settings": {
-    "title": "Cài đặt",
-    "description": "Quản lý cài đặt tài khoản của bạn, hãy thoải mái thay đổi!",
-    "navigation_menu": {
-      "edit_account": "Chỉnh sửa tài khoản",
-      "edit_profile": "Chỉnh sửa hồ sơ",
-      "edit_preference": "Chỉnh sửa sở thích"
-    },
-    "account": {
-      "title": "Tài khoản",
-      "old_password": "Mật khẩu cũ",
-      "new_password": "Mật khẩu mới",
-      "confirm_password": "Xác nhận mật khẩu",
-      "cancel_btn": "Hủy",
-      "submit_btn": "Thay đổi mật khẩu"
-    },
-    "plans": {
-      "duration": "Tháng",
-      "plans": {
-        "hobby": {
-          "title": "Sở thích",
-          "description": "Khởi động",
-          "features": {
-            "feature1": "Học các ngân hàng công hỏi công khai",
-            "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
-            "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
-            "feature4": "Sở hữu đến 3 lớp học"
-          }
-        },
-        "learner": {
-          "title": "Học viên",
-          "description": "Học theo cách của mình",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
-            "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 10 lớp học"
-          }
-        },
-        "expert": {
-          "title": "Chuyên gia",
-          "description": "Tìm kiếm kiến thức",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
-            "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 20 lớp học"
-          }
-        }
-      },
-      "upgrade_dialog": {
-        "buttons": {
-          "upgrade": "Nâng cấp",
-          "cancel": "Hủy"
-        },
-        "title": "Nâng cấp gói cá nhân thành {plan}",
-        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
-      }
-    },
-    "profile": {
-      "title": "Hồ sơ",
-      "edit_profile": "Chỉnh sửa hồ sơ",
-      "label": {
-        "email": "Email",
-        "username": "Tên người dùng",
-        "display_name": "Tên hiển thị",
-        "dob": "Ngày sinh"
-      },
-      "update_dialog": {
-        "title": "Chỉnh sửa hồ sơ",
-        "description": "Thực hiện các thay đổi vào hồ sơ của bạn ở đây. Nhấn Lưu khi hoàn thành.",
-        "label": {
-          "display_name": "Tên hiển thị",
-          "dob": "Ngày sinh"
-        },
-        "submit_btn": "Lưu thay đổi"
-      }
-    },
-    "preference": "Sở thích"
-  },
-  "ViewOtherProfile": {
-    "title": "Hồ sơ",
-    "label": {
-      "email": "Email",
-      "username": "Tên người dùng",
-      "display_name": "Tên hiển thị",
-      "dob": "Ngày sinh"
-    }
-  },
-  "UserDropdown": {
-    "my_account": "Tài khoản của tôi",
-    "profile": "Hồ sơ",
-    "billing": "Thanh toán",
-    "settings": "Cài đặt",
-    "new_classroom": "Tạo lớp học mới",
-    "dashboard": "Bảng điều khiển",
-    "classrooms": {
-      "index": "Lớp học",
-      "new": "Tạo lớp học mới",
-      "my_classrooms": "Lớp học của tôi"
-    },
-    "quizbank": {
-      "index": "Quizbank",
-      "new": "Tạo quizbank mới",
-      "my_quizbanks": "Quizbank của tôi"
-    },
-    "invite": "Mời bạn bè",
-    "faq": "Câu hỏi thường gặp",
-    "support": "Hỗ trợ",
-    "signout": "Đăng xuất"
-  },
-  "AdminSidebar": {
-    "sidebar": {
-      "label": {
-        "dashboard": "Điều khiển",
-        "users": "Người dùng",
-        "classrooms": "Lớp học",
-        "quizbank": "Ngân hàng",
-        "reports": "Báo cáo"
-      }
-    },
-    "dropdown": {
-      "my_account": "Tài khoản của tôi",
-      "profile": "Hồ sơ",
-      "signout": "Đăng xuất"
-    }
-  },
-  "EditQuiz": {
-    "form": {
-      "title": "Chỉnh sửa ngân hàng câu hỏi",
-      "name": {
-        "label": "Tên",
-        "placeholder": "Nhập tên ngân hàng câu hỏi"
-      },
-      "description": {
-        "label": "Mô tả",
-        "placeholder": "Nhập mô tả ngân hàng câu hỏi"
-      },
-      "submit": "Thêm",
-      "tags": {
-        "label": "Tags",
-        "placeholder": "Nhập tags ngân hàng câu hỏi"
-      },
-      "public": {
-        "label": "Công khai",
-        "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
-      },
-      "quiz": {
-        "new": "Thêm câu hỏi mới"
-      },
-      "term": {
-        "label": "Thuật ngữ",
-        "placeholder": "Nhập thuật ngữ"
-      },
-      "definition": {
-        "label": "Định nghĩa",
-        "placeholder": "Nhập định nghĩa"
-      }
-    }
-  },
-  "CopyQuizBank": {
-    "title": "Sao chép ngân hàng câu hỏi này",
-    "description": "Bạn có muốn sao chép ngân hàng câu hỏi này với",
-    "quizzes": "câu hỏi",
-    "form": {
-      "name": {
-        "label": "Name",
-        "text": "Tên",
-        "placeholder": "Nhập tên của ngân hàng câu hỏi"
-      },
-      "copyTo": {
-        "label": "copyTo",
-        "text": "Sao chép tới",
-        "placeholder": "Chọn nơi để sao chép"
-      },
-      "classroom": {
-        "label": "classroom",
-        "text": "Lớp",
-        "placeholder": "Chọn lớp để sao chép tới"
-      },
-      "personal": {
-        "text": "Kho cá nhân"
-      },
-      "public": {
-        "label": "public",
-        "text": "Công khai"
-      },
-      "button": {
-        "cancel": "Hủy",
-        "submit": "Sao chép"
-      },
-      "message": {
+      "take_action": "Thực hiện hành động",
+      "delete": "Xóa",
+      "verify_report": {
         "success": {
-          "title": "Thành công",
-          "description": "Thành công sao chép ngân hàng câu hỏi"
+          "title": "Thành công xác minh cáo",
+          "message": {
+            "success": "Báo cáo đã được xác minh thành công"
+          }
         },
-        "failed": {
-          "title": "Có gì đó không đúng"
+        "error": {
+          "title": "Xác minh báo cáo thất bại"
         }
-      }
-    }
-  },
-  "ReportQuizBank": {
-    "title": "Báo cáo QuizBank này",
-    "description": "Bạn có muốn báo cáo học phần này không?",
-    "form_report": {
-      "reason": {
-        "label": "Lý do",
-        "text": "Lý do",
-        "placeholder": "Lạm dụng",
+      },
+      "dialog": {
+        "report_details": {
+          "title": "Báo cáo chi tiết",
+          "content": {
+            "quizbank_name": "Tên ngân hàng bị báo cáo",
+            "quizbank_id": "ID ngân hàng bị báo cáo",
+            "account_name": "Tên tài khoản bị báo cáo",
+            "account_id": "ID tài khoản bị báo cáo",
+            "reason": "Lí do",
+            "created_at": "Ngày tạo"
+          },
+          "cancel": "Hủy",
+          "confirm": "Chấp nhận báo cáo"
+        }
+      },
+      "report_reason": {
         "reason_choice": {
           "abuse": "Lạm dụng",
           "inappropriate": "Không phù hợp",
           "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
           "other": "Khác"
         }
-      },
-      "more_details": {
-        "label": "Chi tiết hơn",
-        "text": "Chi tiết hơn",
-        "placeholder": "Nhập thêm chi tiết..."
-      },
-      "button": {
-        "cancel": "Hủy",
-        "submit": "Báo cáo"
-      },
-      "text_area": {
-        "placeholder": "Xin hãy cung cấp thông tin chi tiết hơn"
       }
     },
-    "form_result_report": {
-      "report_success": "Báo cáo thành công",
-      "thank_you_reported": "Cảm ơn bạn đã đóng góp cho không gian học tập tốt hơn",
-      "received_submission": "Chúng tôi đã nhận được đơn báo cáo của bạn về quizbank",
-      "of": "của",
-      "against": "đối với",
-      "violation_rules": "Quy tắc vi phạm",
-      "take_action_soon": "chúng tôi. Hành động sẽ được thực hiện sớm.",
-      "recorded": "Đã ghi lại:",
-      "ticket_id": "Mã báo cáo:",
-      "contact_us": "Để biết thêm thông tin, vui lòng liên hệ chúng tôi tại",
-      "Quizlearn_email": "Quizlearn",
-      "confirm": "Xác nhận"
-    },
-    "message": {
-      "success": {
-        "title": "Thành công",
-        "description": "Báo cáo quizbank thành công"
-      },
-      "failed": {
-        "title": "Đã xảy ra lỗi."
-      }
-    }
-  },
-  "Validations": {
-    "errors": {
-      "invalid_type": "Dự kiến {expected}, nhận được {received}",
-      "invalid_type_received_undefined": "Yêu cầu",
-      "invalid_literal": "Giá trị chữ không hợp lệ, dự kiến {expected}",
-      "unrecognized_keys": "Khóa không được nhận diện trong đối tượng: {- keys}",
-      "invalid_union": "Đầu vào không hợp lệ",
-      "invalid_union_discriminator": "Giá trị phân biệt không hợp lệ. Dự kiến {- options}",
-      "invalid_enum_value": "Giá trị enum không hợp lệ. Dự kiến {- options}, nhận được '{received}'",
-      "invalid_arguments": "Tham số hàm không hợp lệ",
-      "invalid_return_type": "Kiểu trả về của hàm không hợp lệ",
-      "invalid_date": "Ngày không hợp lệ",
-      "custom": "Đầu vào không hợp lệ",
-      "invalid_intersection_types": "Kết quả giao không thể được hợp nhất",
-      "not_multiple_of": "Số phải là bội số của {multipleOf}",
-      "not_finite": "Số phải là hữu hạn",
-      "invalid_string": {
-        "email": "{validation} không hợp lệ",
-        "url": "{validation} không hợp lệ",
-        "uuid": "{validation} không hợp lệ",
-        "cuid": "{validation} không hợp lệ",
-        "regex": "Không hợp lệ",
-        "datetime": "{validation} không hợp lệ",
-        "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
-        "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
-      },
-      "signup": {
-        "fullname": "Tên hiển thị phải có ít nhất 2 ký tự.",
-        "username": "Tên người dùng phải từ 3 đến 20 ký tự.",
-        "password": "Mật khẩu phải có ít nhất 8 ký tự.",
-        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
-        "mismatch_password": "Mật khẩu không khớp.",
-        "email": "Email không hợp lệ."
-      },
-      "forgot_password": {
-        "email": "Email không hợp lệ."
-      },
-      "set_new_password": {
-        "password": "Mật khẩu phải có ít nhất 8 ký tự.",
-        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
-        "mismatch_password": "Mật khẩu không khớp."
-      },
-      "edit_account": {
-        "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",
-        "new_password": "Mật khẩu mới phải có ít nhất 8 kí tự.",
-        "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 kí tự.",
-        "mismatch_password": "Các mật khẩu không trùng khớp."
-      },
-      "update_profile_form": {
-        "fullname": "Tên của bạn nên có ít nhất 2 kí tự.",
-        "date": "Đó không phải là một ngày hợp lệ!"
-      },
-      "report_quizbank": {
-        "more_details": {
-          "min_error": "Phải ít nhất 10 kí tự.",
-          "max_error": "Không được vượt quá 100 kí tự."
-        }
-      },
-      "too_small": {
-        "array": {
-          "exact": "Mảng phải chứa đúng {minimum} phần tử",
-          "inclusive": "Mảng phải chứa ít nhất {minimum} phần tử",
-          "not_inclusive": "Mảng phải chứa nhiều hơn {minimum} phần tử"
-        },
-        "string": {
-          "exact": "Chuỗi phải chứa đúng {minimum} ký tự",
-          "inclusive": "Chuỗi phải chứa ít nhất {minimum} ký tự",
-          "not_inclusive": "Chuỗi phải chứa hơn {minimum} ký tự"
-        },
-        "number": {
-          "exact": "Số phải đúng bằng {minimum}",
-          "inclusive": "Số phải lớn hơn hoặc bằng {minimum}",
-          "not_inclusive": "Số phải lớn hơn {minimum}"
-        },
-        "set": {
-          "exact": "Đầu vào không hợp lệ",
-          "inclusive": "Đầu vào không hợp lệ",
-          "not_inclusive": "Đầu vào không hợp lệ"
-        },
-        "date": {
-          "exact": "Ngày phải đúng bằng {datetime}",
-          "inclusive": "Ngày phải lớn hơn hoặc bằng {datetime}",
-          "not_inclusive": "Ngày phải lớn hơn {datetime}"
-        }
-      },
-      "too_big": {
-        "array": {
-          "exact": "Mảng phải chứa đúng {maximum} phần tử",
-          "inclusive": "Mảng phải chứa nhiều nhất {maximum} phần tử",
-          "not_inclusive": "Mảng phải chứa ít hơn {maximum} phần tử"
-        },
-        "string": {
-          "exact": "Chuỗi phải chứa đúng {maximum} ký tự",
-          "inclusive": "Chuỗi phải chứa nhiều nhất {maximum} ký tự",
-          "not_inclusive": "Chuỗi phải chứa dưới {maximum} ký tự"
-        },
-        "number": {
-          "exact": "Số phải đúng bằng {maximum}",
-          "inclusive": "Số phải nhỏ hơn hoặc bằng {maximum}",
-          "not_inclusive": "Số phải nhỏ hơn {maximum}"
-        },
-        "set": {
-          "exact": "Đầu vào không hợp lệ",
-          "inclusive": "Đầu vào không hợp lệ",
-          "not_inclusive": "Đầu vào không hợp lệ"
-        },
-        "date": {
-          "exact": "Ngày phải đúng bằng {- maximum, datetime}",
-          "inclusive": "Ngày phải nhỏ hơn hoặc bằng {- maximum, datetime}",
-          "not_inclusive": "Ngày phải nhỏ hơn {- maximum, datetime}"
-        }
-      }
-    },
-    "validations": {
-      "email": "email",
-      "url": "url",
-      "uuid": "uuid",
-      "cuid": "cuid",
-      "regex": "regex",
-      "datetime": "datetime"
-    },
-    "types": {
-      "function": "hàm",
-      "number": "số",
-      "string": "chuỗi",
-      "nan": "nan",
-      "integer": "số nguyên",
-      "float": "số thực",
-      "boolean": "boolean",
-      "date": "ngày",
-      "bigint": "số nguyên lớn",
-      "undefined": "không xác định",
-      "symbol": "ký hiệu",
-      "null": "null",
-      "array": "mảng",
-      "object": "đối tượng",
-      "unknown": "không xác định",
-      "promise": "promise",
-      "void": "void",
-      "never": "never",
-      "map": "map",
-      "set": "set"
-    }
-  },
-  "AddQuiz": {
-    "import-form": {
-      "title": "Nhập nhiều quizbank",
-      "descriptions": "Dán dữ liệu từ doc, csv, text vào đây",
-      "data": {
-        "label": "Dữ liệu",
-        "placeholder": "term1,definition1;term2,definition2\nĐiền điều bạn muốn học và bấm sáng tạo"
-      },
-      "itemSeperator": {
-        "label": "Dấu phân cách thuật ngữ",
-        "placeholder": "Enter the item seperator"
-      },
-      "quizSeperator": {
-        "label": "Dấu phân cách các quizbank",
-        "placeholder": "Enter the quiz seperator"
-      },
-      "ai": {
-        "label": "Sáng tạo",
-        "placeholder": "Nhập dữ liệu và bấm sáng tạo"
-      }
-    },
-    "form": {
-      "title": "Tạo ngân hàng câu hỏi mới",
-      "name": {
-        "label": "Tên",
-        "placeholder": "Nhập tên ngân hàng câu hỏi"
-      },
-      "description": {
-        "label": "Mô tả",
-        "placeholder": "Nhập mô tả ngân hàng câu hỏi"
-      },
-      "submit": "Thêm",
-      "tags": {
-        "label": "Tags",
-        "placeholder": "Nhập tags ngân hàng câu hỏi"
-      },
-      "public": {
-        "label": "Công khai",
-        "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
-      },
-      "quiz": {
-        "new": "Thêm câu hỏi mới"
-      },
-      "term": {
-        "label": "Thuật ngữ",
-        "placeholder": "Nhập thuật ngữ"
-      },
-      "definition": {
-        "label": "Định nghĩa",
-        "placeholder": "Nhập định nghĩa"
-      }
-    }
-  },
-  "ViewQuizBank": {
-    "ViewFlashcard": {
-      "play_button": "Bắt đầu học",
-      "pause_button": "Tạm dừng thẻ ghi nhớ",
-      "shuffle_button": "Trộn thẻ",
-      "full_screen_button": "Chế độ toàn màn hình",
-      "slide": "Trang",
-      "of": "của"
-    },
-    "ViewQuizzes": {
-      "term": "Thuật ngữ trong học phần này",
-      "view_AI_answer": "Xem câu trả lời của A.I",
-      "relative_quiz_bank": "Học sinh cũng đã xem các học phần",
-      "see_more_btn": "Xem thêm"
-    },
-    "belong_to": "Học phần này thuộc về",
-    "author": {
-      "class_title": "Lớp học",
-      "of": "của",
-      "copy_button": "Sao chép",
-      "report_button": "Báo cáo",
-      "edit_button": "Chỉnh sửa",
-      "public_button": "Công khai"
-    },
-    "rating": {
-      "title": "Đánh giá",
-      "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
-    },
-    "view_ai_answer_error": {
-      "overcount_ai": {
-        "title": "Hạn chế xem câu trả lời A.I hàng ngày",
-        "description": "Bạn đã vượt quá giới hạn xem câu trả lời A.I cho hôm nay",
-        "solution": "Bạn có thể <strong>nâng cấp tài khoản của bạn ngay bây giờ</strong>, hoặc chờ đến ngày mai để có cơ hội xem câu trả lời A.I nhiều hơn.",
-        "cancel": "Hủy",
-        "submit": "Đi đến nâng cấp tài khoản"
-      }
-    }
-  },
-  "NotFound": {
-    "title": "Bạn có vẻ đang đi lạc?",
-    "message": "Trang bạn tìm kiếm có vẻ như đã bị chấm dứt hoặc không tồn tại 🥺🥺",
-    "input": {
-      "placeholder": "Tạo Quiz mới"
-    }
-  },
-  "Error": {
-    "title": "Oops, có vẻ như đã có lỗi",
-    "message": "Đây không phải là cảnh báo hay là 1 bày kiểm tra !\nBạn gặp phải một lỗi khiến bạn nhìn thấy thông báo này, vui lòng thông báo ngay cho cơ quan chức năng ",
-    "input": {
-      "placeholder": "Tạo Quiz mới"
-    },
-    "errorBtn": "Thông báo lỗi"
-  },
-  "UpgradeAccount": {
-    "upgrade": "Nâng cấp tài khoản"
-  },
-  "Errors": {
-    "index": "Lỗi",
-    "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
-    "invalid-pin": "Mã PIN không hợp lệ, vui lòng thử lại",
-    "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
-    "email-existed": "Email đã tồn tại, vui lòng thử lại",
-    "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
-    "verification-failed": "Xác thực thất bại, vui lòng thử lại",
-    "classroom": {
-      "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
-      "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
-      "code-used": "Mã lớp học đã được sử dụng, vui lòng thử lại",
-      "already-joined": "Bạn đã tham gia lớp học này rồi",
-      "not_found": "Không tìm thấy lớp học",
-      "user_not_found": "Không tìm thấy người dùng",
-      "user_in_classroom": "Người dùng đã ở trong lớp học",
-      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
-    }
-  },
-  "ManageClassroomMembers": {
-    "metadata": {
-      "title": "Thành viên trong lớp",
-      "description": "Tất cả các thành viên trong lớp"
-    }
-  },
-  "AddClassroom": {
-    "metadata": {
-      "title": "Tạo lớp học mới",
-      "description": "Quản lý tất cả các lớp học trong hệ thống"
-    },
-    "form": {
-      "title": "Tạo lớp học mới",
-      "name": {
-        "label": "Tên",
-        "placeholder": "Nhập tên của lớp học"
-      },
-      "description": {
-        "label": "Mô tả",
-        "placeholder": "Nhập mô tả của lớp học"
-      },
-      "invite": {
-        "label": "Cho phép thành viên mời người khác"
-      },
-      "plan-form": {
-        "starter": {
-          "title": "Gói cơ bản",
-          "description": "Miễn phí",
-          "currency": "USD",
-          "features": {
-            "feature1": "Bài kiểm tra không giới hạn",
-            "feature2": "10 học sinh",
-            "feature3": "10 trò chơi"
-          }
-        },
-        "premium": {
-          "title": "Gói cao cấp",
-          "description": "Có nhiều niềm vui hơn",
-          "currency": "USD",
-          "features": {
-            "feature1": "Bài kiểm tra không giới hạn",
-            "feature2": "Học sinh không giới hạn",
-            "feature3": "Trò chơi không giới hạn"
-          }
-        },
-        "submit": "Tạo"
-      }
-    }
-  },
-  "EditClassroom": {
-    "metadata": {
-      "title": "Cập nhật lớp học",
-      "description": "Thay đổi thông tin lớp học"
-    },
-    "form": {
-      "title": "Thay đổi thông tin lớp học",
-      "name": {
-        "label": "Tên",
-        "placeholder": "Nhập tên của lớp học"
-      },
-      "description": {
-        "label": "Mô tả",
-        "placeholder": "Nhập mô tả của lớp học"
-      },
-      "invite": {
-        "label": "Cho phép thành viên mời người khác"
-      },
-      "actions": {
-        "edit": {
-          "message": {
-            "title": "Thành công",
-            "description": "Thành công cập nhật thông tin lớp học"
-          }
-        }
-      },
-      "plan-form": {
-        "starter": {
-          "title": "Gói cơ bản",
-          "description": "Miễn phí",
-          "currency": "USD",
-          "features": {
-            "feature1": "Bài kiểm tra không giới hạn",
-            "feature2": "10 học sinh",
-            "feature3": "10 trò chơi"
-          }
-        },
-        "premium": {
-          "title": "Gói cao cấp",
-          "description": "Có nhiều niềm vui hơn",
-          "currency": "USD",
-          "features": {
-            "feature1": "Bài kiểm tra không giới hạn",
-            "feature2": "Học sinh không giới hạn",
-            "feature3": "Trò chơi không giới hạn"
-          }
-        },
-        "submit": "Tạo"
-      }
-    }
-  },
-  "Invite_classroom": {
-    "code": {
-      "title": "Mời bạn bè",
-      "description": "Hãy sử dụng mã ở dưới để tham gia vào lớp học",
-      "link": "Link mời bạn bè",
-      "code": "Mã mời bạn bè",
-      "toast_link": {
-        "title": "Đã sao chép link ",
-        "description": "Bạn có thể dán link vào nơi bạn muốn"
-      },
-      "toast_code": {
-        "title": "Đã sao chép mã",
-        "description": "Bạn có thể dán link vào nơi bạn muốn"
-      }
-    },
-    "user": {
-      "title": "Gửi lời mời tới người dùng",
-      "description": "Nhập email của người dùng bạn muốn mời",
+    "ForgotPassword": {
+      "title": "Quên mật khẩu? Đừng lo",
+      "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",
       "form": {
+        "title": "Nhập mã OTP",
         "email": {
           "label": "Email",
-          "placeholder": "Nhập email của người dùng"
+          "description": "Chúng tôi sẽ gửi mã xác nhận đến email của bạn",
+          "placeholder": "Nhập email của bạn"
         },
-        "submit": "Mời",
+        "submit": "Khôi phục mật khẩu"
+      },
+      "card": {
+        "title": "Hãy kiểm tra hòm thư của bạn 📫",
+        "desciption": "Bạn sẽ nhận được email thay đổi mật khẩu",
+        "missing": "Không nhận được? Thử kiểm tra Thư rác hoặc",
+        "try-again": "Thử email khác"
+      },
+      "errors": {
+        "index": "Lỗi",
+        "account-fail": "Tài khoản không tồn tại"
+      }
+    },
+    "VerifyForgotPassword": {
+      "title": "Quên mật khẩu? Đừng lo",
+      "description": "Chúng tôi đã gửi mã xác nhận đến email của bạn.<br></br>Bạn đã nhận được nó chưa? <resent>Gửi lại</resent>",
+      "form": {
+        "title": "Nhập mã OTP",
+        "submit": "Xác nhận"
+      }
+    },
+    "ChangePassword": {
+      "title": "Quên mật khẩu? Đừng lo",
+      "description": "Nhập mật khẩu mới",
+      "form": {
+        "password": {
+          "label": "Mật khẩu",
+          "placeholder": "********"
+        },
+        "confirm": {
+          "label": "Xác nhận mật khẩu",
+          "placeholder": "********"
+        },
+        "submit": "Xác nhận"
+      },
+      "success": {
+        "title": "Thay đổi mật khẩu thành công",
+        "description": "Mật khẩu đã được thay đổi, hãy thử đăng nhập ngay"
+      },
+      "errors": {
+        "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
+        "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay"
+      }
+    },
+    "Settings": {
+      "title": "Cài đặt",
+      "description": "Quản lý cài đặt tài khoản của bạn, hãy thoải mái thay đổi!",
+      "navigation_menu": {
+        "edit_account": "Chỉnh sửa tài khoản",
+        "edit_profile": "Chỉnh sửa hồ sơ",
+        "edit_preference": "Chỉnh sửa sở thích"
+      },
+      "account": {
+        "title": "Tài khoản",
+        "old_password": "Mật khẩu cũ",
+        "new_password": "Mật khẩu mới",
+        "confirm_password": "Xác nhận mật khẩu",
+        "cancel_btn": "Hủy",
+        "submit_btn": "Thay đổi mật khẩu"
+      },
+      "plans": {
+        "duration": "Tháng",
+        "plans": {
+          "hobby": {
+            "title": "Sở thích",
+            "description": "Khởi động",
+            "features": {
+              "feature1": "Học các ngân hàng công hỏi công khai",
+              "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
+              "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
+              "feature4": "Sở hữu đến 3 lớp học"
+            }
+          },
+          "learner": {
+            "title": "Học viên",
+            "description": "Học theo cách của mình",
+            "features": {
+              "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
+              "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
+              "feature3": "Sở hữu đến 10 lớp học"
+            }
+          },
+          "expert": {
+            "title": "Chuyên gia",
+            "description": "Tìm kiếm kiến thức",
+            "features": {
+              "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
+              "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
+              "feature3": "Sở hữu đến 20 lớp học"
+            }
+          }
+        },
+        "upgrade_dialog": {
+          "buttons": {
+            "upgrade": "Nâng cấp",
+            "cancel": "Hủy"
+          },
+          "title": "Nâng cấp gói cá nhân thành {plan}",
+          "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+        }
+      },
+      "profile": {
+        "title": "Hồ sơ",
+        "edit_profile": "Chỉnh sửa hồ sơ",
+        "label": {
+          "email": "Email",
+          "username": "Tên người dùng",
+          "display_name": "Tên hiển thị",
+          "dob": "Ngày sinh"
+        },
+        "update_dialog": {
+          "title": "Chỉnh sửa hồ sơ",
+          "description": "Thực hiện các thay đổi vào hồ sơ của bạn ở đây. Nhấn Lưu khi hoàn thành.",
+          "label": {
+            "display_name": "Tên hiển thị",
+            "dob": "Ngày sinh"
+          },
+          "submit_btn": "Lưu thay đổi"
+        }
+      },
+      "preference": "Sở thích"
+    },
+    "ViewOtherProfile": {
+      "title": "Hồ sơ",
+      "label": {
+        "email": "Email",
+        "username": "Tên người dùng",
+        "display_name": "Tên hiển thị",
+        "dob": "Ngày sinh"
+      }
+    },
+    "UserDropdown": {
+      "my_account": "Tài khoản của tôi",
+      "profile": "Hồ sơ",
+      "billing": "Thanh toán",
+      "settings": "Cài đặt",
+      "new_classroom": "Tạo lớp học mới",
+      "dashboard": "Bảng điều khiển",
+      "classrooms": {
+        "index": "Lớp học",
+        "new": "Tạo lớp học mới",
+        "my_classrooms": "Lớp học của tôi"
+      },
+      "quizbank": {
+        "index": "Quizbank",
+        "new": "Tạo quizbank mới",
+        "my_quizbanks": "Quizbank của tôi"
+      },
+      "invite": "Mời bạn bè",
+      "faq": "Câu hỏi thường gặp",
+      "support": "Hỗ trợ",
+      "signout": "Đăng xuất"
+    },
+    "AdminSidebar": {
+      "sidebar": {
+        "label": {
+          "dashboard": "Điều khiển",
+          "users": "Người dùng",
+          "classrooms": "Lớp học",
+          "quizbank": "Ngân hàng",
+          "reports": "Báo cáo"
+        }
+      },
+      "dropdown": {
+        "my_account": "Tài khoản của tôi",
+        "profile": "Hồ sơ",
+        "signout": "Đăng xuất"
+      }
+    },
+    "EditQuiz": {
+      "form": {
+        "title": "Chỉnh sửa ngân hàng câu hỏi",
+        "name": {
+          "label": "Tên",
+          "placeholder": "Nhập tên ngân hàng câu hỏi"
+        },
+        "description": {
+          "label": "Mô tả",
+          "placeholder": "Nhập mô tả ngân hàng câu hỏi"
+        },
+        "submit": "Thêm",
+        "tags": {
+          "label": "Tags",
+          "placeholder": "Nhập tags ngân hàng câu hỏi"
+        },
+        "public": {
+          "label": "Công khai",
+          "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
+        },
+        "quiz": {
+          "new": "Thêm câu hỏi mới"
+        },
+        "term": {
+          "label": "Thuật ngữ",
+          "placeholder": "Nhập thuật ngữ"
+        },
+        "definition": {
+          "label": "Định nghĩa",
+          "placeholder": "Nhập định nghĩa"
+        }
+      }
+    },
+    "CopyQuizBank": {
+      "title": "Sao chép ngân hàng câu hỏi này",
+      "description": "Bạn có muốn sao chép ngân hàng câu hỏi này với",
+      "quizzes": "câu hỏi",
+      "form": {
+        "name": {
+          "label": "Name",
+          "text": "Tên",
+          "placeholder": "Nhập tên của ngân hàng câu hỏi"
+        },
+        "copyTo": {
+          "label": "copyTo",
+          "text": "Sao chép tới",
+          "placeholder": "Chọn nơi để sao chép"
+        },
+        "classroom": {
+          "label": "classroom",
+          "text": "Lớp",
+          "placeholder": "Chọn lớp để sao chép tới"
+        },
+        "personal": {
+          "text": "Kho cá nhân"
+        },
+        "public": {
+          "label": "public",
+          "text": "Công khai"
+        },
+        "button": {
+          "cancel": "Hủy",
+          "submit": "Sao chép"
+        },
+        "message": {
+          "success": {
+            "title": "Thành công",
+            "description": "Thành công sao chép ngân hàng câu hỏi"
+          },
+          "failed": {
+            "title": "Có gì đó không đúng"
+          }
+        }
+      }
+    },
+    "ReportQuizBank": {
+      "title": "Báo cáo QuizBank này",
+      "description": "Bạn có muốn báo cáo học phần này không?",
+      "form_report": {
+        "reason": {
+          "label": "Lý do",
+          "text": "Lý do",
+          "placeholder": "Lạm dụng",
+          "reason_choice": {
+            "abuse": "Lạm dụng",
+            "inappropriate": "Không phù hợp",
+            "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+            "other": "Khác"
+          }
+        },
+        "more_details": {
+          "label": "Chi tiết hơn",
+          "text": "Chi tiết hơn",
+          "placeholder": "Nhập thêm chi tiết..."
+        },
+        "button": {
+          "cancel": "Hủy",
+          "submit": "Báo cáo"
+        },
+        "text_area": {
+          "placeholder": "Xin hãy cung cấp thông tin chi tiết hơn"
+        }
+      },
+      "form_result_report": {
+        "report_success": "Báo cáo thành công",
+        "thank_you_reported": "Cảm ơn bạn đã đóng góp cho không gian học tập tốt hơn",
+        "received_submission": "Chúng tôi đã nhận được đơn báo cáo của bạn về quizbank",
+        "of": "của",
+        "against": "đối với",
+        "violation_rules": "Quy tắc vi phạm",
+        "take_action_soon": "chúng tôi. Hành động sẽ được thực hiện sớm.",
+        "recorded": "Đã ghi lại:",
+        "ticket_id": "Mã báo cáo:",
+        "contact_us": "Để biết thêm thông tin, vui lòng liên hệ chúng tôi tại",
+        "Quizlearn_email": "Quizlearn",
+        "confirm": "Xác nhận"
+      },
+      "message": {
+        "success": {
+          "title": "Thành công",
+          "description": "Báo cáo quizbank thành công"
+        },
+        "failed": {
+          "title": "Đã xảy ra lỗi."
+        }
+      }
+    },
+    "Validations": {
+      "errors": {
+        "invalid_type": "Dự kiến {expected}, nhận được {received}",
+        "invalid_type_received_undefined": "Yêu cầu",
+        "invalid_literal": "Giá trị chữ không hợp lệ, dự kiến {expected}",
+        "unrecognized_keys": "Khóa không được nhận diện trong đối tượng: {- keys}",
+        "invalid_union": "Đầu vào không hợp lệ",
+        "invalid_union_discriminator": "Giá trị phân biệt không hợp lệ. Dự kiến {- options}",
+        "invalid_enum_value": "Giá trị enum không hợp lệ. Dự kiến {- options}, nhận được '{received}'",
+        "invalid_arguments": "Tham số hàm không hợp lệ",
+        "invalid_return_type": "Kiểu trả về của hàm không hợp lệ",
+        "invalid_date": "Ngày không hợp lệ",
+        "custom": "Đầu vào không hợp lệ",
+        "invalid_intersection_types": "Kết quả giao không thể được hợp nhất",
+        "not_multiple_of": "Số phải là bội số của {multipleOf}",
+        "not_finite": "Số phải là hữu hạn",
+        "invalid_string": {
+          "email": "{validation} không hợp lệ",
+          "url": "{validation} không hợp lệ",
+          "uuid": "{validation} không hợp lệ",
+          "cuid": "{validation} không hợp lệ",
+          "regex": "Không hợp lệ",
+          "datetime": "{validation} không hợp lệ",
+          "startsWith": "Đầu vào không hợp lệ: phải bắt đầu bằng \"{startsWith}\"",
+          "endsWith": "Đầu vào không hợp lệ: phải kết thúc bằng \"{endsWith}\""
+        },
+        "signup": {
+          "fullname": "Tên hiển thị phải có ít nhất 2 ký tự.",
+          "username": "Tên người dùng phải từ 3 đến 20 ký tự.",
+          "password": "Mật khẩu phải có ít nhất 8 ký tự.",
+          "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
+          "mismatch_password": "Mật khẩu không khớp.",
+          "email": "Email không hợp lệ."
+        },
+        "forgot_password": {
+          "email": "Email không hợp lệ."
+        },
+        "set_new_password": {
+          "password": "Mật khẩu phải có ít nhất 8 ký tự.",
+          "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
+          "mismatch_password": "Mật khẩu không khớp."
+        },
+        "edit_account": {
+          "old_password": "Mật khẩu cũ phải có ít nhất 8 kí tự.",
+          "new_password": "Mật khẩu mới phải có ít nhất 8 kí tự.",
+          "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 kí tự.",
+          "mismatch_password": "Các mật khẩu không trùng khớp."
+        },
+        "update_profile_form": {
+          "fullname": "Tên của bạn nên có ít nhất 2 kí tự.",
+          "date": "Đó không phải là một ngày hợp lệ!"
+        },
+        "report_quizbank": {
+          "more_details": {
+            "min_error": "Phải ít nhất 10 kí tự.",
+            "max_error": "Không được vượt quá 100 kí tự."
+          }
+        },
+        "too_small": {
+          "array": {
+            "exact": "Mảng phải chứa đúng {minimum} phần tử",
+            "inclusive": "Mảng phải chứa ít nhất {minimum} phần tử",
+            "not_inclusive": "Mảng phải chứa nhiều hơn {minimum} phần tử"
+          },
+          "string": {
+            "exact": "Chuỗi phải chứa đúng {minimum} ký tự",
+            "inclusive": "Chuỗi phải chứa ít nhất {minimum} ký tự",
+            "not_inclusive": "Chuỗi phải chứa hơn {minimum} ký tự"
+          },
+          "number": {
+            "exact": "Số phải đúng bằng {minimum}",
+            "inclusive": "Số phải lớn hơn hoặc bằng {minimum}",
+            "not_inclusive": "Số phải lớn hơn {minimum}"
+          },
+          "set": {
+            "exact": "Đầu vào không hợp lệ",
+            "inclusive": "Đầu vào không hợp lệ",
+            "not_inclusive": "Đầu vào không hợp lệ"
+          },
+          "date": {
+            "exact": "Ngày phải đúng bằng {datetime}",
+            "inclusive": "Ngày phải lớn hơn hoặc bằng {datetime}",
+            "not_inclusive": "Ngày phải lớn hơn {datetime}"
+          }
+        },
+        "too_big": {
+          "array": {
+            "exact": "Mảng phải chứa đúng {maximum} phần tử",
+            "inclusive": "Mảng phải chứa nhiều nhất {maximum} phần tử",
+            "not_inclusive": "Mảng phải chứa ít hơn {maximum} phần tử"
+          },
+          "string": {
+            "exact": "Chuỗi phải chứa đúng {maximum} ký tự",
+            "inclusive": "Chuỗi phải chứa nhiều nhất {maximum} ký tự",
+            "not_inclusive": "Chuỗi phải chứa dưới {maximum} ký tự"
+          },
+          "number": {
+            "exact": "Số phải đúng bằng {maximum}",
+            "inclusive": "Số phải nhỏ hơn hoặc bằng {maximum}",
+            "not_inclusive": "Số phải nhỏ hơn {maximum}"
+          },
+          "set": {
+            "exact": "Đầu vào không hợp lệ",
+            "inclusive": "Đầu vào không hợp lệ",
+            "not_inclusive": "Đầu vào không hợp lệ"
+          },
+          "date": {
+            "exact": "Ngày phải đúng bằng {- maximum, datetime}",
+            "inclusive": "Ngày phải nhỏ hơn hoặc bằng {- maximum, datetime}",
+            "not_inclusive": "Ngày phải nhỏ hơn {- maximum, datetime}"
+          }
+        }
+      },
+      "validations": {
+        "email": "email",
+        "url": "url",
+        "uuid": "uuid",
+        "cuid": "cuid",
+        "regex": "regex",
+        "datetime": "datetime"
+      },
+      "types": {
+        "function": "hàm",
+        "number": "số",
+        "string": "chuỗi",
+        "nan": "nan",
+        "integer": "số nguyên",
+        "float": "số thực",
+        "boolean": "boolean",
+        "date": "ngày",
+        "bigint": "số nguyên lớn",
+        "undefined": "không xác định",
+        "symbol": "ký hiệu",
+        "null": "null",
+        "array": "mảng",
+        "object": "đối tượng",
+        "unknown": "không xác định",
+        "promise": "promise",
+        "void": "void",
+        "never": "never",
+        "map": "map",
+        "set": "set"
+      }
+    },
+    "AddQuiz": {
+      "import-form": {
+        "title": "Nhập nhiều quizbank",
+        "descriptions": "Dán dữ liệu từ doc, csv, text vào đây",
+        "data": {
+          "label": "Dữ liệu",
+          "placeholder": "term1,definition1;term2,definition2\nĐiền điều bạn muốn học và bấm sáng tạo"
+        },
+        "itemSeperator": {
+          "label": "Dấu phân cách thuật ngữ",
+          "placeholder": "Enter the item seperator"
+        },
+        "quizSeperator": {
+          "label": "Dấu phân cách các quizbank",
+          "placeholder": "Enter the quiz seperator"
+        },
+        "ai": {
+          "label": "Sáng tạo",
+          "placeholder": "Nhập dữ liệu và bấm sáng tạo"
+        }
+      },
+      "form": {
+        "title": "Tạo ngân hàng câu hỏi mới",
+        "name": {
+          "label": "Tên",
+          "placeholder": "Nhập tên ngân hàng câu hỏi"
+        },
+        "description": {
+          "label": "Mô tả",
+          "placeholder": "Nhập mô tả ngân hàng câu hỏi"
+        },
+        "submit": "Thêm",
+        "tags": {
+          "label": "Tags",
+          "placeholder": "Nhập tags ngân hàng câu hỏi"
+        },
+        "public": {
+          "label": "Công khai",
+          "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
+        },
+        "quiz": {
+          "new": "Thêm câu hỏi mới"
+        },
+        "term": {
+          "label": "Thuật ngữ",
+          "placeholder": "Nhập thuật ngữ"
+        },
+        "definition": {
+          "label": "Định nghĩa",
+          "placeholder": "Nhập định nghĩa"
+        }
+      }
+    },
+    "ViewQuizBank": {
+      "ViewFlashcard": {
+        "play_button": "Bắt đầu học",
+        "pause_button": "Tạm dừng thẻ ghi nhớ",
+        "shuffle_button": "Trộn thẻ",
+        "full_screen_button": "Chế độ toàn màn hình",
+        "slide": "Trang",
+        "of": "của"
+      },
+      "ViewQuizzes": {
+        "term": "Thuật ngữ trong học phần này",
+        "view_AI_answer": "Xem câu trả lời của A.I",
+        "relative_quiz_bank": "Học sinh cũng đã xem các học phần",
+        "see_more_btn": "Xem thêm"
+      },
+      "belong_to": "Học phần này thuộc về",
+      "author": {
+        "class_title": "Lớp học",
+        "of": "của",
+        "copy_button": "Sao chép",
+        "report_button": "Báo cáo",
+        "edit_button": "Chỉnh sửa",
+        "public_button": "Công khai"
+      },
+      "rating": {
+        "title": "Đánh giá",
+        "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
+      },
+      "view_ai_answer_error": {
+        "overcount_ai": {
+          "title": "Hạn chế xem câu trả lời A.I hàng ngày",
+          "description": "Bạn đã vượt quá giới hạn xem câu trả lời A.I cho hôm nay",
+          "solution": "Bạn có thể <strong>nâng cấp tài khoản của bạn ngay bây giờ</strong>, hoặc chờ đến ngày mai để có cơ hội xem câu trả lời A.I nhiều hơn.",
+          "cancel": "Hủy",
+          "submit": "Đi đến nâng cấp tài khoản"
+        }
+      }
+    },
+    "NotFound": {
+      "title": "Bạn có vẻ đang đi lạc?",
+      "message": "Trang bạn tìm kiếm có vẻ như đã bị chấm dứt hoặc không tồn tại 🥺🥺",
+      "input": {
+        "placeholder": "Tạo Quiz mới"
+      }
+    },
+    "Error": {
+      "title": "Oops, có vẻ như đã có lỗi",
+      "message": "Đây không phải là cảnh báo hay là 1 bày kiểm tra !\nBạn gặp phải một lỗi khiến bạn nhìn thấy thông báo này, vui lòng thông báo ngay cho cơ quan chức năng ",
+      "input": {
+        "placeholder": "Tạo Quiz mới"
+      },
+      "errorBtn": "Thông báo lỗi"
+    },
+    "UpgradeAccount": {
+      "upgrade": "Nâng cấp tài khoản"
+    },
+    "Errors": {
+      "index": "Lỗi",
+      "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
+      "invalid-pin": "Mã PIN không hợp lệ, vui lòng thử lại",
+      "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
+      "email-existed": "Email đã tồn tại, vui lòng thử lại",
+      "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
+      "verification-failed": "Xác thực thất bại, vui lòng thử lại",
+      "classroom": {
+        "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
+        "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
+        "code-used": "Mã lớp học đã được sử dụng, vui lòng thử lại",
+        "already-joined": "Bạn đã tham gia lớp học này rồi",
+        "not_found": "Không tìm thấy lớp học",
+        "user_not_found": "Không tìm thấy người dùng",
+        "user_in_classroom": "Người dùng đã ở trong lớp học",
+        "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
+      }
+    },
+    "ManageClassroomMembers": {
+      "metadata": {
+        "title": "Thành viên trong lớp",
+        "description": "Tất cả các thành viên trong lớp"
+      }
+    },
+    "AddClassroom": {
+      "metadata": {
+        "title": "Tạo lớp học mới",
+        "description": "Quản lý tất cả các lớp học trong hệ thống"
+      },
+      "form": {
+        "title": "Tạo lớp học mới",
+        "name": {
+          "label": "Tên",
+          "placeholder": "Nhập tên của lớp học"
+        },
+        "description": {
+          "label": "Mô tả",
+          "placeholder": "Nhập mô tả của lớp học"
+        },
+        "invite": {
+          "label": "Cho phép thành viên mời người khác"
+        },
+        "plan-form": {
+          "starter": {
+            "title": "Gói cơ bản",
+            "description": "Miễn phí",
+            "currency": "USD",
+            "features": {
+              "feature1": "Bài kiểm tra không giới hạn",
+              "feature2": "10 học sinh",
+              "feature3": "10 trò chơi"
+            }
+          },
+          "premium": {
+            "title": "Gói cao cấp",
+            "description": "Có nhiều niềm vui hơn",
+            "currency": "USD",
+            "features": {
+              "feature1": "Bài kiểm tra không giới hạn",
+              "feature2": "Học sinh không giới hạn",
+              "feature3": "Trò chơi không giới hạn"
+            }
+          },
+          "submit": "Tạo"
+        }
+      }
+    },
+    "EditClassroom": {
+      "metadata": {
+        "title": "Cập nhật lớp học",
+        "description": "Thay đổi thông tin lớp học"
+      },
+      "form": {
+        "title": "Thay đổi thông tin lớp học",
+        "name": {
+          "label": "Tên",
+          "placeholder": "Nhập tên của lớp học"
+        },
+        "description": {
+          "label": "Mô tả",
+          "placeholder": "Nhập mô tả của lớp học"
+        },
+        "invite": {
+          "label": "Cho phép thành viên mời người khác"
+        },
+        "actions": {
+          "edit": {
+            "message": {
+              "title": "Thành công",
+              "description": "Thành công cập nhật thông tin lớp học"
+            }
+          }
+        },
+        "plan-form": {
+          "starter": {
+            "title": "Gói cơ bản",
+            "description": "Miễn phí",
+            "currency": "USD",
+            "features": {
+              "feature1": "Bài kiểm tra không giới hạn",
+              "feature2": "10 học sinh",
+              "feature3": "10 trò chơi"
+            }
+          },
+          "premium": {
+            "title": "Gói cao cấp",
+            "description": "Có nhiều niềm vui hơn",
+            "currency": "USD",
+            "features": {
+              "feature1": "Bài kiểm tra không giới hạn",
+              "feature2": "Học sinh không giới hạn",
+              "feature3": "Trò chơi không giới hạn"
+            }
+          },
+          "submit": "Tạo"
+        }
+      }
+    },
+    "Invite_classroom": {
+      "code": {
+        "title": "Mời bạn bè",
+        "description": "Hãy sử dụng mã ở dưới để tham gia vào lớp học",
+        "link": "Link mời bạn bè",
+        "code": "Mã mời bạn bè",
+        "toast_link": {
+          "title": "Đã sao chép link ",
+          "description": "Bạn có thể dán link vào nơi bạn muốn"
+        },
+        "toast_code": {
+          "title": "Đã sao chép mã",
+          "description": "Bạn có thể dán link vào nơi bạn muốn"
+        }
+      },
+      "user": {
+        "title": "Gửi lời mời tới người dùng",
+        "description": "Nhập email của người dùng bạn muốn mời",
+        "form": {
+          "email": {
+            "label": "Email",
+            "placeholder": "Nhập email của người dùng"
+          },
+          "submit": "Mời",
+          "cancel": "Huỷ bỏ"
+        },
+        "success": {
+          "title": "Mời thành công",
+          "description": "Mời người dùng thành công"
+        }
+      }
+    },
+    "Join_classroom": {
+      "title": "Tham gia lớp học",
+      "description": "Nhập mã để tham gia vào lớp học",
+      "form": {
+        "code": {
+          "label": "Mã mời",
+          "placeholder": "Nhập mã mời của lớp học"
+        },
+        "submit": "Tham gia",
         "cancel": "Huỷ bỏ"
       },
       "success": {
-        "title": "Mời thành công",
-        "description": "Mời người dùng thành công"
+        "title": "Tham gia lớp học thành công",
+        "description": "Bạn đã tham gia lớp học thành công"
       }
-    }
-  },
-  "Join_classroom": {
-    "title": "Tham gia lớp học",
-    "description": "Nhập mã để tham gia vào lớp học",
-    "form": {
-      "code": {
-        "label": "Mã mời",
-        "placeholder": "Nhập mã mời của lớp học"
-      },
-      "submit": "Tham gia",
-      "cancel": "Huỷ bỏ"
     },
-    "success": {
-      "title": "Tham gia lớp học thành công",
-      "description": "Bạn đã tham gia lớp học thành công"
-    }
-  },
-  "Delete_clasroom": {
-    "message": {
-      "success": {
-        "title": "Success",
-        "description": "Thành công xóa lớp học"
-      },
-      "failed": { "title": "Failed" }
-    }
-  },
-  "Delete_quizbank": {
-    "message": {
-      "success": {
-        "title": "Thành công",
-        "description": "Thành công xóa ngân hàng câu hỏi"
-      },
-      "failed": { "title": "Thất bại" }
-    }
-  },
-  "Editor": {
-    "marks": {
-      "bold": "Đậm",
-      "italic": "Nghiêng",
-      "underline": "Gạch dưới",
-      "strike": "Gạch ngang",
-      "code": "Mã",
-      "highlight": "Đánh dấu"
-    },
-    "nodes": {
-      "paragraph": "Đoạn văn",
-      "heading": "Tiêu đề",
-      "blockquote": "Trích dẫn",
-      "code": "Khối mã",
-      "list": "Danh sách"
-    },
-    "history": {
-      "undo": "Hoàn tác",
-      "redo": "Làm lại"
-    }
-  },
-  "Change_quizbank_visibility": {
-    "visibility": {
-      "Public": "công khai",
-      "Private": "cá nhân"
-    },
-    "message": {
-      "success": {
-        "title": "Thành công",
-        "description": "Thành công chuyển trạng thái ngân hàng câu hỏi sang {visibility}"
-      },
-      "failed": { "title": "Thất bại" }
-    },
-    "confirm_dialog": {
-      "title": "Bạn có muốn thay đổi trạng thái của ngân hàng câu hỏi",
-      "description": "Trạng thái ngân hàng câu hỏi sẽ được chuyển sang {visibility}",
-      "cancel": "Hủy",
-      "continue": "Tiếp tục"
-    }
-  },
-  "LocaleSwitcher": {
-    "label": "Đổi ngôn ngữ",
-    "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"
-  },
-  "Classroom_student": {
-    "table": {
-      "headers": {
-        "name": "Tên",
-        "email": "Email",
-        "dob": "Ngày sinh"
-      },
-      "actions": {
-        "title": "Lựa chọn",
-        "ban": {
-          "title": "Cấm người dùng",
-          "title_batch": "Cấm người dùng",
-          "description": "Người dùng sẽ bị cấm vào lớp học. Người dùng sẽ ở trong bảng bị cấm",
-          "buttons": {
-            "cancel": "Hủy",
-            "ban": "Cấm"
-          },
-          "message": {
-            "ban_message_single": "Bạn có muốn cấm người dùng <span></span>?",
-            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?",
-            "success": "Cấm người dùng thành công"
-          }
+    "Delete_clasroom": {
+      "message": {
+        "success": {
+          "title": "Success",
+          "description": "Thành công xóa lớp học"
         },
-        "unban": {
-          "title": "Phục hồi người dùng",
-          "title_batch": "Phục hồi người dùng",
-          "description": "Người dùng sẽ được bỏ cấm khỏi lớp học. Người dùng sẽ có thể truy cập nội dung của lớp",
-          "buttons": {
-            "cancel": "Hủy",
-            "ban": "Phục hồi"
-          },
-          "message": {
-            "unban_message_single": "Bạn có muốn phục hồi người dùng <span></span>?",
-            "unban_message_mutiple": "Bạn có muốn phục hồi <span></span> người dùng ?",
-            "success": "Người dùng đã bị cấm vào lớp"
-          }
-        },
-        "kick_user": {
-          "title": "Xóa người dùng",
-          "descrption": "Xóa người dùng khỏi lớp học",
-          "message": {
-            "delete_message": "Bạn có muốn xóa người dùng <span></span>?",
-            "success": "Người dùng đã được xóa khỏi lớp học"
-          },
-          "buttons": {
-            "cancel": "Hủy",
-            "delete": "Xóa"
-          }
-        },
-        "remove_batch": {
-          "title": "Xóa người dùng",
-          "description": "Xóa người dùng khỏi lớp học",
-          "message": {
-            "delete_message": "Bạn có chắc chắn muốn xoá <span></span> người dùng không?",
-            "success": "Người dùng đã được xóa khỏi lớp học"
-          },
-          "button": {
-            "cancel": "Hủy",
-            "delete": "Xóa"
-          }
-        }
-      },
-      "filters": {}
-    }
-  },
-  "Report_user": {
-    "title": "Báo Cáo Người dùng",
-    "description": "Bạn có muốn báo cáo người dùng này?",
-    "terms": {
-      "cancel": "Hủy",
-      "report": "Báo cáo"
+        "failed": { "title": "Failed" }
+      }
     },
-    "form_report": {
-      "reason": {
-        "label": "Lý do",
-        "text": "Lý do",
-        "placeholder": "Lạm dụng",
-        "reason_choice": {
-          "abuse": "Lạm dụng",
-          "inappropriate": "Không phù hợp",
-          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ của tôi",
-          "other": "Khác"
-        }
+    "Delete_quizbank": {
+      "message": {
+        "success": {
+          "title": "Thành công",
+          "description": "Thành công xóa ngân hàng câu hỏi"
+        },
+        "failed": { "title": "Thất bại" }
+      }
+    },
+    "Editor": {
+      "marks": {
+        "bold": "Đậm",
+        "italic": "Nghiêng",
+        "underline": "Gạch dưới",
+        "strike": "Gạch ngang",
+        "code": "Mã",
+        "highlight": "Đánh dấu"
       },
-      "more_details": {
-        "label": "Chi tiết hơn",
-        "text": "Chi tiết hơn",
-        "placeholder": "Diền chi tiết..."
+      "nodes": {
+        "paragraph": "Đoạn văn",
+        "heading": "Tiêu đề",
+        "blockquote": "Trích dẫn",
+        "code": "Khối mã",
+        "list": "Danh sách"
       },
-      "button": {
+      "history": {
+        "undo": "Hoàn tác",
+        "redo": "Làm lại"
+      }
+    },
+    "Change_quizbank_visibility": {
+      "visibility": {
+        "Public": "công khai",
+        "Private": "cá nhân"
+      },
+      "message": {
+        "success": {
+          "title": "Thành công",
+          "description": "Thành công chuyển trạng thái ngân hàng câu hỏi sang {visibility}"
+        },
+        "failed": { "title": "Thất bại" }
+      },
+      "confirm_dialog": {
+        "title": "Bạn có muốn thay đổi trạng thái của ngân hàng câu hỏi",
+        "description": "Trạng thái ngân hàng câu hỏi sẽ được chuyển sang {visibility}",
         "cancel": "Hủy",
-        "submit": "Báo cáo"
-      },
-      "text_area": {
-        "placeholder": "Hãy nhập chi tiết vào đây"
+        "continue": "Tiếp tục"
       }
     },
-    "form_result_report": {
-      "report_success": "Báo cáo thành công",
-      "thank_you_reported": "Cảm ơn bạn đã đóng góp để có không gian học tập tốt hơn",
-      "received_submission": "Chúng tôi đã nhận được báo cáo của bạn đối với người dùng",
-      "of": "của",
-      "against": "đã chống lại",
-      "violation_rules": "các Nội quy vi phạm",
-      "take_action_soon": "của chúng tôi. Sẽ có hành động sớm với tài khoản này.",
-      "recorded": "Được ghi lại vào:",
-      "ticket_id": "Id vé phạt:",
-      "contact_us": "Để biết thêm thông tin, xin vui lòng liên hệ chúng tôi tại",
-      "Quizlearn_email": "Quizlearn",
-      "confirm": "Xác nhận"
+    "LocaleSwitcher": {
+      "label": "Đổi ngôn ngữ",
+      "locale": "{locale, select, vi {vi Tiếng Việt} en {🇺🇸 English} other {Unknown}}"
     },
-    "message": {
-      "success": {
-        "title": "Thành công",
-        "description": "Thành công báo cáo người dùng"
+    "Classroom_student": {
+      "table": {
+        "headers": {
+          "name": "Tên",
+          "email": "Email",
+          "dob": "Ngày sinh"
+        },
+        "actions": {
+          "title": "Lựa chọn",
+          "ban": {
+            "title": "Cấm người dùng",
+            "title_batch": "Cấm người dùng",
+            "description": "Người dùng sẽ bị cấm vào lớp học. Người dùng sẽ ở trong bảng bị cấm",
+            "buttons": {
+              "cancel": "Hủy",
+              "ban": "Cấm"
+            },
+            "message": {
+              "ban_message_single": "Bạn có muốn cấm người dùng <span></span>?",
+              "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?",
+              "success": "Cấm người dùng thành công"
+            }
+          },
+          "unban": {
+            "title": "Phục hồi người dùng",
+            "title_batch": "Phục hồi người dùng",
+            "description": "Người dùng sẽ được bỏ cấm khỏi lớp học. Người dùng sẽ có thể truy cập nội dung của lớp",
+            "buttons": {
+              "cancel": "Hủy",
+              "ban": "Phục hồi"
+            },
+            "message": {
+              "unban_message_single": "Bạn có muốn phục hồi người dùng <span></span>?",
+              "unban_message_mutiple": "Bạn có muốn phục hồi <span></span> người dùng ?",
+              "success": "Người dùng đã bị cấm vào lớp"
+            }
+          },
+          "kick_user": {
+            "title": "Xóa người dùng",
+            "descrption": "Xóa người dùng khỏi lớp học",
+            "message": {
+              "delete_message": "Bạn có muốn xóa người dùng <span></span>?",
+              "success": "Người dùng đã được xóa khỏi lớp học"
+            },
+            "buttons": {
+              "cancel": "Hủy",
+              "delete": "Xóa"
+            }
+          },
+          "remove_batch": {
+            "title": "Xóa người dùng",
+            "description": "Xóa người dùng khỏi lớp học",
+            "message": {
+              "delete_message": "Bạn có chắc chắn muốn xoá <span></span> người dùng không?",
+              "success": "Người dùng đã được xóa khỏi lớp học"
+            },
+            "button": {
+              "cancel": "Hủy",
+              "delete": "Xóa"
+            }
+          }
+        },
+        "filters": {}
+      }
+    },
+    "Report_user": {
+      "title": "Báo Cáo Người dùng",
+      "description": "Bạn có muốn báo cáo người dùng này?",
+      "terms": {
+        "cancel": "Hủy",
+        "report": "Báo cáo"
       },
-      "failed": {
-        "title": "Có gì đó không đúng đã xảy ra"
+      "form_report": {
+        "reason": {
+          "label": "Lý do",
+          "text": "Lý do",
+          "placeholder": "Lạm dụng",
+          "reason_choice": {
+            "abuse": "Lạm dụng",
+            "inappropriate": "Không phù hợp",
+            "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ của tôi",
+            "other": "Khác"
+          }
+        },
+        "more_details": {
+          "label": "Chi tiết hơn",
+          "text": "Chi tiết hơn",
+          "placeholder": "Diền chi tiết..."
+        },
+        "button": {
+          "cancel": "Hủy",
+          "submit": "Báo cáo"
+        },
+        "text_area": {
+          "placeholder": "Hãy nhập chi tiết vào đây"
+        }
+      },
+      "form_result_report": {
+        "report_success": "Báo cáo thành công",
+        "thank_you_reported": "Cảm ơn bạn đã đóng góp để có không gian học tập tốt hơn",
+        "received_submission": "Chúng tôi đã nhận được báo cáo của bạn đối với người dùng",
+        "of": "của",
+        "against": "đã chống lại",
+        "violation_rules": "các Nội quy vi phạm",
+        "take_action_soon": "của chúng tôi. Sẽ có hành động sớm với tài khoản này.",
+        "recorded": "Được ghi lại vào:",
+        "ticket_id": "Id vé phạt:",
+        "contact_us": "Để biết thêm thông tin, xin vui lòng liên hệ chúng tôi tại",
+        "Quizlearn_email": "Quizlearn",
+        "confirm": "Xác nhận"
+      },
+      "message": {
+        "success": {
+          "title": "Thành công",
+          "description": "Thành công báo cáo người dùng"
+        },
+        "failed": {
+          "title": "Có gì đó không đúng đã xảy ra"
+        }
       }
     }
   }

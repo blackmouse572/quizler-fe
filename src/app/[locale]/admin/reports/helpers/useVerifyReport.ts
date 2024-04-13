@@ -7,12 +7,13 @@ type FnProps = {
 }
 
 type Props = {
-    reportId: string
+  reportId: string
 }
 
 export function useVerifyReport({ onSuccess, onError }: FnProps) {
   return useMutation({
     mutationFn: async ({ reportId }: Props) => {
+      debugger
       const res = await fetchVerifyReport(reportId)
       if (!res.ok) {
         throw new Error(res.message)
@@ -21,10 +22,12 @@ export function useVerifyReport({ onSuccess, onError }: FnProps) {
       }
     },
     onSettled: (data, error) => {
+      debugger
       if (error) {
-        console.error(error)
+        console.error("[POST] fetchVerifyReport ERROR:",error)
+      } else {
+        onSuccess?.()
       }
-      onSuccess?.()
     },
     onError,
   })
