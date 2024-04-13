@@ -1339,7 +1339,8 @@
         "mismatch_password": "Passwords don't match"
       },
       "update_profile_form": {
-        "fullname": "Display name must be at least 2 characters."
+        "fullname": "Display name must be at least 2 characters.",
+        "date": "That's not a date!"
       },
       "report_quizbank": {
         "more_details": {
