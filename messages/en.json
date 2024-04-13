@@ -676,6 +676,19 @@
         "reporter": "Go to reporter",
         "reported_account": "Go to reported account",
         "reported_quizbank": "Go to reported quizbank"
+      },
+      "take_action": "Take action",
+      "delete": "Delete",
+      "verify_report": {
+        "success": {
+          "title": "Verify report successfully",
+          "message": {
+            "success": "The Report has been verified successfully"
+          }
+        },
+        "error": {
+          "title": "Failed to verify report"
+        }
       }
     },
     "dialog": {

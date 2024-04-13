@@ -9,23 +9,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Icons } from "@/components/ui/icons"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
 
 type Props = {
   ids: string[]
+  trigger: React.ReactNode
 } & React.ComponentProps<"div">
 
-function DeleteDialog({ ids, ...props }: Props) {
+function DeleteDialog({ ids, trigger}: Props) {
+  const [isDelete, setIsDelete] = useState(false)
   const tableI18n = useTranslations("Table")
   return (
-    <Dialog {...props}>
-      <DialogTrigger asChild>
-        <Button color="danger" size={"sm"}>
-          <Icons.Delete />
-          {tableI18n("delete")}
-        </Button>
-      </DialogTrigger>
+    <Dialog open={isDelete} onOpenChange={setIsDelete}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{tableI18n("delete_title")}</DialogTitle>
@@ -37,6 +34,7 @@ function DeleteDialog({ ids, ...props }: Props) {
             })}
           </DialogDescription>
         </DialogHeader>
+        
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline" color="accent">

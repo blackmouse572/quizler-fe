@@ -837,6 +837,18 @@
         "reporter": "Đi đến người báo cáo",
         "reported_account": "Đi đến tài khoản bị báo cáo",
         "reported_quizbank": "Đi đến ngân hàng bị báo cáo"
+    },
+    "take_action": "Thực hiện hành động",
+    "delete": "Xóa",
+    "verify_report": {
+      "success": {
+        "title": "Thành công xác minh cáo",
+        "message": {
+          "success": "Báo cáo đã được xác minh thành công"
+        }
+      },
+      "error": {
+        "title": "Xác minh báo cáo thất bại"
       }
     },
     "dialog": {
