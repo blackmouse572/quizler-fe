@@ -88,32 +88,38 @@ function CommentList({ onOpenChange, open, post, ...props }: Props) {
                 user={comment.author}
                 secondaryText={timeI18n.relativeTime(new Date(comment.created))}
               />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    size="sm"
-                    isIconOnly
-                    variant="ghost"
-                    color="accent"
-                    className="invisible opacity-0 transition-all duration-200 focus:visible focus:opacity-100 focus-visible:visible focus-visible:opacity-100 group-hover:visible group-hover:opacity-100"
-                    onClick={() => {
-                      setSelectedItem(comment)
-                    }}
-                  >
-                    <Icons.DotVertical />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {comment.author.id !== user?.id && (
-                    <DropdownMenuItem
-                      onClick={() => setIsDeleteDialogOpen(true)}
-                      hidden={comment.author.id !== user?.id}
+              {comment.author.id === user?.id && (
+                <DropdownMenu
+                  onOpenChange={(open) => {
+                    if (!open) return
+                    setSelectedItem(comment)
+                  }}
+                >
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      size="sm"
+                      isIconOnly
+                      variant="ghost"
+                      color="accent"
+                      className="invisible opacity-0 transition-all duration-200 focus:visible focus:opacity-100 focus-visible:visible focus-visible:opacity-100 group-hover:visible group-hover:opacity-100"
                     >
+                      <Icons.DotVertical />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setIsDeleteDialogOpen(true)
+                      }}
+                      hidden={comment.author.id !== user?.id}
+                      className="focus:bg-danger-500/20 focus:text-danger-500"
+                    >
+                      <Icons.Delete className="mr-2 inline-block h-4 w-4" />
                       {t("posts.comments.delete")}
                     </DropdownMenuItem>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
             <p className="indent-2">{comment.content}</p>
           </div>

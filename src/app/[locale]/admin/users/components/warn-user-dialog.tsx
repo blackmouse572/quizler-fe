@@ -9,19 +9,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Icons } from "@/components/ui/icons"
 import { useToast } from "@/components/ui/use-toast"
+import { User } from "@/types"
 import { ContextMenu } from "@radix-ui/react-context-menu"
 import { useTranslations } from "next-intl"
 import { useCallback, useState } from "react"
-import { Icons } from "@/components/ui/icons"
 import { useWarnUser } from "../helpers/useWarnUser"
 
 type Props = {
   id: string
+  user: User
   trigger: React.ReactNode
 }
 
-export default function WarnUserDialog({ id, trigger }: Props) {
+export default function WarnUserDialog({ id, trigger, user }: Props) {
   const [isOpen, setOpen] = useState(false)
   const i18n = useTranslations("UserAdmin")
   const errorI188n = useTranslations("Errors")
@@ -61,7 +63,7 @@ export default function WarnUserDialog({ id, trigger }: Props) {
             <DialogTitle>{i18n("dialog.warn_user.title")}</DialogTitle>
             <DialogDescription>
               {i18n.rich("dialog.warn_user.description", {
-                id: id,
+                id: user.fullName,
                 strong: (children) => <b>{children}</b>,
               })}
             </DialogDescription>

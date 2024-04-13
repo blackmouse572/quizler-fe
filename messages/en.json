@@ -111,7 +111,28 @@
     },
     "actions": {
       "create": "Create classroom",
-      "join": "Join classroom"
+      "join": "Join classroom",
+      "delete": {
+        "index": "Delete",
+        "title": "Delete classroom {name}",
+        "description": "Are you sure you want to delete this classroom?",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      },
+      "leave": {
+        "index": "Leave",
+        "title": "Leave classroom {name}",
+        "description": "Are you sure you want to leave this classroom?",
+        "confirm": "Leave",
+        "cancel": "Cancel",
+        "success": {
+          "title": "Leaved classroom",
+          "description": "You have leave classroom but still re-join"
+        }
+      },
+      "edit": {
+        "index": "Edit"
+      }
     }
   },
   "ClassroomDetails": {
@@ -1014,6 +1035,7 @@
     "profile": "Profile",
     "billing": "Billing",
     "settings": "Settings",
+    "dashboard": "Admin Dashboard",
     "classrooms": {
       "index": "Classrooms",
       "new": "New classroom",
@@ -1264,7 +1286,7 @@
     }
   },
   "UpgradeAccount": {
-    "upgrade": "Upgrade account" 
+    "upgrade": "Upgrade account"
   },
   "Errors": {
     "index": "Error",
@@ -1473,6 +1495,9 @@
         "label": "Description",
         "placeholder": "Enter the description of the classroom"
       },
+      "invite": {
+        "label": "Allow student to invite"
+      },
       "plan-form": {
         "starter": {
           "title": "Starter",
@@ -1512,6 +1537,9 @@
       "description": {
         "label": "Description",
         "placeholder": "Enter the description of the classroom"
+      },
+      "invite": {
+        "label": "Allow student to invite"
       },
       "actions": {
         "edit": {
@@ -1737,9 +1765,9 @@
       }
     }
   },
-  "Report_user" : {
+  "Report_user": {
     "title": "Report User",
-    "description" : "Do you want to report this user?",
+    "description": "Do you want to report this user?",
     "terms": {
       "cancel": "Cancel",
       "report": "Report"

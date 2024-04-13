@@ -107,6 +107,7 @@ function PostItem({
             ...author,
             fullName: t(title as any, {
               user: author.fullName,
+              game: post.game?.gameName,
             }),
           }}
           secondaryText={

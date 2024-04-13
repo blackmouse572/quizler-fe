@@ -14,7 +14,7 @@ export default function AdminDashboardHeader({ totalCount }: Props) {
   const i18n = useTranslations("DashboardAdmin")
 
   return (
-    <div className="flex justify-between gap-5 font-semibold text-black max-md:flex-wrap max-md:px-5">
+    <div className="grid grid-cols-2 gap-3 font-semibold text-black max-md:flex-wrap max-md:px-5 lg:grid-cols-4 lg:gap-4">
       <AdminCardHeader
         title={i18n("header_card.unprocessed_reports")}
         href={"/admin/reports"}

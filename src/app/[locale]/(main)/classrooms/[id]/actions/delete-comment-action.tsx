@@ -2,7 +2,6 @@
 
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
-import { Post } from "@/types/postsData"
 import { revalidateTag } from "next/cache"
 type Payload = {
   commentId: string
@@ -23,14 +22,15 @@ export async function deleteCommentAction(payload: Payload) {
 
   return fetch(url, options)
     .then(async (res) => {
-      const json = await res.json()
       if (!res.ok) {
+        const json = await res.json()
         throw new Error(json.message)
       }
-      return json
+      return true
     })
-    .then((data: Post) => {
+    .then((data) => {
       revalidateTag(`comment-posts-${payload.postId}`)
+      revalidateTag(`classrooms`)
       return {
         ok: true,
         message: "success",

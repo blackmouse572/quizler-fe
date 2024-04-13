@@ -235,10 +235,6 @@
     }
   },
   "Classroom": {
-    "actions": {
-      "create": "Tạo lớp học",
-      "join": "Tham gia lớp học"
-    },
     "headers": {
       "created_at": "Ngày tạo",
       "description": "Mô tả",
@@ -251,6 +247,31 @@
     "metadata": {
       "description": "Quản lý tất cả các lớp học trong hệ thống",
       "title": "Lớp học"
+    },
+    "actions": {
+      "create": "Tạo lớp học",
+      "join": "Tham gia lớp học",
+      "delete": {
+        "index": "Xoá",
+        "title": "Xoá lớp {name}",
+        "description": "Bạn sắp xoá lớp này, bạn có chắc chắn không?",
+        "confirm": "Xoá",
+        "cancel": "Huỷ bỏ"
+      },
+      "leave": {
+        "index": "Rời lớp",
+        "title": "Rời lớp {name}",
+        "description": "Bạn sắp rời lớp này, bạn có chắc chắn không?",
+        "confirm": "Rời đi",
+        "cancel": "Huỷ bỏ",
+        "success": {
+          "title": "Đã rời khỏi lợp",
+          "description": "Bạn vẫn có thể tham gia lại lớp học này"
+        }
+      },
+      "edit": {
+        "index": "Edit"
+      }
     }
   },
   "Members_classroom": {
@@ -475,7 +496,7 @@
       "title": "Nhập mã OTP",
       "submit": "Xác nhận"
     },
-    "signup-success": "Tài khoản đã được xác thực",
+    "signup-success": "Tài khoản đã được xác thực 💖",
     "login": "Đăng nhập"
   },
   "Table": {
@@ -989,6 +1010,7 @@
     "billing": "Thanh toán",
     "settings": "Cài đặt",
     "new_classroom": "Tạo lớp học mới",
+    "dashboard": "Bảng điều khiển",
     "classrooms": {
       "index": "Lớp học",
       "new": "Tạo lớp học mới",
@@ -1398,7 +1420,7 @@
     "errorBtn": "Thông báo lỗi"
   },
   "UpgradeAccount": {
-    "upgrade": "Nâng cấp tài khoản" 
+    "upgrade": "Nâng cấp tài khoản"
   },
   "Errors": {
     "index": "Lỗi",
@@ -1440,6 +1462,9 @@
         "label": "Mô tả",
         "placeholder": "Nhập mô tả của lớp học"
       },
+      "invite": {
+        "label": "Cho phép thành viên mời người khác"
+      },
       "plan-form": {
         "starter": {
           "title": "Gói cơ bản",
@@ -1479,6 +1504,9 @@
       "description": {
         "label": "Mô tả",
         "placeholder": "Nhập mô tả của lớp học"
+      },
+      "invite": {
+        "label": "Cho phép thành viên mời người khác"
       },
       "actions": {
         "edit": {
@@ -1642,7 +1670,8 @@
           },
           "message": {
             "ban_message_single": "Bạn có muốn cấm người dùng <span></span>?",
-            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?"
+            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?",
+            "success": "Cấm người dùng thành công"
           }
         },
         "unban": {
@@ -1687,9 +1716,9 @@
       "filters": {}
     }
   },
-  "Report_user" : {
+  "Report_user": {
     "title": "Báo Cáo Người dùng",
-    "description" : "Bạn có muốn báo cáo người dùng này?",
+    "description": "Bạn có muốn báo cáo người dùng này?",
     "terms": {
       "cancel": "Hủy",
       "report": "Báo cáo"

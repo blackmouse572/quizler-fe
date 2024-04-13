@@ -1,21 +1,19 @@
 "use client"
 
-import React from "react"
+import { Transaction } from "@/types"
+import { DataChart } from "@/types/chart-type"
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js"
-import { Bar } from "react-chartjs-2"
-import { ClassroomGameResults, Transaction } from "@/types"
-import PagedResponse from "@/types/paged-response"
-import { generateRandomColors } from "../helpers/random-color-chart"
 import { useTranslations } from "next-intl"
-import { DataChart } from "@/types/chart-type"
+import { Bar } from "react-chartjs-2"
+import { generateRandomColors } from "../helpers/random-color-chart"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -26,7 +24,7 @@ type Props = {
   }
 }
 
-// labels contains all months in year: now is 2024: 
+// labels contains all months in year: now is 2024:
 // months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', "11", "12"]
 // total money: total money of that month
 export default function BarChartAdminDashboard({ data, time }: Props) {
@@ -79,10 +77,10 @@ export default function BarChartAdminDashboard({ data, time }: Props) {
   return (
     <>
       <Bar options={options} data={dataChart} />
-      <div>
-        {i18n("admin_chart.bar_chart.x_data")} <br />
-        {i18n("admin_chart.bar_chart.y_data")} <br />
-      </div>
+      <ul className="w-fit rounded-md border border-input bg-accent px-5 py-3 text-xs text-accent-foreground">
+        <li> {i18n("admin_chart.bar_chart.x_data")} </li>
+        <li> {i18n("admin_chart.bar_chart.y_data")}</li>
+      </ul>
     </>
   )
 }

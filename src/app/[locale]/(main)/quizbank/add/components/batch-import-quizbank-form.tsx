@@ -68,7 +68,7 @@ type Props = {
 function BatchImportQuizbankForm({ onSuccessfulImport }: Props) {
   const errori18n = useTranslations("Validations")
   const i18n = useTranslations("AddQuiz.import-form")
-  const [isOpen, setOpen] = useState(true)
+  const [isOpen, setOpen] = useState(false)
   const form = useForm<BatchImportQuizbank>({
     resolver: zodResolver(batchImportQuizbankSchema),
     defaultValues: {

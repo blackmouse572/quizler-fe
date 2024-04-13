@@ -11,11 +11,9 @@ export default function useClassroomList({
   initialData: PagedResponse<Classroom>
   options?: Partial<PagedRequest>
 }) {
-  console.log({ options })
   return useInfiniteQuery({
-    queryKey: ["classrooms", options?.search],
+    queryKey: ["classrooms", options],
     queryFn: async ({ pageParam }) => {
-      console.log("options", options)
       const res = await fetchMyClassrooms({
         ...options,
         skip: pageParam,

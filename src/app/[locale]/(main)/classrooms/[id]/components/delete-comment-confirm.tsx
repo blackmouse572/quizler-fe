@@ -70,7 +70,7 @@ function DeleteCommentConfirmDialog({
             disabled={isPending}
             autoFocus
             color="danger"
-            onClick={() => mutate(post?.id || "")}
+            onClick={() => mutate(comment?.id || "")}
           >
             {isPending && <Icons.Spinner className="animate-spin" />}
             {t("delete.confirm")}

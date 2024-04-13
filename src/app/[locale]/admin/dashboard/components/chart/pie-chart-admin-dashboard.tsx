@@ -1,10 +1,10 @@
 "use client"
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js"
-import { Pie } from "react-chartjs-2"
 import { Transaction } from "@/types"
-import { useTranslations } from "next-intl"
 import { PieChart } from "@/types/chart-type"
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js"
+import { useTranslations } from "next-intl"
+import { Pie } from "react-chartjs-2"
 import { generateRandomColors } from "../helpers/random-color-chart"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
@@ -53,5 +53,14 @@ export function PieChartAdminDashboard({ data, time }: Props) {
   dataChart.datasets[0].backgroundColor = randomColors
   dataChart.datasets[0].borderColor = randomColors
 
-  return <Pie data={dataChart} />
+  return (
+    <Pie
+      data={dataChart}
+      className="mx-auto aspect-square"
+      style={{
+        maxWidth: "345px",
+        maxHeight: "345px",
+      }}
+    />
+  )
 }

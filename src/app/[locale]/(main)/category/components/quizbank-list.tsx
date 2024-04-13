@@ -34,10 +34,11 @@ export default function CategoryQuizBankList({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["quizbank", tag],
+    queryKey: ["quizbank", tag, filter],
     queryFn: async ({ pageParam }) => {
       const res = await getQuizBankByTag(
         {
+          ...filter,
           skip: pageParam,
           take: 20,
         },

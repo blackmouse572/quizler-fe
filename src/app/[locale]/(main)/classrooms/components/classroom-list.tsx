@@ -21,7 +21,8 @@ type Props = {
 function ClassroomList({ initialData, filter }: Props) {
   const inViewRef = useRef<HTMLDivElement>(null)
   const inView = useInView(inViewRef, {})
-  const i18n = useTranslations("Delete_classroom")
+  const deleteII18n = useTranslations("Delete_classroom")
+  const i18n = useTranslations("Classroom")
   const errorI18n = useTranslations("Errors")
   const classroomCardRef = useRef<TClassRoomCardRef>(null)
   const {
@@ -57,28 +58,52 @@ function ClassroomList({ initialData, filter }: Props) {
       )
 
       return toast({
-        title: i18n("message.success.title"),
-        description: i18n("message.success.description"),
+        title: deleteII18n("message.success.title"),
+        description: deleteII18n("message.success.description"),
         variant: "flat",
         color: "success",
       })
     },
-    [i18n]
+    [deleteII18n]
   )
 
   const deleteFailCb = useCallback(
     (message: string) => {
       classroomCardRef.current?.setIsDelete(false)
       return toast({
-        title: i18n("message.failed.title"),
+        title: deleteII18n("message.failed.title"),
         description: errorI18n(message as any),
         variant: "flat",
         color: "danger",
       })
     },
-    [errorI18n, i18n]
+    [errorI18n, deleteII18n]
   )
-
+  const leaveClassroomSuccess = useCallback(
+    (id: string) => {
+      toast({
+        title: i18n("actions.leave.success.title"),
+        description: i18n("actions.leave.success.description"),
+        color: "success",
+      })
+      queryClient.setQueryData(
+        ["classrooms", filter],
+        (oldData: InfiniteData<PagedResponse<Classroom>>) => {
+          if (!oldData) return oldData
+          return {
+            ...oldData,
+            pages: oldData.pages.map((page) => {
+              return {
+                ...page,
+                data: page.data.filter((classroom) => classroom.id !== id),
+              }
+            }),
+          }
+        }
+      )
+    },
+    [filter, i18n]
+  )
   const renderItem = useCallback(
     (item: Classroom) => (
       <ClassroomCard
@@ -89,9 +114,10 @@ function ClassroomList({ initialData, filter }: Props) {
         onDeleteClassrooom={() =>
           onDeleteClassroom(+item.id, deleteSucceedCb, deleteFailCb)
         }
+        onLeaveClassroom={leaveClassroomSuccess}
       />
     ),
-    [deleteFailCb, deleteSucceedCb]
+    [deleteFailCb, deleteSucceedCb, leaveClassroomSuccess]
   )
   const renderLoading = useCallback((length?: number) => {
     return Array.from({ length: length ?? 5 }).map((_, index) => (
