@@ -23,6 +23,7 @@ import Link from "next/link"
 import { useCallback, useMemo, useState } from "react"
 import { fetchEndGame } from "../actions/fetch-end-game"
 import { toast } from "@/components/ui/use-toast"
+import { queryClient } from "@/app/[locale]/provider"
 
 type GameCardProps = {
   game: Game
@@ -49,6 +50,9 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
         color: "danger",
       })
     } else {
+      queryClient.invalidateQueries({
+        queryKey: ["games", `game-classroom-${game.classroomId}`],
+      })
       return toast({
         title: actionsI18n("stop.message.success.title"),
         description: actionsI18n("stop.message.success.description"),
@@ -56,7 +60,7 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
         color: "success",
       })
     }
-  }, [classroomId, game.id, actionsI18n, errorI18n])
+  }, [classroomId, game.id, game.classroomId, actionsI18n, errorI18n])
 
   const stopGameIconKey = "ClockStop"
   const options = useMemo<
