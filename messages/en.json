@@ -390,6 +390,9 @@
     },
     "admin_chart": {
       "title": "Income",
+      "select_year": {
+        "index": "Year"
+      },
       "pie_chart": {
         "title": "Pie chart",
         "datasets": {

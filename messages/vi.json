@@ -554,6 +554,9 @@
     },
     "admin_chart": {
       "title": "Thu nhập",
+      "select_year": {
+        "index": "Năm"
+      },
       "pie_chart": {
         "title": "Biểu đồ hình tròn",
         "datasets": {
