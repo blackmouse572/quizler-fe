@@ -230,6 +230,26 @@
           }
         }
       },
+      "stop": {
+        "title": "Stop Game",
+        "message": {
+          "failed": {
+            "title": "Could not stop the game"
+          },
+          "success" : {
+            "title": "Stop the game successfully",
+            "description": "The game has been stop successfully"
+          }
+        },
+        "dialog" : {
+          "title": "Stop this game \"{name}\"?",
+          "description": "Do you want to stop this game immediately?",
+          "terms": {
+            "cancel": "Cancel",
+            "action": "Stop game"
+          }
+        }
+      },
       "leave": {
         "title": "Leave game",
         "description": "Are you sure you want to leave this game? You can't join again",

@@ -1,4 +1,4 @@
-import DeleteDialogConfirm from "@/components/delete-confirm-dialog"
+import ActionDialogConfirm from "@/components/delete-confirm-dialog"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -113,12 +113,12 @@ const ClassroomCard = React.forwardRef<TClassRoomCardRef | null, Props>(
         </Link>
         <CardContent className="flex justify-between">
           {renderAuthor} {renderOptions}
-          <DeleteDialogConfirm
+          <ActionDialogConfirm
             description=""
             title={`Delete classroom '${item.classname}'?`}
             isOpen={isDelete}
             setOpen={setIsDelete}
-            onDelete={() => onDeleteClassrooom?.(+item.id, () => {})}
+            onAction={() => onDeleteClassrooom?.(+item.id, () => {})}
           />
         </CardContent>
       </Card>

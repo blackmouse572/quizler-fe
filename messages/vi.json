@@ -142,6 +142,26 @@
         "index": "Trò chơi mới",
         "title": "Tạo trò chơi mới"
       },
+      "stop": {
+        "title": "Dừng trò chơi",
+        "message": {
+          "failed": {
+            "title": "Không thể dừng trò chơi này"
+          },
+          "success" : {
+            "title": "Thành công dừng trò chơi",
+            "description": "Trò chơi này đã được dừng lại"
+          }
+        },
+        "dialog" : {
+          "title": "Dừng trò chơi \"{name}\"?",
+          "description": "Bạn có muốn dừng trò chơi này lại ngay lập tức?",
+          "terms": {
+            "cancel": "Hủy",
+            "action": "Dừng trò chơi"
+          }
+        }
+      },
       "leave": {
         "title": "Rời khỏi trò chơi",
         "description": "Bạn có muốn rời khỏi trò chơi? Bạn sẽ không thể tham gia lại trò chơi",

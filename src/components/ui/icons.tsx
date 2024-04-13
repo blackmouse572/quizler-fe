@@ -90,7 +90,8 @@ import {
   IconCreditCard,
   IconAlertSquare,
   IconProgressCheck,
-  IconBrandFacebook
+  IconBrandFacebook,
+  IconClockStop
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -151,6 +152,7 @@ export const Icons = {
   Join: IconArrowsJoin,
   AI: IconSparkles,
   Check: IconProgressCheck,
+  ClockStop: IconClockStop,
 
   //Chevrons
   ChevronUp: IconChevronUp,

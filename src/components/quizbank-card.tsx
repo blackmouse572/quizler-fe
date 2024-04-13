@@ -1,5 +1,5 @@
 "use client"
-import DeleteDialogConfirm from "@/components/delete-confirm-dialog"
+import ActionDialogConfirm from "@/components/delete-confirm-dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
@@ -150,17 +150,17 @@ function QuizbankCard({
         </div>
         {renderOptions}
       </CardContent>
-      <DeleteDialogConfirm
+      <ActionDialogConfirm
         description=""
         title={translations?.delete || "Delete"}
         terms={{
           cancel: translations?.cancel || "Cancel",
-          delete: translations?.delete || "Delete",
+          action: translations?.delete || "Delete",
         }}
         isOpen={isDelete}
         disabled={isDeleteing}
         setOpen={setIsDelete}
-        onDelete={onDeleteConfirm}
+        onAction={onDeleteConfirm}
       />
     </Card>
   )

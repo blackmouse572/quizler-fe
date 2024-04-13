@@ -1,3 +1,6 @@
+"use client"
+
+import ActionDialogConfirm from "@/components/delete-confirm-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,7 +20,9 @@ import { IIconKeys, Icons } from "@/components/ui/icons"
 import { Game } from "@/types"
 import { useFormatter, useTranslations } from "next-intl"
 import Link from "next/link"
-import { useMemo } from "react"
+import { useCallback, useMemo, useState } from "react"
+import { fetchEndGame } from "../actions/fetch-end-game"
+import { toast } from "@/components/ui/use-toast"
 
 type GameCardProps = {
   game: Game
@@ -26,9 +31,34 @@ type GameCardProps = {
 }
 
 const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
-  const t = useTranslations("ClassroomGame")
-  const format = useFormatter()
+  const actionsI18n = useTranslations("ClassroomGame.actions")
+  const cardI18n = useTranslations("ClassroomGame.card")
+  const errorI18n = useTranslations("Errors")
 
+
+  const format = useFormatter()
+  const [isEnd, setIsEnd] = useState<boolean>(false)
+
+  const onEndGame = useCallback(async () => {
+    const result = await fetchEndGame(classroomId, game.id)
+    if (!result.ok) {
+      return toast({
+        title: actionsI18n("stop.message.failed.title"),
+        description: errorI18n(result.message as any),
+        variant: "flat",
+        color: "danger",
+      })
+    } else {
+      return toast({
+        title: actionsI18n("stop.message.success.title"),
+        description: actionsI18n("stop.message.success.description"),
+        variant: "flat",
+        color: "success",
+      })
+    }
+  }, [classroomId, game.id, actionsI18n, errorI18n])
+
+  const stopGameIconKey = "ClockStop"
   const options = useMemo<
     {
       icon?: IIconKeys
@@ -40,56 +70,57 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
   >(
     () => [
       {
-        title: "End Game",
-        icon: "X",
+        title: actionsI18n("stop.title"),
+        icon: stopGameIconKey,
         className:
           "text-destructive hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive",
         onClick: () => {
-          // setIsDelete(true)
+          setIsEnd(true)
         },
       },
     ],
-    []
+    [actionsI18n]
   )
 
   const renderGame = useMemo(
     () => (
       <div className="space-y-2">
         <p>
-          {t("actions.create.form.amount.label")}:&nbsp;
+          {actionsI18n("create.form.amount.label")}:&nbsp;
           {game.numberOfQuizzes}
         </p>
         {new Date(game.endTime) < new Date() ? (
           <p>
-            {t("actions.create.form.endTime.label")}:&nbsp;
+            {actionsI18n("create.form.endTime.label")}:&nbsp;
             {format.relativeTime(new Date(game.endTime))}
           </p>
         ) : (
           <p>
-            {t("actions.create.form.startTime.label")}:&nbsp;
+            {actionsI18n("create.form.startTime.label")}:&nbsp;
             {format.relativeTime(new Date(game.startTime))}
           </p>
         )}
         <p>
-          {t("actions.create.form.duration.label")}:&nbsp;
-          {game.duration ?? t("card.unlimited")}
+          {actionsI18n("create.form.duration.label")}:&nbsp;
+          {game.duration ?? cardI18n("unlimited")}
         </p>
         {new Date(game.endTime) < new Date() ? (
           <>
-            <Badge color="accent">{t("card.inactive")}</Badge>
+            <Badge color="accent">{cardI18n("inactive")}</Badge>
           </>
         ) : (
-          <Badge color="success">{t("card.active")}</Badge>
+          <Badge color="success">{cardI18n("active")}</Badge>
         )}
       </div>
     ),
     [
-      format,
-      game.duration,
-      game.endTime,
+      actionsI18n,
       game.numberOfQuizzes,
+      game.endTime,
       game.startTime,
-      t,
+      game.duration,
+      format,
+      cardI18n,
     ]
   )
 
@@ -145,10 +176,22 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
       <CardContent className="flex justify-between">
         {renderGame}
         <div className="flex self-end">{renderOptions}</div>
+        <ActionDialogConfirm
+          description={actionsI18n("stop.dialog.description")}
+          title={actionsI18n("stop.dialog.title", { name: game.gameName })}
+          isOpen={isEnd}
+          setOpen={setIsEnd}
+          onAction={() => onEndGame()}
+          iconKey={stopGameIconKey}
+          terms={{
+            cancel: actionsI18n("stop.dialog.terms.cancel"),
+            action: actionsI18n("stop.dialog.terms.action"),
+          }}
+        />
       </CardContent>
       <CardFooter>
         {(new Date(game.endTime) < new Date() ||
-          game.numberOfQuizzes === 0) ?? <Button>{t("card.join")}</Button>}
+          game.numberOfQuizzes === 0) ?? <Button>{cardI18n("join")}</Button>}
       </CardFooter>
     </Card>
   )
