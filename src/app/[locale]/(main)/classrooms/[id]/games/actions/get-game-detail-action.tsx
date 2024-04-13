@@ -19,14 +19,13 @@ async function getGameDetailsAction({
     },
     next: {
       tags: ["games", `game-${gameId}`],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 60 * 60, // revalidate every 60 seconds
     },
   }
   return fetch(url, options)
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        console.log(json)
         throw new Error(json.message)
       }
       return json

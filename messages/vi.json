@@ -255,10 +255,6 @@
     }
   },
   "Classroom": {
-    "actions": {
-      "create": "Tạo lớp học",
-      "join": "Tham gia lớp học"
-    },
     "headers": {
       "created_at": "Ngày tạo",
       "description": "Mô tả",
@@ -271,6 +267,31 @@
     "metadata": {
       "description": "Quản lý tất cả các lớp học trong hệ thống",
       "title": "Lớp học"
+    },
+    "actions": {
+      "create": "Tạo lớp học",
+      "join": "Tham gia lớp học",
+      "delete": {
+        "index": "Xoá",
+        "title": "Xoá lớp {name}",
+        "description": "Bạn sắp xoá lớp này, bạn có chắc chắn không?",
+        "confirm": "Xoá",
+        "cancel": "Huỷ bỏ"
+      },
+      "leave": {
+        "index": "Rời lớp",
+        "title": "Rời lớp {name}",
+        "description": "Bạn sắp rời lớp này, bạn có chắc chắn không?",
+        "confirm": "Rời đi",
+        "cancel": "Huỷ bỏ",
+        "success": {
+          "title": "Đã rời khỏi lợp",
+          "description": "Bạn vẫn có thể tham gia lại lớp học này"
+        }
+      },
+      "edit": {
+        "index": "Edit"
+      }
     }
   },
   "Members_classroom": {
@@ -495,7 +516,7 @@
       "title": "Nhập mã OTP",
       "submit": "Xác nhận"
     },
-    "signup-success": "Tài khoản đã được xác thực",
+    "signup-success": "Tài khoản đã được xác thực 💖",
     "login": "Đăng nhập"
   },
   "Table": {
@@ -574,6 +595,9 @@
     },
     "admin_chart": {
       "title": "Thu nhập",
+      "select_year": {
+        "index": "Năm"
+      },
       "pie_chart": {
         "title": "Biểu đồ hình tròn",
         "datasets": {
@@ -1006,6 +1030,7 @@
     "billing": "Thanh toán",
     "settings": "Cài đặt",
     "new_classroom": "Tạo lớp học mới",
+    "dashboard": "Bảng điều khiển",
     "classrooms": {
       "index": "Lớp học",
       "new": "Tạo lớp học mới",
@@ -1213,7 +1238,8 @@
         "mismatch_password": "Các mật khẩu không trùng khớp."
       },
       "update_profile_form": {
-        "fullname": "Tên của bạn nên có ít nhất 2 kí tự."
+        "fullname": "Tên của bạn nên có ít nhất 2 kí tự.",
+        "date": "Đó không phải là một ngày hợp lệ!"
       },
       "report_quizbank": {
         "more_details": {
@@ -1414,7 +1440,7 @@
     "errorBtn": "Thông báo lỗi"
   },
   "UpgradeAccount": {
-    "upgrade": "Nâng cấp tài khoản" 
+    "upgrade": "Nâng cấp tài khoản"
   },
   "Errors": {
     "index": "Lỗi",
@@ -1456,6 +1482,9 @@
         "label": "Mô tả",
         "placeholder": "Nhập mô tả của lớp học"
       },
+      "invite": {
+        "label": "Cho phép thành viên mời người khác"
+      },
       "plan-form": {
         "starter": {
           "title": "Gói cơ bản",
@@ -1495,6 +1524,9 @@
       "description": {
         "label": "Mô tả",
         "placeholder": "Nhập mô tả của lớp học"
+      },
+      "invite": {
+        "label": "Cho phép thành viên mời người khác"
       },
       "actions": {
         "edit": {
@@ -1658,7 +1690,8 @@
           },
           "message": {
             "ban_message_single": "Bạn có muốn cấm người dùng <span></span>?",
-            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?"
+            "ban_message_mutiple": "Bạn có muốn cấm <span></span> người dùng?",
+            "success": "Cấm người dùng thành công"
           }
         },
         "unban": {
@@ -1701,6 +1734,62 @@
         }
       },
       "filters": {}
+    }
+  },
+  "Report_user": {
+    "title": "Báo Cáo Người dùng",
+    "description": "Bạn có muốn báo cáo người dùng này?",
+    "terms": {
+      "cancel": "Hủy",
+      "report": "Báo cáo"
+    },
+    "form_report": {
+      "reason": {
+        "label": "Lý do",
+        "text": "Lý do",
+        "placeholder": "Lạm dụng",
+        "reason_choice": {
+          "abuse": "Lạm dụng",
+          "inappropriate": "Không phù hợp",
+          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ của tôi",
+          "other": "Khác"
+        }
+      },
+      "more_details": {
+        "label": "Chi tiết hơn",
+        "text": "Chi tiết hơn",
+        "placeholder": "Diền chi tiết..."
+      },
+      "button": {
+        "cancel": "Hủy",
+        "submit": "Báo cáo"
+      },
+      "text_area": {
+        "placeholder": "Hãy nhập chi tiết vào đây"
+      }
+    },
+    "form_result_report": {
+      "report_success": "Báo cáo thành công",
+      "thank_you_reported": "Cảm ơn bạn đã đóng góp để có không gian học tập tốt hơn",
+      "received_submission": "Chúng tôi đã nhận được báo cáo của bạn đối với người dùng",
+      "of": "của",
+      "against": "đã chống lại",
+      "violation_rules": "các Nội quy vi phạm",
+      "take_action_soon": "của chúng tôi. Sẽ có hành động sớm với tài khoản này.",
+      "recorded": "Được ghi lại vào:",
+      "ticket_id": "Id vé phạt:",
+      "contact_us": "Để biết thêm thông tin, xin vui lòng liên hệ chúng tôi tại",
+      "Quizlearn_email": "Quizlearn",
+      "confirm": "Xác nhận"
+    },
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Thành công báo cáo người dùng"
+      },
+      "failed": {
+        "title": "Có gì đó không đúng đã xảy ra"
+      }
     }
   }
 }

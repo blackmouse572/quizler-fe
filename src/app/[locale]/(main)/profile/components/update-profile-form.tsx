@@ -1,5 +1,6 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { DialogClose } from "@/components/ui/dialog"
 import { User } from "@/types"
 import { useTranslations } from "next-intl"
 import { z } from "zod"
@@ -11,27 +12,35 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormLabel
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { updateUserProfileAction } from "../actions/update-user-profile"
 import { toast } from "@/components/ui/use-toast"
 import { useUser } from "@/hooks/useUser"
 import { useRouter } from "next/navigation"
+import { Dispatch, SetStateAction } from "react"
 
 type Props = {
   userData: User
+  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const formSchema = z.object({
   fullname: z.string().min(2, {
     message: "errors.update_profile_form.fullname",
   }),
-  dob: z.coerce.date(),
+  dob: z.coerce.date({
+    errorMap: (issue, { defaultError }) => ({
+      message:
+        issue.code === "invalid_date"
+          ? "errors.update_profile_form.date"
+          : defaultError,
+    }),
+  }),
 })
 
-export default function UpdateProfileForm({ userData }: Props) {
+export default function UpdateProfileForm({ userData, setOpen }: Props) {
   const i18n = useTranslations("Settings")
   const e = useTranslations("Errors")
   const validationsi18n = useTranslations("Validations")
@@ -69,6 +78,7 @@ export default function UpdateProfileForm({ userData }: Props) {
       variant: "flat",
       color: "success",
     })
+    setOpen(false)
   }
 
   return (
@@ -100,7 +110,7 @@ export default function UpdateProfileForm({ userData }: Props) {
         <FormField
           control={form.control}
           name="dob"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
               <FormLabel>{i18n("profile.update_dialog.label.dob")}</FormLabel>
               <FormControl>
@@ -114,16 +124,21 @@ export default function UpdateProfileForm({ userData }: Props) {
                   }
                 />
               </FormControl>
-              <FormMessage />
+              {fieldState.error && (
+                <p className="text-xs text-danger-500">
+                  {validationsi18n(fieldState.error?.message as any, {
+                    maximum: 255,
+                    minimum: 3,
+                  })}
+                </p>
+              )}
             </FormItem>
           )}
         />
 
-        <DialogClose>
-          <Button type="submit">
-            {i18n("profile.update_dialog.submit_btn")}
-          </Button>
-        </DialogClose>
+        <Button type="submit">
+          {i18n("profile.update_dialog.submit_btn")}
+        </Button>
       </form>
     </Form>
   )

@@ -29,8 +29,8 @@ async function getAllCommentActions({
       Authorization: `Bearer ${token}`,
     },
     next: {
-      tags: ["posts", `post-${postId}`, `comment-posts-${postId}`],
-      revalidate: 60, // revalidate every 60 seconds
+      tags: [`comment-posts-${postId}`],
+      revalidate: 5, // revalidate every 60 seconds
     },
   }
   return fetch(url, options)

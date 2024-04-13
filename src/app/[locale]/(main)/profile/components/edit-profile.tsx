@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  NamedToolTip,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -46,16 +47,9 @@ export default function EditProfile({ userData }: Props) {
         <div className="text-xl font-semibold leading-8 text-black">
           {i18n("profile.title")}
         </div>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <UpdateUserDialog userData={userData} />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{i18n("profile.edit_profile")}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <NamedToolTip side="bottom" content={i18n("profile.edit_profile")}>
+          <UpdateUserDialog userData={userData} />
+        </NamedToolTip>
       </div>
 
       <ContactInfo

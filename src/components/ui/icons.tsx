@@ -1,5 +1,8 @@
 import {
-  IconAffiliate, IconArrowDown,
+  IconAffiliate,
+  IconAlertSquare,
+  IconAlertTriangle,
+  IconArrowDown,
   IconArrowDownRight,
   IconArrowRight,
   IconArrowRoundaboutLeft,
@@ -13,6 +16,7 @@ import {
   IconBold,
   IconBook,
   IconBraces,
+  IconBrandFacebook,
   IconBrandGithub,
   IconBrandGoogle,
   IconBrandTelegram,
@@ -30,6 +34,7 @@ import {
   IconCircleOff,
   IconClock,
   IconCopy,
+  IconCreditCard,
   IconDashboard,
   IconDeviceDesktop,
   IconDeviceGamepad2,
@@ -55,6 +60,7 @@ import {
   IconLink,
   IconList,
   IconLoader2,
+  IconLockOpen,
   IconLogout2,
   IconMail,
   IconMath,
@@ -68,6 +74,7 @@ import {
   IconPlayerPause,
   IconPlayerPlay,
   IconPlus,
+  IconProgressCheck,
   IconQuote,
   IconRefresh,
   IconSearch,
@@ -85,12 +92,6 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
-  IconLockOpen,
-  IconAlertTriangle,
-  IconCreditCard,
-  IconAlertSquare,
-  IconProgressCheck,
-  IconBrandFacebook,
   IconClockStop
 } from "@tabler/icons-react"
 
@@ -153,6 +154,7 @@ export const Icons = {
   AI: IconSparkles,
   Check: IconProgressCheck,
   ClockStop: IconClockStop,
+  Leave: IconLogout2,
 
   //Chevrons
   ChevronUp: IconChevronUp,
@@ -204,7 +206,7 @@ export const Icons = {
   Settings: IconSettings,
   Error: IconBan,
   Payment: IconCreditCard,
-  Facebook: IconBrandFacebook
+  Facebook: IconBrandFacebook,
 }
 
 type IIconKeys = keyof typeof Icons

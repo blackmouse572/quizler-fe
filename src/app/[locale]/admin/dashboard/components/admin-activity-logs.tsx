@@ -1,54 +1,49 @@
-"use client"
-
 import { Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
 import { AdminNotification } from "@/types"
 import PagedResponse from "@/types/paged-response"
-import { useFormatter, useTranslations } from "next-intl"
-import { ReactNode, useCallback, useRef } from "react"
+import { getFormatter, getTranslations } from "next-intl/server"
+import React from "react"
 
 type Props = {
   notificationData: PagedResponse<AdminNotification>
 }
 
-export default function AdminActivityLogs({ notificationData }: Props) {
-  const i18n = useTranslations("DashboardAdmin")
+export default async function AdminActivityLogs({ notificationData }: Props) {
+  const i18n = await getTranslations("DashboardAdmin")
 
-  const renderNotificationIcon = useCallback((type: string) => {
+  const renderNotificationIcon = (type: string) => {
     switch (type) {
       case "Information":
-        return <Icons.Info />
+        return <Icons.Info className="text-info-500" />
       case "Alert":
-        return <Icons.Alert />
+        return <Icons.Alert className="text-warning-500" />
       case "Warning":
-        return <Icons.Warning />
+        return <Icons.Warning className="text-warning-500" />
+      case "Error":
+        return <Icons.Error className="text-danger-500" />
+      case "Payment":
+        return <Icons.Payment className="text-emerald-500" />
+      case "Classroom":
+        return <Icons.School className="text-fuchsia-500" />
       default:
-        return <Icons.Info />
+        return <Icons.Help className="text-indigo-500" />
     }
-  }, [])
+  }
 
-  const renderNotification = useCallback(
-    (item: AdminNotification) => {
-      const icon = renderNotificationIcon(item.type)
-      return <NotificationItem item={item} icon={icon} key={item.id} />
-    },
-    [renderNotificationIcon]
-  )
+  const renderNotification = (item: AdminNotification) => {
+    const icon = renderNotificationIcon(item.type)
+    return <NotificationItem item={item} icon={icon} key={item.id} />
+  }
 
   return (
-    <div className="ml-5 flex w-6/12 flex-col max-md:ml-0 max-md:w-full">
-      <div className="flex w-full grow flex-col rounded-lg border border-solid border-neutral-200 bg-white px-8 py-5 max-md:mt-5 max-md:max-w-full max-md:px-5">
-        <div className="flex w-full justify-between gap-5 max-md:max-w-full max-md:flex-wrap">
-          <div className="my-auto text-base font-semibold leading-6 text-black">
-            {i18n("activity_logs.title")}
-          </div>
-        </div>
-
+    <div className="space-y-4 rounded-lg border border-solid border-neutral-200 bg-white px-8 py-5">
+      <div className="my-auto text-base font-semibold leading-6 text-black">
+        {i18n("activity_logs.title")}
+      </div>
+      <div className="max-h-[65vh] flex-1 space-y-2 overflow-y-auto">
         {notificationData.data.map((result) => (
-          <div
-            key={result.id}
-            className="mt-2.5 flex gap-2.5 pr-7 text-black max-md:flex-wrap max-md:pr-5"
-          >
+          <div key={result.id} className="">
             {renderNotification(result)}
           </div>
         ))}
@@ -57,22 +52,20 @@ export default function AdminActivityLogs({ notificationData }: Props) {
   )
 }
 
-function NotificationItem({
+async function NotificationItem({
   item,
   icon,
 }: {
   item: AdminNotification
-  icon: ReactNode
+  icon: React.ReactNode
 }) {
-  const i18nNoti = useTranslations("Notification")
-  const format = useFormatter()
-  const ref = useRef<HTMLDivElement>(null)
+  const i18nNoti = await getTranslations("Notification")
+  const format = await getFormatter()
 
   return (
     <div
-      ref={ref}
       className={cn(
-        "flex gap-2 rounded-md px-3 py-2 transition-all hover:bg-accent"
+        "flex w-full cursor-default gap-2 rounded-md px-3 py-2 transition-all hover:bg-accent"
       )}
       key={item.id}
     >

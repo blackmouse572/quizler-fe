@@ -92,7 +92,6 @@ function DndQuestion({ data, disabled, onSubmit, isWrong = false }: Props) {
   useEffect(() => {
     if (Object.keys(pairs).length === mod.questions.length) {
       const answers = mod.questions.map((e) => pairs[e.id])
-      console.log(answers)
       onSubmit(answers)
     }
   }, [mod.questions, pairs, onSubmit])

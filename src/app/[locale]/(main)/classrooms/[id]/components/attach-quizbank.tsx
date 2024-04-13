@@ -79,7 +79,6 @@ function AttachQuizbank({
         </CommandEmpty>
       )
     }
-    console.log(data)
     return (
       <CommandList>
         {data.pages[0]?.data.map((quiz) => (

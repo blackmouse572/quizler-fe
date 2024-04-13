@@ -69,31 +69,22 @@ function QuizBankList({ data: initData, token, filter }: Props) {
           color: "danger",
         })
       } else {
+        deleteSucceedCb()
         queryClient.setQueryData(
           ["quizbank", filter],
           (oldData: typeof data) => {
-            if (!oldData) return
             const newData = oldData.pages.map((page) => {
               return {
                 ...page,
                 data: page?.data.filter((item: any) => item.id !== itemId),
               }
             })
+            return {
+              pages: newData,
+              pageParams: oldData.pageParams,
+            }
           }
         )
-        deleteSucceedCb()
-        queryClient.setQueryData(["quizbank"], (oldData: typeof data) => {
-          const newData = oldData.pages.map((page) => {
-            return {
-              ...page,
-              data: page?.data.filter((item: any) => item.id !== itemId),
-            }
-          })
-          return {
-            pages: newData,
-            pageParams: oldData.pageParams,
-          }
-        })
         return toast({
           title: i18n("message.success.title"),
           description: i18n("message.success.description"),

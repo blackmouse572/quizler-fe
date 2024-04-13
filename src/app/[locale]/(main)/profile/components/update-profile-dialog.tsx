@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -11,6 +13,7 @@ import { User } from "@/types"
 import { Pencil1Icon } from "@radix-ui/react-icons"
 import { useTranslations } from "next-intl"
 import UpdateProfileForm from "./update-profile-form"
+import { useState } from "react"
 
 type Props = {
   userData: User
@@ -18,9 +21,10 @@ type Props = {
 
 export default function UpdateUserDialog({ userData }: Props) {
   const i18n = useTranslations("Settings")
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button color={"accent"} isIconOnly>
           <Pencil1Icon />
@@ -34,7 +38,7 @@ export default function UpdateUserDialog({ userData }: Props) {
           </DialogDescription>
         </DialogHeader>
 
-        <UpdateProfileForm userData={userData} />
+        <UpdateProfileForm userData={userData} setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   )

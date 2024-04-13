@@ -73,7 +73,6 @@ function AttachGame({ onSelected, classId, selected, terms, ...props }: Props) {
         </CommandEmpty>
       )
     }
-    console.log(data)
     return (
       <CommandList>
         {data.pages[0]?.data.map((quiz) => (

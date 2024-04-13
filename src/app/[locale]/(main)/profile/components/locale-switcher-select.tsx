@@ -28,9 +28,7 @@ export default function LocaleSwitcherSelect({ defaultValue, label }: Props) {
 
   function onSelectChange(newValue: string) {
     var path = location
-    console.log(path)
     if (path.startsWith("/vi")) {
-      console.log("replace")
       path = path.replace("/vi", "/")
     }
     // const path = "/profile/preference"

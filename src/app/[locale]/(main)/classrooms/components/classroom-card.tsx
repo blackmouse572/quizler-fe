@@ -1,4 +1,6 @@
 import ActionDialogConfirm from "@/components/delete-confirm-dialog"
+import LeaveDialogConfirm from "@/app/[locale]/(main)/classrooms/components/leave-classroom-dialog"
+import { useLeaveClassroom } from "@/app/[locale]/(main)/classrooms/components/useLeaveClassroom"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -14,8 +16,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { IIconKeys, Icons } from "@/components/ui/icons"
+import { useToast } from "@/components/ui/use-toast"
 import UserDisplay from "@/components/user-display"
+import { useUser } from "@/hooks/useUser"
 import { Classroom, TClassRoomCardRef } from "@/types"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import React, { useImperativeHandle, useMemo, useState } from "react"
 
@@ -23,12 +28,32 @@ type Props = {
   item: Classroom
   displayActions?: boolean
   onDeleteClassrooom?: (itemId: number, deleteSucceedCb: () => void) => void
+  onLeaveClassroom?: (classroomId: string) => void
 }
 
-
 const ClassroomCard = React.forwardRef<TClassRoomCardRef | null, Props>(
-  ({ item, displayActions, onDeleteClassrooom }: Props, ref) => {
+  (
+    { item, displayActions, onLeaveClassroom, onDeleteClassrooom }: Props,
+    ref
+  ) => {
+    const i18n = useTranslations("Classroom")
     const [isDelete, setIsDelete] = useState<boolean>(false)
+    const [isLeave, setIsLeave] = useState<boolean>(false)
+    const { toast } = useToast()
+    const err = useTranslations("Errors")
+    const { mutate, isPending } = useLeaveClassroom({
+      onSuccess: () => {
+        onLeaveClassroom?.(item.id)
+      },
+      onError: (e) => {
+        toast({
+          title: err("index"),
+          description: err(e.message as any),
+          color: "danger",
+        })
+      },
+    })
+    const user = useUser().user
 
     useImperativeHandle(ref, () => ({
       setIsDelete,
@@ -48,18 +73,37 @@ const ClassroomCard = React.forwardRef<TClassRoomCardRef | null, Props>(
         className?: string
       }[]
     >(
-      () => [
-        {
-          title: "Delete",
-          icon: "Delete",
-          className:
-            "text-destructive hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive",
-          onClick: () => {
-            setIsDelete(true)
-          },
-        },
-      ],
-      []
+      () =>
+        user?.id === item.author?.id
+          ? [
+              {
+                title: i18n("actions.delete.index"),
+                icon: "Delete",
+                className:
+                  "text-destructive hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive",
+                onClick: () => {
+                  setIsDelete(true)
+                },
+              },
+              {
+                title: i18n("actions.edit.index"),
+                icon: "Edit",
+                className: "",
+                href: `/classrooms/${item.id}/edit`,
+              },
+            ]
+          : [
+              {
+                title: i18n("actions.leave.index"),
+                icon: "Leave",
+                className:
+                  "text-destructive hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive",
+                onClick: () => {
+                  setIsLeave(true)
+                },
+              },
+            ],
+      [i18n, item.author?.id, item.id, user?.id]
     )
     const renderOptions = useMemo(() => {
       if (!displayActions) return null
@@ -114,11 +158,29 @@ const ClassroomCard = React.forwardRef<TClassRoomCardRef | null, Props>(
         <CardContent className="flex justify-between">
           {renderAuthor} {renderOptions}
           <ActionDialogConfirm
-            description=""
-            title={`Delete classroom '${item.classname}'?`}
+            description={i18n("actions.delete.description")}
+            title={i18n("actions.delete.title", { name: item.classname })}
+            terms={{
+              cancel: i18n("actions.delete.cancel"),
+              action: i18n("actions.delete.confirm"),
+            }}
             isOpen={isDelete}
             setOpen={setIsDelete}
             onAction={() => onDeleteClassrooom?.(+item.id, () => {})}
+          />
+          <LeaveDialogConfirm
+            description={i18n("actions.leave.description")}
+            title={i18n("actions.leave.title", { name: item.classname })}
+            isOpen={isLeave}
+            disabled={isPending}
+            terms={{
+              cancel: i18n("actions.leave.cancel"),
+              leave: i18n("actions.leave.confirm"),
+            }}
+            onOpenChange={setIsLeave}
+            onConfirm={() => {
+              mutate({ id: item.id })
+            }}
           />
         </CardContent>
       </Card>

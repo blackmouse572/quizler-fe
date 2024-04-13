@@ -111,7 +111,28 @@
     },
     "actions": {
       "create": "Create classroom",
-      "join": "Join classroom"
+      "join": "Join classroom",
+      "delete": {
+        "index": "Delete",
+        "title": "Delete classroom {name}",
+        "description": "Are you sure you want to delete this classroom?",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      },
+      "leave": {
+        "index": "Leave",
+        "title": "Leave classroom {name}",
+        "description": "Are you sure you want to leave this classroom?",
+        "confirm": "Leave",
+        "cancel": "Cancel",
+        "success": {
+          "title": "Leaved classroom",
+          "description": "You have leave classroom but still re-join"
+        }
+      },
+      "edit": {
+        "index": "Edit"
+      }
     }
   },
   "ClassroomDetails": {
@@ -410,6 +431,9 @@
     },
     "admin_chart": {
       "title": "Income",
+      "select_year": {
+        "index": "Year"
+      },
       "pie_chart": {
         "title": "Pie chart",
         "datasets": {
@@ -1031,6 +1055,7 @@
     "profile": "Profile",
     "billing": "Billing",
     "settings": "Settings",
+    "dashboard": "Admin Dashboard",
     "classrooms": {
       "index": "Classrooms",
       "new": "New classroom",
@@ -1281,7 +1306,7 @@
     }
   },
   "UpgradeAccount": {
-    "upgrade": "Upgrade account" 
+    "upgrade": "Upgrade account"
   },
   "Errors": {
     "index": "Error",
@@ -1359,7 +1384,8 @@
         "mismatch_password": "Passwords don't match"
       },
       "update_profile_form": {
-        "fullname": "Display name must be at least 2 characters."
+        "fullname": "Display name must be at least 2 characters.",
+        "date": "That's not a date!"
       },
       "report_quizbank": {
         "more_details": {
@@ -1489,6 +1515,9 @@
         "label": "Description",
         "placeholder": "Enter the description of the classroom"
       },
+      "invite": {
+        "label": "Allow student to invite"
+      },
       "plan-form": {
         "starter": {
           "title": "Starter",
@@ -1528,6 +1557,9 @@
       "description": {
         "label": "Description",
         "placeholder": "Enter the description of the classroom"
+      },
+      "invite": {
+        "label": "Allow student to invite"
       },
       "actions": {
         "edit": {
@@ -1750,6 +1782,62 @@
             }
           }
         }
+      }
+    }
+  },
+  "Report_user": {
+    "title": "Report User",
+    "description": "Do you want to report this user?",
+    "terms": {
+      "cancel": "Cancel",
+      "report": "Report"
+    },
+    "form_report": {
+      "reason": {
+        "label": "Reason",
+        "text": "Reason",
+        "placeholder": "Abuse",
+        "reason_choice": {
+          "abuse": "Abuse",
+          "inappropriate": "Inappropriate",
+          "violate_intellectual": "Violates my intellectual property rights",
+          "other": "Other"
+        }
+      },
+      "more_details": {
+        "label": "More details",
+        "text": "More details",
+        "placeholder": "Input more details..."
+      },
+      "button": {
+        "cancel": "Cancel",
+        "submit": "Report"
+      },
+      "text_area": {
+        "placeholder": "Please provide more details"
+      }
+    },
+    "form_result_report": {
+      "report_success": "Report successfully",
+      "thank_you_reported": "Thank you for your contribute for better learning space",
+      "received_submission": "We have received your submission on user",
+      "of": "of",
+      "against": "that against the",
+      "violation_rules": "Violation Rules",
+      "take_action_soon": "of us. The action will be taken soon.",
+      "recorded": "Recorded:",
+      "ticket_id": "Ticket id:",
+      "contact_us": "For more information, please contact us at",
+      "Quizlearn_email": "Quizlearn",
+      "confirm": "Confirm"
+    },
+    "message": {
+      "success": {
+        "title": "Success",
+        "description": "Report user successfully"
+      },
+      "failed": {
+        "title": "Something went wrong."
       }
     }
   }

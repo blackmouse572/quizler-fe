@@ -30,7 +30,7 @@ function NotificationList({
   }, [inView, isLoadMore, isLoading, loadMore])
 
   return (
-    <div className="max-h-32 scroll-m-6 overflow-y-auto overflow-x-hidden">
+    <div className="max-h-[300px] scroll-m-6 overflow-y-auto overflow-x-hidden">
       {data.map((notification) => {
         return (
           <>

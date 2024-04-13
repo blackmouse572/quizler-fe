@@ -38,7 +38,8 @@ async function ClassroomPage({ searchParams }: Props) {
         "Validations",
         "Join_classroom",
         "Errors",
-        "Delete_classroom"
+        "Delete_classroom",
+        "Classroom"
       )}
     >
       <div className="mb-4 flex items-center justify-between">
@@ -48,13 +49,7 @@ async function ClassroomPage({ searchParams }: Props) {
           <JoinClassroomDialog
             defaultOpen={!!initCode}
             defaultValue={initCode}
-            trigger={
-              <NamedToolTip side="bottom" content={t("actions.join")}>
-                <Button isIconOnly>
-                  <Icons.Join />
-                </Button>
-              </NamedToolTip>
-            }
+            filter={{ search }}
           />
           <Link href="/classrooms/add">
             <NamedToolTip side="bottom" content={t("actions.create")}>

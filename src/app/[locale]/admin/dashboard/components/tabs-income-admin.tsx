@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Transaction } from "@/types"
 import { useTranslations } from "next-intl"
-import { PieChartAdminDashboard } from "./chart/pie-chart-admin-dashboard"
 import BarChartAdminDashboard from "./chart/bar-chart-admin-dashboard"
+import { PieChartAdminDashboard } from "./chart/pie-chart-admin-dashboard"
 
 type Props = {
   transactionData: Transaction
@@ -27,10 +27,10 @@ export function TabsIncomeAdmin({ transactionData, time }: Props) {
           {i18n("admin_chart.bar_chart.title")}
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="pie_chart">
+      <TabsContent value="pie_chart" className="py-4">
         <PieChartAdminDashboard data={transactionData} time={time} />
       </TabsContent>
-      <TabsContent value="bar_chart">
+      <TabsContent value="bar_chart" className="py-4">
         <BarChartAdminDashboard data={transactionData} time={time} />
       </TabsContent>
     </Tabs>
