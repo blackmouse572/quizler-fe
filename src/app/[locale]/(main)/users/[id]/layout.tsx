@@ -10,7 +10,15 @@ async function UserLayout({ children }: Props) {
   const msg = await getMessages()
   return (
     <BackgroundSquare variant={"default"} className="items-start py-16">
-      <NextIntlClientProvider messages={_.pick(msg, "Settings")}>
+      <NextIntlClientProvider
+        messages={_.pick(
+          msg,
+          "Settings",
+          "Report_user",
+          "Errors",
+          "Validations"
+        )}
+      >
         <div className="container mx-auto space-y-4">{children}</div>
       </NextIntlClientProvider>
     </BackgroundSquare>
