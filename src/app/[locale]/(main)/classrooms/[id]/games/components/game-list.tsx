@@ -17,6 +17,7 @@ import { useInView } from "framer-motion"
 import { useFormatter, useTranslations } from "next-intl"
 import Link from "next/link"
 import { useEffect, useMemo, useRef } from "react"
+import GameCard from "./game-card"
 type Props = {
   classroomId: string
   filter?: Partial<PagedRequest>
@@ -24,8 +25,6 @@ type Props = {
 }
 
 function GameList(props: Props) {
-  const t = useTranslations("ClassroomGame")
-  const format = useFormatter()
   const errorI18n = useTranslations("Errors")
   const loadmoreRef = useRef<HTMLDivElement>(null)
   const inView = useInView(loadmoreRef)
@@ -50,53 +49,15 @@ function GameList(props: Props) {
     return data?.pages.map((page) => {
       return page?.data.map((game) => {
         return (
-          <Card>
-            <CardHeader>
-              <Link href={`/classrooms/${props.classroomId}/game/${game.id}`}>
-                <CardTitle>{game.gameName}</CardTitle>
-              </Link>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p>
-                  {t("actions.create.form.amount.label")}:&nbsp;
-                  {game.numberOfQuizzes}
-                </p>
-                {new Date(game.endTime) < new Date() ? (
-                  <p>
-                    {t("actions.create.form.endTime.label")}:&nbsp;
-                    {format.relativeTime(new Date(game.endTime))}
-                  </p>
-                ) : (
-                  <p>
-                    {t("actions.create.form.startTime.label")}:&nbsp;
-                    {format.relativeTime(new Date(game.startTime))}
-                  </p>
-                )}
-                <p>
-                  {t("actions.create.form.duration.label")}:&nbsp;
-                  {game.duration ?? t("card.unlimited")}
-                </p>
-                {new Date(game.endTime) < new Date() ? (
-                  <>
-                    <Badge color="accent">{t("card.inactive")}</Badge>
-                  </>
-                ) : (
-                  <Badge color="success">{t("card.active")}</Badge>
-                )}
-              </div>
-            </CardContent>
-            <CardFooter>
-              {(new Date(game.endTime) < new Date() ||
-                game.numberOfQuizzes === 0) ?? (
-                <Button>{t("card.join")}</Button>
-              )}
-            </CardFooter>
-          </Card>
+          <GameCard
+            classroomId={props.classroomId}
+            game={game}
+            displayActions={true}
+          />
         )
       })
     })
-  }, [data?.pages, format, props.classroomId, t])
+  }, [data?.pages, props.classroomId])
 
   useEffect(() => {
     if (inView && hasNextPage && !isLoading) {
