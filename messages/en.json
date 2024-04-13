@@ -1035,6 +1035,7 @@
     "profile": "Profile",
     "billing": "Billing",
     "settings": "Settings",
+    "dashboard": "Admin Dashboard",
     "classrooms": {
       "index": "Classrooms",
       "new": "New classroom",

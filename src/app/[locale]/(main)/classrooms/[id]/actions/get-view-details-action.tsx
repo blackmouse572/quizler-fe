@@ -4,7 +4,7 @@ import { TAPIResult } from "@/app/[locale]/(main)/quizbank/add/actions/add-quiz-
 import { getToken } from "@/lib/auth"
 import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
-import { Post, User } from "@/types"
+import { User } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 
@@ -31,7 +31,7 @@ async function getViewDetails({
     },
     next: {
       tags: ["posts", `view-${postId}`],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 60 * 60, // revalidate every 60 seconds
     },
   }
   return fetch(url, options)

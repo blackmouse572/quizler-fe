@@ -30,7 +30,7 @@ async function getAllCommentActions({
     },
     next: {
       tags: ["posts", `post-${postId}`, `comment-posts-${postId}`],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 60 * 60, // revalidate every 60 seconds
     },
   }
   return fetch(url, options)

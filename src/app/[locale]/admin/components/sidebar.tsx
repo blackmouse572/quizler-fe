@@ -1,5 +1,6 @@
 "use client"
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { IIconKeys, Icons } from "@/components/ui/icons"
 import {
@@ -8,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import AdminSidebarDropdown from "@/components/user-dropdown/admin-sidebar"
+import { getShortName } from "@/lib/string-helper"
 import { cn } from "@/lib/utils"
 import { User } from "@/types"
 import { MenuItem } from "@/types/dropdown-menu"
@@ -198,7 +200,36 @@ function Sidebar({ user }: Props) {
           )}
         />
       </Button>
-      <AdminSidebarDropdown user={user} menuItems={menuItems} />
+      <AdminSidebarDropdown
+        user={user}
+        menuItems={menuItems}
+        trigger={
+          <div className="flex items-center gap-2">
+            <Avatar>
+              <AvatarImage src={user?.avatar || ""} alt={user?.fullName} />
+              <AvatarFallback className="bg-gradient-to-bl ">
+                <span className="text-white">
+                  {getShortName(user.fullName)}
+                </span>
+              </AvatarFallback>
+            </Avatar>
+            <motion.div
+              className="flex flex-1 flex-col justify-center"
+              initial="closed"
+              custom={{ index: 0 }}
+              animate={isExpanded ? "open" : "closed"}
+              variants={labelVariants}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+                bounce: 0,
+              }}
+            >
+              <span className="font-medium">{user.fullName}</span>
+            </motion.div>
+          </div>
+        }
+      />
     </motion.div>
   )
 }

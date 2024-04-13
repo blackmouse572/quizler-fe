@@ -32,7 +32,7 @@ async function getAllPostActions({
     },
     next: {
       tags: ["posts", `post-classroom-${classroomId}`],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 60 * 60, // revalidate every 60 seconds
     },
   }
   return fetch(url, options)

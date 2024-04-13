@@ -3,7 +3,6 @@ import Link from "next/link"
 import { useCallback } from "react"
 
 import logoutAction from "@/components/logout-btn/logout-action"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +17,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Icons } from "@/components/ui/icons"
-import { getShortName } from "@/lib/string-helper"
 import { User } from "@/types"
 import { MenuItem } from "@/types/dropdown-menu"
 import { useRouter } from "next/navigation"
@@ -27,14 +25,15 @@ import React from "react"
 type Props = {
   user: User
   menuItems: MenuItem[][]
+  trigger?: React.ReactNode
 }
 
-function AdminSidebarDropdown({ user, menuItems }: Props) {
+function AdminSidebarDropdown({ user, menuItems, trigger }: Props) {
   const t = useTranslations("AdminSidebar")
   const router = useRouter()
   function logout() {
     logoutAction().then(() => {
-      router.refresh()
+      router.replace("/")
     })
   }
   const renderMenuItem = useCallback(
@@ -99,15 +98,14 @@ function AdminSidebarDropdown({ user, menuItems }: Props) {
   }
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="absolute bottom-24 px-2.5">
-        <Avatar>
-          <AvatarImage src={user?.avatar || ""} alt={user?.fullName} />
-          <AvatarFallback className="bg-gradient-to-bl ">
-            <span className="text-white">{getShortName(user.fullName)}</span>
-          </AvatarFallback>
-        </Avatar>
+      <DropdownMenuTrigger className="absolute bottom-24">
+        {trigger}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="min-w-[12rem]">
+      <DropdownMenuContent
+        className="min-w-[12rem]"
+        side="bottom"
+        align="start"
+      >
         <div>
           <DropdownMenuLabel className="pb-0">
             {t("dropdown.my_account")}
