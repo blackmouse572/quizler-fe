@@ -119,7 +119,6 @@ function PlayGame({ initData }: PlayGameProps) {
 
   const renderQuestion = useCallback(
     (question: GameQuiz) => {
-      console.log(isSubmitted)
       switch (question.type) {
         case GameType.Dnd:
           return (

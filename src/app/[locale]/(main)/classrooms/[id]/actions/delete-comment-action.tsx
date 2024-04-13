@@ -30,6 +30,7 @@ export async function deleteCommentAction(payload: Payload) {
     })
     .then((data) => {
       revalidateTag(`comment-posts-${payload.postId}`)
+      revalidateTag(`classrooms`)
       return {
         ok: true,
         message: "success",

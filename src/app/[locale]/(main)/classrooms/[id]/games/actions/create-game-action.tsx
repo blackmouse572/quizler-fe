@@ -21,7 +21,6 @@ export async function createGameAction(payload: AddGameFormType) {
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        console.log(json)
         throw new Error(json.message)
       }
       return json

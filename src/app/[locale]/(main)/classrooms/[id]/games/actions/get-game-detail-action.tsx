@@ -26,7 +26,6 @@ async function getGameDetailsAction({
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {
-        console.log(json)
         throw new Error(json.message)
       }
       return json

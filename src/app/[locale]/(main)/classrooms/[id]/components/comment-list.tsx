@@ -89,7 +89,12 @@ function CommentList({ onOpenChange, open, post, ...props }: Props) {
                 secondaryText={timeI18n.relativeTime(new Date(comment.created))}
               />
               {comment.author.id === user?.id && (
-                <DropdownMenu>
+                <DropdownMenu
+                  onOpenChange={(open) => {
+                    if (!open) return
+                    setSelectedItem(comment)
+                  }}
+                >
                   <DropdownMenuTrigger asChild>
                     <Button
                       size="sm"
@@ -97,16 +102,15 @@ function CommentList({ onOpenChange, open, post, ...props }: Props) {
                       variant="ghost"
                       color="accent"
                       className="invisible opacity-0 transition-all duration-200 focus:visible focus:opacity-100 focus-visible:visible focus-visible:opacity-100 group-hover:visible group-hover:opacity-100"
-                      onClick={() => {
-                        setSelectedItem(comment)
-                      }}
                     >
                       <Icons.DotVertical />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem
-                      onClick={() => setIsDeleteDialogOpen(true)}
+                      onClick={() => {
+                        setIsDeleteDialogOpen(true)
+                      }}
                       hidden={comment.author.id !== user?.id}
                       className="focus:bg-danger-500/20 focus:text-danger-500"
                     >
