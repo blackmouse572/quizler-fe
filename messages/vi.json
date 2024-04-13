@@ -554,6 +554,9 @@
     },
     "admin_chart": {
       "title": "Thu nhập",
+      "select_year": {
+        "index": "Năm"
+      },
       "pie_chart": {
         "title": "Biểu đồ hình tròn",
         "datasets": {
@@ -1193,7 +1196,8 @@
         "mismatch_password": "Các mật khẩu không trùng khớp."
       },
       "update_profile_form": {
-        "fullname": "Tên của bạn nên có ít nhất 2 kí tự."
+        "fullname": "Tên của bạn nên có ít nhất 2 kí tự.",
+        "date": "Đó không phải là một ngày hợp lệ!"
       },
       "report_quizbank": {
         "more_details": {
