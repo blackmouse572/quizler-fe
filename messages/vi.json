@@ -630,8 +630,10 @@
     "actions": {
       "copy_id": "Sao chép ID",
       "copy_author_id": "Sao chép ID tác giả",
-      "take_action": "Thực hiện hành động",
-      "delete": "Xoá",
+      "take_action": {
+        "index": "Thực hiện hành động",
+        "delete": "Xoá"
+      },
       "go_to": {
         "index": "Xem chi tiết",
         "author": "Xem tác giả",
@@ -641,7 +643,7 @@
     "dialog": {
       "delete_quizbank": {
         "title": "Xóa ngân hàng câu hỏi",
-        "description": "Xóa ngân hàng câu hỏi <strong>{quizBankID}</strong> ?",
+        "description": "Cảnh cáo người dùng <strong>{user}</strong> và xóa ngân hàng câu hỏi <strong>{quizBankID}</strong> ?",
         "cancel": "Hủy",
         "delete": "Xóa"
       }

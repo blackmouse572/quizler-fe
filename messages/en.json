@@ -466,8 +466,10 @@
     "actions": {
       "copy_id": "Copy ID",
       "copy_author_id": "Copy author ID",
-      "take_action": "Take action",
-      "delete": "Delete",
+      "take_action": {
+        "index": "Take action",
+        "delete": "Delete"
+      },
       "go_to": {
         "index": "Go to",
         "author": "Go to author",
@@ -477,7 +479,7 @@
     "dialog": {
       "delete_quizbank": {
         "title": "Delete QuizBank",
-        "description": "Delete QuizBank <strong>{quizBankID}</strong> ?",
+        "description": "Warn user <strong>{user}</strong> and delete QuizBank <strong>{quizBankID}</strong> ?",
         "cancel": "Cancel",
         "delete": "Delete"
       }
