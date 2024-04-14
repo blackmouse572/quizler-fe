@@ -5,6 +5,7 @@ import { getAPIServerURL } from "@/lib/utils"
 import { Classroom, User } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export type StudentClasroomData = {
   account: User,
@@ -81,7 +82,10 @@ export async function getBanMembers(
   )
 
   return fetch(url, option)
-    .then(async (res) => res.json())
+    .then(async (res) => {
+      revalidatePath(`classrooms/${classroomId}/members`)
+      revalidatePath(`classrooms/${classroomId}/manage`)
+      return res.json()})
     .catch((err) => {
       console.error(`[ERROR] get Banned Users: ${URL} `, err)
       throw new Error(err)
