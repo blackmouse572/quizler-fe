@@ -1,15 +1,14 @@
 import Sidebar from "@/app/[locale]/admin/components/sidebar"
-import logoutAction from "@/components/logout-btn/logout-action"
 import { getUser } from "@/lib/auth"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
-import { redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 
 async function AdminLayout({ children }: React.PropsWithChildren) {
   const user = getUser()
   const m = await getMessages()
-  if (!user.ok || !user.data) notFound()
+  if (!user || user.role.toLowerCase() === "user") notFound()
 
   return (
     <div className="flex h-screen flex-row bg-neutral-900/95 text-white">
