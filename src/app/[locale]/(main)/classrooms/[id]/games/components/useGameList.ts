@@ -18,7 +18,7 @@ export function useGameList({
   initialData,
 }: UseGameListProps) {
   return useInfiniteQuery({
-    queryKey: ["games", `game-classroom-${classroomId}`],
+    queryKey: ["games", `game-classroom-${classroomId}`, filter],
     queryFn: async ({ pageParam }) => {
       const res = await getAllGamesByClassroomAction({
         filter: { ...filter, skip: pageParam as number },

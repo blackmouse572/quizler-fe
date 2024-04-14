@@ -28,7 +28,7 @@ async function GamePage({ params, searchParams }: Props) {
   const data = await getAllGamesByClassroomAction({
     classroomId: params.id,
     filter: {
-      search: search?.toString(),
+      search: search ? search.toString() : undefined,
     },
   })
   const msg = await getMessages()
