@@ -29,7 +29,7 @@ const SUBJECTS_NAVBAR_ITEMS: MainNavItem[] = [
 
   {
     title: "subject_item.Science",
-    href: "category?tag=Science",
+    href: "/category?tag=Science",
     icon: "Science",
   },
   {
