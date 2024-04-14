@@ -67,6 +67,7 @@ export default function ViewFlashcard({
   )
   const [isPlaying, setIsPlaying] = useState(true)
 
+  const [isShuffleLoading, setIsShuffleLoading] = useState(false)
   const [shuffleField, shuffleDir] = useMemo(() => {
     if (!isShuffle) return ["created", "ASC"]
     const fields = ["answer", "question"]
@@ -78,8 +79,8 @@ export default function ViewFlashcard({
   const {
     data,
     isLoading,
-    isFetching,
     fetchNextPage,
+    isFetchingNextPage,
     isError,
     refetch,
     hasNextPage,
@@ -95,6 +96,8 @@ export default function ViewFlashcard({
       if (!res.ok) {
         throw new Error(res.message)
       }
+
+      setIsShuffleLoading(false)
       setFlipMap((pre) => {
         const newMap = { ...pre }
         res.data?.data.forEach((_, index) => {
@@ -123,14 +126,16 @@ export default function ViewFlashcard({
     }
 
     api.on("select", () => {
-      setCurrentIndex(api.selectedScrollSnap() + 1)
-      data.pages.forEach((page) => {
-        page?.data.find((item, index) => {
-          if (index === api.selectedScrollSnap()) {
-            setCurrentItem(item)
-          }
-        })
-      })
+      const iindex = api.selectedScrollSnap()
+      setCurrentIndex(iindex + 1)
+
+      const item = data.pages
+        .map((page) => page?.data)
+        .flat()
+        .find((_, index) => index === iindex)
+      setCurrentItem(item)
+
+      console.log("Selected item", item)
     })
   }, [api, currentItem?.id, data.pages])
 
@@ -159,11 +164,13 @@ export default function ViewFlashcard({
     setCurrentIndex(1)
     setIsShuffle(!isShuffle)
     setTotalLoaded(10)
+    setIsShuffleLoading(true)
     refetch()
     api?.scrollTo(0)
   }, [isShuffle, refetch, api])
 
   useHotkeys("up,down,h,j", () => {
+    console.log(currentItem)
     setFlipMap((pre) => {
       const newMap = { ...pre }
       newMap[currentItem?.id || -1] = !newMap[currentItem?.id || -1]
@@ -289,8 +296,8 @@ export default function ViewFlashcard({
         plugins={[autoPlay.current]}
         autoFocus
       >
-        {isFetching ? (
-          <CarouselContent>
+        <CarouselContent>
+          {isLoading || isShuffleLoading ? (
             <CarouselItem key={"loading-carousel"} className="p-8">
               <Card>
                 <CardContent className="flex aspect-video items-center justify-center">
@@ -298,15 +305,24 @@ export default function ViewFlashcard({
                 </CardContent>
               </Card>
             </CarouselItem>
-          </CarouselContent>
-        ) : (
-          <CarouselContent>
-            {data.pages.map(
-              (page) => page?.data.map((item, index) => renderItem(item))
-            )}
-            {loadingItem}
-          </CarouselContent>
-        )}
+          ) : (
+            <>
+              {data.pages.map(
+                (page) => page?.data.map((item, index) => renderItem(item))
+              )}
+              {loadingItem}
+            </>
+          )}
+          {isFetchingNextPage && (
+            <CarouselItem key={"loading-carousel"} className="p-8">
+              <Card>
+                <CardContent className="flex aspect-video items-center justify-center">
+                  <Icons.Spinner className="h-10 w-10 animate-spin" />
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          )}
+        </CarouselContent>
 
         <CarouselPrevious />
         <CarouselNext />

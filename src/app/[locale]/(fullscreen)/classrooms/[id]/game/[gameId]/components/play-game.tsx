@@ -92,8 +92,10 @@ function PlayGame({ initData }: PlayGameProps) {
 
   const handleSubmitted = useCallback(() => {
     setIsSubmitted(true)
-    submitAnswer(answer)
-  }, [answer, submitAnswer])
+    submitAnswer(answer)?.catch((e) => {
+      setError(errorI18n("game.not_found"))
+    })
+  }, [answer, errorI18n, submitAnswer])
 
   useEffect(() => {
     if (questions) {
