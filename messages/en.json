@@ -1500,6 +1500,14 @@
       "invite": {
         "label": "Allow student to invite"
       },
+      "actions": {
+        "add": {
+          "message": {
+            "title": "Success",
+            "description": "Create classroom successfully"
+          }
+        }
+      },
       "plan-form": {
         "starter": {
           "title": "Starter",

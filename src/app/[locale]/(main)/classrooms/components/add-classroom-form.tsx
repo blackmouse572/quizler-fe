@@ -105,9 +105,9 @@ export default function AddClassroomForm({
         router.push(`/classrooms/${res.data.id}`)
 
         toast({
-          title: i18n("form.actions.edit.message.title"),
+          title: i18n("form.actions.add.message.title"),
           color: "success",
-          description: i18n("form.actions.edit.message.description"),
+          description: i18n("form.actions.add.message.description"),
         })
       }
     },

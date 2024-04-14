@@ -34,9 +34,13 @@ async function GamePage({ params }: Props) {
   }
   return (
     <BackgroundSquare variant={"topDown"} className="bg-grid-xl-slate-500/20">
-      <GameNavbar game={data!} />
+      <NextIntlClientProvider messages={_.pick(msg, "ClassroomGame", "Errors")}>
+        <GameNavbar game={data!} />
+      </NextIntlClientProvider>
       <div className="container mx-auto">
-        <NextIntlClientProvider messages={_.pick(msg, "ClassroomGame")}>
+        <NextIntlClientProvider
+          messages={_.pick(msg, "ClassroomGame", "Errors")}
+        >
           <PlayGame initData={data!} />
         </NextIntlClientProvider>
       </div>

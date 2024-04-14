@@ -43,7 +43,7 @@ function EditQuizbank({ params }: QuizBankDetailPageProps) {
 
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "EditQuiz", "AddQuiz", "Errors")}
+      messages={_.pick(message, "Validations", "EditQuiz", "Navbar","AddQuiz", "Errors")}
     >
       <AddQuizbankForm
         initialValues={initialValues}
