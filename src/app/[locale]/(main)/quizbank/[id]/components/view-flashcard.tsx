@@ -105,7 +105,11 @@ export default function ViewFlashcard({
         })
         return newMap
       })
-      setTotalLoaded((pre) => pre + 10)
+      if (pageParam === 0) {
+        setTotalLoaded(10)
+      } else {
+        setTotalLoaded((pre) => pre + 10)
+      }
       return res.data
     },
     initialPageParam: 0,
