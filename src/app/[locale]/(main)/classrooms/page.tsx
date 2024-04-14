@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { NamedToolTip } from "@/components/ui/tooltip"
 import _ from "lodash"
-import { NextIntlClientProvider } from "next-intl"
-import { getMessages, getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 
 type Props = {
@@ -22,7 +21,6 @@ export async function generateMetadata() {
   }
 }
 async function ClassroomPage({ searchParams }: Props) {
-  const msg = await getMessages()
   const t = await getTranslations("Classroom")
   const initCode = searchParams["code"] as string | undefined
   const search = searchParams["search"] as string | undefined
@@ -32,16 +30,7 @@ async function ClassroomPage({ searchParams }: Props) {
   }
 
   return (
-    <NextIntlClientProvider
-      messages={_.pick(
-        msg,
-        "Validations",
-        "Join_classroom",
-        "Errors",
-        "Delete_classroom",
-        "Classroom"
-      )}
-    >
+    <>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">{t("metadata.title")}</h1>
         <div className="flex items-center gap-2">
@@ -61,7 +50,7 @@ async function ClassroomPage({ searchParams }: Props) {
         </div>
       </div>
       <ClassroomList initialData={data!} filter={{ search }} />
-    </NextIntlClientProvider>
+    </>
   )
 }
 

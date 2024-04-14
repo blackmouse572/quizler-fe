@@ -31,6 +31,9 @@ async function MainLayout({ children }: Props) {
   const isAuth = isAuthenticated()
   const user = getUser()
   const m = await getMessages()
+  // * For routes has not been defined
+  const defaultRoute = "/login"
+
   const menuItems: MenuItem[][] = [
     [
       {
@@ -103,7 +106,7 @@ async function MainLayout({ children }: Props) {
     },
     {
       title: tNav("contact"),
-      href: "/contact",
+      href: defaultRoute,
       icon: "Contact",
     },
     {
@@ -147,6 +150,7 @@ async function MainLayout({ children }: Props) {
       <GuestNavbar
         className="fixed left-1/2 top-0 w-screen -translate-x-1/2"
         items={mainNavbarItems}
+        defaultRoute={defaultRoute}
       />
     )
 

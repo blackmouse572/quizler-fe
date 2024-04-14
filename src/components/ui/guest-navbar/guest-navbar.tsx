@@ -35,9 +35,14 @@ export type MainNavItem = {
 type Props = {
   items?: MainNavItem[]
   className?: string
+  defaultRoute: string
 }
 
-export default function GuestNavbar({ className, items = [] }: Props) {
+export default function GuestNavbar({
+  className,
+  items = [],
+  defaultRoute,
+}: Props) {
   const segment = useSelectedLayoutSegment()
   // const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
   const tNav = useTranslations("Navbar")
@@ -178,19 +183,19 @@ export default function GuestNavbar({ className, items = [] }: Props) {
                 </NavigationMenuLink>
               </li>
               <ListItem
-                href="/docs"
+                href={defaultRoute}
                 title={tNav("getting_started_sec.introduction.title")}
               >
                 {tNav("getting_started_sec.introduction.description")}
               </ListItem>
               <ListItem
-                href="/docs/installation"
+                href={defaultRoute}
                 title={tNav("getting_started_sec.classroom.title")}
               >
                 {tNav("getting_started_sec.classroom.description")}
               </ListItem>
               <ListItem
-                href="/docs/primitives/typography"
+                href={defaultRoute}
                 title={tNav("getting_started_sec.ai.title")}
               >
                 <span>{tNav("getting_started_sec.ai.description")}</span>
@@ -212,7 +217,7 @@ export default function GuestNavbar({ className, items = [] }: Props) {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
+          <Link href={defaultRoute} legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {tNav("doc")}
             </NavigationMenuLink>
