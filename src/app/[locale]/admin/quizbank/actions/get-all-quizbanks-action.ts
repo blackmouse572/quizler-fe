@@ -14,9 +14,9 @@ type Props = {
 export default async function getAllQuizBanksAction({ filter }: Props) {
   const token = getToken().token
   const query = toURLSeachParams({
-    ...filter,
     sortBy: "created",
     sortDirection: "DESC",
+    ...filter,
   })
   const option: RequestInit = {
     method: "GET",

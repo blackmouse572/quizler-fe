@@ -37,8 +37,8 @@ const LOAD_MORE_THRESHOLD = 3 // Load more when 3 items are left
 import RateQuizbank from "@/app/[locale]/(main)/quizbank/[id]/components/rate-quizbank"
 import { Badge } from "@/components/ui/badge"
 import _ from "lodash"
-import { useHotkeys } from "react-hotkeys-hook"
 import Link from "next/link"
+import { useHotkeys } from "react-hotkeys-hook"
 
 export default function ViewFlashcard({
   quizBankData,
@@ -57,7 +57,6 @@ export default function ViewFlashcard({
   const [count] = useState(initialData?.metadata?.totals ?? 0)
   const [currentIndex, setCurrentIndex] = useState(count > 0 ? 1 : 0)
   const [totalLoaded, setTotalLoaded] = useState(initialData.data.length)
-  // const [isFlipped, setIsFlipped] = useState(true)
   const [currentItem, setCurrentItem] = useState<Quiz>()
   const [flipMap, setFlipMap] = useState<{ [key: number]: boolean }>(
     initialData.data.reduce(
@@ -70,20 +69,31 @@ export default function ViewFlashcard({
   )
   const [isPlaying, setIsPlaying] = useState(true)
 
+  const [shuffleField, shuffleDir] = useMemo(() => {
+    if (!isShuffle) return ["created", "ASC"]
+    const fields = ["answer", "question"]
+    const field = fields[Math.floor(Math.random() * fields.length)]
+    const dir = Math.random() > 0.5 ? "Asc" : "Desc"
+    console.log("shuffleField", field, "shuffleDir", dir)
+    return [field, dir]
+  }, [isShuffle])
+
   const {
     data,
     isLoading,
+    isFetching,
     fetchNextPage,
     isError,
     refetch,
-    isRefetching,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["fetchQuiz", "flashcard", id],
+    queryKey: ["fetchQuiz", "flashcard", id, shuffleField, shuffleDir],
     queryFn: async ({ pageParam }) => {
       const res = await fetchQuiz(id, {
         take: 10,
         skip: pageParam,
+        sortBy: shuffleField,
+        sortDirection: shuffleDir as "Asc" | "Desc",
       })
       if (!res.ok) {
         throw new Error(res.message)
@@ -153,7 +163,8 @@ export default function ViewFlashcard({
     setIsShuffle(!isShuffle)
     setTotalLoaded(10)
     refetch()
-  }, [refetch, isShuffle])
+    api?.scrollTo(0)
+  }, [isShuffle, refetch, api])
 
   useHotkeys("right,l", () => {
     api?.scrollNext()
@@ -305,7 +316,7 @@ export default function ViewFlashcard({
         tabIndex={-1}
         ref={ref}
       >
-        {isRefetching ? (
+        {isFetching ? (
           <CarouselContent>
             <CarouselItem key={"loading-carousel"} className="p-8">
               <Card>

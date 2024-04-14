@@ -1,9 +1,9 @@
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
-import { QuizBankTable } from "./components/table"
-import getAllQuizBanksAction from "./actions/get-all-quizbanks-action"
 import { notFound } from "next/navigation"
+import getAllQuizBanksAction from "./actions/get-all-quizbanks-action"
+import { QuizBankTable } from "./components/table"
 
 type AdminQuizBankProps = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -33,7 +33,7 @@ async function AdminQuizBankPage({ searchParams }: AdminQuizBankProps) {
     : undefined
   const options = { take, skip, search }
   const data = await getAllQuizBanksAction({
-    filter: options
+    filter: options,
   })
   const messages = await getMessages()
 
@@ -42,7 +42,13 @@ async function AdminQuizBankPage({ searchParams }: AdminQuizBankProps) {
   return (
     <div className="">
       <NextIntlClientProvider
-        messages={_.pick(messages, "Table", "QuizBankAdmin", "Validations", "Errors")}
+        messages={_.pick(
+          messages,
+          "Table",
+          "QuizBankAdmin",
+          "Validations",
+          "Errors"
+        )}
       >
         <QuizBankTable data={data.data} />
       </NextIntlClientProvider>
