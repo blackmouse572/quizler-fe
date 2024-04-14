@@ -64,32 +64,35 @@ const addQuizbankSchema = z.object({
     .default(""),
   visibility: z.enum(["Public", "Private"]).default("Public"),
   tags: z.array(z.string()).default([]),
-  quizes: z.array(
-    z
-      .object({
-        question: z
-          .string({
-            required_error: "errors.invalid_type_received_undefined",
-          })
-          .min(1, {
-            message: "errors.too_small.string.inclusive",
-          })
-          .max(1000, {
-            message: "errors.too_big.string.inclusive",
-          }),
-        answer: z
-          .string({
-            required_error: "errors.invalid_type_received_undefined",
-          })
-          .min(1, {
-            message: "errors.too_small.string.inclusive",
-          })
-          .max(1000, {
-            message: "errors.too_big.string.inclusive",
-          }),
-      })
-      .default({ question: "", answer: "" })
-  ),
+  quizes: z
+    .array(
+      z
+        .object({
+          question: z
+            .string({
+              required_error: "errors.invalid_type_received_undefined",
+            })
+            .min(1, {
+              message: "errors.too_small.string.inclusive",
+            })
+            .max(1000, {
+              message: "errors.too_big.string.inclusive",
+            }),
+          answer: z
+            .string({
+              required_error: "errors.invalid_type_received_undefined",
+            })
+            .min(1, {
+              message: "errors.too_small.string.inclusive",
+            })
+            .max(1000, {
+              message: "errors.too_big.string.inclusive",
+            }),
+        })
+        .default({ question: "", answer: "" })
+    )
+    .min(1)
+    .max(999),
   explaination: z
     .string({
       required_error: "errors.invalid_type_received_undefined",
@@ -181,7 +184,7 @@ function AddQuizbankForm({
   )
 
   const renderItems = useMemo(() => {
-    return fields.map((item, index) => (
+    return fields.reverse().map((item, index) => (
       <Card key={item.question + item.id} className="relative">
         <Icons.X
           className={cn(
@@ -248,7 +251,7 @@ function AddQuizbankForm({
       <Tooltip delayDuration={200}>
         <TooltipTrigger asChild>
           <Card
-            className="flex h-32 cursor-pointer items-center justify-center border-dashed bg-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-300/50"
+            className="flex h-32 cursor-pointer items-center justify-center border-dashed bg-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-300"
             onClick={addEmptyQuiz}
           >
             <Icons.Plus className="h-10 w-10" />
@@ -404,8 +407,10 @@ function AddQuizbankForm({
           action={action}
         />
         <div className="space-y-4">
-          {renderItems}
           {renderAddButton}
+          <div className="max-h-screen w-full scroll-ml-4 space-y-4 overflow-y-auto">
+            {renderItems}
+          </div>
         </div>
       </div>
     </Form>

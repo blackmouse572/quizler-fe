@@ -1426,7 +1426,7 @@
   },
   "Errors": {
     "index": "Lỗi",
-    "unknown": "Điều gì đó không đúng",
+    "unknown": "Đã xảy ra lỗi không xác định, vui lòng thử lại sau",
     "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
     "invalid-pin": "Mã PIN không hợp lệ, vui lòng thử lại",
     "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
@@ -1434,7 +1434,6 @@
     "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
     "verification-failed": "Xác thực thất bại, vui lòng thử lại",
     "Unauthorized": "Tài khoản chưa được xác thực, vui lòng đăng nhập lại",
-    "refresh": "Tải lại",
     "classroom": {
       "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
       "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
@@ -1445,6 +1444,7 @@
       "user_in_classroom": "Người dùng đã ở trong lớp học",
       "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
     },
+    "refresh": "Thử lại",
     "game": {
       "already-joined": "Bạn đã tham gia trò chơi này rồi",
       "not_found": "Không tìm thấy trò chơi",

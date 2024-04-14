@@ -1,3 +1,4 @@
+import { getToken, getUser } from "@/lib/auth"
 import {
   getQuizBankDetailPage,
   getQuizByQuizBankId,
@@ -5,12 +6,11 @@ import {
 import { EFormAction } from "@/types"
 import _ from "lodash"
 import { NextIntlClientProvider, useMessages } from "next-intl"
+import { notFound } from "next/navigation"
 import { use } from "react"
 import AddQuizbankForm, {
   AddQuizbank,
 } from "../../add/components/add-quizbank-form"
-import { getToken, getUser } from "@/lib/auth"
-import { notFound } from "next/navigation"
 
 type QuizBankDetailPageProps = {
   params: { id: string }
@@ -22,13 +22,13 @@ function EditQuizbank({ params }: QuizBankDetailPageProps) {
 
   const { props } = use(getQuizBankDetailPage(id))
   const data = props.data
-  const { data: quizesData } = use(getQuizByQuizBankId(id))
+  const { data: quizesData } = use(getQuizByQuizBankId(id, { take: 999 }))
 
   const initialValues: AddQuizbank = {
     bankName: data.bankName,
+    tags: data.tags,
+    quizes: quizesData?.data || [],
     description: data.description,
-    quizes: quizesData?.data ?? [],
-    tags: [],
     visibility: data.visibility,
   }
 
@@ -43,7 +43,14 @@ function EditQuizbank({ params }: QuizBankDetailPageProps) {
 
   return (
     <NextIntlClientProvider
-      messages={_.pick(message, "Validations", "EditQuiz", "Navbar","AddQuiz", "Errors")}
+      messages={_.pick(
+        message,
+        "Validations",
+        "EditQuiz",
+        "Navbar",
+        "AddQuiz",
+        "Errors"
+      )}
     >
       <AddQuizbankForm
         initialValues={initialValues}
