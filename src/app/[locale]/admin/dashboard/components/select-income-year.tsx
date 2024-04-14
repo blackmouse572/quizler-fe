@@ -14,7 +14,7 @@ export default async function SelectIncomeYear() {
 
   return (
     <Select>
-      <SelectTrigger className="w-full">
+      <SelectTrigger className="justify-end gap-4">
         <SelectValue placeholder="2024" />
       </SelectTrigger>
       <SelectContent>
