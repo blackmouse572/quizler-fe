@@ -1,5 +1,4 @@
 import { fetchQuiz } from "@/app/[locale]/(main)/quizbank/[id]/actions/fetch-quiz"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -51,7 +50,6 @@ export default function ViewFlashcard({
   const autoPlay = useRef(
     Autoplay({ delay: 4000, stopOnInteraction: true, playOnInit: false })
   )
-  const ref = useRef<HTMLDivElement>(null)
 
   const [isShuffle, setIsShuffle] = useState(false)
   const [count] = useState(initialData?.metadata?.totals ?? 0)
@@ -74,7 +72,6 @@ export default function ViewFlashcard({
     const fields = ["answer", "question"]
     const field = fields[Math.floor(Math.random() * fields.length)]
     const dir = Math.random() > 0.5 ? "Asc" : "Desc"
-    console.log("shuffleField", field, "shuffleDir", dir)
     return [field, dir]
   }, [isShuffle])
 
@@ -166,17 +163,12 @@ export default function ViewFlashcard({
     api?.scrollTo(0)
   }, [isShuffle, refetch, api])
 
-  useHotkeys("right,l", () => {
-    api?.scrollNext()
-  })
-
-  useHotkeys("left,k", () => {
-    api?.scrollPrev()
-  })
-
   useHotkeys("up,down,h,j", () => {
-    // do flip
-    // setIsFlipped(!isFlipped)
+    setFlipMap((pre) => {
+      const newMap = { ...pre }
+      newMap[currentItem?.id || -1] = !newMap[currentItem?.id || -1]
+      return newMap
+    })
   })
 
   useHotkeys("r", () => {
@@ -255,23 +247,6 @@ export default function ViewFlashcard({
       .on("reInit", () => setIsPlaying(false))
   }, [api])
 
-  useEffect(() => {
-    // disable scroll by keyboard when carousel is focused
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!ref.current?.contains(document.activeElement)) {
-        return
-      }
-      if (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === " ") {
-        e.preventDefault()
-      }
-    }
-    window.addEventListener("keydown", handleKeyDown)
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [])
-
   return (
     <>
       <div className="mt-7 flex w-full justify-between gap-5 whitespace-nowrap max-md:flex-wrap">
@@ -313,8 +288,6 @@ export default function ViewFlashcard({
         }}
         plugins={[autoPlay.current]}
         autoFocus
-        tabIndex={-1}
-        ref={ref}
       >
         {isFetching ? (
           <CarouselContent>
@@ -383,17 +356,6 @@ export default function ViewFlashcard({
         <div className="flex-1 text-center text-xs font-semibold leading-4 text-black">
           {currentIndex}/{count}
         </div>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="light" isIconOnly>
-              <Icons.FullScreen />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{i18n("ViewFlashcard.full_screen_button")}</p>
-          </TooltipContent>
-        </Tooltip>
       </div>
     </>
   )

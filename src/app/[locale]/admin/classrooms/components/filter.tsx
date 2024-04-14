@@ -1,6 +1,6 @@
+import SearchBox from "@/components/searchbox"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
   Popover,
@@ -149,14 +149,7 @@ function FilterDropdown(props: FilterDropdownProps) {
           </div>
           <div className="px-3">
             <Label>{t("search")}</Label>
-            <div className="relative max-w-2xl items-center ">
-              <Icons.Search className="absolute  left-2 top-1/2 h-4  w-4 -translate-y-1/2 " />
-              <Input
-                type="text"
-                className="focus:border-primary-500 max-w-sm border border-border bg-transparent pl-9 focus:ring-0"
-                {...register("search")}
-              />
-            </div>
+            <SearchBox {...register("search")} className="w-full" />
           </div>
           <Separator />
           <div className="flex justify-between px-3">
