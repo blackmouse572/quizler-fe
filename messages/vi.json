@@ -1432,7 +1432,7 @@
     },
     "validations": {
       "email": "email",
-      "url": "url",
+      "url": "Địa chỉ URL",
       "uuid": "uuid",
       "cuid": "cuid",
       "regex": "regex",
