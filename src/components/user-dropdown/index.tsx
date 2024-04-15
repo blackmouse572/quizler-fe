@@ -119,7 +119,7 @@ function UserDropdown({ user, menuItems }: Props) {
         <DropdownMenuSeparator />
         {renderMenuItems()}
         <DropdownMenuSeparator />
-        {user.role.toLocaleLowerCase() === "admin" && (
+        {user.role.toLowerCase() === "admin" && (
           <DropdownMenuItem className="">
             <Link href="/admin/dashboard">
               <Icons.DashBoard className="mr-2 inline-block h-4 w-4" />

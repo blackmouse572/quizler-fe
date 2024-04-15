@@ -40,11 +40,11 @@ export default function SideMenu({
   return (
     <div
       className={cn(
-        "fixed left-20 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md border border-input bg-background p-3 shadow-lg",
+        "fixed bottom-0 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-md border border-input bg-background p-3 shadow-lg lg:bottom-auto lg:left-10 lg:top-1/2 2xl:left-20",
         className
       )}
     >
-      <div className="relative flex flex-col gap-4">
+      <div className="relative flex gap-4 lg:flex-col">
         {itemsWithActived.map(({ href, title, actived, icon }) => {
           const Icon = icon ? Icons[icon] : undefined
           return (
