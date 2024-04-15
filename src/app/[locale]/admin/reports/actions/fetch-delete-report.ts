@@ -4,18 +4,18 @@ import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { revalidateTag } from "next/cache"
 
-
-export default async function fetchVerifyReport(reportId: string) {
+export default async function fetchDeleteReport(reportIds: number[]) {
   const token = getToken().token
 
   const option: RequestInit = {
-    method: "POST",
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify({ reportIds: reportIds }),
   }
-  const url = getAPIServerURL(`/report/verify/${reportId}`)
+  const url = getAPIServerURL(`/report`)
 
   const res = await fetch(url, option)
     .then(async (res) => {
@@ -23,10 +23,10 @@ export default async function fetchVerifyReport(reportId: string) {
         const data = await res.json()
         throw new Error(data.message)
       }
-      return true;
+      return true
     })
     .then((res) => {
-      revalidateTag("AdminReport")
+    revalidateTag("AdminReport")
       return {
         ok: true,
         message: "success",

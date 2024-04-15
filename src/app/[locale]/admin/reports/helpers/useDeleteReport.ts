@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import fetchVerifyReport from "../actions/fetch-verify-report"
+import fetchDeleteReport from "../actions/fetch-delete-report"
 
 type FnProps = {
   onSuccess?: () => void
@@ -7,14 +7,13 @@ type FnProps = {
 }
 
 type Props = {
-  reportId: string
+  reportIds: number[]
 }
 
-export function useVerifyReport({ onSuccess, onError }: FnProps) {
+export function useDeleteReport({ onSuccess, onError }: FnProps) {
   return useMutation({
-    mutationFn: async ({ reportId }: Props) => {
-      debugger
-      const res = await fetchVerifyReport(reportId)
+    mutationFn: async ({ reportIds }: Props) => {
+      const res = await fetchDeleteReport(reportIds)
       if (!res.ok) {
         throw new Error(res.message)
       } else {
@@ -23,7 +22,7 @@ export function useVerifyReport({ onSuccess, onError }: FnProps) {
     },
     onSettled: (data, error) => {
       if (error) {
-        console.error("[POST] fetchVerifyReport ERROR:",error)
+        console.error("[POST] fetchDeleteReport ERROR:",error)
       } else {
         onSuccess?.()
       }
