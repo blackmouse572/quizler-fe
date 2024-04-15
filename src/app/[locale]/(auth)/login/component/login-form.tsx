@@ -183,31 +183,6 @@ function LoginForm({}: Props) {
               }}
             />
 
-            <FormField
-              control={form.control}
-              name="rememberMe"
-              render={({ field }) => {
-                const { value, ...rest } = field
-                return (
-                  <div className="flex items-center justify-start gap-2">
-                    <FormControl className="">
-                      <Checkbox
-                        disabled={isLoading}
-                        size={"sm"}
-                        checked={field.value}
-                        id="remember"
-                        {...rest}
-                      />
-                    </FormControl>
-                    <FormLabel className="text-sm" htmlFor="remember">
-                      {t("form.remember")}
-                    </FormLabel>
-                    <FormMessage />
-                  </div>
-                )
-              }}
-            />
-
             <Button
               disabled={isLoading}
               className="w-full"
