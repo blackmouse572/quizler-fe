@@ -1,8 +1,9 @@
 "use server"
 
-import { getAPIServerURL } from "@/lib/utils"
-import { AccountPlan } from "../type"
 import { getToken } from "@/lib/auth"
+import { getAPIServerURL } from "@/lib/utils"
+import { Plan } from "@/types"
+import { revalidatePath } from "next/cache"
 
 export const saveTransaction = (sessionId: string) => {
   const URL = getAPIServerURL(`/checkout/success?sessionId=${sessionId}`)
@@ -25,6 +26,7 @@ export const saveTransaction = (sessionId: string) => {
       return res
     })
     .then((res) => {
+      revalidatePath("/profile/account")
       return { ok: true, message: "", data: res }
     })
     .catch((err) => {
@@ -36,7 +38,7 @@ export const saveTransaction = (sessionId: string) => {
     })
 }
 
-export const fetchStripeSessionId = ({ id }: AccountPlan) => {
+export const fetchStripeSessionId = ({ id }: Plan) => {
   const URL = getAPIServerURL(`/checkout?planId=${id}`)
   const { token } = getToken()
 
@@ -45,7 +47,7 @@ export const fetchStripeSessionId = ({ id }: AccountPlan) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
-    }
+    },
   }
 
   return fetch(URL, options)
@@ -57,6 +59,7 @@ export const fetchStripeSessionId = ({ id }: AccountPlan) => {
       return data
     })
     .then((res) => {
+      revalidatePath("/profile/account")
       return { ok: true, message: "", data: res }
     })
     .catch((err) => {

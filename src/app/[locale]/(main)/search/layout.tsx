@@ -15,13 +15,16 @@ export default function SearchLayout({
   const messages = useMessages()
 
   return (
-    <NextIntlClientProvider locale={locale} messages={pick(messages, "SearchPage")}>
-      <BackgroundSquare
-        variant={"topDown"}
-        className="container mx-auto items-start pt-20"
+    <BackgroundSquare
+      variant={"topDown"}
+      className="container mx-auto items-start pt-20"
+    >
+      <NextIntlClientProvider
+        locale={locale}
+        messages={pick(messages, "SearchPage", "ClassroomDetails")}
       >
         {children}
-      </BackgroundSquare>
-    </NextIntlClientProvider>
+      </NextIntlClientProvider>
+    </BackgroundSquare>
   )
 }

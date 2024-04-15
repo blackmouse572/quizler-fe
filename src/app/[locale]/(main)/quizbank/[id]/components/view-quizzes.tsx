@@ -1,5 +1,6 @@
 import { fetchQuiz } from "@/app/[locale]/(main)/quizbank/[id]/actions/fetch-quiz"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 import { Icons } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -13,12 +14,11 @@ import { Quiz } from "@/types/QuizBank"
 import PagedResponse from "@/types/paged-response"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { useCallback, useMemo, useState } from "react"
 import { fetchAIquestion } from "../actions/fetch-AI-question"
 import ViewAIExplain from "./view-AI-explain"
-import { useRouter } from "next/navigation"
 import OverCountAILoggedInDialog from "./view-AI-explain-dialog/logged-in/over-count-ai-logged-in-dialog"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 
 type Props = {
   initialData: PagedResponse<Quiz>
@@ -127,48 +127,50 @@ export default function ViewQuizzes({ initialData, id }: Props) {
 
       return (
         <div key={quiz.id}>
-          <div className="rounded-xl border border-solid border-border bg-white px-6 py-4 shadow-sm max-md:px-5">
-            <div className="max-md: flex gap-5 max-md:flex-col max-md:gap-0">
-              <div className="flex w-6/12 flex-col max-md:ml-0 max-md:w-full">
-                <div className="border-r-2 border-gray-300 text-base leading-6 text-black max-md:mt-10">
+          <div className="relative rounded-xl border border-solid border-border bg-white px-6 py-4 shadow-sm max-md:px-5">
+            <div className="flex flex-col items-center justify-between gap-5 max-md:flex-col md:flex-row">
+              <div className="flex-1 flex-col max-md:ml-0 max-md:w-full">
+                <div className="text-base leading-6 text-black max-md:mt-10">
                   {questionWithDiv}
                 </div>
               </div>
-              <div className="ml-5 flex w-6/12 flex-col max-md:ml-0 max-md:w-full">
+              <Separator orientation="vertical" className="min-h-32" />
+              <div className="ml-5 flex-1 max-md:ml-0 max-md:w-full">
                 <div className="text-base leading-6 text-black max-md:mt-10">
                   {quiz.answer}
                 </div>
-              </div>
-              <div className="">
-                <TooltipProvider>
-                  <Dialog>
-                    <Tooltip>
-                      <DialogTrigger asChild>
-                        <TooltipTrigger asChild>
-                          <Button
-                            onClick={async () =>
-                              await handleButtonAIClick(
-                                quiz.id.toString(),
-                                quiz.question,
-                                quiz.answer,
-                                ""
-                              )
-                            }
-                            variant="light"
-                            isIconOnly
-                            color="accent"
-                          >
-                            <Icons.AI />
-                          </Button>
-                        </TooltipTrigger>
-                      </DialogTrigger>
-                      <TooltipContent>
-                        <p>{i18n("ViewQuizzes.view_AI_answer")}</p>
-                      </TooltipContent>
-                      {openOverCountLoggedIn && <OverCountAILoggedInDialog />}
-                    </Tooltip>
-                  </Dialog>
-                </TooltipProvider>
+                <div className="">
+                  <TooltipProvider>
+                    <Dialog>
+                      <Tooltip>
+                        <DialogTrigger asChild>
+                          <TooltipTrigger asChild>
+                            <Button
+                              onClick={async () =>
+                                await handleButtonAIClick(
+                                  quiz.id.toString(),
+                                  quiz.question,
+                                  quiz.answer,
+                                  ""
+                                )
+                              }
+                              variant="light"
+                              isIconOnly
+                              color="accent"
+                              className="absolute right-2 top-2"
+                            >
+                              <Icons.AI />
+                            </Button>
+                          </TooltipTrigger>
+                        </DialogTrigger>
+                        <TooltipContent>
+                          <p>{i18n("ViewQuizzes.view_AI_answer")}</p>
+                        </TooltipContent>
+                        {openOverCountLoggedIn && <OverCountAILoggedInDialog />}
+                      </Tooltip>
+                    </Dialog>
+                  </TooltipProvider>
+                </div>
               </div>
             </div>
 
