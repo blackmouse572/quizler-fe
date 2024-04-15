@@ -2,8 +2,10 @@
 
 import { AddQuizbank } from "@/app/[locale]/(main)/quizbank/add/components/add-quizbank-form"
 import { getToken } from "@/lib/auth"
+import { toURLSeachParams } from "@/lib/query"
 import { getAPIServerURL } from "@/lib/utils"
 import QuizBank, { TAPIQuizResponse } from "@/types/QuizBank"
+import PagedRequest from "@/types/paged-request"
 import { revalidatePath, revalidateTag } from "next/cache"
 
 export async function getQuizBankDetailPage(id: string) {
@@ -17,8 +19,13 @@ export async function getQuizBankDetailPage(id: string) {
   }
 }
 
-export async function getQuizByQuizBankId(id: string) {
-  const url = getAPIServerURL(`/quiz/${id}`)
+export async function getQuizByQuizBankId(
+  id: string,
+  req: Partial<PagedRequest>
+) {
+  const filter = toURLSeachParams(req)
+  const url = getAPIServerURL(`/quiz/${id}?${filter}`)
+
   return fetch(url)
     .then(async (res) => {
       const json = await res.json()

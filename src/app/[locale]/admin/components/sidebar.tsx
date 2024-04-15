@@ -219,7 +219,7 @@ function Sidebar({ user }: Props) {
             <motion.div
               className="flex flex-1 flex-col justify-center"
               initial="closed"
-              custom={{ index: 0 }}
+              custom={{ index: 3 }}
               animate={isExpanded ? "open" : "closed"}
               variants={labelVariants}
               transition={{

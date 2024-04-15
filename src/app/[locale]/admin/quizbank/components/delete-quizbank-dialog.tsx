@@ -15,13 +15,15 @@ import { useTranslations } from "next-intl"
 import { useCallback, useState } from "react"
 import { useDeleteQuizBank } from "../helpers/useDeleteQuizBank"
 import { Icons } from "@/components/ui/icons"
+import { User } from "@/types"
 
 type Props = {
-  id: string
+  user: User,
+  quizBankId: string
   trigger: React.ReactNode
 }
 
-export default function DeleteQuizBankDialog({ id, trigger }: Props) {
+export default function DeleteQuizBankDialog({ user, quizBankId, trigger }: Props) {
   const [isOpen, setOpen] = useState(false)
   const i18n = useTranslations("QuizBankAdmin")
   const errorI188n = useTranslations("Errors")
@@ -61,7 +63,8 @@ export default function DeleteQuizBankDialog({ id, trigger }: Props) {
             <DialogTitle>{i18n("dialog.delete_quizbank.title")}</DialogTitle>
             <DialogDescription>
               {i18n.rich("dialog.delete_quizbank.description", {
-                quizBankID: id,
+                quizBankID: quizBankId,
+                user: user.fullName,
                 strong: (children) => <b>{children}</b>,
               })}
             </DialogDescription>
@@ -76,7 +79,7 @@ export default function DeleteQuizBankDialog({ id, trigger }: Props) {
             <Button
               onClick={() =>
                 mutate({
-                  quizBankId: id,
+                  quizBankId: quizBankId,
                 })
               }
               variant="default"

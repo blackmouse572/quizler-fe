@@ -630,8 +630,10 @@
     "actions": {
       "copy_id": "Sao chép ID",
       "copy_author_id": "Sao chép ID tác giả",
-      "take_action": "Thực hiện hành động",
-      "delete": "Xoá",
+      "take_action": {
+        "index": "Thực hiện hành động",
+        "delete": "Xoá"
+      },
       "go_to": {
         "index": "Xem chi tiết",
         "author": "Xem tác giả",
@@ -641,7 +643,7 @@
     "dialog": {
       "delete_quizbank": {
         "title": "Xóa ngân hàng câu hỏi",
-        "description": "Xóa ngân hàng câu hỏi <strong>{quizBankID}</strong> ?",
+        "description": "Cảnh cáo người dùng <strong>{user}</strong> và xóa ngân hàng câu hỏi <strong>{quizBankID}</strong> ?",
         "cancel": "Hủy",
         "delete": "Xóa"
       }
@@ -1447,12 +1449,14 @@
   },
   "Errors": {
     "index": "Lỗi",
+    "unknown": "Đã xảy ra lỗi không xác định, vui lòng thử lại sau",
     "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
     "invalid-pin": "Mã PIN không hợp lệ, vui lòng thử lại",
     "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
     "email-existed": "Email đã tồn tại, vui lòng thử lại",
     "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
     "verification-failed": "Xác thực thất bại, vui lòng thử lại",
+    "Unauthorized": "Tài khoản chưa được xác thực, vui lòng đăng nhập lại",
     "classroom": {
       "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
       "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
@@ -1462,6 +1466,12 @@
       "user_not_found": "Không tìm thấy người dùng",
       "user_in_classroom": "Người dùng đã ở trong lớp học",
       "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
+    },
+    "refresh": "Thử lại",
+    "game": {
+      "already-joined": "Bạn đã tham gia trò chơi này rồi",
+      "not_found": "Không tìm thấy trò chơi",
+      "user_not_found": "Không tìm thấy người dùng"
     }
   },
   "ManageClassroomMembers": {
@@ -1487,6 +1497,14 @@
       },
       "invite": {
         "label": "Cho phép thành viên mời người khác"
+      },
+      "actions": {
+        "add": {
+          "message": {
+            "title": "Thành công",
+            "description": "Tạo lớp học mới thành công"
+          }
+        }
       },
       "plan-form": {
         "starter": {

@@ -466,8 +466,10 @@
     "actions": {
       "copy_id": "Copy ID",
       "copy_author_id": "Copy author ID",
-      "take_action": "Take action",
-      "delete": "Delete",
+      "take_action": {
+        "index": "Take action",
+        "delete": "Delete"
+      },
       "go_to": {
         "index": "Go to",
         "author": "Go to author",
@@ -477,7 +479,7 @@
     "dialog": {
       "delete_quizbank": {
         "title": "Delete QuizBank",
-        "description": "Delete QuizBank <strong>{quizBankID}</strong> ?",
+        "description": "Warn user <strong>{user}</strong> and delete QuizBank <strong>{quizBankID}</strong> ?",
         "cancel": "Cancel",
         "delete": "Delete"
       }
@@ -736,7 +738,9 @@
       "create_post": "New post create in classroom {objectName}",
       "create_game": "New game created in classroom {objectName}",
       "reported": "You has been reported due to violation",
-      "warning": "You have been warned due to violation"
+      "warning": "You have been warned due to violation",
+      "subcribe_plan": "Your plan has been subcribed successfully to {objectName}",
+      "cancel_plan": "Your plan {objectName} has been canceled successfully"
     },
     "admin": {
       "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
@@ -975,6 +979,9 @@
     "plans": {
       "duration": "months",
       "plans": {
+        "maxAI": "Max AI use times: {times}",
+        "maxClassroom": "Max classroom created: {times}",
+        "maxStudent": "Max student in classsroom: {times}",
         "hobby": {
           "title": "Hobby",
           "description": "Getting warm",
@@ -1011,6 +1018,15 @@
         },
         "title": "Upgrade your plan to {plan}",
         "description": "Upgrade your plan and enjoy the benefits from the plan"
+      },
+      "cancel_dialog": {
+        "buttons": {
+          "cancel": "Cancel",
+          "confirm": "Confirm"
+        },
+        "title": "Cancel your plan {plan}",
+        "description": "Are you sure you want to cancel your plan?",
+        "success": "Your plan has been canceled"
       }
     },
     "profile": {
@@ -1521,6 +1537,14 @@
       },
       "invite": {
         "label": "Allow student to invite"
+      },
+      "actions": {
+        "add": {
+          "message": {
+            "title": "Success",
+            "description": "Create classroom successfully"
+          }
+        }
       },
       "plan-form": {
         "starter": {

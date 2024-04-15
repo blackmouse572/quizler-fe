@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const URL = process.env.NEXT_PUBLIC_URL || "http://localhost:3000"
-const SERVER_URL = process.env.API_SERVER_URL || "http://localhost:5000/api"
+const SERVER_URL = process.env.API_SERVER_URL || URL + "/api/external/"
 
 export function getAbsoluteURL(uri: string) {
   const isEndWithSlash = URL.endsWith("/")
@@ -22,7 +22,7 @@ export function getAbsoluteURL(uri: string) {
   return URL + uri
 }
 
-export function getAPIServerURL(uri: string) {
+export function getAPIServerURL(uri: string, withPrefix = false) {
   const isEndWithSlash = SERVER_URL.endsWith("/")
   const isStartWithSlash = uri.startsWith("/")
 

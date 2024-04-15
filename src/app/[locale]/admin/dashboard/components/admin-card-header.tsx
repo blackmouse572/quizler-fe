@@ -21,7 +21,7 @@ export function AdminCardHeader({ title, href, total }: Props) {
       <Card className="transition-colors hover:bg-accent">
         <CardHeader>
           <CardDescription className="flex items-center justify-between">
-            <div>{title}</div>
+            {title}
             <Icons.ChevronRight />
           </CardDescription>
           <CardTitle className="text-3xl">{total}</CardTitle>

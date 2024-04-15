@@ -8,6 +8,7 @@ import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useHotkeys } from "react-hotkeys-hook"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -199,7 +200,10 @@ const CarouselPrevious = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, variant = "ghost", ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
-
+  useHotkeys("left,k", () => {
+    console.log(canScrollPrev, "prev")
+    canScrollPrev && scrollPrev()
+  })
   return (
     <Button
       ref={ref}
@@ -228,6 +232,11 @@ const CarouselNext = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, variant = "ghost", ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
+
+  useHotkeys("right,l", () => {
+    console.log(canScrollNext, "next")
+    canScrollNext && scrollNext()
+  })
 
   return (
     <Button
