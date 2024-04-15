@@ -714,7 +714,9 @@
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
       "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Bạn đã bị báo cáo do vi phạm",
-      "warning": "Bạn đã bị cảnh cáo do vi phạm"
+      "warning": "Bạn đã bị cảnh cáo do vi phạm",
+      "subcribe_plan": "Your plan has been subcribed successfully to {objectName}",
+      "cancel_plan": "Your plan {objectName} has been canceled successfully"
     },
     "admin": {
       "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
@@ -953,6 +955,9 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
+        "maxAI": "Max AI use times: {times}",
+        "maxClassroom": "Max classroom created: {times}",
+        "maxStudent": "Max student in classsroom: {times}",
         "hobby": {
           "title": "Sở thích",
           "description": "Khởi động",
@@ -989,6 +994,15 @@
         },
         "title": "Nâng cấp gói cá nhân thành {plan}",
         "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+      },
+      "cancel_dialog": {
+        "buttons": {
+          "cancel": "Cancel",
+          "confirm": "Confirm"
+        },
+        "title": "Cancel your plan {plan}",
+        "description": "Are you sure you want to cancel your plan?",
+        "success": "Your plan has been canceled"
       }
     },
     "profile": {
