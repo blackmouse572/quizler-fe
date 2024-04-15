@@ -55,7 +55,7 @@ export default function ViewFlashcard({
   const [count] = useState(initialData?.metadata?.totals ?? 0)
   const [currentIndex, setCurrentIndex] = useState(count > 0 ? 1 : 0)
   const [totalLoaded, setTotalLoaded] = useState(initialData.data.length)
-  const [currentItem, setCurrentItem] = useState<Quiz>()
+  const [currentItem, setCurrentItem] = useState<Quiz>(initialData.data[0]!)
   const [flipMap, setFlipMap] = useState<{ [key: number]: boolean }>(
     initialData.data.reduce(
       (acc, _, index) => {
@@ -137,9 +137,7 @@ export default function ViewFlashcard({
         .map((page) => page?.data)
         .flat()
         .find((_, index) => index === iindex)
-      setCurrentItem(item)
-
-      console.log("Selected item", item)
+      setCurrentItem(item!)
     })
   }, [api, currentItem?.id, data.pages])
 
@@ -173,8 +171,8 @@ export default function ViewFlashcard({
     api?.scrollTo(0)
   }, [isShuffle, refetch, api])
 
-  useHotkeys("up,down,h,j", () => {
-    console.log(currentItem)
+  useHotkeys("up,down,h,j", (e) => {
+    e.preventDefault()
     setFlipMap((pre) => {
       const newMap = { ...pre }
       newMap[currentItem?.id || -1] = !newMap[currentItem?.id || -1]
