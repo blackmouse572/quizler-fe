@@ -715,8 +715,8 @@
       "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Bạn đã bị báo cáo do vi phạm",
       "warning": "Bạn đã bị cảnh cáo do vi phạm",
-      "subcribe_plan": "Your plan has been subcribed successfully to {objectName}",
-      "cancel_plan": "Your plan {objectName} has been canceled successfully"
+      "subcribe_plan": "Gói {objectName} đã được đăng ký thành công",
+      "cancel_plan": "Gói {objectName} của bạn đã được hủy"
     },
     "admin": {
       "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
@@ -955,9 +955,9 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
-        "maxAI": "Max AI use times: {times}",
-        "maxClassroom": "Max classroom created: {times}",
-        "maxStudent": "Max student in classsroom: {times}",
+        "maxAI": "Số lần sử dụng A.I {times}",
+        "maxClassroom": "Số lớp học: {times}",
+        "maxStudent": "Số học sinh mỗi lớp học: {times}",
         "hobby": {
           "title": "Sở thích",
           "description": "Khởi động",
@@ -997,12 +997,12 @@
       },
       "cancel_dialog": {
         "buttons": {
-          "cancel": "Cancel",
-          "confirm": "Confirm"
+          "cancel": "Huỷ gói",
+          "confirm": "Xác nhận huỷ"
         },
-        "title": "Cancel your plan {plan}",
-        "description": "Are you sure you want to cancel your plan?",
-        "success": "Your plan has been canceled"
+        "title": "Huỷ gói {plan}",
+        "description": "Bạn có muốn huỷ gói đang sử dụng?",
+        "success": "Gói của bạn đã được huỷ"
       }
     },
     "profile": {
