@@ -1635,11 +1635,11 @@
   "Delete_classroom": {
     "message": {
       "success": {
-        "title": "Success",
-        "description": "Successfully delete clasroom"
+        "title": "Thành công",
+        "description": "Thành công xoá lớp học"
       },
       "failed": {
-        "title": "Failed"
+        "title": "Thất bại"
       }
     }
   },
@@ -1764,17 +1764,17 @@
       },
       "filters": {
         "visibility": {
-          "label": "Visibility",
-          "placeholder": "Select visibility",
+          "label": "Hiển thị",
+          "placeholder": "Chọn hiển thị",
           "type": {
             "Public": {
-              "value": "Public"
+              "value": "Công khai"
             },
             "Private": {
-              "value": "Private"
+              "value": "Riêng tư"
             },
             "All": {
-              "value": "All"
+              "value": "Tất cả"
             }
           }
         }
