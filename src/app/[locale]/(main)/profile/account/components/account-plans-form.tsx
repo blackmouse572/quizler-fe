@@ -1,5 +1,6 @@
 "use client"
 
+import CancelSubscription from "@/app/[locale]/(main)/profile/account/components/cancel-sub-dialog"
 import {
   Card,
   CardContent,
@@ -27,8 +28,7 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
     .map((plan) => plan.id)
   const [selectedPlan, setSelectedPlan] = useState<Plan>(plans[0])
   const format = useFormatter()
-  const [availablePlanIds, setAvailablePlanIds] = useState<number[]>(seletedIds)
-
+  const currentPlan = plans.filter((plan) => plan.isCurrent)[0]
   const onPlanChange = useCallback(
     (id: number) => {
       setSelectedPlan(plans.filter((i) => i.id === id)[0])
@@ -36,81 +36,229 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
     [plans]
   )
 
+  if (currentPlan.amount === 0) {
+    return (
+      <div className="flex w-full items-center justify-between gap-6">
+        {plans.map((plan) => {
+          return (
+            <Card
+              key={plan.id}
+              onClick={(e) => {
+                onPlanChange(plan.id)
+              }}
+              className={cn(
+                "relative h-96 flex-1 cursor-pointer transition-all",
+
+                {
+                  "border border-green-500": plan.isCurrent,
+                }
+              )}
+              aria-selected={selectedPlan?.id === plan.id}
+            >
+              <CardHeader>
+                <CardTitle>{plan.title}</CardTitle>
+                <CardDescription>{plan.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="font-heading text-3xl font-bold">
+                  <span className="text-4xl">
+                    {format.number(plan.amount, {
+                      style: "currency",
+                      currency: "USD",
+                      compactDisplay: "short",
+                      localeMatcher: "best fit",
+                      maximumFractionDigits: 0,
+                    })}
+                  </span>
+                  <span className="text-gray-500">
+                    /{plan.duration} {t("plans.duration")}
+                  </span>
+                </p>
+              </CardContent>
+              <CardFooter className="flex flex-col items-start space-y-5">
+                <ul className="list-inside list-none space-y-3 text-neutral-500">
+                  <li className="">
+                    <span className="flex gap-2">
+                      <Icons.Check />
+                      {t("plans.plans.maxClassroom", {
+                        times: plan.maxClassroom,
+                      })}
+                    </span>
+                  </li>
+
+                  <li className="">
+                    <span className="flex gap-2">
+                      <Icons.Check />
+                      {t("plans.plans.maxStudent", {
+                        times: plan.maxStudent,
+                      })}
+                    </span>
+                  </li>
+                  <li className="">
+                    <span className="flex gap-2">
+                      <Icons.Check />
+                      {t("plans.plans.maxAI", {
+                        times: plan.useAICount,
+                      })}
+                    </span>
+                  </li>
+                </ul>
+              </CardFooter>
+              {plan.isCurrent ? (
+                <div className="absolute bottom-6 left-5">
+                  <CancelSubscription plan={plan} />
+                </div>
+              ) : (
+                <div className="absolute bottom-6 left-5">
+                  <UpgradeDialog plan={plan} />
+                </div>
+              )}
+            </Card>
+          )
+        })}
+      </div>
+    )
+  }
   return (
-    <div className="flex w-full items-center justify-between gap-6">
-      {plans.map((plan) => {
-        return (
-          <Card
-            key={plan.id}
-            onClick={(e) => {
-              onPlanChange(plan.id)
-            }}
-            className={cn(
-              "relative h-96 flex-1 cursor-pointer transition-all",
+    <div className="grid w-full grid-cols-3 items-center justify-between gap-6">
+      <Card
+        key={currentPlan.id}
+        onClick={(e) => {
+          onPlanChange(currentPlan.id)
+        }}
+        className={cn(
+          "relative col-span-2 h-96 flex-1 cursor-pointer transition-all",
 
-              {
-                "bg-emerald-500/20": plan.isCurrent,
-              }
-            )}
-            aria-selected={selectedPlan?.id === plan.id}
-          >
-            <CardHeader>
-              <CardTitle>{plan.title}</CardTitle>
-              <CardDescription>{plan.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="font-heading text-3xl font-bold">
-                <span className="text-4xl">
-                  {format.number(plan.amount, {
-                    style: "currency",
-                    currency: "USD",
-                    compactDisplay: "short",
-                    localeMatcher: "best fit",
-                    maximumFractionDigits: 0,
-                  })}
-                </span>
-                <span className="text-gray-500">
-                  /{plan.duration} {t("plans.duration")}
-                </span>
-              </p>
-            </CardContent>
-            <CardFooter className="flex flex-col items-start space-y-5">
-              <ul className="list-inside list-none space-y-3 text-neutral-500">
-                <li className="">
-                  <span className="flex gap-2">
-                    <Icons.Check />
-                    {t("plans.plans.maxClassroom", {
-                      times: plan.maxClassroom,
-                    })}
-                  </span>
-                </li>
+          {
+            "border border-green-500": currentPlan.isCurrent,
+          }
+        )}
+        aria-selected={selectedPlan?.id === currentPlan.id}
+      >
+        <CardHeader>
+          <CardTitle>{currentPlan.title}</CardTitle>
+          <CardDescription>{currentPlan.description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="font-heading text-3xl font-bold">
+            <span className="text-4xl">
+              {format.number(currentPlan.amount, {
+                style: "currency",
+                currency: "USD",
+                compactDisplay: "short",
+                localeMatcher: "best fit",
+                maximumFractionDigits: 0,
+              })}
+            </span>
+            <span className="text-gray-500">
+              /{currentPlan.duration} {t("plans.duration")}
+            </span>
+          </p>
+        </CardContent>
+        <CardFooter className="flex flex-col items-start space-y-5">
+          <ul className="list-inside list-none space-y-3 text-neutral-500">
+            <li className="">
+              <span className="flex gap-2">
+                <Icons.Check />
+                {t("plans.plans.maxClassroom", {
+                  times: currentPlan.maxClassroom,
+                })}
+              </span>
+            </li>
 
-                <li className="">
-                  <span className="flex gap-2">
-                    <Icons.Check />
-                    {t("plans.plans.maxStudent", {
-                      times: plan.maxStudent,
+            <li className="">
+              <span className="flex gap-2">
+                <Icons.Check />
+                {t("plans.plans.maxStudent", {
+                  times: currentPlan.maxStudent,
+                })}
+              </span>
+            </li>
+            <li className="">
+              <span className="flex gap-2">
+                <Icons.Check />
+                {t("plans.plans.maxAI", {
+                  times: currentPlan.useAICount,
+                })}
+              </span>
+            </li>
+          </ul>
+        </CardFooter>
+        <div className="absolute bottom-6 left-5">
+          <CancelSubscription plan={currentPlan} />
+        </div>
+      </Card>
+
+      {plans
+        .filter((plan) => !plan.isCurrent)
+        .map((plan, index) => {
+          return (
+            <Card
+              key={plan.id}
+              onClick={(e) => {
+                onPlanChange(plan.id)
+              }}
+              className={cn(
+                "relative h-96 flex-1 cursor-pointer transition-all",
+                index === 0 || index === 1 ? "col-span-1" : "col-span-2",
+                {
+                  "border border-green-500": plan.isCurrent,
+                }
+              )}
+              aria-selected={selectedPlan?.id === plan.id}
+            >
+              <CardHeader>
+                <CardTitle>{plan.title}</CardTitle>
+                <CardDescription>{plan.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="font-heading text-3xl font-bold">
+                  <span className="text-4xl">
+                    {format.number(plan.amount, {
+                      style: "currency",
+                      currency: "USD",
+                      compactDisplay: "short",
+                      localeMatcher: "best fit",
+                      maximumFractionDigits: 0,
                     })}
                   </span>
-                </li>
-                <li className="">
-                  <span className="flex gap-2">
-                    <Icons.Check />
-                    {t("plans.plans.maxAI", {
-                      times: plan.useAICount,
-                    })}
+                  <span className="text-gray-500">
+                    /{plan.duration} {t("plans.duration")}
                   </span>
-                </li>
-              </ul>
-            </CardFooter>
-            {!availablePlanIds.includes(plan.id) && (
-              <div className="absolute bottom-6 left-5">
-                <UpgradeDialog plan={plan} />
-              </div>
-            )}
-          </Card>
-        )
-      })}
+                </p>
+              </CardContent>
+              <CardFooter className="flex flex-col items-start space-y-5">
+                <ul className="list-inside list-none space-y-3 text-neutral-500">
+                  <li className="">
+                    <span className="flex gap-2">
+                      <Icons.Check />
+                      {t("plans.plans.maxClassroom", {
+                        times: plan.maxClassroom,
+                      })}
+                    </span>
+                  </li>
+
+                  <li className="">
+                    <span className="flex gap-2">
+                      <Icons.Check />
+                      {t("plans.plans.maxStudent", {
+                        times: plan.maxStudent,
+                      })}
+                    </span>
+                  </li>
+                  <li className="">
+                    <span className="flex gap-2">
+                      <Icons.Check />
+                      {t("plans.plans.maxAI", {
+                        times: plan.useAICount,
+                      })}
+                    </span>
+                  </li>
+                </ul>
+              </CardFooter>
+            </Card>
+          )
+        })}
     </div>
   )
 }

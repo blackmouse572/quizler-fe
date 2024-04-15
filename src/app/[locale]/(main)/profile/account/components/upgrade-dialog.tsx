@@ -50,6 +50,7 @@ const UpgradeDialog = ({ plan }: Props) => {
     [clientSecret, onComplete]
   )
 
+  if (plan.amount === 0) return null
   return (
     <>
       <Dialog>

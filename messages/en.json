@@ -715,7 +715,8 @@
       "create_game": "New game created in classroom {objectName}",
       "reported": "You has been reported due to violation",
       "warning": "You have been warned due to violation",
-      "subcribe_plan": "Your plan has been subcribed successfully to {objectName}"
+      "subcribe_plan": "Your plan has been subcribed successfully to {objectName}",
+      "cancel_plan": "Your plan {objectName} has been canceled successfully"
     },
     "admin": {
       "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
@@ -993,6 +994,15 @@
         },
         "title": "Upgrade your plan to {plan}",
         "description": "Upgrade your plan and enjoy the benefits from the plan"
+      },
+      "cancel_dialog": {
+        "buttons": {
+          "cancel": "Cancel",
+          "confirm": "Confirm"
+        },
+        "title": "Cancel your plan {plan}",
+        "description": "Are you sure you want to cancel your plan?",
+        "success": "Your plan has been canceled"
       }
     },
     "profile": {

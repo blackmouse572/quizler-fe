@@ -14,6 +14,10 @@ export const fetchAllPlans = async () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    next: {
+      revalidate: 3600,
+      tags: ["Plan"],
+    },
   }
 
   return fetch(URL, options)
