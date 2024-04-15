@@ -18,7 +18,7 @@
       }
     },
     "explain_offering_customer": {
-      "index": "Trao tiềm lực vô hạn cho mọi sinh viên",
+      "index": "Học với nguồn lực vô tận",
       "paragraph": {
         "para_1": "Tại Quizlearn, chúng tôi tin rằng bất cứ ai cũng có thể học bất cứ điều gì. Chỉ cần họ có tinh thần kiên trì, được hướng dẫn đúng cách và có các công cụ phù hợp để thành công. Chúng tôi biết rằng sinh viên đang chịu nhiều áp lực hơn bao giờ hết. Điều đó có thể khiến họ quá tải, gây lo âu và bào mòn sức lực nhanh chóng. ",
         "para_2": "Nhiệm vụ của chúng tôi là cung cấp cho mọi sinh viên các công cụ và sự tự tin để thành công, bất kể động lực và mục tiêu của họ là gì."
@@ -29,7 +29,7 @@
     "no_data": "Không có dữ liệu",
     "no_results": "Không tìm thấy kết quả",
     "loading": "Đang tải...",
-    "selected_rows": "Đã chọn {count} hàng",
+    "selected_rows": "Đã chọn {count}/{total} hàng",
     "action": "Hành động",
     "search": "Tìm kiếm",
     "search_placeholder": "Tìm kiếm...",
@@ -37,8 +37,8 @@
     "export_csv": "Xuất ra CSV",
     "export_excel": "Xuất ra Excel",
     "export_pdf": "Xuất ra PDF",
-    "export_print": "Print",
-    "selected": "Selected",
+    "export_print": "In",
+    "selected": "Đã chọn",
     "all": "Tất cả",
     "clear": "Xóa lựa chọn",
     "reset": "Huỷ bỏ",
@@ -63,32 +63,32 @@
     "prev": "Trước",
     "first": "Đầu",
     "last": "Cuối",
-    "page": "Page",
+    "page": "Trang",
     "goto_page": "Đến trang",
-    "rows_per_page": "Rows per page",
+    "rows_per_page": "Hàng mỗi trang",
     "filter": "Lọc",
     "filters": "Bộ lọc",
-    "filter_by": "Filter by",
-    "filter_placeholder": "Filter by...",
+    "filter_by": "Lọc theo",
+    "filter_placeholder": "Lọc theo...",
     "limit": "Số lượng",
     "sort_by": "Sắp xếp theo",
     "sort_asc": "Sắp xếp tăng dần",
     "sort_desc": "Sắp xếp giảm dần",
-    "add_filter": "Add filter",
-    "remove_filter": "Remove filter",
-    "clear_filter": "Clear filter",
-    "clear_all": "Clear all",
-    "show_column": "Show column",
-    "hide_column": "Hide column",
-    "refresh": "Refresh",
-    "refresh_data": "Refresh data",
-    "refreshed": "Refreshed",
-    "column": "Column",
-    "error": "Error",
-    "edit_row": "Edit row",
-    "clone_row": "Clone row",
-    "delete_row": "Delete row",
-    "validation": "Validation",
+    "add_filter": "Thêm bộ lọc",
+    "remove_filter": "Xoá bộ lọc",
+    "clear_filter": "Xoá toàn bộ",
+    "clear_all": "Xoá toàn bộ",
+    "show_column": "Hiển thị cột",
+    "hide_column": "Giấu cột",
+    "refresh": "Tải lại",
+    "refresh_data": "Tải lại",
+    "refreshed": "Đã tải lại",
+    "column": "Cột",
+    "error": "Lỗi",
+    "edit_row": "Chỉnh sửa",
+    "clone_row": "Nhân đôi",
+    "delete_row": "Xoá",
+    "validation": "Xác thực",
     "warning": "Cảnh báo",
     "success": "Thành công",
     "apply": "Áp dụng",
@@ -131,7 +131,7 @@
         }
       },
       "edit": {
-        "index": "Edit"
+        "index": "Chỉnh sửa"
       }
     }
   },
@@ -176,7 +176,7 @@
       "post": {
         "index": "{user} đã tạo một bài đăng",
         "game": "{user} đã tạo một trò chơi: {game}. Tham gia ngay !!!",
-        "quizbank": "{user} đã tạo một quizbank. Học ngay !!!"
+        "quizbank": "{user} đã tạo một Quizbank. Học ngay !!!"
       },
       "help": {
         "title": "Trợ giúp",
@@ -190,7 +190,7 @@
       "index": "Lớp học",
       "members": "Thành viên",
       "games": "Trò chơi",
-      "quizbanks": "Quizbanks"
+      "quizbanks": "Ngân hàng câu hỏi"
     }
   },
   "ClassroomGame": {
@@ -237,11 +237,11 @@
             "empty": "Không tìm thấy kết quả"
           },
           "gameType": {
-            "label": "Game type",
-            "dnd": "Drag and drop",
-            "mcq": "Multiple choice question",
-            "tf": "True or false",
-            "fill": "Fill in the blank"
+            "label": "Loại game",
+            "dnd": "Kéo thả",
+            "mcq": "Chọn câu trả lời đúng",
+            "tf": "Đúng / Sai",
+            "fill": "Điền vào chỗ trống"
           },
           "submit": "Tạo",
           "cancel": "Hủy",
@@ -396,7 +396,7 @@
     "edit": "Chỉnh sửa",
     "delete": "Xoá",
     "cancel": "Huỷ",
-    "add_quizbank": "Tạo quizbank mới"
+    "add_quizbank": "Tạo Quizbank mới"
   },
   "DashboardAdmin": {
     "metadata": {
@@ -436,7 +436,7 @@
   },
   "QuizBankAdmin": {
     "metadata": {
-      "title": "Quản lý Quiz",
+      "title": "Quản lý QuizBank",
       "description": "Quản lý tất cả các Quiz của bạn"
     },
     "headers": {
@@ -491,7 +491,7 @@
       }
     },
     "error": {
-      "title": "Đã có lỗi xảy ra, vui lòng thử lại sau"
+      "title": "Có gì đó không đúng đã xảy ra."
     }
   },
   "UserAdmin": {
@@ -571,7 +571,7 @@
       }
     },
     "errors": {
-      "title": "Something went wrong."
+      "title": "Có gì đó không đúng đã xảy ra."
     }
   },
   "ClassroomAdmin": {
@@ -588,21 +588,21 @@
       "isStudentAllowInvite": "Học sinh có thể mời"
     },
     "data_table": {
-      "active": "No"
+      "active": "Chưa kích hoạt"
     },
     "filters": {
       "visibility": {
-        "label": "Visibility",
-        "placeholder": "Select visibility",
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
         "type": {
           "Public": {
-            "value": "Public"
+            "value": "Công khai"
           },
           "Private": {
-            "value": "Private"
+            "value": "Riêng tư"
           },
           "All": {
-            "value": "All"
+            "value": "Tất cả"
           }
         }
       }
@@ -797,8 +797,8 @@
     "search_error": "Đã có lỗi xảy ra, vui lòng thử lại sau",
     "results_for": "Kết quả cho",
     "filter": {
-      "take": "take",
-      "skip": "skip",
+      "take": "Lấy số kết quả",
+      "skip": "Trang",
       "take_placeholder": "Lấy số kết quả",
       "skip_placeholder": "Trang"
     },
@@ -1010,17 +1010,17 @@
         "submit_btn": "Lưu thay đổi"
       },
       "verify": {
-        "title": "Verify",
-        "not_verified": "Not verified"
+        "title": "Xác thực",
+        "not_verified": "Chưa xác thực"
       }
     },
     "preference": "Sở thích",
     "success": {
-      "title": "Update account",
-      "description": "Your account has been changed successfully"
+      "title": "Cập nhật tài khoản",
+      "description": "Tài khoản của bạn đã được cập nhật thành công"
     },
     "report": {
-      "index": "Report"
+      "index": "Báo cáo"
     }
   },
   "ViewOtherProfile": {
@@ -1059,7 +1059,7 @@
         "dashboard": "Điều khiển",
         "users": "Người dùng",
         "classrooms": "Lớp học",
-        "quizbank": "Ngân hàng",
+        "quizbank": "Ngân hàng câu hỏi",
         "reports": "Báo cáo"
       }
     },
@@ -1079,11 +1079,11 @@
       },
       "itemSeperator": {
         "label": "Dấu phân cách thuật ngữ",
-        "placeholder": "Enter the item seperator"
+        "placeholder": "Nhập phân dấu định nghĩa"
       },
       "quizSeperator": {
         "label": "Dấu phân cách các quizbank",
-        "placeholder": "Enter the quiz seperator"
+        "placeholder": "Nhập phân dấu Quiz"
       },
       "ai": {
         "label": "Sáng tạo",
@@ -1102,8 +1102,8 @@
       },
       "submit": "Thêm",
       "tags": {
-        "label": "Tags",
-        "placeholder": "Nhập tags ngân hàng câu hỏi"
+        "label": "Thẻ",
+        "placeholder": "Nhập thẻ"
       },
       "public": {
         "label": "Công khai",
@@ -1135,8 +1135,8 @@
       },
       "submit": "Thêm",
       "tags": {
-        "label": "Tags",
-        "placeholder": "Nhập tags ngân hàng câu hỏi"
+        "label": "Thẻ",
+        "placeholder": "Nhập thẻ"
       },
       "public": {
         "label": "Công khai",
@@ -1199,17 +1199,17 @@
     "quizzes": "câu hỏi",
     "form": {
       "name": {
-        "label": "Name",
+        "label": "Tên",
         "text": "Tên",
         "placeholder": "Nhập tên của ngân hàng câu hỏi"
       },
       "copyTo": {
-        "label": "copyTo",
+        "label": "Sao chép tới",
         "text": "Sao chép tới",
         "placeholder": "Chọn nơi để sao chép"
       },
       "classroom": {
-        "label": "classroom",
+        "label": "Lớp học",
         "text": "Lớp",
         "placeholder": "Chọn lớp để sao chép tới"
       },
@@ -1217,7 +1217,7 @@
         "text": "Kho cá nhân"
       },
       "public": {
-        "label": "public",
+        "label": "Công khai",
         "text": "Công khai"
       },
       "button": {
@@ -1227,11 +1227,11 @@
     },
     "message": {
       "success": {
-        "title": "Success",
-        "description": "Copy quizbank successfully"
+        "title": "Thành công",
+        "description": "Sao chép thành công"
       },
       "failed": {
-        "title": "Something went wrong."
+        "title": "Có gì đó không đúng đã xảy ra."
       }
     }
   },
@@ -1739,7 +1739,7 @@
         },
         "kick_user": {
           "title": "Xóa người dùng",
-          "description": "Remove user out of the classroom",
+          "description": "Bạn có muốn xoá người dùng khỏi lớp học",
           "message": {
             "delete_message": "Bạn có muốn xóa người dùng <span></span>?",
             "success": "Người dùng đã được xóa khỏi lớp học"
