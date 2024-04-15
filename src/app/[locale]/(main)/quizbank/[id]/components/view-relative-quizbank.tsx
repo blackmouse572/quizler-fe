@@ -16,7 +16,7 @@ export default function ViewRelativeQuizBank({ relativeQuizBankData }: Props) {
         {i18n("ViewQuizzes.relative_quiz_bank")}
       </div>
 
-      <div className="grid grid-cols-2 max-md:flex-wrap md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 max-md:flex-wrap lg:grid-cols-4">
         {relativeQuizBankData.map((quizKey) => {
           return <QuizbankCard allowActions={false} item={quizKey} />
         })}

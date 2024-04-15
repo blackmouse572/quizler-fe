@@ -44,6 +44,11 @@ function LoginForm({}: Props) {
   const search = useSearchParams()
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      emailOrUsername: "",
+      password: "",
+      rememberMe: false,
+    },
   })
 
   async function onSubmit(values: LoginSchemaType) {
@@ -172,29 +177,6 @@ function LoginForm({}: Props) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
-                  </div>
-                )
-              }}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => {
-                return (
-                  <div className="flex items-center justify-start gap-2">
-                    <FormControl className="">
-                      <Checkbox
-                        disabled={isLoading}
-                        size={"sm"}
-                        id="remember"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormLabel className="text-sm" htmlFor="remember">
-                      {t("form.remember")}
-                    </FormLabel>
                     <FormMessage />
                   </div>
                 )

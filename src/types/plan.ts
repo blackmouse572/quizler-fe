@@ -1,5 +1,5 @@
-export type AccountPlan = {
-  id: string
+export type Plan = {
+  id: number
   title: string
   description: string
   duration: string
@@ -7,7 +7,8 @@ export type AccountPlan = {
   currency: string
   features: string[]
   maxStudent: number
+  maxClassroom: number
   useAICount: number
   isRelease: boolean
-  isCurrent: boolean
+  isCurrent?: boolean
 }
