@@ -1,3 +1,4 @@
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Quiz } from "@/types"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -18,29 +19,21 @@ export default function ResultQuizzes({ quizzesData, isLoading }: Props) {
       </div>
 
       <div className="mt-1 w-full justify-between px-0.5 max-md:max-w-full">
-        <div className="flex flex-wrap justify-between gap-5 max-md:flex-col max-md:gap-0">
+        <div className="mt-2.5 grid grid-cols-2 gap-5 px-0.5 max-md:max-w-full max-md:flex-wrap lg:grid-cols-4">
           <ResultLoading isLoading={isLoading} fieldData={quizzesData} />
-
           {quizzesData &&
             quizzesData.map((data) => {
               return (
-                <div
-                  key={data.id}
-                  className="flex w-3/12 flex-col max-md:ml-0 max-md:w-full"
-                >
-                  <div className="flex w-full grow flex-col justify-center rounded-3xl border border-solid border-zinc-200 bg-white shadow max-md:mt-6">
-                    <div className="flex flex-col p-6 max-md:px-5">
-                      <div className="truncate text-base font-semibold leading-6 text-zinc-950">
-                        <Link href={`quizbank/${data.quizBank?.id}`}>
-                          {data.question}
-                        </Link>
-                      </div>
+                <Link href={`quizbank/${data.quizBank?.id}`}>
+                  <Card key={data.id} className="">
+                    <CardHeader className="">
+                      <CardTitle>{data.question}</CardTitle>
                       <div className="mt-1.5 truncate text-sm leading-5 text-zinc-500">
                         {data.answer}
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </CardHeader>
+                  </Card>
+                </Link>
               )
             })}
         </div>

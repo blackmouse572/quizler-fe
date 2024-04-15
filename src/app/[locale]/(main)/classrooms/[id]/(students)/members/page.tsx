@@ -1,11 +1,8 @@
 import getClassroomDetails from "@/app/[locale]/(main)/classrooms/actions/get-classroom-details-action"
 import { polyfill } from "interweave-ssr"
-import _ from "lodash"
 import { Metadata } from "next"
-import StudentTable from "../components/student-table"
-import { notFound } from "next/navigation"
 import getAllMembers from "../actions/fetch-classroom-members"
-import { NavigationBar } from "../components/navigation-bar"
+import StudentTable from "../components/student-table"
 
 type Props = {
   params: {
