@@ -119,12 +119,14 @@ function UserDropdown({ user, menuItems }: Props) {
         <DropdownMenuSeparator />
         {renderMenuItems()}
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="">
-          <Link href="/admin/dashboard">
-            <Icons.DashBoard className="mr-2 inline-block h-4 w-4" />
-            {t("dashboard")}
-          </Link>
-        </DropdownMenuItem>
+        {user.role.toLocaleLowerCase() === "admin" && (
+          <DropdownMenuItem className="">
+            <Link href="/admin/dashboard">
+              <Icons.DashBoard className="mr-2 inline-block h-4 w-4" />
+              {t("dashboard")}
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem
           className="focus:bg-danger-500/20 focus:text-danger-500"
           onClick={logout}
