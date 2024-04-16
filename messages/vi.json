@@ -726,7 +726,7 @@
         }
       }
     }
-  },
+  }},
   "Notification": {
     "user": {
       "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
