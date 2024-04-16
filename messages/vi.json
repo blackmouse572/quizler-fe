@@ -146,6 +146,9 @@
         "index": "Trò chơi mới",
         "title": "Tạo trò chơi mới"
       },
+      "view_game_result": {
+        "title": "Xem kết quả"
+      },
       "leave": {
         "title": "Rời khỏi trò chơi",
         "description": "Bạn có muốn rời khỏi trò chơi? Bạn sẽ không thể tham gia lại trò chơi",

@@ -251,6 +251,9 @@
           }
         }
       },
+      "view_game_result": {
+        "title": "View game result"
+      },
       "leave": {
         "title": "Leave game",
         "description": "Are you sure you want to leave this game? You can't join again",
