@@ -714,7 +714,9 @@
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
       "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Bạn đã bị báo cáo do vi phạm",
-      "warning": "Bạn đã bị cảnh cáo do vi phạm"
+      "warning": "Bạn đã bị cảnh cáo do vi phạm",
+      "subcribe_plan": "Gói {objectName} đã được đăng ký thành công",
+      "cancel_plan": "Gói {objectName} của bạn đã được hủy"
     },
     "admin": {
       "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
@@ -953,6 +955,9 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
+        "maxAI": "Số lần sử dụng A.I {times}",
+        "maxClassroom": "Số lớp học: {times}",
+        "maxStudent": "Số học sinh mỗi lớp học: {times}",
         "hobby": {
           "title": "Sở thích",
           "description": "Khởi động",
@@ -989,6 +994,15 @@
         },
         "title": "Nâng cấp gói cá nhân thành {plan}",
         "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+      },
+      "cancel_dialog": {
+        "buttons": {
+          "cancel": "Huỷ gói",
+          "confirm": "Xác nhận huỷ"
+        },
+        "title": "Huỷ gói {plan}",
+        "description": "Bạn có muốn huỷ gói đang sử dụng?",
+        "success": "Gói của bạn đã được huỷ"
       }
     },
     "profile": {
