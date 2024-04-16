@@ -3,7 +3,7 @@
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { Plan } from "@/types"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export const saveTransaction = (sessionId: string) => {
   const URL = getAPIServerURL(`/checkout/success?sessionId=${sessionId}`)
@@ -27,6 +27,7 @@ export const saveTransaction = (sessionId: string) => {
     })
     .then((res) => {
       revalidatePath("/profile/account")
+      revalidateTag("Plan")
       return { ok: true, message: "", data: res }
     })
     .catch((err) => {
@@ -60,6 +61,7 @@ export const fetchStripeSessionId = ({ id }: Plan) => {
     })
     .then((res) => {
       revalidatePath("/profile/account")
+      revalidateTag("Plan")
       return { ok: true, message: "", data: res }
     })
     .catch((err) => {

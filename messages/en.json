@@ -1019,7 +1019,8 @@
           "cancel": "Cancel"
         },
         "title": "Upgrade your plan to {plan}",
-        "description": "Upgrade your plan and enjoy the benefits from the plan"
+        "description": "Upgrade your plan and enjoy the benefits from the plan",
+        "success": "You have successfully upgraded your plan"
       },
       "cancel_dialog": {
         "buttons": {

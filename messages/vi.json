@@ -1000,7 +1000,8 @@
           "cancel": "Hủy"
         },
         "title": "Nâng cấp gói cá nhân thành {plan}",
-        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói",
+        "success": "Bạn đã nâng cấp gói thành công"
       }
     },
     "profile": {
