@@ -690,44 +690,43 @@
         },
         "error": {
           "title": "Xác minh báo cáo thất bại"
+        },
+        "delete_report": {
+          "success": {
+            "title": "Thành công xóa báo cáo",
+            "message": {
+              "success": "Báo cáo đã được xóa thành công"
+            }
+          },
+          "error": {
+            "title": "Xóa"
+          }
+      },
+      "dialog": {
+        "report_details": {
+          "title": "Báo cáo chi tiết",
+          "content": {
+            "quizbank_name": "Tên ngân hàng bị báo cáo",
+            "quizbank_id": "ID ngân hàng bị báo cáo",
+            "account_name": "Tên tài khoản bị báo cáo",
+            "account_id": "ID tài khoản bị báo cáo",
+            "reason": "Lí do",
+            "created_at": "Ngày tạo"
+          },
+          "cancel": "Hủy",
+          "confirm": "Chấp nhận báo cáo"
         }
       },
-      "delete_report": {
-        "success": {
-          "title": "Delete report successfully",
-          "message": {
-            "success": "The report(s) has been deleted successfully"
-          }
-        },
-        "error": {
-          "title": "Failed to delete report"
+      "report_reason": {
+        "reason_choice": {
+          "abuse": "Lạm dụng",
+          "inappropriate": "Không phù hợp",
+          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+          "other": "Khác"
         }
       }
-    },
-    "dialog": {
-      "report_details": {
-        "title": "Báo cáo chi tiết",
-        "content": {
-          "quizbank_name": "Tên ngân hàng bị báo cáo",
-          "quizbank_id": "ID ngân hàng bị báo cáo",
-          "account_name": "Tên tài khoản bị báo cáo",
-          "account_id": "ID tài khoản bị báo cáo",
-          "reason": "Lí do",
-          "created_at": "Ngày tạo"
-        },
-        "cancel": "Hủy",
-        "confirm": "Chấp nhận báo cáo"
-      }
-    },
-    "report_reason": {
-      "reason_choice": {
-        "abuse": "Lạm dụng",
-        "inappropriate": "Không phù hợp",
-        "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
-        "other": "Khác"
-      }
     }
-  },
+  }},
   "Notification": {
     "user": {
       "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
@@ -1353,10 +1352,6 @@
       "already-joined": "Bạn đã tham gia trò chơi này rồi",
       "not_found": "Không tìm thấy trò chơi",
       "user_not_found": "Không tìm thấy người dùng"
-    },
-    "Login": {
-      "WrongEmailPassword": "Email hay mật khẩu không đúng",
-      "IssueToken": "Error when issues token"
     }
   },
   "Validations": {
