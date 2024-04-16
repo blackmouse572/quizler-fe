@@ -678,6 +678,30 @@
         "reporter": "Đi đến người báo cáo",
         "reported_account": "Đi đến tài khoản bị báo cáo",
         "reported_quizbank": "Đi đến ngân hàng bị báo cáo"
+      },
+      "take_action": "Thực hiện hành động",
+      "delete": "Xóa",
+      "verify_report": {
+        "success": {
+          "title": "Thành công xác minh báo cáo",
+          "message": {
+            "success": "Báo cáo đã được xác minh thành công"
+          }
+        },
+        "error": {
+          "title": "Xác minh báo cáo thất bại"
+        }
+      },
+      "delete_report": {
+        "success": {
+          "title": "Delete report successfully",
+          "message": {
+            "success": "The report(s) has been deleted successfully"
+          }
+        },
+        "error": {
+          "title": "Failed to delete report"
+        }
       }
     },
     "dialog": {
