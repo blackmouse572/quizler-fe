@@ -1353,6 +1353,10 @@
       "already-joined": "You have already joined this game",
       "not_found": "Game not found",
       "user_not_found": "User not found"
+    },
+    "Login": {
+      "WrongEmailPassword": "Email or password is incorrect",
+      "IssueToken": "Error when issues token"
     }
   },
   "Validations": {
