@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
 import { getUser } from "@/lib/auth"
-import { CLASSROOM_SIDEBAR_ITEMS } from "@/lib/config/navbar-config"
+import {
+  CLASSROOM_SIDEBAR_STUDENT_ITEMS,
+  CLASSROOM_SIDEBAR_TEACHER_ITEMS,
+} from "@/lib/config/navbar-config"
 import { siteConfig } from "@/lib/config/siteconfig"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
@@ -41,12 +44,20 @@ async function ClassroomDetailLayout({ children, params }: Props) {
   const t = await getTranslations("ClassroomDetails")
   const data = await getClassroomDetails(params.id)
   if (!data.ok) {
-    throw Error(data.message)
+    notFound()
   }
 
   if (!data.data || !user) {
     return notFound()
   }
+
+  const isTeacher = data.data.author.id === user.id
+  const isAdmin = user.role.toLowerCase() === "admin"
+  const isTeacherSidebar = isTeacher || isAdmin
+
+  const CLASSROOM_SIDEBAR = isTeacherSidebar
+    ? CLASSROOM_SIDEBAR_TEACHER_ITEMS(params.id)
+    : CLASSROOM_SIDEBAR_STUDENT_ITEMS(params.id)
 
   return (
     <main className="container mx-auto">
@@ -85,10 +96,7 @@ async function ClassroomDetailLayout({ children, params }: Props) {
       <NextIntlClientProvider
         messages={_.pick(msg, "ClassroomDetails", "Errors")}
       >
-        <SideMenu
-          items={CLASSROOM_SIDEBAR_ITEMS(params.id)}
-          namespace="ClassroomDetails"
-        />
+        <SideMenu items={CLASSROOM_SIDEBAR} namespace="ClassroomDetails" />
         {children}
       </NextIntlClientProvider>
     </main>

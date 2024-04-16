@@ -72,7 +72,7 @@ const PROFILE_SIDEBAR_ITEMS: MainNavItem[] = [
   },
 ]
 
-const CLASSROOM_SIDEBAR_ITEMS: (id: string) => MainNavItem[] = (id) => [
+const CLASSROOM_SIDEBAR_TEACHER_ITEMS: (id: string) => MainNavItem[] = (id) => [
   {
     icon: "ArtBoard",
     title: "navbar.index",
@@ -94,8 +94,28 @@ const CLASSROOM_SIDEBAR_ITEMS: (id: string) => MainNavItem[] = (id) => [
     href: `/classrooms/${id}/members`,
   },
 ]
+
+const CLASSROOM_SIDEBAR_STUDENT_ITEMS: (id: string) => MainNavItem[] = (id) => [
+  {
+    icon: "ArtBoard",
+    title: "navbar.index",
+    href: `/classrooms/${id}/`,
+  },
+  {
+    icon: "Game",
+    title: "navbar.games",
+    href: `/classrooms/${id}/games`,
+  },
+  {
+    icon: "Icon",
+    title: "navbar.quizbanks",
+    href: `/classrooms/${id}/quizbanks`,
+  },
+]
+
 export {
-  CLASSROOM_SIDEBAR_ITEMS,
+  CLASSROOM_SIDEBAR_TEACHER_ITEMS,
+  CLASSROOM_SIDEBAR_STUDENT_ITEMS,
   MAIN_NAVBAR_ITEMS,
   PROFILE_SIDEBAR_ITEMS,
   SUBJECTS_NAVBAR_ITEMS,
