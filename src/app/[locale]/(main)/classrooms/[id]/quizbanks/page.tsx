@@ -8,7 +8,8 @@ import { getMessages, getTranslations } from "next-intl/server"
 import Link from "next/link"
 import getAllClassroomQuizBanksAction from "./actions/get-classroom-quizbanks-action"
 import ClassroomQuizBanksList from "./components/classroom-quizbanks-list"
-import { getToken } from "@/lib/auth"
+import { getUser } from "@/lib/auth"
+import { notFound } from "next/navigation"
 
 type Props = {
   params: {
@@ -38,11 +39,9 @@ export default async function ClassroomQuizBanks({
       search: search?.toString(),
     },
   })
+  const user = getUser()
   const msg = await getMessages()
-  const { token } = getToken()
-  if (!data.ok) {
-    throw Error(data.message)
-  }
+  if (!data.ok || !user) notFound()
   return (
     <div>
       <div className="flex items-center justify-between py-5">
@@ -67,7 +66,7 @@ export default async function ClassroomQuizBanks({
           filter={{
             search: search?.toString(),
           }}
-          token={token}
+          user={user}
         />
       </NextIntlClientProvider>
     </div>
