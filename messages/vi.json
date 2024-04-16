@@ -35,7 +35,9 @@
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
       "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Bạn đã bị báo cáo do vi phạm",
-      "warning": "Bạn đã bị cảnh cáo do vi phạm"
+      "warning": "Bạn đã bị cảnh cáo do vi phạm",
+      "subcribe_plan": "Bạn đã đăng kí thành công gói {objectName}",
+      "cancel_plan": "Gói {objectName} của bạn đã hủy thành công"
     },
     "admin": {
       "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
@@ -46,7 +48,9 @@
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
       "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
-      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm"
+      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm",
+      "subcribe_plan": "Người dùng {user} đã đăng kí thành công gói {objectName}",
+      "cancel_plan": "Người dùng {user} đã hủy gói {objectName} thành công"
     }
   },
   "Navbar": {
