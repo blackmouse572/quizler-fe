@@ -751,7 +751,9 @@
       "create_post": "New post create in classroom {objectName}",
       "create_game": "New game created in classroom {objectName}",
       "reported": "User {user} has been reported due to violation",
-      "warning": "User {user} has been warned due to violation"
+      "warning": "User {user} has been warned due to violation",
+      "subcribe_plan": "User {user} plan has been subcribed successfully to {objectName}",
+      "cancel_plan": "User {user} plan {objectName} has been canceled successfully"
     }
   },
   "Navbar": {
