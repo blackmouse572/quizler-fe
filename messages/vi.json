@@ -678,29 +678,52 @@
         "reporter": "Đi đến người báo cáo",
         "reported_account": "Đi đến tài khoản bị báo cáo",
         "reported_quizbank": "Đi đến ngân hàng bị báo cáo"
-      }
-    },
-    "dialog": {
-      "report_details": {
-        "title": "Báo cáo chi tiết",
-        "content": {
-          "quizbank_name": "Tên ngân hàng bị báo cáo",
-          "quizbank_id": "ID ngân hàng bị báo cáo",
-          "account_name": "Tên tài khoản bị báo cáo",
-          "account_id": "ID tài khoản bị báo cáo",
-          "reason": "Lí do",
-          "created_at": "Ngày tạo"
+      },
+      "take_action": "Thực hiện hành động",
+      "delete": "Xóa",
+      "verify_report": {
+        "success": {
+          "title": "Thành công xác minh báo cáo",
+          "message": {
+            "success": "Báo cáo đã được xác minh thành công"
+          }
         },
-        "cancel": "Hủy",
-        "confirm": "Chấp nhận báo cáo"
-      }
-    },
-    "report_reason": {
-      "reason_choice": {
-        "abuse": "Lạm dụng",
-        "inappropriate": "Không phù hợp",
-        "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
-        "other": "Khác"
+        "error": {
+          "title": "Xác minh báo cáo thất bại"
+        },
+        "delete_report": {
+          "success": {
+            "title": "Thành công xóa báo cáo",
+            "message": {
+              "success": "Báo cáo đã được xóa thành công"
+            }
+          },
+          "error": {
+            "title": "Xóa"
+          }
+      },
+      "dialog": {
+        "report_details": {
+          "title": "Báo cáo chi tiết",
+          "content": {
+            "quizbank_name": "Tên ngân hàng bị báo cáo",
+            "quizbank_id": "ID ngân hàng bị báo cáo",
+            "account_name": "Tên tài khoản bị báo cáo",
+            "account_id": "ID tài khoản bị báo cáo",
+            "reason": "Lí do",
+            "created_at": "Ngày tạo"
+          },
+          "cancel": "Hủy",
+          "confirm": "Chấp nhận báo cáo"
+        }
+      },
+      "report_reason": {
+        "reason_choice": {
+          "abuse": "Lạm dụng",
+          "inappropriate": "Không phù hợp",
+          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+          "other": "Khác"
+        }
       }
     }
   },
