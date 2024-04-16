@@ -9,12 +9,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { ReportType } from "@/types"
 import { ContextMenu } from "@radix-ui/react-context-menu"
 import { useFormatter, useTranslations } from "next-intl"
-import { useState } from "react"
+import { useCallback, useState } from "react"
+import { useVerifyReport } from "../helpers/useVerifyReport"
+import { toast } from "@/components/ui/use-toast"
+import { Icons } from "@/components/ui/icons"
 
 type Props = {
   data: ReportType
@@ -24,7 +25,34 @@ type Props = {
 export default function ViewDetailsReportDialog({ data, trigger }: Props) {
   const [isOpen, setOpen] = useState(false)
   const i18n = useTranslations("ReportAdmin")
+  const errorI188n = useTranslations("Errors")
+
   const format = useFormatter()
+
+  const handleSuccess = useCallback(() => {
+    setOpen?.(false)
+    toast({
+      title: i18n("actions.verify_report.success.title"),
+      description: i18n("actions.verify_report.success.message.success"),
+      color: "success",
+    })
+  }, [i18n])
+
+  const handleError = useCallback(
+    (e: Error) => {
+      toast({
+        title: i18n("actions.verify_report.error.title"),
+        description: errorI188n(e.message as any),
+        color: "danger",
+      })
+    },
+    [errorI188n, i18n]
+  )
+
+  const { mutate, isPending } = useVerifyReport({
+    onSuccess: handleSuccess,
+    onError: handleError,
+  })
 
   return (
     <ContextMenu>
@@ -70,7 +98,9 @@ export default function ViewDetailsReportDialog({ data, trigger }: Props) {
 
             <div className="flex justify-between">
               <div>{i18n("dialog.report_details.content.reason")}:</div>
-              <div>{i18n(`report_reason.reason_choice.${data.reason}` as any)}</div>
+              <div>
+                {i18n(`report_reason.reason_choice.${data.reason}` as any)}
+              </div>
             </div>
             <div className="flex justify-between">
               <div>{i18n("dialog.report_details.content.created_at")}:</div>
@@ -85,11 +115,18 @@ export default function ViewDetailsReportDialog({ data, trigger }: Props) {
 
           <DialogFooter className="sm:justify-between">
             <DialogClose asChild>
-              <Button variant="outline" color="accent">
+              <Button variant="outline" color="accent" disabled={isPending}>
+                {isPending && <Icons.Spinner className="animate-spin" />}
                 {i18n("dialog.report_details.cancel")}
               </Button>
             </DialogClose>
-            <Button variant="default" color="danger">
+            <Button
+              variant="default"
+              color="danger"
+              disabled={isPending}
+              onClick={() => mutate({ reportId: data.id })}
+            >
+              {isPending && <Icons.Spinner className="animate-spin" />}
               {i18n("dialog.report_details.confirm")}
             </Button>
           </DialogFooter>
