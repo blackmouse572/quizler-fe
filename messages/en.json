@@ -1354,9 +1354,20 @@
       "not_found": "Game not found",
       "user_not_found": "User not found"
     },
-    "Login": {
-      "WrongEmailPassword": "Email or password is incorrect",
-      "IssueToken": "Error when issues token"
+    "Token": {
+      "Issue": "Error when issues token",
+      "Invalid": "Invalid token"
+    },
+    "ChangePassword": {
+      "WrongOldPassword": "Wrong old password"
+    },
+    "Classroom": {
+      "ExistedMember": "ClassroomMember already exists.",
+      "AlreadyBanned": "User(s) was already banned",
+      "NoMember": "Classroom has no member"
+    },
+    "Quizbank": {
+      "NotFound": "Quizbank not found"
     }
   },
   "Validations": {
