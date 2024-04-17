@@ -93,6 +93,7 @@ function PlayGame({ initData }: PlayGameProps) {
   const handleSubmitted = useCallback(() => {
     setIsSubmitted(true)
     submitAnswer(answer)?.catch((e) => {
+      console.debug(e)
       setError(errorI18n("game.not_found"))
     })
   }, [answer, errorI18n, submitAnswer])
@@ -114,6 +115,7 @@ function PlayGame({ initData }: PlayGameProps) {
       connectToGame(+initData.id)
         ?.then(() => {})
         .catch((e) => {
+          console.debug(e)
           setError(errorI18n("game.already-joined"))
         })
     })
