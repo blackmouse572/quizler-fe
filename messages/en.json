@@ -1648,8 +1648,8 @@
         "cancel": "Cancel"
       },
       "success": {
-        "title": "Invited user",
-        "description": "You have invited the user successfully"
+        "title": "Invite user(s) successfully",
+        "description": "You have invited the user(s) successfully"
       }
     }
   },
