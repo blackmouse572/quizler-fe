@@ -56,8 +56,10 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
               aria-selected={selectedPlan?.id === plan.id}
             >
               <CardHeader>
-                <CardTitle>{plan.title}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
+                <CardTitle>{t(`plans.plans.${plan.title}.title` as any)}</CardTitle>
+                <CardDescription>
+                  {t(`plans.plans.${plan.description}` as any)}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="font-heading text-3xl font-bold">
@@ -136,8 +138,10 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
         aria-selected={selectedPlan?.id === currentPlan.id}
       >
         <CardHeader>
-          <CardTitle>{currentPlan.title}</CardTitle>
-          <CardDescription>{currentPlan.description}</CardDescription>
+          <CardTitle>{t(`plans.plans.${currentPlan.title}.title` as any)}</CardTitle>
+          <CardDescription>
+            {t(`plans.plans.${currentPlan.description}` as any)}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <p className="font-heading text-3xl font-bold">
@@ -208,8 +212,10 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
               aria-selected={selectedPlan?.id === plan.id}
             >
               <CardHeader>
-                <CardTitle>{plan.title}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
+                <CardTitle>{t(`plans.plans.${plan.title}.title` as any)}</CardTitle>
+                <CardDescription>
+                  {t(`plans.plans.${plan.description}` as any)}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="font-heading text-3xl font-bold">
