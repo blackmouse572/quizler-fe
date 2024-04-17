@@ -94,7 +94,7 @@ async function ClassroomDetailLayout({ children, params }: Props) {
       </div>
       <Separator />
       <NextIntlClientProvider
-        messages={_.pick(msg, "ClassroomDetails", "Errors")}
+        messages={_.pick(msg, "ClassroomDetails", "Editor", "Errors")}
       >
         <SideMenu items={CLASSROOM_SIDEBAR} namespace="ClassroomDetails" />
         {children}

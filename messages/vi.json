@@ -992,24 +992,21 @@
             "feature4": "Sở hữu đến 3 lớp học"
           }
         },
-        "learner": {
-          "title": "Học viên",
-          "description": "Học theo cách của mình",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
-            "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 10 lớp học"
-          }
+        "warmup_member": {
+          "title": "Thành viên khởi động",
+          "description": "Gói khởi động, dành cho thành viên mới"
         },
-        "expert": {
-          "title": "Chuyên gia",
-          "description": "Tìm kiếm kiến thức",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
-            "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 20 lớp học"
-          }
-        }
+        "standard_member": {
+          "title": "Thành viên tiêu chuẩn",
+          "description": "Vui hơn khi sử dụng"
+        },
+        "premium_member": {
+          "title": "Thành viên cao cấp",
+          "description": "Thỏa sức vui chơi"
+        },
+        "maxAI": "Số câu hỏi AI tối đa mỗi ngày: {times}",
+        "maxClassroom": "Số lớp học có thể tạo: {times}",
+        "maxStudent": "Tối đa học sinh trong lớp: {times}"
       },
       "upgrade_dialog": {
         "buttons": {

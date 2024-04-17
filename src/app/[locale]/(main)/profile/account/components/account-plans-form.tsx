@@ -23,12 +23,12 @@ type Props = {
 
 function AccountPlanSelectionForm({ action, plans }: Props) {
   const t = useTranslations("Settings")
-  const seletedIds = plans
-    .filter((plan) => plan.isCurrent)
-    .map((plan) => plan.id)
   const [selectedPlan, setSelectedPlan] = useState<Plan>(plans[0])
   const format = useFormatter()
   const currentPlan = plans.filter((plan) => plan.isCurrent)[0]
+
+  // this is currency / divisionRatio = real currency
+  const divisionRatio = 100
   const onPlanChange = useCallback(
     (id: number) => {
       setSelectedPlan(plans.filter((i) => i.id === id)[0])
@@ -56,18 +56,20 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
               aria-selected={selectedPlan?.id === plan.id}
             >
               <CardHeader>
-                <CardTitle>{plan.title}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
+                <CardTitle>{t(`plans.plans.${plan.title}.title` as any)}</CardTitle>
+                <CardDescription>
+                  {t(`plans.plans.${plan.description}` as any)}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="font-heading text-3xl font-bold">
                   <span className="text-4xl">
-                    {format.number(plan.amount, {
+                    {format.number(plan.amount / divisionRatio, {
                       style: "currency",
                       currency: "USD",
                       compactDisplay: "short",
                       localeMatcher: "best fit",
-                      maximumFractionDigits: 0,
+                      maximumFractionDigits: 2,
                     })}
                   </span>
                   <span className="text-gray-500">
@@ -104,7 +106,7 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
                   </li>
                 </ul>
               </CardFooter>
-              {plan.isCurrent ? (
+              {plan.isCurrent && plan.amount !== 0 ? (
                 <div className="absolute bottom-6 left-5">
                   <CancelSubscription plan={plan} />
                 </div>
@@ -136,18 +138,20 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
         aria-selected={selectedPlan?.id === currentPlan.id}
       >
         <CardHeader>
-          <CardTitle>{currentPlan.title}</CardTitle>
-          <CardDescription>{currentPlan.description}</CardDescription>
+          <CardTitle>{t(`plans.plans.${currentPlan.title}.title` as any)}</CardTitle>
+          <CardDescription>
+            {t(`plans.plans.${currentPlan.description}` as any)}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <p className="font-heading text-3xl font-bold">
             <span className="text-4xl">
-              {format.number(currentPlan.amount, {
+              {format.number(currentPlan.amount / divisionRatio, {
                 style: "currency",
                 currency: "USD",
                 compactDisplay: "short",
                 localeMatcher: "best fit",
-                maximumFractionDigits: 0,
+                maximumFractionDigits: 2,
               })}
             </span>
             <span className="text-gray-500">
@@ -208,18 +212,20 @@ function AccountPlanSelectionForm({ action, plans }: Props) {
               aria-selected={selectedPlan?.id === plan.id}
             >
               <CardHeader>
-                <CardTitle>{plan.title}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
+                <CardTitle>{t(`plans.plans.${plan.title}.title` as any)}</CardTitle>
+                <CardDescription>
+                  {t(`plans.plans.${plan.description}` as any)}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="font-heading text-3xl font-bold">
                   <span className="text-4xl">
-                    {format.number(plan.amount, {
+                    {format.number(plan.amount / divisionRatio, {
                       style: "currency",
                       currency: "USD",
                       compactDisplay: "short",
                       localeMatcher: "best fit",
-                      maximumFractionDigits: 0,
+                      maximumFractionDigits: 2,
                     })}
                   </span>
                   <span className="text-gray-500">
