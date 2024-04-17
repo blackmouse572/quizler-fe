@@ -153,6 +153,7 @@
         "load_more": "Tải thêm bình luận",
         "action": "Bình luận",
         "delete": "Xóa",
+        "edit": "Chỉnh sửa",
         "delete_success": "Xóa bình luận thành công"
       },
       "delete": {
@@ -250,6 +251,9 @@
             "description": "Nhấp vào đây để sao chép liên kết trò chơi"
           }
         }
+      },
+      "view_game_result": {
+        "title": "Xem kết quả"
       },
       "leave": {
         "title": "Rời khỏi trò chơi",
@@ -751,7 +755,9 @@
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
       "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
-      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm"
+      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm",
+      "subcribe_plan": "Người dùng {user} đã đăng kí thành công gói {objectName}",
+      "cancel_plan": "Người dùng {user} đã hủy gói {objectName} thành công"
     }
   },
   "Navbar": {
@@ -979,37 +985,25 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
-        "maxAI": "Số lần sử dụng A.I {times}",
+        "normal_member": {
+          "title": "Thành viên thông thường",
+          "description": "Dành cho mọi người"
+        },
+        "warmup_member": {
+          "title": "Thành viên khởi động",
+          "description": "Gói khởi động, dành cho thành viên mới"
+        },
+        "standard_member": {
+          "title": "Thành viên tiêu chuẩn",
+          "description": "Vui hơn khi sử dụng"
+        },
+        "premium_member": {
+          "title": "Thành viên cao cấp",
+          "description": "Thỏa sức vui chơi"
+        },
+        "maxAI": "Số câu hỏi AI tối đa mỗi ngày: {times}",
         "maxClassroom": "Số lớp học: {times}",
-        "maxStudent": "Số học sinh mỗi lớp học: {times}",
-        "hobby": {
-          "title": "Sở thích",
-          "description": "Khởi động",
-          "features": {
-            "feature1": "Học các ngân hàng công hỏi công khai",
-            "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
-            "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
-            "feature4": "Sở hữu đến 3 lớp học"
-          }
-        },
-        "learner": {
-          "title": "Học viên",
-          "description": "Học theo cách của mình",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
-            "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 10 lớp học"
-          }
-        },
-        "expert": {
-          "title": "Chuyên gia",
-          "description": "Tìm kiếm kiến thức",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
-            "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 20 lớp học"
-          }
-        }
+        "maxStudent": "Số học sinh mỗi lớp học: {times}"
       },
       "upgrade_dialog": {
         "buttons": {
@@ -1017,7 +1011,8 @@
           "cancel": "Hủy"
         },
         "title": "Nâng cấp gói cá nhân thành {plan}",
-        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói",
+        "success": "Bạn đã nâng cấp gói thành công"
       },
       "cancel_dialog": {
         "buttons": {
