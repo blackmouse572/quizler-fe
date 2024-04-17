@@ -18,243 +18,96 @@
       }
     },
     "explain_offering_customer": {
-      "index": "Trao tiềm lực vô hạn cho mọi sinh viên",
+      "index": "Học với nguồn lực vô tận",
       "paragraph": {
         "para_1": "Tại Quizlearn, chúng tôi tin rằng bất cứ ai cũng có thể học bất cứ điều gì. Chỉ cần họ có tinh thần kiên trì, được hướng dẫn đúng cách và có các công cụ phù hợp để thành công. Chúng tôi biết rằng sinh viên đang chịu nhiều áp lực hơn bao giờ hết. Điều đó có thể khiến họ quá tải, gây lo âu và bào mòn sức lực nhanh chóng. ",
         "para_2": "Nhiệm vụ của chúng tôi là cung cấp cho mọi sinh viên các công cụ và sự tự tin để thành công, bất kể động lực và mục tiêu của họ là gì."
       }
     }
   },
-  "Notification": {
-    "user": {
-      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
-      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
-      "invite_classroom": "Bạn đã được mời tham gia lớp học {objectName}",
-      "kick_classroom": "Bạn đã bị đá ra khỏi lớp học {objectName}",
-      "ban_classroom": "Bạn đã bị cấm tham gia lớp học {objectName}",
-      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
-      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
-      "reported": "Bạn đã bị báo cáo do vi phạm",
-      "warning": "Bạn đã bị cảnh cáo do vi phạm",
-      "subcribe_plan": "Bạn đã đăng kí thành công gói {objectName}",
-      "cancel_plan": "Gói {objectName} của bạn đã hủy thành công"
-    },
-    "admin": {
-      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
-      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
-      "invite_classroom": "Người dùng {user} đã được mời tham gia lớp học {objectName}",
-      "kick_classroom": "Người dùng {user} đã bị đá ra khỏi lớp học {objectName}",
-      "ban_classroom": "Người dùng {user} đã bị cấm tham gia lớp học {objectName}",
-      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
-      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
-      "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
-      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm",
-      "subcribe_plan": "Người dùng {user} đã đăng kí thành công gói {objectName}",
-      "cancel_plan": "Người dùng {user} đã hủy gói {objectName} thành công"
-    }
-  },
-  "Navbar": {
-    "home": "Trang chủ",
-    "classrooms": "Lớp học",
-    "quizbanks": "Ngân hàng câu hỏi",
-    "contact": "Liên hệ",
-    "about": "Giới thiệu",
-    "signin": "Đăng nhập",
-    "signup": "Đăng ký",
-    "getting_started": "Bắt đầu",
-    "how_it_work": "Cách thức hoạt động?",
-    "doc": "Tài liệu",
-    "my_quizlearn": "Quizlearn của tôi",
-    "my_classrooms": "Lớp học của tôi",
-    "subjects": "Môn",
-    "notification": "Thông báo",
-    "buy-premium": {
-      "title": "Càng đông, càng vui",
-      "description": "Lớp vui hơn với tài khoản cao cấp",
-      "action": "Nâng cấp tài khoản"
-    },
-    "getting_started_sec": {
-      "introduction": {
-        "title": "Giới thiệu",
-        "description": "Quizlearn là gì và nó hoạt động như thế nào?"
-      },
-      "classroom": {
-        "title": "Lớp học",
-        "description": "Thêm niềm vui với lớp học của bạn"
-      },
-      "ai": {
-        "title": "AI",
-        "description": "Biết thêm thông tin với trí tuệ nhân tạo"
-      }
-    },
-    "subject_item": {
-      "Math": "Toán",
-      "Literatue": "Ngữ văn",
-      "Science": "Khoa học",
-      "History": "Lịch sử",
-      "Geography": "Địa lý",
-      "Literature": "Văn học",
-      "Languages": "Ngoại ngữ",
-      "Computer Science": "Khoa học máy tính",
-      "Other": "Khác"
-    },
-    "nav_search": {
-      "search": "Tôi nên học...",
-      "no_search_result_found": "Không có kết quả.",
-      "type_something": "Gõ vài từ để tìm kiếm...",
-      "error_fetching_search": "Đã có lỗi xảy ra, vui lòng thử lại sau",
-      "see_more_results": "Xem thêm"
-    }
-  },
-  "ClassroomGame": {
-    "actions": {
-      "create": {
-        "description": "Tạo trò chơi mới cho lớp học của bạn",
-        "form": {
-          "amount": {
-            "label": "Số câu hỏi",
-            "placeholder": "Số câu hỏi?"
-          },
-          "cancel": "Hủy",
-          "duration": {
-            "label": "Thời gian",
-            "placeholder": "Trò chơi kéo dài trong bao lâu?"
-          },
-          "endTime": {
-            "label": "Thời gian kết thúc",
-            "placeholder": "Trò chơi sẽ kết thúc khi nào?"
-          },
-          "name": {
-            "label": "Tên",
-            "placeholder": "Tên trò chơi"
-          },
-          "quizbank": {
-            "empty": "Không tìm thấy kết quả",
-            "label": "Ngân hàng câu hỏi",
-            "placeholder": "Chọn ngân hàng câu hỏi"
-          },
-          "startTime": {
-            "label": "Thời gian bắt đầu",
-            "placeholder": "Trò chơi sẽ bắt đầu khi nào?"
-          },
-          "submit": "Tạo",
-          "success": {
-            "description": "Nhấp vào đây để sao chép liên kết trò chơi",
-            "title": "Tạo trò chơi thành công"
-          }
-        },
-        "index": "Trò chơi mới",
-        "title": "Tạo trò chơi mới"
-      },
-      "view_game_result": {
-        "title": "Xem kết quả"
-      },
-      "leave": {
-        "title": "Rời khỏi trò chơi",
-        "description": "Bạn có muốn rời khỏi trò chơi? Bạn sẽ không thể tham gia lại trò chơi",
-        "confirm": "Rời",
-        "cancel": "Hủy"
-      }
-    },
-    "card": {
-      "active": "Đang diễn ra",
-      "inactive": "Đã kết thúc",
-      "join": "Tham gia trò chơi",
-      "unlimited": "Không giới hạn"
-    },
-    "headers": {},
-    "metadata": {
-      "description": "Tất cả các trò chơi của lớp học",
-      "title": "Trò chơi lớp học"
-    }
-  },
-  "ClassroomQuizBank": {
-    "metadata": {
-      "title": "QuizBank trong lớp học",
-      "description": "Tất cả Quiz Bank trong lớp"
-    },
-    "actions": {
-      "create": {
-        "index": "Thêm quiz bank trong lớp"
-      }
-    },
-    "terms": "Thuật ngữ",
+  "Table": {
+    "no_data": "Không có dữ liệu",
+    "no_results": "Không tìm thấy kết quả",
+    "loading": "Đang tải...",
+    "selected_rows": "Đã chọn {count}/{total} hàng",
+    "action": "Hành động",
+    "search": "Tìm kiếm",
+    "search_placeholder": "Tìm kiếm...",
+    "export": "Xuất",
+    "export_csv": "Xuất ra CSV",
+    "export_excel": "Xuất ra Excel",
+    "export_pdf": "Xuất ra PDF",
+    "export_print": "In",
+    "selected": "Đã chọn",
+    "all": "Tất cả",
+    "clear": "Xóa lựa chọn",
+    "reset": "Huỷ bỏ",
+    "reload": "Tải lại",
+    "column_visibility": "Hiển thị cột",
+    "column_selection": "Chọn cột",
+    "save": "Lưu",
+    "save_and_close": "Lưu và đóng",
+    "save_and_new": "Lưu và tiếp theo",
+    "cancel": "Huỷ bỏ",
     "delete": "Xoá",
+    "delete_title": "Xoá bản ghi",
+    "delete_message": "Bạn có chắc chắn muốn xoá <span></span> bản ghi không?",
+    "ban": "Cấm",
+    "unban": "Phục Hồi",
     "edit": "Chỉnh sửa",
-    "cancel": "Huỷ bỏ"
-  },
-  "ClassroomDetails": {
-    "members": "Thành viên",
-    "navbar": {
-      "games": "Trò chơi",
-      "index": "Lớp học",
-      "members": "Thành viên",
-      "quizbanks": "Quizbanks"
-    },
-    "posts": {
-      "index": "Bài đăng",
-      "action": "Đăng",
-      "link-game": "Đính kèm trò chơi",
-      "placeholder": "Bạn đang nghĩ gì?",
-      "link-quiz": "Đính kèm ngân hàng câu hỏi",
-      "comments-count": "{count} thành viên đã bình luận",
-      "search": {
-        "placeholder": "Tìm kiếm ...",
-        "empty": "Không có kết quả"
-      },
-      "comments": {
-        "index": "Bình luận",
-        "action": "Bình luận",
-        "delete": "Xóa",
-        "edit":"Chỉnh sửa",
-        "delete_success": "Xóa bình luận thành công",
-        "load_more": "Tải thêm bình luận"
-      },
-      "delete": {
-        "title": "Xóa bài đăng",
-        "description": "Bạn có chắc chắn muốn xóa bài đăng này không?",
-        "comment_description": "Bạn có chắc chắn muốn xoá bình luận này không?",
-        "confirm": "Xóa",
-        "cancel": "Hủy",
-        "success": "Xóa bài đăng thành công"
-      },
-      "edit": {
-        "title": "Chỉnh sửa bài đăng",
-        "description": "Chỉnh sửa bài đăng của bạn",
-        "confirm": "Lưu thay đổi",
-        "cancel": "Hủy bỏ",
-        "success": "Đã cập nhật bài đăng"
-      },
-      "report": {
-        "action": "Báo cáo"
-      },
-      "post": {
-        "index": "{user} đã tạo một bài đăng",
-        "game": "{user} đã tạo một trò chơi: {game}. Tham gia ngay !!!",
-        "quizbank": "{user} đã tạo một quizbank. Học ngay !!!"
-      },
-      "help": {
-        "title": "Trợ giúp",
-        "confirm": "Xác nhận"
-      },
-      "questions": "{count} câu hỏi",
-      "cards": "{count} thẻ",
-      "empty": "Không có bài đăng nào trong lớp học này, hãy tạo một"
-    }
+    "create": "Tạo mới",
+    "show": "Xem",
+    "show_more": "Xem thêm",
+    "show_less": "Thu gọn",
+    "next": "Tiếp theo",
+    "prev": "Trước",
+    "first": "Đầu",
+    "last": "Cuối",
+    "page": "Trang",
+    "goto_page": "Đến trang",
+    "rows_per_page": "Hàng mỗi trang",
+    "filter": "Lọc",
+    "filters": "Bộ lọc",
+    "filter_by": "Lọc theo",
+    "filter_placeholder": "Lọc theo...",
+    "limit": "Số lượng",
+    "sort_by": "Sắp xếp theo",
+    "sort_asc": "Sắp xếp tăng dần",
+    "sort_desc": "Sắp xếp giảm dần",
+    "add_filter": "Thêm bộ lọc",
+    "remove_filter": "Xoá bộ lọc",
+    "clear_filter": "Xoá toàn bộ",
+    "clear_all": "Xoá toàn bộ",
+    "show_column": "Hiển thị cột",
+    "hide_column": "Giấu cột",
+    "refresh": "Tải lại",
+    "refresh_data": "Tải lại",
+    "refreshed": "Đã tải lại",
+    "column": "Cột",
+    "error": "Lỗi",
+    "edit_row": "Chỉnh sửa",
+    "clone_row": "Nhân đôi",
+    "delete_row": "Xoá",
+    "validation": "Xác thực",
+    "warning": "Cảnh báo",
+    "success": "Thành công",
+    "apply": "Áp dụng",
+    "take-placeholder": "Hành động",
+    "take-value": "Hiển thị {count} dòng"
   },
   "Classroom": {
-    "headers": {
-      "created_at": "Ngày tạo",
-      "description": "Mô tả",
-      "games": "Trò chơi",
-      "members": "Thành viên",
-      "name": "Tên",
-      "quizbanks": "Ngân hàng câu hỏi",
-      "visibility": "Hiển thị"
-    },
     "metadata": {
-      "description": "Quản lý tất cả các lớp học trong hệ thống",
-      "title": "Lớp học"
+      "title": "Lớp học",
+      "description": "Quản lý tất cả các lớp học trong hệ thống"
+    },
+    "headers": {
+      "name": "Tên",
+      "description": "Mô tả",
+      "members": "Thành viên",
+      "games": "Trò chơi",
+      "quizbanks": "Ngân hàng câu hỏi",
+      "visibility": "Hiển thị",
+      "created_at": "Ngày tạo"
     },
     "actions": {
       "create": "Tạo lớp học",
@@ -278,9 +131,148 @@
         }
       },
       "edit": {
-        "index": "Edit"
+        "index": "Chỉnh sửa"
       }
     }
+  },
+  "ClassroomDetails": {
+    "members": "Thành viên",
+    "posts": {
+      "index": "Bài đăng",
+      "action": "Đăng",
+      "link-game": "Đính kèm trò chơi",
+      "placeholder": "Bạn đang nghĩ gì?",
+      "link-quiz": "Đính kèm ngân hàng câu hỏi",
+      "comments-count": "{count} thành viên đã bình luận",
+      "search": {
+        "placeholder": "Tìm kiếm ...",
+        "empty": "Không có kết quả"
+      },
+      "comments": {
+        "index": "Bình luận",
+        "load_more": "Tải thêm bình luận",
+        "action": "Bình luận",
+        "delete": "Xóa",
+        "delete_success": "Xóa bình luận thành công"
+      },
+      "delete": {
+        "title": "Xóa bài đăng",
+        "description": "Bạn có chắc chắn muốn xóa bài đăng này không?",
+        "comment_description": "Bạn có chắc chắn muốn xoá bình luận này không?",
+        "confirm": "Xóa",
+        "cancel": "Hủy",
+        "success": "Xóa bài đăng thành công"
+      },
+      "edit": {
+        "title": "Chỉnh sửa bài đăng",
+        "description": "Chỉnh sửa bài đăng của bạn",
+        "confirm": "Lưu thay đổi",
+        "cancel": "Hủy bỏ",
+        "success": "Đã cập nhật bài đăng"
+      },
+      "report": {
+        "action": "Báo cáo"
+      },
+      "post": {
+        "index": "{user} đã tạo một bài đăng",
+        "game": "{user} đã tạo một trò chơi: {game}. Tham gia ngay !!!",
+        "quizbank": "{user} đã tạo một Quizbank. Học ngay !!!"
+      },
+      "help": {
+        "title": "Trợ giúp",
+        "confirm": "Xác nhận"
+      },
+      "questions": "{count} câu hỏi",
+      "cards": "{count} thẻ",
+      "empty": "Không có bài đăng nào trong lớp học này, hãy tạo một"
+    },
+    "navbar": {
+      "index": "Lớp học",
+      "members": "Thành viên",
+      "games": "Trò chơi",
+      "quizbanks": "Ngân hàng câu hỏi"
+    }
+  },
+  "ClassroomGame": {
+    "metadata": {
+      "title": "Trò chơi lớp học",
+      "description": "Tất cả các trò chơi của lớp học"
+    },
+    "headers": {},
+    "card": {
+      "active": "Đang diễn ra",
+      "inactive": "Đã kết thúc",
+      "join": "Tham gia trò chơi",
+      "unlimited": "Không giới hạn"
+    },
+    "actions": {
+      "create": {
+        "index": "Trò chơi mới",
+        "title": "Tạo trò chơi mới",
+        "description": "Tạo trò chơi mới cho lớp học của bạn",
+        "form": {
+          "name": {
+            "label": "Tên",
+            "placeholder": "Tên trò chơi"
+          },
+          "amount": {
+            "label": "Số câu hỏi",
+            "placeholder": "Số câu hỏi?"
+          },
+          "duration": {
+            "label": "Thời gian",
+            "placeholder": "Trò chơi kéo dài trong bao lâu?"
+          },
+          "startTime": {
+            "label": "Thời gian bắt đầu",
+            "placeholder": "Trò chơi sẽ bắt đầu khi nào?"
+          },
+          "endTime": {
+            "label": "Thời gian kết thúc",
+            "placeholder": "Trò chơi sẽ kết thúc khi nào?"
+          },
+          "quizbank": {
+            "label": "Ngân hàng câu hỏi",
+            "placeholder": "Chọn ngân hàng câu hỏi",
+            "empty": "Không tìm thấy kết quả"
+          },
+          "gameType": {
+            "label": "Loại game",
+            "dnd": "Kéo thả",
+            "mcq": "Chọn câu trả lời đúng",
+            "tf": "Đúng / Sai",
+            "fill": "Điền vào chỗ trống"
+          },
+          "submit": "Tạo",
+          "cancel": "Hủy",
+          "success": {
+            "title": "Tạo trò chơi thành công",
+            "description": "Nhấp vào đây để sao chép liên kết trò chơi"
+          }
+        }
+      },
+      "leave": {
+        "title": "Rời khỏi trò chơi",
+        "description": "Bạn có muốn rời khỏi trò chơi? Bạn sẽ không thể tham gia lại trò chơi",
+        "confirm": "Rời",
+        "cancel": "Hủy"
+      }
+    }
+  },
+  "ClassroomQuizBank": {
+    "metadata": {
+      "title": "QuizBank trong lớp học",
+      "description": "Tất cả Quiz Bank trong lớp"
+    },
+    "actions": {
+      "create": {
+        "index": "Thêm quiz bank trong lớp"
+      }
+    },
+    "terms": "Thuật ngữ",
+    "delete": "Xoá",
+    "edit": "Chỉnh sửa",
+    "cancel": "Huỷ bỏ"
   },
   "Members_classroom": {
     "metadata": {
@@ -392,170 +384,6 @@
       }
     }
   },
-  "CategoryQuizBank": {
-    "metadata": {
-      "title": "Mục lục ngân hàng câu hỏi",
-      "description": "Tìm kiếm ngân hàng bẳng thẻ"
-    },
-    "headers": {
-      "index": "Tất cả ngân hàng câu hỏi chứa thẻ {category}"
-    },
-    "terms": "Thuật ngữ",
-    "delete": "Xoá",
-    "edit": "Chỉnh sửa",
-    "cancel": "Huỷ bỏ"
-  },
-  "SearchPage": {
-    "search_error": "Đã có lỗi xảy ra, vui lòng thử lại sau",
-    "results_for": "Kết quả cho",
-    "filter": {
-      "take": "take",
-      "skip": "skip",
-      "take_placeholder": "Lấy số kết quả",
-      "skip_placeholder": "Trang"
-    },
-    "quizbanks": "Các học phần",
-    "classrooms": "Lớp học",
-    "students": "học sinh",
-    "quizzes": "Câu hỏi nằm trong QuizBank",
-    "users": "Người dùng",
-    "posts": "Các bài đăng trong lớp học",
-    "loading": "Đang tải...",
-    "no_results": "Không có kết quả"
-  },
-  "Footer": {
-    "description": "Học nhanh, học vui"
-  },
-  "SignIn": {
-    "title": "Chào mừng trở lại!",
-    "descritpion": "Bạn quên<forgot> mật khẩu?</forgot> Hoặc bạn cần<need> một tài khoản?</need>",
-    "form": {
-      "email": {
-        "label": "Email",
-        "placeholder": "Nhập email của bạn"
-      },
-      "password": {
-        "label": "Mật khẩu",
-        "placeholder": "Nhập mật khẩu của bạn"
-      },
-      "remember": "Nhớ mật khẩu",
-      "submit": "Đăng nhập",
-      "google": "Đăng nhập bằng Google"
-    },
-    "success": {
-      "index": "Đăng nhập thành công!"
-    },
-    "error": {
-      "google": "Đăng nhập bằng Google thất bại:",
-      "invalid_popup": "Cửa sổ đăng nhập đã bị chặn. Vui lòng kiểm tra lại cài đặt trình duyệt của bạn.",
-      "not_found": "Tài khoản không tồn tại"
-    }
-  },
-  "SignUp": {
-    "title": "Tạo tài khoản mới để khám phá",
-    "description": "Đã có tài khoản? Đăng nhập ngay <login>tại đây</login>",
-    "form": {
-      "name": {
-        "label": "Họ và tên",
-        "placeholder": "Bạn muốn gọi là gì?"
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "Chỉ để gửi những thông tin thú vị đến bạn"
-      },
-      "username": {
-        "label": "Tên đăng nhập",
-        "placeholder": "Chỉ để gửi những thông tin thú vị đến bạn"
-      },
-      "password": {
-        "label": "Mật khẩu",
-        "placeholder": "********"
-      },
-      "confirm": {
-        "label": "Xác nhận mật khẩu",
-        "placeholder": "********"
-      },
-      "gender": {
-        "label": "Giới tính",
-        "placeholder": "Chọn giới tính",
-        "type": {
-          "Male": {
-            "value": "Nam"
-          },
-          "Female": {
-            "value": "Nữ"
-          },
-          "Other": {
-            "value": "Khác"
-          }
-        }
-      },
-      "dob": {
-        "label": "Ngày sinh",
-        "placeholder": "Chọn ngày sinh"
-      },
-      "submit": "Đăng ký"
-    }
-  },
-  "VerifySignUp": {
-    "title": "Tạo tài khoản mới để khám phá",
-    "description": "Chúng tôi đã gửi mã xác nhận đến email của bạn.<br></br>Bạn đã nhận được nó chưa? <resent>Gửi lại</resent>",
-    "form": {
-      "title": "Nhập mã OTP",
-      "submit": "Xác nhận"
-    },
-    "signup-success": "Tài khoản đã được xác thực 💖",
-    "login": "Đăng nhập"
-  },
-  "Table": {
-    "no_data": "Không có dữ liệu",
-    "no_results": "Không tìm thấy kết quả",
-    "loading": "Đang tải...",
-    "selected_rows": "Đã chọn {count} hàng",
-    "action": "Hành động",
-    "search": "Tìm kiếm",
-    "search_placeholder": "Tìm kiếm...",
-    "export": "Xuất",
-    "export_excel": "Xuất ra Excel",
-    "export_csv": "Xuất ra CSV",
-    "export_pdf": "Xuất ra PDF",
-    "all": "Tất cả",
-    "clear": "Xóa lựa chọn",
-    "reset": "Huỷ bỏ",
-    "reload": "Tải lại",
-    "column_visibility": "Hiển thị cột",
-    "column_selection": "Chọn cột",
-    "save": "Lưu",
-    "save_and_close": "Lưu và đóng",
-    "save_and_new": "Lưu và tiếp theo",
-    "cancel": "Huỷ bỏ",
-    "delete": "Xoá",
-    "delete_title": "Xoá bản ghi",
-    "delete_message": "Bạn có chắc chắn muốn xoá <span></span> bản ghi không?",
-    "ban": "Cấm",
-    "unban": "Phục Hồi",
-    "edit": "Chỉnh sửa",
-    "create": "Tạo mới",
-    "show": "Xem",
-    "show_more": "Xem thêm",
-    "show_less": "Thu gọn",
-    "next": "Tiếp theo",
-    "prev": "Trước",
-    "first": "Đầu",
-    "last": "Cuối",
-    "goto_page": "Đến trang",
-    "filter": "Lọc",
-    "filters": "Bộ lọc",
-    "limit": "Số lượng",
-    "sort_by": "Sắp xếp theo",
-    "sort_asc": "Sắp xếp tăng dần",
-    "sort_desc": "Sắp xếp giảm dần",
-    "warning": "Cảnh báo",
-    "success": "Thành công",
-    "apply": "Áp dụng",
-    "take-placeholder": "Hành động",
-    "take-value": "Hiển thị {count} dòng"
-  },
   "MyQuizbanks": {
     "metadata": {
       "title": "Quản lý ngân hàng câu hỏi",
@@ -568,7 +396,7 @@
     "edit": "Chỉnh sửa",
     "delete": "Xoá",
     "cancel": "Huỷ",
-    "add_quizbank": "Tạo quizbank mới"
+    "add_quizbank": "Tạo Quizbank mới"
   },
   "DashboardAdmin": {
     "metadata": {
@@ -608,7 +436,7 @@
   },
   "QuizBankAdmin": {
     "metadata": {
-      "title": "Quản lý Quiz",
+      "title": "Quản lý QuizBank",
       "description": "Quản lý tất cả các Quiz của bạn"
     },
     "headers": {
@@ -663,7 +491,7 @@
       }
     },
     "error": {
-      "title": "Đã có lỗi xảy ra, vui lòng thử lại sau"
+      "title": "Có gì đó không đúng đã xảy ra."
     }
   },
   "UserAdmin": {
@@ -743,7 +571,7 @@
       }
     },
     "errors": {
-      "index": "Đã có lỗi xảy ra, vui lòng thử lại sau"
+      "title": "Có gì đó không đúng đã xảy ra."
     }
   },
   "ClassroomAdmin": {
@@ -759,19 +587,22 @@
       "created_at": "Ngày tạo",
       "isStudentAllowInvite": "Học sinh có thể mời"
     },
+    "data_table": {
+      "active": "Chưa kích hoạt"
+    },
     "filters": {
       "visibility": {
-        "label": "Visibility",
-        "placeholder": "Select visibility",
+        "label": "Hiển thị",
+        "placeholder": "Chọn hiển thị",
         "type": {
           "Public": {
-            "value": "Public"
+            "value": "Công khai"
           },
           "Private": {
-            "value": "Private"
+            "value": "Riêng tư"
           },
           "All": {
-            "value": "All"
+            "value": "Tất cả"
           }
         }
       }
@@ -859,43 +690,221 @@
         },
         "error": {
           "title": "Xác minh báo cáo thất bại"
-        },
-        "delete_report": {
-          "success": {
-            "title": "Thành công xóa báo cáo",
-            "message": {
-              "success": "Báo cáo đã được xóa thành công"
-            }
-          },
-          "error": {
-            "title": "Xóa"
+        }
+      },
+      "delete_report": {
+        "success": {
+          "title": "Delete report successfully",
+          "message": {
+            "success": "The report(s) has been deleted successfully"
           }
         },
-        "dialog": {
-          "report_details": {
-            "title": "Báo cáo chi tiết",
-            "content": {
-              "quizbank_name": "Tên ngân hàng bị báo cáo",
-              "quizbank_id": "ID ngân hàng bị báo cáo",
-              "account_name": "Tên tài khoản bị báo cáo",
-              "account_id": "ID tài khoản bị báo cáo",
-              "reason": "Lí do",
-              "created_at": "Ngày tạo"
-            },
-            "cancel": "Hủy",
-            "confirm": "Chấp nhận báo cáo"
-          }
-        },
-        "report_reason": {
-          "reason_choice": {
-            "abuse": "Lạm dụng",
-            "inappropriate": "Không phù hợp",
-            "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
-            "other": "Khác"
-          }
+        "error": {
+          "title": "Failed to delete report"
         }
       }
+    },
+    "dialog": {
+      "report_details": {
+        "title": "Báo cáo chi tiết",
+        "content": {
+          "quizbank_name": "Tên ngân hàng bị báo cáo",
+          "quizbank_id": "ID ngân hàng bị báo cáo",
+          "account_name": "Tên tài khoản bị báo cáo",
+          "account_id": "ID tài khoản bị báo cáo",
+          "reason": "Lí do",
+          "created_at": "Ngày tạo"
+        },
+        "cancel": "Hủy",
+        "confirm": "Chấp nhận báo cáo"
+      }
+    },
+    "report_reason": {
+      "reason_choice": {
+        "abuse": "Lạm dụng",
+        "inappropriate": "Không phù hợp",
+        "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+        "other": "Khác"
+      }
     }
+  },
+  "Notification": {
+    "user": {
+      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
+      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
+      "invite_classroom": "Bạn đã được mời tham gia lớp học {objectName}",
+      "kick_classroom": "Bạn đã bị đá ra khỏi lớp học {objectName}",
+      "ban_classroom": "Bạn đã bị cấm tham gia lớp học {objectName}",
+      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
+      "reported": "Bạn đã bị báo cáo do vi phạm",
+      "warning": "Bạn đã bị cảnh cáo do vi phạm",
+      "subcribe_plan": "Gói {objectName} đã được đăng ký thành công",
+      "cancel_plan": "Gói {objectName} của bạn đã được hủy"
+    },
+    "admin": {
+      "deleted_quizbank": "Ngân hàng câu hỏi {objectName} đã bị xóa do vi phạm",
+      "reported_quizbank": "Ngân hàng câu hỏi {objectName} đã bị báo cáo do vi phạm",
+      "invite_classroom": "Người dùng {user} đã được mời tham gia lớp học {objectName}",
+      "kick_classroom": "Người dùng {user} đã bị đá ra khỏi lớp học {objectName}",
+      "ban_classroom": "Người dùng {user} đã bị cấm tham gia lớp học {objectName}",
+      "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
+      "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
+      "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
+      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm"
+    }
+  },
+  "Navbar": {
+    "home": "Trang chủ",
+    "classrooms": "Lớp học",
+    "quizbanks": "Ngân hàng câu hỏi",
+    "contact": "Liên hệ",
+    "about": "Giới thiệu",
+    "signin": "Đăng nhập",
+    "signup": "Đăng ký",
+    "getting_started": "Bắt đầu",
+    "how_it_work": "Cách thức hoạt động?",
+    "doc": "Tài liệu",
+    "my_quizlearn": "Quizlearn của tôi",
+    "my_classrooms": "Lớp học của tôi",
+    "subjects": "Môn",
+    "notification": "Thông báo",
+    "buy-premium": {
+      "title": "Càng đông, càng vui",
+      "description": "Lớp vui hơn với tài khoản cao cấp",
+      "action": "Nâng cấp tài khoản"
+    },
+    "getting_started_sec": {
+      "introduction": {
+        "title": "Giới thiệu",
+        "description": "Quizlearn là gì và nó hoạt động như thế nào?"
+      },
+      "classroom": {
+        "title": "Lớp học",
+        "description": "Thêm niềm vui với lớp học của bạn"
+      },
+      "ai": {
+        "title": "AI",
+        "description": "Biết thêm thông tin với trí tuệ nhân tạo"
+      }
+    },
+    "subject_item": {
+      "Math": "Toán",
+      "Science": "Khoa học",
+      "History": "Lịch sử",
+      "Geography": "Địa lý",
+      "Literature": "Văn học",
+      "Languages": "Ngoại ngữ",
+      "Computer Science": "Khoa học máy tính",
+      "Other": "Khác"
+    },
+    "nav_search": {
+      "search": "Tôi nên học...",
+      "no_search_result_found": "Không có kết quả.",
+      "type_something": "Gõ vài từ để tìm kiếm...",
+      "error_fetching_search": "Đã có lỗi xảy ra, vui lòng thử lại sau",
+      "see_more_results": "Xem thêm"
+    }
+  },
+  "CategoryQuizBank": {
+    "metadata": {
+      "title": "Mục lục ngân hàng câu hỏi",
+      "description": "Tìm kiếm ngân hàng bẳng thẻ"
+    },
+    "headers": {
+      "index": "Tất cả ngân hàng câu hỏi chứa thẻ {category}"
+    },
+    "terms": "Thuật ngữ",
+    "delete": "Xoá",
+    "edit": "Chỉnh sửa",
+    "cancel": "Huỷ bỏ"
+  },
+  "SearchPage": {
+    "search_error": "Đã có lỗi xảy ra, vui lòng thử lại sau",
+    "results_for": "Kết quả cho",
+    "filter": {
+      "take": "Lấy số kết quả",
+      "skip": "Trang",
+      "take_placeholder": "Lấy số kết quả",
+      "skip_placeholder": "Trang"
+    },
+    "quizbanks": "Các học phần",
+    "classrooms": "Lớp học",
+    "students": "học sinh",
+    "quizzes": "Câu hỏi nằm trong QuizBank",
+    "users": "Người dùng",
+    "posts": "Các bài đăng trong lớp học",
+    "loading": "Đang tải...",
+    "no_results": "Không có kết quả"
+  },
+  "Footer": {
+    "description": "Học nhanh, học vui"
+  },
+  "SignIn": {
+    "title": "Chào mừng trở lại!",
+    "descritpion": "Bạn quên<forgot> mật khẩu?</forgot> Hoặc bạn cần<need> một tài khoản?</need>",
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Nhập email của bạn"
+      },
+      "password": {
+        "label": "Mật khẩu",
+        "placeholder": "Nhập mật khẩu của bạn"
+      },
+      "remember": "Nhớ mật khẩu",
+      "submit": "Đăng nhập",
+      "google": "Đăng nhập bằng Google"
+    },
+    "success": {
+      "index": "Đăng nhập thành công!"
+    },
+    "error": {
+      "google": "Đăng nhập bằng Google thất bại:",
+      "invalid_popup": "Cửa sổ đăng nhập đã bị chặn. Vui lòng kiểm tra lại cài đặt trình duyệt của bạn.",
+      "not_found": "Tài khoản không tồn tại"
+    }
+  },
+  "SignUp": {
+    "title": "Tạo tài khoản mới để khám phá",
+    "description": "Đã có tài khoản? Đăng nhập ngay <login>tại đây</login>",
+    "form": {
+      "name": {
+        "label": "Họ và tên",
+        "placeholder": "Bạn muốn gọi là gì?"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Chỉ để gửi những thông tin thú vị đến bạn"
+      },
+      "username": {
+        "label": "Tên đăng nhập",
+        "placeholder": "Chỉ để gửi những thông tin thú vị đến bạn"
+      },
+      "password": {
+        "label": "Mật khẩu",
+        "placeholder": "********"
+      },
+      "confirm": {
+        "label": "Xác nhận mật khẩu",
+        "placeholder": "********"
+      },
+      "dob": {
+        "label": "Ngày sinh",
+        "placeholder": "Chọn ngày sinh"
+      },
+      "submit": "Đăng ký"
+    }
+  },
+  "VerifySignUp": {
+    "title": "Tạo tài khoản mới để khám phá",
+    "description": "Chúng tôi đã gửi mã xác nhận đến email của bạn.<br></br>Bạn đã nhận được nó chưa? <resent>Gửi lại</resent>",
+    "form": {
+      "title": "Nhập mã OTP",
+      "submit": "Xác nhận"
+    },
+    "signup-success": "Tài khoản đã được xác thực 💖",
+    "login": "Đăng nhập"
   },
   "ForgotPassword": {
     "title": "Quên mật khẩu? Đừng lo",
@@ -970,9 +979,18 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
-        "normal_member": {
-          "title": "Thành viên thông thường",
-          "description": "Dành cho mọi người"
+        "maxAI": "Số lần sử dụng A.I {times}",
+        "maxClassroom": "Số lớp học: {times}",
+        "maxStudent": "Số học sinh mỗi lớp học: {times}",
+        "hobby": {
+          "title": "Sở thích",
+          "description": "Khởi động",
+          "features": {
+            "feature1": "Học các ngân hàng công hỏi công khai",
+            "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
+            "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
+            "feature4": "Sở hữu đến 3 lớp học"
+          }
         },
         "warmup_member": {
           "title": "Thành viên khởi động",
@@ -996,17 +1014,16 @@
           "cancel": "Hủy"
         },
         "title": "Nâng cấp gói cá nhân thành {plan}",
-        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói",
-        "success": "Bạn đã nâng cấp gói thành công"
+        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
       },
       "cancel_dialog": {
         "buttons": {
-          "cancel": "Hủy bỏ",
-          "confirm": "Xác nhận"
+          "cancel": "Huỷ gói",
+          "confirm": "Xác nhận huỷ"
         },
-        "title": "Hủy gói {plan} của bạn",
-        "description": "Bạn có chắc chắn muốn hủy gói của bạn không?",
-        "success": "Gói của bạn đã được hủy"
+        "title": "Huỷ gói {plan}",
+        "description": "Bạn có muốn huỷ gói đang sử dụng?",
+        "success": "Gói của bạn đã được huỷ"
       }
     },
     "profile": {
@@ -1026,9 +1043,20 @@
           "dob": "Ngày sinh"
         },
         "submit_btn": "Lưu thay đổi"
+      },
+      "verify": {
+        "title": "Xác thực",
+        "not_verified": "Chưa xác thực"
       }
     },
-    "preference": "Sở thích"
+    "preference": "Sở thích",
+    "success": {
+      "title": "Cập nhật tài khoản",
+      "description": "Tài khoản của bạn đã được cập nhật thành công"
+    },
+    "report": {
+      "index": "Báo cáo"
+    }
   },
   "ViewOtherProfile": {
     "title": "Hồ sơ",
@@ -1044,7 +1072,6 @@
     "profile": "Hồ sơ",
     "billing": "Thanh toán",
     "settings": "Cài đặt",
-    "new_classroom": "Tạo lớp học mới",
     "dashboard": "Bảng điều khiển",
     "classrooms": {
       "index": "Lớp học",
@@ -1067,7 +1094,7 @@
         "dashboard": "Điều khiển",
         "users": "Người dùng",
         "classrooms": "Lớp học",
-        "quizbank": "Ngân hàng",
+        "quizbank": "Ngân hàng câu hỏi",
         "reports": "Báo cáo"
       }
     },
@@ -1077,9 +1104,29 @@
       "signout": "Đăng xuất"
     }
   },
-  "EditQuiz": {
+  "AddQuiz": {
+    "import-form": {
+      "title": "Nhập nhiều quizbank",
+      "descriptions": "Dán dữ liệu từ doc, csv, text vào đây",
+      "data": {
+        "label": "Dữ liệu",
+        "placeholder": "term1,definition1;term2,definition2\nĐiền điều bạn muốn học và bấm sáng tạo"
+      },
+      "itemSeperator": {
+        "label": "Dấu phân cách thuật ngữ",
+        "placeholder": "Nhập phân dấu định nghĩa"
+      },
+      "quizSeperator": {
+        "label": "Dấu phân cách các quizbank",
+        "placeholder": "Nhập phân dấu Quiz"
+      },
+      "ai": {
+        "label": "Sáng tạo",
+        "placeholder": "Nhập dữ liệu và bấm sáng tạo"
+      }
+    },
     "form": {
-      "title": "Chỉnh sửa ngân hàng câu hỏi",
+      "title": "Tạo ngân hàng câu hỏi mới",
       "name": {
         "label": "Tên",
         "placeholder": "Nhập tên ngân hàng câu hỏi"
@@ -1090,8 +1137,8 @@
       },
       "submit": "Thêm",
       "tags": {
-        "label": "Tags",
-        "placeholder": "Nhập tags ngân hàng câu hỏi"
+        "label": "Thẻ",
+        "placeholder": "Nhập thẻ"
       },
       "public": {
         "label": "Công khai",
@@ -1110,23 +1157,94 @@
       }
     }
   },
+  "EditQuiz": {
+    "form": {
+      "title": "Chỉnh sửa ngân hàng câu hỏi",
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên ngân hàng câu hỏi"
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Nhập mô tả ngân hàng câu hỏi"
+      },
+      "submit": "Thêm",
+      "tags": {
+        "label": "Thẻ",
+        "placeholder": "Nhập thẻ"
+      },
+      "public": {
+        "label": "Công khai",
+        "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
+      },
+      "quiz": {
+        "new": "Thêm câu hỏi mới"
+      },
+      "term": {
+        "label": "Thuật ngữ",
+        "placeholder": "Nhập thuật ngữ"
+      },
+      "definition": {
+        "label": "Định nghĩa",
+        "placeholder": "Nhập định nghĩa"
+      }
+    }
+  },
+  "ViewQuizBank": {
+    "ViewFlashcard": {
+      "play_button": "Bắt đầu học",
+      "pause_button": "Tạm dừng thẻ ghi nhớ",
+      "shuffle_button": "Trộn thẻ",
+      "full_screen_button": "Chế độ toàn màn hình",
+      "slide": "Trang",
+      "of": "của"
+    },
+    "ViewQuizzes": {
+      "term": "Thuật ngữ trong học phần này",
+      "view_AI_answer": "Xem câu trả lời của A.I",
+      "relative_quiz_bank": "Học sinh cũng đã xem các học phần",
+      "see_more_btn": "Xem thêm"
+    },
+    "belong_to": "Học phần này thuộc về",
+    "author": {
+      "class_title": "Lớp học",
+      "of": "của",
+      "copy_button": "Sao chép",
+      "report_button": "Báo cáo",
+      "edit_button": "Chỉnh sửa",
+      "public_button": "Công khai"
+    },
+    "rating": {
+      "title": "Đánh giá",
+      "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
+    },
+    "view_ai_answer_error": {
+      "overcount_ai": {
+        "title": "Hạn chế xem câu trả lời A.I hàng ngày",
+        "description": "Bạn đã vượt quá giới hạn xem câu trả lời A.I cho hôm nay",
+        "solution": "Bạn có thể <strong>nâng cấp tài khoản của bạn ngay bây giờ</strong>, hoặc chờ đến ngày mai để có cơ hội xem câu trả lời A.I nhiều hơn.",
+        "cancel": "Hủy",
+        "submit": "Đi đến nâng cấp tài khoản"
+      }
+    }
+  },
   "CopyQuizBank": {
     "title": "Sao chép ngân hàng câu hỏi này",
     "description": "Bạn có muốn sao chép ngân hàng câu hỏi này với",
     "quizzes": "câu hỏi",
     "form": {
       "name": {
-        "label": "Name",
+        "label": "Tên",
         "text": "Tên",
         "placeholder": "Nhập tên của ngân hàng câu hỏi"
       },
       "copyTo": {
-        "label": "copyTo",
+        "label": "Sao chép tới",
         "text": "Sao chép tới",
         "placeholder": "Chọn nơi để sao chép"
       },
       "classroom": {
-        "label": "classroom",
+        "label": "Lớp học",
         "text": "Lớp",
         "placeholder": "Chọn lớp để sao chép tới"
       },
@@ -1134,21 +1252,21 @@
         "text": "Kho cá nhân"
       },
       "public": {
-        "label": "public",
+        "label": "Công khai",
         "text": "Công khai"
       },
       "button": {
         "cancel": "Hủy",
         "submit": "Sao chép"
+      }
+    },
+    "message": {
+      "success": {
+        "title": "Thành công",
+        "description": "Sao chép thành công"
       },
-      "message": {
-        "success": {
-          "title": "Thành công",
-          "description": "Thành công sao chép ngân hàng câu hỏi"
-        },
-        "failed": {
-          "title": "Có gì đó không đúng"
-        }
+      "failed": {
+        "title": "Có gì đó không đúng đã xảy ra."
       }
     }
   },
@@ -1202,6 +1320,40 @@
       "failed": {
         "title": "Đã xảy ra lỗi."
       }
+    }
+  },
+  "UpgradeAccount": {
+    "upgrade": "Nâng cấp tài khoản"
+  },
+  "Errors": {
+    "index": "Lỗi",
+    "unknown": "Đã xảy ra lỗi không xác định, vui lòng thử lại sau",
+    "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
+    "invalid-pin": "Mã PIN không hợp lệ, vui lòng thử lại",
+    "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
+    "email-existed": "Email đã tồn tại, vui lòng thử lại",
+    "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
+    "verification-failed": "Xác thực thất bại, vui lòng thử lại",
+    "Unauthorized": "Tài khoản chưa được xác thực, vui lòng đăng nhập lại",
+    "refresh": "Thử lại",
+    "classroom": {
+      "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
+      "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
+      "code-used": "Mã lớp học đã được sử dụng, vui lòng thử lại",
+      "already-joined": "Bạn đã tham gia lớp học này rồi",
+      "not_found": "Không tìm thấy lớp học",
+      "user_not_found": "Không tìm thấy người dùng",
+      "user_in_classroom": "Người dùng đã ở trong lớp học",
+      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
+    },
+    "game": {
+      "already-joined": "Bạn đã tham gia trò chơi này rồi",
+      "not_found": "Không tìm thấy trò chơi",
+      "user_not_found": "Không tìm thấy người dùng"
+    },
+    "Login": {
+      "WrongEmailPassword": "Email hay mật khẩu không đúng",
+      "IssueToken": "Error when issues token"
     }
   },
   "Validations": {
@@ -1319,7 +1471,7 @@
     },
     "validations": {
       "email": "email",
-      "url": "url",
+      "url": "Địa chỉ URL",
       "uuid": "uuid",
       "cuid": "cuid",
       "regex": "regex",
@@ -1348,97 +1500,6 @@
       "set": "set"
     }
   },
-  "AddQuiz": {
-    "import-form": {
-      "title": "Nhập nhiều quizbank",
-      "descriptions": "Dán dữ liệu từ doc, csv, text vào đây",
-      "data": {
-        "label": "Dữ liệu",
-        "placeholder": "term1,definition1;term2,definition2\nĐiền điều bạn muốn học và bấm sáng tạo"
-      },
-      "itemSeperator": {
-        "label": "Dấu phân cách thuật ngữ",
-        "placeholder": "Enter the item seperator"
-      },
-      "quizSeperator": {
-        "label": "Dấu phân cách các quizbank",
-        "placeholder": "Enter the quiz seperator"
-      },
-      "ai": {
-        "label": "Sáng tạo",
-        "placeholder": "Nhập dữ liệu và bấm sáng tạo"
-      }
-    },
-    "form": {
-      "title": "Tạo ngân hàng câu hỏi mới",
-      "name": {
-        "label": "Tên",
-        "placeholder": "Nhập tên ngân hàng câu hỏi"
-      },
-      "description": {
-        "label": "Mô tả",
-        "placeholder": "Nhập mô tả ngân hàng câu hỏi"
-      },
-      "submit": "Thêm",
-      "tags": {
-        "label": "Tags",
-        "placeholder": "Nhập tags ngân hàng câu hỏi"
-      },
-      "public": {
-        "label": "Công khai",
-        "description": "Ai cũng có thể thấy và sử dụng ngân hàng câu hỏi này"
-      },
-      "quiz": {
-        "new": "Thêm câu hỏi mới"
-      },
-      "term": {
-        "label": "Thuật ngữ",
-        "placeholder": "Nhập thuật ngữ"
-      },
-      "definition": {
-        "label": "Định nghĩa",
-        "placeholder": "Nhập định nghĩa"
-      }
-    }
-  },
-  "ViewQuizBank": {
-    "ViewFlashcard": {
-      "play_button": "Bắt đầu học",
-      "pause_button": "Tạm dừng thẻ ghi nhớ",
-      "shuffle_button": "Trộn thẻ",
-      "full_screen_button": "Chế độ toàn màn hình",
-      "slide": "Trang",
-      "of": "của"
-    },
-    "ViewQuizzes": {
-      "term": "Thuật ngữ trong học phần này",
-      "view_AI_answer": "Xem câu trả lời của A.I",
-      "relative_quiz_bank": "Học sinh cũng đã xem các học phần",
-      "see_more_btn": "Xem thêm"
-    },
-    "belong_to": "Học phần này thuộc về",
-    "author": {
-      "class_title": "Lớp học",
-      "of": "của",
-      "copy_button": "Sao chép",
-      "report_button": "Báo cáo",
-      "edit_button": "Chỉnh sửa",
-      "public_button": "Công khai"
-    },
-    "rating": {
-      "title": "Đánh giá",
-      "success": "Cảm ơn bạn đã đánh giá ({rating} ⭐)"
-    },
-    "view_ai_answer_error": {
-      "overcount_ai": {
-        "title": "Hạn chế xem câu trả lời A.I hàng ngày",
-        "description": "Bạn đã vượt quá giới hạn xem câu trả lời A.I cho hôm nay",
-        "solution": "Bạn có thể <strong>nâng cấp tài khoản của bạn ngay bây giờ</strong>, hoặc chờ đến ngày mai để có cơ hội xem câu trả lời A.I nhiều hơn.",
-        "cancel": "Hủy",
-        "submit": "Đi đến nâng cấp tài khoản"
-      }
-    }
-  },
   "NotFound": {
     "title": "Bạn có vẻ đang đi lạc?",
     "message": "Trang bạn tìm kiếm có vẻ như đã bị chấm dứt hoặc không tồn tại 🥺🥺",
@@ -1453,36 +1514,6 @@
       "placeholder": "Tạo Quiz mới"
     },
     "errorBtn": "Thông báo lỗi"
-  },
-  "UpgradeAccount": {
-    "upgrade": "Nâng cấp tài khoản"
-  },
-  "Errors": {
-    "index": "Lỗi",
-    "unknown": "Đã xảy ra lỗi không xác định, vui lòng thử lại sau",
-    "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
-    "invalid-pin": "Mã PIN không hợp lệ, vui lòng thử lại",
-    "account-fail": "Tài khoản này đã bị vô hiệu hóa, hãy liên hệ với Hỗ trợ ngay",
-    "email-existed": "Email đã tồn tại, vui lòng thử lại",
-    "username-existed": "Tên đăng nhập đã tồn tại, vui lòng thử lại",
-    "verification-failed": "Xác thực thất bại, vui lòng thử lại",
-    "Unauthorized": "Tài khoản chưa được xác thực, vui lòng đăng nhập lại",
-    "classroom": {
-      "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
-      "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
-      "code-used": "Mã lớp học đã được sử dụng, vui lòng thử lại",
-      "already-joined": "Bạn đã tham gia lớp học này rồi",
-      "not_found": "Không tìm thấy lớp học",
-      "user_not_found": "Không tìm thấy người dùng",
-      "user_in_classroom": "Người dùng đã ở trong lớp học",
-      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
-    },
-    "refresh": "Thử lại",
-    "game": {
-      "already-joined": "Bạn đã tham gia trò chơi này rồi",
-      "not_found": "Không tìm thấy trò chơi",
-      "user_not_found": "Không tìm thấy người dùng"
-    }
   },
   "ManageClassroomMembers": {
     "metadata": {
@@ -1640,13 +1671,15 @@
       "description": "Bạn đã tham gia lớp học thành công"
     }
   },
-  "Delete_clasroom": {
+  "Delete_classroom": {
     "message": {
       "success": {
-        "title": "Success",
-        "description": "Thành công xóa lớp học"
+        "title": "Thành công",
+        "description": "Thành công xoá lớp học"
       },
-      "failed": { "title": "Failed" }
+      "failed": {
+        "title": "Thất bại"
+      }
     }
   },
   "Delete_quizbank": {
@@ -1655,7 +1688,9 @@
         "title": "Thành công",
         "description": "Thành công xóa ngân hàng câu hỏi"
       },
-      "failed": { "title": "Thất bại" }
+      "failed": {
+        "title": "Thất bại"
+      }
     }
   },
   "Editor": {
@@ -1689,7 +1724,9 @@
         "title": "Thành công",
         "description": "Thành công chuyển trạng thái ngân hàng câu hỏi sang {visibility}"
       },
-      "failed": { "title": "Thất bại" }
+      "failed": {
+        "title": "Thất bại"
+      }
     },
     "confirm_dialog": {
       "title": "Bạn có muốn thay đổi trạng thái của ngân hàng câu hỏi",
@@ -1741,7 +1778,7 @@
         },
         "kick_user": {
           "title": "Xóa người dùng",
-          "descrption": "Xóa người dùng khỏi lớp học",
+          "description": "Bạn có muốn xoá người dùng khỏi lớp học",
           "message": {
             "delete_message": "Bạn có muốn xóa người dùng <span></span>?",
             "success": "Người dùng đã được xóa khỏi lớp học"
@@ -1764,7 +1801,23 @@
           }
         }
       },
-      "filters": {}
+      "filters": {
+        "visibility": {
+          "label": "Hiển thị",
+          "placeholder": "Chọn hiển thị",
+          "type": {
+            "Public": {
+              "value": "Công khai"
+            },
+            "Private": {
+              "value": "Riêng tư"
+            },
+            "All": {
+              "value": "Tất cả"
+            }
+          }
+        }
+      }
     }
   },
   "Report_user": {

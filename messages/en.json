@@ -266,7 +266,7 @@
   "ClassroomQuizBank": {
     "metadata": {
       "title": "Classroom QuizBank",
-      "description": "All classroom Quiz Banks"
+      "description": "All classroom Quizbanks"
     },
     "actions": {
       "create": {
@@ -983,7 +983,7 @@
       "submit_btn": "Change password"
     },
     "plans": {
-      "duration": "months",
+      "duration": "Months",
       "plans": {
         "normal_member": {
           "title": "Normal member",
@@ -1250,7 +1250,7 @@
         "text": "Personal"
       },
       "public": {
-        "label": "public",
+        "label": "Public",
         "text": "Public"
       },
       "button": {
@@ -1348,6 +1348,10 @@
       "already-joined": "You have already joined this game",
       "not_found": "Game not found",
       "user_not_found": "User not found"
+    },
+    "Login": {
+      "WrongEmailPassword": "Email or password is incorrect",
+      "IssueToken": "Error when issues token"
     }
   },
   "Validations": {
@@ -1671,7 +1675,9 @@
         "title": "Success",
         "description": "Successfully delete clasroom"
       },
-      "failed": { "title": "Failed" }
+      "failed": {
+        "title": "Failed"
+      }
     }
   },
   "Delete_quizbank": {
@@ -1680,7 +1686,9 @@
         "title": "Success",
         "description": "Successfully delete quizbank"
       },
-      "failed": { "title": "Failed" }
+      "failed": {
+        "title": "Failed"
+      }
     }
   },
   "Editor": {
@@ -1714,7 +1722,9 @@
         "title": "Success",
         "description": "Successfully change quizbank visibility to {visibility}"
       },
-      "failed": { "title": "Failed" }
+      "failed": {
+        "title": "Failed"
+      }
     },
     "confirm_dialog": {
       "title": "Do you want to change quizbank visibility?",
