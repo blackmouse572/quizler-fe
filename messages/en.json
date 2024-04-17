@@ -153,6 +153,7 @@
         "load_more": "Load more comments",
         "action": "Delete comment",
         "delete": "Delete",
+        "edit": "Edit",
         "delete_success": "Comment deleted successfully"
       },
       "delete": {

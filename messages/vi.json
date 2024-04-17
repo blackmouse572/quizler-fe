@@ -206,6 +206,7 @@
         "index": "Bình luận",
         "action": "Bình luận",
         "delete": "Xóa",
+        "edit":"Chỉnh sửa",
         "delete_success": "Xóa bình luận thành công",
         "load_more": "Tải thêm bình luận"
       },

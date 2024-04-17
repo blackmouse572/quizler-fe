@@ -59,7 +59,7 @@ function GameList(props: Props) {
                   <Link
                     href={`/classrooms/${props.classroomId}/games/${game.id}/result`}
                   >
-                    <CardTitle className="pt-2 font-normal">{t("actions.view_game_result.title")} </CardTitle>
+                    <CardTitle className="pt-2 font-normal text-green-800">{t("actions.view_game_result.title")} </CardTitle>
                   </Link>
                 </div>
               ) : (
