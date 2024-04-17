@@ -153,7 +153,7 @@ function PostItem({
                 </Button>
               </NamedToolTip>
 
-              <NamedToolTip content={t("posts.comments.delete")}>
+              <NamedToolTip content={t("posts.comments.edit")}>
                 <Button
                   color="success"
                   isIconOnly

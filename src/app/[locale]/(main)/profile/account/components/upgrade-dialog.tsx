@@ -37,9 +37,13 @@ const UpgradeDialog = ({ plan }: Props) => {
     setClientSecret(clientSecret)
     setSessionId(sessionId)
   }, [plan])
+  const [isOpen, setIsOpen] = useState(false)
 
   const onComplete = useCallback(async () => {
     const res = await saveTransaction(sessionId)
+
+    setIsOpen(false)
+    console.log(res)
   }, [sessionId])
 
   const options = useMemo(
@@ -53,7 +57,7 @@ const UpgradeDialog = ({ plan }: Props) => {
   if (plan.amount === 0) return null
   return (
     <>
-      <Dialog>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
             onSelect={(e) => {

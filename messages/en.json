@@ -153,6 +153,7 @@
         "load_more": "Load more comments",
         "action": "Delete comment",
         "delete": "Delete",
+        "edit": "Edit",
         "delete_success": "Comment deleted successfully"
       },
       "delete": {
@@ -250,6 +251,9 @@
             "description": "Click here to copy the game link"
           }
         }
+      },
+      "view_game_result": {
+        "title": "View game result"
       },
       "leave": {
         "title": "Leave game",
@@ -981,37 +985,25 @@
     "plans": {
       "duration": "months",
       "plans": {
-        "maxAI": "Max AI use times: {times}",
+        "normal_member": {
+          "title": "Normal member",
+          "description": "For everyone"
+        },
+        "warmup_member": {
+          "title": "Warm up member",
+          "description": "Warmup plan, for new members"
+        },
+        "standard_member": {
+          "title": "Standard member",
+          "description": "More fun to use"
+        },
+        "premium_member": {
+          "title": "Premium member",
+          "description": "Enjoy your playground"
+        },
+        "maxAI": "Max AI use times per day: {times}",
         "maxClassroom": "Max classroom created: {times}",
-        "maxStudent": "Max student in classsroom: {times}",
-        "hobby": {
-          "title": "Hobby",
-          "description": "Getting warm",
-          "features": {
-            "feature1": "Learn public quizbank",
-            "feature2": "Create your own quizbank",
-            "feature3": "15 A.I Helper per day",
-            "feature4": "Own upto 3 Classrooms"
-          }
-        },
-        "learner": {
-          "title": "Learner",
-          "description": "Learn as your need",
-          "features": {
-            "feature1": "Everything in Hobby plan",
-            "feature2": "50 A.I Helper perday",
-            "feature3": "Own upto 10 Classrooms"
-          }
-        },
-        "expert": {
-          "title": "Expert",
-          "description": "Explore the knowledge",
-          "features": {
-            "feature1": "Everything in Learner plan",
-            "feature2": "100 A.I Helper perday",
-            "feature3": "Own upto 20 Classrooms"
-          }
-        }
+        "maxStudent": "Max student in classsroom: {times}"
       },
       "upgrade_dialog": {
         "buttons": {
@@ -1019,7 +1011,8 @@
           "cancel": "Cancel"
         },
         "title": "Upgrade your plan to {plan}",
-        "description": "Upgrade your plan and enjoy the benefits from the plan"
+        "description": "Upgrade your plan and enjoy the benefits from the plan",
+        "success": "You have successfully upgraded your plan"
       },
       "cancel_dialog": {
         "buttons": {

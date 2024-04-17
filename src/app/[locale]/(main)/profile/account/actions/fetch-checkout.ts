@@ -3,7 +3,7 @@
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { Plan } from "@/types"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export const saveTransaction = (sessionId: string) => {
   const URL = getAPIServerURL(`/checkout/success?sessionId=${sessionId}`)
@@ -15,18 +15,20 @@ export const saveTransaction = (sessionId: string) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    next: {
+      revalidate: 0,
+    },
   }
 
   return fetch(URL, options)
     .then(async (res) => {
-      const data = await res.json()
       if (!res.ok) {
+        const data = await res.json()
         throw new Error(data.message)
       }
-      return res
+      return true
     })
     .then((res) => {
-      revalidatePath("/profile/account")
       return { ok: true, message: "", data: res }
     })
     .catch((err) => {
@@ -35,6 +37,10 @@ export const saveTransaction = (sessionId: string) => {
         message: err.message,
         data: "",
       }
+    })
+    .finally(() => {
+      revalidateTag("Plan")
+      revalidatePath("/profile/account")
     })
 }
 
@@ -60,6 +66,7 @@ export const fetchStripeSessionId = ({ id }: Plan) => {
     })
     .then((res) => {
       revalidatePath("/profile/account")
+      revalidateTag("Plan")
       return { ok: true, message: "", data: res }
     })
     .catch((err) => {

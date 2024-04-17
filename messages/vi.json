@@ -146,6 +146,9 @@
         "index": "Trò chơi mới",
         "title": "Tạo trò chơi mới"
       },
+      "view_game_result": {
+        "title": "Xem kết quả"
+      },
       "leave": {
         "title": "Rời khỏi trò chơi",
         "description": "Bạn có muốn rời khỏi trò chơi? Bạn sẽ không thể tham gia lại trò chơi",
@@ -203,6 +206,7 @@
         "index": "Bình luận",
         "action": "Bình luận",
         "delete": "Xóa",
+        "edit":"Chỉnh sửa",
         "delete_success": "Xóa bình luận thành công",
         "load_more": "Tải thêm bình luận"
       },
@@ -866,32 +870,33 @@
           "error": {
             "title": "Xóa"
           }
-      },
-      "dialog": {
-        "report_details": {
-          "title": "Báo cáo chi tiết",
-          "content": {
-            "quizbank_name": "Tên ngân hàng bị báo cáo",
-            "quizbank_id": "ID ngân hàng bị báo cáo",
-            "account_name": "Tên tài khoản bị báo cáo",
-            "account_id": "ID tài khoản bị báo cáo",
-            "reason": "Lí do",
-            "created_at": "Ngày tạo"
-          },
-          "cancel": "Hủy",
-          "confirm": "Chấp nhận báo cáo"
-        }
-      },
-      "report_reason": {
-        "reason_choice": {
-          "abuse": "Lạm dụng",
-          "inappropriate": "Không phù hợp",
-          "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
-          "other": "Khác"
+        },
+        "dialog": {
+          "report_details": {
+            "title": "Báo cáo chi tiết",
+            "content": {
+              "quizbank_name": "Tên ngân hàng bị báo cáo",
+              "quizbank_id": "ID ngân hàng bị báo cáo",
+              "account_name": "Tên tài khoản bị báo cáo",
+              "account_id": "ID tài khoản bị báo cáo",
+              "reason": "Lí do",
+              "created_at": "Ngày tạo"
+            },
+            "cancel": "Hủy",
+            "confirm": "Chấp nhận báo cáo"
+          }
+        },
+        "report_reason": {
+          "reason_choice": {
+            "abuse": "Lạm dụng",
+            "inappropriate": "Không phù hợp",
+            "violate_intellectual": "Vi phạm quyền sở hữu trí tuệ",
+            "other": "Khác"
+          }
         }
       }
     }
-  }},
+  },
   "ForgotPassword": {
     "title": "Quên mật khẩu? Đừng lo",
     "description": "Nhập thông tin của bạn và chúng tôi sẽ khôi phục lại",
@@ -965,34 +970,25 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
-        "hobby": {
-          "title": "Sở thích",
-          "description": "Khởi động",
-          "features": {
-            "feature1": "Học các ngân hàng công hỏi công khai",
-            "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
-            "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
-            "feature4": "Sở hữu đến 3 lớp học"
-          }
+        "normal_member": {
+          "title": "Thành viên thông thường",
+          "description": "Dành cho mọi người"
         },
-        "learner": {
-          "title": "Học viên",
-          "description": "Học theo cách của mình",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Sở thích\"",
-            "feature2": "50 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 10 lớp học"
-          }
+        "warmup_member": {
+          "title": "Thành viên khởi động",
+          "description": "Gói khởi động, dành cho thành viên mới"
         },
-        "expert": {
-          "title": "Chuyên gia",
-          "description": "Tìm kiếm kiến thức",
-          "features": {
-            "feature1": "Tất cả mọi thứ trong \"Học Viên\"",
-            "feature2": "100 lần sử dùng công cụ AI mỗi ngày",
-            "feature3": "Sở hữu đến 20 lớp học"
-          }
-        }
+        "standard_member": {
+          "title": "Thành viên tiêu chuẩn",
+          "description": "Vui hơn khi sử dụng"
+        },
+        "premium_member": {
+          "title": "Thành viên cao cấp",
+          "description": "Thỏa sức vui chơi"
+        },
+        "maxAI": "Số câu hỏi AI tối đa mỗi ngày: {times}",
+        "maxClassroom": "Số lớp học có thể tạo: {times}",
+        "maxStudent": "Tối đa học sinh trong lớp: {times}"
       },
       "upgrade_dialog": {
         "buttons": {
@@ -1000,7 +996,17 @@
           "cancel": "Hủy"
         },
         "title": "Nâng cấp gói cá nhân thành {plan}",
-        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói",
+        "success": "Bạn đã nâng cấp gói thành công"
+      },
+      "cancel_dialog": {
+        "buttons": {
+          "cancel": "Hủy bỏ",
+          "confirm": "Xác nhận"
+        },
+        "title": "Hủy gói {plan} của bạn",
+        "description": "Bạn có chắc chắn muốn hủy gói của bạn không?",
+        "success": "Gói của bạn đã được hủy"
       }
     },
     "profile": {

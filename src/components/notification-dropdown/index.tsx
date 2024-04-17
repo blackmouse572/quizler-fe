@@ -110,6 +110,7 @@ function NotificationItem({
   const inView = useInView(ref, {})
   const { mutateAsync } = useReadNotification()
   const i18nNoti = useTranslations("Notification")
+  const tPlan = useTranslations("Settings.plans")
 
   useEffect(() => {
     if (inView && !item.read) {
@@ -129,11 +130,20 @@ function NotificationItem({
     >
       {icon}
       <div className="flex flex-1 cursor-default items-start justify-between gap-2">
-        {/* <h3 className="text-sm font-medium">{item.title}</h3> */}
         <h3 className="text-sm font-medium">
-          {i18nNoti.rich(`user.${item.title}` as any, {
-            objectName: item.objectName,
-          })}
+          {item.type.toLowerCase() === "payment" ? (
+            <div>
+              {i18nNoti.rich(`user.${item.title}` as any, {
+                objectName: tPlan(`plans.${item.objectName}.title` as any),
+              })}
+            </div>
+          ) : (
+            <div>
+              {i18nNoti.rich(`user.${item.title}` as any, {
+                objectName: item.objectName,
+              })}
+            </div>
+          )}
         </h3>
         <span className="text-nowrap text-xs text-accent-foreground">
           {formatDate(item.created)}

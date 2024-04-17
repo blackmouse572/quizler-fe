@@ -47,7 +47,7 @@ function CancelSubscription({ plan }: { plan: Plan }) {
       <AlertDialogContent>
         <AlertTitle>
           {t("plans.cancel_dialog.title", {
-            plan: plan.title,
+            plan: t(`plans.plans.${plan.title}.title` as any),
           })}
         </AlertTitle>
         <AlertDescription>
