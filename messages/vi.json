@@ -153,6 +153,7 @@
         "load_more": "Tải thêm bình luận",
         "action": "Bình luận",
         "delete": "Xóa",
+        "edit": "Chỉnh sửa",
         "delete_success": "Xóa bình luận thành công"
       },
       "delete": {
@@ -250,6 +251,9 @@
             "description": "Nhấp vào đây để sao chép liên kết trò chơi"
           }
         }
+      },
+      "view_game_result": {
+        "title": "Xem kết quả trò chơi"
       },
       "leave": {
         "title": "Rời khỏi trò chơi",
@@ -979,9 +983,6 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
-        "maxAI": "Số lần sử dụng A.I {times}",
-        "maxClassroom": "Số lớp học: {times}",
-        "maxStudent": "Số học sinh mỗi lớp học: {times}",
         "hobby": {
           "title": "Sở thích",
           "description": "Khởi động",
