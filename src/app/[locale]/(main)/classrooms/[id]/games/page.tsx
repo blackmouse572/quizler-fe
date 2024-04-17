@@ -1,10 +1,13 @@
 import getAllGamesByClassroomAction from "@/app/[locale]/(main)/classrooms/[id]/games/actions/get-game-action"
 import AddGameForm from "@/app/[locale]/(main)/classrooms/[id]/games/components/add-game-form"
 import GameList from "@/app/[locale]/(main)/classrooms/[id]/games/components/game-list"
+import getClassroomDetails from "@/app/[locale]/(main)/classrooms/actions/get-classroom-details-action"
 import SearchBox from "@/components/searchbox"
+import { getUser } from "@/lib/auth"
 import { pick } from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
+import { notFound } from "next/navigation"
 
 type Props = {
   params: {
@@ -24,16 +27,23 @@ export async function generateMetadata() {
 
 async function GamePage({ params, searchParams }: Props) {
   const t = await getTranslations("ClassroomGame")
+  const user = getUser()
   const { search } = searchParams
-  const data = await getAllGamesByClassroomAction({
-    classroomId: params.id,
-    filter: {
-      search: search ? search.toString() : undefined,
-    },
-  })
+  const [data, classroom] = await Promise.all([
+    getAllGamesByClassroomAction({
+      classroomId: params.id,
+      filter: {
+        search: search ? search.toString() : undefined,
+      },
+    }),
+    getClassroomDetails(params.id),
+  ])
   const msg = await getMessages()
-  if (!data.ok) {
+  if (!data.ok || !classroom.ok) {
     throw Error(data.message)
+  }
+  if (!user) {
+    return notFound()
   }
   return (
     <div>
@@ -41,16 +51,18 @@ async function GamePage({ params, searchParams }: Props) {
         <h1 className="text-lg font-medium">{t("metadata.title")}</h1>
         <div className="flex items-center gap-2">
           <SearchBox className="bg-background" />
-          <NextIntlClientProvider
-            messages={pick(msg, "ClassroomGame", "Validations", "Errors")}
-          >
-            <AddGameForm
-              intialValues={{
-                classroomId: params.id,
-                isTest: false,
-              }}
-            />
-          </NextIntlClientProvider>
+          {user.id === classroom.data?.author.id && (
+            <NextIntlClientProvider
+              messages={pick(msg, "ClassroomGame", "Validations", "Errors")}
+            >
+              <AddGameForm
+                intialValues={{
+                  classroomId: params.id,
+                  isTest: false,
+                }}
+              />
+            </NextIntlClientProvider>
+          )}
         </div>
       </div>
       <NextIntlClientProvider
