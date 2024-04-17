@@ -177,7 +177,7 @@
       "post": {
         "index": "{user} created a post",
         "game": "{user} created a game: {game}. Join now !!!",
-        "quizbank": "{user} created a quizbank. Learned now !!!"
+        "quizbank": "{user} created a quizbank. Learn now !!!"
       },
       "help": {
         "title": "Help",
