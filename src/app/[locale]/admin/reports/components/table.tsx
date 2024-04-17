@@ -53,7 +53,6 @@ import {
 import usePaginationValue from "@/hooks/usePaginationValue"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
-import FilterDropdown from "./filter"
 import { useRouter } from "next/navigation"
 import DeleteDialog from "./delete-dialog"
 import { ReportType } from "@/types"
@@ -408,7 +407,6 @@ export function ReportsTable({ data }: ReportTableProps) {
         <div className="flex items-center gap-2">{renderDeleteButton()}</div>
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}
-          <FilterDropdown table={table} />
         </div>
       </div>
       <div className="rounded-md border border-primary bg-background">

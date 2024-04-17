@@ -52,9 +52,21 @@ function GameList(props: Props) {
         return (
           <Card>
             <CardHeader>
-              <Link href={`/classrooms/${props.classroomId}/game/${game.id}`}>
-                <CardTitle>{game.gameName}</CardTitle>
-              </Link>
+              {new Date(game.endTime) < new Date() ? (
+                <div>
+                  <CardTitle>{game.gameName}</CardTitle>
+
+                  <Link
+                    href={`/classrooms/${props.classroomId}/games/${game.id}/result`}
+                  >
+                    <CardTitle className="pt-2 font-normal text-green-800">{t("actions.view_game_result.title")} </CardTitle>
+                  </Link>
+                </div>
+              ) : (
+                <Link href={`/classrooms/${props.classroomId}/game/${game.id}`}>
+                  <CardTitle>{game.gameName}</CardTitle>
+                </Link>
+              )}
             </CardHeader>
             <CardContent>
               <div className="space-y-2">

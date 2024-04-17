@@ -1,4 +1,3 @@
-import { getUserProfileAction } from "@/app/[locale]/(main)/profile/actions/fetch-user-profile"
 import { getUser } from "@/lib/auth"
 import _ from "lodash"
 import type { Metadata } from "next"
@@ -22,11 +21,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const getUserProfile = async (id: string) => {
-  const response = await getUserProfileAction(id)
-  return response.data
-}
-
 export default async function UserProfile({ params }: Props) {
   const user = getUser()
   if (!user) return notFound()
@@ -39,6 +33,7 @@ export default async function UserProfile({ params }: Props) {
         messages={_.pick(
           msg,
           "LocaleSwitcher",
+          "UpgradeAccount",
           "Settings",
           "Validations",
           "Errors"
