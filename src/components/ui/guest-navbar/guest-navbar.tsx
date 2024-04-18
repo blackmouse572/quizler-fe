@@ -22,6 +22,8 @@ import {
 import { cn } from "@/lib/utils"
 import { useMotionValueEvent, useScroll } from "framer-motion"
 import { useTranslations } from "next-intl"
+import { LoggedInAnimatedListItemSubject } from "../logged-in-navbar/logged-in-animated-list-item-subject"
+import { SUBJECTS_NAVBAR_ITEMS } from "@/lib/config/navbar-config"
 
 export type MainNavItem = {
   title: string
@@ -211,12 +213,22 @@ export default function GuestNavbar({ className, items = [] }: Props) {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+        
         <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {tNav("doc")}
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuTrigger>{tNav("subjects")}</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+              {SUBJECTS_NAVBAR_ITEMS.map((data) => {
+                return (
+                  <LoggedInAnimatedListItemSubject
+                    key={data.title}
+                    {...data}
+                    title={tNav(data.title as any)}
+                  />
+                )
+              })}
+            </ul>
+          </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
       <NavigationMenuList className="space-x-2">
