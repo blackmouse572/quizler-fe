@@ -1349,6 +1349,7 @@
     "upgrade": "Upgrade account"
   },
   "Errors": {
+    "Already joined": "You have already joined this classroom",
     "index": "Error",
     "unknown": "Something went wrong",
     "token-expire": "The url has been expire, please create another request",
@@ -1359,6 +1360,7 @@
     "verification-failed": "The verification code is not correct, please try again",
     "Unauthorized": "Account not authorized, please login",
     "refresh": "Refresh",
+    "back": "Go to classroom",
     "classroom": {
       "code-invalid": "The code is not valid, please try again",
       "code-expire": "The code has been expired, please try again",
