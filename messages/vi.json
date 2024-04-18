@@ -157,6 +157,10 @@
       },
       "edit": {
         "index": "Chỉnh sửa"
+      },
+      "owner": {
+        "All": "Tất cả",
+        "Owner": "Của tôi"
       }
     }
   },

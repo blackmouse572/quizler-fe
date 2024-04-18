@@ -157,6 +157,10 @@
       },
       "edit": {
         "index": "Edit"
+      },
+      "owner": {
+        "All": "All",
+        "Owner": "My classrooms"
       }
     }
   },

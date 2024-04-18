@@ -1,6 +1,7 @@
 import { fetchMyClassrooms } from "@/app/[locale]/(main)/classrooms/actions/fetch-my-classroom"
 import ClassroomList from "@/app/[locale]/(main)/classrooms/components/classroom-list"
 import JoinClassroomDialog from "@/app/[locale]/(main)/classrooms/components/join-classroom-dialog"
+import { OwnerSelect } from "@/app/[locale]/(main)/classrooms/components/owner-select"
 import SearchBox from "@/components/searchbox"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
@@ -29,7 +30,6 @@ async function ClassroomPage({ searchParams }: Props) {
   if (!user) {
     console.log("User not found")
     redirect(`/login?from="/classrooms?code=${initCode}"`)
-    return
   }
   const msg = await getMessages()
   const t = await getTranslations("Classroom")
@@ -54,6 +54,7 @@ async function ClassroomPage({ searchParams }: Props) {
         <h1 className="text-xl font-bold">{t("metadata.title")}</h1>
         <div className="flex items-center gap-2">
           <SearchBox className="bg-background" />
+          <OwnerSelect />
           <JoinClassroomDialog
             defaultOpen={!!initCode}
             defaultValue={initCode}
