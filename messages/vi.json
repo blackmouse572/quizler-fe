@@ -1352,6 +1352,7 @@
     "upgrade": "Nâng cấp tài khoản"
   },
   "Errors": {
+    "Already joined": "Bạn đã tham gia lớp học này rồi",
     "index": "Lỗi",
     "unknown": "Đã xảy ra lỗi không xác định, vui lòng thử lại sau",
     "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
