@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useTranslations } from "next-intl"
 import { Textarea } from "@/components/ui/textarea"
+import Link from "next/link"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -33,8 +34,8 @@ const formSchema = z.object({
     }),
 })
 
-export default function ContactForm() {
-  const t = useTranslations("Contact")
+export default function Support() {
+  const t = useTranslations("Support")
   const validationsi18n = useTranslations("Validations")
 
   // 1. Define your form.
@@ -62,9 +63,24 @@ export default function ContactForm() {
       <div className="flex justify-center text-3xl font-extrabold">
         {t("index")}
       </div>
+      <div className="flex justify-center pt-5 font-normal">
+        {t.rich("search_docs.index", {
+          docs: (children) => (
+            <Link href={"/docs"}>
+              <span className="mx-1 text-orange-500">{children}</span>
+            </Link>
+          ),
+        })}
+      </div>
+      <div className="flex justify-center py-5 text-3xl font-extrabold">
+        {t("search_docs.or")}
+      </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex justify-center text-3xl font-extrabold">
+            {t("form.index")}
+          </div>
           <FormField
             control={form.control}
             name="name"
@@ -112,7 +128,10 @@ export default function ContactForm() {
               <FormItem>
                 <FormLabel required>{t("form.reason.label")}</FormLabel>
                 <FormControl>
-                  <Textarea placeholder={t("form.reason.placeholder")} {...field} />
+                  <Textarea
+                    placeholder={t("form.reason.placeholder")}
+                    {...field}
+                  />
                 </FormControl>
                 {fieldState.error && (
                   <p className="text-xs text-danger-500">

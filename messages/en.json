@@ -50,6 +50,36 @@
       "submit": "Submit"
     }
   },
+  "Support": {
+    "metadata": {
+      "title": "Support",
+      "description": "Support"
+    },
+    "index": "Support QuizLearn",
+    "search_docs": {
+      "index": "You can try to search our <docs>docs</docs> for the problem you are facing with.",
+      "or": "OR"
+    },
+    "message": {
+      "index": "Thank you!<br></br>We have received your request support at email: {email}<br></br>We will contact you soon."
+    },
+    "form": {
+      "index": "Contact us for your problems",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter you email"
+      },
+      "reason": {
+        "label": "Reason",
+        "placeholder": "Enter your reason"
+      },
+      "submit": "Submit"
+    }
+  },
   "Table": {
     "no_data": "No data",
     "no_results": "No results",

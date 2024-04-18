@@ -47,7 +47,37 @@
         "label": "Lí do",
         "placeholder": "Nhập lí do của bạn"
       },
-      "submit": "Xác nhận"
+      "submit": "Gửi"
+    }
+  },
+  "Support": {
+    "metadata": {
+      "title": "Hỗ trợ",
+      "description": "Hỗ trợ"
+    },
+    "index": "Hỗ trợ QuizLearn",
+    "search_docs": {
+      "index": "Bạn có thể thử tìm kiếm trong <docs>tài liệu</docs> của chúng tôi để tìm giải pháp cho vấn đề bạn đang gặp phải.",
+      "or": "HOẶC"
+    },
+    "message": {
+      "index": "Cảm ơn bạn!<br></br>Chúng tôi đã nhận được yêu cầu hỗ trợ của bạn qua email: {email}<br></br>Chúng tôi sẽ liên hệ với bạn sớm."
+    },
+    "form": {
+      "index": "Liên hệ với chúng tôi về vấn đề của bạn",
+      "name": {
+        "label": "Họ tên",
+        "placeholder": "Nhập họ tên của bạn"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Nhập email của bạn"
+      },
+      "reason": {
+        "label": "Lý do",
+        "placeholder": "Nhập lý do của bạn"
+      },
+      "submit": "Gửi"
     }
   },
   "Table": {
