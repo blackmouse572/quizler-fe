@@ -1,14 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Form, FormControl, FormField, FormMessage } from "@/components/ui/form"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form, FormControl, FormField } from "@/components/ui/form"
 import { Icons } from "@/components/ui/icons"
 import Otp from "@/components/ui/otp"
 import { useToast } from "@/components/ui/use-toast"
@@ -69,19 +63,6 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
     <Card className="min-w-96">
       <CardHeader>
         <CardTitle className="font-heading text-lg">{t("title")}</CardTitle>
-        <CardDescription className="text-sm text-neutral-500">
-          {t.rich("description", {
-            resent: (children) => (
-              <button
-                className="font-medium underline opacity-75 hover:opacity-100"
-                onClick={() => alert("Ok")} //TODO: implement
-              >
-                <b>{children}</b>
-              </button>
-            ),
-            br: () => <br />,
-          })}
-        </CardDescription>
       </CardHeader>
 
       <CardContent>
@@ -92,7 +73,7 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
             <FormField
               control={form.control}
               name="token"
-              render={({ field }) => {
+              render={({ field, fieldState }) => {
                 return (
                   <div className="mt-2 space-y-4">
                     <FormControl>
@@ -106,7 +87,11 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
                         }}
                       />
                     </FormControl>
-                    <FormMessage className="text-center" />
+                    {fieldState.error && (
+                      <p className="text-sm text-red-500">
+                        {errorsI18n(fieldState.error.message as any)}
+                      </p>
+                    )}
                   </div>
                 )
               }}

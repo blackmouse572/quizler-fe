@@ -24,9 +24,15 @@ export async function getQuizByQuizBankId(
   req: Partial<PagedRequest>
 ) {
   const filter = toURLSeachParams(req)
+  const token = getToken().token
   const url = getAPIServerURL(`/quiz/${id}?${filter}`)
+  const option: RequestInit = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
 
-  return fetch(url)
+  return fetch(url, option)
     .then(async (res) => {
       const json = await res.json()
       if (!res.ok) {

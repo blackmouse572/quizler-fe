@@ -187,6 +187,10 @@
       },
       "edit": {
         "index": "Edit"
+      },
+      "owner": {
+        "All": "All",
+        "Owner": "My classrooms"
       }
     }
   },
@@ -258,6 +262,7 @@
     "card": {
       "active": "On-going",
       "inactive": "Ended",
+      "upcoming": "Upcoming",
       "join": "Join gamee",
       "unlimited": "Unlimited"
     },

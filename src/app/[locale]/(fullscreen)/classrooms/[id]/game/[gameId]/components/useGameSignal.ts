@@ -42,6 +42,7 @@ export function useGameSignal({
           onReceiveAnswer(result, () => {
             if (!nextQuiz) {
               onFinished?.()
+              conn.stop()
             } else {
               setQuestions(nextQuiz)
             }
@@ -62,7 +63,18 @@ export function useGameSignal({
     const conn = connect()
     setConn(conn)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.accessToken.token])
+
+    return () => {
+      conn?.stop()
+    }
+  }, [
+    onFinished,
+    onReceiveAnswer,
+    setCurrent,
+    setTotal,
+    user,
+    user?.accessToken.token,
+  ])
 
   const start = useCallback(
     (cb: () => void) => {

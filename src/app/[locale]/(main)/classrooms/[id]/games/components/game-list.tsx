@@ -49,24 +49,22 @@ function GameList(props: Props) {
   const renderItems = useMemo(() => {
     return data?.pages.map((page) => {
       return page?.data.map((game) => {
+        const joinAble =
+          new Date(game.startTime) < new Date() &&
+          new Date(game.endTime) > new Date()
+        let status = "active"
+        if (new Date(game.endTime) < new Date()) {
+          status = "inactive"
+        } else if (new Date(game.startTime) > new Date()) {
+          status = "upcoming"
+        }
+
         return (
           <Card>
             <CardHeader>
-              {new Date(game.endTime) < new Date() ? (
-                <div>
-                  <CardTitle>{game.gameName}</CardTitle>
-
-                  <Link
-                    href={`/classrooms/${props.classroomId}/games/${game.id}/result`}
-                  >
-                    <CardTitle className="pt-2 font-normal text-green-800">{t("actions.view_game_result.title")} </CardTitle>
-                  </Link>
-                </div>
-              ) : (
-                <Link href={`/classrooms/${props.classroomId}/game/${game.id}`}>
-                  <CardTitle>{game.gameName}</CardTitle>
-                </Link>
-              )}
+              <div>
+                <CardTitle>{game.gameName}</CardTitle>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -89,19 +87,35 @@ function GameList(props: Props) {
                   {t("actions.create.form.duration.label")}:&nbsp;
                   {game.duration ?? t("card.unlimited")}
                 </p>
-                {new Date(game.endTime) < new Date() ? (
-                  <>
-                    <Badge color="accent">{t("card.inactive")}</Badge>
-                  </>
-                ) : (
-                  <Badge color="success">{t("card.active")}</Badge>
-                )}
+                <Badge
+                  color={
+                    status === "active"
+                      ? "success"
+                      : status === "inactive"
+                        ? "danger"
+                        : "warning"
+                  }
+                >
+                  {t(`card.${status}` as any)}
+                </Badge>
               </div>
             </CardContent>
             <CardFooter>
-              {(new Date(game.endTime) < new Date() ||
-                game.numberOfQuizzes === 0) ?? (
-                <Button>{t("card.join")}</Button>
+              {joinAble ? (
+                <Link href={`/classrooms/${props.classroomId}/game/${game.id}`}>
+                  <Button>{t("card.join")}</Button>
+                </Link>
+              ) : (
+                <></>
+              )}
+              {new Date(game.endTime) < new Date() && (
+                <Link
+                  href={`/classrooms/${props.classroomId}/games/${game.id}/result`}
+                >
+                  <Button color="success">
+                    {t("actions.view_game_result.title")}
+                  </Button>
+                </Link>
               )}
             </CardFooter>
           </Card>
