@@ -1409,6 +1409,46 @@
     "Login": {
       "WrongEmailPassword": "Email or password is incorrect",
       "IssueToken": "Error when issues token"
+    },
+    "Game": {
+      "UserNotJoined": "User has not joined in the game yet",
+      "ExceedTime": "Exceeding time limit",
+      "QuizSize": "Amount is larger than quizbank size",
+      "NotStarted": "Game is not started or has been ended",
+      "NoRecord": "There is no record",
+      "AlreadyStarted": "Game already started or ended",
+      "NotReJoin": "Can not re-join the game",
+      "NotJoin": "User has not joined in the game yet"
+    },
+    "Quiz": {
+      "not_found": "Quiz not found"
+    },
+    "Quizbank": {
+      "not_found": "Quizbank not found"
+    },
+    "Classroom": {
+      "NotIncludeQuizbank": "QuizBank is not included in classroom"
+    },
+    "Notification": {
+      "NotFound": "Notification not found"
+    },
+    "Plan": {
+      "NotHave": "Not have plan",
+      "NotAdmin": "Not Admin",
+      "NotFound": "Not Found Plan"
+    },
+    "Post": {
+      "not_found": "Could not find Post"
+    },
+    "Comment": {
+      "not_found": "Could not find Comment"
+    },
+    "Progress": {
+      "not_found": "Not found progress"
+    },
+    "Report": {
+      "FieldsMiss": "Fields missing",
+      "AlreadyActive": "Report is already Actived"
     }
   },
   "Validations": {

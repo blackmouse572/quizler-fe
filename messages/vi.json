@@ -810,7 +810,9 @@
       "create_post": "Bài viết mới được tạo trong lớp học {objectName}",
       "create_game": "Trò chơi mới đã được tạo trong lớp học {objectName}",
       "reported": "Người dùng {user} đã bị báo cáo do vi phạm",
-      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm"
+      "warning": "Người dùng {user} đã bị cảnh cáo do vi phạm",
+      "subcribe_plan": "Người dùng {user} đã đăng kí thành công gói {objectName}",
+      "cancel_plan": "Người dùng {user} đã hủy gói {objectName} thành công"
     }
   },
   "Navbar": {
@@ -1038,15 +1040,9 @@
     "plans": {
       "duration": "Tháng",
       "plans": {
-        "hobby": {
-          "title": "Sở thích",
-          "description": "Khởi động",
-          "features": {
-            "feature1": "Học các ngân hàng công hỏi công khai",
-            "feature2": "Tự do tạo cái ngân hàng câu hỏi của riêng mình",
-            "feature3": "15 lần sử dùng công cụ AI mỗi ngày",
-            "feature4": "Sở hữu đến 3 lớp học"
-          }
+        "normal_member": {
+          "title": "Thành viên thông thường",
+          "description": "Dành cho mọi người"
         },
         "warmup_member": {
           "title": "Thành viên khởi động",
@@ -1061,8 +1057,8 @@
           "description": "Thỏa sức vui chơi"
         },
         "maxAI": "Số câu hỏi AI tối đa mỗi ngày: {times}",
-        "maxClassroom": "Số lớp học có thể tạo: {times}",
-        "maxStudent": "Tối đa học sinh trong lớp: {times}"
+        "maxClassroom": "Số lớp học: {times}",
+        "maxStudent": "Số học sinh mỗi lớp học: {times}"
       },
       "upgrade_dialog": {
         "buttons": {
@@ -1070,7 +1066,8 @@
           "cancel": "Hủy"
         },
         "title": "Nâng cấp gói cá nhân thành {plan}",
-        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói"
+        "description": "Nâng cấp gói cá nhân và tận hưởng những lợi ích từ gói",
+        "success": "Bạn đã nâng cấp gói thành công"
       },
       "cancel_dialog": {
         "buttons": {
@@ -1411,6 +1408,46 @@
     "Login": {
       "WrongEmailPassword": "Email hay mật khẩu không đúng",
       "IssueToken": "Error when issues token"
+    },
+    "Game": {
+      "UserNotJoined": "Người dùng chưa tham gia trò chơi",
+      "ExceedTime": "Quá giới hạn thời gian",
+      "QuizSize": "Số lượng câu hỏi vượt quá số lượng trong quizbank",
+      "NotStarted": "Game chưa bắt đầu hoặc đã kết thúc",
+      "NoRecord": "Không tím thấy bất kỳ bản ghi nào",
+      "AlreadyStarted": "Game đã bắt đầu hoặc đã kết thúc",
+      "NotReJoin": "Không thể tham gia lại vào trò chơi",
+      "NotJoin": "Người dùng chưa tham gia trò chơi"
+    },
+    "Quiz": {
+      "not_found": "Không tìm thấy quiz"
+    },
+    "Quizbank": {
+      "not_found": "Không tìm thấy quizbank"
+    },
+    "Classroom": {
+      "NotIncludeQuizbank": "Quizbank không có trong lớp học"
+    },
+    "Notification": {
+      "NotFound": "Không tìm thấy thông báo"
+    },
+    "Plan": {
+      "NotHave": "Không có Plan",
+      "NotAdmin": "Không phải Admin",
+      "NotFound": "Không tìm thấy Plan"
+    },
+    "Post": {
+      "not_found": "Không tìm thấy Post"
+    },
+    "Comment": {
+      "not_found": "Không tìm thấy bình luận"
+    },
+    "Progress": {
+      "not_found": "Không tìm thấy quá trình học"
+    },
+    "Report": {
+      "FieldsMiss": "Thiếu (một số) miền",
+      "AlreadyActive": "Báo cáo đã được kích hoạt"
     }
   },
   "Validations": {
