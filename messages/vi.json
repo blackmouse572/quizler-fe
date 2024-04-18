@@ -25,6 +25,31 @@
       }
     }
   },
+  "Contact": {
+    "metadata": {
+      "title": "Liên lạc với chúng tôi",
+      "description": "Liên lạc với chúng tôi"
+    },
+    "index": "Liên lạc QuizLearn",
+    "message": {
+      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm."
+    },
+    "form": {
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên của bạn"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Nhập email của bạn"
+      },
+      "reason": {
+        "label": "Lí do",
+        "placeholder": "Nhập lí do của bạn"
+      },
+      "submit": "Xác nhận"
+    }
+  },
   "Table": {
     "no_data": "Không có dữ liệu",
     "no_results": "Không tìm thấy kết quả",
@@ -1390,6 +1415,11 @@
         "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
         "mismatch_password": "Mật khẩu không khớp.",
         "email": "Email không hợp lệ."
+      },
+      "contact": {
+        "name": "Tên phải có ít nhất 2 ký tự.",
+        "email": "Email không hợp lệ.",
+        "reason": "Lí do phải từ 3 đến 1000 ký tự."
       },
       "forgot_password": {
         "email": "Email không hợp lệ."
