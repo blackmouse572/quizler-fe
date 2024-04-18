@@ -1390,6 +1390,7 @@
     "verification-failed": "Xác thực thất bại, vui lòng thử lại",
     "Unauthorized": "Tài khoản chưa được xác thực, vui lòng đăng nhập lại",
     "refresh": "Thử lại",
+    "back": "Đi đến lớp học",
     "classroom": {
       "code-invalid": "Mã lớp học không hợp lệ, vui lòng thử lại",
       "code-expire": "Mã lớp học đã hết hạn, vui lòng thử lại",
