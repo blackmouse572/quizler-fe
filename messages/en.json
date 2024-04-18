@@ -1427,7 +1427,8 @@
       "not_found": "Quizbank not found"
     },
     "Classroom": {
-      "NotIncludeQuizbank": "QuizBank is not included in classroom"
+      "NotIncludeQuizbank": "QuizBank is not included in classroom",
+      "AlreadyBanned": "User was already banned from the classroom"
     },
     "Notification": {
       "NotFound": "Notification not found"
