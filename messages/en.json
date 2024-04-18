@@ -1399,7 +1399,8 @@
       "not_found": "Classroom not found",
       "user_not_found": "User not found",
       "user_in_classroom": "User has already in classroom",
-      "max_classrooms": "You have reached max classroom in this plan."
+      "max_classrooms": "You have reached max classroom in this plan.",
+      "ExistedMember": "You have already a member of this classroom"
     },
     "game": {
       "already-joined": "You have already joined this game",

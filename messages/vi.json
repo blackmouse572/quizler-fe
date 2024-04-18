@@ -1398,7 +1398,8 @@
       "not_found": "Không tìm thấy lớp học",
       "user_not_found": "Không tìm thấy người dùng",
       "user_in_classroom": "Người dùng đã ở trong lớp học",
-      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
+      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa.",
+      "ExistedMember": "Bạn đã là thành viên của lớp học này rồi"
     },
     "game": {
       "already-joined": "Bạn đã tham gia trò chơi này rồi",
