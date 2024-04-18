@@ -1408,6 +1408,46 @@
     "Login": {
       "WrongEmailPassword": "Email hay mật khẩu không đúng",
       "IssueToken": "Error when issues token"
+    },
+    "Game": {
+      "UserNotJoined": "Người dùng chưa tham gia trò chơi",
+      "ExceedTime": "Quá giới hạn thời gian",
+      "QuizSize": "Số lượng câu hỏi vượt quá số lượng trong quizbank",
+      "NotStarted": "Game chưa bắt đầu hoặc đã kết thúc",
+      "NoRecord": "Không tím thấy bất kỳ bản ghi nào",
+      "AlreadyStarted": "Game đã bắt đầu hoặc đã kết thúc",
+      "NotReJoin": "Không thể tham gia lại vào trò chơi",
+      "NotJoin": "Người dùng chưa tham gia trò chơi"
+    },
+    "Quiz": {
+      "not_found": "Không tìm thấy quiz"
+    },
+    "Quizbank": {
+      "not_found": "Không tìm thấy quizbank"
+    },
+    "Classroom": {
+      "NotIncludeQuizbank": "Quizbank không có trong lớp học"
+    },
+    "Notification": {
+      "NotFound": "Không tìm thấy thông báo"
+    },
+    "Plan": {
+      "NotHave": "Không có Plan",
+      "NotAdmin": "Không phải Admin",
+      "NotFound": "Không tìm thấy Plan"
+    },
+    "Post": {
+      "not_found": "Không tìm thấy Post"
+    },
+    "Comment": {
+      "not_found": "Không tìm thấy bình luận"
+    },
+    "Progress": {
+      "not_found": "Không tìm thấy quá trình học"
+    },
+    "Report": {
+      "FieldsMiss": "Thiếu (một số) miền",
+      "AlreadyActive": "Báo cáo đã được kích hoạt"
     }
   },
   "Validations": {
