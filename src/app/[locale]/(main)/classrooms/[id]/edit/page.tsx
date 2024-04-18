@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { use } from "react"
 import getClassroomDetails from "../../actions/get-classroom-details-action"
+import { getUser } from "@/lib/auth"
 
 type Props = {
   params: { id: string; locale?: string; classroom?: Classroom }
@@ -29,14 +30,17 @@ export async function generateMetadata({
 
 function EditClassroomPage({ params: { id } }: Props) {
   const message = useMessages()
+  const user = getUser()
   const data = use(getClassroomDetails(id))
   if (!data.ok) {
     throw Error(data.message)
   }
 
-  if (!data.data) {
+  if (!data.data || !user) {
     return notFound()
   }
+  const isTeacher = data.data.author.id === user.id
+  if (!isTeacher) notFound()
 
   const classroom = data.data
 

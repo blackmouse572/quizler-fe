@@ -25,6 +25,31 @@
       }
     }
   },
+  "Contact": {
+    "metadata": {
+      "title": "Contact Us",
+      "description": "Contact us"
+    },
+    "index": "Contact QuizLearn",
+    "message": {
+      "index": "Thank you for your contact!<br></br>We have received your contact at email: {email}<br></br>We will contact you soon."
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter you email"
+      },
+      "reason": {
+        "label": "Reason",
+        "placeholder": "Enter your reason"
+      },
+      "submit": "Submit"
+    }
+  },
   "Table": {
     "no_data": "No data",
     "no_results": "No results",
@@ -177,7 +202,7 @@
       "post": {
         "index": "{user} created a post",
         "game": "{user} created a game: {game}. Join now !!!",
-        "quizbank": "{user} created a quizbank. Learned now !!!"
+        "quizbank": "{user} created a quizbank. Learn now !!!"
       },
       "help": {
         "title": "Help",
@@ -1388,6 +1413,11 @@
         "mismatch_password": "Passwords don't match",
         "email": "Email is invalid"
       },
+      "contact": {
+        "name": "Name must be at least 2 characters.",
+        "email": "Email is invalid",
+        "reason": "Reason should be between 2 and 1000 characters."
+      },
       "forgot_password": {
         "email": "Email is invalid"
       },
@@ -1648,8 +1678,8 @@
         "cancel": "Cancel"
       },
       "success": {
-        "title": "Invited user",
-        "description": "You have invited the user successfully"
+        "title": "Invite user(s) successfully",
+        "description": "You have invited the user(s) successfully"
       }
     }
   },

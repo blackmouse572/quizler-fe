@@ -105,13 +105,17 @@ export default function AddClassroomForm({
         router.push(`/classrooms/${res.data.id}`)
 
         toast({
-          title: i18n("form.actions.add.message.title"),
+          title: isAddAction
+            ? i18n("form.actions.add.message.title")
+            : i18n("form.actions.edit.message.title"),
           color: "success",
-          description: i18n("form.actions.add.message.description"),
+          description: isAddAction
+            ? i18n("form.actions.add.message.description")
+            : i18n("form.actions.edit.message.description"),
         })
       }
     },
-    [errori18n, i18n, router, t, toast]
+    [errori18n, i18n, isAddAction, router, t, toast]
   )
 
   const onSubmit = useCallback(

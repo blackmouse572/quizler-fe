@@ -41,16 +41,6 @@ export default function Footer({ className, locale }: Props) {
           </div>
           <div className="flex gap-4">
             <LocaleSwitcherSelect label="" defaultValue={locale ?? "en"} />
-            <Link href="https://github.com/blackmouse572/quizler-fe">
-              <Button isIconOnly variant="light">
-                <Icons.Github />
-              </Button>
-            </Link>
-            <Link href="https://www.facebook.com/blackmouse572/">
-              <Button isIconOnly variant="light">
-                <Icons.Facebook />
-              </Button>
-            </Link>
           </div>
         </div>
       </div>

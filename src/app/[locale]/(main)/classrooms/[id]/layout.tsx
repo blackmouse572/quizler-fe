@@ -78,8 +78,13 @@ async function ClassroomDetailLayout({ children, params }: Props) {
             </p>
           </div>
           <div className="flex space-x-2">
-            <GenerateJoinDialog classroomId={params.id} />
-            <SendInviteDialog classroomId={params.id} />
+            {(isTeacher || data.data.isStudentAllowInvite) && (
+              <>
+                <GenerateJoinDialog classroomId={params.id} />
+                <SendInviteDialog classroomId={params.id} />
+              </>
+            )}
+
             {user.id !== data.data.author?.id ? (
               <LeaveClassroom classroom={data.data!} />
             ) : (
