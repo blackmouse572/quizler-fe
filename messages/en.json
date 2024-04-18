@@ -1408,7 +1408,8 @@
     },
     "Login": {
       "WrongEmailPassword": "Email or password is incorrect",
-      "IssueToken": "Error when issues token"
+      "IssueToken": "Error when issues token",
+      "wasBaned": "User has been banned"
     },
     "Game": {
       "UserNotJoined": "User has not joined in the game yet",
@@ -1450,6 +1451,9 @@
     "Report": {
       "FieldsMiss": "Fields missing",
       "AlreadyActive": "Report is already Actived"
+    },
+    "ChangePassword": {
+      "WrongOldPassword": "Wrong old password"
     }
   },
   "Validations": {
