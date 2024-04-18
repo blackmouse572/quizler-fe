@@ -21,7 +21,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -38,6 +37,7 @@ type Props = {}
 
 function LoginForm({}: Props) {
   const t = useTranslations("SignIn")
+  const errorsi18n = useTranslations("Errors")
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { toast } = useToast()
   const router = useRouter()
@@ -58,16 +58,16 @@ function LoginForm({}: Props) {
     if (!result.ok) {
       setIsLoading(false)
       return toast({
-        title: "Something went wrong.",
-        description: result.message,
+        title: errorsi18n("unknown"),
+        description: errorsi18n(result.message as any),
         variant: "flat",
         color: "danger",
       })
     }
 
     toast({
-      title: "Success",
-      description: "You have been logged in.",
+      title: t("title"),
+      description: t("success.index"),
       variant: "flat",
       color: "success",
     })
