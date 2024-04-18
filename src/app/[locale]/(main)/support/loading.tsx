@@ -7,9 +7,9 @@ import {
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
-function RestLoadingPage() {
+export default function ContactLoadingPage() {
   return (
-    <div className="container mx-auto h-screen space-y-2">
+    <div className="h-screen space-y-2">
       <div className="grid h-72">
         <Card className="h-full">
           <CardHeader>
@@ -45,5 +45,3 @@ function RestLoadingPage() {
     </div>
   )
 }
-
-export default RestLoadingPage

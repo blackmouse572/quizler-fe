@@ -25,6 +25,61 @@
       }
     }
   },
+  "Contact": {
+    "metadata": {
+      "title": "Contact Us",
+      "description": "Contact us"
+    },
+    "index": "Contact QuizLearn",
+    "message": {
+      "index": "Thank you for your contact!<br></br>We have received your contact at email: {email}<br></br>We will contact you soon."
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter you email"
+      },
+      "reason": {
+        "label": "Reason",
+        "placeholder": "Enter your reason"
+      },
+      "submit": "Submit"
+    }
+  },
+  "Support": {
+    "metadata": {
+      "title": "Support",
+      "description": "Support"
+    },
+    "index": "Support QuizLearn",
+    "search_docs": {
+      "index": "You can try to search our <docs>docs</docs> for the problem you are facing with.",
+      "or": "OR"
+    },
+    "message": {
+      "index": "Thank you!<br></br>We have received your request support at email: {email}<br></br>We will contact you soon."
+    },
+    "form": {
+      "index": "Contact us for your problems",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter you email"
+      },
+      "reason": {
+        "label": "Reason",
+        "placeholder": "Enter your reason"
+      },
+      "submit": "Submit"
+    }
+  },
   "Table": {
     "no_data": "No data",
     "no_results": "No results",
@@ -177,7 +232,7 @@
       "post": {
         "index": "{user} created a post",
         "game": "{user} created a game: {game}. Join now !!!",
-        "quizbank": "{user} created a quizbank. Learned now !!!"
+        "quizbank": "{user} created a quizbank. Learn now !!!"
       },
       "help": {
         "title": "Help",
@@ -1324,6 +1379,7 @@
     "upgrade": "Upgrade account"
   },
   "Errors": {
+    "Already joined": "You have already joined this classroom",
     "index": "Error",
     "unknown": "Something went wrong",
     "token-expire": "The url has been expire, please create another request",
@@ -1334,6 +1390,7 @@
     "verification-failed": "The verification code is not correct, please try again",
     "Unauthorized": "Account not authorized, please login",
     "refresh": "Refresh",
+    "back": "Go to classroom",
     "classroom": {
       "code-invalid": "The code is not valid, please try again",
       "code-expire": "The code has been expired, please try again",
@@ -1387,6 +1444,11 @@
         "confirm_password": "Confirm password must be at least 8 characters.",
         "mismatch_password": "Passwords don't match",
         "email": "Email is invalid"
+      },
+      "contact": {
+        "name": "Name must be at least 2 characters.",
+        "email": "Email is invalid",
+        "reason": "Reason should be between 2 and 1000 characters."
       },
       "forgot_password": {
         "email": "Email is invalid"
@@ -1648,8 +1710,8 @@
         "cancel": "Cancel"
       },
       "success": {
-        "title": "Invited user",
-        "description": "You have invited the user successfully"
+        "title": "Invite user(s) successfully",
+        "description": "You have invited the user(s) successfully"
       }
     }
   },

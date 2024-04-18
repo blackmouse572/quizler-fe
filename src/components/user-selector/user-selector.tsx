@@ -156,7 +156,7 @@ function UserSelector({
           {users.map((user) => {
             return (
               <div
-                className="flex w-fit gap-2 rounded-md bg-neutral-100 px-2 py-1.5"
+                className="relative flex w-fit gap-2 rounded-md bg-neutral-100 px-2 py-1.5 hover:bg-white"
                 key={user?.id}
               >
                 <Avatar className="h-8 w-8 text-xs">
@@ -179,6 +179,15 @@ function UserSelector({
                     {user?.email}
                   </div>
                 </div>
+                <Icons.X
+                  className="absolute right-1.5 top-1 h-3 w-3 cursor-pointer text-neutral-500"
+                  onClick={() =>
+                    setValues((prev) => {
+                      prev.delete(user?.id.toString() || "")
+                      return new Set(prev)
+                    })
+                  }
+                />
               </div>
             )
           })}

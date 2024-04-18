@@ -55,7 +55,7 @@ function SendInviteDialog({ classroomId }: SendInviteDialogProps) {
       setOpen(false)
       toast({
         title: t("success.title"),
-        description: t("success.title"),
+        description: t("success.description"),
         color: "success",
       })
     }

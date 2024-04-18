@@ -193,6 +193,10 @@ export default function ViewFlashcard({
   const renderItem = useCallback(
     (item: Quiz) => {
       const isFlip = flipMap[item.id] || false
+      const questionWithDiv = item.question
+        .split("\n")
+        .map((line: string, index: number) => <div key={index}>{line}</div>)
+
       return (
         <CarouselItem
           key={item.id + "-carousel"}
@@ -214,7 +218,9 @@ export default function ViewFlashcard({
                 })}
               </Badge>
               <CardContent className="flex aspect-video items-center justify-center">
-                <span className="text-4xl">{item.question}</span>
+                <span className="text-4xl">
+                  {questionWithDiv}
+                </span>
               </CardContent>
             </Card>
             <Card className="relative">

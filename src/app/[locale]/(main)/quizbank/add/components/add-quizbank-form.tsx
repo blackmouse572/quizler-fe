@@ -28,6 +28,7 @@ import { cn } from "@/lib/utils"
 import { EFormAction } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useCallback, useMemo, useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
@@ -290,15 +291,23 @@ function AddQuizbankForm({
           </div>
         )}
         <div className="my-4 flex items-center justify-between border-b border-primary">
-          <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
+          <div className="flex items-center gap-1">
+            {action === EFormAction.Edit && (
+              <Link href={`/quizbank/${quizBankId}`}>
+                <Button variant="ghost" color="accent" isIconOnly>
+                  <Icons.ChevronLeft />
+                </Button>
+              </Link>
+            )}
+            <h3 className="text-lg font-bold">{i18n("form.title")}</h3>
+          </div>
           <div>
             <BatchImportQuizbankForm onSuccessfulImport={onImport} />
-
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   type="submit"
-                  variant={"flat"}
+                  variant={"ghost"}
                   form="addForm"
                   isIconOnly
                   color={"accent"}

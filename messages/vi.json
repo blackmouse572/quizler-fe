@@ -25,6 +25,61 @@
       }
     }
   },
+  "Contact": {
+    "metadata": {
+      "title": "Liên lạc với chúng tôi",
+      "description": "Liên lạc với chúng tôi"
+    },
+    "index": "Liên lạc QuizLearn",
+    "message": {
+      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm."
+    },
+    "form": {
+      "name": {
+        "label": "Tên",
+        "placeholder": "Nhập tên của bạn"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Nhập email của bạn"
+      },
+      "reason": {
+        "label": "Lí do",
+        "placeholder": "Nhập lí do của bạn"
+      },
+      "submit": "Gửi"
+    }
+  },
+  "Support": {
+    "metadata": {
+      "title": "Hỗ trợ",
+      "description": "Hỗ trợ"
+    },
+    "index": "Hỗ trợ QuizLearn",
+    "search_docs": {
+      "index": "Bạn có thể thử tìm kiếm trong <docs>tài liệu</docs> của chúng tôi để tìm giải pháp cho vấn đề bạn đang gặp phải.",
+      "or": "HOẶC"
+    },
+    "message": {
+      "index": "Cảm ơn bạn!<br></br>Chúng tôi đã nhận được yêu cầu hỗ trợ của bạn qua email: {email}<br></br>Chúng tôi sẽ liên hệ với bạn sớm."
+    },
+    "form": {
+      "index": "Liên hệ với chúng tôi về vấn đề của bạn",
+      "name": {
+        "label": "Họ tên",
+        "placeholder": "Nhập họ tên của bạn"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Nhập email của bạn"
+      },
+      "reason": {
+        "label": "Lý do",
+        "placeholder": "Nhập lý do của bạn"
+      },
+      "submit": "Gửi"
+    }
+  },
   "Table": {
     "no_data": "Không có dữ liệu",
     "no_results": "Không tìm thấy kết quả",
@@ -253,7 +308,7 @@
         }
       },
       "view_game_result": {
-        "title": "Xem kết quả"
+        "title": "Xem kết quả trò chơi"
       },
       "leave": {
         "title": "Rời khỏi trò chơi",
@@ -1324,6 +1379,7 @@
     "upgrade": "Nâng cấp tài khoản"
   },
   "Errors": {
+    "Already joined": "Bạn đã tham gia lớp học này rồi",
     "index": "Lỗi",
     "unknown": "Đã xảy ra lỗi không xác định, vui lòng thử lại sau",
     "token-expire": "Địa chỉ URL hết hiệu lực, hãy thử lại",
@@ -1387,6 +1443,11 @@
         "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
         "mismatch_password": "Mật khẩu không khớp.",
         "email": "Email không hợp lệ."
+      },
+      "contact": {
+        "name": "Tên phải có ít nhất 2 ký tự.",
+        "email": "Email không hợp lệ.",
+        "reason": "Lí do phải từ 3 đến 1000 ký tự."
       },
       "forgot_password": {
         "email": "Email không hợp lệ."
@@ -1648,7 +1709,7 @@
         "cancel": "Huỷ bỏ"
       },
       "success": {
-        "title": "Mời thành công",
+        "title": "Mời người dùng thành công",
         "description": "Mời người dùng thành công"
       }
     }
