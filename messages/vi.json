@@ -1048,6 +1048,10 @@
             "feature4": "Sở hữu đến 3 lớp học"
           }
         },
+        "normal_member": {
+          "title": "Thành viên bình thường",
+          "description": "Cho mọi người"
+        },
         "warmup_member": {
           "title": "Thành viên khởi động",
           "description": "Gói khởi động, dành cho thành viên mới"
