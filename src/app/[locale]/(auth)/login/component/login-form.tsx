@@ -21,7 +21,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -71,7 +70,7 @@ function LoginForm({}: Props) {
       variant: "flat",
       color: "success",
     })
-    const from = search.get("from")
+    const from = search.get("from")?.replace(/"/g, "")
     if (from) return router.push(from.toString())
     return router.push("/")
   }
