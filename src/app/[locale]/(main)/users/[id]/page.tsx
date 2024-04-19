@@ -78,7 +78,7 @@ export default async function UserProfile({ params }: Props) {
         </CardContent>
         <CardFooter className="justify-end">
           <NextIntlClientProvider
-            messages={_.pick(msg, "Validations", "Errors")}
+            messages={_.pick(msg, "Report_user", "Validations", "Errors")}
           >
             {currentUser && currentUser.id !== user.id && (
               <ReportUserDialog
