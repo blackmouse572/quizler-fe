@@ -250,7 +250,8 @@
       "index": "Classroom",
       "members": "Members",
       "games": "Games",
-      "quizbanks": "Quizbanks"
+      "quizbanks": "Quizbanks",
+      "back_to_top": "Back to top"
     }
   },
   "ClassroomGame": {
@@ -1253,9 +1254,17 @@
       "play_button": "Start learning",
       "pause_button": "Pause flashcard",
       "shuffle_button": "Toggle random",
+      "stop_shuffle": "Stop random",
+      "prev_flashcard": "Previous flashcard",
+      "next_flashcard": "Next flashcard",
+      "flip_flashcard": "Flip flashcard",
       "full_screen_button": "Full screen mode",
       "slide": "Slides",
-      "of": "of"
+      "of": "of",
+      "help": {
+        "title": "Help",
+        "confirm": "Confirm"
+      }
     },
     "ViewQuizzes": {
       "term": "Terms in this bank",

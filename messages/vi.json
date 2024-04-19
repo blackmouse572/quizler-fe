@@ -250,7 +250,8 @@
       "index": "Lớp học",
       "members": "Thành viên",
       "games": "Trò chơi",
-      "quizbanks": "Ngân hàng câu hỏi"
+      "quizbanks": "Ngân hàng câu hỏi",
+      "back_to_top": "Về đầu trang"
     }
   },
   "ClassroomGame": {
@@ -1251,10 +1252,18 @@
     "ViewFlashcard": {
       "play_button": "Bắt đầu học",
       "pause_button": "Tạm dừng thẻ ghi nhớ",
-      "shuffle_button": "Trộn thẻ",
+      "shuffle_button": "Xáo trộn thẻ",
+      "stop_shuffle": "Dừng xáo trộn thẻ",
+      "prev_flashcard": "Thẻ trước",
+      "next_flashcard": "Thẻ tiếp theo",
+      "flip_flashcard": "Lật thẻ",
       "full_screen_button": "Chế độ toàn màn hình",
       "slide": "Trang",
-      "of": "của"
+      "of": "của",
+      "help": {
+        "title": "Trợ giúp",
+        "confirm": "Xác nhận"
+      }
     },
     "ViewQuizzes": {
       "term": "Thuật ngữ trong học phần này",

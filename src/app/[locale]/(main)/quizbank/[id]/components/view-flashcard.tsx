@@ -12,6 +12,7 @@ import { Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Toggle } from "@/components/ui/toggle"
 import {
+  NamedToolTip,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -38,6 +39,8 @@ import { Badge } from "@/components/ui/badge"
 import _ from "lodash"
 import Link from "next/link"
 import { useHotkeys } from "react-hotkeys-hook"
+import { Button } from "@/components/ui/button"
+import FlashcardHelperDialog from "./flashcard-helper-dialog/flashcard-helper-dialog"
 
 export default function ViewFlashcard({
   quizBankData,
@@ -218,9 +221,7 @@ export default function ViewFlashcard({
                 })}
               </Badge>
               <CardContent className="flex aspect-video items-center justify-center">
-                <span className="text-4xl">
-                  {questionWithDiv}
-                </span>
+                <span className="text-4xl">{questionWithDiv}</span>
               </CardContent>
             </Card>
             <Card className="relative">
@@ -336,7 +337,7 @@ export default function ViewFlashcard({
         <CarouselNext />
       </Carousel>
 
-      <div className="flex items-center justify-between gap-5 ">
+      <div className="flex items-center justify-between gap-5 mr-6">
         <div className="flex justify-between gap-3">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -372,13 +373,27 @@ export default function ViewFlashcard({
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{i18n("ViewFlashcard.shuffle_button")}</p>
+              <p>
+                {isShuffle
+                  ? i18n("ViewFlashcard.stop_shuffle")
+                  : i18n("ViewFlashcard.shuffle_button")}
+              </p>
             </TooltipContent>
           </Tooltip>
         </div>
 
         <div className="flex-1 text-center text-xs font-semibold leading-4 text-black">
           {currentIndex}/{count}
+        </div>
+
+        <div className="flex justify-between ">
+          <NamedToolTip content={i18n("ViewFlashcard.help.title")}>
+            <FlashcardHelperDialog>
+              <Button type="button" isIconOnly variant="ghost" color="accent">
+                <Icons.Help />
+              </Button>
+            </FlashcardHelperDialog>
+          </NamedToolTip>
         </div>
       </div>
     </>
