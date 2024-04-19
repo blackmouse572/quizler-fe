@@ -250,7 +250,8 @@
       "index": "Classroom",
       "members": "Members",
       "games": "Games",
-      "quizbanks": "Quizbanks"
+      "quizbanks": "Quizbanks",
+      "back_to_top": "Back to top"
     }
   },
   "ClassroomGame": {

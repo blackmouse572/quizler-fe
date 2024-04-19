@@ -18,6 +18,7 @@ import React from "react"
 import getClassroomDetails from "../actions/get-classroom-details-action"
 import GenerateJoinDialog from "../components/generate-join-dialog"
 import SendInviteDialog from "../components/send-invite-dialog"
+import BackToTop from "./components/back-to-top"
 
 type Props = {
   children: React.ReactNode
@@ -103,6 +104,7 @@ async function ClassroomDetailLayout({ children, params }: Props) {
       >
         <SideMenu items={CLASSROOM_SIDEBAR} namespace="ClassroomDetails" />
         {children}
+        <BackToTop />
       </NextIntlClientProvider>
     </main>
   )
