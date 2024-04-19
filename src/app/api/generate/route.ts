@@ -28,7 +28,7 @@ const structuredPrompt = (
   itemSeperator: string,
   quizSeperator: string
 ) => {
-  return `Genereate a set of 10 flashcards from the following text.  Term and definition are separated by a ${itemSeperator}. Each flashcard is separated by a ${quizSeperator}.\nFor example:"""An apple${itemSeperator} A fruit${quizSeperator} A bird${itemSeperator} An animal${quizSeperator}A flower${itemSeperator}a plant${quizSeperator}""".\nDo not format or list the answer. Also Do not provide any furthur information but you are welcome to take the context from the text."""\nHere is the text: \n"""${prompt}"""i. \nIf answer larger or equal to 11, reduce it down to 10 items only.`
+  return `Genereate a set of 10 flashcards from the following text.  Term and definition are separated by a ${itemSeperator}. Each flashcard is separated by a ${quizSeperator}.\nFor example:"""An apple${itemSeperator} A fruit${quizSeperator} A bird${itemSeperator} An animal${quizSeperator}A flower${itemSeperator}a plant${quizSeperator}""".\nDo not format or list out the answer (no mark by bullet list or number list). Also Do not provide any furthur information."""\nHere is the text: \n"""${prompt}"""i. \nIf answer larger or equal to 11, reduce it down to 10 items only.`
 }
 
 export async function POST(req: Request) {
