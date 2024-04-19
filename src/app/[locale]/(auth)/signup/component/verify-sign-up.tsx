@@ -31,7 +31,7 @@ export function VerifyRegister({ initialValues }: VerifyRegisterProps) {
   const router = useRouter()
   const { toast } = useToast()
 
-  const [otp, setOtp] = useState<string>("")
+  const [otp, setOtp] = useState<string>(initialValues.token || "")
   const handleOtpChange = (otp: string) => {
     setOtp(otp)
   }

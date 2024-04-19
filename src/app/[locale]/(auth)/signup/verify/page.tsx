@@ -1,9 +1,9 @@
 import GoBackButton from "@/components/go-back-btn"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages, getTranslations } from "next-intl/server"
-import { VerifyRegister } from "../component/verify-sign-up"
+import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
+import { VerifyRegister } from "../component/verify-sign-up"
 
 type VerifyRegisterProps = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -19,7 +19,9 @@ export default async function VerifyRegisterPage({
   return (
     <div className="">
       <GoBackButton />
-      <NextIntlClientProvider messages={_.pick(m, "VerifySignUp", "Errors")}>
+      <NextIntlClientProvider
+        messages={_.pick(m, "VerifySignUp", "Errors", "Validations")}
+      >
         <VerifyRegister
           initialValues={{
             email: email.toString(),
