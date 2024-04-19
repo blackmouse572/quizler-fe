@@ -1,9 +1,11 @@
-import Anthropic from "@anthropic-ai/sdk"
-import { AnthropicStream, Message, StreamingTextResponse } from "ai"
+import {
+  GoogleGenerativeAI,
+  HarmBlockThreshold,
+  HarmCategory,
+} from "@google/generative-ai"
+import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai"
 
-const genAI = new Anthropic({
-  apiKey: process.env.GOOGLE_API_KEY || "",
-})
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "")
 
 // IMPORTANT! Set the runtime to edge
 export const runtime = "edge"
@@ -35,20 +37,31 @@ export async function POST(req: Request) {
 
   const _prompt = structuredPrompt(prompt, itemSeperator, quizSeperator)
   //   const message =
-  const geminiStream = await genAI.messages.create({
-    messages: [
+  const geminiStream = await genAI
+    .getGenerativeModel(
       {
-        role: "user",
-        content: _prompt,
+        model: "gemini-pro",
+        safetySettings: [
+          {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE, // 0.1 is the most restrictive setting
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE, // 0.1 is the most restrictive setting
+          },
+        ],
       },
-    ],
-    model: "claude-3-haiku-20240307",
-    stream: true,
-    max_tokens: 300,
-  })
+      {
+        baseUrl: "https://palm-proxy-pi-seven.vercel.app",
+      }
+    )
+    .generateContentStream({
+      contents: [{ role: "user", parts: [{ text: _prompt }] }],
+    })
 
   // Convert the response into a friendly text-stream
-  const stream = AnthropicStream(geminiStream)
+  const stream = GoogleGenerativeAIStream(geminiStream)
 
   // Respond with the stream
   return new StreamingTextResponse(stream)
