@@ -1830,5 +1830,77 @@
         "title": "Something went wrong."
       }
     }
+  },
+  "Documentation": {
+    "docs_page": {
+      "metadata": {
+        "title": "Documentation",
+        "description": "Enhance your learning experience with QuizLearn, a powerful study application featuring traditional quiz functionality along with engaging game elements. Learn more about how QuizLearn can revolutionize your study routine!"
+      },
+      "header": {
+        "title": "Documentation",
+        "subtitle": "The Ultimate Study Companion with Added Gaming Fun"
+      },
+      "main": {
+        "introduction": {
+          "title": "Introduction",
+          "paragraph": "Welcome to QuizLearn, the next-generation study application designed to transform the way you learn and retain information. With QuizLearn, traditional study methods are infused with exciting gaming elements, making learning both effective and enjoyable."
+        },
+        "key_features": {
+          "title": "Key Features",
+          "interactive_quizzing": {
+            "title": "Interactive Quizzing",
+            "paragraph": "QuizLearn offers a vast library of pre-made quizzes covering various subjects and topics. Test your knowledge and reinforce key concepts through interactive quizzes tailored to your learning needs."
+          },
+          "flashcard_functionality": {
+            "title": "Flashcard Functionality",
+            "paragraph": "Master difficult concepts with ease using QuizLearn's flashcard feature. Create custom flashcards or choose from a wide selection of pre-made decks to enhance your learning experience."
+          },
+          "gamified_learning": {
+            "title": "Gamified Learning",
+            "paragraph": "Say goodbye to mundane study sessions! QuizLearn introduces gaming elements such as points, levels, and rewards to motivate and engage learners. Earn points for correct answers, level up your profile, and unlock exciting rewards as you progress."
+          },
+          "comprehensive_analytics": {
+            "title": "Comprehensive Analytics",
+            "paragraph": "Track your progress and identify areas for improvement with QuizLearn's comprehensive analytics. Monitor your performance across quizzes, flashcards, and games to optimize your study strategy and achieve academic success."
+          },
+          "social_learning": {
+            "title": "Social Learning",
+            "paragraph": "Connect with fellow learners, join study groups, and compete in friendly challenges to enhance collaboration and foster a sense of community within the QuizLearn platform."
+          }
+        },
+        "how_to_use": {
+          "title": "How to use this Document",
+          "navigation": {
+            "title": "Navigation",
+            "paragraph_1": "On the left hand side, there is a side bar that you can navigate between Documents. Documents are divided into to parts 'Getting Started' and 'Others'. Each part will have smaller parts for you to find out. Click on smaller part to see instructions",
+            "paragraph_2": "Remember this appication is not fully developed so there maybe some shortcoming and some parts of the document is not fully covered"
+          }
+        },
+        "why_choose": {
+          "title": "Why choose QuizLearn",
+          "efficiency": {
+            "title": "Efficiency",
+            "paragraph": "QuizLearn streamlines the learning process, allowing you to study smarter, not harder."
+          },
+          "engagement": {
+            "title": "Engagement",
+            "paragraph": "Say goodbye to boring study sessions and hello to interactive, gamified learning experiences."
+          },
+          "community": {
+            "title": "Community",
+            "paragraph": "Connect with like-minded learners, share knowledge, and support each other's academic journey within the QuizLearn community."
+          },
+          "flexibility": {
+            "title": "Flexibility",
+            "paragraph": "With QuizLearn, you have the flexibility to study anytime, anywhere, at your own pace."
+          }
+        },
+        "last_words": {
+          "paragraph_1": "Start Your Learning Journey with QuizLearn Today!",
+          "paragraph_2": "Join the QuizLearn community and revolutionize your study routine with our innovative blend of traditional quizzing and gaming fun. Sign up now and unlock a world of knowledge at your fingertips!"
+        }
+      }
+    }
   }
 }
