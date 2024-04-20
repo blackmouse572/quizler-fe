@@ -1789,5 +1789,77 @@
         "title": "Có gì đó không đúng đã xảy ra"
       }
     }
+  },
+  "Documentation": {
+    "docs_page": {
+      "metadata": {
+        "title": "Tài liệu",
+        "description": "Nâng cao trải nghiệm học tập của bạn với QuizLearn, một ứng dụng học tập mạnh mẽ có chức năng đố vui truyền thống cùng với các yếu tố trò chơi hấp dẫn. Tìm hiểu thêm về cách QuizLearn có thể cách mạng hóa thói quen học tập của bạn!"
+      },
+      "header": {
+        "title": "Tài liệu",
+        "subtitle": "Người bạn đồng hành học tập tối ưu với niềm vui chơi game bổ sung"
+      },
+      "main": {
+        "introduction": {
+          "title": "Giới thiệu",
+          "paragraph": "Chào mừng bạn đến với QuizLearn, ứng dụng học tập thế hệ tiếp theo được thiết kế để thay đổi cách bạn học và ghi nhớ thông tin. Với QuizLearn, các phương pháp học tập truyền thống được kết hợp với các yếu tố trò chơi thú vị, giúp việc học vừa hiệu quả vừa thú vị."
+        },
+        "key_features": {
+          "title": "Các tính năng chính",
+          "interactive_quizzing": {
+            "title": "Câu đố tương tác",
+            "paragraph": "QuizLearn cung cấp một thư viện lớn gồm các câu đố được tạo sẵn bao gồm nhiều chủ đề và chủ đề khác nhau. Kiểm tra kiến ​​thức của bạn và củng cố các khái niệm chính thông qua các câu đố tương tác phù hợp với nhu cầu học tập của bạn."
+          },
+          "flashcard_functionality": {
+            "title": "Chức năng thẻ ghi nhớ",
+            "paragraph": "Dễ dàng nắm vững các khái niệm khó bằng cách sử dụng tính năng thẻ ghi nhớ của QuizLearn. Tạo thẻ ghi nhớ tùy chỉnh hoặc chọn từ nhiều bộ bài được tạo sẵn để nâng cao trải nghiệm học tập của bạn."
+          },
+          "gamified_learning": {
+            "title": "Trò chơi hóa việc học",
+            "paragraph": "Hãy tạm biệt những buổi học nhàm chán! QuizLearn giới thiệu các yếu tố trò chơi như điểm, cấp độ và phần thưởng để thúc đẩy và thu hút người học. Kiếm điểm cho các câu trả lời đúng, nâng cấp hồ sơ của bạn và mở khóa những phần thưởng thú vị khi bạn tiến bộ."
+          },
+          "comprehensive_analytics": {
+            "title": "Phân tích toàn diện",
+            "paragraph": "Theo dõi tiến trình của bạn và xác định các lĩnh vực cần cải thiện bằng phân tích toàn diện của QuizLearn. Theo dõi hiệu suất của bạn qua các câu đố, thẻ ghi chú và trò chơi để tối ưu hóa chiến lược học tập của bạn và đạt được thành công trong học tập."
+          },
+          "social_learning": {
+            "title": "HHọc cùng với bạn bè",
+            "paragraph": "Kết nối với những người cùng học, tham gia các nhóm học tập và cạnh tranh trong các thử thách thân thiện để tăng cường sự cộng tác và nuôi dưỡng ý thức cộng đồng trong nền tảng QuizLearn."
+          }
+        },
+        "how_to_use": {
+          "title": "Cách sử dụng tài liệu này",
+          "navigation": {
+            "title": "Điều hướng",
+            "paragraph_1": "Ở phía bên trái có một thanh bên để bạn có thể điều hướng giữa các Tài liệu. Các tài liệu được chia thành phần 'Bắt ​​đầu' và 'Khác'. Mỗi phần sẽ có những phần nhỏ hơn để bạn tìm hiểu. Bấm vào phần nhỏ hơn để xem hướng dẫn",
+            "paragraph_2": "Hãy nhớ rằng ứng dụng này chưa được phát triển đầy đủ nên có thể có một số thiếu sót và một số phần của tài liệu chưa được trình bày đầy đủ"
+          }
+        },
+        "why_choose": {
+          "title": "Tại sao bạn nên dùng QuizLearn?",
+          "efficiency": {
+            "title": "Hiệu quả",
+            "paragraph": "QuizLearn hợp lý hóa quá trình học tập, cho phép bạn học thông minh hơn mà không cần chăm chỉ hơn."
+          },
+          "engagement": {
+            "title": "Dễ tiếp cận",
+            "paragraph": "Hãy tạm biệt những buổi học nhàm chán và chào đón những trải nghiệm học tập mang tính tương tác, được ứng dụng."
+          },
+          "community": {
+            "title": "Community",
+            "paragraph": "Connect with like-minded learners, share knowledge, and support each other's academic journey within the QuizLearn community."
+          },
+          "flexibility": {
+            "title": "Linh động",
+            "paragraph": "Với QuizLearn, bạn có thể linh hoạt học mọi lúc, mọi nơi, theo tốc độ của riêng mình."
+          }
+        },
+        "last_words": {
+          "paragraph_1": "Bắt đầu hành trình học tập của bạn với QuizLearn ngay hôm nay!",
+          "paragraph_2": "Tham gia cộng đồng QuizLearn và cách mạng hóa thói quen học tập của bạn bằng sự kết hợp sáng tạo giữa câu đố truyền thống và trò chơi thú vị của chúng tôi. Đăng ký ngay và mở khóa thế giới kiến ​​thức trong tầm tay bạn!"
+        }
+      }
+    }
   }
 }
