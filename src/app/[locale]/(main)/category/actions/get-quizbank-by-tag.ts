@@ -25,7 +25,7 @@ export async function getQuizBankByTag(
     },
     next: {
       tags: ["quizbank", tag!],
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL(

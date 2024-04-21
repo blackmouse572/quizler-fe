@@ -25,7 +25,7 @@ export default async function getAllNotificationsAction({ filter }: Props) {
       Authorization: `Bearer ${token}`,
     },
     next: {
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL(`/Notification/GetAll`) + "?" + query

@@ -42,7 +42,7 @@ async function getQuizBank(options: Partial<PagedRequest>) {
       Authorization: `Bearer ${token.token}`,
     },
     next: {
-      revalidate: 60 * 60, // Revalidate every 1 second
+      revalidate: 1 * 60, // Revalidate every 1 second
     },
   }
   const url = getAPIServerURL("/QuizBank/GetMyQuizBank?" + params.toString())

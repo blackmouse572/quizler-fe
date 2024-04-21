@@ -34,7 +34,7 @@ export default async function getAllMembers(
     },
     next: {
       tags: ["classroom_management"],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 1, // revalidate every 60 seconds
     },
   }
 
@@ -72,7 +72,7 @@ export async function getBanMembers(
     },
     next: {
       tags: ["classroom_management"],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 1, // revalidate every 60 seconds
     },
   }
 

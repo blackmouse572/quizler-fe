@@ -26,7 +26,7 @@ export default async function getAllQuizBanksAction({ filter }: Props) {
     },
     next: {
       tags: ["AdminQuizBank"],
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL("/QuizBank") + "?" + query

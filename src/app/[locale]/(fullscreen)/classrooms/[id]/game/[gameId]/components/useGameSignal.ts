@@ -67,14 +67,8 @@ export function useGameSignal({
     return () => {
       conn?.stop()
     }
-  }, [
-    onFinished,
-    onReceiveAnswer,
-    setCurrent,
-    setTotal,
-    user,
-    user?.accessToken.token,
-  ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
 
   const start = useCallback(
     (cb: () => void) => {
