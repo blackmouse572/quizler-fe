@@ -1,3 +1,4 @@
+"use client"
 import { IIconKeys, Icons } from "@/components/ui/icons"
 import { NavigationMenuLink } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
@@ -7,7 +8,7 @@ import React from "react"
 type AnimatedProps = React.ComponentPropsWithoutRef<"a"> & {
   icon?: IIconKeys
   title?: string
-  href?:string
+  href?: string
 }
 
 export const LoggedInAnimatedListItemSubject = React.forwardRef<
