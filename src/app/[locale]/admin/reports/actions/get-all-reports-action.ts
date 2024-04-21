@@ -26,7 +26,7 @@ export default async function getAllReportsAction({ filter }: Props) {
     },
     next: {
       tags: ["AdminReport"],
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL("/report") + "?" + query

@@ -21,7 +21,7 @@ export const fetchMyClassrooms = async (filter: Partial<PagedRequest>) => {
     },
     next: {
       tags: ["classrooms"],
-      revalidate: 60,
+      revalidate: 1,
     },
   }
 

@@ -23,7 +23,7 @@ export default async function getAllRecordsEndGame(
     },
     next: {
       tags: [`classroom_game_` + `${gameId}` + `_result`],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 1, // revalidate every 60 seconds
     },
   }
 

@@ -16,7 +16,7 @@ export async function reportQuizbankAction(quizbankId: string, reason: string) {
     },
     body: JSON.stringify({ quizbankId, reason }),
     next: {
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
 
