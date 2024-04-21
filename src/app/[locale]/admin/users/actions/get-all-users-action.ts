@@ -23,7 +23,7 @@ export default async function getAllUsersAction({ options }: Props) {
     },
     next: {
       tags: ["AdminUser"],
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL("/accounts") + "?" + query

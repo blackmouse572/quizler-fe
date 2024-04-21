@@ -26,7 +26,7 @@ export default async function getAllClassroomsAction({ filter }: Props) {
     },
     next: {
       tags: ["AdminClassrooms"],
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL("/Classrooms") + "?" + query

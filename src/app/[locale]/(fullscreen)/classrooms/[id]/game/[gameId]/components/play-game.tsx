@@ -107,10 +107,16 @@ function PlayGame({ initData }: PlayGameProps) {
   }, [questions])
 
   useEffect(() => {
+    if(isSubmitted) {
+      console.log(
+        "is submiting"
+      )
+      return;
+    }
     if (current <= 0) {
       handleSubmitted()
     }
-  }, [answer, current, handleSubmitted, submitAnswer])
+  }, [current, handleSubmitted, isSubmitted])
 
   useEffect(() => {
     start(() => {

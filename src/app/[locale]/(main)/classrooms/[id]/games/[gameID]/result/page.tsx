@@ -6,10 +6,12 @@ import { notFound } from "next/navigation"
 import ResultGameStudent from "./components/result-game-student"
 import ResultGameTeacher from "./components/result-game-teacher"
 import getAllRecordsEndGame from "./components/actions/get-all-records-end-game-action"
+import getClassroomDetails from "../../../../actions/get-classroom-details-action"
 
 type Props = {
   params: {
-    gameID: string
+    gameID: string,
+    id: string
   }
   searchParams: { [key: string]: string | string[] | undefined }
 }
@@ -38,6 +40,7 @@ export default async function ManageClassroomPage({
   const { gameID } = params
   const { token } = getToken()
   const user = getUser()
+  const {data:classroom, ok:classroomOk} = await getClassroomDetails(params.id)
 
   const take = searchParams.take ? parseInt(searchParams.take as string) : 20
   const skip = searchParams.skip ? parseInt(searchParams.skip as string) : 0
@@ -47,12 +50,11 @@ export default async function ManageClassroomPage({
   const options = { take, skip, search }
   const { ok, data } = await getAllRecordsEndGame(gameID, options)
 
-  if (!token || !ok) {
+  if (!token || !ok || !classroomOk) {
     notFound()
   }
 
-  const studentIds = data!.data.map((result) => result.accountId.toString())
-  const isStudent = studentIds.includes(user!.id.toString())
+  const isStudent = classroom?.author.id !== user?.id
 
   // check if student
   if (isStudent) {
