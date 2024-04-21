@@ -2,7 +2,11 @@
   "Index": {
     "title": "Quizlearn",
     "back": "Go back",
-    "description": "Learning with supafast methods"
+    "description": "Learning with supafast methods",
+    "getting-started": "Learn now",
+    "contact": "Talk to us",
+    "subjects": "Learn by subject",
+    "quizbank": "What to learn"
   },
   "AboutUs": {
     "metadata": {
@@ -30,7 +34,11 @@
       "title": "Contact Us",
       "description": "Contact us"
     },
-    "index": "Contact QuizLearn",
+    "index": "Contact to QuizLearn team",
+    "contact-card": {
+      "index": "Want to get in touch with us?",
+      "description": "We are here to help you with any questions or concerns you may have. Feel free to reach out to us at any time. We look forward to hearing from you!"
+    },
     "message": {
       "index": "Thank you for your contact!<br></br>We have received your contact at email: {email}<br></br>We will contact you soon."
     },
@@ -187,6 +195,10 @@
       },
       "edit": {
         "index": "Edit"
+      },
+      "owner": {
+        "All": "All",
+        "Owner": "My classrooms"
       }
     }
   },
@@ -246,7 +258,8 @@
       "index": "Classroom",
       "members": "Members",
       "games": "Games",
-      "quizbanks": "Quizbanks"
+      "quizbanks": "Quizbanks",
+      "back_to_top": "Back to top"
     }
   },
   "ClassroomGame": {
@@ -258,6 +271,7 @@
     "card": {
       "active": "On-going",
       "inactive": "Ended",
+      "upcoming": "Upcoming",
       "join": "Join gamee",
       "unlimited": "Unlimited"
     },
@@ -1248,9 +1262,17 @@
       "play_button": "Start learning",
       "pause_button": "Pause flashcard",
       "shuffle_button": "Toggle random",
+      "stop_shuffle": "Stop random",
+      "prev_flashcard": "Previous flashcard",
+      "next_flashcard": "Next flashcard",
+      "flip_flashcard": "Flip flashcard",
       "full_screen_button": "Full screen mode",
       "slide": "Slides",
-      "of": "of"
+      "of": "of",
+      "help": {
+        "title": "Help",
+        "confirm": "Confirm"
+      }
     },
     "ViewQuizzes": {
       "term": "Terms in this bank",
@@ -1399,7 +1421,8 @@
       "not_found": "Classroom not found",
       "user_not_found": "User not found",
       "user_in_classroom": "User has already in classroom",
-      "max_classrooms": "You have reached max classroom in this plan."
+      "max_classrooms": "You have reached max classroom in this plan.",
+      "ExistedMember": "You have already a member of this classroom"
     },
     "game": {
       "already-joined": "You have already joined this game",
