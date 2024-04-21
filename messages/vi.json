@@ -3,10 +3,10 @@
     "title": "Quizlearn",
     "back": "Quay lại",
     "description": "Học tập với các phương pháp siêu tốc",
-    "getting-started": "Learn now",
+    "getting-started": "Học ngay bây giờ",
     "contact": "Liên hệ",
     "subjects": "Học theo môn",
-    "quizbank": "Hôm nay học gì ?"
+    "quizbank": "Hôm nay học gì"
   },
   "AboutUs": {
     "metadata": {
@@ -36,8 +36,8 @@
     },
     "index": "Liên lạc QuizLearn",
     "contact-card": {
-      "index": "Want to get in touch with us?",
-      "description": "We are here to help you with any questions or concerns you may have. Feel free to reach out to us at any time. We look forward to hearing from you!"
+      "index": "Muốn liên hệ với chúng tôi?",
+      "description": "Chúng tôi ở đây để giúp bạn với bất kỳ câu hỏi hoặc mối quan tâm nào bạn có thể có. Hãy liên hệ với chúng tôi bất cứ lúc nào. Chúng tôi mong chờ tin từ bạn!"
     },
     "message": {
       "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm."
@@ -271,7 +271,7 @@
     "card": {
       "active": "Đang diễn ra",
       "inactive": "Đã kết thúc",
-      "upcoming": "Upcoming",
+      "upcoming": "Chuẩn bị",
       "join": "Tham gia trò chơi",
       "unlimited": "Không giới hạn"
     },
