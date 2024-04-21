@@ -3,6 +3,7 @@
 import { AddClassroom } from "@/app/[locale]/(main)/classrooms/components/add-classroom-form"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export async function addNewClassroom(data: AddClassroom) {
   const url = getAPIServerURL("/classrooms")
@@ -27,6 +28,8 @@ export async function addNewClassroom(data: AddClassroom) {
       return json
     })
     .then((res) => {
+      revalidatePath("/classrooms")
+      revalidateTag("classrooms")
       return {
         ok: true,
         message: "success",

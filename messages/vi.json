@@ -2,7 +2,11 @@
   "Index": {
     "title": "Quizlearn",
     "back": "Quay lại",
-    "description": "Học tập với các phương pháp siêu tốc"
+    "description": "Học tập với phương pháp siêu tốc",
+    "getting-staarted": "Bắt đầu học",
+    "contact": "Liên hệ",
+    "subjects": "Học theo môn",
+    "quizbank": "Hôm nay học gì ?"
   },
   "AboutUs": {
     "metadata": {
@@ -32,7 +36,11 @@
     },
     "index": "Liên lạc QuizLearn",
     "message": {
-      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm."
+      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm.",
+      "contact-card": {
+        "index": "Liên lạc với chúng tôi",
+        "description": "Chúng tôi ở đây để giúp bạn. Hãy liên hệ với chúng tôi nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào."
+      }
     },
     "form": {
       "name": {
@@ -187,6 +195,10 @@
       },
       "edit": {
         "index": "Chỉnh sửa"
+      },
+      "owner": {
+        "All": "Tất cả",
+        "Owner": "Của tôi"
       }
     }
   },
@@ -246,7 +258,8 @@
       "index": "Lớp học",
       "members": "Thành viên",
       "games": "Trò chơi",
-      "quizbanks": "Ngân hàng câu hỏi"
+      "quizbanks": "Ngân hàng câu hỏi",
+      "back_to_top": "Về đầu trang"
     }
   },
   "ClassroomGame": {
@@ -1247,10 +1260,18 @@
     "ViewFlashcard": {
       "play_button": "Bắt đầu học",
       "pause_button": "Tạm dừng thẻ ghi nhớ",
-      "shuffle_button": "Trộn thẻ",
+      "shuffle_button": "Xáo trộn thẻ",
+      "stop_shuffle": "Dừng xáo trộn thẻ",
+      "prev_flashcard": "Thẻ trước",
+      "next_flashcard": "Thẻ tiếp theo",
+      "flip_flashcard": "Lật thẻ",
       "full_screen_button": "Chế độ toàn màn hình",
       "slide": "Trang",
-      "of": "của"
+      "of": "của",
+      "help": {
+        "title": "Trợ giúp",
+        "confirm": "Xác nhận"
+      }
     },
     "ViewQuizzes": {
       "term": "Thuật ngữ trong học phần này",
@@ -1399,7 +1420,8 @@
       "not_found": "Không tìm thấy lớp học",
       "user_not_found": "Không tìm thấy người dùng",
       "user_in_classroom": "Người dùng đã ở trong lớp học",
-      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa."
+      "max_classrooms": "Bạn đã đạt số lượng lớp tối đa.",
+      "ExistedMember": "Bạn đã là thành viên của lớp học này rồi"
     },
     "game": {
       "already-joined": "Bạn đã tham gia trò chơi này rồi",

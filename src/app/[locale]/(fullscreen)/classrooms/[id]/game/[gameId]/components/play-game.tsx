@@ -68,6 +68,7 @@ function PlayGame({ initData }: PlayGameProps) {
   )
 
   const onFinished = useCallback(() => {
+    setIsLoading(true)
     router.push(
       `/classrooms/${initData.classroomId}/games/${initData.id}/result`
     )
@@ -95,7 +96,7 @@ function PlayGame({ initData }: PlayGameProps) {
     setIsSubmitted(true)
     submitAnswer(answer)?.catch((e) => {
       console.debug(e)
-      setError(errorI18n("game.not_found"))
+      setError(errorI18n(e.message))
     })
   }, [answer, errorI18n, submitAnswer])
 

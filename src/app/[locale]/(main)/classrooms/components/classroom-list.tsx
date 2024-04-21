@@ -10,14 +10,14 @@ import PagedResponse from "@/types/paged-response"
 import { InfiniteData } from "@tanstack/react-query"
 import { useInView } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { useCallback, useEffect, useRef } from "react"
+import { useSearchParams } from "next/navigation"
+import { useCallback, useEffect, useMemo, useRef } from "react"
 import { onDeleteClassroom } from "./mixin"
 
 type Props = {
   initialData: PagedResponse<Classroom>
   filter: Partial<PagedRequest>
 }
-
 function ClassroomList({ initialData, filter }: Props) {
   const inViewRef = useRef<HTMLDivElement>(null)
   const inView = useInView(inViewRef, {})
@@ -25,6 +25,11 @@ function ClassroomList({ initialData, filter }: Props) {
   const i18n = useTranslations("Classroom")
   const errorI18n = useTranslations("Errors")
   const classroomCardRef = useRef<TClassRoomCardRef>(null)
+  const search = useSearchParams()
+  const isOwner = useMemo(
+    () => (search.get("isOwner") === "true" ? true : false),
+    [search]
+  )
   const {
     data,
     isError,
@@ -36,6 +41,7 @@ function ClassroomList({ initialData, filter }: Props) {
   } = useClassroomList({
     initialData,
     options: filter,
+    isOwner,
   })
 
   const deleteSucceedCb = useCallback(
