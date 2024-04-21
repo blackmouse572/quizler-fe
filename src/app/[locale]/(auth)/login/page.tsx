@@ -13,7 +13,9 @@ async function LoginPage({}: Props) {
   return (
     <div className="">
       <GoBackButton />
-      <NextIntlClientProvider messages={_.pick(m, "SignIn", "Errors")}>
+      <NextIntlClientProvider
+        messages={_.pick(m, "SignIn", "Errors", "Validations")}
+      >
         <LoginForm />
       </NextIntlClientProvider>
     </div>

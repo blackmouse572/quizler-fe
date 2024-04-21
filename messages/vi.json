@@ -2,7 +2,11 @@
   "Index": {
     "title": "Quizlearn",
     "back": "Quay lại",
-    "description": "Học tập với các phương pháp siêu tốc"
+    "description": "Học tập với phương pháp siêu tốc",
+    "getting-staarted": "Bắt đầu học",
+    "contact": "Liên hệ",
+    "subjects": "Học theo môn",
+    "quizbank": "Hôm nay học gì ?"
   },
   "AboutUs": {
     "metadata": {
@@ -32,7 +36,11 @@
     },
     "index": "Liên lạc QuizLearn",
     "message": {
-      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm."
+      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm.",
+      "contact-card": {
+        "index": "Liên lạc với chúng tôi",
+        "description": "Chúng tôi ở đây để giúp bạn. Hãy liên hệ với chúng tôi nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào."
+      }
     },
     "form": {
       "name": {

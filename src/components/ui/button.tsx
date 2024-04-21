@@ -22,7 +22,7 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
         outline:
           "border border-input bg-transparent shadow-sm ring-primary focus:ring-0",
         ghost: "",
@@ -32,7 +32,7 @@ const buttonVariants = cva(
       size: {
         md: "h-9 px-4 py-2 [&_svg]:h-5 [&_svg]:w-5",
         sm: "h-8 rounded-md px-3 text-xs [&_svg]:h-4 [&_svg]:w-4",
-        lg: "h-10 rounded-md px-8 [&_svg]:h-6 [&_svg]:w-6",
+        lg: "h-12 rounded-md px-5 text-lg [&_svg]:h-6 [&_svg]:w-6",
       },
       isIconOnly: {
         true: "aspect-square p-0",
@@ -57,7 +57,7 @@ const buttonVariants = cva(
         color: "accent",
         variant: "outline",
         className:
-          "border-primary/20 text-accent-foreground hover:bg-accent hover:text-primary focus:bg-accent/30 focus:text-accent-foreground",
+          "border-primary/20 bg-accent text-accent-foreground hover:bg-accent hover:text-primary focus:bg-accent/30 focus:text-accent-foreground",
       },
       {
         color: "danger",
