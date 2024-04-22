@@ -2,11 +2,11 @@
   "Index": {
     "title": "Quizlearn",
     "back": "Quay lại",
-    "description": "Học tập với phương pháp siêu tốc",
-    "getting-staarted": "Bắt đầu học",
+    "description": "Học tập với các phương pháp siêu tốc",
+    "getting-started": "Học ngay bây giờ",
     "contact": "Liên hệ",
     "subjects": "Học theo môn",
-    "quizbank": "Hôm nay học gì ?"
+    "quizbank": "Hôm nay học gì"
   },
   "AboutUs": {
     "metadata": {
@@ -35,6 +35,10 @@
       "description": "Liên lạc với chúng tôi"
     },
     "index": "Liên lạc QuizLearn",
+    "contact-card": {
+      "index": "Muốn liên hệ với chúng tôi?",
+      "description": "Chúng tôi ở đây để giúp bạn với bất kỳ câu hỏi hoặc mối quan tâm nào bạn có thể có. Hãy liên hệ với chúng tôi bất cứ lúc nào. Chúng tôi mong chờ tin từ bạn!"
+    },
     "message": {
       "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm.",
       "contact-card": {
@@ -271,6 +275,7 @@
     "card": {
       "active": "Đang diễn ra",
       "inactive": "Đã kết thúc",
+      "upcoming": "Chuẩn bị",
       "join": "Tham gia trò chơi",
       "unlimited": "Không giới hạn"
     },
@@ -1260,7 +1265,7 @@
     "ViewFlashcard": {
       "play_button": "Bắt đầu học",
       "pause_button": "Tạm dừng thẻ ghi nhớ",
-      "shuffle_button": "Xáo trộn thẻ",
+      "shuffle_button": "Trộn thẻ",
       "stop_shuffle": "Dừng xáo trộn thẻ",
       "prev_flashcard": "Thẻ trước",
       "next_flashcard": "Thẻ tiếp theo",
