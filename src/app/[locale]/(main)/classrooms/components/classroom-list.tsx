@@ -48,7 +48,7 @@ function ClassroomList({ initialData, filter }: Props) {
     (id: number) => {
       classroomCardRef.current?.setIsDelete(false)
       queryClient.setQueryData(
-        ["classrooms"],
+        ["classrooms", filter, isOwner],
         (oldData: InfiniteData<PagedResponse<Classroom>>) => {
           if (!oldData) return oldData
           return {
@@ -70,7 +70,7 @@ function ClassroomList({ initialData, filter }: Props) {
         color: "success",
       })
     },
-    [deleteII18n]
+    [deleteII18n, filter, isOwner]
   )
 
   const deleteFailCb = useCallback(
@@ -93,7 +93,7 @@ function ClassroomList({ initialData, filter }: Props) {
         color: "success",
       })
       queryClient.setQueryData(
-        ["classrooms", filter],
+        ["classrooms", filter, isOwner],
         (oldData: InfiniteData<PagedResponse<Classroom>>) => {
           if (!oldData) return oldData
           return {
@@ -108,7 +108,7 @@ function ClassroomList({ initialData, filter }: Props) {
         }
       )
     },
-    [filter, i18n]
+    [filter, i18n, isOwner]
   )
   const renderItem = useCallback(
     (item: Classroom) => (
