@@ -22,9 +22,10 @@ export const deleteClassroom = async (classroomId: string) => {
         message: res.statusText,
       }
     }
-    revalidatePath("/classrooms", "page")
-    revalidatePath("/vi/classrooms", "page")
+    revalidatePath("/classrooms")
+    revalidatePath("classrooms")
     revalidateTag(`classroom-details-${classroomId}`)
+    revalidateTag("classroom-details")
     revalidateTag("classrooms")
     return {
       isSuccess: true,

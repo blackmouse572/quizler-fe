@@ -86,7 +86,7 @@ async function AdminDashboardPage({ searchParams }: AdminDashboardProps) {
   return (
     <div className="">
       <NextIntlClientProvider
-        messages={_.pick(messages, "Table", "Notification", "DashboardAdmin")}
+        messages={_.pick(messages, "Table", "Notification", "DashboardAdmin", "Settings")}
       >
         <AdminDashboard
           totalCount={totalCount}

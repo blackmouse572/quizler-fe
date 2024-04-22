@@ -1,8 +1,8 @@
-import { QuizBanksData } from "@/types/quizBanksData"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import QuizBank from "@/types/QuizBank"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import ResultLoading from "../loading/result-loading"
-import { useTranslations } from "next-intl"
-import QuizBank from "@/types/QuizBank"
 
 type Props = {
   quizBanksData: QuizBank[]
@@ -18,25 +18,24 @@ export default function ResultQuizbanks({ quizBanksData, isLoading }: Props) {
         {tSearch("quizbanks")}
       </div>
 
-      <div className="mt-2.5 flex w-full flex-wrap justify-between gap-5 px-0.5 max-md:max-w-full max-md:flex-wrap">
+      <div className="mt-2.5 grid grid-cols-2 gap-5 px-0.5 max-md:max-w-full max-md:flex-wrap lg:grid-cols-4">
         <ResultLoading isLoading={isLoading} fieldData={quizBanksData} />
 
         {quizBanksData &&
           quizBanksData.map((data) => {
             return (
-              <div
-                key={data.id}
-                className="flex max-w-[25%] flex-1 flex-1 flex-col justify-center rounded-3xl border border-solid border-zinc-200 bg-white shadow"
-              >
-                <div className="flex flex-col items-start py-6 pl-6 pr-20 max-md:px-5">
-                  <div className="whitespace-nowrap text-base font-semibold leading-6 text-zinc-950">
-                    <Link href={`/quizbank/${data.id}`}>{data.bankName}</Link>
-                  </div>
-                  <div className="mt-1.5 text-sm leading-5 text-zinc-500">
-                    {data.quizCount}
-                  </div>
-                </div>
-              </div>
+              <Link href={`/quizbank/${data.id}`}>
+                <Card key={data.id} className="">
+                  <CardHeader className="flex flex-col items-start py-6 pl-6 pr-20 max-md:px-5">
+                    <CardTitle className="line-clamp-1">
+                      {data.bankName}
+                    </CardTitle>
+                    <div className="mt-1.5 text-sm leading-5 text-zinc-500">
+                      {data.quizCount}
+                    </div>
+                  </CardHeader>
+                </Card>
+              </Link>
             )
           })}
       </div>

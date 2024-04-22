@@ -12,12 +12,13 @@ import { deleteQuizBank } from "../actions/detete-quiz-bank"
 import { toast } from "@/components/ui/use-toast"
 import { queryClient } from "@/app/[locale]/provider"
 import QuizbankCard from "@/components/quizbank-card"
+import { User } from "@/types"
 
 type Props = {
   classroomId: string
   filter?: Partial<PagedRequest>
   initialData?: PagedResponse<QuizBank>
-  token: string
+  user: User
 }
 
 export default function ClassroomQuizBanksList(props: Props) {
@@ -47,7 +48,7 @@ export default function ClassroomQuizBanksList(props: Props) {
   const onDeleteQuizBank = useCallback(
     async (itemId: number, deleteSucceedCb: () => void) => {
       const result = await deleteQuizBank(
-        props.token,
+        props.user.accessToken.token,
         props.classroomId,
         itemId.toString()
       )
@@ -87,25 +88,44 @@ export default function ClassroomQuizBanksList(props: Props) {
         })
       }
     },
-    [errorI18n, i18n, props.classroomId, props.filter, props.token]
+    [
+      errorI18n,
+      i18n,
+      props.classroomId,
+      props.filter,
+      props.user.accessToken.token,
+    ]
   )
 
   const renderItems = useCallback(
-    (item: QuizBank) => (
-      <QuizbankCard
-        key={item.id}
-        item={item}
-        translations={{
-          terms: t("terms"),
-          delete: t("delete"),
-          edit: t("edit"),
-          cancel: t("cancel"),
-        }}
-        onDeleteQuizBank={onDeleteQuizBank}
-        allowActions
-      />
-    ),
-    [onDeleteQuizBank, t]
+    (item: QuizBank) =>
+      item.author.id !== props.user.id ? (
+        <QuizbankCard
+          key={item.id}
+          item={item}
+          translations={{
+            terms: t("terms"),
+            delete: t("delete"),
+            edit: t("edit"),
+            cancel: t("cancel"),
+          }}
+          onDeleteQuizBank={onDeleteQuizBank}
+        />
+      ) : (
+        <QuizbankCard
+          key={item.id}
+          item={item}
+          translations={{
+            terms: t("terms"),
+            delete: t("delete"),
+            edit: t("edit"),
+            cancel: t("cancel"),
+          }}
+          onDeleteQuizBank={onDeleteQuizBank}
+          allowActions
+        />
+      ),
+    [onDeleteQuizBank, props.user.id, t]
   )
 
   useEffect(() => {

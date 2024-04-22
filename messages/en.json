@@ -2,7 +2,11 @@
   "Index": {
     "title": "Quizlearn",
     "back": "Go back",
-    "description": "Learning with supafast methods"
+    "description": "Learning with supafast methods",
+    "getting-started": "Learn now",
+    "contact": "Talk to us",
+    "subjects": "Learn by subject",
+    "quizbank": "What to learn"
   },
   "AboutUs": {
     "metadata": {
@@ -23,6 +27,65 @@
         "para_1": "At Quizlearn, we believe that anyone can learn anything. All it takes is a tenacious spirit, the right guidance, and the tools to see it through. We know that students are under more pressure than ever. It can leave them overwhelmed, be anxiety-producing and make it all too easy to burn out.",
         "para_2": "It’s our job to give every student the tools and confidence to succeed, no matter what their motivation, or what they’re striving to achieve."
       }
+    }
+  },
+  "Contact": {
+    "metadata": {
+      "title": "Contact Us",
+      "description": "Contact us"
+    },
+    "index": "Contact to QuizLearn team",
+    "contact-card": {
+      "index": "Want to get in touch with us?",
+      "description": "We are here to help you with any questions or concerns you may have. Feel free to reach out to us at any time. We look forward to hearing from you!"
+    },
+    "message": {
+      "index": "Thank you for your contact!<br></br>We have received your contact at email: {email}<br></br>We will contact you soon."
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter you email"
+      },
+      "reason": {
+        "label": "Reason",
+        "placeholder": "Enter your reason"
+      },
+      "submit": "Submit"
+    }
+  },
+  "Support": {
+    "metadata": {
+      "title": "Support",
+      "description": "Support"
+    },
+    "index": "Support QuizLearn",
+    "search_docs": {
+      "index": "You can try to search our <docs>docs</docs> for the problem you are facing with.",
+      "or": "OR"
+    },
+    "message": {
+      "index": "Thank you!<br></br>We have received your request support at email: {email}<br></br>We will contact you soon."
+    },
+    "form": {
+      "index": "Contact us for your problems",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter you email"
+      },
+      "reason": {
+        "label": "Reason",
+        "placeholder": "Enter your reason"
+      },
+      "submit": "Submit"
     }
   },
   "Table": {
@@ -132,6 +195,10 @@
       },
       "edit": {
         "index": "Edit"
+      },
+      "owner": {
+        "All": "All",
+        "Owner": "My classrooms"
       }
     }
   },
@@ -153,6 +220,7 @@
         "load_more": "Load more comments",
         "action": "Delete comment",
         "delete": "Delete",
+        "edit": "Edit",
         "delete_success": "Comment deleted successfully"
       },
       "delete": {
@@ -176,7 +244,7 @@
       "post": {
         "index": "{user} created a post",
         "game": "{user} created a game: {game}. Join now !!!",
-        "quizbank": "{user} created a quizbank. Learned now !!!"
+        "quizbank": "{user} created a quizbank. Learn now !!!"
       },
       "help": {
         "title": "Help",
@@ -190,7 +258,8 @@
       "index": "Classroom",
       "members": "Members",
       "games": "Games",
-      "quizbanks": "Quizbanks"
+      "quizbanks": "Quizbanks",
+      "back_to_top": "Back to top"
     }
   },
   "ClassroomGame": {
@@ -202,6 +271,7 @@
     "card": {
       "active": "On-going",
       "inactive": "Ended",
+      "upcoming": "Upcoming",
       "join": "Join gamee",
       "unlimited": "Unlimited"
     },
@@ -257,12 +327,12 @@
           "failed": {
             "title": "Could not stop the game"
           },
-          "success" : {
+          "success": {
             "title": "Stop the game successfully",
             "description": "The game has been stop successfully"
           }
         },
-        "dialog" : {
+        "dialog": {
           "title": "Stop this game \"{name}\"?",
           "description": "Do you want to stop this game immediately?",
           "terms": {
@@ -270,6 +340,9 @@
             "action": "Stop game"
           }
         }
+      },
+      "view_game_result": {
+        "title": "View game result"
       },
       "leave": {
         "title": "Leave game",
@@ -282,7 +355,7 @@
   "ClassroomQuizBank": {
     "metadata": {
       "title": "Classroom QuizBank",
-      "description": "All classroom Quiz Banks"
+      "description": "All classroom Quizbanks"
     },
     "actions": {
       "create": {
@@ -486,8 +559,10 @@
     "actions": {
       "copy_id": "Copy ID",
       "copy_author_id": "Copy author ID",
-      "take_action": "Take action",
-      "delete": "Delete",
+      "take_action": {
+        "index": "Take action",
+        "delete": "Delete"
+      },
       "go_to": {
         "index": "Go to",
         "author": "Go to author",
@@ -497,7 +572,7 @@
     "dialog": {
       "delete_quizbank": {
         "title": "Delete QuizBank",
-        "description": "Delete QuizBank <strong>{quizBankID}</strong> ?",
+        "description": "Warn user <strong>{user}</strong> and delete QuizBank <strong>{quizBankID}</strong> ?",
         "cancel": "Cancel",
         "delete": "Delete"
       }
@@ -696,6 +771,30 @@
         "reporter": "Go to reporter",
         "reported_account": "Go to reported account",
         "reported_quizbank": "Go to reported quizbank"
+      },
+      "take_action": "Take action",
+      "delete": "Delete",
+      "verify_report": {
+        "success": {
+          "title": "Verify report successfully",
+          "message": {
+            "success": "The report(s) has been verified successfully"
+          }
+        },
+        "error": {
+          "title": "Failed to verify report"
+        }
+      },
+      "delete_report": {
+        "success": {
+          "title": "Delete report successfully",
+          "message": {
+            "success": "The report(s) has been deleted successfully"
+          }
+        },
+        "error": {
+          "title": "Failed to delete report"
+        }
       }
     },
     "dialog": {
@@ -732,7 +831,9 @@
       "create_post": "New post create in classroom {objectName}",
       "create_game": "New game created in classroom {objectName}",
       "reported": "You has been reported due to violation",
-      "warning": "You have been warned due to violation"
+      "warning": "You have been warned due to violation",
+      "subcribe_plan": "Your plan has been subcribed successfully to {objectName}",
+      "cancel_plan": "Your plan {objectName} has been canceled successfully"
     },
     "admin": {
       "deleted_quizbank": "QuizBank {objectName} has been deleted due to violation",
@@ -743,7 +844,9 @@
       "create_post": "New post create in classroom {objectName}",
       "create_game": "New game created in classroom {objectName}",
       "reported": "User {user} has been reported due to violation",
-      "warning": "User {user} has been warned due to violation"
+      "warning": "User {user} has been warned due to violation",
+      "subcribe_plan": "User {user} plan has been subcribed successfully to {objectName}",
+      "cancel_plan": "User {user} plan {objectName} has been canceled successfully"
     }
   },
   "Navbar": {
@@ -969,36 +1072,27 @@
       "submit_btn": "Change password"
     },
     "plans": {
-      "duration": "months",
+      "duration": "Months",
       "plans": {
-        "hobby": {
-          "title": "Hobby",
-          "description": "Getting warm",
-          "features": {
-            "feature1": "Learn public quizbank",
-            "feature2": "Create your own quizbank",
-            "feature3": "15 A.I Helper per day",
-            "feature4": "Own upto 3 Classrooms"
-          }
+        "normal_member": {
+          "title": "Normal member",
+          "description": "For everyone"
         },
-        "learner": {
-          "title": "Learner",
-          "description": "Learn as your need",
-          "features": {
-            "feature1": "Everything in Hobby plan",
-            "feature2": "50 A.I Helper perday",
-            "feature3": "Own upto 10 Classrooms"
-          }
+        "warmup_member": {
+          "title": "Warm up member",
+          "description": "Warmup plan, for new members"
         },
-        "expert": {
-          "title": "Expert",
-          "description": "Explore the knowledge",
-          "features": {
-            "feature1": "Everything in Learner plan",
-            "feature2": "100 A.I Helper perday",
-            "feature3": "Own upto 20 Classrooms"
-          }
-        }
+        "standard_member": {
+          "title": "Standard member",
+          "description": "More fun to use"
+        },
+        "premium_member": {
+          "title": "Premium member",
+          "description": "Enjoy your playground"
+        },
+        "maxAI": "Max AI use times per day: {times}",
+        "maxClassroom": "Max classroom created: {times}",
+        "maxStudent": "Max student in classsroom: {times}"
       },
       "upgrade_dialog": {
         "buttons": {
@@ -1006,7 +1100,17 @@
           "cancel": "Cancel"
         },
         "title": "Upgrade your plan to {plan}",
-        "description": "Upgrade your plan and enjoy the benefits from the plan"
+        "description": "Upgrade your plan and enjoy the benefits from the plan",
+        "success": "You have successfully upgraded your plan"
+      },
+      "cancel_dialog": {
+        "buttons": {
+          "cancel": "Cancel",
+          "confirm": "Confirm"
+        },
+        "title": "Cancel your plan {plan}",
+        "description": "Are you sure you want to cancel your plan?",
+        "success": "Your plan has been canceled"
       }
     },
     "profile": {
@@ -1074,6 +1178,7 @@
   "AdminSidebar": {
     "sidebar": {
       "label": {
+        "home": "Home page",
         "dashboard": "Dashboard",
         "users": "Users",
         "classrooms": "Classrooms",
@@ -1178,9 +1283,17 @@
       "play_button": "Start learning",
       "pause_button": "Pause flashcard",
       "shuffle_button": "Toggle random",
+      "stop_shuffle": "Stop random",
+      "prev_flashcard": "Previous flashcard",
+      "next_flashcard": "Next flashcard",
+      "flip_flashcard": "Flip flashcard",
       "full_screen_button": "Full screen mode",
       "slide": "Slides",
-      "of": "of"
+      "of": "of",
+      "help": {
+        "title": "Help",
+        "confirm": "Confirm"
+      }
     },
     "ViewQuizzes": {
       "term": "Terms in this bank",
@@ -1235,7 +1348,7 @@
         "text": "Personal"
       },
       "public": {
-        "label": "public",
+        "label": "Public",
         "text": "Public"
       },
       "button": {
@@ -1309,6 +1422,7 @@
     "upgrade": "Upgrade account"
   },
   "Errors": {
+    "Already joined": "You have already joined this classroom",
     "index": "Error",
     "unknown": "Something went wrong",
     "token-expire": "The url has been expire, please create another request",
@@ -1319,6 +1433,7 @@
     "verification-failed": "The verification code is not correct, please try again",
     "Unauthorized": "Account not authorized, please login",
     "refresh": "Refresh",
+    "back": "Go to classroom",
     "classroom": {
       "code-invalid": "The code is not valid, please try again",
       "code-expire": "The code has been expired, please try again",
@@ -1327,12 +1442,60 @@
       "not_found": "Classroom not found",
       "user_not_found": "User not found",
       "user_in_classroom": "User has already in classroom",
-      "max_classrooms": "You have reached max classroom in this plan."
+      "max_classrooms": "You have reached max classroom in this plan.",
+      "ExistedMember": "You have already a member of this classroom"
     },
     "game": {
       "already-joined": "You have already joined this game",
       "not_found": "Game not found",
       "user_not_found": "User not found"
+    },
+    "Login": {
+      "WrongEmailPassword": "Email or password is incorrect",
+      "IssueToken": "Error when issues token"
+    },
+    "ChangePassword": {
+      "WrongOldPassword": "Old password is not correct"
+    },
+    "Game": {
+      "UserNotJoined": "User has not joined in the game yet",
+      "ExceedTime": "Exceeding time limit",
+      "QuizSize": "Amount is larger than quizbank size",
+      "NotStarted": "Game is not started or has been ended",
+      "NoRecord": "There is no record",
+      "AlreadyStarted": "Game already started or ended",
+      "NotReJoin": "Can not re-join the game",
+      "NotJoin": "User has not joined in the game yet"
+    },
+    "Quiz": {
+      "not_found": "Quiz not found"
+    },
+    "Quizbank": {
+      "not_found": "Quizbank not found"
+    },
+    "Classroom": {
+      "NotIncludeQuizbank": "QuizBank is not included in classroom"
+    },
+    "Notification": {
+      "NotFound": "Notification not found"
+    },
+    "Plan": {
+      "NotHave": "Not have plan",
+      "NotAdmin": "Not Admin",
+      "NotFound": "Not Found Plan"
+    },
+    "Post": {
+      "not_found": "Could not find Post"
+    },
+    "Comment": {
+      "not_found": "Could not find Comment"
+    },
+    "Progress": {
+      "not_found": "Not found progress"
+    },
+    "Report": {
+      "FieldsMiss": "Fields missing",
+      "AlreadyActive": "Report is already Actived"
     }
   },
   "Validations": {
@@ -1367,7 +1530,13 @@
         "password": "Password must be at least 8 characters.",
         "confirm_password": "Confirm password must be at least 8 characters.",
         "mismatch_password": "Passwords don't match",
-        "email": "Email is invalid"
+        "email": "Email is invalid",
+        "dob": "Invalid date"
+      },
+      "contact": {
+        "name": "Name must be at least 2 characters.",
+        "email": "Email is invalid",
+        "reason": "Reason should be between 2 and 1000 characters."
       },
       "forgot_password": {
         "email": "Email is invalid"
@@ -1484,7 +1653,8 @@
     "message": "The page you seeks seem like terminated or not existed 🥺🥺",
     "input": {
       "placeholder": "New Quiz"
-    }
+    },
+    "go_back_home": "Go back home"
   },
   "Error": {
     "title": "Oops, seem like an errors",
@@ -1492,7 +1662,8 @@
     "input": {
       "placeholder": "New Quiz"
     },
-    "errorBtn": "Errors messages"
+    "errorBtn": "Errors messages",
+    "go_back_home": "Go back home"
   },
   "ManageClassroomMembers": {
     "metadata": {
@@ -1517,6 +1688,14 @@
       },
       "invite": {
         "label": "Allow student to invite"
+      },
+      "actions": {
+        "add": {
+          "message": {
+            "title": "Success",
+            "description": "Create classroom successfully"
+          }
+        }
       },
       "plan-form": {
         "starter": {
@@ -1621,8 +1800,8 @@
         "cancel": "Cancel"
       },
       "success": {
-        "title": "Invited user",
-        "description": "You have invited the user successfully"
+        "title": "Invite user(s) successfully",
+        "description": "You have invited the user(s) successfully"
       }
     }
   },
@@ -1648,7 +1827,9 @@
         "title": "Success",
         "description": "Successfully delete clasroom"
       },
-      "failed": { "title": "Failed" }
+      "failed": {
+        "title": "Failed"
+      }
     }
   },
   "Delete_quizbank": {
@@ -1657,7 +1838,9 @@
         "title": "Success",
         "description": "Successfully delete quizbank"
       },
-      "failed": { "title": "Failed" }
+      "failed": {
+        "title": "Failed"
+      }
     }
   },
   "Editor": {
@@ -1691,7 +1874,9 @@
         "title": "Success",
         "description": "Successfully change quizbank visibility to {visibility}"
       },
-      "failed": { "title": "Failed" }
+      "failed": {
+        "title": "Failed"
+      }
     },
     "confirm_dialog": {
       "title": "Do you want to change quizbank visibility?",

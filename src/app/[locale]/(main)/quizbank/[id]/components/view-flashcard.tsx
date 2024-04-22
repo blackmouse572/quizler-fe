@@ -1,5 +1,4 @@
 import { fetchQuiz } from "@/app/[locale]/(main)/quizbank/[id]/actions/fetch-quiz"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -13,6 +12,7 @@ import { Icons } from "@/components/ui/icons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Toggle } from "@/components/ui/toggle"
 import {
+  NamedToolTip,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -37,8 +37,10 @@ const LOAD_MORE_THRESHOLD = 3 // Load more when 3 items are left
 import RateQuizbank from "@/app/[locale]/(main)/quizbank/[id]/components/rate-quizbank"
 import { Badge } from "@/components/ui/badge"
 import _ from "lodash"
-import { useHotkeys } from "react-hotkeys-hook"
 import Link from "next/link"
+import { useHotkeys } from "react-hotkeys-hook"
+import { Button } from "@/components/ui/button"
+import FlashcardHelperDialog from "./flashcard-helper-dialog/flashcard-helper-dialog"
 
 export default function ViewFlashcard({
   quizBankData,
@@ -51,14 +53,12 @@ export default function ViewFlashcard({
   const autoPlay = useRef(
     Autoplay({ delay: 4000, stopOnInteraction: true, playOnInit: false })
   )
-  const ref = useRef<HTMLDivElement>(null)
 
   const [isShuffle, setIsShuffle] = useState(false)
   const [count] = useState(initialData?.metadata?.totals ?? 0)
   const [currentIndex, setCurrentIndex] = useState(count > 0 ? 1 : 0)
   const [totalLoaded, setTotalLoaded] = useState(initialData.data.length)
-  // const [isFlipped, setIsFlipped] = useState(true)
-  const [currentItem, setCurrentItem] = useState<Quiz>()
+  const [currentItem, setCurrentItem] = useState<Quiz>(initialData.data[0]!)
   const [flipMap, setFlipMap] = useState<{ [key: number]: boolean }>(
     initialData.data.reduce(
       (acc, _, index) => {
@@ -70,24 +70,37 @@ export default function ViewFlashcard({
   )
   const [isPlaying, setIsPlaying] = useState(true)
 
+  const [isShuffleLoading, setIsShuffleLoading] = useState(false)
+  const [shuffleField, shuffleDir] = useMemo(() => {
+    if (!isShuffle) return ["created", "ASC"]
+    const fields = ["answer", "question"]
+    const field = fields[Math.floor(Math.random() * fields.length)]
+    const dir = Math.random() > 0.5 ? "Asc" : "Desc"
+    return [field, dir]
+  }, [isShuffle])
+
   const {
     data,
     isLoading,
     fetchNextPage,
+    isFetchingNextPage,
     isError,
     refetch,
-    isRefetching,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["fetchQuiz", "flashcard", id],
+    queryKey: ["fetchQuiz", "flashcard", id, shuffleField, shuffleDir],
     queryFn: async ({ pageParam }) => {
       const res = await fetchQuiz(id, {
         take: 10,
         skip: pageParam,
+        sortBy: shuffleField,
+        sortDirection: shuffleDir as "Asc" | "Desc",
       })
       if (!res.ok) {
         throw new Error(res.message)
       }
+
+      setIsShuffleLoading(false)
       setFlipMap((pre) => {
         const newMap = { ...pre }
         res.data?.data.forEach((_, index) => {
@@ -95,7 +108,11 @@ export default function ViewFlashcard({
         })
         return newMap
       })
-      setTotalLoaded((pre) => pre + 10)
+      if (pageParam === 0) {
+        setTotalLoaded(10)
+      } else {
+        setTotalLoaded((pre) => pre + 10)
+      }
       return res.data
     },
     initialPageParam: 0,
@@ -116,14 +133,14 @@ export default function ViewFlashcard({
     }
 
     api.on("select", () => {
-      setCurrentIndex(api.selectedScrollSnap() + 1)
-      data.pages.forEach((page) => {
-        page?.data.find((item, index) => {
-          if (index === api.selectedScrollSnap()) {
-            setCurrentItem(item)
-          }
-        })
-      })
+      const iindex = api.selectedScrollSnap()
+      setCurrentIndex(iindex + 1)
+
+      const item = data.pages
+        .map((page) => page?.data)
+        .flat()
+        .find((_, index) => index === iindex)
+      setCurrentItem(item!)
     })
   }, [api, currentItem?.id, data.pages])
 
@@ -152,20 +169,18 @@ export default function ViewFlashcard({
     setCurrentIndex(1)
     setIsShuffle(!isShuffle)
     setTotalLoaded(10)
+    setIsShuffleLoading(true)
     refetch()
-  }, [refetch, isShuffle])
+    api?.scrollTo(0)
+  }, [isShuffle, refetch, api])
 
-  useHotkeys("right,l", () => {
-    api?.scrollNext()
-  })
-
-  useHotkeys("left,k", () => {
-    api?.scrollPrev()
-  })
-
-  useHotkeys("up,down,h,j", () => {
-    // do flip
-    // setIsFlipped(!isFlipped)
+  useHotkeys("up,down,h,j", (e) => {
+    e.preventDefault()
+    setFlipMap((pre) => {
+      const newMap = { ...pre }
+      newMap[currentItem?.id || -1] = !newMap[currentItem?.id || -1]
+      return newMap
+    })
   })
 
   useHotkeys("r", () => {
@@ -181,6 +196,10 @@ export default function ViewFlashcard({
   const renderItem = useCallback(
     (item: Quiz) => {
       const isFlip = flipMap[item.id] || false
+      const questionWithDiv = item.question
+        .split("\n")
+        .map((line: string, index: number) => <div key={index}>{line}</div>)
+
       return (
         <CarouselItem
           key={item.id + "-carousel"}
@@ -202,7 +221,7 @@ export default function ViewFlashcard({
                 })}
               </Badge>
               <CardContent className="flex aspect-video items-center justify-center">
-                <span className="text-4xl">{item.question}</span>
+                <span className="text-4xl">{questionWithDiv}</span>
               </CardContent>
             </Card>
             <Card className="relative">
@@ -243,23 +262,6 @@ export default function ViewFlashcard({
       .on("autoplay:stop", () => setIsPlaying(false))
       .on("reInit", () => setIsPlaying(false))
   }, [api])
-
-  useEffect(() => {
-    // disable scroll by keyboard when carousel is focused
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!ref.current?.contains(document.activeElement)) {
-        return
-      }
-      if (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === " ") {
-        e.preventDefault()
-      }
-    }
-    window.addEventListener("keydown", handleKeyDown)
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [])
 
   return (
     <>
@@ -302,11 +304,9 @@ export default function ViewFlashcard({
         }}
         plugins={[autoPlay.current]}
         autoFocus
-        tabIndex={-1}
-        ref={ref}
       >
-        {isRefetching ? (
-          <CarouselContent>
+        <CarouselContent>
+          {isLoading || isShuffleLoading ? (
             <CarouselItem key={"loading-carousel"} className="p-8">
               <Card>
                 <CardContent className="flex aspect-video items-center justify-center">
@@ -314,21 +314,30 @@ export default function ViewFlashcard({
                 </CardContent>
               </Card>
             </CarouselItem>
-          </CarouselContent>
-        ) : (
-          <CarouselContent>
-            {data.pages.map(
-              (page) => page?.data.map((item, index) => renderItem(item))
-            )}
-            {loadingItem}
-          </CarouselContent>
-        )}
+          ) : (
+            <>
+              {data.pages.map(
+                (page) => page?.data.map((item, index) => renderItem(item))
+              )}
+              {loadingItem}
+            </>
+          )}
+          {isFetchingNextPage && (
+            <CarouselItem key={"loading-carousel"} className="p-8">
+              <Card>
+                <CardContent className="flex aspect-video items-center justify-center">
+                  <Icons.Spinner className="h-10 w-10 animate-spin" />
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          )}
+        </CarouselContent>
 
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
 
-      <div className="flex items-center justify-between gap-5 ">
+      <div className="flex items-center justify-between gap-5 mr-6">
         <div className="flex justify-between gap-3">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -364,7 +373,11 @@ export default function ViewFlashcard({
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{i18n("ViewFlashcard.shuffle_button")}</p>
+              <p>
+                {isShuffle
+                  ? i18n("ViewFlashcard.stop_shuffle")
+                  : i18n("ViewFlashcard.shuffle_button")}
+              </p>
             </TooltipContent>
           </Tooltip>
         </div>
@@ -373,16 +386,15 @@ export default function ViewFlashcard({
           {currentIndex}/{count}
         </div>
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="light" isIconOnly>
-              <Icons.FullScreen />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{i18n("ViewFlashcard.full_screen_button")}</p>
-          </TooltipContent>
-        </Tooltip>
+        <div className="flex justify-between ">
+          <NamedToolTip content={i18n("ViewFlashcard.help.title")}>
+            <FlashcardHelperDialog>
+              <Button type="button" isIconOnly variant="ghost" color="accent">
+                <Icons.Help />
+              </Button>
+            </FlashcardHelperDialog>
+          </NamedToolTip>
+        </div>
       </div>
     </>
   )

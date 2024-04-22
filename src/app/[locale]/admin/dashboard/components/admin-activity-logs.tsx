@@ -60,6 +60,7 @@ async function NotificationItem({
   icon: React.ReactNode
 }) {
   const i18nNoti = await getTranslations("Notification")
+  const tPlan = await getTranslations("Settings.plans")
   const format = await getFormatter()
 
   return (
@@ -73,10 +74,21 @@ async function NotificationItem({
 
       <div className="flex flex-col">
         <div className="text-base leading-6">
-          {i18nNoti.rich(`admin.${item.title}` as any, {
-            objectName: item.objectName,
-            user: item.account.fullName,
-          })}
+          {item.type.toLowerCase() === "payment" ? (
+            <>
+              {i18nNoti.rich(`admin.${item.title}` as any, {
+                objectName: tPlan(`plans.${item.objectName}.title` as any),
+                user: item.account.fullName,
+              })}
+            </>
+          ) : (
+            <>
+              {i18nNoti.rich(`admin.${item.title}` as any, {
+                objectName: item.objectName,
+                user: item.account.fullName,
+              })}
+            </>
+          )}
         </div>
         <div className="text-xs leading-4">
           {format.dateTime(new Date(item.created), {

@@ -2,7 +2,7 @@
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
 import { ActionResponse } from "@/types"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export async function joinClassroomAction(
   params: string
@@ -38,5 +38,6 @@ export async function joinClassroomAction(
     })
     .finally(() => {
       revalidatePath("/classrooms")
+      revalidateTag("/classrooms")
     })
 }

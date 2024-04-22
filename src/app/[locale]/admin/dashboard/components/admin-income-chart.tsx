@@ -21,7 +21,7 @@ export default async function AdminIncomeChart({
       <div className="flex w-full grow flex-col rounded-lg border border-solid border-neutral-200 bg-white px-8 pt-5 max-md:mt-5 max-md:max-w-full max-md:px-5">
         <div className="flex pb-5 text-base font-semibold leading-6 text-black max-md:max-w-full">
           <div className="w-full">{i18n("admin_chart.title")}</div>
-          <div className="w-full">
+          <div className="w-fit">
             <SelectIncomeYear />
           </div>
         </div>

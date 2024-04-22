@@ -53,7 +53,6 @@ import {
 import usePaginationValue from "@/hooks/usePaginationValue"
 import PagedResponse from "@/types/paged-response"
 import { useFormatter, useTranslations } from "next-intl"
-import FilterDropdown from "./filter"
 import { useRouter } from "next/navigation"
 import DeleteDialog from "./delete-dialog"
 import { ReportType } from "@/types"
@@ -227,15 +226,34 @@ export function ReportsTable({ data }: ReportTableProps) {
             </ContextMenuItem>
             <ContextMenuSeparator />
 
-            <ViewDetailsReportDialog
-              data={report}
-              trigger={
-                <ContextMenuItem>
-                  <Icons.Info className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.view_details")}
-                </ContextMenuItem>
-              }
-            />
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <Icons.HandStop className="mr-2 inline-block h-4 w-4" />
+                {i18n("actions.take_action")}
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                <ViewDetailsReportDialog
+                  data={report}
+                  trigger={
+                    <ContextMenuItem>
+                      <Icons.Info className="mr-2 inline-block h-4 w-4" />
+                      {i18n("actions.view_details")}
+                    </ContextMenuItem>
+                  }
+                />
+                <ContextMenu>
+                  <DeleteDialog
+                    ids={[report.id]}
+                    trigger={
+                      <ContextMenuItem onSelect={(e) => e.stopPropagation()}>
+                        <Icons.Delete className="mr-2 inline-block h-4 w-4" />
+                        {i18n("actions.delete")}
+                      </ContextMenuItem>
+                    }
+                  />
+                </ContextMenu>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
 
             <ContextMenuSub>
               <ContextMenuSubTrigger>
@@ -322,10 +340,16 @@ export function ReportsTable({ data }: ReportTableProps) {
       return (
         <DeleteDialog
           ids={model.rows.map((row) => row.original.id.toString())}
+          trigger={
+            <Button color={"danger"} size={"sm"}>
+              <Icons.Delete />
+              {i18n("actions.delete")}
+            </Button>
+          }
         />
       )
     }
-  }, [rowSelection, table])
+  }, [i18n, rowSelection, table])
 
   const renderVisibibleColumnDropdown = React.useCallback(() => {
     return (
@@ -383,7 +407,6 @@ export function ReportsTable({ data }: ReportTableProps) {
         <div className="flex items-center gap-2">{renderDeleteButton()}</div>
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}
-          <FilterDropdown table={table} />
         </div>
       </div>
       <div className="rounded-md border border-primary bg-background">

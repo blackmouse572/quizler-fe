@@ -8,7 +8,6 @@ import { useDebounce } from "use-debounce"
 import { fetchSearchGlobal } from "./actions/fetch-search-global"
 import ResultClassrooms from "./components/result-classrooms"
 import ResultFilterTag from "./components/result-filter-tag"
-import ResultPosts from "./components/result-posts"
 import ResultQuizbanks from "./components/result-quizbanks"
 import ResultQuizzes from "./components/result-quizzes"
 import ResultUsers from "./components/result-users"
@@ -60,8 +59,6 @@ export default function SearchGlobalPage() {
         <ResultQuizzes quizzesData={quizzes} isLoading={isLoading} />
 
         <ResultUsers usersData={users} isLoading={isLoading} />
-
-        <ResultPosts postsData={posts} isLoading={isLoading} />
       </div>
     </>
   )

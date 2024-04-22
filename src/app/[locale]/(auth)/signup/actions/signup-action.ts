@@ -2,9 +2,8 @@
 
 import { revalidatePath } from "next/cache"
 
-import { setToken } from "@/lib/auth"
-import { SignUpSchemaType } from "../vaidations/sign-up-validate"
 import { getAPIServerURL } from "@/lib/utils"
+import { SignUpSchemaType } from "../vaidations/sign-up-validate"
 
 export const SignUpAction = async (values: SignUpSchemaType) => {
   const URL = getAPIServerURL("/auth/register")
@@ -21,7 +20,7 @@ export const SignUpAction = async (values: SignUpSchemaType) => {
     .then(async (response) => {
       const json = await response.json()
       if (!response.ok) {
-        return Promise.reject(json)
+        throw new Error(json.message)
       }
       return json
     })

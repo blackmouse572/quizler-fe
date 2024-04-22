@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { IIconKeys, Icons } from "@/components/ui/icons"
 import {
+  NamedToolTip,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -182,7 +183,11 @@ function Sidebar({ user }: Props) {
           },
         }}
       >
-        <Icons.Icon className="w-6 min-w-6" />
+        <Link href={"/"}>
+          <NamedToolTip side="right" content={i18n("sidebar.label.home")}>
+            <Icons.Icon className="w-6 min-w-6" />
+          </NamedToolTip>
+        </Link>
       </motion.span>
       <motion.div
         variants={labelVariants}
@@ -219,7 +224,7 @@ function Sidebar({ user }: Props) {
             <motion.div
               className="flex flex-1 flex-col justify-center"
               initial="closed"
-              custom={{ index: 0 }}
+              custom={{ index: 3 }}
               animate={isExpanded ? "open" : "closed"}
               variants={labelVariants}
               transition={{

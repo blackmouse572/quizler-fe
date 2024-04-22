@@ -153,7 +153,7 @@ function PostItem({
                 </Button>
               </NamedToolTip>
 
-              <NamedToolTip content={t("posts.comments.delete")}>
+              <NamedToolTip content={t("posts.comments.edit")}>
                 <Button
                   color="success"
                   isIconOnly
@@ -168,11 +168,6 @@ function PostItem({
               </NamedToolTip>
             </>
           )}
-          <NamedToolTip content={t("posts.report.action")}>
-            <Button color="accent" isIconOnly variant="ghost">
-              <Icons.Report />
-            </Button>
-          </NamedToolTip>
           <NamedToolTip content={t("posts.comments.index")}>
             <Button
               color="accent"

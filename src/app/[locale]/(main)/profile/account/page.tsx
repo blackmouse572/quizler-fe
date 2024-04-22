@@ -1,12 +1,11 @@
-import { getUserProfileAction } from "@/app/[locale]/(main)/profile/actions/fetch-user-profile"
 import { getUser } from "@/lib/auth"
 import _ from "lodash"
+import type { Metadata } from "next"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
+import { getMessages, getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import EditAccount from "./components/edit-account"
 import UpgradePlan from "./components/upgrade-plan"
-import type { Metadata } from 'next'
 
 type Props = {
   params: {
@@ -15,21 +14,16 @@ type Props = {
   }
 }
 
-export const metadata: Metadata = {
-  title: 'Account settings',
-  description: 'Web site created with Next.js.',
-  
-}
-
-const getUserProfile = async (id: string) => {
-  const response = await getUserProfileAction(id)
-  return response.data
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const msg = await getTranslations("Settings")
+  return {
+    title: msg("account.title"),
+  }
 }
 
 export default async function UserProfile({ params }: Props) {
   const user = getUser()
   if (!user) return notFound()
-  const userData = await getUserProfile(user.id.toString())
   const msg = await getMessages()
 
   return (
@@ -39,6 +33,7 @@ export default async function UserProfile({ params }: Props) {
         messages={_.pick(
           msg,
           "LocaleSwitcher",
+          "UpgradeAccount",
           "Settings",
           "Validations",
           "Errors"

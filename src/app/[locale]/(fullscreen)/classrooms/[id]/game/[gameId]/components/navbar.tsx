@@ -53,7 +53,7 @@ function GameNavbar({ game }: Props) {
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel />
+                <AlertDialogCancel>{t("actions.leave.cancel")}</AlertDialogCancel>
                 <AlertDialogAction
                   onClick={() => router.push(`/classrooms/${game.classroomId}`)}
                 >

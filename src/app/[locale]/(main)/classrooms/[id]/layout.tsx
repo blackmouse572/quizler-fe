@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
 import { getUser } from "@/lib/auth"
-import { CLASSROOM_SIDEBAR_ITEMS } from "@/lib/config/navbar-config"
+import {
+  CLASSROOM_SIDEBAR_STUDENT_ITEMS,
+  CLASSROOM_SIDEBAR_TEACHER_ITEMS,
+} from "@/lib/config/navbar-config"
 import { siteConfig } from "@/lib/config/siteconfig"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
@@ -15,6 +18,7 @@ import React from "react"
 import getClassroomDetails from "../actions/get-classroom-details-action"
 import GenerateJoinDialog from "../components/generate-join-dialog"
 import SendInviteDialog from "../components/send-invite-dialog"
+import BackToTop from "./components/back-to-top"
 
 type Props = {
   children: React.ReactNode
@@ -41,12 +45,20 @@ async function ClassroomDetailLayout({ children, params }: Props) {
   const t = await getTranslations("ClassroomDetails")
   const data = await getClassroomDetails(params.id)
   if (!data.ok) {
-    throw Error(data.message)
+    notFound()
   }
 
   if (!data.data || !user) {
     return notFound()
   }
+
+  const isTeacher = data.data.author.id === user.id
+  const isAdmin = user.role.toLowerCase() === "admin"
+  const isTeacherSidebar = isTeacher || isAdmin
+
+  const CLASSROOM_SIDEBAR = isTeacherSidebar
+    ? CLASSROOM_SIDEBAR_TEACHER_ITEMS(params.id)
+    : CLASSROOM_SIDEBAR_STUDENT_ITEMS(params.id)
 
   return (
     <main className="container mx-auto">
@@ -67,8 +79,13 @@ async function ClassroomDetailLayout({ children, params }: Props) {
             </p>
           </div>
           <div className="flex space-x-2">
-            <GenerateJoinDialog classroomId={params.id} />
-            <SendInviteDialog classroomId={params.id} />
+            {(isTeacher || data.data.isStudentAllowInvite) && (
+              <>
+                <GenerateJoinDialog classroomId={params.id} />
+                <SendInviteDialog classroomId={params.id} />
+              </>
+            )}
+
             {user.id !== data.data.author?.id ? (
               <LeaveClassroom classroom={data.data!} />
             ) : (
@@ -83,13 +100,11 @@ async function ClassroomDetailLayout({ children, params }: Props) {
       </div>
       <Separator />
       <NextIntlClientProvider
-        messages={_.pick(msg, "ClassroomDetails", "Errors")}
+        messages={_.pick(msg, "ClassroomDetails", "Editor", "Errors")}
       >
-        <SideMenu
-          items={CLASSROOM_SIDEBAR_ITEMS(params.id)}
-          namespace="ClassroomDetails"
-        />
+        <SideMenu items={CLASSROOM_SIDEBAR} namespace="ClassroomDetails" />
         {children}
+        <BackToTop />
       </NextIntlClientProvider>
     </main>
   )

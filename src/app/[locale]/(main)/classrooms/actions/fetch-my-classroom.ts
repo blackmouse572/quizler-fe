@@ -8,7 +8,6 @@ import PagedResponse from "@/types/paged-response"
 
 export const fetchMyClassrooms = async (filter: Partial<PagedRequest>) => {
   const searchParams = toURLSeachParams(filter)
-  console.log(filter)
   const URL = getAPIServerURL(
     `/classrooms/getCurrent?${searchParams.toString()}`
   )
@@ -22,7 +21,7 @@ export const fetchMyClassrooms = async (filter: Partial<PagedRequest>) => {
     },
     next: {
       tags: ["classrooms"],
-      revalidate: 60,
+      revalidate: 1,
     },
   }
 

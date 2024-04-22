@@ -23,6 +23,7 @@ import {
 } from "@/types/game"
 import { AnimatePresence, motion } from "framer-motion"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useRef, useState } from "react"
 import Confetti from "react-confetti"
@@ -67,6 +68,7 @@ function PlayGame({ initData }: PlayGameProps) {
   )
 
   const onFinished = useCallback(() => {
+    setIsLoading(true)
     router.push(
       `/classrooms/${initData.classroomId}/games/${initData.id}/result`
     )
@@ -92,8 +94,11 @@ function PlayGame({ initData }: PlayGameProps) {
 
   const handleSubmitted = useCallback(() => {
     setIsSubmitted(true)
-    submitAnswer(answer)
-  }, [answer, submitAnswer])
+    submitAnswer(answer)?.catch((e) => {
+      console.debug(e)
+      setError(errorI18n(e.message))
+    })
+  }, [answer, errorI18n, submitAnswer])
 
   useEffect(() => {
     if (questions) {
@@ -102,16 +107,23 @@ function PlayGame({ initData }: PlayGameProps) {
   }, [questions])
 
   useEffect(() => {
+    if(isSubmitted) {
+      console.log(
+        "is submiting"
+      )
+      return;
+    }
     if (current <= 0) {
       handleSubmitted()
     }
-  }, [answer, current, handleSubmitted, submitAnswer])
+  }, [current, handleSubmitted, isSubmitted])
 
   useEffect(() => {
     start(() => {
       connectToGame(+initData.id)
         ?.then(() => {})
         .catch((e) => {
+          console.debug(e)
           setError(errorI18n("game.already-joined"))
         })
     })
@@ -193,8 +205,14 @@ function PlayGame({ initData }: PlayGameProps) {
             <Icons.Loader className="ml-2 h-5 w-5 animate-spin" />
           )}
         </CardContent>
-        <CardFooter>
-          <Button>
+        <CardFooter className="gap-2">
+          <Link href={`/classrooms/${initData.classroomId}/games`}>
+            <Button>
+              <Icons.ChevronLeft className="mr-2 h-5 w-5" />
+              {errorI18n("back")}
+            </Button>
+          </Link>
+          <Button variant="ghost" color="accent">
             <Icons.Refresh className="mr-2 h-5 w-5" />
             {errorI18n("refresh")}
           </Button>

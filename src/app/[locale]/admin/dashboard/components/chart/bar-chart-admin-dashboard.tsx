@@ -29,10 +29,12 @@ type Props = {
 // total money: total money of that month
 export default function BarChartAdminDashboard({ data, time }: Props) {
   const i18n = useTranslations("DashboardAdmin")
+  // this is currency / divisionRatio = real currency
+  const divisionRatio = 100
 
   const labels = data.map((result) => ({
     month: result.month.toString(),
-    amount: result.amount,
+    amount: result.amount / divisionRatio,
   }))
 
   const blyat = labels.map((result) => result.month)

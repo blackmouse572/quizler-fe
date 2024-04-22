@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl"
 
 import BackgroundSquare from "@/components/background-square"
 import { SearchBar } from "@/components/ui/searchbar"
+import Link from "next/link"
+import { Button } from "./ui/button"
 
 export type TErrorPageProps = {
   type: "Error" | "NotFound"
@@ -25,13 +27,25 @@ export function ErrorFn({ type, error, reset }: TErrorPageProps) {
           {!isProduction && type === "Error" ? (
             <pre className="max-h-svh max-w-screen-xl overflow-auto text-wrap rounded-md border border-input border-neutral-200 bg-background px-4 py-2.5 text-start font-mono">
               {error?.message}
+              <Link className="ml-2" href={"/"}>
+                <Button>
+                  {t("go_back_home")}
+                </Button>
+              </Link>
             </pre>
           ) : (
-            <SearchBar
-              container={{ className: "" }}
-              className="bg-white"
-              placeholder={t("input.placeholder")}
-            />
+            <div className="flex">
+              <SearchBar
+                container={{ className: "" }}
+                className="bg-white"
+                placeholder={t("input.placeholder")}
+              />
+              <Link className="ml-2" href={"/"}>
+                <Button>
+                  {t("go_back_home")}
+                </Button>
+              </Link>
+            </div>
           )}
         </div>
       </div>

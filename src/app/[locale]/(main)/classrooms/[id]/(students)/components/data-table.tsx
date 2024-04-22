@@ -343,7 +343,7 @@ export function ClassroomMembersTable({
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
         <div className="flex items-center gap-2">
-          {renderUnbanButton()} {renderDeleteButton()}
+          {renderUnbanButton()}
         </div>
         <div className="flex items-center gap-2">
           {renderVisibibleColumnDropdown()}

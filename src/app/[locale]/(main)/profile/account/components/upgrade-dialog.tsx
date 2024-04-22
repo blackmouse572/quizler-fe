@@ -9,21 +9,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { AccountPlan } from "../type"
+import { STRIPE_PK } from "@/lib/constant"
+import { Plan } from "@/types"
+import { EmbeddedCheckoutProvider } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 import { useTranslations } from "next-intl"
-import CheckoutForm from "./checkout-form"
 import { useCallback, useMemo, useState } from "react"
 import {
-  saveTransaction,
   fetchStripeSessionId,
+  saveTransaction,
 } from "../actions/fetch-checkout"
-import { loadStripe } from "@stripe/stripe-js"
-import { EmbeddedCheckoutProvider } from "@stripe/react-stripe-js"
-import { STRIPE_PK } from "@/lib/constant"
+import CheckoutForm from "./checkout-form"
 
 type Props = {
-  plan: AccountPlan
+  plan: Plan
 }
+const stripePromise = loadStripe(STRIPE_PK)
 
 const UpgradeDialog = ({ plan }: Props) => {
   const i18n = useTranslations("Settings.plans.upgrade_dialog")
@@ -36,12 +37,14 @@ const UpgradeDialog = ({ plan }: Props) => {
     setClientSecret(clientSecret)
     setSessionId(sessionId)
   }, [plan])
+  const [isOpen, setIsOpen] = useState(false)
 
   const onComplete = useCallback(async () => {
     const res = await saveTransaction(sessionId)
-  }, [sessionId])
 
-  const stripePromise = loadStripe(STRIPE_PK)
+    setIsOpen(false)
+    console.log(res)
+  }, [sessionId])
 
   const options = useMemo(
     () => ({
@@ -51,9 +54,10 @@ const UpgradeDialog = ({ plan }: Props) => {
     [clientSecret, onComplete]
   )
 
+  if (plan.amount === 0) return null
   return (
     <>
-      <Dialog>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
             onSelect={(e) => {

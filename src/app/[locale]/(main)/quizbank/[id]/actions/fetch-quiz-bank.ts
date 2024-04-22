@@ -1,6 +1,7 @@
 "use server"
 import { getToken } from "@/lib/auth"
 import { getAPIServerURL } from "@/lib/utils"
+import { notFound } from "next/navigation"
 
 export const fetchQuizBank = async (id: string) => {
   const URL = getAPIServerURL(`/quizbank/${id}`)
@@ -16,6 +17,8 @@ export const fetchQuizBank = async (id: string) => {
 
   const res = await fetch(URL, options).then(async (response) => {
     if (!response.ok) {
+      if (response.status === 404) notFound()
+
       const error = await response.json()
       throw new Error(error.message)
     }

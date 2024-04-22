@@ -19,7 +19,7 @@ async function getGameDetailsAction({
     },
     next: {
       tags: ["games", `game-${gameId}`],
-      revalidate: 60 * 60, // revalidate every 60 seconds
+      revalidate: 1, // revalidate every 60 seconds
     },
   }
   return fetch(url, options)

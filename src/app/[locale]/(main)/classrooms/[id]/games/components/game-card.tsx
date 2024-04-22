@@ -36,6 +36,22 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
   const cardI18n = useTranslations("ClassroomGame.card")
   const errorI18n = useTranslations("Errors")
 
+  const joinAble = useMemo(
+    () =>
+      new Date(game.startTime) < new Date() &&
+      new Date(game.endTime) > new Date(),
+    [game.endTime, game.startTime]
+  )
+
+  const status = useMemo(() => {
+    if (new Date(game.endTime) < new Date()) {
+      return "inactive"
+    } else if (new Date(game.startTime) > new Date()) {
+      return "upcoming"
+    } else {
+      return "active"
+    }
+  }, [game.endTime, game.startTime])
 
   const format = useFormatter()
   const [isEnd, setIsEnd] = useState<boolean>(false)
@@ -108,24 +124,20 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
           {actionsI18n("create.form.duration.label")}:&nbsp;
           {game.duration ?? cardI18n("unlimited")}
         </p>
-        {new Date(game.endTime) < new Date() ? (
-          <>
-            <Badge color="accent">{cardI18n("inactive")}</Badge>
-          </>
-        ) : (
-          <Badge color="success">{cardI18n("active")}</Badge>
-        )}
+        <Badge
+          color={
+            status === "active"
+              ? "success"
+              : status === "inactive"
+                ? "danger"
+                : "warning"
+          }
+        >
+          {cardI18n(`${status}` as any)}
+        </Badge>
       </div>
     ),
-    [
-      actionsI18n,
-      game.numberOfQuizzes,
-      game.endTime,
-      game.startTime,
-      game.duration,
-      format,
-      cardI18n,
-    ]
+    [game, format, cardI18n, actionsI18n, status]
   )
 
   const renderOptions = useMemo(() => {
@@ -194,8 +206,20 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
         />
       </CardContent>
       <CardFooter>
-        {(new Date(game.endTime) < new Date() ||
-          game.numberOfQuizzes === 0) ?? <Button>{cardI18n("join")}</Button>}
+        {joinAble ? (
+          <Link href={`/classrooms/${classroomId}/game/${game.id}`}>
+            <Button>{cardI18n("join")}</Button>
+          </Link>
+        ) : (
+          <></>
+        )}
+        {new Date(game.endTime) < new Date() && (
+          <Link href={`/classrooms/${classroomId}/games/${game.id}/result`}>
+            <Button color="success">
+              {actionsI18n("view_game_result.title")}
+            </Button>
+          </Link>
+        )}
       </CardFooter>
     </Card>
   )

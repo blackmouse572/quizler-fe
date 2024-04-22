@@ -14,9 +14,9 @@ type Props = {
 export default async function getAllQuizBanksAction({ filter }: Props) {
   const token = getToken().token
   const query = toURLSeachParams({
-    ...filter,
     sortBy: "created",
     sortDirection: "DESC",
+    ...filter,
   })
   const option: RequestInit = {
     method: "GET",
@@ -26,7 +26,7 @@ export default async function getAllQuizBanksAction({ filter }: Props) {
     },
     next: {
       tags: ["AdminQuizBank"],
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL("/QuizBank") + "?" + query

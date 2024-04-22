@@ -35,12 +35,13 @@ function AddTagForm({
   action = EFormAction.Add,
 }: AddTagFormProps) {
   const [tags, setTags] = useState(initialValues || [])
+  console.log(initialValues)
   const [filterTags, setFilterTags] = useState(TAGS)
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const i18n = useTranslations(
     +action === EFormAction.Add ? "AddQuiz.form" : "EditQuiz.form"
   )
-  const subjectI18n = useTranslations("Navbar.subject_item") 
+  const subjectI18n = useTranslations("Navbar.subject_item")
   const error18n = useTranslations("Validations.errors")
   const {
     register,

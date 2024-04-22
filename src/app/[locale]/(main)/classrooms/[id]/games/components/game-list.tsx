@@ -1,21 +1,12 @@
 "use client"
 import { useGameList } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useGameList"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Game } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { useInView } from "framer-motion"
-import { useFormatter, useTranslations } from "next-intl"
-import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { useEffect, useMemo, useRef } from "react"
 import GameCard from "./game-card"
 type Props = {
@@ -48,6 +39,16 @@ function GameList(props: Props) {
   const renderItems = useMemo(() => {
     return data?.pages.map((page) => {
       return page?.data.map((game) => {
+        const joinAble =
+          new Date(game.startTime) < new Date() &&
+          new Date(game.endTime) > new Date()
+        let status = "active"
+        if (new Date(game.endTime) < new Date()) {
+          status = "inactive"
+        } else if (new Date(game.startTime) > new Date()) {
+          status = "upcoming"
+        }
+
         return (
           <GameCard
             classroomId={props.classroomId}

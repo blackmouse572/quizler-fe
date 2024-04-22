@@ -212,19 +212,24 @@ export function QuizBankTable({ data }: QuizBankTableProps) {
               {i18n("actions.copy_author_id")}
             </ContextMenuItem>
             <ContextMenuSeparator />
-            <ContextMenuItem>
-              <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
-              {i18n("actions.take_action")}
-            </ContextMenuItem>
-            <DeleteQuizBankDialog
-              id={bank.id.toString()}
-              trigger={
-                <ContextMenuItem>
-                  <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
-                  {i18n("actions.delete")}
-                </ContextMenuItem>
-              }
-            />
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <Icons.HandStop className="mr-2 inline-block h-4 w-4 " />
+                {i18n("actions.take_action.index")}
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                <DeleteQuizBankDialog
+                  user={bank.author}
+                  quizBankId={bank.id.toString()}
+                  trigger={
+                    <ContextMenuItem>
+                      <Icons.Delete className="mr-2 inline-block h-4 w-4 " />
+                      {i18n("actions.take_action.delete")}
+                    </ContextMenuItem>
+                  }
+                />
+              </ContextMenuSubContent>
+            </ContextMenuSub>
             <ContextMenuSub>
               <ContextMenuSubTrigger>
                 <Icons.Navigation className="mr-2 inline-block h-4 w-4 " />

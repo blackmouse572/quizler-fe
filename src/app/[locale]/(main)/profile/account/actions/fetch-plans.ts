@@ -1,7 +1,8 @@
 "use server"
 
-import { getAPIServerURL } from "@/lib/utils"
 import { getToken } from "@/lib/auth"
+import { getAPIServerURL } from "@/lib/utils"
+import { Plan } from "@/types"
 
 export const fetchAllPlans = async () => {
   const URL = getAPIServerURL(`/plan`)
@@ -13,6 +14,10 @@ export const fetchAllPlans = async () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    next: {
+      revalidate: 3600,
+      tags: ["Plan"],
+    },
   }
 
   return fetch(URL, options)
@@ -23,7 +28,7 @@ export const fetchAllPlans = async () => {
       }
       return data
     })
-    .then((res) => ({
+    .then((res: Plan[]) => ({
       ok: true,
       message: "success",
       data: res,

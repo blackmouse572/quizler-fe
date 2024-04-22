@@ -14,7 +14,7 @@ async function getClassroomDetails(id: string) {
       Authorization: `Bearer ${token}`,
     },
     next: {
-      revalidate: 3600,
+      revalidate: 1,
       tags: ["classroom-details", `classroom-details-${id}`],
     },
   }
