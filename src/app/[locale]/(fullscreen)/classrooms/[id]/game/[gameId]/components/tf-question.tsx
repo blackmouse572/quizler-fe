@@ -22,16 +22,9 @@ function TrueFalseQuestion({ data, onSubmit, disabled, isWrong }: Props) {
   )
   const renderQuestion = useMemo(() => {
     return (
-      <div>
-        <div className="text-center text-4xl font-bold">
-          {data.questions[0]}
-        </div>
-        <div className="text-center text-accent-foreground">
-          {data.answers[0]}
-        </div>
-      </div>
+      <div className="text-center text-4xl font-bold">{data.questions[0]}</div>
     )
-  }, [data.answers, data.questions])
+  }, [data.questions])
   const renderAnswers = useMemo(() => {
     return (
       <>

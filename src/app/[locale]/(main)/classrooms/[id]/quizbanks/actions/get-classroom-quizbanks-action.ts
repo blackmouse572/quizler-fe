@@ -32,7 +32,7 @@ async function getAllClassroomQuizBanksAction({
     },
     next: {
       tags: [`classroom-${classroomId}-quizbanks`],
-      revalidate: 60, // revalidate every 60 seconds
+      revalidate: 1, // revalidate every 60 seconds
     },
   }
   return fetch(url, options)

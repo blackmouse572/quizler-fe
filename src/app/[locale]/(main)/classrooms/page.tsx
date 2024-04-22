@@ -1,14 +1,17 @@
 import { fetchMyClassrooms } from "@/app/[locale]/(main)/classrooms/actions/fetch-my-classroom"
 import ClassroomList from "@/app/[locale]/(main)/classrooms/components/classroom-list"
 import JoinClassroomDialog from "@/app/[locale]/(main)/classrooms/components/join-classroom-dialog"
+import { OwnerSelect } from "@/app/[locale]/(main)/classrooms/components/owner-select"
 import SearchBox from "@/components/searchbox"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/ui/icons"
 import { NamedToolTip } from "@/components/ui/tooltip"
+import { getUser } from "@/lib/auth"
 import _ from "lodash"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -22,9 +25,14 @@ export async function generateMetadata() {
   }
 }
 async function ClassroomPage({ searchParams }: Props) {
+  const user = getUser()
+  const initCode = searchParams["code"] as string | undefined
+  if (!user) {
+    console.log("User not found")
+    redirect(`/login?from="/classrooms?code=${initCode}"`)
+  }
   const msg = await getMessages()
   const t = await getTranslations("Classroom")
-  const initCode = searchParams["code"] as string | undefined
   const search = searchParams["search"] as string | undefined
   const { data, message, ok } = await fetchMyClassrooms({ search, take: 20 })
   if (!ok) {
@@ -46,6 +54,7 @@ async function ClassroomPage({ searchParams }: Props) {
         <h1 className="text-xl font-bold">{t("metadata.title")}</h1>
         <div className="flex items-center gap-2">
           <SearchBox className="bg-background" />
+          <OwnerSelect />
           <JoinClassroomDialog
             defaultOpen={!!initCode}
             defaultValue={initCode}

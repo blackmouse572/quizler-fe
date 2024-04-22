@@ -1,50 +1,22 @@
-import {
-    Card,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
-  import { Skeleton } from "@/components/ui/skeleton"
-  
-  function MainLoadingPage() {
-    return (
-      <div className="h-screen space-y-2">
-        <div className="grid h-72">
-          <Card className="h-full">
-            <CardHeader>
-              <CardTitle>
-                <Skeleton className="h-8 w-full" />
-              </CardTitle>
-              <CardDescription>
-                <Skeleton className="h-5 w-full" />
-                <Skeleton className="h-5 w-full" />
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Skeleton className="h-5 w-full" />
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="grid h-72 pt-10">
-          <Card className="h-full">
-            <CardHeader>
-              <CardTitle>
-                <Skeleton className="h-8 w-full" />
-              </CardTitle>
-              <CardDescription>
-                <Skeleton className="h-5 w-full" />
-                <Skeleton className="h-5 w-full" />
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Skeleton className="h-5 w-full" />
-            </CardFooter>
-          </Card>
-        </div>
-      </div>
-    )
-  }
-  
-  export default MainLoadingPage
-  
+import { Button } from "@/components/ui/button"
+import { Icons } from "@/components/ui/icons"
+import { getTranslations } from "next-intl/server"
+
+async function MainLoadingPage() {
+  const t = await getTranslations("SearchPage")
+  return (
+    <div className="container mx-auto flex h-screen flex-col items-center justify-center gap-3">
+      <Button
+        size="lg"
+        variant="flat"
+        color="accent"
+        className="cursor-default active:scale-[100%]"
+      >
+        <Icons.Loader className="mr-2 animate-spin" />
+        {t("loading")}
+      </Button>
+    </div>
+  )
+}
+
+export default MainLoadingPage

@@ -38,9 +38,6 @@ const batchImportQuizbankSchema = z.object({
     })
     .min(3, {
       message: "errors.invalid_type_received_undefined",
-    })
-    .max(5000, {
-      message: "errors.invalid_type_received_undefined",
     }),
   itemSeperator: z
     .string({

@@ -19,7 +19,7 @@ export default async function getAllTransactionsByYearAction({
       Authorization: `Bearer ${token}`,
     },
     next: {
-      revalidate: 60, // Revalidate every 60 second
+      revalidate: 1, // Revalidate every 60 second
     },
   }
   const url = getAPIServerURL(`/transaction/getbyyear/${year}`)

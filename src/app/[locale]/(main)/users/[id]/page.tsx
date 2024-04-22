@@ -10,8 +10,11 @@ import {
 } from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
+import { getUser } from "@/lib/auth"
 import { getShortName } from "@/lib/string-helper"
-import { getFormatter, getTranslations } from "next-intl/server"
+import _ from "lodash"
+import { NextIntlClientProvider } from "next-intl"
+import { getFormatter, getMessages, getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import ReportUserDialog from "./components/report-user-dialog/report-user-dialog"
 
@@ -23,6 +26,9 @@ type Props = {
 
 export default async function UserProfile({ params }: Props) {
   const data = await getUserProfileAction(params.id)
+  const msg = await getMessages()
+
+  const currentUser = getUser()
   const t = await getTranslations("Settings")
   const format = await getFormatter()
 
@@ -71,7 +77,16 @@ export default async function UserProfile({ params }: Props) {
           </div>
         </CardContent>
         <CardFooter className="justify-end">
-            <ReportUserDialog accountId={user.id.toString()} accountName={user.fullName ?? user.username} />
+          <NextIntlClientProvider
+            messages={_.pick(msg, "Report_user", "Validations", "Errors")}
+          >
+            {currentUser && currentUser.id !== user.id && (
+              <ReportUserDialog
+                accountId={user.id.toString()}
+                accountName={user.fullName ?? user.username}
+              />
+            )}
+          </NextIntlClientProvider>
         </CardFooter>
       </Card>
     </div>
