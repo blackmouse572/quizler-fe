@@ -1433,6 +1433,9 @@
       "WrongEmailPassword": "Email or password is incorrect",
       "IssueToken": "Error when issues token"
     },
+    "ChangePassword": {
+      "WrongOldPassword": "Old password is not correct"
+    },
     "Game": {
       "UserNotJoined": "User has not joined in the game yet",
       "ExceedTime": "Exceeding time limit",
@@ -1506,7 +1509,8 @@
         "password": "Password must be at least 8 characters.",
         "confirm_password": "Confirm password must be at least 8 characters.",
         "mismatch_password": "Passwords don't match",
-        "email": "Email is invalid"
+        "email": "Email is invalid",
+        "dob": "Invalid date"
       },
       "contact": {
         "name": "Name must be at least 2 characters.",
