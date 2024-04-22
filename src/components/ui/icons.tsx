@@ -92,6 +92,7 @@ import {
   IconUsers,
   IconX,
   TablerIconsProps,
+  IconClockStop
 } from "@tabler/icons-react"
 
 export const Icons = {
@@ -152,6 +153,7 @@ export const Icons = {
   Join: IconArrowsJoin,
   AI: IconSparkles,
   Check: IconProgressCheck,
+  ClockStop: IconClockStop,
   Leave: IconLogout2,
 
   //Chevrons

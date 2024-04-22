@@ -1,6 +1,6 @@
+import ActionDialogConfirm from "@/components/delete-confirm-dialog"
 import LeaveDialogConfirm from "@/app/[locale]/(main)/classrooms/components/leave-classroom-dialog"
 import { useLeaveClassroom } from "@/app/[locale]/(main)/classrooms/components/useLeaveClassroom"
-import DeleteDialogConfirm from "@/components/delete-confirm-dialog"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -157,16 +157,16 @@ const ClassroomCard = React.forwardRef<TClassRoomCardRef | null, Props>(
         </Link>
         <CardContent className="flex justify-between">
           {renderAuthor} {renderOptions}
-          <DeleteDialogConfirm
+          <ActionDialogConfirm
             description={i18n("actions.delete.description")}
             title={i18n("actions.delete.title", { name: item.classname })}
             terms={{
               cancel: i18n("actions.delete.cancel"),
-              delete: i18n("actions.delete.confirm"),
+              action: i18n("actions.delete.confirm"),
             }}
             isOpen={isDelete}
             setOpen={setIsDelete}
-            onDelete={() => onDeleteClassrooom?.(+item.id, () => {})}
+            onAction={() => onDeleteClassrooom?.(+item.id, () => {})}
           />
           <LeaveDialogConfirm
             description={i18n("actions.leave.description")}

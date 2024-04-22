@@ -1,22 +1,14 @@
 "use client"
 import { useGameList } from "@/app/[locale]/(main)/classrooms/[id]/games/components/useGameList"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Game } from "@/types"
 import PagedRequest from "@/types/paged-request"
 import PagedResponse from "@/types/paged-response"
 import { useInView } from "framer-motion"
-import { useFormatter, useTranslations } from "next-intl"
-import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { useEffect, useMemo, useRef } from "react"
+import GameCard from "./game-card"
 type Props = {
   classroomId: string
   filter?: Partial<PagedRequest>
@@ -24,8 +16,6 @@ type Props = {
 }
 
 function GameList(props: Props) {
-  const t = useTranslations("ClassroomGame")
-  const format = useFormatter()
   const errorI18n = useTranslations("Errors")
   const loadmoreRef = useRef<HTMLDivElement>(null)
   const inView = useInView(loadmoreRef)
@@ -60,69 +50,15 @@ function GameList(props: Props) {
         }
 
         return (
-          <Card>
-            <CardHeader>
-              <div>
-                <CardTitle>{game.gameName}</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p>
-                  {t("actions.create.form.amount.label")}:&nbsp;
-                  {game.numberOfQuizzes}
-                </p>
-                {new Date(game.endTime) < new Date() ? (
-                  <p>
-                    {t("actions.create.form.endTime.label")}:&nbsp;
-                    {format.relativeTime(new Date(game.endTime))}
-                  </p>
-                ) : (
-                  <p>
-                    {t("actions.create.form.startTime.label")}:&nbsp;
-                    {format.relativeTime(new Date(game.startTime))}
-                  </p>
-                )}
-                <p>
-                  {t("actions.create.form.duration.label")}:&nbsp;
-                  {game.duration ?? t("card.unlimited")}
-                </p>
-                <Badge
-                  color={
-                    status === "active"
-                      ? "success"
-                      : status === "inactive"
-                        ? "danger"
-                        : "warning"
-                  }
-                >
-                  {t(`card.${status}` as any)}
-                </Badge>
-              </div>
-            </CardContent>
-            <CardFooter>
-              {joinAble ? (
-                <Link href={`/classrooms/${props.classroomId}/game/${game.id}`}>
-                  <Button>{t("card.join")}</Button>
-                </Link>
-              ) : (
-                <></>
-              )}
-              {new Date(game.endTime) < new Date() && (
-                <Link
-                  href={`/classrooms/${props.classroomId}/games/${game.id}/result`}
-                >
-                  <Button color="success">
-                    {t("actions.view_game_result.title")}
-                  </Button>
-                </Link>
-              )}
-            </CardFooter>
-          </Card>
+          <GameCard
+            classroomId={props.classroomId}
+            game={game}
+            displayActions={true}
+          />
         )
       })
     })
-  }, [data?.pages, format, props.classroomId, t])
+  }, [data?.pages, props.classroomId])
 
   useEffect(() => {
     if (inView && hasNextPage && !isLoading) {

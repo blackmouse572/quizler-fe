@@ -8,7 +8,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { Icons } from "@/components/ui/icons"
+import { IIconKeys, Icons } from "@/components/ui/icons"
+import { useMemo } from "react"
 
 type Props = {
   title: string
@@ -16,22 +17,28 @@ type Props = {
   disabled?: boolean
   isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  onDelete: () => void
+  onAction: () => void
   terms?: {
     cancel: string
-    delete: string
+    action: string
   }
+  iconKey?: IIconKeys
 }
 
-function DeleteDialogConfirm({
+function ActionDialogConfirm({
   title,
   description,
   isOpen,
   setOpen,
   terms,
-  onDelete,
+  onAction,
+  iconKey,
   disabled = false,
 }: Props) {
+  const ActionIcon = useMemo(
+    () => (iconKey ? Icons[iconKey] : Icons["Delete"]),
+    [iconKey]
+  )
   return (
     <AlertDialog onOpenChange={setOpen} open={isOpen}>
       <AlertDialogContent>
@@ -44,16 +51,16 @@ function DeleteDialogConfirm({
             {terms?.cancel || "Cancel"}
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={onDelete}
+            onClick={onAction}
             color="danger"
             disabled={disabled}
           >
             {disabled ? (
               <Icons.Loader className="animate-spin" />
             ) : (
-              <Icons.Delete />
+              ActionIcon && <ActionIcon />
             )}
-            {terms?.delete || "Delete"}
+            {terms?.action || "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -61,4 +68,4 @@ function DeleteDialogConfirm({
   )
 }
 
-export default DeleteDialogConfirm
+export default ActionDialogConfirm
