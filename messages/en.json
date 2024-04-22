@@ -1158,6 +1158,7 @@
   "AdminSidebar": {
     "sidebar": {
       "label": {
+        "home": "Home page",
         "dashboard": "Dashboard",
         "users": "Users",
         "classrooms": "Classrooms",
@@ -1632,7 +1633,8 @@
     "message": "The page you seeks seem like terminated or not existed 🥺🥺",
     "input": {
       "placeholder": "New Quiz"
-    }
+    },
+    "go_back_home": "Go back home"
   },
   "Error": {
     "title": "Oops, seem like an errors",
@@ -1640,7 +1642,8 @@
     "input": {
       "placeholder": "New Quiz"
     },
-    "errorBtn": "Errors messages"
+    "errorBtn": "Errors messages",
+    "go_back_home": "Go back home"
   },
   "ManageClassroomMembers": {
     "metadata": {
