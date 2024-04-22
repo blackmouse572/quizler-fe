@@ -1157,6 +1157,7 @@
   "AdminSidebar": {
     "sidebar": {
       "label": {
+        "home": "Trang chủ",
         "dashboard": "Điều khiển",
         "users": "Người dùng",
         "classrooms": "Lớp học",
@@ -1630,7 +1631,8 @@
     "message": "Trang bạn tìm kiếm có vẻ như đã bị chấm dứt hoặc không tồn tại 🥺🥺",
     "input": {
       "placeholder": "Tạo Quiz mới"
-    }
+    },
+    "go_back_home": "Về trang chủ"
   },
   "Error": {
     "title": "Oops, có vẻ như đã có lỗi",
@@ -1638,7 +1640,8 @@
     "input": {
       "placeholder": "Tạo Quiz mới"
     },
-    "errorBtn": "Thông báo lỗi"
+    "errorBtn": "Thông báo lỗi",
+    "go_back_home": "Về trang chủ"
   },
   "ManageClassroomMembers": {
     "metadata": {

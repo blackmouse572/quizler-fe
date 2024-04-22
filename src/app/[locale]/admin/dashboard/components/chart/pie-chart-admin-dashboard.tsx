@@ -20,9 +20,11 @@ type Props = {
 // data: number of total income in each month
 export function PieChartAdminDashboard({ data, time }: Props) {
   const i18n = useTranslations("DashboardAdmin")
+  // this is currency / divisionRatio = real currency
+  const divisionRatio = 100
   const transactionsCreated = data.map((result) => ({
     month: result.month.toString(),
-    amount: result.amount,
+    amount: result.amount / divisionRatio,
   }))
 
   const monthsInYear = transactionsCreated.map((result) => result.month)
