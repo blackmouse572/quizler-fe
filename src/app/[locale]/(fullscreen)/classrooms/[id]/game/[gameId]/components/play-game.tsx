@@ -94,10 +94,17 @@ function PlayGame({ initData }: PlayGameProps) {
 
   const handleSubmitted = useCallback(() => {
     setIsSubmitted(true)
-    submitAnswer(answer)?.catch((e) => {
-      console.debug(e)
-      setError(errorI18n(e.message))
-    })
+    submitAnswer(answer)
+      ?.catch((e) => {
+        console.debug(e)
+        setError(errorI18n(e.message))
+      })
+      .then(() => {
+        setAnswer((prev) => ({
+          ...prev,
+          userAnswer: [],
+        }))
+      })
   }, [answer, errorI18n, submitAnswer])
 
   useEffect(() => {
