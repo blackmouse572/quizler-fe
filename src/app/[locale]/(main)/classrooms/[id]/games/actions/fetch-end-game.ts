@@ -25,9 +25,6 @@ export async function fetchEndGame(classroomId: string, gameId: string) {
       return json
     })
     .then((data: Game) => {
-      revalidatePath(`classrooms/${classroomId}/games`)
-      revalidateTag(`game-classroom-${classroomId}`)
-      revalidateTag(`games`)
       return {
         ok: true,
         message: "success",
