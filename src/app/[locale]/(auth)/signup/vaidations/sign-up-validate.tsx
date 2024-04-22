@@ -15,7 +15,14 @@ const SignUpSchema = z
     password: z.string().min(8, {
       message: "errors.signup.password",
     }),
-    dob: z.date(),
+    dob: z.coerce.date({
+      errorMap: (issue, { defaultError }) => ({
+        message:
+          issue.code === "invalid_date"
+            ? "errors.update_profile_form.date"
+            : defaultError,
+      }),
+    }),
     confirm: z.string().min(8, {
       message: "errors.signup.confirm_password",
     }),

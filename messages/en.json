@@ -1158,6 +1158,7 @@
   "AdminSidebar": {
     "sidebar": {
       "label": {
+        "home": "Home page",
         "dashboard": "Dashboard",
         "users": "Users",
         "classrooms": "Classrooms",
@@ -1433,6 +1434,9 @@
       "WrongEmailPassword": "Email or password is incorrect",
       "IssueToken": "Error when issues token"
     },
+    "ChangePassword": {
+      "WrongOldPassword": "Old password is not correct"
+    },
     "Game": {
       "UserNotJoined": "User has not joined in the game yet",
       "ExceedTime": "Exceeding time limit",
@@ -1506,7 +1510,8 @@
         "password": "Password must be at least 8 characters.",
         "confirm_password": "Confirm password must be at least 8 characters.",
         "mismatch_password": "Passwords don't match",
-        "email": "Email is invalid"
+        "email": "Email is invalid",
+        "dob": "Invalid date"
       },
       "contact": {
         "name": "Name must be at least 2 characters.",
@@ -1628,7 +1633,8 @@
     "message": "The page you seeks seem like terminated or not existed 🥺🥺",
     "input": {
       "placeholder": "New Quiz"
-    }
+    },
+    "go_back_home": "Go back home"
   },
   "Error": {
     "title": "Oops, seem like an errors",
@@ -1636,7 +1642,8 @@
     "input": {
       "placeholder": "New Quiz"
     },
-    "errorBtn": "Errors messages"
+    "errorBtn": "Errors messages",
+    "go_back_home": "Go back home"
   },
   "ManageClassroomMembers": {
     "metadata": {

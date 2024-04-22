@@ -31,10 +31,7 @@ export default async function ManageClassroomPage({
   params,
   searchParams,
 }: Props) {
-  const msg = await getMessages()
   const { id } = params
-  const { token } = getToken()
-  const user = getUser()
 
   const take = searchParams.take ? parseInt(searchParams.take as string) : 20
   const skip = searchParams.skip ? parseInt(searchParams.skip as string) : 0
@@ -43,13 +40,6 @@ export default async function ManageClassroomPage({
     : undefined
   const options = { take, skip, search }
   const data = await getBanMembers(id, options)
-
-  // TODO: check role here
-  // const isAuthor = user?.role === "User" && user?.email === data
-
-  // {
-  //   ;(!token || !isAuthor) && notFound()
-  // }
 
   return (
     <div className="mt-6 space-y-12">

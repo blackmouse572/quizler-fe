@@ -3,7 +3,7 @@
     "title": "Quizlearn",
     "back": "Quay lại",
     "description": "Học tập với phương pháp siêu tốc",
-    "getting-staarted": "Bắt đầu học",
+    "getting-started": "Bắt đầu học",
     "contact": "Liên hệ",
     "subjects": "Học theo môn",
     "quizbank": "Hôm nay học gì ?"
@@ -35,12 +35,12 @@
       "description": "Liên lạc với chúng tôi"
     },
     "index": "Liên lạc QuizLearn",
+    "contact-card": {
+      "index": "Liên lạc với chúng tôi",
+      "description": "Chúng tôi ở đây để giúp bạn. Hãy liên hệ với chúng tôi nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào."
+    },
     "message": {
-      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm.",
-      "contact-card": {
-        "index": "Liên lạc với chúng tôi",
-        "description": "Chúng tôi ở đây để giúp bạn. Hãy liên hệ với chúng tôi nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào."
-      }
+      "index": "Cảm ơn liên lạc của bạn!<br></br>Chúng tôi đã nhận được thông tin liên lạc của bạn tại email: {email}<br></br>Chúng tôi sẽ liên lạc bạn sớm."
     },
     "form": {
       "name": {
@@ -1157,6 +1157,7 @@
   "AdminSidebar": {
     "sidebar": {
       "label": {
+        "home": "Trang chủ",
         "dashboard": "Điều khiển",
         "users": "Người dùng",
         "classrooms": "Lớp học",
@@ -1431,6 +1432,9 @@
       "WrongEmailPassword": "Email hay mật khẩu không đúng",
       "IssueToken": "Error when issues token"
     },
+    "ChangePassword": {
+      "WrongOldPassword": "Mật khẩu cũ không đúng"
+    },
     "Game": {
       "UserNotJoined": "Người dùng chưa tham gia trò chơi",
       "ExceedTime": "Quá giới hạn thời gian",
@@ -1504,7 +1508,8 @@
         "password": "Mật khẩu phải có ít nhất 8 ký tự.",
         "confirm_password": "Xác nhận mật khẩu phải có ít nhất 8 ký tự.",
         "mismatch_password": "Mật khẩu không khớp.",
-        "email": "Email không hợp lệ."
+        "email": "Email không hợp lệ.",
+        "dob": "Ngày không hợp lệ"
       },
       "contact": {
         "name": "Tên phải có ít nhất 2 ký tự.",
@@ -1626,7 +1631,8 @@
     "message": "Trang bạn tìm kiếm có vẻ như đã bị chấm dứt hoặc không tồn tại 🥺🥺",
     "input": {
       "placeholder": "Tạo Quiz mới"
-    }
+    },
+    "go_back_home": "Về trang chủ"
   },
   "Error": {
     "title": "Oops, có vẻ như đã có lỗi",
@@ -1634,7 +1640,8 @@
     "input": {
       "placeholder": "Tạo Quiz mới"
     },
-    "errorBtn": "Thông báo lỗi"
+    "errorBtn": "Thông báo lỗi",
+    "go_back_home": "Về trang chủ"
   },
   "ManageClassroomMembers": {
     "metadata": {
