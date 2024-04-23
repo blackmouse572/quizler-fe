@@ -34,12 +34,12 @@ const SUBJECTS_NAVBAR_ITEMS: MainNavItem[] = [
   },
   {
     title: "subject_item.Languages",
-    href: "/category?tag=Language",
+    href: "/category?tag=Languages",
     icon: "Languague",
   },
   {
     title: "subject_item.Computer Science",
-    href: "/category?tag=Computer",
+    href: "/category?tag=Computer%20Science",
     icon: "Computer",
   },
   {
