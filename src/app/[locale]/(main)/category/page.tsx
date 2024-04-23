@@ -50,7 +50,7 @@ export default async function CategoryQuizBank({ searchParams }: Props) {
     <main>
       <div className="mb-3 flex items-center justify-between">
         <h3 className="text-lg font-bold">
-          {t("headers.index", { category: `"${tag}"` })}
+          {t("headers.index", { category: `"${decodeURI(tag!)}"` })}
         </h3>
         <div className="flex items-center gap-2">
           <SearchBox className="bg-background" />
