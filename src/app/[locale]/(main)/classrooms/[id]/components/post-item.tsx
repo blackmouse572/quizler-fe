@@ -84,7 +84,7 @@ function PostItem({
       } else if (post.gameLink) {
         const game = post.game
         return (
-          <Link href={`/game/${game.id}`}>
+          <Link href={`/classrooms/${classroomId}/game/${game.id}`}>
             <Card className="relative">
               <CardHeader>
                 <CardDescription>
@@ -97,7 +97,7 @@ function PostItem({
         )
       }
     },
-    [t]
+    [classroomId, t]
   )
   return (
     <Card key={post.id} ref={containerRef}>

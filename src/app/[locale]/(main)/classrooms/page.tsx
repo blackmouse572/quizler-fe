@@ -38,6 +38,7 @@ async function ClassroomPage({ searchParams }: Props) {
   if (!ok) {
     throw new Error(message)
   }
+  const isOwner = searchParams["isOwner"] === "true"
 
   return (
     <NextIntlClientProvider
@@ -56,6 +57,7 @@ async function ClassroomPage({ searchParams }: Props) {
           <SearchBox className="bg-background" />
           <OwnerSelect />
           <JoinClassroomDialog
+          isOwner={isOwner}
             defaultOpen={!!initCode}
             defaultValue={initCode}
             filter={{ search }}

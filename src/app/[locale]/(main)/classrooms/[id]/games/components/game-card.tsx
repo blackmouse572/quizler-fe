@@ -24,6 +24,7 @@ import { useCallback, useMemo, useState } from "react"
 import { fetchEndGame } from "../actions/fetch-end-game"
 import { toast } from "@/components/ui/use-toast"
 import { queryClient } from "@/app/[locale]/provider"
+import _ from "lodash"
 
 type GameCardProps = {
   game: Game
@@ -88,18 +89,21 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
       className?: string
     }[]
   >(
-    () => [
-      {
-        title: actionsI18n("stop.title"),
-        icon: stopGameIconKey,
-        className:
-          "text-destructive hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive",
-        onClick: () => {
-          setIsEnd(true)
-        },
-      },
-    ],
-    [actionsI18n]
+    () =>
+      status === "active"
+        ? [
+            {
+              title: actionsI18n("stop.title"),
+              icon: stopGameIconKey,
+              className:
+                "text-destructive hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive",
+              onClick: () => {
+                setIsEnd(true)
+              },
+            },
+          ]
+        : [],
+    [actionsI18n, status]
   )
 
   const renderGame = useMemo(
@@ -141,7 +145,7 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
   )
 
   const renderOptions = useMemo(() => {
-    if (!displayActions) return null
+    if (!displayActions || _.isEmpty(options)) return null
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -185,9 +189,7 @@ const GameCard = ({ game, displayActions, classroomId }: GameCardProps) => {
   return (
     <Card>
       <CardHeader>
-        <Link href={`/classrooms/${classroomId}/game/${game.id}`}>
-          <CardTitle>{game.gameName}</CardTitle>
-        </Link>
+        <CardTitle>{game.gameName}</CardTitle>
       </CardHeader>
       <CardContent className="flex justify-between">
         {renderGame}

@@ -46,13 +46,14 @@ const JoinClassroomSchema = z.object({
 type Props = {
   defaultOpen?: boolean
   defaultValue?: string
+  isOwner: boolean
   trigger?: React.ReactNode
   filter?: Partial<PagedRequest>
 }
 
 type FormData = z.infer<typeof JoinClassroomSchema>
 
-function JoinClassroomDialog({ defaultOpen, defaultValue, filter }: Props) {
+function JoinClassroomDialog({ defaultOpen, isOwner, defaultValue, filter }: Props) {
   const [isOpen, setOpen] = useState(defaultOpen)
   const t = useTranslations("Join_classroom")
   const classroomT = useTranslations("Classroom")
@@ -79,7 +80,7 @@ function JoinClassroomDialog({ defaultOpen, defaultValue, filter }: Props) {
       })
     } else {
       setOpen(false)
-      queryClient.invalidateQueries({ queryKey: ["classrooms", filter] })
+      queryClient.invalidateQueries({ queryKey: ["classrooms", filter, isOwner] })
 
       toast({
         title: t("success.title"),

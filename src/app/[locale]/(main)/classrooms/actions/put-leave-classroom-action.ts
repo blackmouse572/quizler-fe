@@ -26,8 +26,6 @@ export async function leaveClassroomAction(classroomId: string) {
       return true
     })
     .then((e) => {
-      revalidateTag("classrooms")
-      revalidatePath("/classrooms")
       return {
         ok: true,
         message: "success",
@@ -40,5 +38,9 @@ export async function leaveClassroomAction(classroomId: string) {
         message: e.message,
         data: null,
       }
+    })
+    .finally(() => {
+      revalidatePath("/classrooms")
+      revalidateTag("/classrooms")
     })
 }
