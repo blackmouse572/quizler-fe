@@ -47,7 +47,7 @@ export default function Home() {
           {t("description")}
         </p>
         <div className="z-10 mt-12 flex items-center justify-between gap-3">
-          <Link href={isAuth ? "/search" : "/login"}>
+          <Link href={isAuth ? "/search?search=tư+tưởng" : "/login"}>
             <Button className="bg-emerald-500 transition-colors hover:bg-emerald-600 focus:bg-emerald-500 active:bg-emerald-400">
               <Icons.ChevronRight className="mr-2" />
               {t("getting-started")}
