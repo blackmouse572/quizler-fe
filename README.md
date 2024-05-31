@@ -1,4 +1,8 @@
 # QuizLearn
+> [!WARNING]  
+> Due to the project are using external apis for most of the feature, Preview Link will not be availble
+> 
+> However, you can still clone this and run your own api at https://github.com/quinnmike82/fuquizlearn_api
 
 > Quiz-based Learning and Practice System using NextJS framework, ASP.NET Core Web API and PostgreSQL database
 
