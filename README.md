@@ -2,6 +2,8 @@
 
 > Quiz-based Learning and Practice System using NextJS framework, ASP.NET Core Web API and PostgreSQL database
 
+ ![og image](./public/og.png)
+ 
 ## Table of Contents
 
 - [QuizLearn](#quizlearn)
